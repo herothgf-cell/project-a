@@ -25,3 +25,6 @@ Final review: self-review (no subagent/reviewer tool available). No independent 
 6. Browser navigation limitation: offline UI tests locally, real-origin browser tests in CI. No claim of real-device validation.
 
 Deferred minor items: hand-authored vector art remains prototype art rather than a finished illustrated asset pack; no background music or voice acting; enemy routing uses local steering around simple rectangular collision footprints rather than global pathfinding. All spawn/objective positions are flood-fill reachability tested.
+
+## CI lifecycle follow-up
+The first HTTP run (36130552140) passed the Node suite and first UI checks, then caught a test-fixture lifecycle error: replacing localStorage during a live session is intentionally overwritten by the pagehide autosave. Reproduced locally by including pagehide in the offline reload. The fixture now exits through the real menu to the title screen before seeding a legacy or corrupt checkpoint; all original assertions remain. No production autosave behavior was weakened. Inspect the newer workflow run for deployment status.

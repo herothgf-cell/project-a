@@ -25,8 +25,19 @@ def main():
             if args.red and name=='app.js':continue
             page.add_script_tag(content=(ROOT/name).read_text(encoding='utf-8'))
     def reload_page(page):
+        # Offline documents need the pagehide event that real HTTP navigation emits.
+        if not url: page.evaluate("window.dispatchEvent(new PageTransitionEvent('pagehide'))")
         seed=page.evaluate("Object.fromEntries(Array.from({length:localStorage.length},(_,i)=>{const k=localStorage.key(i);return [k,localStorage.getItem(k)]}))")
         load(page,seed)
+    def seed_save_at_title(page,raw):
+        # Match user behavior: finish the session before replacing its checkpoint.
+        # A native pagehide while playing MUST save the live game, not test data.
+        if page.locator('#game').is_visible():
+            page.locator('#menu').click()
+            page.get_by_role('button',name='타이틀로',exact=True).click()
+        expect(page.locator('#title')).to_be_visible()
+        expect(page.locator('#game')).not_to_be_visible()
+        page.evaluate("raw=>localStorage.setItem('dualworld.save.v1',raw)",raw)
     results=[]
     try:
         with sync_playwright() as p:
@@ -57,7 +68,7 @@ def main():
             page.locator('#menu').click();pt=page.evaluate('__game.playTime');page.wait_for_timeout(200);assert page.evaluate('__game.playTime')==pt;page.locator('#closeDialog').click();results.append('held attack/release and modal pause')
             page.evaluate("()=>{__game.progress=8;__game.training=2;__game.enter('ruins');__game.events=[];}");page.locator('#menu').click();page.get_by_role('button',name='거점으로 후퇴',exact=True).click();page.get_by_role('button',name='후퇴하기',exact=True).click();page.wait_for_timeout(120);assert page.evaluate('__game.area')=='village';assert page.evaluate('__game.progress')==8
             # Exported/imported schema and continue exercise browser localStorage, same key.
-            page.evaluate("()=>localStorage.setItem('dualworld.save.v1',JSON.stringify({version:1,area:'rift',progress:6,training:2,level:5,xp:10,gold:135,potions:2,upgrade:3,clears:1}))")
+            seed_save_at_title(page,json.dumps(dict(version=1,area="rift",progress=6,training=2,level=5,xp=10,gold=135,potions=2,upgrade=3,clears=1)))
             reload_page(page);page.locator('#continue').click();page.wait_for_timeout(150);assert page.evaluate('__game.progress')==6;assert page.evaluate('__game.gold')==135;assert page.evaluate('__game.area')=='city';results.append('retreat and v1 saved-game migration/continue')
             for width,height in [(390,844),(360,640),(844,390)]:
                 mobile=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=2,is_mobile=True,has_touch=True)
@@ -74,7 +85,7 @@ def main():
                 m.evaluate("document.getElementById('menu').click()");cdp.send('Input.dispatchTouchEvent',{'type':'touchCancel','touchPoints':[]});after=m.evaluate('__game.player.x');m.locator('#closeDialog').click();m.wait_for_timeout(220);assert abs(m.evaluate('__game.player.x')-after)<.1;assert not me,me
                 m.screenshot(path=str(out/f'mobile-{width}x{height}.png'));mobile.close();results.append(f'{width}x{height}: viewport, multitouch movement+attack, cancel and modal reset')
             # Corrupt storage is preserved; overwrite requires confirmation.
-            page.evaluate("localStorage.setItem('dualworld.save.v1','broken-save')");reload_page(page);assert page.locator('#continue').is_hidden();assert '읽을 수 없' in page.locator('#titleError').inner_text();page.locator('#start').click();assert page.evaluate("localStorage.getItem('dualworld.save.v1')")=='broken-save';page.locator('#closeDialog').click();assert page.evaluate("localStorage.getItem('dualworld.save.v1')")=='broken-save';results.append('corrupt storage preserved until explicit confirmation')
+            seed_save_at_title(page,"broken-save");reload_page(page);assert page.locator('#continue').is_hidden();assert '읽을 수 없' in page.locator('#titleError').inner_text();page.locator('#start').click();assert page.evaluate("localStorage.getItem('dualworld.save.v1')")=='broken-save';page.locator('#closeDialog').click();assert page.evaluate("localStorage.getItem('dualworld.save.v1')")=='broken-save';results.append('corrupt storage preserved until explicit confirmation')
             assert not errors,errors;browser.close()
             (out/'results.json').write_text(json.dumps({'mode':'HTTP origin; real browser storage' if url else 'offline document; storage shim','passed':len(results),'checks':results,'page_errors':errors},ensure_ascii=False,indent=2),encoding='utf-8');print(json.dumps({'passed':len(results),'checks':results},ensure_ascii=False,indent=2))
     finally:
