@@ -15,8 +15,8 @@ test('full two-chapter journey uses interactions and combat through the ending',
   g.retreat();const before=g.stats().attack;at(g,'master');assert.equal(g.training,3);assert.equal(g.stats().attack,before+6);assert.equal(g.progress,10);at(g,'portal');at(g,'warden');assert.equal(g.progress,11);at(g,'harbor');guards(g);at(g,'anchor1');at(g,'anchor2');kill(g,g.enemies.find(e=>e.boss));assert.equal(g.progress,12);
   assert.equal(g.harborClears,1);g.retreat();assert.equal(g.area,'city');assert.match(at(g,'warden').text,/제2장 완료/);const h=Game.load(g.save());assert.equal(h.progress,12);assert.equal(h.training,3);
 });
-test('all six spawns, points and enemies have reachable walkable positions',()=>{
-  assert.equal(Object.keys(AREAS).length,6);
+test('all eight spawns, points and enemies have reachable walkable positions',()=>{
+  assert.equal(Object.keys(AREAS).length,8);
   for(const [name,a] of Object.entries(AREAS)){
     const g=new Game();g.enter(name);const step=20,cols=Math.ceil(a.w/step),rows=Math.ceil(a.h/step);
     const key=(x,y)=>Math.round(x/step)+','+Math.round(y/step),seen=new Set(),queue=[[Math.round(g.player.x/step),Math.round(g.player.y/step)]];let head=0;

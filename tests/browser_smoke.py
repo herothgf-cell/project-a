@@ -21,7 +21,7 @@ def main():
         page.evaluate(storage_shim,seed or {})
         page.evaluate(INSTRUMENT)
         page.add_style_tag(content=(ROOT/'style.css').read_text(encoding='utf-8'))
-        for name in ['world.js','game.js','art.js','render.js','app.js']:
+        for name in ['world.js','fate.js','game.js','art.js','fate-art.js','render.js','app.js']:
             if args.red and name=='app.js':continue
             page.add_script_tag(content=(ROOT/name).read_text(encoding='utf-8'))
     def reload_page(page):

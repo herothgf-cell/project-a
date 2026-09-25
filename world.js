@@ -5,7 +5,7 @@
   else root.WorldData = api;
 })(globalThis, function () {
   'use strict';
-  const VERSION = '0.3.0';
+  const VERSION = '0.4.0';
   const point = (id,x,y,label,kind='npc',extra={}) => ({id,x,y,label,kind,...extra});
   const block = (x,y,w,h,kind) => ({x,y,w,h,kind});
   const encounter = [[390,850],[600,720],[800,770],[920,550],[1170,410],[1280,230]];

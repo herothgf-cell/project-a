@@ -39,6 +39,7 @@ jobs:
             sleep 1
           done
           python tests/browser_smoke.py --url=http://127.0.0.1:3000/ --output=browser-results
+          python tests/fate_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/fate
       - name: Keep browser test evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -49,9 +50,9 @@ jobs:
       - name: Prepare browser assets only
         run: |
           mkdir -p site
-          cp index.html world.js game.js art.js render.js app.js style.css site/
+          cp index.html world.js fate.js game.js art.js fate-art.js render.js app.js style.css site/
           touch site/.nojekyll
-          printf '{"version":"0.3.0","commit":"%s"}\n' "$GITHUB_SHA" > site/build-info.json
+          printf '{"version":"0.4.0","commit":"%s"}\n' "$GITHUB_SHA" > site/build-info.json
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

@@ -1,6 +1,6 @@
 'use strict';
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
-const assets=new Set(['index.html','world.js','game.js','art.js','render.js','app.js','style.css']);
+const assets=new Set(['index.html','world.js','fate.js','game.js','art.js','fate-art.js','render.js','app.js','style.css']);
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8'};
 function createServer(){return http.createServer((req,res)=>{
   res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Cache-Control','no-cache');

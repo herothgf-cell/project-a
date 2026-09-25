@@ -1,10 +1,11 @@
 /* DOM-free simulation. Rendering and controls consume, never mutate, effects. */
 (function(root,factory){
-  const api=factory(typeof module==='object'&&module.exports?require('./world.js'):root.WorldData);
+  const api=factory(typeof module==='object'&&module.exports?require('./world.js'):root.WorldData,typeof module==='object'&&module.exports?require('./fate.js'):root.FateRules);
   if(typeof module==='object'&&module.exports)module.exports=api;else root.DualWorld=api;
-})(globalThis,function(data){
+})(globalThis,function(data,Fate){
   'use strict';
   const {VERSION,AREAS,QUESTS,SKILLS}=data;
+  Fate.install(AREAS);
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
   const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
   const trainingFor=s=>s>=10?3:s>=4?2:s>=2?1:0;
@@ -12,9 +13,9 @@
   class Game {
     constructor(){
       Object.assign(this,{area:'city',progress:0,training:0,level:1,xp:0,gold:40,potions:3,upgrade:0,clears:0,harborClears:0,playTime:0,combo:0,lastAttack:-10,shake:0,notice:0});
-      this.player={x:640,y:650,r:16,hp:120,mp:80,face:-Math.PI/2,invuln:0,flash:0,dash:0,dx:0,dy:0,walking:false,cool:{attack:0,moon:0,storm:0,dash:0,potion:0}};
+      this.player={swing:0,x:640,y:650,r:16,hp:120,mp:80,face:-Math.PI/2,invuln:0,flash:0,dash:0,dx:0,dy:0,walking:false,cool:{attack:0,moon:0,storm:0,dash:0,potion:0}};
       this.events=[];this.enemies=[];this.fx=[];this.activated=[];
-      this.enter('city');this.events=[];
+      Fate.init(this);this.enter('city');this.events=[];
     }
     stats(){return {hp:120+(this.level-1)*18,mp:80+(this.level-1)*5,attack:16+(this.level-1)*3+this.training*6+this.upgrade*4,next:70+this.level*45};}
     emit(type,extra={}){this.events.push({type,...extra});}
@@ -23,7 +24,7 @@
     enter(id){
       if(!Object.hasOwn(AREAS,id))return false;
       const old=AREAS[this.area],a=AREAS[id],p=this.player;this.area=id;
-      [p.x,p.y]=a.spawn;p.dash=0;p.invuln=1;p.flash=0;p.walking=false;
+      [p.x,p.y]=a.spawn;p.dash=0;p.invuln=1;p.flash=0;p.walking=false;p.swing=0;
       this.enemies=[];this.fx=[];this.activated=[];this.combo=0;
       for(const k in p.cool)p.cool[k]=0;
       if(a.safe){p.hp=this.stats().hp;p.mp=this.stats().mp;}
@@ -34,7 +35,7 @@
           this.enemies.push({id:'enemy-'+i,x,y,r:boss?31:19,boss,hp,maxHp:hp,name:boss?a.boss:a.mob,kind:boss?a.bossKind:a.mobKind,damage:Math.round((boss?a.damage*1.7:a.damage)*scale),speed:boss?78:94,cd:.6+i*.09,wind:0,windMax:1,tx:x,ty:y,range:boss?130:64,flash:0,attacks:0,pattern:'strike',rewarded:false});
         });
       }
-      this.emit('area',{text:a.name});
+      Fate.entry(this);this.emit('area',{text:a.name});
       if(old.world==='무림'&&a.world==='현실'&&this.training>0)this.emit('transfer',{title:'무공이 현실에 남았다',text:`공격력 ${this.stats().attack} · 전승 무공 ${Math.min(2,this.training)}개\n${this.training>=3?'경계 공명 · 받는 피해 15% 감소\n':''}\n다른 하늘 아래에서도, 몸은 같은 호흡을 기억한다.`});
       return true;
     }
@@ -55,6 +56,7 @@
     bossLocked(){return this.guardsAlive()||this.seals().some(o=>!this.activated.includes(o.id));}
     nearestPoint(){return AREAS[this.area].points.filter(o=>dist(o,this.player)<95).sort((a,b)=>dist(a,this.player)-dist(b,this.player))[0]||null;}
     target(){
+      const custom=Fate.objective(this,AREAS);if(custom)return custom.target;
       const a=AREAS[this.area],s=this.progress,points=a.points;
       if(!a.safe){
         const done={forest:3,rift:6,ruins:9,harbor:12}[this.area];
@@ -71,6 +73,7 @@
       return points.find(o=>o.id===id)||points[0];
     }
     objective(){
+      const custom=Fate.objective(this,AREAS);if(custom)return custom;
       const t=this.target(),a=AREAS[this.area];let text=QUESTS[this.progress][1];
       if(a.safe&&t.id==='portal')text=`${a.world==='현실'?'무림':'현실'}으로 이동하세요. 금빛 방향 표식을 따라 경계석을 찾으세요.`;
       if(a.safe&&t.id==='master')text='백련 사부에게 다가가 대화하세요.';
@@ -84,6 +87,7 @@
     }
     interact(){
       const o=this.nearestPoint(),s=this.progress;if(!o)return {type:'toast',text:'금빛 표식 가까이에서 대화 / 이동을 누르세요.'};
+      const fateEvent=Fate.interact(this,o);if(fateEvent)return fateEvent;
       if(o.kind==='shop')return {type:'shop',title:o.label};
       if(o.kind==='rest'){this.player.hp=this.stats().hp;this.player.mp=this.stats().mp;this.effect('heal',o.x,o.y);return dialog('호흡을 고르다','체력과 내력이 모두 회복되었습니다.\n금화가 부족해도 이곳에서는 무료로 쉴 수 있습니다.');}
       if(o.id==='warden'){
@@ -124,7 +128,11 @@
       this.gold-=cost;if(item==='potion')this.potions++;else this.upgrade++;
       this.toast(item==='potion'?'회복약 +1':`무기 강화 +${this.upgrade} · 두 세계 공격력 +4`);this.emit('sound',{name:'reward'});return true;
     }
+    skillInfo(action){return Fate.info(this,action)||SKILLS[action];}
+    beginTrial(path){return Fate.begin(this,path);}
+    acceptFate(path){return Fate.accept(this,path);}
     act(action){
+      if(Fate.names.includes(action))return Fate.act(this,action);
       if(!Object.hasOwn(SKILLS,action))return false;
       const p=this.player,k=SKILLS[action];if(p.hp<=0||p.cool[action]>0)return false;
       if(this.training<k.need||p.mp<k.cost)return false;
@@ -138,6 +146,7 @@
         p.dash=.17;p.invuln=.33;p.dx=Math.cos(p.face);p.dy=Math.sin(p.face);
         this.effect('dash',p.x,p.y,{angle:p.face,life:.3,max:.3});this.emit('sound',{name:'dash'});return true;
       }
+      p.swing=.24;
       if(action==='attack'){this.combo=this.playTime-this.lastAttack<1.1?this.combo%3+1:1;this.lastAttack=this.playTime;}
       const heavy=action==='attack'&&this.combo===3;
       const range=action==='storm'?250:action==='moon'?215:heavy?120:96;
@@ -150,21 +159,35 @@
         const angle=Math.atan2(e.y-p.y,e.x-p.x);if(action!=='storm'&&Math.cos(angle-p.face)<-.05)continue;
         if(e.boss&&this.bossLocked()){if(this.notice<=0){this.effect('text',e.x,e.y-65,{text:'보호막 · 호위 / 봉인',color:'#c8ced2',life:1,max:1});this.notice=1;}continue;}
         const mult=action==='storm'?3.6:action==='moon'?2.4:heavy?1.7:this.combo===2?1.1:1;
-        const damage=Math.round(this.stats().attack*mult);e.hp=Math.max(0,e.hp-damage);e.flash=.17;this.shake=heavy||action!=='attack'?.13:.06;
-        this.effect('text',e.x,e.y-50,{text:String(damage),color:action==='attack'?'#fff4d5':'#e2d493',life:.8,max:.8});
-        this.effect('spark',e.x,e.y-20,{life:.3,max:.3});
-        if(!e.boss)this.move(e,Math.cos(angle)*14,Math.sin(angle)*14);
-        if(e.hp===0)this.reward(e);
+        this.strike(e,Math.round(this.stats().attack*mult),action);
       }
       return true;
     }
+    strike(e,damage,source='attack'){
+      if(e.hp<=0||e.boss&&this.bossLocked())return 0;
+      const before=e.hp;e.hp=Math.max(e.trial&&!this.trial?.feat?1:0,e.hp-damage);e.flash=.17;
+      this.shake=source==='attack'?.06:.13;this.hitStop=source==='attack'?.025:.045;
+      this.effect('text',e.x,e.y-50,{text:String(before-e.hp),color:source==='attack'?'#fff4d5':Fate.PATHS[Fate.active(this)]?.color||'#e2d493',life:.8,max:.8});
+      this.effect('spark',e.x,e.y-20,{life:.3,max:.3});
+      if(source!=='ultimate')this.fate.focus=Math.min(100,this.fate.focus+(source==='attack'?6:11));
+      if(!e.boss&&!e.trial){const angle=Math.atan2(e.y-this.player.y,e.x-this.player.x);this.move(e,Math.cos(angle)*14,Math.sin(angle)*14);}
+      if(e.hp===0)this.reward(e);return before-e.hp;
+    }
+    takeHit(e){
+      const p=this.player;if(p.invuln>0)return;
+      const base=Math.round(e.damage*(this.training>=3?.85:1)),damage=Fate.incoming(this,e,base);
+      p.hp=Math.max(0,p.hp-damage);p.invuln=.5;if(!damage)return;p.flash=.18;this.shake=.18;
+      this.effect('text',p.x,p.y-58,{text:`−${damage}`,color:'#ffa98e',life:.7,max:.7});this.emit('sound',{name:'hurt'});
+    }
     reward(e){
       if(e.rewarded)return;e.rewarded=true;
+      if(e.trial){Fate.reward(this,e);return;}
       const gold=e.boss?110:16;this.gold=Math.min(999999,this.gold+gold);this.xp+=e.boss?145:32;
       this.effect('text',e.x,e.y-20,{text:`+${gold} 금화`,color:'#d5bd82',life:1.1,max:1.1});this.emit('sound',{name:'reward'});
       while(this.level<80&&this.xp>=this.stats().next){this.xp-=this.stats().next;this.level++;this.player.hp=Math.min(this.stats().hp,this.player.hp+45);this.player.mp=this.stats().mp;this.toast(`경지 상승 · Lv.${this.level}`);this.effect('heal',this.player.x,this.player.y,{life:1,max:1});}
       this.xp=Math.min(this.xp,this.stats().next-1);
       if(e.boss){
+        if(Fate.reward(this,e))return;
         const next={forest:3,rift:6,ruins:9,harbor:12}[this.area];
         if(this.area==='rift')this.clears++;if(this.area==='harbor')this.harborClears++;
         if(this.progress===next-1)this.progress=next;
@@ -174,51 +197,53 @@
       }
     }
     step(dt,input={}){
-      if(!Number.isFinite(dt)||dt<=0)return;dt=Math.min(dt,.05);this.playTime+=dt;
+      if(!Number.isFinite(dt)||dt<=0)return;dt=Math.min(dt,.05);
+      if(this.hitStop>0){this.hitStop=Math.max(0,this.hitStop-dt);return;}
+      Fate.tick(this,dt);this.playTime+=dt;
       const p=this.player;for(const k in p.cool)p.cool[k]=Math.max(0,p.cool[k]-dt);
-      p.invuln=Math.max(0,p.invuln-dt);p.flash=Math.max(0,p.flash-dt);this.shake=Math.max(0,this.shake-dt);this.notice=Math.max(0,this.notice-dt);p.mp=Math.min(this.stats().mp,p.mp+dt*6);
+      p.swing=Math.max(0,(p.swing||0)-dt);p.invuln=Math.max(0,p.invuln-dt);p.flash=Math.max(0,p.flash-dt);this.shake=Math.max(0,this.shake-dt);this.notice=Math.max(0,this.notice-dt);p.mp=Math.min(this.stats().mp,p.mp+dt*6);
       let x=Number.isFinite(input.x)?clamp(input.x,-1,1):0,y=Number.isFinite(input.y)?clamp(input.y,-1,1):0;
       const n=Math.hypot(x,y);if(n>1){x/=n;y/=n;}p.walking=n>.1||p.dash>0;
       if(p.dash>0){p.dash=Math.max(0,p.dash-dt);this.move(p,p.dx*650*dt,p.dy*650*dt);}
       else {if(n>.1)p.face=Math.atan2(y,x);this.move(p,x*215*dt,y*215*dt);}
       if(input.attack)this.act('attack');
       for(const e of this.enemies){
-        e.flash=Math.max(0,e.flash-dt);if(e.hp<=0||e.boss&&this.bossLocked())continue;
+        e.flash=Math.max(0,e.flash-dt);e.stun=Math.max(0,(e.stun||0)-dt);e.root=Math.max(0,(e.root||0)-dt);if(e.stun>0)continue;if(e.hp<=0||e.boss&&this.bossLocked())continue;
         e.cd=Math.max(0,e.cd-dt);const d=dist(e,p);
         if(e.wind>0){
-          e.wind-=dt;
+          e.wind-=dt*(Fate.speed(this,e)<1?.6:1);
           if(e.wind<=0){
             this.effect('impact',e.tx,e.ty,{range:e.range,pattern:e.pattern,life:.42,max:.42});
             if(e.pattern==='dive'){this.move(e,e.tx-e.x,e.ty-e.y);}
             if(Math.hypot(p.x-e.tx,p.y-e.ty)<e.range+p.r*.4&&p.invuln<=0){
-              const damage=Math.round(e.damage*(this.training>=3?.85:1));p.hp=Math.max(0,p.hp-damage);p.invuln=.5;p.flash=.18;this.shake=.18;
-              this.effect('text',p.x,p.y-58,{text:`−${damage}`,color:'#ffa98e',life:.7,max:.7});this.emit('sound',{name:'hurt'});
+              this.takeHit(e);
             }
             e.cd=e.boss?(e.hp<e.maxHp*.5?1.2:1.7):1.5;
           }
         }else if(d<(e.boss?270:e.kind==='shade'||e.kind==='drone'?240:100)&&e.cd<=0&&this.lineClear(e,p)){
-          e.attacks++;e.windMax=e.boss?(e.hp<e.maxHp*.5?.75:1):.85;e.wind=e.windMax;
+          e.attacks++;e.windMax=e.trial?1.3:e.boss?(e.hp<e.maxHp*.5?.75:1):.85;e.wind=e.windMax;
           e.pattern=e.boss&&e.attacks%2===0?'sweep':e.boss&&['tide','guardian'].includes(e.kind)?'dive':'strike';
           e.tx=e.pattern==='sweep'?e.x:p.x;e.ty=e.pattern==='sweep'?e.y:p.y;e.range=e.pattern==='sweep'?175:e.boss?108:e.kind==='shade'||e.kind==='drone'?72:62;
-        }else if(d<570&&d>60){
-          const angle=Math.atan2(p.y-e.y,p.x-e.x),before={x:e.x,y:e.y};this.move(e,Math.cos(angle)*e.speed*dt,Math.sin(angle)*e.speed*dt);
-          if(dist(before,e)<.2)this.move(e,Math.cos(angle+1.1)*e.speed*dt,Math.sin(angle+1.1)*e.speed*dt);
+        }else if(d<570&&d>60&&e.root<=0){
+          const angle=Math.atan2(p.y-e.y,p.x-e.x),before={x:e.x,y:e.y};this.move(e,Math.cos(angle)*e.speed*Fate.speed(this,e)*dt,Math.sin(angle)*e.speed*Fate.speed(this,e)*dt);
+          if(dist(before,e)<.2)this.move(e,Math.cos(angle+1.1)*e.speed*Fate.speed(this,e)*dt,Math.sin(angle+1.1)*e.speed*Fate.speed(this,e)*dt);
         }
       }
       for(const f of this.fx)f.life-=dt;this.fx=this.fx.filter(f=>f.life>0);
-      if(p.hp<=0){this.gold=Math.max(0,this.gold-15);this.enter(AREAS[this.area].world==='무림'?'village':'city');this.emit('defeat',{title:'쓰러져도, 성장은 남는다',text:'거점에서 체력과 내력을 회복했습니다. 금화 최대 15를 잃었지만 무공과 이야기 진행은 유지됩니다.\n\n호위와 봉인은 재입장하면 초기화됩니다. 붉은 공격 예고에서 회피하고, 회복약을 준비하세요.'});}
+      if(p.hp<=0){const inTrial=!!this.trial;this.gold=Math.max(0,this.gold-(inTrial?0:15));this.enter(AREAS[this.area].world==='무림'?'village':'city');this.emit('defeat',{title:'쓰러져도, 성장은 남는다',text:(inTrial?'시험은 금화 손실 없이 다시 도전할 수 있습니다. ':'거점에서 체력과 내력을 회복했습니다. 금화 최대 15를 잃었지만 ')+ '  무공과 이야기 진행은 유지됩니다.\n\n호위와 봉인은 재입장하면 초기화됩니다. 붉은 공격 예고에서 회피하고, 회복약을 준비하세요.'});}
     }
     retreat(){if(!AREAS[this.area].safe)this.enter(AREAS[this.area].world==='무림'?'village':'city');}
-    save(){const d={version:2};for(const k of ['area','progress','training','level','xp','gold','potions','upgrade','clears','harborClears','playTime'])d[k]=this[k];return JSON.stringify(d);}
+    save(){const d={version:3,fate:this.fate};for(const k of ['area','progress','training','level','xp','gold','potions','upgrade','clears','harborClears','playTime'])d[k]=this[k];return JSON.stringify(d);}
     static load(text){
-      const d=JSON.parse(text);if(!d||Array.isArray(d)||![1,2].includes(d.version)||!Object.hasOwn(AREAS,d.area))throw Error('지원하지 않거나 손상된 저장입니다.');
+      const d=JSON.parse(text);if(!d||Array.isArray(d)||![1,2,3].includes(d.version)||!Object.hasOwn(AREAS,d.area))throw Error('지원하지 않거나 손상된 저장입니다.');
       const ranges={progress:[0,d.version===1?6:12],training:[0,3],level:[1,80],xp:[0,3670],gold:[0,999999],potions:[0,99],upgrade:[0,10],clears:[0,99999]};
       for(const [k,[lo,hi]] of Object.entries(ranges))if(!Number.isInteger(d[k])||d[k]<lo||d[k]>hi)throw Error(`잘못된 저장 항목: ${k}`);
       if(d.xp>=70+d.level*45||d.training!==trainingFor(d.progress))throw Error('진행과 성장 정보가 일치하지 않습니다.');
-      if(d.version===2&&(!Number.isInteger(d.harborClears)||d.harborClears<0||d.harborClears>99999||!Number.isFinite(d.playTime)||d.playTime<0||d.playTime>1e10))throw Error('잘못된 저장 시간 또는 클리어 수입니다.');
+      if(d.version>=2&&(!Number.isInteger(d.harborClears)||d.harborClears<0||d.harborClears>99999||!Number.isFinite(d.playTime)||d.playTime<0||d.playTime>1e10))throw Error('잘못된 저장 시간 또는 클리어 수입니다.');
       const g=new Game();for(const k of Object.keys(ranges))g[k]=d[k];g.harborClears=d.harborClears||0;g.playTime=d.playTime||0;
+      if(d.version===3)g.fate=Fate.validate(d.fate,d.progress);
       g.enter(AREAS[d.area].safe?d.area:AREAS[d.area].world==='무림'?'village':'city');g.events=[];return g;
     }
   }
-  return {VERSION,Game,AREAS,QUESTS,SKILLS,clamp,dist};
+  return {VERSION,Game,AREAS,QUESTS,SKILLS,clamp,dist,Fate};
 });
