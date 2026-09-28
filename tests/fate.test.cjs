@@ -8,7 +8,7 @@ function trial(path){const g=ready();at(g,'sanctum');at(g,'relic-'+path);assert.
 function armed(path){const g=trial(path);g.fate.proven=[path];g.trial=null;g.retreat();assert.equal(g.acceptFate(path),true);g.enter('heart');g.events=[];return g;}
 function near(g){const e=g.enemies[0];g.player.x=e.x-45;g.player.y=e.y;g.player.face=0;g.player.invuln=0;e.hp=e.maxHp=2000;return e;}
 function hitSoon(g,e){e.wind=.01;e.windMax=.85;e.tx=g.player.x;e.ty=g.player.y;e.range=110;g.player.invuln=0;}
-test('fate state is absent of forced choice and version three is explicit',()=>{const g=new Game();assert.ok(g.fate);assert.equal(g.fate.path,null);assert.deepEqual(g.fate.proven,[]);assert.equal(JSON.parse(g.save()).version,3);});
+test('fate state is absent of forced choice and version four is explicit',()=>{const g=new Game();assert.ok(g.fate);assert.equal(g.fate.path,null);assert.deepEqual(g.fate.proven,[]);assert.equal(JSON.parse(g.save()).version,4);});
 test('chapter three opens only after chapter two and provides next target',()=>{const g=new Game();at(g,'warden');assert.equal(g.fate.stage,0);const h=ready();assert.equal(h.fate.stage,2);assert.equal(h.target().id,'sanctum');assert.equal(h.objective().chapter,3);});
 test('investigation discovers a path without automatically assigning a class',()=>{const g=ready();at(g,'sanctum');const r=at(g,'relic-echo');assert.equal(r.type,'fate-trial');assert.ok(g.fate.discovered.includes('echo'));assert.equal(g.fate.path,null);assert.equal(g.acceptFate('echo'),false);});
 test('invalid and undiscovered trials cannot be started',()=>{const g=ready();for(const path of ['echo','__proto__','constructor','bogus'])assert.equal(g.beginTrial(path),false);});

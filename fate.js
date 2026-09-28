@@ -60,6 +60,7 @@
       if(f.stage>=6)return {type:'dialog',title:'서린 · 돌아온 전설',text:PATHS[f.path].ending+'\n\n기연 도감에서 네가 증명한 이야기를 돌아볼 수 있어.',portrait:'warden'};
     }
     if(o.id==='master'){
+      if(f.stage===1&&f.path){f.stage=3;return {type:'dialog',title:'백련 · 나는 그 힘을 준 적이 없다',text:g.witness()+'네 검은 이미 답을 찾았다. 비경의 기억은 연습일 뿐, 허가증이 아니다.\n현실로 돌아가 네 호흡이 그곳에서도 이어지는지 보아라.',portrait:'master'};}
       if(f.stage===1){f.stage=2;return {type:'dialog',title:'백련 · 정해지지 않은 후계자',text:'무명 비경에는 주인을 기다리는 세 흔적이 있다.\n부러진 검, 겹쳐진 발자국, 봉합된 비석.\n\n각 흔적을 조사하고 그 힘을 잠시 빌려 써보거라.\n행동으로 증명한 길만 네 것으로 받아들일 수 있다.\n모두 시험해도 좋다. 최종 선택은 네 몫이다.\n\n동남쪽 무명 비경으로 향하자.',portrait:'master'};}
       if(f.stage>=2)return {type:'fate-choice',text:f.proven.length?'네가 증명한 호흡을 네 이름으로 받아들이겠느냐?':'비경에서 흔적을 조사하고 시험을 통과하거라. 잘못 골라도 잃는 것은 없다.'};
     }
@@ -129,11 +130,11 @@
     if(e.trial){if(!g.trial?.feat)return true;const path=g.trial.path;const first=!g.fate.proven.includes(path);if(first){g.fate.proven.push(path);g.gold=Math.min(999999,g.gold+40);}g.trial=null;g.combat.echo=null;g.combat.field=null;g.emit('trial-complete',{title:'증명 완료 · '+PATHS[path].name,text:'빌린 기술이 네 행동을 통해 다른 호흡이 되었다.\n\n백련에게 돌아가 이 길을 받아들일 수 있습니다.\n다른 흔적을 시험한 뒤 결정해도 좋습니다.',path});return true;}
     if(e.boss&&g.area==='heart'){if(g.fate.stage===4)g.fate.stage=5;g.emit('victory',{title:'경계의 심장을 넘어',text:PATHS[g.fate.path]?.ending+'\n\n기지의 서린에게 돌아가 보고하세요.'});return true;}return false;
   }
-  function validate(raw,progress){
+  function validate(raw,progress,early=false){
     if(!raw||Array.isArray(raw)||!Number.isInteger(raw.stage)||raw.stage<0||raw.stage>6||raw.path!==null&&!valid(raw.path))throw Error('기연 저장이 손상되었습니다.');
     const clean=initial();clean.stage=raw.stage;clean.path=raw.path;
     for(const key of ['discovered','proven']){if(!Array.isArray(raw[key])||raw[key].length>3||raw[key].some(p=>!valid(p))||new Set(raw[key]).size!==raw[key].length)throw Error('기연 증거가 손상되었습니다.');clean[key]=raw[key].slice();}
-    if(clean.proven.some(p=>!clean.discovered.includes(p))||clean.stage>=3&&(!clean.path||!clean.proven.includes(clean.path))||clean.stage<3&&clean.path||progress<12&&clean.stage>0)throw Error('기연 진행이 일치하지 않습니다.');
+    if(clean.proven.some(p=>!clean.discovered.includes(p))||clean.stage>=3&&(!clean.path||!clean.proven.includes(clean.path))||clean.stage<3&&clean.path&&!early||progress<12&&clean.stage>0)throw Error('기연 진행이 일치하지 않습니다.');
     if(!raw.feats||typeof raw.feats!=='object')throw Error('기연 행적이 없습니다.');for(const key of Object.keys(PATHS)){const v=raw.feats[key];if(!Number.isInteger(v)||v<0||v>999999)throw Error('기연 행적 값이 잘못되었습니다.');clean.feats[key]=v;}
     if(!Number.isFinite(raw.focus)||raw.focus<0||raw.focus>100)throw Error('잘못된 기세입니다.');clean.focus=0;return clean;
   }

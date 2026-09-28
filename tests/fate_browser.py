@@ -7,7 +7,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright,expect
 from browser_smoke import INSTRUMENT
 ROOT=Path(__file__).resolve().parents[1]
-FILES=['world.js','fate.js','game.js','art.js','fate-art.js','render.js','app.js']
+FILES=['world.js','fate.js','legend.js','game.js','art.js','portrait-data.js','classic-art.js','fate-art.js','render.js','app.js']
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('--url');parser.add_argument('--output',default='.superpowers/v04/fate-screens');parser.add_argument('--red',action='store_true');args=parser.parse_args();out=Path(args.output);out.mkdir(parents=True,exist_ok=True);checks=[]
  with sync_playwright() as pw:
@@ -16,7 +16,7 @@ def main():
    page.on('pageerror',lambda e:errors.append(str(e)))
    if args.url:page.goto(args.url,wait_until='load')
    else:
-    page.goto('about:blank');page.set_content(re.sub(r'<script[^>]*>.*?</script>|<link rel="stylesheet"[^>]*>','',(ROOT/'index.html').read_text(),flags=re.S));page.evaluate("()=>{const m=new Map();Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}})}");page.evaluate(INSTRUMENT);page.add_style_tag(content=(ROOT/'style.css').read_text());
+    page.goto('about:blank');page.set_content(re.sub(r'<script[^>]*>.*?</script>|<link rel="stylesheet"[^>]*>','',(ROOT/'index.html').read_text(),flags=re.S));page.evaluate("()=>{const m=new Map();Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}})}");page.evaluate(INSTRUMENT);page.add_style_tag(content=(ROOT/'style.css').read_text());page.add_style_tag(content=(ROOT/'classic.css').read_text());
     for f in FILES:
      if (ROOT/f).exists():page.add_script_tag(content=(ROOT/f).read_text())
    page.locator('#start').click();page.locator('#dialogActions button').first.click();page.wait_for_timeout(80)
@@ -31,9 +31,10 @@ def main():
    p.evaluate("()=>{__game.progress=12;__game.training=3;__game.level=8;__game.enter('city');__game.events=[];}");at(p,'warden');dismiss(p);at(p,'portal');dismiss(p);at(p,'master');dismiss(p);at(p,'sanctum');at(p,'relic-'+path)
    p.get_by_role('button',name='공명 시험 시작',exact=True).click();dismiss(p);expect(p.locator('#fateControls')).to_be_visible();assert p.evaluate('__game.fate.path') is None
    p.evaluate("()=>{const e=__game.enemies[0];__game.player.x=e.x-45;__game.player.y=e.y;__game.player.face=0;__game.player.invuln=0;e.cd=10;e.wind=.18;e.windMax=1.3;e.tx=__game.player.x;e.ty=__game.player.y;e.range=110;}")
-   p.keyboard.press('KeyQ');p.wait_for_timeout(250)
+   p.keyboard.press('KeyQ');p.wait_for_function('__game.player.cool.signature1>0',timeout=2500)
+   if path=='ripple':p.wait_for_function('__game.trial.feat',timeout=2500)
    if path=='echo':p.keyboard.press('KeyR');p.wait_for_timeout(80)
-   assert p.evaluate('__game.trial.feat'),path
+   assert p.evaluate('__game.trial.feat'), {'path':path,'combat':p.evaluate('__game.combat'),'enemy':p.evaluate('__game.enemies[0]'),'errors':errors}
    p.evaluate("()=>{const e=__game.enemies[0];__game.strike(e,e.hp,'attack');}");p.wait_for_timeout(90);p.get_by_role('button',name='거점으로 귀환',exact=True).click();at(p,'master');p.get_by_role('button',name={'ripple':'파문검','echo':'잔영보','seal':'경계봉인'}[path]+' 수락',exact=True).click();dismiss(p)
    assert p.evaluate('__game.fate.path')==path;at(p,'portal');dismiss(p);at(p,'warden');dismiss(p);at(p,'heart');p.wait_for_timeout(100)
    p.evaluate("()=>{const e=__game.enemies[0];__game.player.x=e.x-60;__game.player.y=e.y;__game.fate.focus=100;}");p.keyboard.press('KeyF');p.wait_for_timeout(60)

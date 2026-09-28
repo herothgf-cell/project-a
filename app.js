@@ -1,7 +1,7 @@
 /* Browser adapter: input lifecycle, modal flow, save migration, and readable HUD. */
 (function(){
   'use strict';
-  const {Game,AREAS,QUESTS,SKILLS,VERSION,dist,Fate}=DualWorld;
+  const {Game,AREAS,QUESTS,SKILLS,VERSION,dist,Fate,Legend}=DualWorld;
   const $=id=>document.getElementById(id),SAVE='dualworld.save.v1',BACKUP='dualworld.backup.v1';
   const dialog=$('dialog'),renderer=new WorldRenderer($('canvas'),$('mini'));
   let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0;
@@ -25,33 +25,48 @@
   }
   function closeDialog(){if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker);}}
   function show(title,body,actions=[{label:'계속하기'}],portrait='system',kicker='쌍계 · 이야기'){
-    clearInput();$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
+    clearInput();dialog.classList.toggle('legend-offer',kicker.includes('발현')||kicker.includes('각성'));$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
     $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=body;else $('dialogBody').append(body);
     WorldArt.portrait($('portrait'),portrait);$('dialogActions').replaceChildren();
     actions.forEach(a=>{const b=node('button',a.secondary?'secondary':a.danger?'danger':'primary',a.label);b.disabled=!!a.disabled;b.addEventListener('click',()=>{queued=[];if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(a.run)a.run();});$('dialogActions').append(b);});
     if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
   }
+  function legendOffer(event){
+    const path=Fate.PATHS[event.path],body=node('div');body.style.setProperty('--legend-color',path.color);
+    body.append(node('span','legend-symbol',path.glyph),node('p','legend-origin',event.text),node('p','legend-note','이름을 알기 전에 몸이 먼저 기억했다. 이 호흡을 이어가거나, 다른 가능성을 살펴봐도 좋다.'));
+    const blocked=!!g.fate.path&&g.fate.path!==event.path&&!AREAS[g.area].safe;
+    const actions=[{label:blocked?'거점에서 다른 호흡으로 잇기':'이 호흡을 붙잡는다',disabled:blocked,run:()=>{g.awaken(event.path);processEvents();persist();update();}},{label:'지금은 이 감각만 기억한다',secondary:true}];
+    if(dialog.open)queued.push({title:event.title,text:body,actions,portrait:'hero',kicker:'현장 발현 · 아직 이름 붙이지 않은 힘'});
+    else show(event.title,body,actions,'hero','현장 발현 · 아직 이름 붙이지 않은 힘');
+  }
   function fateJournal(){
-    if(!active)return;const f=g.fate,body=node('div');
-    body.append(node('p','dialog-note','기연은 뽑는 직업이 아니라 직접 증명한 호흡입니다. 세 길을 모두 시험하고, 증명한 한 계열을 백련에게서 받아들일 수 있습니다.'));
-    if(f.path)body.append(grid([['나의 무공',Fate.PATHS[f.path].name],['별호',f.stage>=6?Fate.PATHS[f.path].title:'아직 쓰는 중'],['기세',Math.floor(f.focus)+' / 100'],['나의 증거',f.proven.length+' / 3']]));
+    if(!active)return;const f=g.fate,l=g.legend,body=node('div');
+    body.append(node('p','dialog-note','무공의 시작은 누군가의 보상 목록이 아니다. 여기에는 당신이 실제로 지나온 장소와 마주한 사건만 남는다.'));
+    if(f.path)body.append(grid([['나의 무공',Fate.PATHS[f.path].name],['별호',f.stage>=6?Fate.PATHS[f.path].title:'아직 쓰는 중'],['기세',Math.floor(f.focus)+' / 100'],['시작',l.awakened.includes(f.path)?'전투 중 발현':'이전 여정 / 비경의 기억']]));
+    body.append(node('h3','','내가 남긴 기억'));const memories=node('section','memory-list');
+    if(!l.memories.length)memories.append(node('p','','아직 새로 기록된 발현은 없다. 기존에 배운 무공은 그대로 남아 있다. 적의 예고를 끝까지 보거나, 회피한 뒤 돌아가거나, 전장의 이상한 틈에 손을 대 보자.'));
+    for(const m of l.memories){const e=node('article');e.append(node('b','',AREAS[m.area].name+' · '+m.foe),node('p','',m.action+'.'));memories.append(e);}body.append(memories);
     for(const [id,path]of Object.entries(Fate.PATHS)){
-      const card=node('section','fate-card');card.style.setProperty('--fate-color',path.color);
-      const head=node('div','fate-card-head');head.append(node('span','fate-glyph',path.glyph),node('b','',path.name),node('small','',f.path===id?'나의 무공':f.proven.includes(id)?'증명 완료':f.discovered.includes(id)?'발견':'미발견'));card.append(head,node('p','',path.reason));
-      for(let i=0;i<3;i++){const sk=path.skills[i];card.append(node('p','fate-skill-copy',`${['Q','R','F'][i]} · ${sk[0]} — ${sk[4]}`));}
-      card.append(node('small','fate-feats',`실전 행적 ${f.feats[id]}회 · ${path.proof}`));body.append(card);
+      if(!f.discovered.includes(id)&&!f.proven.includes(id))continue;
+      const card=node('section','fate-card');card.style.setProperty('--fate-color',path.color);const head=node('div','fate-card-head');
+      head.append(node('span','fate-glyph',path.glyph),node('b','',path.name),node('small','',f.path===id?'지금의 호흡':l.ready.includes(id)?'이어갈 수 있는 기억':f.proven.includes(id)?'비경에서 익힌 기억':'정체를 알아가는 중'));card.append(head);
+      for(let i=0;i<3;i++)card.append(node('p','fate-skill-copy',`${['Q','R','F'][i]} · ${path.skills[i][0]} — ${path.skills[i][4]}`));body.append(card);
     }
-    body.append(node('p','dialog-note',g.progress<12?'제2장을 마치고 서린과 대화하면 제3장의 흔적이 열립니다.':g.objective().text));
-    show('나의 기연 · 증명의 기록',body,[{label:'돌아가기'},...(g.area==='village'&&f.proven.length?[{label:'증명한 계열 수락 / 재수련',secondary:true,run:fateChoice}]:[])],'hero','세 갈래의 가능성');
+    const actions=l.ready.filter(id=>id!==f.path||!l.awakened.includes(id)).map(id=>({label:Fate.PATHS[id].name+' · 내 호흡으로',disabled:!!f.path&&f.path!==id&&!AREAS[g.area].safe,run:()=>{g.awaken(id);processEvents();persist();update();}}));
+    if(f.path&&!AREAS[g.area].safe)body.append(node('p','dialog-note','다른 호흡으로 갈아타는 일은 안전한 거점에서 할 수 있습니다. 지금의 기억은 사라지지 않습니다.'));
+    actions.push({label:'돌아가기',secondary:true});
+    if(g.area==='village'&&f.proven.length&&f.stage>=2)actions.push({label:'비경에서 익힌 계열 재수련',secondary:true,run:fateChoice});
+    show('나의 기연 · 기억의 장',body,actions,'hero','내 발걸음에 남은 이야기');
   }
   function fateChoice(){
     const f=g.fate,body=node('div');body.append(node('p','','네가 직접 증명한 길만 받아들일 수 있습니다. 이미 완성한 이야기와 무공은 계열을 바꾸어도 사라지지 않습니다. 거점에서 재수련은 무료입니다.'));
     for(const id of f.proven){const path=Fate.PATHS[id];body.append(node('h3','',path.name),node('p','',path.skills.map((sk,i)=>`${['Q','R','F'][i]} · ${sk[0]}: ${sk[4]}`).join('\n')));}
     if(!f.proven.length)body.append(node('p','','먼저 무명 비경의 흔적을 조사하고, 임시 무공으로 시험을 통과하세요.'));
-    show('백련 · 너의 호흡을 받아들여라',body,[...f.proven.map(id=>({label:Fate.PATHS[id].name+' 수락',run:()=>{g.acceptFate(id);processEvents();persist();update();}})),{label:'더 생각해 보기',secondary:true}],'master','계열 수락 · 언제든 재수련 가능');
+    show('백련 · 너의 호흡을 받아들여라',body,[...f.proven.map(id=>({label:Fate.PATHS[id].name+' 수락',run:()=>{g.acceptFate(id);processEvents();persist();update();}})),{label:'더 생각해 보기',secondary:true}],'master','선택형 연습 · 이미 겪은 호흡의 재해석');
   }
-  function trialPrompt(event){show(event.title,event.text,[{label:'공명 시험 시작',run:()=>{g.beginTrial(event.path);processEvents();persist();update();}},{label:'지금은 관찰만',secondary:true}],'hero','기연의 조짐 · 아직 확정되지 않은 길');}
+  function trialPrompt(event){show(event.title,event.text,[{label:'공명 시험 시작',run:()=>{g.beginTrial(event.path);processEvents();persist();update();}},{label:'지금은 관찰만',secondary:true}],'hero','선택형 기억 연습 · 현장 발현과 별개');}
   function story(event){
+    if(event.type==='legend-ready'){legendOffer(event);return;}
     if(event.type==='fate-trial'){trialPrompt(event);return;}
     if(event.type==='fate-choice'){fateChoice();return;}
     if(event.type==='awakening'){$('game').style.setProperty('--fate-color',Fate.PATHS[event.path].color);}
@@ -62,7 +77,7 @@
     else show(event.title,event.text,actions,event.portrait||'system',kicker);
   }
   function start(load=false){
-    backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();lastFrame=performance.now();persist();update();
+    backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
     if(!load)show('제1장 · 낯선 신호','당신은 해온시의 신입 헌터, 윤서.\n균열에서 회수한 경계석이 당신의 손에서 깨어났다.\n\n무림에서 익힌 무공은 현실에서도 사라지지 않는다.\n먼저 관리관 서린을 찾아가자.\n\n이동: WASD / 왼쪽 조이스틱\n대화: E / 화면 아래 대화 버튼\n금빛 방향 표식이 다음 목표를 안내합니다.',[{label:'여정 시작'}],'hero');
     else toast('안전한 거점에서 이어갑니다. 기존 성장과 무공을 유지했습니다.');
   }
@@ -110,15 +125,18 @@
     for(const e of g.events.splice(0)){
       if(e.type==='toast')toast(e.text);if(e.type==='sound')playSound(e.name);
       if(e.type==='area'){clearInput();$('toasts').replaceChildren();$('areaBanner').querySelector('strong').textContent=e.text;$('areaBanner').classList.add('show');clearTimeout(bannerTimer);bannerTimer=setTimeout(()=>$('areaBanner').classList.remove('show'),1800);persist();}
-      if(e.type==='ultimate'){clearTimeout(bannerTimer);$('areaBanner').classList.remove('show');$('ultimateBanner').querySelector('strong').textContent=e.title;$('ultimateBanner').style.setProperty('--fate-color',Fate.PATHS[e.path].color);$('ultimateBanner').classList.add('show');clearTimeout(ultimateTimer);ultimateTimer=setTimeout(()=>$('ultimateBanner').classList.remove('show'),1100);}
-      if(['transfer','victory','defeat','dialog','awakening','trial-complete'].includes(e.type)){story(e);persist();}
+      if(e.type==='manifestation'){
+        clearTimeout(bannerTimer);$('areaBanner').classList.remove('show');$('ultimateBanner').querySelector('small').textContent='이름 없는 발현';$('ultimateBanner').querySelector('strong').textContent=e.title;$('ultimateBanner').style.setProperty('--fate-color',Fate.PATHS[e.path].color);$('ultimateBanner').classList.add('show');clearTimeout(ultimateTimer);ultimateTimer=setTimeout(()=>$('ultimateBanner').classList.remove('show'),2100);toast(e.text.replace('\n',' · '));persist();
+      }
+      if(e.type==='ultimate'){$('ultimateBanner').querySelector('small').textContent='나만의 오의';clearTimeout(bannerTimer);$('areaBanner').classList.remove('show');$('ultimateBanner').querySelector('strong').textContent=e.title;$('ultimateBanner').style.setProperty('--fate-color',Fate.PATHS[e.path].color);$('ultimateBanner').classList.add('show');clearTimeout(ultimateTimer);ultimateTimer=setTimeout(()=>$('ultimateBanner').classList.remove('show'),1100);}
+      if(['transfer','victory','defeat','dialog','awakening','trial-complete','legend-ready'].includes(e.type)){story(e);persist();}
     }
   }
-  function interact(){if(!running())return;const result=g.interact();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
+  function interact(){if(!running())return;const result=g.interact();if(result?.type==='dialog'&&['master','warden'].includes(result.portrait)&&g.witness()&&!result.text.includes(g.witness()))result.text=g.witness()+result.text;if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
   function act(action){
     if(!running())return;const k=g.skillInfo(action);if(!k)return;
     if(!g.act(action)){
-      if(k.locked)toast('비경에서 시험을 통과하고 백련에게 이 계열을 수락하세요.');
+      if(k.locked)toast('전장에서 나타난 감각은 나의 기연 도감에 기록됩니다. 비경에서는 안전하게 연습할 수도 있습니다.');
       else if(action==='ultimate'&&g.fate.focus<100)toast('적에게 타격하거나 기연 행동에 성공해 기세 100을 모으세요.');
       else if(action==='signature2'&&Fate.active(g)==='echo'&&!g.combat.echo)toast('Q 잔영각으로 먼저 잔향을 남겨야 합니다.');
       else if(action==='signature2'&&Fate.active(g)==='echo'&&g.combat.echo&&!g.lineClear(g.player,g.combat.echo))toast('잔향까지의 길이 막혔습니다. 벽을 넘어 귀환할 수 없습니다.');
@@ -147,7 +165,9 @@
   }
   $('fateJournal').addEventListener('click',fateJournal);
   $('start').addEventListener('click',newGame);$('continue').addEventListener('click',()=>start(true));$('menu').addEventListener('click',menu);$('inventory').addEventListener('click',inventory);$('journal').addEventListener('click',journal);$('mapBtn').addEventListener('click',map);$('interact').addEventListener('click',interact);$('potion').addEventListener('click',()=>act('potion'));$('closeDialog').addEventListener('click',closeDialog);
-  dialog.addEventListener('cancel',()=>{queued=[];clearInput();});dialog.addEventListener('close',clearInput);
+  // Clear synchronously at every close/cancel path. Native close is queued and
+  // must not erase a fresh movement key pressed after the dialog disappeared.
+  dialog.addEventListener('cancel',()=>{queued=[];clearInput();});
   $('sound').addEventListener('click',()=>{sound=!sound;$('sound').textContent=sound?'♫':'♪';$('sound').setAttribute('aria-label',sound?'소리 끄기':'소리 켜기');playSound('reward');});
   $('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('game').requestFullscreen();}catch(error){toast('이 브라우저에서는 전체 화면을 지원하지 않습니다.');}});
   const keyActions={KeyQ:'signature1',KeyR:'signature2',KeyF:'ultimate',KeyJ:'attack',KeyK:'moon',KeyL:'storm',Space:'dash',ShiftLeft:'dash',ShiftRight:'dash',Digit1:'potion'};
@@ -177,5 +197,5 @@
     }catch(error){if(!errorReported){errorReported=true;console.error(error);show('게임 실행 중 오류가 발생했습니다','저장된 진행은 그대로 보관됩니다. 새로고침 후에도 반복되면 이 내용을 알려 주세요.\n\n'+error.message);}}
     requestAnimationFrame(frame);
   }
-  inspectSave();WorldArt.cover($('cover'));update();requestAnimationFrame(frame);
+  inspectSave();WorldArt.cover($('cover'));WorldArt.portrait($('hudPortrait'),'hero');update();requestAnimationFrame(frame);
 })();

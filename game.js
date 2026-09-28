@@ -1,13 +1,12 @@
 /* DOM-free simulation. Rendering and controls consume, never mutate, effects. */
 (function(root,factory){
-  const api=factory(typeof module==='object'&&module.exports?require('./world.js'):root.WorldData,typeof module==='object'&&module.exports?require('./fate.js'):root.FateRules);
+  const api=factory(typeof module==='object'&&module.exports?require('./world.js'):root.WorldData,typeof module==='object'&&module.exports?require('./fate.js'):root.FateRules,typeof module==='object'&&module.exports?require('./legend.js'):root.LegendRules);
   if(typeof module==='object'&&module.exports)module.exports=api;else root.DualWorld=api;
-})(globalThis,function(data,Fate){
+})(globalThis,function(data,Fate,Legend){
   'use strict';
   const {VERSION,AREAS,QUESTS,SKILLS}=data;
-  Fate.install(AREAS);
-  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
-  const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+  Fate.install(AREAS);Legend.install(AREAS);
+  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
   const trainingFor=s=>s>=10?3:s>=4?2:s>=2?1:0;
   const dialog=(title,text,portrait='system')=>({type:'dialog',title,text,portrait});
   class Game {
@@ -15,7 +14,7 @@
       Object.assign(this,{area:'city',progress:0,training:0,level:1,xp:0,gold:40,potions:3,upgrade:0,clears:0,harborClears:0,playTime:0,combo:0,lastAttack:-10,shake:0,notice:0});
       this.player={swing:0,x:640,y:650,r:16,hp:120,mp:80,face:-Math.PI/2,invuln:0,flash:0,dash:0,dx:0,dy:0,walking:false,cool:{attack:0,moon:0,storm:0,dash:0,potion:0}};
       this.events=[];this.enemies=[];this.fx=[];this.activated=[];
-      Fate.init(this);this.enter('city');this.events=[];
+      Fate.init(this);Legend.init(this);this.enter('city');this.events=[];
     }
     stats(){return {hp:120+(this.level-1)*18,mp:80+(this.level-1)*5,attack:16+(this.level-1)*3+this.training*6+this.upgrade*4,next:70+this.level*45};}
     emit(type,extra={}){this.events.push({type,...extra});}
@@ -35,7 +34,7 @@
           this.enemies.push({id:'enemy-'+i,x,y,r:boss?31:19,boss,hp,maxHp:hp,name:boss?a.boss:a.mob,kind:boss?a.bossKind:a.mobKind,damage:Math.round((boss?a.damage*1.7:a.damage)*scale),speed:boss?78:94,cd:.6+i*.09,wind:0,windMax:1,tx:x,ty:y,range:boss?130:64,flash:0,attacks:0,pattern:'strike',rewarded:false});
         });
       }
-      Fate.entry(this);this.emit('area',{text:a.name});
+      Fate.entry(this);Legend.enter(this);this.emit('area',{text:a.name});
       if(old.world==='무림'&&a.world==='현실'&&this.training>0)this.emit('transfer',{title:'무공이 현실에 남았다',text:`공격력 ${this.stats().attack} · 전승 무공 ${Math.min(2,this.training)}개\n${this.training>=3?'경계 공명 · 받는 피해 15% 감소\n':''}\n다른 하늘 아래에서도, 몸은 같은 호흡을 기억한다.`});
       return true;
     }
@@ -87,6 +86,7 @@
     }
     interact(){
       const o=this.nearestPoint(),s=this.progress;if(!o)return {type:'toast',text:'금빛 표식 가까이에서 대화 / 이동을 누르세요.'};
+      const fieldEvent=Legend.interact(this,o);if(fieldEvent)return fieldEvent;
       const fateEvent=Fate.interact(this,o);if(fateEvent)return fateEvent;
       if(o.kind==='shop')return {type:'shop',title:o.label};
       if(o.kind==='rest'){this.player.hp=this.stats().hp;this.player.mp=this.stats().mp;this.effect('heal',o.x,o.y);return dialog('호흡을 고르다','체력과 내력이 모두 회복되었습니다.\n금화가 부족해도 이곳에서는 무료로 쉴 수 있습니다.');}
@@ -128,10 +128,13 @@
       this.gold-=cost;if(item==='potion')this.potions++;else this.upgrade++;
       this.toast(item==='potion'?'회복약 +1':`무기 강화 +${this.upgrade} · 두 세계 공격력 +4`);this.emit('sound',{name:'reward'});return true;
     }
+    awaken(path){return Legend.awaken(this,path);}
+    witness(){return Legend.witness(this);}
     skillInfo(action){return Fate.info(this,action)||SKILLS[action];}
     beginTrial(path){return Fate.begin(this,path);}
     acceptFate(path){return Fate.accept(this,path);}
-    act(action){
+    act(action,held=false){
+      this.legendRuntime.manual=!held;
       if(Fate.names.includes(action))return Fate.act(this,action);
       if(!Object.hasOwn(SKILLS,action))return false;
       const p=this.player,k=SKILLS[action];if(p.hp<=0||p.cool[action]>0)return false;
@@ -143,6 +146,7 @@
       }
       p.cool[action]=k.cool;p.mp-=k.cost;
       if(action==='dash'){
+        Legend.dash(this);
         p.dash=.17;p.invuln=.33;p.dx=Math.cos(p.face);p.dy=Math.sin(p.face);
         this.effect('dash',p.x,p.y,{angle:p.face,life:.3,max:.3});this.emit('sound',{name:'dash'});return true;
       }
@@ -171,7 +175,7 @@
       this.effect('spark',e.x,e.y-20,{life:.3,max:.3});
       if(source!=='ultimate')this.fate.focus=Math.min(100,this.fate.focus+(source==='attack'?6:11));
       if(!e.boss&&!e.trial){const angle=Math.atan2(e.y-this.player.y,e.x-this.player.x);this.move(e,Math.cos(angle)*14,Math.sin(angle)*14);}
-      if(e.hp===0)this.reward(e);return before-e.hp;
+      Legend.hit(this,e,source);if(e.hp===0)this.reward(e);return before-e.hp;
     }
     takeHit(e){
       const p=this.player;if(p.invuln>0)return;
@@ -206,13 +210,14 @@
       const n=Math.hypot(x,y);if(n>1){x/=n;y/=n;}p.walking=n>.1||p.dash>0;
       if(p.dash>0){p.dash=Math.max(0,p.dash-dt);this.move(p,p.dx*650*dt,p.dy*650*dt);}
       else {if(n>.1)p.face=Math.atan2(y,x);this.move(p,x*215*dt,y*215*dt);}
-      if(input.attack)this.act('attack');
+      if(input.attack)this.act('attack',true);
       for(const e of this.enemies){
         e.flash=Math.max(0,e.flash-dt);e.stun=Math.max(0,(e.stun||0)-dt);e.root=Math.max(0,(e.root||0)-dt);if(e.stun>0)continue;if(e.hp<=0||e.boss&&this.bossLocked())continue;
         e.cd=Math.max(0,e.cd-dt);const d=dist(e,p);
         if(e.wind>0){
           e.wind-=dt*(Fate.speed(this,e)<1?.6:1);
           if(e.wind<=0){
+            Legend.impact(this,e);
             this.effect('impact',e.tx,e.ty,{range:e.range,pattern:e.pattern,life:.42,max:.42});
             if(e.pattern==='dive'){this.move(e,e.tx-e.x,e.ty-e.y);}
             if(Math.hypot(p.x-e.tx,p.y-e.ty)<e.range+p.r*.4&&p.invuln<=0){
@@ -233,17 +238,18 @@
       if(p.hp<=0){const inTrial=!!this.trial;this.gold=Math.max(0,this.gold-(inTrial?0:15));this.enter(AREAS[this.area].world==='무림'?'village':'city');this.emit('defeat',{title:'쓰러져도, 성장은 남는다',text:(inTrial?'시험은 금화 손실 없이 다시 도전할 수 있습니다. ':'거점에서 체력과 내력을 회복했습니다. 금화 최대 15를 잃었지만 ')+ '  무공과 이야기 진행은 유지됩니다.\n\n호위와 봉인은 재입장하면 초기화됩니다. 붉은 공격 예고에서 회피하고, 회복약을 준비하세요.'});}
     }
     retreat(){if(!AREAS[this.area].safe)this.enter(AREAS[this.area].world==='무림'?'village':'city');}
-    save(){const d={version:3,fate:this.fate};for(const k of ['area','progress','training','level','xp','gold','potions','upgrade','clears','harborClears','playTime'])d[k]=this[k];return JSON.stringify(d);}
+    save(){const d={version:4,fate:this.fate,legend:this.legend};for(const k of ['area','progress','training','level','xp','gold','potions','upgrade','clears','harborClears','playTime'])d[k]=this[k];return JSON.stringify(d);}
     static load(text){
-      const d=JSON.parse(text);if(!d||Array.isArray(d)||![1,2,3].includes(d.version)||!Object.hasOwn(AREAS,d.area))throw Error('지원하지 않거나 손상된 저장입니다.');
+      const d=JSON.parse(text);if(!d||Array.isArray(d)||![1,2,3,4].includes(d.version)||!Object.hasOwn(AREAS,d.area))throw Error('지원하지 않거나 손상된 저장입니다.');
       const ranges={progress:[0,d.version===1?6:12],training:[0,3],level:[1,80],xp:[0,3670],gold:[0,999999],potions:[0,99],upgrade:[0,10],clears:[0,99999]};
       for(const [k,[lo,hi]] of Object.entries(ranges))if(!Number.isInteger(d[k])||d[k]<lo||d[k]>hi)throw Error(`잘못된 저장 항목: ${k}`);
       if(d.xp>=70+d.level*45||d.training!==trainingFor(d.progress))throw Error('진행과 성장 정보가 일치하지 않습니다.');
       if(d.version>=2&&(!Number.isInteger(d.harborClears)||d.harborClears<0||d.harborClears>99999||!Number.isFinite(d.playTime)||d.playTime<0||d.playTime>1e10))throw Error('잘못된 저장 시간 또는 클리어 수입니다.');
       const g=new Game();for(const k of Object.keys(ranges))g[k]=d[k];g.harborClears=d.harborClears||0;g.playTime=d.playTime||0;
-      if(d.version===3)g.fate=Fate.validate(d.fate,d.progress);
+      if(d.version===4)g.legend=Legend.validate(d.legend);
+      if(d.version>=3)g.fate=Fate.validate(d.fate,d.progress,d.version===4&&g.legend.awakened.includes(d.fate?.path));
       g.enter(AREAS[d.area].safe?d.area:AREAS[d.area].world==='무림'?'village':'city');g.events=[];return g;
     }
   }
-  return {VERSION,Game,AREAS,QUESTS,SKILLS,clamp,dist,Fate};
+  return {VERSION,Game,AREAS,QUESTS,SKILLS,clamp,dist,Fate,Legend};
 });

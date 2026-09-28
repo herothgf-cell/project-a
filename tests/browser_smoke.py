@@ -20,8 +20,8 @@ def main():
         page.set_content(html,wait_until='load')
         page.evaluate(storage_shim,seed or {})
         page.evaluate(INSTRUMENT)
-        page.add_style_tag(content=(ROOT/'style.css').read_text(encoding='utf-8'))
-        for name in ['world.js','fate.js','game.js','art.js','fate-art.js','render.js','app.js']:
+        page.add_style_tag(content=(ROOT/'style.css').read_text(encoding='utf-8'));page.add_style_tag(content=(ROOT/'classic.css').read_text(encoding='utf-8'))
+        for name in ['world.js','fate.js','legend.js','game.js','art.js','portrait-data.js','classic-art.js','fate-art.js','render.js','app.js']:
             if args.red and name=='app.js':continue
             page.add_script_tag(content=(ROOT/name).read_text(encoding='utf-8'))
     def reload_page(page):
@@ -50,7 +50,7 @@ def main():
             load(page);page.screenshot(path=str(out/'title.png'));page.locator('#start').click();expect(page.locator('#dialog')).to_be_visible(timeout=1500)
             if args.red: print('unexpected RED pass');return
             page.locator('#dialogActions button').first.click();expect(page.locator('#dialog')).not_to_be_visible();expect(page.locator('#canvas')).to_be_visible();expect(page.locator('#title')).not_to_be_visible()
-            page.wait_for_timeout(100);x=page.evaluate('__game.player.x');page.keyboard.down('KeyD');page.wait_for_timeout(400);page.keyboard.up('KeyD');assert page.evaluate('__game.player.x')>x+30
+            page.wait_for_timeout(100);x=page.evaluate('__game.player.x');page.keyboard.down('KeyD');page.wait_for_function('(x)=>__game.player.x>x+30',arg=x,timeout=2500);page.keyboard.up('KeyD');assert page.evaluate('__game.player.x')>x+30, {'start':x,'end':page.evaluate('__game.player.x'),'errors':errors,'dialog':page.locator('#dialog').inner_text() if page.locator('#dialog').is_visible() else '', 'player':page.evaluate('__game.player')}
             assert 'undefined' not in page.locator('#objective').inner_text();assert not errors,errors;results.append('new journey, intro close, visible canvas and keyboard movement')
             page.screenshot(path=str(out/'desktop-city.png'))
             # Real model fixtures for all encounters; keyboard and pointer actions remain real UI input.

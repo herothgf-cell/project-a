@@ -7,7 +7,7 @@
     constructor(canvas,mini){this.canvas=canvas;this.c=canvas.getContext('2d');this.mini=mini;this.cache={};this.camera={x:0,y:0};this.area=null;this.quality=matchMedia('(pointer:coarse)').matches?1:2;this.autoLow=false;this.slowFrames=0;this.reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;this.resize();}
     resize(){const r=this.canvas.getBoundingClientRect();this.w=Math.max(1,r.width);this.h=Math.max(1,r.height);this.dpr=Math.min(devicePixelRatio||1,2);this.canvas.width=Math.round(this.w*this.dpr);this.canvas.height=Math.round(this.h*this.dpr);this.zoom=this.w<600?1:1.1;}
     scenery(id){
-      if(this.cache[id])return this.cache[id];const a=AREAS[id],p=palettes[id],can=document.createElement('canvas');can.width=a.w;can.height=a.h;const c=can.getContext('2d'),rng=random(id.charCodeAt(0)*289+17),outdoor=['village','forest','ruins','sanctum'].includes(id);
+      if(this.cache[id])return this.cache[id];if(root.ClassicArt){this.cache[id]=ClassicArt.terrain(AREAS[id]);return this.cache[id];}const a=AREAS[id],p=palettes[id],can=document.createElement('canvas');can.width=a.w;can.height=a.h;const c=can.getContext('2d'),rng=random(id.charCodeAt(0)*289+17),outdoor=['village','forest','ruins','sanctum'].includes(id);
       const grad=c.createLinearGradient(0,0,a.w,a.h);grad.addColorStop(0,p[1]);grad.addColorStop(.65,p[0]);grad.addColorStop(1,p[1]);c.fillStyle=grad;c.fillRect(0,0,a.w,a.h);
       for(let i=0;i<2000;i++){c.fillStyle=i%2?'#d9e4bb06':'#122f320a';c.fillRect(rng()*a.w,rng()*a.h,5+rng()*25,1+rng()*8);}
       c.lineCap='round';c.lineJoin='round';for(const road of a.roads){line(c,road,outdoor?'#c5c09929':'#c4d2bd16',154);line(c,road,outdoor?'#919677':'#566c76',132);line(c,road,outdoor?'#a4a384':'#536873',112);}
@@ -46,21 +46,22 @@
         const selected=target?.id===o.id,near=dist(o,p)<230;
         if(['portal','gate','exit','fate-gate'].includes(o.kind))portal(c,o,t,a.theme,o.need>g.progress);
         else if(o.kind==='relic')FateArt.relic(c,o,t,g.fate.proven.includes(o.path));
+        else if(o.kind==='scar')ClassicArt.scar(c,o,t,g);
         else if(o.kind==='seal')seal(c,o,t,g.activated.includes(o.id),g.area==='harbor');
         else if(o.kind==='rest'){ellipse(c,o.x,o.y+2,36,13,'#102e324a');box(c,o.x-28,o.y-13,56,12,'#acac87',2);line(c,[[o.x-20,o.y],[o.x-20,o.y+9]],'#556e59',4);line(c,[[o.x+20,o.y],[o.x+20,o.y+9]],'#556e59',4);}
         else human(c,{...o,face:Math.atan2(p.y-o.y,p.x-o.x)},t,o.id==='warden'?'warden':o.id==='master'?'master':'shop');
         if(selected)this.marker(c,o,t);
-        if(near||selected){const w=Math.max(80,o.label.length*10+16);box(c,o.x-w/2,o.y-88,w,22,'#132a32d9',4);text(c,o.label,o.x,o.y-73,selected?'#e7d397':'#c4d1bf',10);}
+        if(near||selected){const w=Math.max(80,o.label.length*10+16);box(c,o.x-w/2,o.y-107,w,22,'#132a32d9',4);text(c,o.label,o.x,o.y-92,selected?'#e7d397':'#c4d1bf',10);}
       }});
       for(const e of g.enemies){if(e.hp<=0)continue;objects.push({y:e.y,draw:()=>{
         const scale=e.boss?1.72:e.trial?1.25:1.08;human(c,{...e,face:Math.atan2(p.y-e.y,p.x-e.x),walking:e.wind<=0&&dist(e,p)<570&&(!e.boss||!g.bossLocked())},t,e.kind,scale);
         if(e.boss&&g.bossLocked()){c.strokeStyle='#b9d3c37a';c.lineWidth=2;c.setLineDash([8,7]);c.beginPath();c.ellipse(e.x,e.y-41,48,70,0,0,TAU);c.stroke();c.setLineDash([]);text(c,'보호막',e.x,e.y-118,'#c7d8c5',11);}
-        if(!e.boss&&(e.hp<e.maxHp||dist(e,p)<180)){box(c,e.x-22,e.y-75,44,4,'#15313ae5',1);box(c,e.x-22,e.y-75,44*e.hp/e.maxHp,4,'#d8aa87',1);}
+        if(!e.boss&&(e.hp<e.maxHp||dist(e,p)<180)){box(c,e.x-22,e.y-99,44,4,'#15313ae5',1);box(c,e.x-22,e.y-99,44*e.hp/e.maxHp,4,'#d8aa87',1);}
         if(target?.id===e.id)this.marker(c,e,t);
       }});}
-      objects.push({y:p.y,draw:()=>{if(p.invuln>0&&p.dash>0)ellipse(c,p.x,p.y,28,12,'#c5deba66');human(c,p,t,'hero',1.15);FateArt.costume(c,g,t);text(c,g.fate.path?DualWorld.Fate.PATHS[g.fate.path].title:'윤서',p.x,p.y-91,'#e4dfb1',10);}});
+      objects.push({y:p.y,draw:()=>{if(p.invuln>0&&p.dash>0)ellipse(c,p.x,p.y,28,12,'#c5deba66');human(c,p,t,'hero',1.15);if(!ClassicArt.spriteReady())FateArt.costume(c,g,t);text(c,g.fate.path?DualWorld.Fate.PATHS[g.fate.path].title:'윤서',p.x,p.y-111,'#fff3c6',10);}});
       objects.sort((a,b)=>a.y-b.y);for(const o of objects)if(o.y>this.camera.y-150&&o.y<this.camera.y+vh+240)o.draw();
-      for(const f of g.fx){this.effect(c,f);FateArt.effect(c,f,quality);}
+      for(const f of g.fx){this.effect(c,f);FateArt.effect(c,f,quality);ClassicArt.effect(c,f,quality);}
       if(quality>0){const rng=random(842);for(let i=0;i<24;i++){const x=(rng()*a.w+t*(i%2?3:-2)+a.w)%a.w,y=(rng()*a.h+t*.7)%a.h;ellipse(c,x,y,1.2,1.2,'#eee4b54d');}}
       FateArt.atmosphere(c,g,this.camera,vw,vh,quality,t);c.restore();FateArt.overlay(c,g,this.w,this.h,quality);this.edgeMarker(g);this.drawMini(g,this.mini);
     }

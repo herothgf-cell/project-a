@@ -5,21 +5,21 @@
   else root.WorldData = api;
 })(globalThis, function () {
   'use strict';
-  const VERSION = '0.4.0';
+  const VERSION = '0.5.0';
   const point = (id,x,y,label,kind='npc',extra={}) => ({id,x,y,label,kind,...extra});
   const block = (x,y,w,h,kind) => ({x,y,w,h,kind});
   const encounter = [[390,850],[600,720],[800,770],[920,550],[1170,410],[1280,230]];
   const AREAS = {
     city: {
       name:'해온시 · 헌터 기지', sub:'비가 그친 도시, 아직 닫히지 않은 경계', world:'현실', theme:'city', safe:true,
-      w:1440,h:1040,spawn:[640,650], chapter:1,
+      w:1440,h:1040,spawn:[640,540], chapter:1,
       points:[point('warden',600,330,'서린 · 관리관'),point('portal',1080,560,'경계석 · 무림 접속','portal'),point('gate',1170,850,'D급 균열','gate',{to:'rift',need:5}),point('harbor',1100,320,'침식된 항만','gate',{to:'harbor',need:11}),point('shop',300,550,'헌터 보급소','shop'),point('rest',440,745,'휴식 벤치','rest')],
       blocks:[block(95,125,285,235,'building'),block(480,60,280,170,'building'),block(935,60,325,150,'building'),block(90,760,170,165,'building'),block(770,775,125,80,'crate')],
       roads:[[[60,610],[640,610],[1260,610]],[[640,990],[640,310]],[[1020,610],[1130,860]],[[1080,610],[1100,300]]]
     },
     village: {
       name:'청운촌 · 백련문',sub:'대숲의 바람을 따라, 한 호흡 더 깊이',world:'무림',theme:'village',safe:true,
-      w:1440,h:1040,spawn:[600,680],chapter:1,
+      w:1440,h:1040,spawn:[600,535],chapter:1,
       points:[point('master',600,320,'백련 · 사부'),point('portal',250,810,'경계석 · 현실 귀환','portal'),point('forest',1180,860,'흑풍 죽림','gate',{to:'forest',need:2}),point('ruins',1120,350,'월영 폐사','gate',{to:'ruins',need:8}),point('shop',950,555,'청운 약방','shop'),point('rest',440,540,'운기조식','rest')],
       blocks:[block(410,95,360,145,'temple'),block(875,135,275,125,'house'),block(90,200,230,185,'house'),block(710,710,145,105,'pond'),block(125,565,90,90,'tree')],
       roads:[[[130,800],[590,680],[1190,850]],[[590,680],[600,320]],[[650,520],[1070,540],[1120,350]]]
