@@ -4,7 +4,11 @@
   const {Game,AREAS,QUESTS,SKILLS,VERSION,dist,Fate}=DualWorld;
   const $=id=>document.getElementById(id),SAVE='dualworld.save.v1',BACKUP='dualworld.backup.v1';
   const dialog=$('dialog'),renderer=new WorldRenderer($('canvas'),$('mini'));
-  let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0;
+  const perfEnabled=new URLSearchParams(location.search).get('perf')==='1';
+  const perf=perfEnabled?new PerfMeter():null;
+  const perfHud=perfEnabled?document.createElement('pre'):null;
+  if(perfHud){perfHud.id='perfHud';perfHud.setAttribute('aria-label','성능 진단');perfHud.style.cssText='position:fixed;top:8px;right:8px;z-index:1000;max-width:calc(100vw - 16px);margin:0;padding:8px 10px;background:#101e24e8;color:#f3e5be;border:1px solid #d0bb7b;font:11px/1.4 monospace;white-space:pre-wrap;pointer-events:none;';$('game').append(perfHud);}
+  let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0,lastPerfHud=0;
   let sound=false,audio=null,bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
   const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
@@ -170,8 +174,9 @@
   window.addEventListener('blur',clearInput);document.addEventListener('visibilitychange',()=>{clearInput();persist();lastFrame=performance.now();});window.addEventListener('pagehide',persist);
   new ResizeObserver(()=>{renderer.resize();if(!$('title').hidden)WorldArt.cover($('cover'));}).observe($('playArea'));window.addEventListener('resize',()=>{clearInput();renderer.resize();if(!$('title').hidden)WorldArt.cover($('cover'));});
   function frame(now){
-    const dt=Math.min((now-lastFrame)/1000,.05);lastFrame=now;
+    const elapsed=now-lastFrame,dt=Math.min(elapsed/1000,.05);lastFrame=now;
     try{
+      if(perf&&running()&&elapsed>0&&elapsed<1000){perf.record(elapsed);if(now-lastPerfHud>500){const quality=renderer.reduced||renderer.autoLow?0:renderer.quality;perfHud.textContent=`PERF · local only\navg ${perf.averageMs.toFixed(1)} ms · recent ${perf.recentMs.toFixed(1)} ms (120 frames)\nslow >35 ms ${perf.slowTotal} · pressure ${renderer.slowFrames}\nautoLow ${renderer.autoLow?'ON':'OFF'} · quality ${quality} (base ${renderer.quality})\nviewport ${innerWidth}×${innerHeight} · canvas ${Math.round(renderer.w)}×${Math.round(renderer.h)} · DPR ${renderer.dpr}`;lastPerfHud=now;}}
       if(running()){const x=joy.x+(keys.has('KeyD')||keys.has('ArrowRight')?1:0)-(keys.has('KeyA')||keys.has('ArrowLeft')?1:0),y=joy.y+(keys.has('KeyS')||keys.has('ArrowDown')?1:0)-(keys.has('KeyW')||keys.has('ArrowUp')?1:0);g.step(dt,{x,y,attack:keys.has('KeyJ')||held.size>0});processEvents();if(now-lastSave>4000)persist();}
       if(active){renderer.draw(g,dt);if(now-lastHud>70){update();lastHud=now;}}
     }catch(error){if(!errorReported){errorReported=true;console.error(error);show('게임 실행 중 오류가 발생했습니다','저장된 진행은 그대로 보관됩니다. 새로고침 후에도 반복되면 이 내용을 알려 주세요.\n\n'+error.message);}}

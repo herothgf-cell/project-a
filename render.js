@@ -3,6 +3,13 @@
   'use strict';
   const {AREAS,clamp,dist}=DualWorld,{TAU,polygon,ellipse,line,box,text,random,bamboo,prop,human,portal,seal}=WorldArt;
   const palettes={city:['#395765','#284653'],village:['#67836b','#486b58'],forest:['#53755d','#305746'],rift:['#43596d','#293e52'],ruins:['#637865','#3e6050'],harbor:['#466776','#293f54'],sanctum:['#374b66','#172b42'],heart:['#37475e','#182335']};
+  // Instantiated only for the explicit performance overlay; never persists or sends samples.
+  class PerfMeter{
+    constructor(){this.frames=0;this.totalMs=0;this.slowTotal=0;this.recent=[];this.recentSum=0;}
+    record(ms){if(!Number.isFinite(ms)||ms<=0)return;this.frames++;this.totalMs+=ms;if(ms>35)this.slowTotal++;this.recent.push(ms);this.recentSum+=ms;if(this.recent.length>120)this.recentSum-=this.recent.shift();}
+    get averageMs(){return this.frames?this.totalMs/this.frames:0;}
+    get recentMs(){return this.recent.length?this.recentSum/this.recent.length:0;}
+  }
   class WorldRenderer{
     constructor(canvas,mini){this.canvas=canvas;this.c=canvas.getContext('2d');this.mini=mini;this.cache={};this.camera={x:0,y:0};this.area=null;this.quality=matchMedia('(pointer:coarse)').matches?1:2;this.autoLow=false;this.slowFrames=0;this.reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;this.resize();}
     resize(){const r=this.canvas.getBoundingClientRect();this.w=Math.max(1,r.width);this.h=Math.max(1,r.height);this.dpr=Math.min(devicePixelRatio||1,2);this.canvas.width=Math.round(this.w*this.dpr);this.canvas.height=Math.round(this.h*this.dpr);this.zoom=this.w<600?1:1.1;}
@@ -93,4 +100,5 @@
     }
   }
   root.WorldRenderer=WorldRenderer;
+  root.PerfMeter=PerfMeter;
 })(globalThis);

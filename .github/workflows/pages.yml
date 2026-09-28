@@ -40,6 +40,7 @@ jobs:
           done
           python tests/browser_smoke.py --url=http://127.0.0.1:3000/ --output=browser-results
           python tests/fate_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/fate
+          python tests/perf_browser.py --url=http://127.0.0.1:3000/
       - name: Keep browser test evidence
         if: always()
         uses: actions/upload-artifact@v4
