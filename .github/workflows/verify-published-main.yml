@@ -1,0 +1,76 @@
+name: Verify live consolidated main
+on:
+  push:
+    branches: ['publish/v06-artwork-20260928']
+    paths: ['.github/workflows/verify-published-main.yml']
+permissions:
+  contents: read
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Check published version, commit and exact tested assets
+        run: |
+          python3 - <<'PY'
+          import os,json,time,hashlib,urllib.request
+          from pathlib import Path
+          base='https://herothgf-cell.github.io/project-a/'
+          commit='a25872353ee7949086b74b5a3faffd3bc1a0afad'
+          expected={
+            'sequel.js':'bcf2461149c39b874d401b75aa32af3f5439ee66',
+            'wuxia-direction.js':'53638149b7eee7bffc11d9cc5e8cbf2af27abc1c',
+            'wuxia-data.js':'f7c6228108dd969f6ef8483939f9f5943ec1e5f7',
+            'wuxia-art.js':'19fe5f59d35889bdb27ff3d58bf452d6135027cb',
+            'wuxia.css':'ba6930fb416e16849215d7648749df4071c3998b',
+            'index.html':'307b6a190c604aae4ee479cff516190bef2e8442',
+            'world.js':'4534b7542ba2b117d040cc1b4f5cd0c0ab3d097d',
+            'fate.js':'eda93767a2c21a75a153dda4a5af156863c1ef33',
+            'legend.js':'23a9097ba0aff1050f2787525bdda70b0a33a585',
+            'game.js':'89352761b175c61c4f465af17adedbed5e1d10d4',
+            'art.js':'7be26b307f5626198352a921500395e357bfc7c5',
+            'portrait-data.js':'d614c529e37f4722e11f64d6c60afabc7e2ea4c8',
+            'classic-art.js':'d58245acc8e9566892de1f6ddf596afdf5b6a733',
+            'fate-art.js':'68842aedecc673e04d9b47b16873eb45cf548bbf',
+            'render.js':'3343a576bf9a43311d258ee092079c7d94d36faa',
+            'app.js':'15826dbadb6d79525fa12e3c53a69a8e7b7717f3',
+            'style.css':'017a1bd98ed05fcb73dbc841642e0e7befdf3b3b',
+            'classic.css':'c26e8cae2aa240f4c6113ba57505bf6cccceebb4'
+          }
+          def fetch(path,attempt=0):
+              req=urllib.request.Request(base+path+'?verify='+commit+'-'+os.environ['GITHUB_RUN_ID']+'-'+str(attempt),headers={'Cache-Control':'no-cache','User-Agent':'Ssanggye-Published-Verification'})
+              with urllib.request.urlopen(req,timeout=20) as response:
+                  assert response.status==200
+                  return response.read()
+          for attempt in range(10):
+              try:
+                  info=json.loads(fetch('build-info.json',attempt))
+                  assert info=={'version':'0.6.0','commit':commit},info
+                  break
+              except Exception as error:
+                  if attempt==9:raise
+                  print('Waiting for deployment identity:',str(error),flush=True)
+                  time.sleep(5)
+          checks=[]
+          for path,sha in expected.items():
+              for attempt in range(4):
+                  data=fetch(path,attempt)
+                  actual=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+                  if actual==sha:break
+                  if attempt==3:raise AssertionError('Published asset differs: '+path+' '+actual)
+                  time.sleep(3)
+              checks.append({'path':path,'bytes':len(data),'blob':actual})
+              print('MATCH',path,actual,flush=True)
+          home=fetch('')
+          home_sha=hashlib.sha1(b'blob '+str(len(home)).encode()+b'\0'+home).hexdigest()
+          assert home_sha==expected['index.html'],'Root route differs from tested index'
+          receipt={'site':base,'version':info['version'],'commit':info['commit'],'assets_matched':len(checks),'root_route_matched':True,'assets':checks}
+          text=json.dumps(receipt,indent=2)
+          Path('live-publication-receipt.json').write_text(text+'\n')
+          print(text,flush=True)
+          PY
+      - name: Keep live verification receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: v06-live-publication-receipt
+          path: live-publication-receipt.json
