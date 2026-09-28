@@ -1,0 +1,73 @@
+name: Verify and assemble existing v06 artwork
+on:
+  push:
+    branches: ['publish/v06-artwork-20260928']
+permissions:
+  contents: write
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Reconstruct exact authorized artwork blob without changing main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os, json, base64, hashlib, urllib.request
+          repo = os.environ['REPOSITORY']
+          assert repo == 'herothgf-cell/project-a'
+          base = 'https://api.github.com/repos/' + repo
+          headers = {'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept': 'application/vnd.github+json', 'User-Agent': 'ssanggye-verified-asset-assembly'}
+          def api(route, body=None):
+              payload = None if body is None else json.dumps(body).encode()
+              request = urllib.request.Request(base + route, data=payload, headers=headers, method='GET' if body is None else 'POST')
+              with urllib.request.urlopen(request, timeout=30) as response:
+                  return json.load(response)
+          expected = [
+              'c10ff2d76f4ed200653dba766f0d36c72ffaaf88',
+              '5cbe7d3ac81de209e9e2e85eed46a154629764f1',
+              '0f4eb9cb69f5549ab6d89705139086dea83ed33e',
+              'a36a82291c2df06b76ce48dc9dd284456f210179',
+              'c1aa205fbd71517cad4e4250132e0517b934234a',
+              '7e14ca9091d1bcfbffaf2375c82727c52d370ea5',
+              'b84ae6cf2411c42c296468116a3d4dd0435871a7',
+              '49fdbf78ccfed81a636185c979702c05cbacf9d3',
+              '44bf0e8bc2bfcd93fc3291f3903efe731f24ac82',
+              '55bbed18a31c3145c5efb88ffc508bf6198813a0',
+              'c73e87164fa0a504f2b9413723cca3c06e433ac5',
+              'b33ea801666cbafde52cdcb806a2d32f16975a08',
+              '6d495ec581fb9ad6e044f1f1059b7bafc4df99de',
+              '6ba390a519b8ba2372e03f46c063df8a6782f984',
+              'd87b86ebb1c720fcc96e6a716e7c9c21a3dde3cf',
+              'ae29b6a37a454f5c42e1c8f398597811b5fa9f4a',
+          ]
+          def blob_sha(data):
+              return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+          parts = []
+          for index, target in enumerate(expected):
+              source = '1bdfd0413019d05782155942990763946822a3bf' if index == 12 else target
+              obj = api('/git/blobs/' + source)
+              assert obj['encoding'] == 'base64'
+              data = base64.b64decode(obj['content'])
+              assert blob_sha(data) == source
+              if index == 12:
+                  # Restore the one verified transcription omission; final original hash is mandatory.
+                  assert data.count(b'oyLUXH9m+cn') == 1
+                  data = data.replace(b'oyLUXH9m+cn', b'oyLriPtckDZd/KzUX9m+cn')
+              assert len(data) == (66 if index == 15 else 8000)
+              assert blob_sha(data) == target, 'Part checksum mismatch: ' + str(index)
+              parts.append(data)
+              print('Verified part', index)
+          full = b''.join(parts)
+          target = 'f7c6228108dd969f6ef8483939f9f5943ec1e5f7'
+          assert len(full) == 120066
+          assert hashlib.sha256(full).hexdigest() == '469b9a42f91546f86170f8c72ccdfb6a4dce9301c85ac1085054cad44f6609cb'
+          assert blob_sha(full) == target
+          result = api('/git/blobs', {'encoding': 'base64', 'content': base64.b64encode(full).decode('ascii')})
+          assert result['sha'] == target
+          print('VERIFIED_ASSET_BLOB=' + target)
+          print('Full asset matches tested v0.6 source exactly. No branch reference was modified by this job.')
+          PY
