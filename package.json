@@ -1,10 +1,14 @@
 {
-  "name":"dualworld-project-a", "version":"0.5.0", "private":true,
-  "description":"쌍계 — 바람에 새긴 이름. Field awakenings and original classic RPG art.",
-  "scripts":{
-    "start":"node server.cjs",
-    "test":"node --test tests/*.test.cjs",
-    "check":"node --check legend.js && node --check classic-art.js && node --check portrait-data.js && node --check world.js && node --check fate.js && node --check fate-art.js && node --check game.js && node --check art.js && node --check render.js && node --check app.js && node --check server.cjs"
+  "name": "dualworld-project-a",
+  "version": "0.6.0",
+  "private": true,
+  "description": "쌍계 — 끊긴 귀환로. Wuxia directions and persistent world consequences.",
+  "scripts": {
+    "start": "node server.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "check": "node --check sequel.js && node --check wuxia-direction.js && node --check wuxia-data.js && node --check wuxia-art.js && node --check legend.js && node --check classic-art.js && node --check portrait-data.js && node --check world.js && node --check fate.js && node --check fate-art.js && node --check game.js && node --check art.js && node --check render.js && node --check app.js && node --check server.cjs"
   },
-  "engines":{"node":">=20"}
+  "engines": {
+    "node": ">=20"
+  }
 }

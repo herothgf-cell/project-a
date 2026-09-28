@@ -4,7 +4,11 @@
   const {Game,AREAS,QUESTS,SKILLS,VERSION,dist,Fate,Legend}=DualWorld;
   const $=id=>document.getElementById(id),SAVE='dualworld.save.v1',BACKUP='dualworld.backup.v1';
   const dialog=$('dialog'),renderer=new WorldRenderer($('canvas'),$('mini'));
-  let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0;
+  const perfEnabled=new URLSearchParams(location.search).get('perf')==='1';
+  const perf=perfEnabled?new PerfMeter():null;
+  const perfHud=perfEnabled?document.createElement('pre'):null;
+  if(perfHud){perfHud.id='perfHud';perfHud.setAttribute('aria-label','성능 진단');perfHud.style.cssText='position:fixed;top:8px;right:8px;z-index:1000;max-width:calc(100vw - 16px);margin:0;padding:8px 10px;background:#101e24e8;color:#f3e5be;border:1px solid #d0bb7b;font:11px/1.4 monospace;white-space:pre-wrap;pointer-events:none;';$('game').append(perfHud);}
+  let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0,lastPerfHud=0;
   let sound=false,audio=null,bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
   const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
@@ -43,6 +47,7 @@
     if(!active)return;const f=g.fate,l=g.legend,body=node('div');
     body.append(node('p','dialog-note','무공의 시작은 누군가의 보상 목록이 아니다. 여기에는 당신이 실제로 지나온 장소와 마주한 사건만 남는다.'));
     if(f.path)body.append(grid([['나의 무공',Fate.PATHS[f.path].name],['별호',f.stage>=6?Fate.PATHS[f.path].title:'아직 쓰는 중'],['기세',Math.floor(f.focus)+' / 100'],['시작',l.awakened.includes(f.path)?'전투 중 발현':'이전 여정 / 비경의 기억']]));
+    if(g.chapter4?.rescued){body.append(node('h3','','내가 바꾼 세계'),node('p','world-consequence','연화가 청운촌으로 돌아와 가게를 다시 열었습니다. 청운 귀환로의 장벽이 사라졌습니다. '+ChronicleRules.label[g.chapter4.route]+'의 흔적은 현실의 귀환 부두에도 남아 있습니다.'));}
     body.append(node('h3','','내가 남긴 기억'));const memories=node('section','memory-list');
     if(!l.memories.length)memories.append(node('p','','아직 새로 기록된 발현은 없다. 기존에 배운 무공은 그대로 남아 있다. 적의 예고를 끝까지 보거나, 회피한 뒤 돌아가거나, 전장의 이상한 틈에 손을 대 보자.'));
     for(const m of l.memories){const e=node('article');e.append(node('b','',AREAS[m.area].name+' · '+m.foe),node('p','',m.action+'.'));memories.append(e);}body.append(memories);
@@ -123,6 +128,7 @@
   }
   function processEvents(){
     for(const e of g.events.splice(0)){
+      if(e.type==='world-news')updateNews();
       if(e.type==='toast')toast(e.text);if(e.type==='sound')playSound(e.name);
       if(e.type==='area'){clearInput();$('toasts').replaceChildren();$('areaBanner').querySelector('strong').textContent=e.text;$('areaBanner').classList.add('show');clearTimeout(bannerTimer);bannerTimer=setTimeout(()=>$('areaBanner').classList.remove('show'),1800);persist();}
       if(e.type==='manifestation'){
@@ -145,12 +151,22 @@
       else if(action==='potion')toast(g.potions<=0?'회복약이 없습니다. 거점에서 구입하세요.':'체력이 충분하거나 재사용 대기 중입니다.');
     }else if(action==='potion')persist();processEvents();update();
   }
+  let lastNews='';
+  function updateNews(){
+    const feed=g.chapter4?.feed||[],stamp=JSON.stringify(feed);
+    if(stamp===lastNews)return;lastNews=stamp;
+    $('rumorCount').textContent=String(feed.length);$('rumorMessages').replaceChildren();
+    if(!feed.length)$('rumorMessages').append(node('p','rumor-empty','아직 들려오는 소식이 없습니다. 실제로 일어난 사건이 여기에 남습니다.'));
+    for(const m of feed.slice(-8)){const row=node('article','rumor-entry '+m.kind);row.append(node('b','',m.kind==='npc'?m.speaker+' · NPC':m.speaker),node('p','',m.text));$('rumorMessages').append(row);}
+    $('rumorMessages').scrollTop=$('rumorMessages').scrollHeight;
+  }
   function update(){
+    updateNews();
     const a=AREAS[g.area],s=g.stats(),p=g.player,o=g.objective();
     $('world').textContent=a.world;$('rank').textContent=g.training>=3?'경계 공명':g.training===2?'이류 무인':g.training?'삼류 무인':'미각성';$('place').textContent=a.name;$('sub').textContent=a.sub;$('lv').textContent=g.level;$('gold').textContent=g.gold;
     for(const [id,val,max]of [['hp',p.hp,s.hp],['mp',p.mp,s.mp]]){$(id).style.width=Math.max(0,val/max*100)+'%';$(id+'Text').textContent=`${Math.ceil(val)} / ${max}`;$(id+'Track').setAttribute('aria-valuemin','0');$(id+'Track').setAttribute('aria-valuemax',String(max));$(id+'Track').setAttribute('aria-valuenow',String(Math.ceil(val)));}
-    $('quest').textContent=o.title;$('questDesc').textContent=o.text;$('chapterKicker').textContent='CHAPTER 0'+o.chapter;$('chapterTitle').textContent=o.chapter===3?'나의 전설':o.chapter===2?'잔월의 서약':'경계를 넘는 자';$('sync').textContent=g.training?`${Math.min(2,g.training)}개 무공 · ${g.training>=3?'경계 공명 완성':'두 세계에 전승'}`:'경계석의 신호를 따라가세요';
-    const phase=o.chapter===3?g.fate.stage:o.chapter===1?g.progress:g.progress-6;if($('questSteps').dataset.step!==`${g.progress}:${g.fate.stage}`){$('questSteps').replaceChildren(...Array.from({length:6},(_,i)=>node('i',i<phase?'done':'')));$('questSteps').dataset.step=`${g.progress}:${g.fate.stage}`;}
+    $('quest').textContent=o.title;$('questDesc').textContent=o.text;$('chapterKicker').textContent='CHAPTER 0'+o.chapter;$('chapterTitle').textContent=o.chapter===4?'끊긴 귀환로':o.chapter===3?'나의 전설':o.chapter===2?'잔월의 서약':'경계를 넘는 자';$('sync').textContent=g.training?`${Math.min(2,g.training)}개 무공 · ${g.training>=3?'경계 공명 완성':'두 세계에 전승'}`:'경계석의 신호를 따라가세요';
+    const phase=o.chapter===4?g.chapter4.phase:o.chapter===3?g.fate.stage:o.chapter===1?g.progress:g.progress-6;if($('questSteps').dataset.step!==`${g.progress}:${g.fate.stage}:${g.chapter4?.phase||0}`){$('questSteps').replaceChildren(...Array.from({length:o.chapter===4?4:6},(_,i)=>node('i',i<phase?'done':'')));$('questSteps').dataset.step=`${g.progress}:${g.fate.stage}:${g.chapter4?.phase||0}`;}
     $('xp').style.width=g.xp/s.next*100+'%';$('xpText').textContent=`${g.xp} / ${s.next}`;$('atk').textContent='공격력 '+s.attack;$('potion').querySelector('b').textContent=g.potions;
     const near=g.nearestPoint();$('interact').classList.toggle('near',!!near);$('interact').querySelector('span').textContent=near?near.kind==='npc'?'대화 · '+near.label:near.kind==='shop'?'보급 / 강화':near.kind==='rest'?'휴식하기':near.label:'대화 / 이동';
     if(o.target){$('objectiveTarget').textContent=`${o.target.label} · ${Math.round(dist(p,o.target)/10)}걸음`;$('objectiveHint').textContent=o.text;$('objectiveArrow').style.transform=`rotate(${Math.atan2(o.target.y-p.y,o.target.x-p.x)*180/Math.PI+90}deg)`;}
@@ -163,6 +179,12 @@
     for(const action of ['moon','storm','dash']){const btn=document.querySelector(`[data-action="${action}"]`),k=SKILLS[action];btn.classList.toggle('locked',g.training<k.need);btn.classList.toggle('no-mana',p.mp<k.cost);btn.setAttribute('aria-label',`${k.name}${g.training<k.need?' 미습득':''}`);const cd=btn.querySelector('em');cd.classList.toggle('active',p.cool[action]>.04);cd.textContent=p.cool[action]>=1?Math.ceil(p.cool[action]):p.cool[action].toFixed(1);}
     document.querySelector('.scene-bottom>span').textContent=matchMedia('(pointer:coarse)').matches?'왼쪽 이동 · 오른쪽 공격 / 회피':'WASD 이동 · J 공격 · Space 회피 · E 대화';
   }
+  $('rumorToggle').addEventListener('click',()=>{
+    if(matchMedia('(max-width:1099px), (pointer:coarse)').matches){const body=node('div','rumor-modal');body.append(node('p','rumor-disclosure','NPC 시뮬레이션 · 오프라인 연출 · 실제 유저 채팅 아님'));const entries=$('rumorMessages').cloneNode(true);entries.removeAttribute('id');body.append(entries);show('강호 소식',body,[{label:'돌아가기'}],'system','세계가 기억하는 일 · NPC 시뮬레이션');return;}
+    const open=$('rumorContent').hidden;$('rumorContent').hidden=!open;$('rumorToggle').setAttribute('aria-expanded',String(open));$('rumorPanel').classList.toggle('collapsed',!open);clearInput();
+  });
+  if(!matchMedia('(max-width:1099px), (pointer:coarse)').matches){$('rumorContent').hidden=false;$('rumorToggle').setAttribute('aria-expanded','true');$('rumorPanel').classList.remove('collapsed');}
+  window.addEventListener('wuxia-assets-ready',()=>{renderer.cache={};WorldArt.portrait($('hudPortrait'),'hero');if(!$('title').hidden)WorldArt.cover($('cover'));});
   $('fateJournal').addEventListener('click',fateJournal);
   $('start').addEventListener('click',newGame);$('continue').addEventListener('click',()=>start(true));$('menu').addEventListener('click',menu);$('inventory').addEventListener('click',inventory);$('journal').addEventListener('click',journal);$('mapBtn').addEventListener('click',map);$('interact').addEventListener('click',interact);$('potion').addEventListener('click',()=>act('potion'));$('closeDialog').addEventListener('click',closeDialog);
   // Clear synchronously at every close/cancel path. Native close is queued and
@@ -190,8 +212,9 @@
   window.addEventListener('blur',clearInput);document.addEventListener('visibilitychange',()=>{clearInput();persist();lastFrame=performance.now();});window.addEventListener('pagehide',persist);
   new ResizeObserver(()=>{renderer.resize();if(!$('title').hidden)WorldArt.cover($('cover'));}).observe($('playArea'));window.addEventListener('resize',()=>{clearInput();renderer.resize();if(!$('title').hidden)WorldArt.cover($('cover'));});
   function frame(now){
-    const dt=Math.min((now-lastFrame)/1000,.05);lastFrame=now;
+    const elapsed=now-lastFrame,dt=Math.min(elapsed/1000,.05);lastFrame=now;
     try{
+      if(perf&&running()&&elapsed>0&&elapsed<1000){perf.record(elapsed);if(now-lastPerfHud>500){const quality=renderer.reduced||renderer.autoLow?0:renderer.quality;perfHud.textContent=`PERF · local only\navg ${perf.averageMs.toFixed(1)} ms · recent ${perf.recentMs.toFixed(1)} ms (120 frames)\nslow >35 ms ${perf.slowTotal} · pressure ${renderer.slowFrames}\nautoLow ${renderer.autoLow?'ON':'OFF'} · quality ${quality} (base ${renderer.quality})\nviewport ${innerWidth}×${innerHeight} · canvas ${Math.round(renderer.w)}×${Math.round(renderer.h)} · DPR ${renderer.dpr}`;lastPerfHud=now;}}
       if(running()){const x=joy.x+(keys.has('KeyD')||keys.has('ArrowRight')?1:0)-(keys.has('KeyA')||keys.has('ArrowLeft')?1:0),y=joy.y+(keys.has('KeyS')||keys.has('ArrowDown')?1:0)-(keys.has('KeyW')||keys.has('ArrowUp')?1:0);g.step(dt,{x,y,attack:keys.has('KeyJ')||held.size>0});processEvents();if(now-lastSave>4000)persist();}
       if(active){renderer.draw(g,dt);if(now-lastHud>70){update();lastHud=now;}}
     }catch(error){if(!errorReported){errorReported=true;console.error(error);show('게임 실행 중 오류가 발생했습니다','저장된 진행은 그대로 보관됩니다. 새로고침 후에도 반복되면 이 내용을 알려 주세요.\n\n'+error.message);}}

@@ -2,11 +2,13 @@ name: Test and deploy Ssanggye
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   build:
@@ -41,6 +43,8 @@ jobs:
           python tests/browser_smoke.py --url=http://127.0.0.1:3000/ --output=browser-results
           python tests/fate_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/fate
           python tests/legend_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/legend
+          python tests/v06_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v06
+          python tests/perf_browser.py --url=http://127.0.0.1:3000/
       - name: Keep browser test evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -51,13 +55,14 @@ jobs:
       - name: Prepare browser assets only
         run: |
           mkdir -p site
-          cp index.html world.js fate.js legend.js game.js art.js portrait-data.js classic-art.js fate-art.js render.js app.js style.css classic.css site/
+          cp sequel.js wuxia-direction.js wuxia-data.js wuxia-art.js wuxia.css index.html world.js fate.js legend.js game.js art.js portrait-data.js classic-art.js fate-art.js render.js app.js style.css classic.css site/
           touch site/.nojekyll
-          printf '{"version":"0.5.0","commit":"%s"}\n' "$GITHUB_SHA" > site/build-info.json
+          printf '{"version":"0.6.0","commit":"%s"}\n' "$GITHUB_SHA" > site/build-info.json
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
   deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 5
