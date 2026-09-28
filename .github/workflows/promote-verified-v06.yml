@@ -1,0 +1,94 @@
+name: Promote verified v0.6
+on:
+  push:
+    branches: ['publish/v06-artwork-20260928']
+    paths: ['.github/workflows/promote-verified-v06.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: v06-safe-promotion
+  cancel-in-progress: false
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Wait for verified candidate, compare base, update without force, dispatch Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,json,time,urllib.request,urllib.parse,hashlib,base64
+          from pathlib import Path
+          repo='herothgf-cell/project-a'
+          baseline='51ca33f9dc76728e809e19501117773d044e1bb7'
+          assert os.environ['GITHUB_REPOSITORY']==repo
+          base='https://api.github.com/repos/'+repo
+          def api(route,body=None,method=None):
+              payload=None if body is None else json.dumps(body).encode()
+              req=urllib.request.Request(base+route,data=payload,method=method or ('GET' if body is None else 'POST'),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'ssanggye-verified-promotion'})
+              with urllib.request.urlopen(req,timeout=45) as r:
+                  text=r.read()
+                  return json.loads(text) if text else {}
+          run=None
+          for _ in range(66):
+              rows=api('/actions/runs?branch=publish%2Fv06-artwork-20260928&per_page=30')['workflow_runs']
+              candidates=[r for r in rows if r['path']=='.github/workflows/publish-v06-recovery-final.yml']
+              if candidates:
+                  run=max(candidates,key=lambda r:r['id'])
+                  print('Verification',run['id'],run['status'],run['conclusion'],flush=True)
+                  if run['status']=='completed':
+                      assert run['conclusion']=='success','Candidate verification failed; main remains unchanged'
+                      break
+              time.sleep(10)
+          else:raise RuntimeError('No successful source verification within time limit; main unchanged')
+          candidate_branch='publish/v06-ready-'+str(run['id'])
+          candidate=api('/git/ref/heads/'+candidate_branch)['object']['sha']
+          commit=api('/git/commits/'+candidate)
+          assert [p['sha'] for p in commit['parents']]==[baseline],'Candidate base mismatch'
+          assert 'v0.6' in commit['message']
+          tree=api('/git/trees/'+commit['tree']['sha']+'?recursive=1')
+          assert not tree.get('truncated')
+          files={x['path']:x['sha'] for x in tree['tree'] if x['type']=='blob'}
+          expected={'wuxia-data.js':'f7c6228108dd969f6ef8483939f9f5943ec1e5f7','sequel.js':'bcf2461149c39b874d401b75aa32af3f5439ee66','wuxia-art.js':'19fe5f59d35889bdb27ff3d58bf452d6135027cb','app.js':'f145c4a43601390217acc024437f1007f5be2389','render.js':'6cf4989ae52183600ea680d8220c81e965b67b5a','world.js':'4534b7542ba2b117d040cc1b4f5cd0c0ab3d097d'}
+          for path,sha in expected.items():assert files.get(path)==sha,'Candidate file mismatch: '+path
+          assert not any(p.startswith('.publish/') or 'assemble-v06' in p or 'promote-verified-v06' in p for p in files)
+          package=api('/git/blobs/'+files['package.json'])
+          assert json.loads(base64.b64decode(package['content']))['version']=='0.6.0'
+          current=api('/git/ref/heads/main')['object']['sha']
+          if current!=candidate:
+              assert current==baseline,'main advanced since preparation; no overwrite permitted'
+              response=api('/git/refs/heads/main',{'sha':candidate,'force':False},method='PATCH')
+              assert response['object']['sha']==candidate
+          assert api('/git/ref/heads/main')['object']['sha']==candidate
+          api('/actions/workflows/pages.yml/dispatches',{'ref':'main'})
+          result={'main':candidate,'verification_run':run['id'],'candidate_branch':candidate_branch,'pages_dispatched':True}
+          Path('publication-result.json').write_text(json.dumps(result,indent=2))
+          print('MAIN_COMMIT='+candidate,flush=True)
+          print('Explicit Pages workflow dispatch accepted.',flush=True)
+          deployment=None
+          for _ in range(50):
+              runs=api('/actions/runs?branch=main&per_page=20')['workflow_runs']
+              matches=[r for r in runs if r['head_sha']==candidate and r['path']=='.github/workflows/pages.yml']
+              if matches:
+                  deployment=max(matches,key=lambda r:r['id'])
+                  print('Pages',deployment['id'],deployment['status'],deployment['conclusion'],flush=True)
+                  if deployment['status']=='completed':
+                      result.update({'pages_run':deployment['id'],'pages_conclusion':deployment['conclusion']})
+                      Path('publication-result.json').write_text(json.dumps(result,indent=2))
+                      assert deployment['conclusion']=='success','main updated but Pages failed; inspect test logs'
+                      break
+              time.sleep(6)
+          else:raise RuntimeError('main updated; Pages completion not confirmed in polling window')
+          print(json.dumps(result),flush=True)
+          PY
+      - name: Keep publication receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v06-publication-receipt
+          path: publication-result.json
+          if-no-files-found: ignore
