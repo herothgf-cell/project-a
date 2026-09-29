@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "required": [],
+  "assets": [
+    {
+      "id": "reality.npc.seorin",
+      "world": "reality",
+      "entityId": "warden",
+      "kind": "actor",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/npc/seorin/idle-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 1
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 1
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 1
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 1
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "evidence": [],
+        "limitations": [
+          "Candidate proportions differ from hero; no field-scale approval.",
+          "Equipment handedness requires continuity pass.",
+          "No portrait or animation."
+        ]
+      }
+    }
+  ]
+}

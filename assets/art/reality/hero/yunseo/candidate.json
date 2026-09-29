@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "required": [],
+  "assets": [
+    {
+      "id": "reality.hero.yunseo",
+      "world": "reality",
+      "entityId": "hero",
+      "kind": "actor",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/hero/yunseo/idle-candidate-v1.png",
+        "width": 1774,
+        "height": 887
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                443,
+                443
+              ],
+              "pivot": [
+                0.5,
+                0.97
+              ],
+              "duration": 1
+            }
+          ],
+          "se": [
+            {
+              "rect": [
+                443,
+                0,
+                444,
+                443
+              ],
+              "pivot": [
+                0.5,
+                0.97
+              ],
+              "duration": 1
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                887,
+                0,
+                443,
+                443
+              ],
+              "pivot": [
+                0.5,
+                0.97
+              ],
+              "duration": 1
+            }
+          ],
+          "ne": [
+            {
+              "rect": [
+                1330,
+                0,
+                444,
+                443
+              ],
+              "pivot": [
+                0.5,
+                0.97
+              ],
+              "duration": 1
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                0,
+                443,
+                443,
+                444
+              ],
+              "pivot": [
+                0.5,
+                0.97
+              ],
+              "duration": 1
+            }
+          ],
+          "nw": [
+            {
+              "rect": [
+                443,
+                443,
+                444,
+                444
+              ],
+              "pivot": [
+                0.5,
+                0.97
+              ],
+              "duration": 1
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                887,
+                443,
+                443,
+                444
+              ],
+              "pivot": [
+                0.5,
+                0.97
+              ],
+              "duration": 1
+            }
+          ],
+          "sw": [
+            {
+              "rect": [
+                1330,
+                443,
+                444,
+                444
+              ],
+              "pivot": [
+                0.5,
+                0.97
+              ],
+              "duration": 1
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "evidence": [],
+        "limitations": [
+          "Idle direction study only; not walking or combat animation.",
+          "Equipment continuity and edge alpha require review.",
+          "No verified sockets or expression portraits."
+        ]
+      }
+    }
+  ]
+}

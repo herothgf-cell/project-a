@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "releaseState": "BLOCKED_ART",
+  "required": ["reality.hero.yunseo", "murim.hero.yunseo", "reality.npc.seorin", "reality.npc.dogyeom", "reality.npc.supply", "murim.npc.baekryun", "murim.npc.yeonhwa", "murim.npc.apothecary", "reality.environment.city", "murim.environment.village", "reality.portal.city", "murim.portal.village"],
+  "assets": [
+    {"id":"reality.hero.yunseo","world":"reality","entityId":"hero","kind":"actor","status":"BLOCKED_ART","reason":"Independent idle candidate in review; walking, dodge, attacks, cast, hit, portraits and sockets not yet produced."},
+    {"id":"murim.hero.yunseo","world":"murim","entityId":"hero","kind":"actor","status":"BLOCKED_ART","reason":"Independent full-body animation, portraits and sockets required."},
+    {"id":"reality.npc.seorin","world":"reality","entityId":"warden","kind":"actor","status":"BLOCKED_ART","reason":"Unique full body, four directions and two expression portraits required."},
+    {"id":"reality.npc.dogyeom","world":"reality","entityId":"hunter","kind":"actor","status":"BLOCKED_ART","reason":"Unique hunter body, clips and portraits required; aliases must explicitly cover witness-hunter and partner."},
+    {"id":"reality.npc.supply","world":"reality","entityId":"city:shop","kind":"actor","status":"BLOCKED_ART","reason":"Unique modern supply mechanic full body and portraits required."},
+    {"id":"murim.npc.baekryun","world":"murim","entityId":"master","kind":"actor","status":"BLOCKED_ART","reason":"Unique elderly master full body and portraits required."},
+    {"id":"murim.npc.yeonhwa","world":"murim","entityId":"yeonhwa","kind":"actor","status":"BLOCKED_ART","reason":"Same identity before/after rescue, independent full body and portraits required."},
+    {"id":"murim.npc.apothecary","world":"murim","entityId":"village:shop","kind":"actor","status":"BLOCKED_ART","reason":"Independent apothecary body and portraits, not Yeonhwa reuse."},
+    {"id":"reality.environment.city","world":"reality","entityId":"city","kind":"environment","status":"BLOCKED_ART","reason":"Independent modular hunter-base ground, 3-5 building families and props required."},
+    {"id":"murim.environment.village","world":"murim","entityId":"village","kind":"environment","status":"BLOCKED_ART","reason":"Independent modular village ground, 3-5 building families and props required."},
+    {"id":"reality.portal.city","world":"reality","entityId":"city:portal","kind":"portal","status":"BLOCKED_ART","reason":"Metal gate layers and locked/available/active/transition clips required."},
+    {"id":"murim.portal.village","world":"murim","entityId":"village:portal","kind":"portal","status":"BLOCKED_ART","reason":"Stone gate layers and locked/available/active/transition clips required."}
+  ]
+}

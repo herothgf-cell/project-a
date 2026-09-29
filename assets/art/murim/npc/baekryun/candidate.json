@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "required": [],
+  "assets": [
+    {
+      "id": "murim.npc.baekryun",
+      "world": "murim",
+      "entityId": "master",
+      "kind": "actor",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/npc/baekryun/idle-candidate-v1.png",
+        "width": 1230,
+        "height": 1278
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                615,
+                639
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 1
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                615,
+                0,
+                615,
+                639
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 1
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                0,
+                639,
+                615,
+                639
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 1
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                615,
+                639,
+                615,
+                639
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 1
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "evidence": [],
+        "limitations": [
+          "REJECTED_VISUAL: hair touches top border; missing margin.",
+          "Staff handedness and foot pivots differ across views.",
+          "No portrait or animation."
+        ]
+      }
+    }
+  ]
+}

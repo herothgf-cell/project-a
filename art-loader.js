@@ -1,0 +1,62 @@
+/* Exact-identity production art catalog. A missing clip is never another actor. */
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.ProductionArt=api;})(globalThis,function(){
+ 'use strict';
+ const worlds=['reality','murim','shared'],statuses=['BLOCKED_ART','candidate','approved'];
+ const safePath=p=>typeof p==='string'&&/^assets\/art\/(?:[a-z0-9_-]+\/)+[a-z0-9_-]+\.(png|webp|json|ogg|wav)$/.test(p);
+ function freeze(value){if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value);}return value;}
+ function validate(m){
+  const issues=[],ids=new Set(),actors=new Set();
+  if(m?.schemaVersion!==1||!Array.isArray(m?.assets)||!Array.isArray(m?.required))return ['invalid schema'];
+  for(const a of m.assets){
+   if(!a||typeof a.id!=='string'){issues.push('missing asset id');continue;}
+   if(ids.has(a.id))issues.push('duplicate id '+a.id);ids.add(a.id);
+   if(!worlds.includes(a.world)||!a.id.startsWith(a.world+'.'))issues.push('world mismatch '+a.id);
+   if(!statuses.includes(a.status))issues.push('invalid status '+a.id);
+   if(a.entityId){const key=a.world+':'+a.entityId;if(actors.has(key))issues.push('duplicate actor '+key);actors.add(key);}
+   if(a.status==='BLOCKED_ART'){if(!a.reason)issues.push('missing blocker '+a.id);continue;}
+   const atlas=a.atlas;
+   if(!atlas||!safePath(atlas.path)||!atlas.path.startsWith('assets/art/'+a.world+'/')||!Number.isInteger(atlas.width)||!Number.isInteger(atlas.height)||atlas.width<=0||atlas.height<=0||atlas.width*atlas.height>16777216){issues.push('invalid atlas '+a.id);continue;}
+   if(!Array.isArray(a.sources)||!a.sources.length)issues.push('missing provenance '+a.id);
+   if(a.status==='approved'&&(!a.review?.evidence?.length||a.review?.visual!==true))issues.push('missing visual approval '+a.id);
+   if(!a.clips||!Object.keys(a.clips).length)issues.push('missing clips '+a.id);
+   for(const [clip,facings] of Object.entries(a.clips||{}))for(const [facing,frames] of Object.entries(facings)){
+    if(!['n','ne','e','se','s','sw','w','nw','none'].includes(facing)||!Array.isArray(frames)||!frames.length){issues.push('invalid facing '+a.id);continue;}
+    for(const f of frames){const r=f.rect,p=f.pivot;if(!Array.isArray(r)||r.length!==4||!r.every(Number.isInteger)||r[0]<0||r[1]<0||r[2]<=0||r[3]<=0||r[0]+r[2]>atlas.width||r[1]+r[3]>atlas.height||!Array.isArray(p)||p.length!==2||!p.every(n=>Number.isFinite(n)&&n>=0&&n<=1)||!Number.isFinite(f.duration)||f.duration<=0)issues.push('invalid frame '+a.id+'.'+clip+'.'+facing);}
+   }
+  }
+  for(const id of m.required)if(!ids.has(id))issues.push('required id missing '+id);
+  return issues;
+ }
+ function createCatalog(input){
+  const issues=validate(input);if(issues.length)throw Error('Invalid art catalog: '+issues.join('; '));
+  // Detach caller-owned input so later mutations cannot bypass validation.
+  const manifest=freeze(JSON.parse(JSON.stringify(input)));
+  function resolve(q,{preview=false}={}){
+   const blocked=reason=>({status:'BLOCKED_ART',world:q.world,entityId:q.entityId,reason});
+   const a=manifest.assets.find(a=>a.world===q.world&&a.entityId===q.entityId);
+   if(!a)return blocked('missing identity');
+   if(a.status==='BLOCKED_ART')return blocked(a.reason);
+   if(a.status!=='approved'&&!preview)return blocked('awaiting visual approval');
+   const frames=a.clips[q.action]?.[q.facing];if(!frames)return blocked('missing clip '+q.action+'.'+q.facing);
+   const index=Number.isInteger(q.frame)&&q.frame>=0?q.frame:0;
+   if(index>=frames.length)return blocked('missing frame');
+   return {status:a.status,id:a.id,world:a.world,entityId:a.entityId,atlas:a.atlas,frame:frames[index],frameIndex:index};
+  }
+  function releaseIssues(){return manifest.required.flatMap(id=>{const a=manifest.assets.find(a=>a.id===id);return a?.status==='approved'?[]:[{id,status:'BLOCKED_ART',reason:a?.reason||'awaiting complete production set and visual approval'}];});}
+  function files({preview=false}={}){return [...new Set(manifest.assets.filter(a=>a.status==='approved'||preview&&a.status==='candidate').map(a=>a.atlas.path))];}
+  return {resolve,releaseIssues,files,manifest};
+ }
+ function createImageCache({ImageClass=globalThis.Image,maxEntries=24}={}){
+  const cache=new Map();
+  async function load(visual){
+   if(visual?.status==='BLOCKED_ART')return visual;
+   const p=visual?.atlas?.path;if(!safePath(p))return {status:'BLOCKED_ART',reason:'invalid image path'};
+   if(cache.has(p)){const promise=cache.get(p);cache.delete(p);cache.set(p,promise);return promise;}
+   const promise=new Promise(resolve=>{const img=new ImageClass();img.onload=()=>resolve(img.naturalWidth===visual.atlas.width&&img.naturalHeight===visual.atlas.height?{status:'loaded',image:img}:{status:'BLOCKED_ART',reason:'image dimensions differ'});img.onerror=()=>resolve({status:'BLOCKED_ART',reason:'image load failed'});img.src=p;});
+   cache.set(p,promise);while(cache.size>maxEntries)cache.delete(cache.keys().next().value);
+   const result=await promise;if(result.status!=='loaded'&&cache.get(p)===promise)cache.delete(p);return result;
+  }
+  return {load,clear:()=>cache.clear(),get size(){return cache.size;}};
+ }
+ return {safePath,validate,createCatalog,createImageCache};
+});
