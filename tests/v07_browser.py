@@ -29,7 +29,14 @@ def main():
   p.evaluate("()=>{__game.enter('station');__game.events=[];Object.assign(__game.player,__game.points().find(o=>o.id==='partner'));}");p.keyboard.press('KeyE');dismiss(p);assert p.evaluate('__game.journey.companion')
   p.evaluate("()=>{Object.assign(__game.player,__game.points().find(o=>o.id==='station-lens'));}");p.keyboard.press('KeyB');p.wait_for_function("__game.journey.facts.some(f=>f.id==='station-sense')")
   p.evaluate("()=>{const g=__game;g.enemies.forEach(e=>e.cd=99);const e=g.enemies[0];Object.assign(e,{x:850,y:620,hp:3000,maxHp:3000});Object.assign(g.player,{x:745,y:620,mp:500,face:0});g.combat.echo={x:850,y:620,life:5};g.player.cool.signature2=0;}");p.keyboard.press('KeyR');p.wait_for_function('__game.journey.measured===true',timeout=3500);p.screenshot(path=str(out/'reality-reproduction.png'))
-  p.evaluate("()=>{const g=__game;for(const e of g.enemies)g.strike(e,999999);}");p.wait_for_function('__game.journey.phase===4');dismiss(p)
+  p.evaluate("()=>{const g=__game;for(const e of g.enemies)g.strike(e,999999);}")
+  p.wait_for_function('__game.journey.phase===4')
+  # The model completes synchronously; the victory dialog is rendered on the next
+  # animation frame. Wait for the actual dialog before dismissing it or traveling.
+  expect(p.locator('#dialog')).to_be_visible()
+  expect(p.locator('#dialogTitle')).to_have_text('기록이 뒤늦게 따라왔다')
+  dismiss(p)
+  expect(p.locator('#dialog')).not_to_be_visible()
   p.evaluate("()=>{__game.enter('city');__game.events=[];Object.assign(__game.player,__game.points().find(o=>o.id==='warden'));}");p.keyboard.press('KeyE');expect(p.locator('#dialogBody')).to_contain_text('C급 현장 인증');dismiss(p)
   p.locator('#menu').click();p.get_by_role('button',name='타이틀로',exact=True).click();p.locator('#continue').click();assert p.evaluate('__game.journey.phase')==5;assert p.evaluate('__game.journey.seed')>0;assert not errors,errors
   results.append('chapter5 real UI: legacy finish -> choice -> ally -> sense -> delayed skill -> certification -> save/continue')
