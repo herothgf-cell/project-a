@@ -1,0 +1,146 @@
+name: Verify exact v0.7 source
+on:
+  push:
+    branches: ['verify/v07-20260929']
+    paths: ['.github/workflows/verify-v07-source.yml']
+permissions:
+  contents: write
+concurrency:
+  group: v07-source-verification
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: a25872353ee7949086b74b5a3faffd3bc1a0afad
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Apply checksum-verified source patches
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > /tmp/v07publish.py <<'PY'
+          import os,json,base64,hashlib,subprocess,urllib.request,urllib.error
+          from pathlib import Path
+          REPO='herothgf-cell/project-a'
+          BASE='a25872353ee7949086b74b5a3faffd3bc1a0afad'
+          TREE='b968e92f2c13fc4d0d913d93a00b535ff4eede8f'
+          assert os.environ['GITHUB_REPOSITORY']==REPO
+          def api(route,body=None):
+              request=urllib.request.Request('https://api.github.com/repos/'+REPO+route,data=None if body is None else json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'Ssanggye-v07-Verification'})
+              try:
+                  with urllib.request.urlopen(request,timeout=60) as response:return json.load(response)
+              except urllib.error.HTTPError as error:
+                  print('GitHub API error:',route,error.code,error.read().decode()[:1200]);raise
+          def sha(data):return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+          def git(*args):return subprocess.check_output(['git',*args],text=True).strip()
+          if __name__=='__main__':
+              assert git('rev-parse','HEAD')==BASE
+              patches=[
+                '7ddee4a2d3e43b8a24225cab623cdea6d46f605a',
+                '108138ead191297c2e2295e52fed1121bb4ab812',
+                '2f614787c10e53545414fdd9f522a338d2f28d26',
+                '323bbec0a4dcfde46129f75f32de96c91362b9fc',
+                '5b5093b01734eb6e83838aec5577bb115cbce128',
+                '6bcddbcfc33eece56ead9b53ae052302e776f5a1',
+                'e9bda16def98d0d06d1eab18884f53a824fe2187',
+                '64eb78c30452cb4d47201e932acc8e3ec85a58cb',
+                'c415f9a2f506acda54a24283583ddcbfc271f93c',
+                '96f06f43892aadba43e2f7e769db73930964213e',
+                '9eddd132bcd402b5ec4d9e7430de0908d16cfa85',
+                'd63a47319def08482f0467c7f0d25dfb53280bea',
+                'f4b5190c5ae8e17d9cd24543abbb0a63a8f4ee15',
+                '1d86632ea96b710f2c1d6c3f6f5b477dc532d698',
+                'bc88a682fd45b9fb1ab26b0b890e9f4d654e4617',
+                'a759d227c5f63406295459b47ee853a9eb323922'
+              ]
+              combined=b''
+              for index,ref in enumerate(patches):
+                  obj=api('/git/blobs/'+ref)
+                  assert obj['encoding']=='base64'
+                  data=base64.b64decode(obj['content'])
+                  assert sha(data)==ref,'Patch content mismatch'
+                  combined+=data
+                  path=Path('/tmp/v07-'+str(index)+'.patch');path.write_bytes(data)
+                  subprocess.run(['git','apply','--check','--index',str(path)],check=True)
+                  subprocess.run(['git','apply','--index',str(path)],check=True)
+                  print('PATCH_OK',index,ref,flush=True)
+              assert hashlib.sha256(combined).hexdigest()=='de69db5810ad95d64aaacf77f493716823672c83b688de57e9b4bcd9f27189f3'
+              assert git('write-tree')==TREE,'Source tree differs from locally tested source'
+              subprocess.run(['git','diff','--cached','--check'],check=True)
+              print('EXACT_TREE='+TREE,flush=True)
+          PY
+          python /tmp/v07publish.py
+      - name: Syntax and all simulation tests
+        run: npm run check && npm test
+      - name: Install Chromium test tools
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Six HTTP and real-storage browser suites
+        run: |
+          node server.cjs > /tmp/ssanggye-v07-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 20); do
+            if curl --fail --silent http://127.0.0.1:3000/ >/dev/null; then break; fi
+            sleep 1
+          done
+          python tests/browser_smoke.py --url=http://127.0.0.1:3000/ --output=browser-results/legacy
+          python tests/fate_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/fate
+          python tests/legend_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/legend
+          python tests/v06_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v06
+          python tests/perf_browser.py --url=http://127.0.0.1:3000/
+          python tests/v07_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v07
+          node scripts/build-site.cjs /tmp/v07-site a25872353ee7949086b74b5a3faffd3bc1a0afad
+      - name: Export verified blobs without changing branches
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import sys,zipfile
+          sys.path.insert(0,'/tmp')
+          import v07publish as v
+          assert v.api('/git/ref/heads/main')['object']['sha']==v.BASE,'Main advanced during verification; integration needs review'
+          assert v.git('write-tree')==v.TREE
+          entries=[]
+          for name in v.git('diff','--cached','--name-only',v.BASE).splitlines():
+              data=v.Path(name).read_bytes();expected=v.sha(data)
+              ref=v.api('/git/blobs',{'encoding':'base64','content':v.base64.b64encode(data).decode()})['sha']
+              assert ref==expected
+              entries.append({'path':name,'mode':'100644','type':'blob','sha':ref})
+              print('VERIFIED_FILE',name,ref,flush=True)
+          receipt={'base':v.BASE,'expected_tree':v.TREE,'run_id':v.os.environ['GITHUB_RUN_ID'],'entries':entries}
+          text=v.json.dumps(receipt,ensure_ascii=False,indent=2)
+          v.Path('publication-receipt.json').write_text(text+'\n')
+          ref=v.api('/git/blobs',{'encoding':'utf-8','content':text+'\n'})['sha']
+          print('RECEIPT_BLOB='+ref,flush=True)
+          print(text,flush=True)
+          with zipfile.ZipFile('verified-source.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for name in v.git('ls-files').splitlines():z.write(name,'project-a/'+name)
+          PY
+      - name: Keep exact source and publication receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v07-verified-source
+          path: |
+            publication-receipt.json
+            verified-source.zip
+          if-no-files-found: ignore
+      - name: Keep browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v07-browser-evidence
+          path: browser-results/
+          if-no-files-found: ignore
