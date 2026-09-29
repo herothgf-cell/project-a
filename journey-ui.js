@@ -12,13 +12,14 @@
    if(!active())return;const g=game(),s=g.journey,body=node('section','notebook'),tabs=node('nav','notebook-tabs');tabs.setAttribute('aria-label','수첩 분류');
    for(const [id,label]of [['facts','관찰'],['styles','무공 해석'],['growth','성장 · 준비'],['others','다른 여정']]){const b=action(tabs,label,()=>open(id));b.classList.toggle('selected',id===tab);b.setAttribute('aria-current',id===tab?'page':'false');}body.append(tabs);
    if(tab==='facts'){
+    const u=Presentation.guide(g),next=node('section','guide-next');next.append(node('small','','현재 할 수 있는 행동'),node('b','',u.title),node('p','',u.text));action(next,'기감 사용법과 안내 보기',()=>document.getElementById('helpButton').click());body.append(next);
     para(body,'이 수첩에는 직접 확인한 사실만 적힙니다. 아직 모르는 조건의 진행률은 표시하지 않습니다.','notebook-muted');
     if(!s.facts.length)para(body,g.progress<2?'먼저 백련에게 공통 무공을 익히세요. 이후 청운촌 남동쪽 환서정의 바람을 살펴볼 수 있습니다.':'청운촌 남동쪽의 환서정은 선택적으로 방문할 수 있습니다. 기감(B)을 펼치면 가까운 물건의 다른 면이 보입니다.');
     for(const f of s.facts){const row=node('article','observed-fact');row.append(node('small','',DualWorld.AREAS[f.area].name),node('p','',D.facts[f.id]));body.append(row);}
     if(s.items.length)para(body,'보관 중인 물건 · '+s.items.map(k=>D.relics[k]).join(' / '));
     para(body,'기감 B → 보이는 물건 가까이 E. 울림이 모일 때 공격·회피·주변 장치가 서로 다른 반응을 만듭니다. 일반 퀘스트의 표시를 따라갈 필요는 없습니다.','notebook-muted');
    }else if(tab==='styles'){
-    para(body,'기본 무공은 그대로입니다. 발견한 해석은 같은 계열의 Q/R 운용을 바꾸며 자동으로 장착되지 않습니다.');
+    para(body,'무공 해석은 새 직업이 아니라 기존 Q/R의 사용법 변경입니다. 파문검(반격·수호), 잔영보(귀환·재현), 경계봉인(억제·유도) 중 현재 계열에서 발견한 운용을 선택합니다. 기본 무공은 유지되고 자동 장착되지 않습니다.');
     if(!s.known.length)para(body,'아직 이름 붙인 해석이 없습니다. 환서정에서 글이 아니라 물건과 바람의 반응을 먼저 살펴보세요.');
     for(const key of s.known){const v=D.variants[key],card=node('article','interpret-card');card.style.setProperty('--interpret-color',v.color);card.append(node('h3','',v.glyph+' '+v.name),node('p','',v.description),node('small','',D.syncNames[s.sync[key]]));
      const can=g.fate.path===v.path&&!g.trial&&(DualWorld.AREAS[g.area].safe||g.area==='archive');
@@ -42,7 +43,7 @@
     action(body,s.lens?'관측 렌즈 보유 · 기감 범위 +80':'관측 렌즈 · 마정석 2 / 금화 60',()=>{g.tradeMaterial('lens');open('growth');},!safe||s.lens||s.materials<2||g.gold<60);
     if(!safe)para(body,'심법 변경·돌파·거래는 안전한 거점에서 할 수 있습니다.','notebook-muted');
    }else{
-    para(body,'가상 모험가 기록 · 싱글플레이 시뮬레이션\n실제 유저 채팅·접속자·서버 최초 기록이 아닙니다.','simulation-notice');
+    para(body,'실제 멀티 채팅이 아닌 연출 시뮬레이션입니다.\n가상 모험가 기록 · 실제 유저 채팅·접속자·서버 최초 기록이 아닙니다.','simulation-notice');
     para(body,'여기서는 현재 여정과 다른 가능한 경험을 들려줍니다. 소문의 물건과 장치는 환서정에 실제로 존재합니다.');
     for(const m of D.rumors(s)){const row=node('article','other-journey');row.append(node('b','',m.speaker+' · 가상 모험가'),node('p','',m.text));body.append(row);}
    }

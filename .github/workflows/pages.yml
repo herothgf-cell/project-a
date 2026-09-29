@@ -46,6 +46,7 @@ jobs:
           python tests/v06_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v06
           python tests/perf_browser.py --url=http://127.0.0.1:3000/
           python tests/v07_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v07
+          python tests/v08_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v08
       - name: Keep browser test evidence
         if: always()
         uses: actions/upload-artifact@v4

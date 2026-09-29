@@ -1,6 +1,6 @@
 'use strict';
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
-const assets=new Set(['journey-data.js','journey.js','cultivation.js','chapter-five.js','journey-art.js','journey-ui.js','journey.css','sequel.js','wuxia-direction.js','wuxia-data.js','wuxia-art.js','wuxia.css','index.html','world.js','fate.js','legend.js','game.js','art.js','fate-art.js','classic-art.js','portrait-data.js','classic.css','render.js','app.js','style.css']);
+const assets=new Set(['journey-data.js','journey.js','cultivation.js','chapter-five.js','journey-art.js','journey-ui.js','journey.css','sequel.js','wuxia-direction.js','wuxia-data.js','wuxia-art.js','wuxia.css','index.html','presentation.js','realm-art.js','realm-ui.js','realm.css','world.js','fate.js','legend.js','game.js','art.js','fate-art.js','classic-art.js','portrait-data.js','classic.css','render.js','app.js','style.css']);
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8'};
 function createServer(){return http.createServer((req,res)=>{
   res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Cache-Control','no-cache');

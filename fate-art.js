@@ -86,7 +86,7 @@
     c.restore();
   }
   function atmosphere(c,g,camera,w,h,q,t){
-    if(q<=0)return;c.save();const modern=g.area==='city'||g.area==='harbor'||g.area==='heart';
+    if(q<=0)return;c.save();const modern=DualWorld.AREAS[g.area].world==='현실';
     if(modern){for(let i=0;i<(q>1?25:10);i++){const x=camera.x+(i*113+t*19)%w,y=camera.y+(i*79+t*175)%h;line(c,[[x,y],[x-3,y+15]],'#c2dde31b',1);}}
     else {for(let i=0;i<3;i++){const x=camera.x+w*(.15+i*.35)+Math.sin(t*.13+i)*25,y=camera.y+h*(.4+i*.16);ellipse(c,x,y,w*.3,22,'#cbd1b207');}}
     c.restore();

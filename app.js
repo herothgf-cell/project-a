@@ -10,7 +10,7 @@
   if(perfHud){perfHud.id='perfHud';perfHud.setAttribute('aria-label','성능 진단');perfHud.style.cssText='position:fixed;top:8px;right:8px;z-index:1000;max-width:calc(100vw - 16px);margin:0;padding:8px 10px;background:#101e24e8;color:#f3e5be;border:1px solid #d0bb7b;font:11px/1.4 monospace;white-space:pre-wrap;pointer-events:none;';$('game').append(perfHud);}
   let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0,lastPerfHud=0;
   let sound=false,audio=null,bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
-  let journeyUI=null;
+  let journeyUI=null,realmUI=null;
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
   const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
   const running=()=>active&&!dialog.open&&!document.hidden;
@@ -30,7 +30,7 @@
   }
   function closeDialog(){if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker);}}
   function show(title,body,actions=[{label:'계속하기'}],portrait='system',kicker='쌍계 · 이야기'){
-    clearInput();dialog.classList.toggle('legend-offer',kicker.includes('발현')||kicker.includes('각성'));$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
+    RealmArt.begin(g);clearInput();dialog.classList.toggle('story-dialog',typeof body==='string'&&portrait!=='system'&&!kicker.includes('일시정지'));dialog.classList.toggle('news-dialog',!!body?.classList?.contains('realm-news'));dialog.classList.toggle('help-dialog',!!body?.classList?.contains('realm-help-sheet'));dialog.classList.toggle('legend-offer',kicker.includes('발현')||kicker.includes('각성'));$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
     $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=body;else $('dialogBody').append(body);
     WorldArt.portrait($('portrait'),portrait);$('dialogActions').replaceChildren();
     actions.forEach(a=>{const b=node('button',a.secondary?'secondary':a.danger?'danger':'primary',a.label);b.disabled=!!a.disabled;b.addEventListener('click',()=>{queued=[];if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(a.run)a.run();});$('dialogActions').append(b);});
@@ -132,7 +132,7 @@
       if(e.type==='world-news')updateNews();
       if(e.type==='interpretation'){journeyUI.offer(e);persist();}
       if(e.type==='toast')toast(e.text);if(e.type==='sound')playSound(e.name);
-      if(e.type==='area'){clearInput();$('toasts').replaceChildren();$('areaBanner').querySelector('strong').textContent=e.text;$('areaBanner').classList.add('show');clearTimeout(bannerTimer);bannerTimer=setTimeout(()=>$('areaBanner').classList.remove('show'),1800);persist();}
+      if(e.type==='area'){clearInput();$('toasts').replaceChildren();if(g.area==='archive'&&!g.journey.known.length)toast('처음이라면 도움말 H · 기감 B → 가까이 E 조사 → 수첩 N');$('areaBanner').querySelector('small').textContent=g.presentationTravel?.from!==g.presentationTravel?.to?g.presentationTravel.from+' → '+g.presentationTravel.to:'['+AREAS[g.area].world+'] 지역 이동';$('areaBanner').querySelector('strong').textContent=e.text;$('areaBanner').classList.add('show');clearTimeout(bannerTimer);bannerTimer=setTimeout(()=>$('areaBanner').classList.remove('show'),1800);persist();}
       if(e.type==='manifestation'){
         clearTimeout(bannerTimer);$('areaBanner').classList.remove('show');$('ultimateBanner').querySelector('small').textContent='이름 없는 발현';$('ultimateBanner').querySelector('strong').textContent=e.title;$('ultimateBanner').style.setProperty('--fate-color',Fate.PATHS[e.path].color);$('ultimateBanner').classList.add('show');clearTimeout(ultimateTimer);ultimateTimer=setTimeout(()=>$('ultimateBanner').classList.remove('show'),2100);toast(e.text.replace('\n',' · '));persist();
       }
@@ -153,18 +153,11 @@
       else if(action==='potion')toast(g.potions<=0?'회복약이 없습니다. 거점에서 구입하세요.':'체력이 충분하거나 재사용 대기 중입니다.');
     }else if(action==='potion')persist();processEvents();update();
   }
-  let lastNews='';
-  function updateNews(){
-    const feed=g.chapter4?.feed||[],stamp=JSON.stringify(feed);
-    if(stamp===lastNews)return;lastNews=stamp;
-    $('rumorCount').textContent=String(feed.length);$('rumorMessages').replaceChildren();
-    if(!feed.length)$('rumorMessages').append(node('p','rumor-empty','아직 들려오는 소식이 없습니다. 실제로 일어난 사건이 여기에 남습니다.'));
-    for(const m of feed.slice(-8)){const row=node('article','rumor-entry '+m.kind);row.append(node('b','',m.kind==='npc'?m.speaker+' · NPC':m.speaker),node('p','',m.text));$('rumorMessages').append(row);}
-    $('rumorMessages').scrollTop=$('rumorMessages').scrollHeight;
-  }
+  function updateNews(){realmUI?.update();}
   function update(){
     updateNews();journeyUI?.update();
-    const a=AREAS[g.area],s=g.stats(),p=g.player,o=g.objective();
+    const a=AREAS[g.area],s=g.stats(),p=g.player,original=g.objective(),hint=realmUI?.guide();
+    const o=hint?.target?{...original,text:hint.text,target:hint.target}:original;
     $('world').textContent=a.world;$('rank').textContent=g.journey?.realm?'이류 · 돌파':g.training?'입문 · 수련 중':'미각성';$('place').textContent=a.name;$('sub').textContent=a.sub;$('lv').textContent=g.level;$('gold').textContent=g.gold;
     for(const [id,val,max]of [['hp',p.hp,s.hp],['mp',p.mp,s.mp]]){$(id).style.width=Math.max(0,val/max*100)+'%';$(id+'Text').textContent=`${Math.ceil(val)} / ${max}`;$(id+'Track').setAttribute('aria-valuemin','0');$(id+'Track').setAttribute('aria-valuemax',String(max));$(id+'Track').setAttribute('aria-valuenow',String(Math.ceil(val)));}
     $('quest').textContent=o.title;$('questDesc').textContent=o.text;$('chapterKicker').textContent='CHAPTER 0'+o.chapter;$('chapterTitle').textContent=o.chapter===5?'기록에 없는 귀환자':o.chapter===4?'끊긴 귀환로':o.chapter===3?'나의 전설':o.chapter===2?'잔월의 서약':'경계를 넘는 자';$('sync').textContent=g.training?`${Math.min(2,g.training)}개 무공 · ${g.training>=3?'경계 공명 완성':'두 세계에 전승'}`:'경계석의 신호를 따라가세요';
@@ -181,10 +174,6 @@
     for(const action of ['moon','storm','dash']){const btn=document.querySelector(`[data-action="${action}"]`),k=SKILLS[action];btn.classList.toggle('locked',g.training<k.need);btn.classList.toggle('no-mana',p.mp<k.cost);btn.setAttribute('aria-label',`${k.name}${g.training<k.need?' 미습득':''}`);const cd=btn.querySelector('em');cd.classList.toggle('active',p.cool[action]>.04);cd.textContent=p.cool[action]>=1?Math.ceil(p.cool[action]):p.cool[action].toFixed(1);}
     document.querySelector('.scene-bottom>span').textContent=matchMedia('(pointer:coarse)').matches?'왼쪽 이동 · 오른쪽 공격 / 회피':'WASD 이동 · J 공격 · Space 회피 · E 대화';
   }
-  $('rumorToggle').addEventListener('click',()=>{
-    if(matchMedia('(max-width:1099px), (pointer:coarse)').matches){const body=node('div','rumor-modal');body.append(node('p','rumor-disclosure','NPC 시뮬레이션 · 오프라인 연출 · 실제 유저 채팅 아님'));const entries=$('rumorMessages').cloneNode(true);entries.removeAttribute('id');body.append(entries);show('강호 소식',body,[{label:'돌아가기'}],'system','세계가 기억하는 일 · NPC 시뮬레이션');return;}
-    const open=$('rumorContent').hidden;$('rumorContent').hidden=!open;$('rumorToggle').setAttribute('aria-expanded',String(open));$('rumorPanel').classList.toggle('collapsed',!open);clearInput();
-  });
   if(!matchMedia('(max-width:1099px), (pointer:coarse)').matches){$('rumorContent').hidden=false;$('rumorToggle').setAttribute('aria-expanded','true');$('rumorPanel').classList.remove('collapsed');}
   window.addEventListener('wuxia-assets-ready',()=>{renderer.cache={};WorldArt.portrait($('hudPortrait'),'hero');if(!$('title').hidden)WorldArt.cover($('cover'));});
   $('fateJournal').addEventListener('click',fateJournal);
@@ -224,5 +213,6 @@
   }
   journeyUI=JourneyUI.create({game:()=>g,show,node,grid,refresh:()=>{processEvents();persist();update();},act,running,active:()=>active});
   window.addEventListener('keydown',e=>{if(e.code==='KeyN'&&!e.repeat&&active&&!dialog.open){e.preventDefault();journeyUI.open();}if(e.code==='KeyB'&&!e.repeat&&running()){e.preventDefault();act('sense');}});
+  realmUI=RealmUI.create({game:()=>g,show,node,refresh:()=>{processEvents();persist();update();},active:()=>active,clearInput,notes:journeyUI});
   inspectSave();WorldArt.cover($('cover'));WorldArt.portrait($('hudPortrait'),'hero');update();requestAnimationFrame(frame);
 })();
