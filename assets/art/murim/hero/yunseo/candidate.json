@@ -17,6 +17,10 @@
         "height": 887
       },
       "clips": {
+        "portrait-neutral": {"none": [{"atlas":"portraits","rect":[0,0,627,627],"pivot":[0.5,0.5],"duration":1}]},
+        "portrait-focus": {"none": [{"atlas":"portraits","rect":[627,0,627,627],"pivot":[0.5,0.5],"duration":1}]},
+        "portrait-hurt": {"none": [{"atlas":"portraits","rect":[0,627,627,627],"pivot":[0.5,0.5],"duration":1}]},
+        "portrait-slight-smile": {"none": [{"atlas":"portraits","rect":[627,627,627,627],"pivot":[0.5,0.5],"duration":1}]},
         "idle": {
           "s": [
             {
@@ -138,16 +142,259 @@
               "duration": 1
             }
           ]
+        },
+        "walk": {
+          "se": [
+            {
+              "atlas": "walk_se",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12
+            },
+            {
+              "atlas": "walk_se",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12
+            },
+            {
+              "atlas": "walk_se",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12
+            },
+            {
+              "atlas": "walk_se",
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12
+            },
+            {
+              "atlas": "walk_se",
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12
+            },
+            {
+              "atlas": "walk_se",
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12
+            }
+          ]
+        },
+        "attack1": {
+          "se": [
+            {
+              "atlas": "attack1_se",
+              "rect": [
+                0,
+                0,
+                660,
+                627
+              ],
+              "pivot": [
+                0.45454545454545453,
+                0.9090909090909091
+              ],
+              "duration": 0.06,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  300,
+                  570
+                ],
+                "hand": [
+                  405,
+                  262
+                ],
+                "blade": [
+                  641,
+                  390
+                ],
+                "effect": [
+                  641,
+                  390
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "attack1_se",
+              "rect": [
+                670,
+                0,
+                584,
+                627
+              ],
+              "pivot": [
+                0.4452054794520548,
+                0.9250398724082934
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  260,
+                  580
+                ],
+                "hand": [
+                  399,
+                  269
+                ],
+                "blade": [
+                  568,
+                  326
+                ],
+                "effect": [
+                  568,
+                  326
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "attack1_se",
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.4944178628389155,
+                0.8755980861244019
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  310,
+                  549
+                ],
+                "hand": [
+                  242,
+                  253
+                ],
+                "blade": [
+                  453,
+                  457
+                ],
+                "effect": [
+                  453,
+                  457
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "attack1_se",
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5374800637958532,
+                0.89792663476874
+              ],
+              "duration": 0.09,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  337,
+                  563
+                ],
+                "hand": [
+                  234,
+                  330
+                ],
+                "blade": [
+                  369,
+                  554
+                ],
+                "effect": [
+                  369,
+                  554
+                ]
+              },
+              "displayHeight": 120
+            }
+          ]
         }
       },
       "review": {
         "visual": false,
         "evidence": [],
         "limitations": [
-          "Idle direction study only; not walking or combat animation.",
-          "Equipment continuity and edge alpha require review.",
-          "No verified sockets or expression portraits."
-        ]
+          "Idle direction study, southeast walk/attack1 and four portrait-expression candidates.",
+          "Walk foot planting, limb continuity and loop seam require motion review.",
+          "Other walk facings, attack2/3/dodge/hit/cast and verified sockets remain BLOCKED_ART; portrait alpha edges and field identity need final review.",
+          "Attack1 SE four frames and manually placed sockets are provisional; other combat facings/combos absent."
+        ],
+        "userDirectionApproved": "2026-09-30"
+      },
+      "atlases": {
+        "portraits": {"path":"assets/art/murim/hero/yunseo/portraits-candidate-v2.png","width":1254,"height":1254},
+        "walk_se": {
+          "path": "assets/art/murim/hero/yunseo/walk-se-candidate-v2.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "attack1_se": {
+          "path": "assets/art/murim/hero/yunseo/attack1-se-candidate-v1.png",
+          "width": 1254,
+          "height": 1254
+        }
       }
     }
   ]

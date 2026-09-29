@@ -4,6 +4,19 @@
  const worlds=['reality','murim','shared'],statuses=['BLOCKED_ART','candidate','approved'];
  const safePath=p=>typeof p==='string'&&/^assets\/art\/(?:[a-z0-9_-]+\/)+[a-z0-9_-]+\.(png|webp|json|ogg|wav)$/.test(p);
  function freeze(value){if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value);}return value;}
+ const validAtlas=(atlas,world)=>atlas&&safePath(atlas.path)&&atlas.path.startsWith('assets/art/'+world+'/')&&Number.isInteger(atlas.width)&&Number.isInteger(atlas.height)&&atlas.width>0&&atlas.height>0&&atlas.width*atlas.height<=16777216;
+ function heroIssues(a){
+  if(a.kind!=='actor'||a.entityId!=='hero')return [];
+  const issues=[],directions=['n','ne','e','se','s','sw','w','nw'];
+  for(const [clip,min]of Object.entries({idle:2,walk:6,dodge:4,attack1:4,attack2:4,attack3:4,cast:4,hit:2})){
+   if(directions.some(d=>(a.clips?.[clip]?.[d]?.length||0)<min))issues.push('incomplete '+clip+' (8 directions / '+min+' frames)');
+   const frames=Object.values(a.clips?.[clip]||{}).flat();
+   if(!frames.length||frames.some(f=>['foot','hand','blade','effect'].some(k=>!f.sockets?.[k])))issues.push('missing sockets in '+clip);
+   if(clip.startsWith('attack')&&directions.some(d=>a.clips?.[clip]?.[d]?.[0]?.contact!==true))issues.push('missing immediate contact in '+clip);
+  }
+  for(const expression of ['neutral','focus','hurt','slight-smile'])if(!a.clips?.['portrait-'+expression]?.none?.length)issues.push('missing portrait '+expression);
+  return issues;
+ }
  function validate(m){
   const issues=[],ids=new Set(),actors=new Set();
   if(m?.schemaVersion!==1||!Array.isArray(m?.assets)||!Array.isArray(m?.required))return ['invalid schema'];
@@ -15,13 +28,18 @@
    if(a.entityId){const key=a.world+':'+a.entityId;if(actors.has(key))issues.push('duplicate actor '+key);actors.add(key);}
    if(a.status==='BLOCKED_ART'){if(!a.reason)issues.push('missing blocker '+a.id);continue;}
    const atlas=a.atlas;
-   if(!atlas||!safePath(atlas.path)||!atlas.path.startsWith('assets/art/'+a.world+'/')||!Number.isInteger(atlas.width)||!Number.isInteger(atlas.height)||atlas.width<=0||atlas.height<=0||atlas.width*atlas.height>16777216){issues.push('invalid atlas '+a.id);continue;}
+   if(!validAtlas(atlas,a.world)){issues.push('invalid atlas '+a.id);continue;}
+   for(const [key,sheet]of Object.entries(a.atlases||{}))if(!/^[a-z0-9_-]+$/.test(key)||!validAtlas(sheet,a.world))issues.push('invalid alternate atlas '+a.id+'.'+key);
    if(!Array.isArray(a.sources)||!a.sources.length)issues.push('missing provenance '+a.id);
    if(a.status==='approved'&&(!a.review?.evidence?.length||a.review?.visual!==true))issues.push('missing visual approval '+a.id);
    if(!a.clips||!Object.keys(a.clips).length)issues.push('missing clips '+a.id);
    for(const [clip,facings] of Object.entries(a.clips||{}))for(const [facing,frames] of Object.entries(facings)){
     if(!['n','ne','e','se','s','sw','w','nw','none'].includes(facing)||!Array.isArray(frames)||!frames.length){issues.push('invalid facing '+a.id);continue;}
-    for(const f of frames){const r=f.rect,p=f.pivot;if(!Array.isArray(r)||r.length!==4||!r.every(Number.isInteger)||r[0]<0||r[1]<0||r[2]<=0||r[3]<=0||r[0]+r[2]>atlas.width||r[1]+r[3]>atlas.height||!Array.isArray(p)||p.length!==2||!p.every(n=>Number.isFinite(n)&&n>=0&&n<=1)||!Number.isFinite(f.duration)||f.duration<=0)issues.push('invalid frame '+a.id+'.'+clip+'.'+facing);}
+    for(const f of frames){
+     const r=f?.rect,p=f?.pivot,sheet=f?.atlas===undefined?atlas:a.atlases?.[f.atlas];
+     if(!validAtlas(sheet,a.world)||!Array.isArray(r)||r.length!==4||!r.every(Number.isInteger)||r[0]<0||r[1]<0||r[2]<=0||r[3]<=0||r[0]+r[2]>sheet.width||r[1]+r[3]>sheet.height||!Array.isArray(p)||p.length!==2||!p.every(n=>Number.isFinite(n)&&n>=0&&n<=1)||!Number.isFinite(f.duration)||f.duration<=0){issues.push('invalid frame '+a.id+'.'+clip+'.'+facing);continue;}
+     for(const socket of Object.values(f.sockets||{}))if(!Array.isArray(socket)||socket.length!==2||!socket.every(Number.isFinite)||socket[0]<0||socket[1]<0||socket[0]>r[2]||socket[1]>r[3])issues.push('invalid socket '+a.id+'.'+clip);
+    }
    }
   }
   for(const id of m.required)if(!ids.has(id))issues.push('required id missing '+id);
@@ -40,11 +58,20 @@
    const frames=a.clips[q.action]?.[q.facing];if(!frames)return blocked('missing clip '+q.action+'.'+q.facing);
    const index=Number.isInteger(q.frame)&&q.frame>=0?q.frame:0;
    if(index>=frames.length)return blocked('missing frame');
-   return {status:a.status,id:a.id,world:a.world,entityId:a.entityId,atlas:a.atlas,frame:frames[index],frameIndex:index};
+   const frame=frames[index];
+   return {status:a.status,id:a.id,world:a.world,entityId:a.entityId,atlas:frame.atlas===undefined?a.atlas:a.atlases[frame.atlas],frame,frameIndex:index};
   }
-  function releaseIssues(){return manifest.required.flatMap(id=>{const a=manifest.assets.find(a=>a.id===id);return a?.status==='approved'?[]:[{id,status:'BLOCKED_ART',reason:a?.reason||'awaiting complete production set and visual approval'}];});}
-  function files({preview=false}={}){return [...new Set(manifest.assets.filter(a=>a.status==='approved'||preview&&a.status==='candidate').map(a=>a.atlas.path))];}
-  return {resolve,releaseIssues,files,manifest};
+  function sample(q,options){
+   const first=resolve({...q,frame:0},options);if(first.status==='BLOCKED_ART')return first;
+   if(!Number.isFinite(q.elapsed)||q.elapsed<0)return {status:'BLOCKED_ART',reason:'invalid animation time'};
+   const a=manifest.assets.find(a=>a.id===first.id),frames=a.clips[q.action][q.facing],total=frames.reduce((n,f)=>n+f.duration,0);
+   let elapsed=q.loop?q.elapsed%total:Math.min(q.elapsed,total),index=0;
+   while(index<frames.length-1&&elapsed>=frames[index].duration){elapsed-=frames[index].duration;index++;}
+   return resolve({...q,frame:index},options);
+  }
+  function releaseIssues(){return manifest.required.flatMap(id=>{const a=manifest.assets.find(a=>a.id===id),gaps=a?.status==='approved'?heroIssues(a):[];return a?.status==='approved'&&!gaps.length?[]:[{id,status:'BLOCKED_ART',reason:gaps.length?gaps.join('; '):a?.reason||'awaiting complete production set and visual approval'}];});}
+  function files({preview=false}={}){return [...new Set(manifest.assets.filter(a=>a.status==='approved'||preview&&a.status==='candidate').flatMap(a=>[a.atlas,...Object.values(a.atlases||{})].map(s=>s.path)))];}
+  return {resolve,sample,releaseIssues,files,manifest};
  }
  function createImageCache({ImageClass=globalThis.Image,maxEntries=24}={}){
   const cache=new Map();

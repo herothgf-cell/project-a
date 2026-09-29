@@ -7,6 +7,8 @@ test('production server serves catalog but excludes review images, references, a
   const r=await fetch(base+'/assets/art/manifest.json');assert.equal(r.status,200);assert.match(r.headers.get('content-type'),/application\/json/);
   assert.equal((await fetch(base+'/assets/art/reality/hero/yunseo/idle-candidate-v1.png')).status,404);
   for(const p of ['/references/manifest.json','/docs/codex-art-handoff/00_READ_FIRST.md','/assets/art/%2e%2e/%2e%2e/package.json','/art-review.html'])assert.equal((await fetch(base+p)).status,404,p);
+  assert.equal((await fetch(base+'/art-play.html')).status,404);
+  assert.equal((await fetch(base+'/art-preview-runtime.js')).status,404);
  }finally{await new Promise(r=>s.close(r));}
 });
 test('explicit local art review server exposes actual image bytes and HEAD MIME, not source boards',async()=>{
@@ -17,5 +19,7 @@ test('explicit local art review server exposes actual image bytes and HEAD MIME,
   const bytes=Buffer.from(await r.arrayBuffer());assert.deepEqual([...bytes.subarray(0,8)],[137,80,78,71,13,10,26,10]);
   const h=await fetch(base+p,{method:'HEAD'});assert.equal(h.status,200);assert.equal((await h.text()).length,0);
   assert.equal((await fetch(base+'/art-review.html')).status,200);assert.equal((await fetch(base+'/references/codex-art/reality-world-reference.webp')).status,404);
+  const play=await fetch(base+'/art-play.html');assert.equal(play.status,200);assert.match(await play.text(),/src="art-preview-runtime.js"/);
+  assert.equal((await fetch(base+'/art-runtime.js')).status,200);
  }finally{await new Promise(r=>s.close(r));}
 });

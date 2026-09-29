@@ -35,3 +35,39 @@ test('catalog approval and frames cannot be mutated after validation',()=>{
  assert.throws(()=>{v.atlas.path='assets/art/murim/hero/stolen.png';},TypeError);
  assert.equal(c.resolve(q).status,'BLOCKED_ART');
 });
+test('animation frames resolve their own sheet and every sheet is included in packaging',()=>{
+ const m=sample(),a=m.assets[0];a.atlases={walk:{path:'assets/art/reality/hero/yunseo/walk.png',width:600,height:400}};
+ a.clips.walk={se:[{atlas:'walk',rect:[0,0,200,200],pivot:[.5,.9],duration:.1},{atlas:'walk',rect:[200,0,200,200],pivot:[.5,.9],duration:.2}]};
+ const c=load().createCatalog(m),v=c.resolve({world:'reality',entityId:'hero',action:'walk',facing:'se',frame:1},{preview:true});
+ assert.equal(v.atlas.path,'assets/art/reality/hero/yunseo/walk.png');assert.equal(v.atlas.width,600);
+ assert.deepEqual(c.files({preview:true}).sort(),['assets/art/reality/hero/yunseo/idle.png','assets/art/reality/hero/yunseo/walk.png']);
+ assert.deepEqual(c.files(),[],'candidate sheets never ship');
+});
+test('animation sampling follows recorded frame durations and loop versus recovery semantics',()=>{
+ const m=sample(),a=m.assets[0];a.clips.walk={s:[{rect:[0,0,256,256],pivot:[.5,.9],duration:.1},{rect:[256,0,256,256],pivot:[.5,.9],duration:.2}]};
+ const c=load().createCatalog(m),q={world:'reality',entityId:'hero',action:'walk',facing:'s'};
+ assert.equal(typeof c.sample,'function');
+ for(const [elapsed,loop,want]of [[0,false,0],[.1,false,1],[.29,false,1],[.35,false,1],[.35,true,0]])assert.equal(c.sample({...q,elapsed,loop},{preview:true}).frameIndex,want);
+ assert.equal(c.sample({...q,elapsed:0}).status,'BLOCKED_ART');
+ assert.equal(c.sample({...q,action:'attack1',elapsed:0},{preview:true}).status,'BLOCKED_ART');
+});
+test('frame sockets and alternate sheets cannot reference another world or invalid bounds',()=>{
+ for(const mutate of [a=>{a.atlases={walk:{path:'assets/art/murim/hero/yunseo/walk.png',width:100,height:100}};},a=>{a.clips.idle.s[0].atlas='absent';},a=>{a.clips.idle.s[0].sockets={hand:[-1,5]};}]){
+  const m=sample();mutate(m.assets[0]);assert.throws(()=>load().createCatalog(m),/Invalid art catalog/);
+ }
+});
+test('approving an idle study cannot accidentally clear the hero production gate',()=>{
+ const m=sample();m.assets[0].status='approved';m.assets[0].review={visual:true,evidence:['qa/user-review.png']};
+ const issues=load().createCatalog(m).releaseIssues();assert.equal(issues.length,1);assert.match(issues[0].reason,/walk/);assert.match(issues[0].reason,/socket/);
+});
+test('independent hero dialogue expressions are candidates, never production approvals or field bodies',()=>{
+ for(const world of ['reality','murim']){
+  const c=load().createCatalog(JSON.parse(fs.readFileSync(path.join(root,'assets/art',world,'hero/yunseo/candidate.json'))));
+  for(const expression of ['neutral','focus','hurt','slight-smile']){
+   const q={world,entityId:'hero',action:'portrait-'+expression,facing:'none'},v=c.resolve(q,{preview:true});
+   assert.equal(v.status,'candidate');assert.match(v.atlas.path,new RegExp('assets/art/'+world+'/hero/yunseo/portraits-'));
+   assert.equal(c.resolve(q).status,'BLOCKED_ART');
+   assert.equal(c.resolve({...q,facing:'se'},{preview:true}).status,'BLOCKED_ART');
+  }
+ }
+});

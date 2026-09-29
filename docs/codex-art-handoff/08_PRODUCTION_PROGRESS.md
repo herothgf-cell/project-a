@@ -55,4 +55,29 @@ Another generated Murim three-combo study (`exec-0d541381-0fd9-4a87-804b-3b0cbbf
 
 ## 07_DONE_CRITERIA assessment
 
-No visual completion box is checked yet. Current screenshots of hunter base and village are BEFORE/development captures. The comparison sheet is idle-only and cannot satisfy walking-video or combo-video evidence. NPC portrait consistency, all skill captures, production environments/enemies/portals, mobile final-art review and live art hashes are still missing. Consequently this pass is **BLOCKED_ART**, not a completed vertical slice and not a published graphics release.
+### 2026-09-30 continuation — approval and local playable candidates
+
+The user approved work to date and directed continuation. This records direction/work acceptance, not approval of frames that do not yet exist. Task 2 remains in progress; Tasks 3–10 are not complete. Neither P0 scene meets the final visual criteria yet.
+
+Independent full-body hero assets are now connected in **local-only** `/art-play.html`: eight idle directions, six southeast walk frames and four southeast attack1 frames per world. Production `/` and the Pages bundle do not include these candidate scripts/images. Missing clips remain explicitly labelled BLOCKED_ART in the development preview; no other-world actor or idle-as-attack substitution is used by the catalog. The preview's tiny socket-following slash is a timing diagnostic, **not final skill VFX**.
+
+| Workspace path under assets/art | Generation ID | Status |
+| --- | --- | --- |
+| reality/hero/yunseo/walk-se-candidate-v1.png | exec-15f95e97-ee54-47b1-a550-5e8e8bc1361c | Candidate; loop seam/foot planting pending |
+| murim/hero/yunseo/walk-se-candidate-v2.png | exec-e9cdb9e5-e6e3-441e-974f-4713573ee937 | Candidate; opposite-leg cycle quality pending |
+| reality/hero/yunseo/attack1-se-candidate-v1.png | exec-afbfcb61-f51a-4778-aae8-b6ba1bdea8e6 | Candidate; provisional frame-local sockets |
+| murim/hero/yunseo/attack1-se-candidate-v1.png | exec-83b78385-b515-4175-bff1-a93bdb5bd1a0 | Candidate; provisional frame-local sockets |
+| reality/hero/yunseo/portraits-candidate-v1.png | exec-f74bc1f2-9751-4486-9b5f-7d9a4c079204 | Neutral/focus/hurt/slight-smile; candidate alpha-edge review |
+| murim/hero/yunseo/portraits-candidate-v2.png | exec-dcbea625-8379-4106-acb0-88ee599277fb | Same four expressions; padding correction of rejected cropped-topknot v1 |
+
+Generated with the built-in image tool, originals retained. Prompt set: `09_GENERATION_PROMPTS.json`. No image processing substituted a cropped head or repurposed a reference board. Transparent background was checked by alpha rather than hidden RGB appearance.
+
+Rejected further combo studies (not copied into the runtime catalog): reality attack2 `exec-1822bd81-9895-471a-b7c4-a309be323de4` changes sword hand across frames and has insufficient top padding; reality attack3 `exec-570dc747-c92f-420b-98f4-3f7c53669693`, murim attack2 `exec-45b49414-d65f-4aa7-8130-a1d021b177d0` and murim attack3 `exec-0d48eb4b-d66f-41d2-86b1-09dc8ff5fae6` rotate away from the intended consistent facing and/or leave blade margins too tight. They require another art pass, not a metadata-only approval.
+
+New review controls play walk/attack1, scrub individual frames, mark foot/hand/blade/effect sockets and explicitly show missing attack2/3. Real Chromium verifies the missing action does not reuse attack1. The production gate also rejects an approved idle-only hero lacking full clip counts, sockets, immediate contact and portraits.
+
+Portrait candidates now resolve independently by world/expression in the local game HUD/dialog renderer. Real Chromium verifies reality → murim changes HUD identity and explicit hurt expression selection; the field-body renderer never consumes a portrait clip. The initially generated murim portrait `exec-b63c2eb8-efb6-4b30-82b8-a8a7590e7b0d` clipped the topknot and was rejected, then corrected using the image tool. Final portrait alpha edges, framing and in-dialog visual review remain pending.
+
+Evidence: `preview-reality-full-body.png`, `preview-murim-full-body.png`, `preview-murim-contact.png`, `hero-contact-socket-review.png` under `.superpowers/art-production/evidence/`. These are **development captures**, with legacy environments/NPCs still visible. Actual enemy hit remains damage 22 and immediate contact; body/effect select the same frame and elapsed time. Existing v0.8 browser regression was rerun after the renderer adapter changed: all seven scenarios passed, including three mobile sizes and reduced motion, no page errors. No candidate art push or deployment has been performed.
+
+No visual completion box is checked yet. Current screenshots of hunter base and village are BEFORE/development captures. The comparison viewer now includes SE walk/attack1, but not complete eight-direction walking or three-combo video evidence. NPC portrait consistency, all skill captures, production environments/enemies/portals, mobile final-art review and live art hashes are still missing. Consequently this pass is **BLOCKED_ART**, not a completed vertical slice and not a published graphics release.

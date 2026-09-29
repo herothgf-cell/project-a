@@ -7,7 +7,7 @@ function createServer({artReview=false}={}){
  const catalog=Art.createCatalog(JSON.parse(fs.readFileSync(path.join(__dirname,'assets/art/manifest.json'))));
  for(const file of catalog.files())allowed.add(file);
  if(artReview){
-  allowed.add('art-review.html');allowed.add('art-review.js');
+  for(const p of ['art-review.html','art-review.js','art-play.html','art-runtime.js','art-preview-runtime.js'])allowed.add(p);
   for(const world of ['reality','murim']){
    const file='assets/art/'+world+'/hero/yunseo/candidate.json';
    if(fs.existsSync(path.join(__dirname,file))){allowed.add(file);const review=Art.createCatalog(JSON.parse(fs.readFileSync(path.join(__dirname,file))));for(const p of review.files({preview:true}))allowed.add(p);}
@@ -19,7 +19,11 @@ function createServer({artReview=false}={}){
   let url;try{url=decodeURIComponent(new URL(req.url,'http://localhost').pathname);}catch{res.writeHead(400);return res.end('Bad request');}
   if(url==='/favicon.ico'){res.writeHead(204);return res.end();}
   const file=url==='/'?'index.html':url.slice(1);if(!allowed.has(file)){res.writeHead(404);return res.end('Not found');}
-  fs.readFile(path.join(__dirname,file),(error,content)=>{if(error){res.writeHead(500);return res.end('Unable to read game asset');}res.writeHead(200,{'Content-Type':types[path.extname(file)]});res.end(req.method==='HEAD'?undefined:content);});
+  fs.readFile(path.join(__dirname,file==='art-play.html'?'index.html':file),(error,content)=>{
+   if(error){res.writeHead(500);return res.end('Unable to read game asset');}
+   if(file==='art-play.html')content=Buffer.from(content.toString('utf8').replace('</head>','<script defer src="art-runtime.js"></script><script defer src="art-preview-runtime.js"></script></head>'));
+   res.writeHead(200,{'Content-Type':types[path.extname(file)]});res.end(req.method==='HEAD'?undefined:content);
+  });
 });}
 if(require.main===module){const host=process.env.HOST||'127.0.0.1',port=Number(process.env.PORT||3000);if(!Number.isInteger(port)||port<0||port>65535)throw Error('Invalid port');if(process.env.ART_REVIEW==='1'&&!['127.0.0.1','localhost','::1'].includes(host))throw Error('Art review must bind to loopback');const server=createServer({artReview:process.env.ART_REVIEW==='1'});server.on('error',e=>{console.error(e.message);process.exitCode=1;});server.listen(port,host,()=>console.log('쌍계: http://'+host+':'+server.address().port));}
 module.exports={createServer};
