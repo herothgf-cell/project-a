@@ -1,0 +1,123 @@
+name: Verify exact v0.8 presentation source
+on:
+  push:
+    branches: ['verify/v08-presentation-20260929']
+    paths: ['.github/workflows/verify-v08-source.yml']
+permissions:
+  contents: write
+concurrency:
+  group: verify-v08-presentation
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 65658c8820a6348d3bd41a2579da853df13c6671
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Restore checksum-verified presentation patch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > /tmp/v08transfer.py <<'PY'
+          import os,json,hashlib,base64,lzma,subprocess,urllib.request
+          from pathlib import Path
+          REPO='herothgf-cell/project-a'
+          BASE='65658c8820a6348d3bd41a2579da853df13c6671'
+          TREE='9d1e47244de3f188017b6a0dfe765e361faeee86'
+          PARTS=['f61a8565f59473af05e4780d59c6f63f53e52da7','b36fb61744ac6d1d47a292051777d43ccb1213e8','9ed4a2cb6abd24d43084c721fa0e2565dda2177a','2702935dda03bd87c8da03dd90248375a29598fb','1d27a6485697d9ef386a98dd3479313090d3462e','dcf5177609acfa20c0c0713bcacb71be40bbcfa2']
+          def api(route,body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+REPO+route,data=None if body is None else json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'ssanggye-v08-verification'})
+              with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
+          def sha(data):return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+          def git(*args):return subprocess.check_output(['git',*args],text=True).strip()
+          if __name__=='__main__':
+              assert os.environ['GITHUB_REPOSITORY']==REPO
+              assert git('rev-parse','HEAD')==BASE
+              chunks=[]
+              for ref in PARTS:
+                  data=base64.b64decode(api('/git/blobs/'+ref)['content']);assert sha(data)==ref
+                  chunks.append(data)
+              compressed=base64.b64decode(b''.join(chunks),validate=True)
+              assert hashlib.sha256(compressed).hexdigest()=='8dc2002d9c28542fbc56bf244554562a27e9c9e6b8c89732c902b92aa15231f4'
+              patch=lzma.decompress(compressed);assert len(patch)==84640
+              subprocess.run(['git','apply','--index','--unidiff-zero','--whitespace=error','-'],input=patch,check=True)
+              subprocess.run(['git','diff','--cached','--check'],check=True)
+              assert git('write-tree')==TREE,'Exact source tree mismatch'
+              print('EXACT_SOURCE_TREE='+TREE,flush=True)
+          PY
+          python /tmp/v08transfer.py
+      - name: Syntax and complete simulation suite
+        run: npm run check && npm test
+      - name: Install browser verification tools
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Seven HTTP and native-storage browser suites
+        run: |
+          node server.cjs > /tmp/ssanggye-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 20); do
+            if curl --fail --silent http://127.0.0.1:3000/ >/dev/null; then break; fi
+            sleep 1
+          done
+          python tests/browser_smoke.py --url=http://127.0.0.1:3000/ --output=browser-results
+          python tests/fate_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/fate
+          python tests/legend_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/legend
+          python tests/v06_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v06
+          python tests/perf_browser.py --url=http://127.0.0.1:3000/
+          python tests/v07_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v07
+          python tests/v08_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v08
+      - name: Export tested file blobs without changing any branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import sys,zipfile
+          sys.path.insert(0,'/tmp')
+          import v08transfer as m
+          assert m.api('/git/ref/heads/main')['object']['sha']==m.BASE,'main advanced; rebase required'
+          assert m.git('write-tree')==m.TREE
+          paths=m.git('diff','--cached','--name-only',m.BASE).splitlines()
+          assert len(paths)==20
+          assert not any(p.startswith('.superpowers/') or 'verify-v08-source' in p for p in paths)
+          entries=[]
+          for path in paths:
+              data=m.Path(path).read_bytes();ref=m.sha(data)
+              obj=m.api('/git/blobs',{'encoding':'base64','content':m.base64.b64encode(data).decode()})
+              assert obj['sha']==ref
+              entries.append({'path':path,'mode':'100644','type':'blob','sha':ref})
+          receipt={'base':m.BASE,'tree':m.TREE,'version':'0.8.0','run_id':m.os.environ['GITHUB_RUN_ID'],'entries':entries}
+          text=m.json.dumps(receipt,indent=2)
+          m.Path('v08-publication-receipt.json').write_text(text+'\n')
+          print(text,flush=True)
+          print('RECEIPT_BLOB='+m.api('/git/blobs',{'encoding':'utf-8','content':text+'\n'})['sha'],flush=True)
+          with zipfile.ZipFile('v08-source.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for name in m.git('ls-files').splitlines():z.write(name,'project-a/'+name)
+          PY
+      - name: Keep exact tested source and publication receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v08-verified-source
+          path: |
+            v08-publication-receipt.json
+            v08-source.zip
+          if-no-files-found: ignore
+      - name: Keep browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v08-verification-browser-evidence
+          path: browser-results/
+          if-no-files-found: ignore
