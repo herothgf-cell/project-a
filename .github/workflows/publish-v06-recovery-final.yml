@@ -83,45 +83,45 @@ jobs:
           for name,ref in expected.items():assert m.sha(m.Path(name).read_bytes())==ref,'Patched source mismatch: '+name
           assert m.json.loads(m.Path('package.json').read_text())['version']=='0.6.0'
           m.Path('README.md').write_text('''# 쌍계 — 끊긴 귀환로 · v0.6.0
-          
+
           플레이: https://herothgf-cell.github.io/project-a/
-          
+
           PC와 휴대폰에서 브라우저만으로 실행합니다. Node 설치는 개발할 때만 필요합니다. 시작 화면의 v0.6.0을 확인하세요. 기존 저장은 이어하기로 유지됩니다.
-          
+
           ## 이번 변경
           흑발·도포·장검의 무협 주인공, 정면/측면/뒷면과 대각선 방향 처리, 주요 NPC 초상과 필드 인물, 잔디·돌길·기와·수목 질감을 개선했습니다.
-          
+
           제3장 완료 후 현실 서린에게 대화하면 제4장 끊긴 귀환로가 시작됩니다. 청운 귀환로에서 파문 받아내기, 잔향 귀환, 결계 억제 또는 일반 전투 후 권양기 우회로 연화를 구조합니다. 실제 통행로가 열리고 연화가 청운촌에 돌아옵니다. 구한 방법은 다음 현실 지역 귀환 부두의 보호/잔향 협공/공격 예고 억제 효과로 이어집니다.
-          
+
           강호 소식은 사건에 반응하는 NPC 시뮬레이션입니다. 실제 온라인 유저 채팅이나 서버 접속자가 아닙니다. 모바일에서는 버튼으로 읽습니다.
-          
+
           ## 조작과 저장
           WASD/방향키 이동 · J 공격 · K/L 공통 무공 · Q/R 개인 무공 · F 오의 · Space/Shift 회피 · E 상호작용 · 1 회복약 · I 장비 · M 지도 · Esc 메뉴.
           모바일은 조이스틱과 화면 버튼을 사용합니다. 저장 version5이며 이전 v1~4를 읽습니다. 브라우저별 저장이므로 기기 이동에는 메뉴의 저장 파일 내보내기/불러오기를 사용하세요.
-          
+
           ## 검증과 한계
           npm run check, npm test, npm start. 네 Playwright Chromium HTTP/실제 저장소 검사가 배포를 보호합니다. build-info.json에 게시 버전과 커밋이 기록됩니다.
-          
+
           다섯 독립 시점과 반전을 조합한 8방향 표현입니다. 모든 방향의 걷기/공격 프레임을 각각 그린 최종 애니메이션은 아니며 일부 배경은 벡터 기반입니다. 실제 저사양 Android/iPhone Safari 장기 프레임·배터리는 미검증입니다.
           ''',encoding='utf-8')
           m.Path('docs/verification-v06.md').write_text('''# v0.6 검증 및 직접 게시
-          
+
           기준 main: 51ca33f9dc76728e809e19501117773d044e1bb7. 전달한 최신 project-a-v0.6.0-source.zip의 런타임과 패치를 사용합니다. 이전의 비슷한 이름 ssanggye-v0.6.0-source.zip과 혼합하지 않습니다.
-          
+
           GitHub 쓰기 도구가 없다는 이전 안내는 잘못됐습니다. 실제 파일 쓰기와 브랜치 갱신 도구가 있습니다. 게시 준비에서 로컬 구문 검사와 Node 101개 통과를 재확인했습니다. 이전 로컬 브라우저 30묶음은 인라인 문서/저장 shim 기반이며 실제 HTTP/물리기기와 구분합니다.
-          
+
           wuxia-data.js: 120066바이트, Git blob f7c6228108dd969f6ef8483939f9f5943ec1e5f7, SHA256 469b9a42f91546f86170f8c72ccdfb6a4dce9301c85ac1085054cad44f6609cb. 분할 전송 후 이 전체 해시를 검증했으며 다른 바이트는 사용하지 않습니다.
-          
+
           격리된 게시 브랜치에서 정확한 패치 적용, 구문/Node 검사, 기존·기연·현장각성·v06의 네 HTTP/native localStorage 브라우저 스위트를 실행합니다. 성공한 뒤에만 후보 커밋을 만듭니다. main은 게시 직전 다시 확인하고 force 없이 갱신합니다. main의 Pages 워크플로도 그대로 검사를 실행하며 실패하면 게시하지 않습니다.
-          
+
           브라우저 검사는 모델 위치/적을 준비한 뒤 실제 키보드/터치 이벤트를 사용합니다. 무보조 전체 플레이 인증이나 물리 기기 성능 인증은 아닙니다. 저사양 Android/iPhone Safari 장기 성능은 미검증입니다. NPC 소식은 명시된 오프라인 시뮬레이션입니다.
           ''',encoding='utf-8')
           m.Path('docs/art-provenance-v06.md').write_text('''# v0.6 아트 출처 및 한계
-          
+
           대화에서 생성된 오리지널 무협 컨셉 a_detailed_promotional_collage_ui_showcase_image.png의 인물과 자연 질감을 사용했습니다. 원본 SHA256: 8ce05be2023d8925d199e3a98c405d0b170538cabdf93f18c93c1a2e6577fbfa0b2. 나르실리온이나 로그인 무림 원작 스크린샷의 픽셀을 추출하지 않습니다.
-          
+
           wuxia-data.js에는 80x128 셀 열 개, 주요 인물 초상 다섯 개, 잔디/돌/기와/목재/꽃 질감이 WebP로 포함됩니다. 포스터 전체를 배경으로 붙인 방식이 아니며 실제 이동/충돌/전투와 함께 렌더링합니다. 외부 이미지 서버를 요청하지 않습니다.
-          
+
           다섯 시점과 반전으로 여덟 방향을 표현합니다. 모든 방향에서 프레임별로 새로 그린 완전한 걷기/공격 애니메이션은 아닙니다. 필드 NPC는 역할별 아틀라스를 공유하며 일부 건물은 벡터입니다. 원작 수준의 전체 손그림 타일셋이라고 주장하지 않습니다.
           ''',encoding='utf-8')
           subprocess.run(['git','diff','--check'],check=True)
