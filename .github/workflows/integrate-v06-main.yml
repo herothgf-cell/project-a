@@ -1,0 +1,176 @@
+name: Verify consolidated v0.6 and performance HUD
+on:
+  push:
+    branches: ['publish/v06-artwork-20260928']
+    paths: ['.github/workflows/integrate-v06-main.yml']
+permissions:
+  contents: write
+concurrency:
+  group: v06-consolidation
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 51ca33f9dc76728e809e19501117773d044e1bb7
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Restore verified v0.6 and merge the existing performance branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > /tmp/integration.py <<'PY'
+          import os,json,hashlib,base64,urllib.request,urllib.error,subprocess
+          from pathlib import Path
+          REPO='herothgf-cell/project-a'
+          BASE='51ca33f9dc76728e809e19501117773d044e1bb7'
+          PERF='865b4172364a69bf0181b78a25534ee80f5ec84d'
+          assert os.environ['GITHUB_REPOSITORY']==REPO
+          def api(route,body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+REPO+route,data=None if body is None else json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'ssanggye-integration'})
+              try:
+                  with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
+              except urllib.error.HTTPError as e:
+                  print('GitHub request failed:',route,e.code,e.read().decode()[:1500]);raise
+          def sha(data):return hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+          def blob(ref):
+              obj=api('/git/blobs/'+ref);data=base64.b64decode(obj['content'])
+              assert sha(data)==ref,'Blob checksum mismatch '+ref
+              return data
+          def git(*args):return subprocess.check_output(['git',*args],text=True).strip()
+          FILES={
+            '.github/workflows/pages.yml':'6c2112cfa1cdb9e522dd4981284430aa11ccf63a',
+            'app.js':'f145c4a43601390217acc024437f1007f5be2389',
+            'index.html':'307b6a190c604aae4ee479cff516190bef2e8442',
+            'package.json':'92f1678a508f7044abc0839633c73b73e0ece7ba',
+            'render.js':'6cf4989ae52183600ea680d8220c81e965b67b5a',
+            'server.cjs':'0cf99b64fcbd33fd76dcf13c532aaeca17fe7668',
+            'world.js':'4534b7542ba2b117d040cc1b4f5cd0c0ab3d097d',
+            'sequel.js':'bcf2461149c39b874d401b75aa32af3f5439ee66',
+            'wuxia-art.js':'19fe5f59d35889bdb27ff3d58bf452d6135027cb',
+            'wuxia-data.js':'f7c6228108dd969f6ef8483939f9f5943ec1e5f7',
+            'wuxia-direction.js':'53638149b7eee7bffc11d9cc5e8cbf2af27abc1c',
+            'wuxia.css':'ba6930fb416e16849215d7648749df4071c3998b',
+            'tests/chapter4.test.cjs':'902c754cc28a9a363c40ff18799cb78a29cc6ee6',
+            'tests/wuxia-assets.test.cjs':'a175dd2b7182475abd2f4066a20b580eb962c7ac',
+            'tests/wuxia-direction.test.cjs':'82114f2db36dc86573d54520c482c48a446e2035',
+            'tests/published-assets.test.cjs':'4e33781710ee08b604c40eac89cda6c83fa68883',
+            'tests/v06_browser.py':'fd03c04652d108192f0ec8de71226cbe4cc2c035',
+            'README.md':'778009726d50291c5416b5b1958197e05407d11f',
+            'docs/verification-v06.md':'d8fa2a84537e0287a916445c64b1fb4edbb9a009',
+            'docs/art-provenance-v06.md':'3d030b115ec5d3cf723df8bd35aa194738e29056'
+          }
+          if __name__=='__main__':
+              assert git('rev-parse','HEAD')==BASE
+              for name,ref in FILES.items():
+                  p=Path(name);p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(blob(ref))
+              subprocess.run(['git','add','--',*FILES],check=True)
+              selected=['app.js','render.js','docs/verification-v04.md','tests/perf.test.cjs','tests/perf_browser.py']
+              patch=subprocess.check_output(['git','diff','48f6f70e24fd8c11f2d2ac5d35c1065f5e5bb157',PERF,'--',*selected])
+              assert patch
+              subprocess.run(['git','apply','--3way','-'],input=patch,check=True)
+              assert not git('ls-files','-u'),'Unresolved merge conflict'
+              path=Path('.github/workflows/pages.yml');s=path.read_text()
+              s=s.replace('  workflow_dispatch:',"  pull_request:\n    branches: [main]\n  workflow_dispatch:",1)
+              s=s.replace('  group: pages','  group: pages-${{ github.ref }}',1)
+              s=s.replace('      - name: Keep browser test evidence','          python tests/perf_browser.py --url=http://127.0.0.1:3000/\n      - name: Keep browser test evidence',1)
+              s=s.replace('  deploy:\n    needs: build',"  deploy:\n    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'\n    needs: build",1)
+              path.write_text(s)
+              assert "get('perf')==='1'" in Path('app.js').read_text()
+              assert 'class PerfMeter' in Path('render.js').read_text()
+              assert sha(Path('wuxia-data.js').read_bytes())==FILES['wuxia-data.js']
+              subprocess.run(['git','add','--','.github/workflows/pages.yml'],check=True)
+              subprocess.run(['git','diff','--cached','--check'],check=True)
+          PY
+          python /tmp/integration.py
+      - name: Syntax and complete simulation suite
+        run: npm run check && npm test
+      - name: Install browser verification tools
+        run: |
+          python -m pip install playwright==1.57.0
+          python -m playwright install --with-deps chromium
+      - name: Five HTTP and native-storage browser suites
+        run: |
+          node server.cjs > /tmp/ssanggye-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 20); do
+            if curl --fail --silent http://127.0.0.1:3000/ >/dev/null; then break; fi
+            sleep 1
+          done
+          python tests/browser_smoke.py --url=http://127.0.0.1:3000/ --output=browser-results
+          python tests/fate_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/fate
+          python tests/legend_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/legend
+          python tests/v06_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v06
+          python tests/perf_browser.py --url=http://127.0.0.1:3000/
+      - name: Export verified blobs and receipt without moving any branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import sys,zipfile
+          sys.path.insert(0,'/tmp')
+          import integration as m
+          assert m.api('/git/ref/heads/main')['object']['sha']==m.BASE,'main advanced; rebase required'
+          m.Path('docs/verification-v06.md').write_text('''# v0.6 통합 검증
+
+          기준 main: 51ca33f9dc76728e809e19501117773d044e1bb7.
+          성능 진단 브랜치: 865b4172364a69bf0181b78a25534ee80f5ec84d.
+
+          이전 게시 작업은 Node 101개와 HTTP 브라우저 30개 시나리오 묶음까지 통과했으나, 후보 Git tree 생성에서 HTTP 403으로 중단되어 main과 배포가 갱신되지 않았다. 이번에는 이미 검증한 v0.6 파일의 Git blob 해시를 확인해 복구하고, 성능 진단 브랜치의 변경을 3-way로 합쳤다. Actions는 테스트와 blob 출력만 담당하고, 최종 커밋과 main 갱신은 연결된 GitHub 쓰기 도구로 처리한다.
+
+          통합본 검사: npm run check, npm test, browser_smoke.py, fate_browser.py, legend_browser.py, v06_browser.py, perf_browser.py를 모두 성공한 뒤 이 문서를 생성했다. 브라우저 검사는 HTTP와 실제 localStorage를 사용하며 데스크톱 및 390x844 / 360x640 / 844x390 터치 화면을 포함한다. 테스트 준비를 위해 게임 상태를 설정하므로 무보조 전체 수동 플레이 인증은 아니다.
+
+          기본 URL과 ?perf=0에는 진단 HUD가 없고 ?perf=1에서만 평균/최근 프레임 시간, 느린 프레임 누적, 자동 품질 저하 여부, 품질, viewport와 DPR이 표시된다. 값은 메모리에만 유지하며 개인정보와 플레이 내용을 수집하지 않는다. 기존 자동 품질 저하 판단은 변경하지 않는다.
+
+          v0.6에는 무협풍 인물과 다섯 시점/반전을 조합한 8방향 표현, NPC 초상, 제4장 끊긴 귀환로, 구조 결과에 따른 길/인물/다음 현실 전투 변화, NPC 소식 시뮬레이션이 포함된다. NPC 소식은 실제 유저 채팅이 아니다. 모든 방향의 프레임별 손그림 애니메이션은 아니며 일부 배경은 벡터다.
+
+          실제 저사양 Android / iPhone Safari의 장기 프레임, 발열, 배터리 소모는 미검증이다. 배터리 값은 이 HUD가 측정하지 않는다. Pages 배포 성공은 이 문서 생성 이후 별도로 Actions와 배포된 build-info.json에서 확인해야 한다.
+          ''',encoding='utf-8')
+          p=m.Path('README.md');p.write_text(p.read_text()+'\n## 통합된 성능 진단\n일반 플레이 화면은 동일하며 URL에 `?perf=1`을 붙인 경우에만 진단 HUD를 표시합니다. `feat/v04-perf-hud`의 변경을 v0.6에 통합했습니다. 기록은 메모리에만 유지하며 전송하지 않습니다. 배포 전 다섯 HTTP 브라우저 스위트를 실행합니다.\n')
+          m.subprocess.run(['git','add','--','README.md','docs/verification-v06.md'],check=True)
+          m.subprocess.run(['git','diff','--cached','--check'],check=True)
+          files=m.git('diff','--cached','--name-only',m.BASE).splitlines()
+          assert not any(p.startswith('.publish/') or 'integrate-v06-main' in p for p in files)
+          entries=[]
+          for path in files:
+              data=m.Path(path).read_bytes();ref=m.sha(data)
+              obj=m.api('/git/blobs',{'encoding':'base64','content':m.base64.b64encode(data).decode()})
+              assert obj['sha']==ref
+              entries.append({'path':path,'mode':'100644','type':'blob','sha':ref})
+          receipt={'base':m.BASE,'merge_parent':m.PERF,'expected_tree':m.git('write-tree'),'run_id':m.os.environ['GITHUB_RUN_ID'],'entries':entries}
+          text=m.json.dumps(receipt,ensure_ascii=False,indent=2)
+          m.Path('integration-receipt.json').write_text(text)
+          ref=m.api('/git/blobs',{'encoding':'utf-8','content':text})['sha']
+          print('INTEGRATION_RECEIPT_BLOB='+ref,flush=True)
+          print('EXPECTED_TREE='+receipt['expected_tree'],flush=True)
+          print(text,flush=True)
+          with zipfile.ZipFile('integrated-source.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for name in m.git('ls-files').splitlines():z.write(name,'project-a/'+name)
+          PY
+      - name: Keep integration receipt and exact source
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v06-integration-source
+          path: |
+            integration-receipt.json
+            integrated-source.zip
+          if-no-files-found: ignore
+      - name: Keep browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v06-integration-browser-evidence
+          path: browser-results/
+          if-no-files-found: ignore
