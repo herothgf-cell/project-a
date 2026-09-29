@@ -124,11 +124,11 @@
  function effect(c,f,q,g){
   if(f.kind==='legend-echo'){c.save();c.globalAlpha=Math.max(0,f.life/f.max)*.5;for(let i=0;i<(q?3:1);i++)human(c,{x:f.x+i*27,y:f.y-i*10,face:f.angle||0},clock,'hero',1.15);c.restore();return true;}
   if(!['slash','fate-wave'].includes(f.kind)||!f.actorBound)return false;
-  const age=f.max-f.life,k=Math.max(0,f.life/f.max),col=f.kind==='fate-wave'?'#f5d99b':f.skill==='moon'?'#bfe7ed':'#f5edcd';
-  const e={...g.player,face:f.motionAngle,motion:{stride:g.player.motion?.stride||0,speed:0,action:'attack',at:g.playTime-age,angle:f.motionAngle,duration:f.max,combo:f.motionCombo}};
-  const p=P.pose(e,g.playTime),x=g.player.x+(p.hand.x-g.player.x)*1.15,y=g.player.y+(p.hand.y-g.player.y)*1.15;
+  const k=Math.max(0,f.life/f.max),col=f.kind==='fate-wave'?'#f5d99b':f.skill==='moon'?'#bfe7ed':'#f5edcd';
+  const p=P.effectPose(f,g.playTime);if(!p)return false;
+  const x=f.x+(p.hand.x-f.x)*1.15,y=f.y+(p.hand.y-f.y)*1.15;
   c.save();c.translate(x,y);c.scale(1,.72);c.rotate(f.motionAngle);c.globalAlpha=k;
-  const grow=f.skill==='moon'||f.kind==='fate-wave';const r=grow?50+(f.range-50)*(1-k):52,sign=f.motionCombo===2?-1:1,a=sign*(-.36+1.6*Math.sin((1-k)*Math.PI*.65));
+  const grow=f.skill==='moon'||f.kind==='fate-wave';const r=grow?50+(f.range-50)*(1-k):52,sign=f.motionCombo===2?-1:1,a=p.bladeAngle-p.angle;
   c.beginPath();c.arc(0,0,r,a-sign*.85,a,sign<0);c.strokeStyle=col;c.lineWidth=grow?6:3;c.stroke();if(q>0){c.globalAlpha=k*.22;c.lineWidth=14;c.stroke();}
   c.globalAlpha=k*.75;line(c,[[Math.cos(a)*r,Math.sin(a)*r],[Math.cos(a)*r*.57,Math.sin(a)*r*.57]],'#fff8e8',2);c.restore();return true;
  }

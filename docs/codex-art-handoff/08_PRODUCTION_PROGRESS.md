@@ -42,3 +42,17 @@ Hero sheets returned 1774×887 rather than the requested 1024×512. Frame rectan
 ## Next gates
 
 Task 2 requires idle/walk/dodge/attack1–3/cast/hit and portraits for both heroes, socket/contact metadata, eight-direction and combo captures. Do not substitute idle frames for missing combat animation. Body, hands, weapon and VFX must use the same simulation-authoritative action instance. NPC, environment, enemies and VFX tasks remain incomplete. Do not expand to the other ten regions before the two P0 scenes pass visual review.
+
+## Action-clock foundation (Task 2 partial)
+
+`presentation.js` creates immutable action instances shared by body and newly emitted visuals; immediate common attacks record the simulation contact time. IDs are transient and not saved. Released slashes retain their emission coordinates instead of following a walking player. Their geometry samples the body action clock, not a differently scaled effect lifetime. Body recovery still ends on time; lingering waves retain terminal geometry to avoid a backwards snap. Simulation damage, costs, cooldowns, delayed hit schedules and save version are untouched.
+
+Unit regressions cover shared hand/tip timing, repeated actions, fixed emission origin, read-only rendering and the ripple wave duration boundary. Real Chrome keyboard input confirms matching action IDs and phases. This does not establish production sprite sockets, delayed-skill visuals or animation approval.
+
+After this change: all 178 Node tests pass. The existing `v08_browser.py` passes all seven HTTP/native-storage scenarios in real Chrome, including 390×844, 360×640, 844×390 and reduced motion, with no page errors. On Korean Windows it was run with `PYTHONUTF8=1`; Playwright dependencies are isolated in the ignored `.superpowers/art-production/python-deps` directory. The independent reviewer reran all 15 presentation tests and confirmed the wave-boundary fix. The full seven-script final-release browser suite has not yet been rerun; this is not final release evidence.
+
+Another generated Murim three-combo study (`exec-0d541381-0fd9-4a87-804b-3b0cbbf3b0a5`) was visually rejected: uneven cell margins, blade near cell boundary, inconsistent facing and lower-row foot spacing. It is retained in the generation archive, not included in the runtime catalog. The prompt requested twelve full-body frames in a 4×3 grid, independent contact/follow-through/recovery/ready poses, 15% margins and no VFX. Those constraints were not all satisfied.
+
+## 07_DONE_CRITERIA assessment
+
+No visual completion box is checked yet. Current screenshots of hunter base and village are BEFORE/development captures. The comparison sheet is idle-only and cannot satisfy walking-video or combo-video evidence. NPC portrait consistency, all skill captures, production environments/enemies/portals, mobile final-art review and live art hashes are still missing. Consequently this pass is **BLOCKED_ART**, not a completed vertical slice and not a published graphics release.

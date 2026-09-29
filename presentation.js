@@ -3,12 +3,13 @@
  'use strict';
  const {Game,AREAS,Fate,dist}=api,proto=Game.prototype;
  const previous={act:proto.act,step:proto.step,enter:proto.enter};
+ const actionSequences=new WeakMap();
  const DISCLOSURE='실제 멀티 채팅이 아닌 연출 시뮬레이션입니다.';
  const channels=[['all','전체'],['world','월드'],['server','서버'],['recruit','모집'],['system','시스템']];
  const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
  function worldStyle(area){const world=area?.world==='현실'?'현실':'무림';return {world,architecture:world==='현실'?'modern':'martial',npc:world==='현실'?'uniform':'robe',accent:world==='현실'?'#82dbe7':'#e0c18a'};}
  function fresh(){return {stride:0,speed:0,action:'idle',at:-10,angle:Math.PI/2,duration:.32,combo:0};}
- function pose(e,time=0){const m=e.motion||fresh(),age=Math.max(0,time-m.at),active=age<m.duration&&m.action!=='idle';
+ function pose(e,time=0,{linger=false}={}){const motion=e.motion||fresh(),m=motion.instance?{...motion,...motion.instance,at:motion.instance.startedAt}:motion,age=Math.max(0,time-m.at),active=(age<m.duration||linger)&&m.action!=='idle';
   const u=active?clamp(age/m.duration,0,1):1,angle=active?m.angle:Number.isFinite(e.face)?e.face:Math.PI/2;
   const step=m.stride*Math.PI/25,strength=e.walking?clamp(m.speed/150,0,1):0,foot=Math.sin(step)*strength;
   const magic=active&&['storm','seal','ultimate-seal'].includes(m.action);
@@ -17,12 +18,19 @@
   const reach=active?18+14*Math.sin((1-u)*Math.PI*.65):14;
   const shoulder={x:e.x+Math.cos(angle)*5,y:e.y-55},hand={x:e.x+Math.cos(angle)*reach,y:e.y-42+Math.sin(angle)*reach*.55};
   const bladeAngle=angle+sweep,tip={x:hand.x+Math.cos(bladeAngle)*53,y:hand.y+Math.sin(bladeAngle)*53*.65};
-  return {action:active?m.action:'idle',active,magic,u,angle,bladeAngle,foot,bob:Math.abs(foot)*1.8,lean:active?Math.sin((1-u)*Math.PI)*.1:foot*.012,shoulder,hand,tip,stride:step};
+  return {actionId:m.actionId||null,contactAt:m.contactAt??null,action:active?m.action:'idle',active,magic,u,angle,bladeAngle,foot,bob:Math.abs(foot)*1.8,lean:active?Math.sin((1-u)*Math.PI)*.1:foot*.012,shoulder,hand,tip,stride:step};
  }
+ // Released visuals retain their emission coordinates, but sample the same action clock as the body.
+ function effectPose(f,time){if(!f.actionInstance)return null;return pose({x:f.x,y:f.y,face:f.actionInstance.angle,motion:{...fresh(),instance:f.actionInstance}},time,{linger:true});}
  proto.enter=function(id){const from=this.area,ok=previous.enter.call(this,id);if(ok){this.player.motion=fresh();for(const e of this.enemies)e.motion=fresh();this.presentationTravel={from:AREAS[from]?.world||AREAS[id].world,to:AREAS[id].world,at:this.playTime};}return ok;};
  proto.act=function(action,...rest){const before=new Set(this.fx),ok=previous.act.call(this,action,...rest);if(!ok||!['attack','moon','storm','dash','signature1','signature2','ultimate'].includes(action))return ok;
   const m=this.player.motion||(this.player.motion=fresh()),path=Fate.active(this);m.action=action==='signature1'||action==='signature2'?path:action==='ultimate'?'ultimate-'+path:action;m.at=this.playTime;m.angle=this.player.face;m.duration=action==='dash'?.22:action==='ultimate'?.58:.3;m.combo=this.combo;
-  for(const f of this.fx)if(!before.has(f)&&['slash','fate-wave'].includes(f.kind)){f.actorBound=true;f.motionAt=m.at;f.motionAngle=m.angle;f.motionCombo=m.combo;}
+  const sequence=(actionSequences.get(this)||0)+1;actionSequences.set(this,sequence);
+  m.instance=Object.freeze({actionId:'player-'+sequence,action:m.action,startedAt:m.at,contactAt:['attack','moon','storm'].includes(action)?m.at:null,angle:m.angle,duration:m.duration,combo:m.combo});
+  for(const f of this.fx)if(!before.has(f)){
+   f.actionInstance=m.instance;
+   if(['slash','fate-wave'].includes(f.kind)){f.actorBound=true;f.motionAt=m.at;f.motionAngle=m.angle;f.motionCombo=m.combo;}
+  }
   return ok;
  };
  proto.step=function(dt,input={}){const entities=[this.player,...this.enemies],positions=entities.map(e=>[e.x,e.y]),t=this.playTime;previous.step.call(this,dt,input);const elapsed=this.playTime-t;if(elapsed<=0)return;
@@ -51,5 +59,5 @@
   rows.push({id:'local-notice',channel:'system',speaker:'시스템 안내',text:'서버 탭은 현재 여정에서 발생한 사건을 알리는 연출입니다. 실제 서버 최초·접속자·다른 유저의 기록이 아닙니다.',at:null,simulated:true,origin:'싱글플레이 안내'});
   return rows.slice(-40);
  }
- return {worldStyle,pose,guide,news,DISCLOSURE,channels};
+ return {worldStyle,pose,effectPose,guide,news,DISCLOSURE,channels};
 });

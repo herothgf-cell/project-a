@@ -38,3 +38,28 @@ test('alternate template names cannot make a modern area render with a martial i
 test('unknown progress never makes tutorial hints invent an artifact or equipped interpretation',()=>{
  const g=new api.Game();g.progress=2;g.training=1;g.enter('archive');const raw=g.save();for(let i=0;i<100;i++){P.guide(g);P.news(g);}assert.equal(g.save(),raw);assert.deepEqual(g.journey.items,[]);assert.deepEqual(g.journey.known,[]);
 });
+test('body and contact effects share an immutable action instance and one clock',()=>{
+ const g=new api.Game();g.act('attack');const f=g.fx.find(f=>f.kind==='slash'),a=g.player.motion.instance;
+ assert.ok(a?.actionId);assert.equal(f.actionInstance,a);assert.equal(a.contactAt,g.playTime);
+ assert.equal(a.startedAt,g.playTime);assert.ok(Object.isFrozen(a));
+ const body=P.pose(g.player,g.playTime+.12),vfx=P.effectPose(f,g.playTime+.12);
+ assert.equal(body.actionId,a.actionId);assert.equal(vfx.actionId,a.actionId);
+ assert.equal(body.u,vfx.u);assert.deepEqual(body.hand,vfx.hand);assert.deepEqual(body.tip,vfx.tip);
+ f.life=.01;assert.equal(P.effectPose(f,g.playTime+.12).u,body.u,'effect lifetime cannot rescale action timing');
+});
+test('released effects preserve origin and action even after movement, turning and a new action',()=>{
+ const g=new api.Game();g.act('attack');const f=g.fx.find(f=>f.kind==='slash'),at=g.playTime+.1;
+ const original=P.effectPose(f,at);g.player.x+=80;g.player.y+=30;g.player.face=-1;
+ g.player.cool.attack=0;g.act('attack');
+ assert.notEqual(f.actionInstance.actionId,g.player.motion.instance.actionId);
+ assert.deepEqual(P.effectPose(f,at),original);
+ const raw=g.save();for(let i=0;i<20;i++)P.effectPose(f,at);assert.equal(g.save(),raw);
+});
+test('released ripple wave retains terminal geometry while fading after body recovery',()=>{
+ const g=new api.Game();g.fate.path='ripple';g.fate.stage=3;g.player.mp=100;
+ assert.equal(g.act('signature2'),true);const f=g.fx.find(f=>f.kind==='fate-wave'),a=f.actionInstance;
+ const before=P.effectPose(f,a.startedAt+a.duration-.000001),end=P.effectPose(f,a.startedAt+a.duration),later=P.effectPose(f,a.startedAt+.6);
+ assert.ok(Math.abs(before.bladeAngle-end.bladeAngle)<.0001,'wave must not snap back to idle');
+ assert.equal(later.bladeAngle,end.bladeAngle);assert.deepEqual(later.hand,end.hand);assert.equal(later.u,1);
+ assert.equal(P.pose(g.player,a.startedAt+a.duration).active,false,'body still returns to idle on time');
+});

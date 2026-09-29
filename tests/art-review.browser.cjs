@@ -27,8 +27,13 @@ async function main(){
   await game.goto(url);await game.waitForFunction(()=>window.WuxiaArt&&WuxiaArt.ready());await game.click('#start');await game.locator('#dialogActions button').first().click();await game.waitForFunction(()=>window.__game);
   await game.screenshot({path:path.join(out,'before-reality-base.png')});
   await game.evaluate(()=>{__game.progress=2;__game.training=1;__game.enter('village');__game.events=[];});await game.waitForTimeout(180);
-  await game.screenshot({path:path.join(out,'before-murim-village.png')});assert.deepEqual(errors,[]);
+  await game.screenshot({path:path.join(out,'before-murim-village.png')});
+  await game.keyboard.press('KeyJ');
+  const actionProbe=await game.evaluate(()=>{const f=__game.fx.find(f=>f.kind==='slash'),body=Presentation.pose(__game.player,__game.playTime),vfx=Presentation.effectPose(f,__game.playTime);return {bodyId:body.actionId,vfxId:vfx.actionId,bodyTime:body.u,vfxTime:vfx.u,contactAt:body.contactAt,startedAt:f.actionInstance.startedAt};});
+  assert.ok(actionProbe.bodyId);assert.equal(actionProbe.bodyId,actionProbe.vfxId);assert.equal(actionProbe.bodyTime,actionProbe.vfxTime);assert.equal(actionProbe.contactAt,actionProbe.startedAt);
+  await game.screenshot({path:path.join(out,'action-timing-development.png')});assert.deepEqual(errors,[]);
   const report={status:'code-ready / candidate-art-only',checks:['16 independent directional candidates load over HTTP','transparent and opaque pixels exist','image cache reuses decoded image','failed load returns BLOCKED_ART and can retry','mobile review has no horizontal overflow','existing city/village remain functional'],probe,pageErrors:errors,artApproved:false,gameArtIntegrated:false};
+  report.actionProbe=actionProbe;report.checks.push('real keyboard attack body/effect share action id and contact clock');
   fs.writeFileSync(path.join(out,'browser-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 }
