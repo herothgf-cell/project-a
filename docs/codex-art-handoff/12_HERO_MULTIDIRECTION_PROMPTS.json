@@ -1,0 +1,128 @@
+[
+  {
+    "world": "reality",
+    "action": "idle",
+    "prompt": "Use case: stylized-concept. Make a NEW production game animation sprite atlas, transparent RGBA background, no text, labels, grid lines or floor. Reference image is character identity only, NOT an edit target. Same hand-painted adult full-body protagonist, short black hair, black modern tactical hunter jacket, ID lanyard, pouches, black cargo trousers and boots, no robes. Preserve asymmetric gear sides, no mirrored fake views. Elevated 3/4 RPG camera.\nAtlas exactly 4 columns x 4 rows, 16 equal cells. Each adjacent pair is inhale/exhale idle animation with planted feet unchanged. Row1: south/front pair then southeast/front-right pair. Row2: east/right-profile pair then northeast/back-right pair. Row3: north/back pair then northwest/back-left pair. Row4: west/left-profile pair then southwest/front-left pair. Subtle shoulder/cloak breathing, full head to boots, sword sheathed.\nPerfect regular equal-sized cell layout; feet centered at x50%, baseline y88% in each cell, head near y15%, entire weapon and clothing inside cell with generous 8% margin. Consistent scale, no clipping, no shared bodies, no portraits. Square 2048x2048 detailed atlas. Truly transparent background, not opaque black.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-4f58c4a2-b363-4b9e-8b92-6c6d918d412a.png",
+    "workspacePath": "assets/art/reality/hero/yunseo/idle-eight-directions-candidate-v1.png",
+    "status": "candidate-integrated",
+    "reason": "Foot registration and loop require final review."
+  },
+  {
+    "world": "reality",
+    "action": "attack1",
+    "prompt": "Use case: stylized-concept. Make a NEW production game animation sprite atlas, transparent RGBA background, no text, labels, grid lines or floor. Reference image is character identity only, NOT an edit target. Same hand-painted adult full-body protagonist, short black hair, black modern tactical hunter jacket, ID lanyard, pouches, black cargo trousers and boots, no robes. Preserve asymmetric gear sides, no mirrored fake views. Elevated 3/4 RPG camera.\nAtlas exactly 4 columns x 8 rows, 32 equal cells. Each row four consecutive full-body frames of ONE low horizontal sword cut: CONTACT already extended right-hand sword, follow through, recovery, ready. Row1 south front; row2 southeast front-right; row3 east right-profile; row4 northeast back-right; row5 north back; row6 northwest back-left; row7 west left-profile; row8 southwest front-left. Same facing within each row. Sword stays in anatomical RIGHT hand, one complete sword never detached. No glow trails: effect rendered separately.\nPerfect regular equal-sized cell layout; feet centered at x50%, baseline y88% in each cell, head near y15%, entire weapon and clothing inside cell with generous 8% margin. Consistent scale, no clipping, no shared bodies, no portraits. Tall 2048x4096 detailed atlas. Truly transparent background, not opaque black.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-afb04a5d-51d7-44e0-be18-ad72d9cdb5ed.png",
+    "workspacePath": "assets/art/reality/hero/yunseo/attack1-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "murim",
+    "action": "idle",
+    "prompt": "Use case: stylized-concept. Make a NEW production game animation sprite atlas, transparent RGBA background, no text, labels, grid lines or floor. Reference image is character identity only, NOT an edit target. Same hand-painted adult full-body protagonist, long black ponytail, layered off-white and navy robe, charcoal travel cloak, leather wrist guards, cloth sash and brown boots, no modern gear. Preserve asymmetric gear sides, no mirrored fake views. Elevated 3/4 RPG camera.\nAtlas exactly 4 columns x 4 rows, 16 equal cells. Each adjacent pair is inhale/exhale idle animation with planted feet unchanged. Row1: south/front pair then southeast/front-right pair. Row2: east/right-profile pair then northeast/back-right pair. Row3: north/back pair then northwest/back-left pair. Row4: west/left-profile pair then southwest/front-left pair. Subtle shoulder/cloak breathing, full head to boots, sword sheathed.\nPerfect regular equal-sized cell layout; feet centered at x50%, baseline y88% in each cell, head near y15%, entire weapon and clothing inside cell with generous 8% margin. Consistent scale, no clipping, no shared bodies, no portraits. Square 2048x2048 detailed atlas. Truly transparent background, not opaque black.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-cb9dbaf6-afbe-4ec6-badc-51a13cf335c9.png",
+    "workspacePath": "assets/art/murim/hero/yunseo/idle-eight-directions-candidate-v1.png",
+    "status": "candidate-integrated",
+    "reason": "Foot registration and loop require final review."
+  },
+  {
+    "world": "murim",
+    "action": "attack1",
+    "prompt": "Use case: stylized-concept. Make a NEW production game animation sprite atlas, transparent RGBA background, no text, labels, grid lines or floor. Reference image is character identity only, NOT an edit target. Same hand-painted adult full-body protagonist, long black ponytail, layered off-white and navy robe, charcoal travel cloak, leather wrist guards, cloth sash and brown boots, no modern gear. Preserve asymmetric gear sides, no mirrored fake views. Elevated 3/4 RPG camera.\nAtlas exactly 4 columns x 8 rows, 32 equal cells. Each row four consecutive full-body frames of ONE low horizontal sword cut: CONTACT already extended right-hand sword, follow through, recovery, ready. Row1 south front; row2 southeast front-right; row3 east right-profile; row4 northeast back-right; row5 north back; row6 northwest back-left; row7 west left-profile; row8 southwest front-left. Same facing within each row. Sword stays in anatomical RIGHT hand, one complete sword never detached. No glow trails: effect rendered separately.\nPerfect regular equal-sized cell layout; feet centered at x50%, baseline y88% in each cell, head near y15%, entire weapon and clothing inside cell with generous 8% margin. Consistent scale, no clipping, no shared bodies, no portraits. Tall 2048x4096 detailed atlas. Truly transparent background, not opaque black.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-f03710af-89c5-469d-8e8a-b3c24d9efdf3.png",
+    "workspacePath": "assets/art/murim/hero/yunseo/attack1-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "reality",
+    "action": "attack2",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). short black hair, black modern tactical hunter jacket, ID lanyard, cargo trousers and boots, NO robes. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of reverse return sword slash: immediate contact with sword across body, continue reverse slash, relax elbows, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-322a9647-311c-4d71-9554-690d963aa53c.png",
+    "workspacePath": "assets/art/reality/hero/yunseo/attack2-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "reality",
+    "action": "attack3",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). short black hair, black modern tactical hunter jacket, ID lanyard, cargo trousers and boots, NO robes. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of heavy broad torso-turn sword finisher: immediate downward-diagonal contact, follow through low, rise, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-aeb2cebf-6002-46b1-a9af-b26d845727cc.png",
+    "workspacePath": "assets/art/reality/hero/yunseo/attack3-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "reality",
+    "action": "dodge",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). short black hair, black modern tactical hunter jacket, ID lanyard, cargo trousers and boots, NO robes. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of evasive quick step: lowered push-off, low moving crouch, planted landing, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-48057323-d75b-4c26-9a6c-874230b26020.png",
+    "workspacePath": "assets/art/reality/hero/yunseo/dodge-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "reality",
+    "action": "cast",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). short black hair, black modern tactical hunter jacket, ID lanyard, cargo trousers and boots, NO robes. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of spell casting with left open palm: immediate outstretched palm contact, sustained gesture, lower hand, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-d0fd6ba2-0445-4909-9365-bcc944fdfc1d.png",
+    "workspacePath": "assets/art/reality/hero/yunseo/cast-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "reality",
+    "action": "hit",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). short black hair, black modern tactical hunter jacket, ID lanyard, cargo trousers and boots, NO robes. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of small injury recoil: shoulders recoil, bend knees, rebalance, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-80300c35-7ec9-46f9-adeb-7dee214638e4.png",
+    "workspacePath": "assets/art/reality/hero/yunseo/hit-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "murim",
+    "action": "attack2",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). long black ponytail, off-white/navy layered robes, charcoal cloak and sash, brown boots, NO modern equipment. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of reverse return sword slash: immediate contact with sword across body, continue reverse slash, relax elbows, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-f1d3dd58-9988-4615-aa4a-6d9bfe6cb371.png",
+    "workspacePath": "assets/art/murim/hero/yunseo/attack2-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "murim",
+    "action": "attack3",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). long black ponytail, off-white/navy layered robes, charcoal cloak and sash, brown boots, NO modern equipment. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of heavy broad torso-turn sword finisher: immediate downward-diagonal contact, follow through low, rise, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-d6689760-afd0-4ce3-b1f1-892910a31fb9.png",
+    "workspacePath": "assets/art/murim/hero/yunseo/attack3-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "murim",
+    "action": "dodge",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). long black ponytail, off-white/navy layered robes, charcoal cloak and sash, brown boots, NO modern equipment. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of evasive quick step: lowered push-off, low moving crouch, planted landing, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-af12d473-c40d-4cb6-8cd0-9e456cdad38a.png",
+    "workspacePath": "assets/art/murim/hero/yunseo/dodge-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "murim",
+    "action": "cast",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). long black ponytail, off-white/navy layered robes, charcoal cloak and sash, brown boots, NO modern equipment. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of spell casting with left open palm: immediate outstretched palm contact, sustained gesture, lower hand, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-272ce9c4-ff6a-45f7-b0a5-8f19df26f8c5.png",
+    "workspacePath": "assets/art/murim/hero/yunseo/cast-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  },
+  {
+    "world": "murim",
+    "action": "hit",
+    "prompt": "Use case: stylized-concept. NEW game sprite animation atlas based on character identity reference (not edit target). long black ponytail, off-white/navy layered robes, charcoal cloak and sash, brown boots, NO modern equipment. Hand-painted adult proportions elevated 3/4 RPG view. Exactly FOUR columns and EIGHT rows (32 complete figures). Each row is one facing, each column successive frames of small injury recoil: shoulders recoil, bend knees, rebalance, recover ready. Row order: south/front, southeast/front-right, east/right-profile, northeast/back-right, north/back, northwest/back-left, west/left-profile, southwest/front-left. Keep row facing stable. Entire head to feet and whole sword INSIDE each cell, no cross-cell overlap. Each character maximum 65% cell height; feet anchored at cell x50% y85%. Eight percent empty padding on ALL sides including sword tip. One steel sword in anatomical RIGHT hand throughout, never changes hands, preserve gear asymmetry. Clear genuinely different temporal poses, same body scale and boots. No effects/trails/glows/shadows/background/text/grids. Truly transparent RGBA. Tall atlas 2048x4096.",
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-13452307-f625-49f1-9a44-606f0bb51583.png",
+    "workspacePath": "assets/art/murim/hero/yunseo/hit-eight-directions-candidate-v1.png",
+    "status": "BLOCKED_ART-review-study",
+    "reason": "Weapon margins, pose facing and hand continuity require correction; not runtime approved."
+  }
+]

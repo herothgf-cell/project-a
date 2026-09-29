@@ -1,0 +1,153 @@
+{
+  "status": "candidate / not release approved",
+  "jobs": [
+    {
+      "world": "reality",
+      "id": "seorin",
+      "subject": "adult Korean female bureau officer, short practical black bob, navy fitted officer coat over charcoal trousers, silver ID badge, tablet under left arm, composed confident posture",
+      "prompt": "Use case: stylized-concept. NEW isolated RPG character asset sheet, not a concept board. Character adult Korean female bureau officer, short practical black bob, navy fitted officer coat over charcoal trousers, silver ID badge, tablet under left arm, composed confident posture. Hand-painted detailed adult proportions, elevated three-quarter game camera, same art language as reference but unique body/face/outfit not protagonist reuse. Exactly 3 columns x 2 rows SIX equal square cells. Top row: complete full-body front facing down, complete full-body right profile, complete full-body back. Bottom row: complete full-body left profile, waist-up neutral portrait of SAME person and SAME costume, waist-up expressive concerned story portrait. Keep every figure fully inside its cell 12% margin, head/hair/boots not clipped. All FOUR bodies same 70% cell height, feet at 85%. No text, lettering, frame, labels, logos, floor, scenes or extra people. Genuinely transparent RGBA background. Wide 1536x1024 atlas.",
+      "type": "npc",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-1a3229af-37a0-4814-9d4d-8eff57eea5e4.png",
+      "path": "assets/art/reality/npc/seorin-candidate-v1.png"
+    },
+    {
+      "world": "reality",
+      "id": "dogyeom",
+      "subject": "adult Korean male field hunter, broad athletic shoulders, swept-back cropped dark hair, rugged charcoal armored jacket with pale shoulder patch, utility harness and heavy boots, weary warm face, no robes",
+      "prompt": "Use case: stylized-concept. NEW isolated RPG character asset sheet, not a concept board. Character adult Korean male field hunter, broad athletic shoulders, swept-back cropped dark hair, rugged charcoal armored jacket with pale shoulder patch, utility harness and heavy boots, weary warm face, no robes. Hand-painted detailed adult proportions, elevated three-quarter game camera, same art language as reference but unique body/face/outfit not protagonist reuse. Exactly 3 columns x 2 rows SIX equal square cells. Top row: complete full-body front facing down, complete full-body right profile, complete full-body back. Bottom row: complete full-body left profile, waist-up neutral portrait of SAME person and SAME costume, waist-up expressive concerned story portrait. Keep every figure fully inside its cell 12% margin, head/hair/boots not clipped. All FOUR bodies same 70% cell height, feet at 85%. No text, lettering, frame, labels, logos, floor, scenes or extra people. Genuinely transparent RGBA background. Wide 1536x1024 atlas.",
+      "type": "npc",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-c29920e1-e9dc-4320-b541-dbe2bbe5f75e.png",
+      "path": "assets/art/reality/npc/dogyeom-candidate-v1.png"
+    },
+    {
+      "world": "reality",
+      "id": "supply",
+      "subject": "middle-aged Korean male mechanic, stocky body, stubble, black baseball cap, rolled sleeves, dark work vest over gray shirt, heavy tool belt, wrench in hand",
+      "prompt": "Use case: stylized-concept. NEW isolated RPG character asset sheet, not a concept board. Character middle-aged Korean male mechanic, stocky body, stubble, black baseball cap, rolled sleeves, dark work vest over gray shirt, heavy tool belt, wrench in hand. Hand-painted detailed adult proportions, elevated three-quarter game camera, same art language as reference but unique body/face/outfit not protagonist reuse. Exactly 3 columns x 2 rows SIX equal square cells. Top row: complete full-body front facing down, complete full-body right profile, complete full-body back. Bottom row: complete full-body left profile, waist-up neutral portrait of SAME person and SAME costume, waist-up expressive concerned story portrait. Keep every figure fully inside its cell 12% margin, head/hair/boots not clipped. All FOUR bodies same 70% cell height, feet at 85%. No text, lettering, frame, labels, logos, floor, scenes or extra people. Genuinely transparent RGBA background. Wide 1536x1024 atlas.",
+      "type": "npc",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-736c9496-8488-482c-96f4-fcd2df93e46e.png",
+      "path": "assets/art/reality/npc/supply-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "id": "baekryun",
+      "subject": "elderly Korean sword mentor, tall lean body, long white hair tied loosely and long white beard, ash gray layered scholarly robe, weathered charcoal outer shawl, carved wooden walking staff, dignified face",
+      "prompt": "Use case: stylized-concept. NEW isolated RPG character asset sheet, not a concept board. Character elderly Korean sword mentor, tall lean body, long white hair tied loosely and long white beard, ash gray layered scholarly robe, weathered charcoal outer shawl, carved wooden walking staff, dignified face. Hand-painted detailed adult proportions, elevated three-quarter game camera, same art language as reference but unique body/face/outfit not protagonist reuse. Exactly 3 columns x 2 rows SIX equal square cells. Top row: complete full-body front facing down, complete full-body right profile, complete full-body back. Bottom row: complete full-body left profile, waist-up neutral portrait of SAME person and SAME costume, waist-up expressive concerned story portrait. Keep every figure fully inside its cell 12% margin, head/hair/boots not clipped. All FOUR bodies same 70% cell height, feet at 85%. No text, lettering, frame, labels, logos, floor, scenes or extra people. Genuinely transparent RGBA background. Wide 1536x1024 atlas.",
+      "type": "npc",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-a3324713-47a0-4947-a2ca-e8a87ded0dfd.png",
+      "path": "assets/art/murim/npc/baekryun-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "id": "yeonhwa",
+      "subject": "adult Korean female traveling merchant, brown hair in elaborate low bun with small cream flower, faded rose and warm cream layered traditional dress, leather satchel and rolled cloth bundle, resourceful gentle face",
+      "prompt": "Use case: stylized-concept. NEW isolated RPG character asset sheet, not a concept board. Character adult Korean female traveling merchant, brown hair in elaborate low bun with small cream flower, faded rose and warm cream layered traditional dress, leather satchel and rolled cloth bundle, resourceful gentle face. Hand-painted detailed adult proportions, elevated three-quarter game camera, same art language as reference but unique body/face/outfit not protagonist reuse. Exactly 3 columns x 2 rows SIX equal square cells. Top row: complete full-body front facing down, complete full-body right profile, complete full-body back. Bottom row: complete full-body left profile, waist-up neutral portrait of SAME person and SAME costume, waist-up expressive concerned story portrait. Keep every figure fully inside its cell 12% margin, head/hair/boots not clipped. All FOUR bodies same 70% cell height, feet at 85%. No text, lettering, frame, labels, logos, floor, scenes or extra people. Genuinely transparent RGBA background. Wide 1536x1024 atlas.",
+      "type": "npc",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-0e704b79-4f22-41cb-a8d5-b17b87e6a12d.png",
+      "path": "assets/art/murim/npc/yeonhwa-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "id": "apothecary",
+      "subject": "middle-aged Korean male apothecary, compact body, tied brown hair, muted moss-green traditional outer robe with cream sleeves, herb basket on back and medicine pouch at waist, friendly round face",
+      "prompt": "Use case: stylized-concept. NEW isolated RPG character asset sheet, not a concept board. Character middle-aged Korean male apothecary, compact body, tied brown hair, muted moss-green traditional outer robe with cream sleeves, herb basket on back and medicine pouch at waist, friendly round face. Hand-painted detailed adult proportions, elevated three-quarter game camera, same art language as reference but unique body/face/outfit not protagonist reuse. Exactly 3 columns x 2 rows SIX equal square cells. Top row: complete full-body front facing down, complete full-body right profile, complete full-body back. Bottom row: complete full-body left profile, waist-up neutral portrait of SAME person and SAME costume, waist-up expressive concerned story portrait. Keep every figure fully inside its cell 12% margin, head/hair/boots not clipped. All FOUR bodies same 70% cell height, feet at 85%. No text, lettering, frame, labels, logos, floor, scenes or extra people. Genuinely transparent RGBA background. Wide 1536x1024 atlas.",
+      "type": "npc",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-4f0cc620-8aac-4b0b-becf-0e595f1335e2.png",
+      "path": "assets/art/murim/npc/apothecary-candidate-v1.png"
+    },
+    {
+      "world": "reality",
+      "id": "buildings",
+      "ref": "D:/Git/project-a/references/codex-art/reality-world-reference.webp",
+      "prompt": "Use case: stylized-concept. NEW transparent game environment atlas, FOUR distinct assets in exactly 2 columns x 2 rows equal square cells. Top left hunter administration headquarters flat concrete roof with railings and glass lobby, top right research annex flat roof glass and steel with rooftop equipment, bottom left civilian supply workshop with rolling shutter and small awning, bottom right stacked industrial cargo crates with a bollard and maintenance cart. Cool blue-gray metal/glass/concrete, restrained warm window lighting. NO traditional roofs or wood temples. Hand-painted original detailed RPG assets, consistent elevated 3/4 view showing front and right side. Each complete standalone building or prop has fully transparent surroundings and small contact shadow, bottom-center ground contact at 85% cell height; 10% empty margin entire silhouette. No floor tile/base diorama, no people, no background scenery, no signs/text/UI/grid. 2048 square RGBA.",
+      "type": "environment",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-7070134c-daba-4ccd-95c1-f663419713ed.png",
+      "path": "assets/art/reality/environment/buildings-candidate-v1.png"
+    },
+    {
+      "world": "reality",
+      "id": "ground",
+      "ref": "D:/Git/project-a/references/codex-art/reality-world-reference.webp",
+      "prompt": "Use case: stylized-concept. NEW game ground material texture atlas exactly TWO equal square textures horizontally arranged. Left square: cool blue gray worn concrete paving with subtle drainage and scattered small cracks. Right square: wet dark asphalt texture with no painted markings. Orthographic top-down flat materials only, evenly lit, seamless-looking edges, no buildings/people/props/shadows/horizon/text. Hand painted detailed classic RPG ground with natural variation but no huge contrast or repeated motifs. Wide 2048x1024.",
+      "type": "environment",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-687aad4c-6fd2-498f-9465-6d6292d92e2f.png",
+      "path": "assets/art/reality/environment/ground-candidate-v1.png"
+    },
+    {
+      "world": "reality",
+      "id": "portal",
+      "ref": "D:/Git/project-a/references/codex-art/reality-world-reference.webp",
+      "prompt": "Use case: stylized-concept. NEW transparent game portal animation state sheet, exactly2x2 four equal square cells. Modern hunter containment gate: upright heavy industrial steel frame, tech coils, small warning lights, blue-white spatial fracture, subtle forest mountain shapes visible inside. NO traditional ornament. SAME portal frame each cell, top-left locked dormant dark interior; top-right available gentle vortex; bottom-left active bright open aperture; bottom-right transition flowing inward streaks. Elevated three-quarter game view, full frame and base visible, within central80% each cell, ground anchor85%. Hand-painted richly textured, transparent outside portal including between assets, no background scene, UI, labels or text. 2048square RGBA.",
+      "type": "environment",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-d4951d1e-3cbc-40b1-bef4-195ce2782905.png",
+      "path": "assets/art/reality/environment/portal-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "id": "buildings",
+      "ref": "D:/Git/project-a/references/codex-art/murim-world-reference.webp",
+      "prompt": "Use case: stylized-concept. NEW transparent game environment atlas, FOUR distinct assets in exactly 2 columns x 2 rows equal square cells. Top left village martial hall curved blue-gray tile roof, wooden pillars and stone entrance steps, top right humble timber inn with tiled roof, lanterns and cloth awning, bottom left herbal apothecary wooden shop with baskets and hanging herbs, bottom right old leafy tree with stone planter, small lantern and herb pots. Warm natural light, weathered timber and cream plaster, no modern objects. Hand-painted original detailed RPG assets, consistent elevated 3/4 view showing front and right side. Each complete standalone building or prop has fully transparent surroundings and small contact shadow, bottom-center ground contact at 85% cell height; 10% empty margin entire silhouette. No floor tile/base diorama, no people, no background scenery, no signs/text/UI/grid. 2048 square RGBA.",
+      "type": "environment",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-920fcc1d-b78a-43e8-ad04-00ffc8657268.png",
+      "path": "assets/art/murim/environment/buildings-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "id": "ground",
+      "ref": "D:/Git/project-a/references/codex-art/murim-world-reference.webp",
+      "prompt": "Use case: stylized-concept. NEW game ground material texture atlas exactly TWO equal square textures horizontally arranged. Left square: soft mossy grassy soil with sparse tiny clover and pebbles. Right square: warm earth and irregular pale cobbles path texture. Orthographic top-down flat materials only, evenly lit, seamless-looking edges, no buildings/people/props/shadows/horizon/text. Hand painted detailed classic RPG ground with natural variation but no huge contrast or repeated motifs. Wide 2048x1024.",
+      "type": "environment",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-d89b0613-0ffe-4a0c-b6ae-2fea246edacd.png",
+      "path": "assets/art/murim/environment/ground-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "id": "portal",
+      "ref": "D:/Git/project-a/references/codex-art/murim-world-reference.webp",
+      "prompt": "Use case: stylized-concept. NEW transparent game portal animation state sheet, exactly2x2 four equal square cells. Ancient boundary gate: weathered stone standing pillars, carved understated talisman marks, bronze ties, ink-gold-cyan energy with subtle cold city lights inside. NO technological metal frame. SAME portal frame each cell, top-left locked dormant dark interior; top-right available gentle vortex; bottom-left active bright open aperture; bottom-right transition flowing inward streaks. Elevated three-quarter game view, full frame and base visible, within central80% each cell, ground anchor85%. Hand-painted richly textured, transparent outside portal including between assets, no background scene, UI, labels or text. 2048square RGBA.",
+      "type": "environment",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-94be603c-f2dd-486c-ba23-cfa58555d0ee.png",
+      "path": "assets/art/murim/environment/portal-candidate-v1.png"
+    },
+    {
+      "id": "blade",
+      "prompt": "Use case: stylized-concept. NEW hand-painted 2D RPG VFX texture atlas on genuinely transparent RGBA, crisp luminous core and restrained translucent feathering, NO black background or matte. Exactly 3 columns x 2 rows SIX isolated sword-energy effects: top-left narrow silver-blue low sweeping crescent, top-middle opposite curved silver return slash, top-right broad white-blue finisher arc, bottom-left ONE large elegant silver moon crescent, bottom-middle warm gold single reverse-flow crescent, bottom-right powerful gold broad semicircular slash with sparse dust flecks. All oriented moving towards RIGHT. No full circles, characters or swords. Each inside central80% cell with transparency, consistent center anchor. Generous15% empty margins and no overlap across cells. No text, labels, borders, UI, characters or scenery. Square 1536 atlas unless six cells then wide1536x1024.",
+      "type": "vfx",
+      "world": "shared",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-139830af-075a-480d-8f8c-7bf0fffe792d.png",
+      "path": "assets/art/shared/vfx/blade-candidate-v1.png"
+    },
+    {
+      "id": "storm",
+      "prompt": "Use case: stylized-concept. NEW hand-painted 2D RPG VFX texture atlas on genuinely transparent RGBA, crisp luminous core and restrained translucent feathering, NO black background or matte. Exactly 2 columns x 2 rows FOUR sequential frames of one blue-white downward lightning spell: top-left single strong white-core blue lightning bolt contact hitting small ground point, top-right fading forked blue-purple afterglow at same position, bottom-left tiny residual blue electric wisps, bottom-right very faint dissipating sparks. Only FIRST frame has strong impact; residual frames NEVER look like additional strikes. Same scale and same center ground point at x50% y85% in all cells. Generous15% empty margins and no overlap across cells. No text, labels, borders, UI, characters or scenery. Square 1536 atlas unless six cells then wide1536x1024.",
+      "type": "vfx",
+      "world": "shared",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-786413b0-6489-4044-959f-b8b3d567997e.png",
+      "path": "assets/art/shared/vfx/storm-candidate-v1.png"
+    },
+    {
+      "id": "seal",
+      "prompt": "Use case: stylized-concept. NEW hand-painted 2D RPG VFX texture atlas on genuinely transparent RGBA, crisp luminous core and restrained translucent feathering, NO black background or matte. Exactly 2 columns x 2 rows FOUR isolated ground magic sigils: top-left thin cyan circular boundary ward viewed elevated from above, top-right denser cyan-blue circular suppression ward with four upright paper talismans, bottom-left small teal target-binding ring, bottom-right large intricate cyan-gold boundary seal with upright light pillars. All elliptical 2:1 projected ground shapes, centered at cell midpoint, no floor or terrain. Generous15% empty margins and no overlap across cells. No text, labels, borders, UI, characters or scenery. Square 1536 atlas unless six cells then wide1536x1024.",
+      "type": "vfx",
+      "world": "shared",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-4d240674-344d-4451-aaa1-cef69328eb27.png",
+      "path": "assets/art/shared/vfx/seal-candidate-v1.png"
+    },
+    {
+      "id": "ripple",
+      "prompt": "Use case: stylized-concept. NEW hand-painted 2D RPG VFX texture atlas on genuinely transparent RGBA, crisp luminous core and restrained translucent feathering, NO black background or matte. Exactly 2 columns x 2 rows FOUR isolated warm gold energy effects: top-left delicate thin small defensive ripple arc, top-right large expanding bright gold circular successful parry shockwave, bottom-left small soft gold protective ground ring, bottom-right narrow gold charge filament traveling left to right. Defensive preparation must be visibly subtler than successful parry. No body, shield or weapon. Generous15% empty margins and no overlap across cells. No text, labels, borders, UI, characters or scenery. Square 1536 atlas unless six cells then wide1536x1024.",
+      "type": "vfx",
+      "world": "shared",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-418f93f5-d8ef-40db-96ad-4fa12358df17.png",
+      "path": "assets/art/shared/vfx/ripple-candidate-v1.png"
+    },
+    {
+      "id": "echo",
+      "prompt": "Use case: stylized-concept. NEW hand-painted 2D RPG VFX texture atlas on genuinely transparent RGBA, crisp luminous core and restrained translucent feathering, NO black background or matte. Exactly 2 columns x 2 rows FOUR isolated pale indigo mist/wind effects: top-left small sparse motion wisps trailing left, top-right a thin curving return-path ribbon flowing left to right, bottom-left pale fading footprint-shaped wind curl, bottom-right narrow violet spectral cut arc. No character silhouette (runtime uses exact recorded character pose), no weapons, no ground. Generous15% empty margins and no overlap across cells. No text, labels, borders, UI, characters or scenery. Square 1536 atlas unless six cells then wide1536x1024.",
+      "type": "vfx",
+      "world": "shared",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-9a2418f8-5edd-476d-9f18-a9a709f4152d.png",
+      "path": "assets/art/shared/vfx/echo-candidate-v1.png"
+    }
+  ]
+}

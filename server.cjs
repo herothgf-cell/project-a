@@ -8,8 +8,7 @@ function createServer({artReview=false}={}){
  for(const file of catalog.files())allowed.add(file);
  if(artReview){
   for(const p of ['art-review.html','art-review.js','art-play.html','art-runtime.js','art-preview-runtime.js'])allowed.add(p);
-  for(const world of ['reality','murim']){
-   const file='assets/art/'+world+'/hero/yunseo/candidate.json';
+  for(const file of ['assets/art/scene-candidate.json',...['reality','murim'].map(world=>'assets/art/'+world+'/hero/yunseo/candidate.json')]){
    if(fs.existsSync(path.join(__dirname,file))){allowed.add(file);const review=Art.createCatalog(JSON.parse(fs.readFileSync(path.join(__dirname,file))));for(const p of review.files({preview:true}))allowed.add(p);}
   }
  }

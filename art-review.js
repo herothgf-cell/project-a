@@ -8,7 +8,7 @@
   for(const issue of manifest.releaseIssues()){const li=document.createElement('li');li.textContent=issue.id+' — '+issue.status+' · '+issue.reason;document.getElementById('issues').append(li);}
   const renders=[],animations=[];
   const control=document.createElement('label'),toggle=document.createElement('input');toggle.type='checkbox';toggle.id='animate';control.append(toggle,' 동작 후보 재생 (SE 방향만)');document.querySelector('header').append(control);
-  const action=document.getElementById('reviewAction'),frame=document.getElementById('reviewFrame');
+  const action=document.getElementById('reviewAction'),frame=document.getElementById('reviewFrame'),facing=document.getElementById('reviewFacing');
   const play=document.createElement('a');play.href='/art-play.html';play.textContent='실제 게임에서 전신 후보 보기';document.querySelector('header').append(document.createElement('br'),play);
   for(const world of ['reality','murim']){
    const catalog=ProductionArt.createCatalog(await fetchJson('assets/art/'+world+'/hero/yunseo/candidate.json'));
@@ -21,17 +21,17 @@
     const paint=()=>{const c=canvas.getContext('2d'),height=Number(document.getElementById('scale').value),r=visual.frame.rect,p=visual.frame.pivot,w=height*r[2]/r[3];c.clearRect(0,0,220,270);c.fillStyle='#1a2832';c.fillRect(0,0,220,270);c.drawImage(loaded.image,...r,110-w*p[0],230-height*p[1],w,height);if(document.getElementById('pivot').checked){c.strokeStyle='#66b9c780';c.beginPath();c.moveTo(14,230);c.lineTo(206,230);c.moveTo(110,218);c.lineTo(110,242);c.stroke();}};renders.push(paint);paint();
    }
    const sheets=new Map();
-   for(const name of ['walk','attack1']){const v=catalog.resolve({world,entityId:'hero',action:name,facing:'se'},{preview:true});if(v.status!=='BLOCKED_ART'){const loaded=await cache.load(v);if(loaded.status!=='loaded')throw Error(loaded.reason);sheets.set(v.atlas.path,loaded.image);}}
+   for(const asset of catalog.manifest.assets)for(const atlas of [asset.atlas,...Object.values(asset.atlases||{})]){const loaded=await cache.load({status:'candidate',atlas});if(loaded.status!=='loaded')throw Error(loaded.reason);sheets.set(atlas.path,loaded.image);}
    {
     const row=document.createElement('div'),canvas=document.createElement('canvas'),note=document.createElement('p');canvas.width=280;canvas.height=300;canvas.dataset.action='walk';canvas.dataset.frame='0';
     canvas.dataset.assetId=world+'.hero.yunseo';row.append(canvas,note);section.append(row);
     const paint=elapsed=>{
-     const q={world,entityId:'hero',action:action.value,facing:'se'},v=toggle.checked?catalog.sample({...q,elapsed,loop:true},{preview:true}):catalog.resolve({...q,frame:Number(frame.value)},{preview:true}),c=canvas.getContext('2d');
+     const q={world,entityId:'hero',action:action.value,facing:facing.value},v=toggle.checked?catalog.sample({...q,elapsed,loop:true},{preview:true}):catalog.resolve({...q,frame:Number(frame.value)},{preview:true}),c=canvas.getContext('2d');
      c.fillStyle='#1a2832';c.fillRect(0,0,280,300);canvas.dataset.action=action.value;canvas.dataset.blocked=String(v.status==='BLOCKED_ART');canvas.dataset.contact=String(v.frame?.contact===true);canvas.dataset.frame=v.frameIndex??'';
-     if(v.status==='BLOCKED_ART'){note.textContent='BLOCKED_ART · '+action.value+' SE · 미제작 프레임은 다른 동작으로 대체하지 않습니다.';return;}
+     if(v.status==='BLOCKED_ART'){note.textContent='BLOCKED_ART · '+action.value+' '+facing.value+' · 미제작 프레임은 다른 동작으로 대체하지 않습니다.';return;}
      const r=v.frame.rect,p=v.frame.pivot,h=Number(document.getElementById('scale').value),w=h*r[2]/r[3],x=140-w*p[0],y=250-h*p[1];
      c.drawImage(sheets.get(v.atlas.path),...r,x,y,w,h);
-     note.textContent=action.value+' SE · '+(v.frameIndex+1)+'프레임'+(v.frame.contact?' / 실제 타격 시점':'')+' · 소켓/발 접지 검수 중, 나머지 7방향 BLOCKED_ART';
+     note.textContent=action.value+' '+facing.value+' · '+(v.frameIndex+1)+'프레임'+(v.frame.contact?' / 실제 타격 시점':'')+' · 소켓/발 접지 검수 중';
      if(document.getElementById('pivot').checked){c.strokeStyle='#66b9c780';c.beginPath();c.moveTo(20,250);c.lineTo(260,250);c.stroke();c.font='10px system-ui';for(const [name,s]of Object.entries(v.frame.sockets||{})){const sx=x+s[0]*w/r[2],sy=y+s[1]*h/r[3];c.fillStyle=name==='blade'?'#ffbe73':'#66e9dc';c.beginPath();c.arc(sx,sy,3,0,Math.PI*2);c.fill();c.fillText(name,sx+5,sy-5);}}
     };
     animations.push(paint);renders.push(()=>paint(0));paint(0);
@@ -39,6 +39,7 @@
   }
   for(const id of ['scale','pivot'])document.getElementById(id).addEventListener('change',()=>renders.forEach(f=>f()));
   action.addEventListener('change',()=>{frame.max=action.value==='walk'?'5':'3';frame.value='0';renders.forEach(f=>f());});
+  facing.addEventListener('change',()=>{frame.value='0';renders.forEach(f=>f());});
   frame.addEventListener('input',()=>{toggle.checked=false;renders.forEach(f=>f());});
   document.body.dataset.ready='true';
   let started=null;function tick(now){if(toggle.checked){if(started===null)started=now;animations.forEach(f=>f((now-started)/1000));}else started=null;requestAnimationFrame(tick);}requestAnimationFrame(tick);

@@ -1,0 +1,3297 @@
+{
+  "schemaVersion": 1,
+  "required": [],
+  "assets": [
+    {
+      "id": "reality.npc.seorin",
+      "world": "reality",
+      "entityId": "npc.seorin",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/npc/seorin-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.npc.dogyeom",
+      "world": "reality",
+      "entityId": "npc.dogyeom",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/npc/dogyeom-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.npc.supply",
+      "world": "reality",
+      "entityId": "npc.supply",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/npc/supply-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.npc.baekryun",
+      "world": "murim",
+      "entityId": "npc.baekryun",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/npc/baekryun-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.npc.yeonhwa",
+      "world": "murim",
+      "entityId": "npc.yeonhwa",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/npc/yeonhwa-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.npc.apothecary",
+      "world": "murim",
+      "entityId": "npc.apothecary",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/npc/apothecary-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.environment.buildings",
+      "world": "reality",
+      "entityId": "environment.buildings",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/environment/buildings-candidate-v2.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                650,
+                675
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                650,
+                0,
+                604,
+                675
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                675,
+                650,
+                579
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                650,
+                675,
+                604,
+                579
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.environment.ground",
+      "world": "reality",
+      "entityId": "environment.ground",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/environment/ground-candidate-v1.png",
+        "width": 1774,
+        "height": 887
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                887,
+                887
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                887,
+                0,
+                887,
+                887
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.environment.portal",
+      "world": "reality",
+      "entityId": "environment.portal",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/environment/portal-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "locked": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "available": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "active": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "transition": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.environment.buildings",
+      "world": "murim",
+      "entityId": "environment.buildings",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/environment/buildings-candidate-v2.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.environment.ground",
+      "world": "murim",
+      "entityId": "environment.ground",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/environment/ground-candidate-v1.png",
+        "width": 1774,
+        "height": 887
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                887,
+                887
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                887,
+                0,
+                887,
+                887
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.environment.portal",
+      "world": "murim",
+      "entityId": "environment.portal",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/environment/portal-candidate-v2.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "locked": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "available": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "active": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "transition": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate states need in-game scale and transition QA"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.blade",
+      "world": "shared",
+      "entityId": "vfx.blade",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/blade-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-4": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-5": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.storm",
+      "world": "shared",
+      "entityId": "vfx.storm",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/storm-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.seal",
+      "world": "shared",
+      "entityId": "vfx.seal",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/seal-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.ripple",
+      "world": "shared",
+      "entityId": "vfx.ripple",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/ripple-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.echo",
+      "world": "shared",
+      "entityId": "vfx.echo",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/echo-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.enemy.shade",
+      "world": "reality",
+      "entityId": "enemy.shade",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/enemy/shade-candidate-v1.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Single SE direction study; attack weapon cell overflow and death timing need QA"
+        ]
+      }
+    },
+    {
+      "id": "reality.enemy.sentinel",
+      "world": "reality",
+      "entityId": "enemy.sentinel",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/enemy/sentinel-candidate-v1.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 170
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                256,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                512,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                768,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 170
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Single SE direction study; attack weapon cell overflow and death timing need QA"
+        ]
+      }
+    },
+    {
+      "id": "murim.enemy.bandit",
+      "world": "murim",
+      "entityId": "enemy.bandit",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/enemy/bandit-candidate-v1.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Single SE direction study; attack weapon cell overflow and death timing need QA"
+        ]
+      }
+    },
+    {
+      "id": "murim.enemy.chief",
+      "world": "murim",
+      "entityId": "enemy.chief",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/enemy/chief-candidate-v1.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.3,
+              "displayHeight": 155
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                256,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                512,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                768,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.92
+              ],
+              "duration": 0.1,
+              "displayHeight": 155
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Single SE direction study; attack weapon cell overflow and death timing need QA"
+        ]
+      }
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 /* Read-only renderer with deterministic cached terrain and Y-sorted sprites. */
 (function(root){
   'use strict';
-  const {AREAS,clamp,dist}=DualWorld,{TAU,polygon,ellipse,line,box,text,random,bamboo,prop,portal,seal}=WorldArt;
+  const {AREAS,clamp,dist}=DualWorld,{TAU,polygon,ellipse,line,box,text,random,bamboo,seal}=WorldArt;
+  const prop=(...args)=>WorldArt.prop(...args),portal=(...args)=>WorldArt.portal(...args);
   // Art may finish decoding after renderer construction; resolve the active adapter at draw time.
   const human=(...args)=>WorldArt.human(...args);
   const palettes={city:['#395765','#284653'],village:['#67836b','#486b58'],forest:['#53755d','#305746'],rift:['#43596d','#293e52'],ruins:['#637865','#3e6050'],harbor:['#466776','#293f54'],sanctum:['#374b66','#172b42'],heart:['#37475e','#182335']};

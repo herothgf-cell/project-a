@@ -1,0 +1,54 @@
+{
+  "status": "candidate only",
+  "enemyJobs": [
+    {
+      "world": "reality",
+      "id": "shade",
+      "subject": "alien humanoid aberration, black fragmented chitin, asymmetrical elongated claw arms, cold blue glowing heart, no human clothing",
+      "prompt": "Game sprite animation production, hand-painted detailed mature classic 2D action RPG. Unique subject: alien humanoid aberration, black fragmented chitin, asymmetrical elongated claw arms, cold blue glowing heart, no human clothing. Transparent RGBA runtime atlas, no scene, no labels, no boards. Exactly 4 columns by 6 rows, 24 complete full-body sprites. Fixed elevated three-quarter view facing southeast (toward lower right), consistent identity and scale throughout, all 24 cells equal. Each silhouette within central 65% of its cell, 17% transparent margin, weapon tips and boots fully contained. Rows in this exact order: 1 idle four subtle breathing stages; 2 locomotion four alternating-step stages; 3 attack telegraph four anticipation stages; 4 attack four stages contact then follow-through then recovery; 5 hit reaction four recoil stages; 6 defeat four collapse stages ending lying or scattered on ground. Foot baseline identical inside every cell except collapse. No added VFX, duplicated weapons, dramatic camera shifts or other characters. Tall 1024x1536.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-0fc1ac1a-2eff-4d1e-8989-10b31b69d35b.png",
+      "path": "assets/art/reality/enemy/shade-candidate-v1.png"
+    },
+    {
+      "world": "reality",
+      "id": "sentinel",
+      "subject": "large floating dimensional sentinel, concentric jagged black metal stone shards surrounding a brilliant blue core, non-humanoid radial body, no humanoid face or limbs",
+      "prompt": "Game sprite animation production, hand-painted detailed mature classic 2D action RPG. Unique subject: large floating dimensional sentinel, concentric jagged black metal stone shards surrounding a brilliant blue core, non-humanoid radial body, no humanoid face or limbs. Transparent RGBA runtime atlas, no scene, no labels, no boards. Exactly 4 columns by 6 rows, 24 complete full-body sprites. Fixed elevated three-quarter view facing southeast (toward lower right), consistent identity and scale throughout, all 24 cells equal. Each silhouette within central 65% of its cell, 17% transparent margin, weapon tips and boots fully contained. Rows in this exact order: 1 idle four subtle breathing stages; 2 locomotion four alternating-step stages; 3 attack telegraph four anticipation stages; 4 attack four stages contact then follow-through then recovery; 5 hit reaction four recoil stages; 6 defeat four collapse stages ending lying or scattered on ground. Foot baseline identical inside every cell except collapse. No added VFX, duplicated weapons, dramatic camera shifts or other characters. Tall 1024x1536.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-391dfbb3-d82c-4129-b7f6-1e1a171f51ba.png",
+      "path": "assets/art/reality/enemy/sentinel-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "id": "bandit",
+      "subject": "stocky adult mountain bandit, weathered brown and muted red cloth armor, black hair topknot, one rugged curved dao gripped in right hand, worn boots",
+      "prompt": "Game sprite animation production, hand-painted detailed mature classic 2D action RPG. Unique subject: stocky adult mountain bandit, weathered brown and muted red cloth armor, black hair topknot, one rugged curved dao gripped in right hand, worn boots. Transparent RGBA runtime atlas, no scene, no labels, no boards. Exactly 4 columns by 6 rows, 24 complete full-body sprites. Fixed elevated three-quarter view facing southeast (toward lower right), consistent identity and scale throughout, all 24 cells equal. Each silhouette within central 65% of its cell, 17% transparent margin, weapon tips and boots fully contained. Rows in this exact order: 1 idle four subtle breathing stages; 2 locomotion four alternating-step stages; 3 attack telegraph four anticipation stages; 4 attack four stages contact then follow-through then recovery; 5 hit reaction four recoil stages; 6 defeat four collapse stages ending lying or scattered on ground. Foot baseline identical inside every cell except collapse. No added VFX, duplicated weapons, dramatic camera shifts or other characters. Tall 1024x1536.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-32d7d229-2b26-40ef-bfa8-9d742b82646e.png",
+      "path": "assets/art/murim/enemy/bandit-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "id": "chief",
+      "subject": "large broad-shouldered older mountain bandit chief, dark beard and messy black hair, layered leather and fur armor over dark burgundy cloth, heavy single iron axe held in both hands, intimidating scarred face",
+      "prompt": "Game sprite animation production, hand-painted detailed mature classic 2D action RPG. Unique subject: large broad-shouldered older mountain bandit chief, dark beard and messy black hair, layered leather and fur armor over dark burgundy cloth, heavy single iron axe held in both hands, intimidating scarred face. Transparent RGBA runtime atlas, no scene, no labels, no boards. Exactly 4 columns by 6 rows, 24 complete full-body sprites. Fixed elevated three-quarter view facing southeast (toward lower right), consistent identity and scale throughout, all 24 cells equal. Each silhouette within central 65% of its cell, 17% transparent margin, weapon tips and boots fully contained. Rows in this exact order: 1 idle four subtle breathing stages; 2 locomotion four alternating-step stages; 3 attack telegraph four anticipation stages; 4 attack four stages contact then follow-through then recovery; 5 hit reaction four recoil stages; 6 defeat four collapse stages ending lying or scattered on ground. Foot baseline identical inside every cell except collapse. No added VFX, duplicated weapons, dramatic camera shifts or other characters. Tall 1024x1536.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-3aedca3a-4e78-4764-98d5-a7bdea4ca27d.png",
+      "path": "assets/art/murim/enemy/chief-candidate-v1.png"
+    }
+  ],
+  "portalRevision": {
+    "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-dc694ab4-151b-4ee6-b0b2-c450f9df36fe.png",
+    "path": "assets/art/murim/environment/portal-candidate-v2.png",
+    "prompt": "Edit this portal runtime sprite sheet. Keep exact stone/talisman/bronze portal identity and four states, but fix layout: completely REMOVE the white panel separator lines to transparent alpha. Scale all four gates DOWN to fit entirely within the central 65% of each 2x2 equal cell, leaving 17% transparent border on every side. Tops and foundations completely visible, no cropping anywhere. In bottom-left active gate ONLY, replace the view of traditional pagodas with distant cold-blue MODERN city skyscraper silhouettes (this gate leads to reality). Preserve painterly texture. Full transparent RGBA outside all gates, no grid/text/scene."
+  },
+  "buildingRevisions": [
+    {
+      "world": "reality",
+      "prompt": "Edit the attached transparent game building atlas. Preserve exactly the four building/prop identities, materials, lighting, original painterly style and elevated camera. CHANGE ONLY layout and object scale: exactly 2x2 equal square cells; each complete object's silhouette must fit within central 70% of its cell with at least 15% genuinely transparent margin on all four sides. NO pixels from adjacent object may cross midpoint grid lines. Every roof and foundation fully visible. Align bottom ground contact at 82% of each cell. Transparent RGBA background, no visible grid, no new objects, no labels. This is a runtime sprite atlas not a scene.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-f6bc4bec-dbec-4d14-9224-c330b304b062.png"
+    },
+    {
+      "world": "murim",
+      "prompt": "Edit the attached transparent game building atlas. Preserve exactly the four building/prop identities, materials, lighting, original painterly style and elevated camera. CHANGE ONLY layout and object scale: exactly 2x2 equal square cells; each complete object's silhouette must fit within central 70% of its cell with at least 15% genuinely transparent margin on all four sides. NO pixels from adjacent object may cross midpoint grid lines. Every roof and foundation fully visible. Align bottom ground contact at 82% of each cell. Transparent RGBA background, no visible grid, no new objects, no labels. This is a runtime sprite atlas not a scene.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-f7b7ade9-0088-4e36-a24b-dc5e1b140575.png"
+    }
+  ]
+}

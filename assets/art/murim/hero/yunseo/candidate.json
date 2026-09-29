@@ -17,129 +17,1033 @@
         "height": 887
       },
       "clips": {
-        "portrait-neutral": {"none": [{"atlas":"portraits","rect":[0,0,627,627],"pivot":[0.5,0.5],"duration":1}]},
-        "portrait-focus": {"none": [{"atlas":"portraits","rect":[627,0,627,627],"pivot":[0.5,0.5],"duration":1}]},
-        "portrait-hurt": {"none": [{"atlas":"portraits","rect":[0,627,627,627],"pivot":[0.5,0.5],"duration":1}]},
-        "portrait-slight-smile": {"none": [{"atlas":"portraits","rect":[627,627,627,627],"pivot":[0.5,0.5],"duration":1}]},
-        "idle": {
-          "s": [
+        "hit": {
+          "se": [
             {
+              "atlas": "hit_se",
               "rect": [
                 0,
                 0,
-                443,
-                443
+                627,
+                627
+              ],
+              "pivot": [
+                0.6012759170653907,
+                0.9106858054226475
+              ],
+              "duration": 0.045,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  377,
+                  571
+                ],
+                "hand": [
+                  251,
+                  382
+                ],
+                "blade": [
+                  398,
+                  573
+                ],
+                "effect": [
+                  398,
+                  573
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "hit_se",
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5757575757575758,
+                0.9106858054226475
+              ],
+              "duration": 0.045,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  361,
+                  571
+                ],
+                "hand": [
+                  257,
+                  357
+                ],
+                "blade": [
+                  435,
+                  559
+                ],
+                "effect": [
+                  435,
+                  559
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "hit_se",
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5358851674641149,
+                0.8803827751196173
+              ],
+              "duration": 0.045,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  336,
+                  552
+                ],
+                "hand": [
+                  226,
+                  308
+                ],
+                "blade": [
+                  373,
+                  527
+                ],
+                "effect": [
+                  373,
+                  527
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "hit_se",
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5534290271132376,
+                0.8771929824561403
+              ],
+              "duration": 0.045,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  347,
+                  550
+                ],
+                "hand": [
+                  236,
+                  332
+                ],
+                "blade": [
+                  381,
+                  545
+                ],
+                "effect": [
+                  381,
+                  545
+                ]
+              },
+              "displayHeight": 120
+            }
+          ]
+        },
+        "cast": {
+          "se": [
+            {
+              "atlas": "cast_se",
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.518341307814992,
+                0.9425837320574163
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  325,
+                  591
+                ],
+                "hand": [
+                  199,
+                  370
+                ],
+                "blade": [
+                  329,
+                  582
+                ],
+                "effect": [
+                  511,
+                  210
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "cast_se",
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.4800637958532695,
+                0.9425837320574163
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  301,
+                  591
+                ],
+                "hand": [
+                  166,
+                  370
+                ],
+                "blade": [
+                  312,
+                  590
+                ],
+                "effect": [
+                  446,
+                  154
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "cast_se",
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5342902711323764,
+                0.8692185007974481
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  335,
+                  545
+                ],
+                "hand": [
+                  212,
+                  331
+                ],
+                "blade": [
+                  370,
+                  540
+                ],
+                "effect": [
+                  450,
+                  143
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "cast_se",
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.4800637958532695,
+                0.8660287081339713
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  301,
+                  543
+                ],
+                "hand": [
+                  219,
+                  336
+                ],
+                "blade": [
+                  377,
+                  543
+                ],
+                "effect": [
+                  453,
+                  300
+                ]
+              },
+              "displayHeight": 120
+            }
+          ]
+        },
+        "dodge": {
+          "se": [
+            {
+              "atlas": "dodge_se",
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5199362041467305,
+                0.8771929824561403
+              ],
+              "duration": 0.04,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  326,
+                  550
+                ],
+                "hand": [
+                  366,
+                  400
+                ],
+                "blade": [
+                  585,
+                  555
+                ],
+                "effect": [
+                  585,
+                  555
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "dodge_se",
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5342902711323764,
+                0.9282296650717703
+              ],
+              "duration": 0.06,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  335,
+                  582
+                ],
+                "hand": [
+                  370,
+                  350
+                ],
+                "blade": [
+                  587,
+                  504
+                ],
+                "effect": [
+                  587,
+                  504
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "dodge_se",
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5406698564593302,
+                0.8038277511961722
+              ],
+              "duration": 0.06,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  339,
+                  504
+                ],
+                "hand": [
+                  340,
+                  320
+                ],
+                "blade": [
+                  576,
+                  485
+                ],
+                "effect": [
+                  576,
+                  485
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "dodge_se",
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5550239234449761,
+                0.8803827751196173
+              ],
+              "duration": 0.06,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  348,
+                  552
+                ],
+                "hand": [
+                  242,
+                  329
+                ],
+                "blade": [
+                  430,
+                  511
+                ],
+                "effect": [
+                  430,
+                  511
+                ]
+              },
+              "displayHeight": 120
+            }
+          ]
+        },
+        "attack3": {
+          "se": [
+            {
+              "atlas": "attack3_se",
+              "rect": [
+                0,
+                0,
+                675,
+                627
+              ],
+              "pivot": [
+                0.4711111111111111,
+                0.9266347687400319
+              ],
+              "duration": 0.06,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  318,
+                  581
+                ],
+                "hand": [
+                  457,
+                  381
+                ],
+                "blade": [
+                  657,
+                  581
+                ],
+                "effect": [
+                  657,
+                  581
+                ]
+              },
+              "displayHeight": 120
+            },
+            {
+              "atlas": "attack3_se",
+              "rect": [
+                690,
+                0,
+                564,
+                637
+              ],
+              "pivot": [
+                0.43439716312056736,
+                0.9309262166405023
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  245,
+                  593
+                ],
+                "hand": [
+                  391,
+                  473
+                ],
+                "blade": [
+                  543,
+                  625
+                ],
+                "effect": [
+                  543,
+                  625
+                ]
+              },
+              "displayHeight": 121.91387559808612
+            },
+            {
+              "atlas": "attack3_se",
+              "rect": [
+                0,
+                637,
+                627,
+                617
+              ],
+              "pivot": [
+                0.5311004784688995,
+                0.86709886547812
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  333,
+                  535
+                ],
+                "hand": [
+                  300,
+                  224
+                ],
+                "blade": [
+                  552,
+                  430
+                ],
+                "effect": [
+                  552,
+                  430
+                ]
+              },
+              "displayHeight": 118.08612440191388
+            },
+            {
+              "atlas": "attack3_se",
+              "rect": [
+                627,
+                637,
+                627,
+                617
+              ],
+              "pivot": [
+                0.5342902711323764,
+                0.8719611021069692
+              ],
+              "duration": 0.09,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  335,
+                  538
+                ],
+                "hand": [
+                  247,
+                  318
+                ],
+                "blade": [
+                  421,
+                  527
+                ],
+                "effect": [
+                  421,
+                  527
+                ]
+              },
+              "displayHeight": 118.08612440191388
+            }
+          ]
+        },
+        "attack2": {
+          "se": [
+            {
+              "atlas": "attack2_se",
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5151515151515151,
+                0.9505582137161085
+              ],
+              "duration": 0.06,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  323,
+                  596
+                ],
+                "hand": [
+                  370,
+                  300
+                ],
+                "blade": [
+                  574,
+                  195
+                ],
+                "effect": [
+                  574,
+                  195
+                ]
+              },
+              "displayHeight": 142
+            },
+            {
+              "atlas": "attack2_se",
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.48325358851674644,
+                0.9569377990430622
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  303,
+                  600
+                ],
+                "hand": [
+                  378,
+                  223
+                ],
+                "blade": [
+                  542,
+                  116
+                ],
+                "effect": [
+                  542,
+                  116
+                ]
+              },
+              "displayHeight": 142
+            },
+            {
+              "atlas": "attack2_se",
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.529505582137161,
+                0.8500797448165869
+              ],
+              "duration": 0.075,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  332,
+                  533
+                ],
+                "hand": [
+                  278,
+                  273
+                ],
+                "blade": [
+                  495,
+                  419
+                ],
+                "effect": [
+                  495,
+                  419
+                ]
+              },
+              "displayHeight": 142
+            },
+            {
+              "atlas": "attack2_se",
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5087719298245614,
+                0.8580542264752791
+              ],
+              "duration": 0.09,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  319,
+                  538
+                ],
+                "hand": [
+                  246,
+                  346
+                ],
+                "blade": [
+                  416,
+                  508
+                ],
+                "effect": [
+                  416,
+                  508
+                ]
+              },
+              "displayHeight": 142
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "atlas": "portraits",
+              "rect": [
+                0,
+                0,
+                627,
+                627
               ],
               "pivot": [
                 0.5,
-                0.97
+                0.5
               ],
               "duration": 1
+            }
+          ]
+        },
+        "portrait-focus": {
+          "none": [
+            {
+              "atlas": "portraits",
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "duration": 1
+            }
+          ]
+        },
+        "portrait-hurt": {
+          "none": [
+            {
+              "atlas": "portraits",
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "duration": 1
+            }
+          ]
+        },
+        "portrait-slight-smile": {
+          "none": [
+            {
+              "atlas": "portraits",
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.5
+              ],
+              "duration": 1
+            }
+          ]
+        },
+        "idle": {
+          "s": [
+            {
+              "atlas": "idle_breath",
+              "rect": [
+                0,
+                0,
+                313,
+                313
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.8,
+              "displayHeight": 110
+            },
+            {
+              "atlas": "idle_breath",
+              "rect": [
+                313,
+                0,
+                314,
+                313
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.8,
+              "displayHeight": 110
             }
           ],
           "se": [
             {
+              "atlas": "idle_breath",
               "rect": [
-                443,
+                627,
                 0,
-                444,
-                443
+                313,
+                313
               ],
               "pivot": [
                 0.5,
-                0.97
+                0.98
               ],
-              "duration": 1
+              "duration": 0.8,
+              "displayHeight": 110
+            },
+            {
+              "atlas": "idle_breath",
+              "rect": [
+                940,
+                0,
+                314,
+                313
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.8,
+              "displayHeight": 110
             }
           ],
           "e": [
             {
+              "atlas": "idle_breath",
               "rect": [
-                887,
                 0,
-                443,
-                443
+                313,
+                313,
+                314
               ],
               "pivot": [
                 0.5,
-                0.97
+                0.98
               ],
-              "duration": 1
+              "duration": 0.8,
+              "displayHeight": 110
+            },
+            {
+              "atlas": "idle_breath",
+              "rect": [
+                313,
+                313,
+                314,
+                314
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.8,
+              "displayHeight": 110
             }
           ],
           "ne": [
             {
+              "atlas": "idle_breath",
               "rect": [
-                1330,
-                0,
-                444,
-                443
+                627,
+                313,
+                313,
+                314
               ],
               "pivot": [
                 0.5,
-                0.97
+                0.98
               ],
-              "duration": 1
+              "duration": 0.8,
+              "displayHeight": 110
+            },
+            {
+              "atlas": "idle_breath",
+              "rect": [
+                940,
+                313,
+                314,
+                314
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.8,
+              "displayHeight": 110
             }
           ],
           "n": [
             {
+              "atlas": "idle_breath",
               "rect": [
                 0,
-                443,
-                443,
-                444
+                627,
+                313,
+                313
               ],
               "pivot": [
                 0.5,
-                0.97
+                0.98
               ],
-              "duration": 1
+              "duration": 0.8,
+              "displayHeight": 110
+            },
+            {
+              "atlas": "idle_breath",
+              "rect": [
+                313,
+                627,
+                314,
+                313
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.8,
+              "displayHeight": 110
             }
           ],
           "nw": [
             {
+              "atlas": "idle_breath",
               "rect": [
-                443,
-                443,
-                444,
-                444
+                627,
+                627,
+                313,
+                313
               ],
               "pivot": [
                 0.5,
-                0.97
+                0.98
               ],
-              "duration": 1
+              "duration": 0.8,
+              "displayHeight": 110
+            },
+            {
+              "atlas": "idle_breath",
+              "rect": [
+                940,
+                627,
+                314,
+                313
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.8,
+              "displayHeight": 110
             }
           ],
           "w": [
             {
+              "atlas": "idle_breath",
               "rect": [
-                887,
-                443,
-                443,
-                444
+                0,
+                940,
+                313,
+                314
               ],
               "pivot": [
                 0.5,
-                0.97
+                0.98
               ],
-              "duration": 1
+              "duration": 0.8,
+              "displayHeight": 110
+            },
+            {
+              "atlas": "idle_breath",
+              "rect": [
+                313,
+                940,
+                314,
+                314
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.8,
+              "displayHeight": 110
             }
           ],
           "sw": [
             {
+              "atlas": "idle_breath",
               "rect": [
-                1330,
-                443,
-                444,
-                444
+                627,
+                940,
+                313,
+                314
               ],
               "pivot": [
                 0.5,
-                0.97
+                0.98
               ],
-              "duration": 1
+              "duration": 0.8,
+              "displayHeight": 110
+            },
+            {
+              "atlas": "idle_breath",
+              "rect": [
+                940,
+                940,
+                314,
+                314
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.8,
+              "displayHeight": 110
             }
           ]
         },
@@ -228,6 +1132,650 @@
                 0.98
               ],
               "duration": 0.12
+            }
+          ],
+          "s": [
+            {
+              "atlas": "walk_s",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_s",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_s",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_s",
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_s",
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_s",
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            }
+          ],
+          "e": [
+            {
+              "atlas": "walk_e",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_e",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_e",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_e",
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_e",
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_e",
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            }
+          ],
+          "ne": [
+            {
+              "atlas": "walk_ne",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_ne",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_ne",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_ne",
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_ne",
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_ne",
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            }
+          ],
+          "n": [
+            {
+              "atlas": "walk_n",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_n",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_n",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_n",
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_n",
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_n",
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "walk_nw",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_nw",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_nw",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_nw",
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_nw",
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_nw",
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            }
+          ],
+          "w": [
+            {
+              "atlas": "walk_w",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_w",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_w",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_w",
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_w",
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_w",
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            }
+          ],
+          "sw": [
+            {
+              "atlas": "walk_sw",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_sw",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_sw",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_sw",
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_sw",
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
+            },
+            {
+              "atlas": "walk_sw",
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.98
+              ],
+              "duration": 0.12,
+              "displayHeight": 120
             }
           ]
         },
@@ -376,15 +1924,44 @@
         "visual": false,
         "evidence": [],
         "limitations": [
-          "Idle direction study, southeast walk/attack1 and four portrait-expression candidates.",
-          "Walk foot planting, limb continuity and loop seam require motion review.",
-          "Other walk facings, attack2/3/dodge/hit/cast and verified sockets remain BLOCKED_ART; portrait alpha edges and field identity need final review.",
-          "Attack1 SE four frames and manually placed sockets are provisional; other combat facings/combos absent."
+          "Candidate only; all eight walk directions need loop seam, foot planting, silhouette scale and equipment continuity review.",
+          "Idle lacks multi-frame breathing; combat/dodge/cast/hit only southeast. Other combat facings remain BLOCKED_ART.",
+          "Sockets provisional; environment, NPC, enemy and final skill VFX not production approved.",
+          "Eight-direction idle now has two candidate breathing frames. Large multi-direction combat studies stored separately: margin, direction and hand continuity need per-frame corrections before runtime integration."
         ],
         "userDirectionApproved": "2026-09-30"
       },
       "atlases": {
-        "portraits": {"path":"assets/art/murim/hero/yunseo/portraits-candidate-v2.png","width":1254,"height":1254},
+        "hit_se": {
+          "path": "assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+          "width": 1254,
+          "height": 1254
+        },
+        "cast_se": {
+          "path": "assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+          "width": 1254,
+          "height": 1254
+        },
+        "dodge_se": {
+          "path": "assets/art/murim/hero/yunseo/dodge-se-candidate-v1.png",
+          "width": 1254,
+          "height": 1254
+        },
+        "attack3_se": {
+          "path": "assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+          "width": 1254,
+          "height": 1254
+        },
+        "attack2_se": {
+          "path": "assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png",
+          "width": 1254,
+          "height": 1254
+        },
+        "portraits": {
+          "path": "assets/art/murim/hero/yunseo/portraits-candidate-v2.png",
+          "width": 1254,
+          "height": 1254
+        },
         "walk_se": {
           "path": "assets/art/murim/hero/yunseo/walk-se-candidate-v2.png",
           "width": 1536,
@@ -392,6 +1969,46 @@
         },
         "attack1_se": {
           "path": "assets/art/murim/hero/yunseo/attack1-se-candidate-v1.png",
+          "width": 1254,
+          "height": 1254
+        },
+        "walk_s": {
+          "path": "assets/art/murim/hero/yunseo/walk-s-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "walk_e": {
+          "path": "assets/art/murim/hero/yunseo/walk-e-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "walk_ne": {
+          "path": "assets/art/murim/hero/yunseo/walk-ne-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "walk_n": {
+          "path": "assets/art/murim/hero/yunseo/walk-n-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "walk_nw": {
+          "path": "assets/art/murim/hero/yunseo/walk-nw-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "walk_w": {
+          "path": "assets/art/murim/hero/yunseo/walk-w-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "walk_sw": {
+          "path": "assets/art/murim/hero/yunseo/walk-sw-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "idle_breath": {
+          "path": "assets/art/murim/hero/yunseo/idle-eight-directions-candidate-v1.png",
           "width": 1254,
           "height": 1254
         }

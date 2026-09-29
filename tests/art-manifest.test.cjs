@@ -71,3 +71,46 @@ test('independent hero dialogue expressions are candidates, never production app
   }
  }
 });
+test('eight walk facings use independent candidate sheets in each world',()=>{
+ const paths=new Set();
+ for(const world of ['reality','murim']){
+  const c=load().createCatalog(JSON.parse(fs.readFileSync(path.join(root,'assets/art',world,'hero/yunseo/candidate.json'))));
+  for(const facing of ['s','se','e','ne','n','nw','w','sw']){
+   const q={world,entityId:'hero',action:'walk',facing},v=c.resolve(q,{preview:true});
+   assert.equal(v.status,'candidate');assert.equal(c.manifest.assets[0].clips.walk[facing].length,6);
+   assert.equal(paths.has(v.atlas.path),false);paths.add(v.atlas.path);
+   assert.equal(c.resolve(q).status,'BLOCKED_ART');assert.ok(fs.existsSync(path.join(root,v.atlas.path)));
+  }
+ }
+});
+test('idle breathes in two whole-body frames without sharing opposite facing cells',()=>{
+ for(const world of ['reality','murim']){
+  const c=load().createCatalog(JSON.parse(fs.readFileSync(path.join(root,'assets/art',world,'hero/yunseo/candidate.json'))));
+  const rectangles=new Set();
+  for(const facing of ['s','se','e','ne','n','nw','w','sw']){
+   const q={world,entityId:'hero',action:'idle',facing},first=c.sample({...q,elapsed:0,loop:true},{preview:true}),second=c.sample({...q,elapsed:.8,loop:true},{preview:true});
+   assert.equal(second.frameIndex,1);assert.notDeepEqual(first.frame.rect,second.frame.rect);
+   for(const f of [first,second]){const key=f.atlas.path+f.frame.rect.join(':');assert.equal(rectangles.has(key),false);rectangles.add(key);}
+  }
+ }
+});
+test('second combo has independent contact frames and sockets for both worlds',()=>{
+ for(const world of ['reality','murim']){
+  const c=load().createCatalog(JSON.parse(fs.readFileSync(path.join(root,'assets/art',world,'hero/yunseo/candidate.json'))));
+  const q={world,entityId:'hero',action:'attack2',facing:'se'},first=c.sample({...q,elapsed:0},{preview:true});
+  assert.equal(first.status,'candidate');assert.equal(first.frame.contact,true);
+  assert.notEqual(first.atlas.path,c.resolve({...q,action:'attack1'},{preview:true}).atlas.path);
+  for(const elapsed of [0,.061,.136,.211]){const v=c.sample({...q,elapsed},{preview:true});assert.ok(v.frame.sockets.hand);assert.ok(v.frame.sockets.blade);}
+  assert.equal(c.sample({...q,elapsed:0}).status,'BLOCKED_ART');
+ }
+});
+test('finisher dodge cast and hit candidates retain simulation recovery durations',()=>{
+ for(const world of ['reality','murim']){
+  const c=load().createCatalog(JSON.parse(fs.readFileSync(path.join(root,'assets/art',world,'hero/yunseo/candidate.json'))));
+  for(const [action,duration]of [['attack3',.3],['dodge',.22],['cast',.3],['hit',.18]]){
+   const q={world,entityId:'hero',action,facing:'se'},v=c.sample({...q,elapsed:0},{preview:true});assert.equal(v.status,'candidate');
+   const frames=c.manifest.assets[0].clips[action].se;assert.equal(frames.length,4);assert.ok(Math.abs(frames.reduce((n,f)=>n+f.duration,0)-duration)<1e-8);
+   assert.equal(v.frame.contact,action==='attack3');assert.equal(c.sample({...q,elapsed:duration},{preview:true}).frameIndex,3);
+  }
+ }
+});

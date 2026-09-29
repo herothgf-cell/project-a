@@ -1,0 +1,87 @@
+{
+  "date": "2026-09-30",
+  "mode": "built-in image_gen",
+  "status": "candidate / not production-approved",
+  "motion": [
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. New game sprite atlas for a second sword combo attack. Reference supplied defines identity and clothes ONLY. Four whole-body animation frames in regular 2x2 layout. All heads point southeast screen lower-right, feet on the same southeast axis; face and chest remain visible throughout, NEVER show the back. Sword ALWAYS in anatomical RIGHT hand, LEFT hand open for balance. Short black-haired adult modern hunter in charcoal tactical hooded jacket and trousers, grey shirt, black boots, blue ID details. FOUR consecutive poses in reading order: (1) already at CONTACT of rising diagonal cut, bent knees, RIGHT sword hand at chest level, sword blade angled up-right, (2) sword arm raised slightly higher in follow through, (3) recover sword toward right hip, (4) ready with sword tip lowered diagonally right. No preparatory windup. Preserve right sword hand and same camera throughout. This is not a turntable. Whole body, hair, boots, all sword tips fully contained inside each quadrant. CRITICAL: each whole figure INCLUDING sword occupies only 65 percent of cell height and width, leaving 17.5 percent blank transparent padding on all sides. Transparent alpha background with no shadow or VFX. No text or grid. Detailed painterly 2D art matching reference, consistent character proportions and gear.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-59da98b1-e39d-4590-8f49-2352be42482e.png",
+      "workspace": "assets/art/reality/hero/yunseo/attack2-se-candidate-v2.png"
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. Game sprite animation atlas. Reference: identity and costume only. Four successive poses in a regular 2x2 grid. Adult short-black-haired tactical hunter, charcoal hooded jacket/trousers and blue accents. Fixed elevated southeast camera, facing screen-down-right, same scale and right-hand sword in all four frames, no flips, no back view. A heavy downward finishing sword strike, no wind-up: frame1 contact sword extending diagonally down-right, body crouched with wide planted stance; frame2 follow-through lower crouch and blade continuing downward; frame3 knees extending back up and sword arm returning; frame4 ready with sword low. Full bodies, entire hair/boots/weapon inside each quadrant, no image borders crossed. Only70%of each cell occupied, real15%transparent margin each side. Genuine transparent alpha background. No ground, shadow, VFX, text, labels, UI or additional people. Whole body poses distinct, anatomy/costume continuous, painterly RPG style.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-7760de9b-e274-40c8-9d8e-c270171c9289.png",
+      "workspace": "assets/art/reality/hero/yunseo/attack3-se-candidate-v2.png"
+    },
+    {
+      "world": "reality",
+      "action": "dodge",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. Game sprite animation atlas. Reference: identity and costume only. Four successive poses in a regular 2x2 grid. Adult short-black-haired tactical hunter, charcoal hooded jacket/trousers and blue accents. Fixed elevated southeast camera, facing screen-down-right, same scale and right-hand sword in all four frames, no flips, no back view. A quick grounded evasive sidestep: frame1 deep knee bend and torso forward; frame2 right foot extends out to the right, left foot pushes off; frame3 left foot catches up in low stance; frame4 knees extend into ready position. Sword kept low in anatomical right hand and pointed safely away. No rolling or teleport art. Full bodies, entire hair/boots/weapon inside each quadrant, no image borders crossed. Only70%of each cell occupied, real15%transparent margin each side. Genuine transparent alpha background. No ground, shadow, VFX, text, labels, UI or additional people. Whole body poses distinct, anatomy/costume continuous, painterly RPG style.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-af889849-f60d-40f7-b1d7-a2ad0ddfc7f5.png",
+      "workspace": "assets/art/reality/hero/yunseo/dodge-se-candidate-v1.png"
+    },
+    {
+      "world": "reality",
+      "action": "cast",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. Four-frame full-body 2D RPG animation atlas, regular2x2grid with genuine transparent background. Supplied image is outfit/identity reference, not pose layout. Same adult modern hunter with short black hair and charcoal tactical jacket/trousers/blue equipment. Keep same elevated southeast facing/camera in every frame, right hand holds sword low safely at right side throughout, left hand free, costume consistent. Spell channel animation: first frame left open palm extends forward at chest level, feet braced; second frame left palm rises to eye level with tense wrist; third frame palm turns inward as release completes; fourth frame lowered left hand, return to ready. No magic graphics, no glow, no rays, this is just the body animation. Four distinct consecutive whole-body frames, complete head/hair/boots/weapon and scabbard. Fit each subject into inner70%of its own quadrant, at least15%transparent gap on all four sides of each whole figure. Nothing cropped or overlapping cells. No text, icons, grid lines, scenery, shadow or VFX. Painterly detailed game sprite rendering of supplied character.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-405ca251-6020-412b-9a95-5f77ea9f6a6e.png",
+      "workspace": "assets/art/reality/hero/yunseo/cast-se-candidate-v1.png"
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. Four-frame full-body 2D RPG animation atlas, regular2x2grid with genuine transparent background. Supplied image is outfit/identity reference, not pose layout. Same adult modern hunter with short black hair and charcoal tactical jacket/trousers/blue equipment. Keep same elevated southeast facing/camera in every frame, right hand holds sword low safely at right side throughout, left hand free, costume consistent. Hit reaction animation: first frame shoulders recoil backward and left hand draws toward chest, knees buckle slightly; second frame torso visibly leans backward, pained face; third frame regains balance leaning forward; fourth frame recovers ready stance. No injury, no blood, no knockdown, no displaced sword hand. Four distinct consecutive whole-body frames, complete head/hair/boots/weapon and scabbard. Fit each subject into inner70%of its own quadrant, at least15%transparent gap on all four sides of each whole figure. Nothing cropped or overlapping cells. No text, icons, grid lines, scenery, shadow or VFX. Painterly detailed game sprite rendering of supplied character.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-72072778-71d6-4ec1-b692-e89389c168d8.png",
+      "workspace": "assets/art/reality/hero/yunseo/hit-se-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. New game sprite atlas for a second sword combo attack. Reference supplied defines identity and clothes ONLY. Four whole-body animation frames in regular 2x2 layout. All heads point southeast screen lower-right, feet on the same southeast axis; face and chest remain visible throughout, NEVER show the back. Sword ALWAYS in anatomical RIGHT hand, LEFT hand open for balance. Long tied black-haired adult wuxia swordsman with cream crossed robes, blue collar/waist, charcoal cape and dark boots. FOUR consecutive poses in reading order: (1) already at CONTACT of rising diagonal cut, bent knees, RIGHT sword hand at chest level, sword blade angled up-right, (2) sword arm raised slightly higher in follow through, (3) recover sword toward right hip, (4) ready with sword tip lowered diagonally right. No preparatory windup. Preserve right sword hand and same camera throughout. This is not a turntable. Whole body, hair, boots, all sword tips fully contained inside each quadrant. CRITICAL: each whole figure INCLUDING sword occupies only 65 percent of cell height and width, leaving 17.5 percent blank transparent padding on all sides. Transparent alpha background with no shadow or VFX. No text or grid. Detailed painterly 2D art matching reference, consistent character proportions and gear.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-61c122df-6c82-46c7-abf9-9289bb90ac6e.png",
+      "workspace": "assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png"
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. Game sprite animation atlas. Reference: identity and costume only. Four successive poses in a regular 2x2 grid. Adult long-black-haired swordsman, cream robes, blue waistcloth, dark weathered cape. Fixed elevated southeast camera, facing screen-down-right, same scale and right-hand sword in all four frames, no flips, no back view. A heavy downward finishing sword strike, no wind-up: frame1 contact sword extending diagonally down-right, body crouched with wide planted stance; frame2 follow-through lower crouch and blade continuing downward; frame3 knees extending back up and sword arm returning; frame4 ready with sword low. Full bodies, entire hair/boots/weapon inside each quadrant, no image borders crossed. Only70%of each cell occupied, real15%transparent margin each side. Genuine transparent alpha background. No ground, shadow, VFX, text, labels, UI or additional people. Whole body poses distinct, anatomy/costume continuous, painterly RPG style.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-c5f22b97-9521-4040-abce-a695256ffeea.png",
+      "workspace": "assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png"
+    },
+    {
+      "world": "murim",
+      "action": "dodge",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. Game sprite animation atlas. Reference: identity and costume only. Four successive poses in a regular 2x2 grid. Adult long-black-haired swordsman, cream robes, blue waistcloth, dark weathered cape. Fixed elevated southeast camera, facing screen-down-right, same scale and right-hand sword in all four frames, no flips, no back view. A quick grounded evasive sidestep: frame1 deep knee bend and torso forward; frame2 right foot extends out to the right, left foot pushes off; frame3 left foot catches up in low stance; frame4 knees extend into ready position. Sword kept low in anatomical right hand and pointed safely away. No rolling or teleport art. Full bodies, entire hair/boots/weapon inside each quadrant, no image borders crossed. Only70%of each cell occupied, real15%transparent margin each side. Genuine transparent alpha background. No ground, shadow, VFX, text, labels, UI or additional people. Whole body poses distinct, anatomy/costume continuous, painterly RPG style.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-2ffff553-1b5d-42b4-98ae-3d29fbd05e56.png",
+      "workspace": "assets/art/murim/hero/yunseo/dodge-se-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. Four-frame full-body 2D RPG animation atlas, regular2x2grid with genuine transparent background. Supplied image is outfit/identity reference, not pose layout. Same adult martial swordsman with long tied black hair, ivory blue robes and dark weathered cape. Keep same elevated southeast facing/camera in every frame, right hand holds sword low safely at right side throughout, left hand free, costume consistent. Spell channel animation: first frame left open palm extends forward at chest level, feet braced; second frame left palm rises to eye level with tense wrist; third frame palm turns inward as release completes; fourth frame lowered left hand, return to ready. No magic graphics, no glow, no rays, this is just the body animation. Four distinct consecutive whole-body frames, complete head/hair/boots/weapon and scabbard. Fit each subject into inner70%of its own quadrant, at least15%transparent gap on all four sides of each whole figure. Nothing cropped or overlapping cells. No text, icons, grid lines, scenery, shadow or VFX. Painterly detailed game sprite rendering of supplied character.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-2289e962-eafb-4c9f-a397-0bcc1defe9af.png",
+      "workspace": "assets/art/murim/hero/yunseo/cast-se-candidate-v1.png"
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "se",
+      "prompt": "Use case: stylized-concept. Four-frame full-body 2D RPG animation atlas, regular2x2grid with genuine transparent background. Supplied image is outfit/identity reference, not pose layout. Same adult martial swordsman with long tied black hair, ivory blue robes and dark weathered cape. Keep same elevated southeast facing/camera in every frame, right hand holds sword low safely at right side throughout, left hand free, costume consistent. Hit reaction animation: first frame shoulders recoil backward and left hand draws toward chest, knees buckle slightly; second frame torso visibly leans backward, pained face; third frame regains balance leaning forward; fourth frame recovers ready stance. No injury, no blood, no knockdown, no displaced sword hand. Four distinct consecutive whole-body frames, complete head/hair/boots/weapon and scabbard. Fit each subject into inner70%of its own quadrant, at least15%transparent gap on all four sides of each whole figure. Nothing cropped or overlapping cells. No text, icons, grid lines, scenery, shadow or VFX. Painterly detailed game sprite rendering of supplied character.",
+      "original": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-1225ee3b-ed10-4af5-b6a5-a181de4f2924.png",
+      "workspace": "assets/art/murim/hero/yunseo/hit-se-candidate-v1.png"
+    }
+  ]
+}

@@ -38,6 +38,13 @@ test('alternate template names cannot make a modern area render with a martial i
 test('unknown progress never makes tutorial hints invent an artifact or equipped interpretation',()=>{
  const g=new api.Game();g.progress=2;g.training=1;g.enter('archive');const raw=g.save();for(let i=0;i<100;i++){P.guide(g);P.news(g);}assert.equal(g.save(),raw);assert.deepEqual(g.journey.items,[]);assert.deepEqual(g.journey.known,[]);
 });
+test('damage records a transient hit reaction but invulnerability does not invent another reaction',()=>{
+ const g=new api.Game(),hp=g.player.hp;g.player.invuln=0;g.takeHit({damage:10});
+ assert.equal(g.player.hp,hp-10);assert.equal(g.player.invuln,.5);
+ const r=g.player.motion.reaction;assert.ok(r);assert.equal(r.action,'hit');assert.equal(r.startedAt,g.playTime);assert.equal(r.duration,.18);assert.ok(Object.isFrozen(r));
+ g.takeHit({damage:10});assert.equal(g.player.motion.reaction,r);assert.equal(g.player.hp,hp-10);
+ assert.ok(!g.save().includes('reaction'));
+});
 test('body and contact effects share an immutable action instance and one clock',()=>{
  const g=new api.Game();g.act('attack');const f=g.fx.find(f=>f.kind==='slash'),a=g.player.motion.instance;
  assert.ok(a?.actionId);assert.equal(f.actionInstance,a);assert.equal(a.contactAt,g.playTime);
@@ -54,6 +61,12 @@ test('released effects preserve origin and action even after movement, turning a
  assert.notEqual(f.actionInstance.actionId,g.player.motion.instance.actionId);
  assert.deepEqual(P.effectPose(f,at),original);
  const raw=g.save();for(let i=0;i<20;i++)P.effectPose(f,at);assert.equal(g.save(),raw);
+});
+test('martial action records input and pre-consumption charge for read-only VFX',()=>{
+ const g=new api.Game();g.fate.path='ripple';g.fate.stage=3;g.player.mp=100;g.combat.charges=3;
+ assert.equal(g.act('signature2'),true);const a=g.player.motion.instance;
+ assert.equal(a.input,'signature2');assert.equal(a.charge,3);assert.equal(g.combat.charges,0);
+ assert.equal(g.fx.find(f=>f.kind==='fate-wave').actionInstance,a);
 });
 test('released ripple wave retains terminal geometry while fading after body recovery',()=>{
  const g=new api.Game();g.fate.path='ripple';g.fate.stage=3;g.player.mp=100;

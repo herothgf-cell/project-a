@@ -25,8 +25,20 @@ async function main(){
   assert.equal(await page.locator('[data-action="attack1"][data-contact="true"]').count(),2);
   await page.screenshot({path:path.join(out,'hero-contact-socket-review.png'),fullPage:true});
   await page.selectOption('#reviewAction','attack2');
-  assert.equal(await page.locator('[data-blocked="true"]').count(),2,'missing combo must not reuse attack1');
+  await page.selectOption('#reviewFacing','n');
+  assert.equal(await page.locator('[data-blocked="true"]').count(),2,'missing facing must not reuse southeast');
+  await page.selectOption('#reviewFacing','se');
+  assert.equal(await page.locator('[data-action="attack2"][data-contact="true"]').count(),2);
   await page.selectOption('#reviewAction','walk');
+  for(const facing of ['s','se','e','ne','n','nw','w','sw']){
+   await page.selectOption('#reviewFacing',facing);
+   assert.equal(await page.locator('[data-action="walk"]').count(),2);
+   assert.equal(await page.locator('[data-blocked="true"]').count(),0);
+   await page.locator('#reviewFrame').fill('5');await page.locator('#reviewFrame').dispatchEvent('input');
+   assert.equal(await page.locator('[data-action="walk"][data-frame="5"]').count(),2);
+  }
+  await page.screenshot({path:path.join(out,'hero-walk-sw-review.png'),fullPage:true});
+  await page.selectOption('#reviewFacing','se');
   await page.selectOption('#scale','180');await page.screenshot({path:path.join(out,'hero-idle-candidates.png'),fullPage:true});
   const probe=await page.evaluate(async()=>{
    const m=await (await fetch('assets/art/reality/hero/yunseo/candidate.json')).json(),c=ProductionArt.createCatalog(m),v=c.resolve({world:'reality',entityId:'hero',action:'idle',facing:'s'},{preview:true}),cache=ProductionArt.createImageCache();
@@ -80,7 +92,43 @@ async function main(){
   const contactDamage=await review.evaluate(()=>({damage:1000-__game.enemies[0].hp,contact:__game.player.motion.instance.contactAt,started:__game.player.motion.instance.startedAt}));
   assert.equal(contactDamage.damage,expectedHit);assert.equal(contactDamage.contact,contactDamage.started);
   report.contactDamage=contactDamage;report.userDirectionApproved=true;report.previewArtIntegrated=true;
-  report.checks.push('SE walk/attack1 playback and frame scrub expose contact sockets; missing attack2 is BLOCKED_ART without substitution');
+  report.checks.push('SE walk/attack1/attack2 frame scrub exposes contact sockets; missing north-facing attack2 is BLOCKED_ART without substitution');
+  report.comboEvidence=[];
+  for(const [area,world]of [['rift','reality'],['forest','murim']]){
+   await review.evaluate(area=>{__game.training=1;__game.enter(area);__game.events=[];__game.enemies=__game.enemies.slice(0,1);__game.enemies[0].hp=1000;__game.enemies[0].cd=999;__game.combo=0;__game.lastAttack=-10;},area);
+   await review.bringToFront();
+   await review.evaluate(()=>{const stream=document.getElementById('canvas').captureStream(30),chunks=[],rec=new MediaRecorder(stream,{mimeType:'video/webm'});window.__artRecording={rec,stream,chunks};rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};rec.start(100);stream.getVideoTracks()[0].requestFrame();});
+   await review.waitForFunction(()=>__artRecording.chunks.reduce((n,c)=>n+c.size,0)>1000);
+   for(let combo=1;combo<=3;combo++){
+    await review.waitForFunction(()=>__game.player.cool.attack===0);
+    const before=await review.evaluate(()=>{const e=__game.enemies[0];e.cd=999;Object.assign(__game.player,{x:e.x-28,y:e.y-28,face:Math.PI/4});return e.hp;});
+    await review.keyboard.press('KeyJ');
+    await review.waitForFunction(({world,combo})=>ArtPreview.diagnostics.get(world+'.hero')?.action==='attack'+combo,{world,combo});
+    const probe=await review.evaluate(({world,before})=>{const a=__game.player.motion.instance;return {damage:before-__game.enemies[0].hp,contactAt:a.contactAt,startedAt:a.startedAt,body:ArtPreview.diagnostics.get(world+'.hero'),effect:ArtPreview.effectDiagnostics.get(a.actionId)};},{world,before});
+    assert.equal(probe.damage,[22,24,37][combo-1]);assert.equal(probe.body.status,'candidate');assert.equal(probe.body.frame,probe.effect.frame);assert.equal(probe.body.elapsed,probe.effect.elapsed);assert.equal(probe.contactAt,probe.startedAt);
+    report.comboEvidence.push({world,combo,...probe});await review.screenshot({path:path.join(out,world+'-combo-'+combo+'.png')});
+   }
+   await review.evaluate(()=>{__game.enemies=[];__game.player.face=Math.PI/4;__game.player.cool.dash=0;});
+   await review.keyboard.press('Space');
+   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action==='dodge',world);
+   assert.equal(await review.evaluate(world=>ArtPreview.diagnostics.get(world+'.hero').status,world),'candidate');
+   await review.screenshot({path:path.join(out,world+'-dodge.png')});
+   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action!=='dodge',world);
+   const recording=await review.evaluate(()=>new Promise(resolve=>{const {rec,stream,chunks}=window.__artRecording;rec.onstop=async()=>{const bytes=new Uint8Array(await new Blob(chunks,{type:'video/webm'}).arrayBuffer());stream.getTracks().forEach(t=>t.stop());resolve(Array.from(bytes));};rec.stop();}));
+   assert.ok(recording.length>1000);fs.writeFileSync(path.join(out,world+'-combo-dodge.webm'),Buffer.from(recording));
+   await review.evaluate(()=>{__game.training=3;__game.player.mp=80;__game.player.face=Math.PI/4;__game.player.cool.storm=0;});
+   await review.keyboard.press('KeyL');
+   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action==='cast',world);
+   assert.equal(await review.evaluate(world=>ArtPreview.diagnostics.get(world+'.hero').status,world),'candidate');
+   await review.screenshot({path:path.join(out,world+'-cast.png')});
+   await review.waitForFunction(()=>__game.playTime>=__game.player.motion.instance.startedAt+.3);
+   const hpBefore=await review.evaluate(()=>{__game.player.invuln=0;const hp=__game.player.hp;__game.takeHit({damage:10});return hp;});
+   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action==='hit',world);
+   assert.equal(await review.evaluate(world=>ArtPreview.diagnostics.get(world+'.hero').status,world),'candidate');
+   assert.equal(await review.evaluate(()=>__game.player.hp),hpBefore-9);
+   await review.screenshot({path:path.join(out,world+'-hit.png')});
+  }
+  assert.deepEqual(errors,[]);report.checks.push('both worlds real keyboard 3-hit combo preserves damage 22/24/37 and shared contact frames; dodge uses independent whole-body clip');
   fs.writeFileSync(path.join(out,'browser-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
  }finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}
 }
