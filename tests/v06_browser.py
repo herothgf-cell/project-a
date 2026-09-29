@@ -60,8 +60,11 @@ def main():
         for i,keys in enumerate(moves):
             for key in keys:p.keyboard.down(key)
             p.wait_for_function('name=>WuxiaDirection.facing(__game.player.face).name===name',arg=names[i],timeout=1500)
+            # Read/capture while the complete chord is held. Sequential key-up
+            # events can legitimately leave one cardinal key pressed for a frame.
+            d=p.evaluate('WuxiaDirection.facing(__game.player.face)');assert d['name']==names[i];facing.append(d['name'])
+            p.locator('#canvas').screenshot(path=str(out/f'direction-{i}.png'))
             for key in keys:p.keyboard.up(key)
-            p.wait_for_timeout(90);d=p.evaluate('WuxiaDirection.facing(__game.player.face)');facing.append(d['name']);p.locator('#canvas').screenshot(path=str(out/f'direction-{i}.png'))
         assert len(set(facing))==8;assert p.evaluate("WuxiaDirection.facing(Math.PI/2).cell!==WuxiaDirection.facing(-Math.PI/2).cell")
         p.evaluate("()=>{const o=DualWorld.AREAS.village.points.find(o=>o.id==='master');__game.player.x=o.x;__game.player.y=o.y;}");p.keyboard.press('KeyE');expect(p.locator('#dialog')).to_be_visible();assert p.locator('#portrait').get_attribute('data-portrait')=='master';p.screenshot(path=str(out/'master-portrait.png'));dismiss(p);results.append('eight distinct facing views and painted NPC portrait')
         # Three causes use actual Q/R input against the timed pulse; no direct rescue API.

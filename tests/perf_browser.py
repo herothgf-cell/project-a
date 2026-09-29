@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 ROOT=Path(__file__).resolve().parents[1]
-FILES=['world.js','fate.js','game.js','art.js','fate-art.js','render.js','app.js']
+FILES=re.findall(r'<script[^>]+src="([^"?]+)',(ROOT/'index.html').read_text())
 CAPTURE="""Object.defineProperty(window,'WorldRenderer',{configurable:true,set(Base){Object.defineProperty(window,'WorldRenderer',{configurable:true,value:class extends Base{constructor(...args){super(...args);window.__renderer=this;}}});}});"""
 
 def main():
@@ -21,7 +21,8 @@ def main():
                 html=re.sub(r'<script[^>]*>.*?</script>|<link rel="stylesheet"[^>]*>','',(ROOT/'index.html').read_text(),flags=re.S)
                 page.set_content(html)
                 page.evaluate("()=>{const m=new Map();Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}})}")
-                page.add_style_tag(content=(ROOT/'style.css').read_text())
+
+                for f in re.findall(r'<link rel="stylesheet"[^>]+href="([^"?]+)',(ROOT/'index.html').read_text()):page.add_style_tag(content=(ROOT/f).read_text())
                 for file in FILES:page.add_script_tag(content=(ROOT/file).read_text())
             page.locator('#start').click();page.locator('#dialogActions button').first.click()
             hud=page.locator('#perfHud')

@@ -44,14 +44,15 @@
       if(this.area!==g.area){this.area=g.area;this.camera={x:tx,y:ty};}else{const lerp=1-Math.exp(-Math.max(dt,.016)*12);this.camera.x+=(tx-this.camera.x)*lerp;this.camera.y+=(ty-this.camera.y)*lerp;}
       c.setTransform(this.dpr,0,0,this.dpr,0,0);c.clearRect(0,0,this.w,this.h);c.fillStyle=(palettes[g.area]||palettes[a.theme]||palettes.village)[1];c.fillRect(0,0,this.w,this.h);c.save();
       const shake=this.reduced?0:g.shake*15;c.translate(Math.sin(g.playTime*137)*shake,Math.cos(g.playTime*149)*shake);c.scale(zoom,zoom);c.translate(-this.camera.x,-this.camera.y);
-      const scene=this.scenery(g.area);c.drawImage(scene.terrain,0,0);FateArt.ground(c,g,quality,t);if(root.WuxiaArt)WuxiaArt.drawWorld(c,g,quality,t);
+      const scene=this.scenery(g.area);c.drawImage(scene.terrain,0,0);FateArt.ground(c,g,quality,t);if(root.WuxiaArt)WuxiaArt.drawWorld(c,g,quality,t);if(root.JourneyArt)JourneyArt.ground(c,g,quality,t);
       for(const e of g.enemies){if(e.hp<=0||e.wind<=0)continue;const k=1-e.wind/e.windMax;c.fillStyle='#ec9d7930';c.strokeStyle=e.pattern==='dive'?'#d7a8df':'#edaa8e';c.lineWidth=2;c.beginPath();c.arc(e.tx,e.ty,e.range,0,TAU);c.fill();c.stroke();c.fillStyle='#ffca9437';c.beginPath();c.moveTo(e.tx,e.ty);c.arc(e.tx,e.ty,e.range,-Math.PI/2,-Math.PI/2+k*TAU);c.closePath();c.fill();text(c,e.pattern==='sweep'?'광역 베기':e.pattern==='dive'?'도약 공격':'공격 예고',e.tx,e.ty+5,'#f8d5b8',10);}
       const target=g.target(),objects=[];
       for(const b of a.blocks)objects.push({y:b.y+b.h,draw:()=>prop(c,b,a.theme)});
       for(const b of scene.decorations)objects.push({y:b.y,draw:()=>bamboo(c,b.x,b.y,b.scale,t)});
-      for(const o of a.points.filter(o=>!root.ChronicleRules||ChronicleRules.visiblePoint(g,o)))objects.push({y:o.y,draw:()=>{
+      for(const o of (g.points?g.points():a.points).filter(o=>root.JourneyRules?JourneyRules.visiblePoint(g,o):!root.ChronicleRules||ChronicleRules.visiblePoint(g,o)))objects.push({y:o.y,draw:()=>{
         const selected=target?.id===o.id,near=dist(o,p)<230;
-        if(['portal','gate','exit','fate-gate','story-gate'].includes(o.kind))portal(c,o,t,a.theme,o.need>g.progress);
+        if(['portal','gate','exit','fate-gate','story-gate','journey-gate'].includes(o.kind))portal(c,o,t,a.theme,o.need>g.progress);
+        else if(['discovery','experiment'].includes(o.kind)&&root.JourneyArt)JourneyArt.prop(c,o,t);
         else if(['mechanism','story-clue'].includes(o.kind)&&root.WuxiaArt)WuxiaArt.mechanism(c,o,t);
         else if(o.kind==='relic')FateArt.relic(c,o,t,g.fate.proven.includes(o.path));
         else if(o.kind==='scar')ClassicArt.scar(c,o,t,g);
@@ -67,9 +68,10 @@
         if(!e.boss&&(e.hp<e.maxHp||dist(e,p)<180)){box(c,e.x-22,e.y-99,44,4,'#15313ae5',1);box(c,e.x-22,e.y-99,44*e.hp/e.maxHp,4,'#d8aa87',1);}
         if(target?.id===e.id)this.marker(c,e,t);
       }});}
+      if(g.experimentRuntime?.companion)objects.push({y:g.experimentRuntime.companion.y,draw:()=>JourneyArt.actor(c,g,t)});
       objects.push({y:p.y,draw:()=>{if(p.invuln>0&&p.dash>0)ellipse(c,p.x,p.y,28,12,'#c5deba66');human(c,p,t,'hero',1.15);if(!ClassicArt.spriteReady())FateArt.costume(c,g,t);text(c,g.fate.path?DualWorld.Fate.PATHS[g.fate.path].title:'윤서',p.x,p.y-111,'#fff3c6',10);}});
       objects.sort((a,b)=>a.y-b.y);for(const o of objects)if(o.y>this.camera.y-150&&o.y<this.camera.y+vh+240)o.draw();
-      for(const f of g.fx){this.effect(c,f);FateArt.effect(c,f,quality);ClassicArt.effect(c,f,quality);}
+      for(const f of g.fx){this.effect(c,f);FateArt.effect(c,f,quality);ClassicArt.effect(c,f,quality);if(root.JourneyArt)JourneyArt.effect(c,f,quality);}
       if(quality>0){const rng=random(842);for(let i=0;i<24;i++){const x=(rng()*a.w+t*(i%2?3:-2)+a.w)%a.w,y=(rng()*a.h+t*.7)%a.h;ellipse(c,x,y,1.2,1.2,'#eee4b54d');}}
       FateArt.atmosphere(c,g,this.camera,vw,vh,quality,t);c.restore();FateArt.overlay(c,g,this.w,this.h,quality);this.edgeMarker(g);this.drawMini(g,this.mini);
     }
@@ -96,7 +98,7 @@
     drawMini(g,canvas,labels=false){
       if(!canvas)return;const c=canvas.getContext('2d'),a=AREAS[g.area],w=canvas.width,h=canvas.height,s=Math.min((w-22)/a.w,(h-22)/a.h),ox=(w-a.w*s)/2,oy=(h-a.h*s)/2;
       c.clearRect(0,0,w,h);box(c,0,0,w,h,'#12282f',3);c.save();c.translate(ox,oy);c.scale(s,s);c.drawImage(this.scenery(g.area).terrain,0,0);for(const b of a.blocks)box(c,b.x,b.y,b.w,b.h,'#c4c7ad4f',4);c.restore();
-      for(const o of a.points.filter(o=>!root.ChronicleRules||ChronicleRules.visiblePoint(g,o))){ellipse(c,ox+o.x*s,oy+o.y*s,o.kind==='portal'?4:3,o.kind==='portal'?4:3,o.need>g.progress?'#708678':o.kind==='seal'?'#beb1d3':'#e1c38a');if(labels)text(c,o.label,ox+o.x*s,oy+o.y*s-9,'#e3dbb2',10);}
+      for(const o of (g.points?g.points():a.points).filter(o=>root.JourneyRules?JourneyRules.visiblePoint(g,o):!root.ChronicleRules||ChronicleRules.visiblePoint(g,o))){ellipse(c,ox+o.x*s,oy+o.y*s,o.kind==='portal'?4:3,o.kind==='portal'?4:3,o.need>g.progress?'#708678':o.kind==='seal'?'#beb1d3':'#e1c38a');if(labels)text(c,o.label,ox+o.x*s,oy+o.y*s-9,'#e3dbb2',10);}
       for(const e of g.enemies)if(e.hp>0)ellipse(c,ox+e.x*s,oy+e.y*s,e.boss?4:2,e.boss?4:2,'#d39987');const p=g.player,x=ox+p.x*s,y=oy+p.y*s;polygon(c,[[x,y-6],[x+4,y+4],[x,y+2],[x-4,y+4]],'#fff0af');
       if(!labels){c.strokeStyle='#e0e0b75e';c.lineWidth=1;const x1=clamp(this.camera.x,0,a.w),y1=clamp(this.camera.y,0,a.h),x2=clamp(this.camera.x+this.w/this.zoom,0,a.w),y2=clamp(this.camera.y+this.h/this.zoom,0,a.h);c.strokeRect(ox+x1*s,oy+y1*s,(x2-x1)*s,(y2-y1)*s);}
     }

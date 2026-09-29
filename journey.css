@@ -1,0 +1,15 @@
+/* Notebook is paused and scrollable; gameplay tools never mask the combat cluster. */
+.journey-tools{position:absolute;left:24px;top:244px;display:flex;gap:7px;z-index:4;pointer-events:auto}
+.journey-tools button{min-width:76px;min-height:38px;padding:7px 10px;border:1px solid #c6bc91;background:#253d48eb;color:#f4e5b9;border-radius:4px;font-size:12px;box-shadow:0 3px 12px #15312d44}
+.journey-tools kbd{margin-left:7px;font-size:10px;opacity:.7}.journey-tools .sensing{border-color:#b8f4d9;background:#305f5b}.journey-tools button:disabled{opacity:.45}
+.notebook{white-space:normal}.notebook p{white-space:pre-line;line-height:1.85}.notebook-muted{font-size:12px;color:#bcd0c3}
+.notebook-tabs{display:flex;flex-wrap:wrap;gap:6px;position:sticky;top:0;background:#263e50;z-index:2;padding:4px 0 9px;border-bottom:1px solid #cfbf8644}
+.notebook-action{min-height:38px;padding:8px 11px;margin:4px 5px 4px 0;border:1px solid #b4b89e80;border-radius:3px;background:#1a354699;color:#e9e5c8;font-size:12px}
+.notebook-action:hover:not(:disabled),.notebook-action.selected{background:#c9b586;color:#163943}.notebook-action:disabled{opacity:.45;cursor:default}
+.observed-fact{padding:12px 14px;margin:10px 0;border-left:2px solid #d6c399;background:#7388751c}.observed-fact small{color:#e4d3a5}.observed-fact p{margin:6px 0}
+.interpret-card{padding:12px 16px;border:1px solid var(--interpret-color);margin:13px 0;border-radius:4px;background:#19364766}.interpret-card h3{color:var(--interpret-color);margin:3px 0 10px}.interpret-card small{display:block;color:#bcceca}
+.interpret-seal{float:right;width:74px;height:74px;border:1px solid var(--interpret-color);border-radius:50%;text-align:center;font:45px/74px Georgia,serif;color:var(--interpret-color);margin:0 0 10px 12px}
+.simulation-notice{padding:12px;border:1px solid #dab780;background:#d1c69717;color:#eee0af;font-weight:600}.other-journey{border-bottom:1px solid #b0c8b633;padding:10px 0}.other-journey b{color:#a9dae1}.other-journey p{font-size:13px}
+.mastery-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px;padding:7px 0;font-size:12px}.mastery-row progress{width:100%;height:6px;accent-color:#b8cda5}
+@media(max-width:1099px),(pointer:coarse){.journey-tools{left:12px;top:207px;gap:5px}.journey-tools button{min-width:65px;min-height:34px;font-size:10px;padding:6px 8px}.journey-tools kbd{display:none}.notebook-tabs{gap:4px}.notebook-tabs .notebook-action{font-size:10px;flex:1;padding:7px 4px;margin:0;min-width:58px}.notebook-action{font-size:11px;min-height:36px}.notebook-muted{font-size:11px}.interpret-card{padding:10px}.interpret-seal{width:52px;height:52px;font-size:30px;line-height:52px}}
+@media(max-height:520px) and (min-width:600px){.journey-tools{left:12px;top:165px;flex-direction:column;gap:4px}.journey-tools button{min-height:32px;min-width:82px;padding:5px 7px}.notebook-tabs{position:static}.interpret-seal{display:none}}

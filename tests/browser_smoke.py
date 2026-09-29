@@ -3,7 +3,7 @@ import argparse, json, os, re, subprocess, time
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 ROOT=Path(__file__).resolve().parents[1]
-INSTRUMENT="""(() => {let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(value){api=value;const Base=api.Game;api.Game=class extends Base{constructor(...args){super(...args);window.__game=this;}static load(text){const g=Base.load(text);window.__game=g;return g;}};}});})();"""
+INSTRUMENT="""(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api},set(v){api=v;for(const k of ['save','step']){const original=api.Game.prototype[k];api.Game.prototype[k]=function(...args){window.__game=this;return original.apply(this,args)}}}})})();"""
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--red',action='store_true');parser.add_argument('--url');parser.add_argument('--output',default=str(ROOT/'.superpowers/v03/screens'));args=parser.parse_args()
     out=Path(args.output);out.mkdir(parents=True,exist_ok=True)
@@ -20,8 +20,9 @@ def main():
         page.set_content(html,wait_until='load')
         page.evaluate(storage_shim,seed or {})
         page.evaluate(INSTRUMENT)
-        page.add_style_tag(content=(ROOT/'style.css').read_text(encoding='utf-8'));page.add_style_tag(content=(ROOT/'classic.css').read_text(encoding='utf-8'))
-        for name in ['world.js','fate.js','legend.js','game.js','art.js','portrait-data.js','classic-art.js','fate-art.js','render.js','app.js']:
+
+        for name in re.findall(r'<link rel="stylesheet"[^>]+href="([^"?]+)',(ROOT/'index.html').read_text()):page.add_style_tag(content=(ROOT/name).read_text())
+        for name in re.findall(r'<script[^>]+src="([^"?]+)',(ROOT/'index.html').read_text()):
             if args.red and name=='app.js':continue
             page.add_script_tag(content=(ROOT/name).read_text(encoding='utf-8'))
     def reload_page(page):

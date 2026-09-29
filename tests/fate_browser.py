@@ -7,7 +7,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright,expect
 from browser_smoke import INSTRUMENT
 ROOT=Path(__file__).resolve().parents[1]
-FILES=['world.js','fate.js','legend.js','game.js','art.js','portrait-data.js','classic-art.js','fate-art.js','render.js','app.js']
+FILES=re.findall(r'<script[^>]+src="([^"?]+)',(ROOT/'index.html').read_text())
 def main():
  parser=argparse.ArgumentParser();parser.add_argument('--url');parser.add_argument('--output',default='.superpowers/v04/fate-screens');parser.add_argument('--red',action='store_true');args=parser.parse_args();out=Path(args.output);out.mkdir(parents=True,exist_ok=True);checks=[]
  with sync_playwright() as pw:
@@ -16,7 +16,8 @@ def main():
    page.on('pageerror',lambda e:errors.append(str(e)))
    if args.url:page.goto(args.url,wait_until='load')
    else:
-    page.goto('about:blank');page.set_content(re.sub(r'<script[^>]*>.*?</script>|<link rel="stylesheet"[^>]*>','',(ROOT/'index.html').read_text(),flags=re.S));page.evaluate("()=>{const m=new Map();Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}})}");page.evaluate(INSTRUMENT);page.add_style_tag(content=(ROOT/'style.css').read_text());page.add_style_tag(content=(ROOT/'classic.css').read_text());
+    page.goto('about:blank');page.set_content(re.sub(r'<script[^>]*>.*?</script>|<link rel="stylesheet"[^>]*>','',(ROOT/'index.html').read_text(),flags=re.S));page.evaluate("()=>{const m=new Map();Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}})}");page.evaluate(INSTRUMENT);
+    for f in re.findall(r'<link rel="stylesheet"[^>]+href="([^"?]+)',(ROOT/'index.html').read_text()):page.add_style_tag(content=(ROOT/f).read_text())
     for f in FILES:
      if (ROOT/f).exists():page.add_script_tag(content=(ROOT/f).read_text())
    page.locator('#start').click();page.locator('#dialogActions button').first.click();page.wait_for_timeout(80)

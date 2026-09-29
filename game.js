@@ -188,7 +188,7 @@
       if(e.trial){Fate.reward(this,e);return;}
       const gold=e.boss?110:16;this.gold=Math.min(999999,this.gold+gold);this.xp+=e.boss?145:32;
       this.effect('text',e.x,e.y-20,{text:`+${gold} 금화`,color:'#d5bd82',life:1.1,max:1.1});this.emit('sound',{name:'reward'});
-      while(this.level<80&&this.xp>=this.stats().next){this.xp-=this.stats().next;this.level++;this.player.hp=Math.min(this.stats().hp,this.player.hp+45);this.player.mp=this.stats().mp;this.toast(`경지 상승 · Lv.${this.level}`);this.effect('heal',this.player.x,this.player.y,{life:1,max:1});}
+      while(this.level<80&&this.xp>=this.stats().next){this.xp-=this.stats().next;this.level++;this.player.hp=Math.min(this.stats().hp,this.player.hp+45);this.player.mp=this.stats().mp;this.toast(`레벨 상승 · Lv.${this.level}`);this.effect('heal',this.player.x,this.player.y,{life:1,max:1});}
       this.xp=Math.min(this.xp,this.stats().next-1);
       if(e.boss){
         if(Fate.reward(this,e))return;

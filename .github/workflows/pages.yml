@@ -45,6 +45,7 @@ jobs:
           python tests/legend_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/legend
           python tests/v06_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v06
           python tests/perf_browser.py --url=http://127.0.0.1:3000/
+          python tests/v07_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v07
       - name: Keep browser test evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -53,11 +54,7 @@ jobs:
           path: browser-results/
           if-no-files-found: ignore
       - name: Prepare browser assets only
-        run: |
-          mkdir -p site
-          cp sequel.js wuxia-direction.js wuxia-data.js wuxia-art.js wuxia.css index.html world.js fate.js legend.js game.js art.js portrait-data.js classic-art.js fate-art.js render.js app.js style.css classic.css site/
-          touch site/.nojekyll
-          printf '{"version":"0.6.0","commit":"%s"}\n' "$GITHUB_SHA" > site/build-info.json
+        run: node scripts/build-site.cjs site "$GITHUB_SHA"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
@@ -74,7 +71,17 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/configure-pages@v5
       - name: Deploy verified game
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify live version and all runtime bytes
+        run: python3 scripts/check-live.py --url=https://herothgf-cell.github.io/project-a/ --commit="$GITHUB_SHA"
+      - name: Keep live release receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-release-receipt
+          path: live-receipt.json
