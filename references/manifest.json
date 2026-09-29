@@ -1,0 +1,40 @@
+{
+  "project": "Ssanggye / project-a",
+  "base_commit": "c1f33e39a4394528a77c6809c71bab2491ecddf4",
+  "required_attachment": "ssanggye-codex-art-production-handoff-v09.zip",
+  "repo_embedded_binary_references": false,
+  "usage": "Open every reference from the required attachment before production. These are direction boards, not runtime-ready assets. Text inside concept boards is non-authoritative; code/spec docs define names and gameplay.",
+  "references": [
+    {
+      "id": "R01",
+      "path": "references/codex-art/reality-world-reference.webp",
+      "description": "현실 세계 건축/플레이어/NPC/몬스터 컨셉 모음.",
+      "production_ready": false
+    },
+    {
+      "id": "R02",
+      "path": "references/codex-art/murim-world-reference.webp",
+      "description": "무림 세계 건축/플레이어/NPC/몬스터 컨셉 모음.",
+      "production_ready": false
+    },
+    {
+      "id": "R03",
+      "path": "references/codex-art/combat-vfx-reference.webp",
+      "description": "전체 아트 방향과 현재 무공/전투 연출 컨셉 모음.",
+      "production_ready": false
+    },
+    {
+      "id": "R16",
+      "path": "references/codex-art/R16-current-mixed-world.webp",
+      "description": "현실 화면의 공통 절차형 몸체/혼합 아트 문제 재현 캡처.",
+      "production_ready": false
+    }
+  ],
+  "full_size_sources": "references/source-boards/",
+  "priority": [
+    "R16",
+    "R01",
+    "R02",
+    "R03"
+  ]
+}
