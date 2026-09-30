@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-30",
+  "tool": "built-in image_gen",
+  "status": "prototype-candidate, not final-art approval",
+  "accepted": [
+    {
+      "id": "murim.enemy.masked.rear",
+      "path": "assets/art/murim/enemy/masked-rear-candidate-v1.png",
+      "generated": "exec-354d0add-79d6-4ad5-8bcf-10265b1dba65.png",
+      "prompt": "Use case: identity-preserve. Input image is identity reference ONLY. Create a NEW back-view game sprite sheet of this exact masked cult swordsman, black torn robes, red ribbons, curved sword. Every pose faces NORTHWEST (away from viewer, upper left). Show BACK of head and torso, NOT front mask or front core. Transparent RGBA background, no colored backdrop. EXACTLY 3 columns and 2 rows, 1536x1024, six 512x512 cells. One whole character per cell centered within a 380x380 area with generous transparent margins. Reading order: idle; walking stride; attack windup; attack contact extension; recoiling from hit; dead collapsed on ground. Preserve distinctive costume and proportions. NO labels, arrows, grid, text, scenery or added effects. Full body and full weapon fit inside every cell. Rear view is the primary requirement. Not a turnaround board: six separate usable sprites of ONE rear direction.",
+      "limitations": "Six single key poses; rear oblique view, no full rear gait cycle. Variable atlas crop gutters audited; PNG unedited."
+    },
+    {
+      "id": "reality.enemy.drone.rear",
+      "path": "assets/art/reality/enemy/drone-rear-candidate-v1.png",
+      "generated": "exec-dc5a4f57-3470-4fa6-8b1f-9fc5ac3cf35d.png",
+      "prompt": "Use case: identity-preserve. Input image is identity reference ONLY. Create a NEW back-view game sprite sheet of this exact black twin-ring-rotor surveillance drone, articulated claws and blue core. Every pose faces NORTHWEST (away from viewer, upper left). Show BACK of head and torso, NOT front mask or front core. Transparent RGBA background, no colored backdrop. EXACTLY 3 columns and 2 rows, 1536x1024, six 512x512 cells. One whole character per cell centered within a 380x380 area with generous transparent margins. Reading order: idle; walking stride; attack windup; attack contact extension; recoiling from hit; dead collapsed on ground. Preserve distinctive costume and proportions. NO labels, arrows, grid, text, scenery or added effects. Full body and full weapon fit inside every cell. Rear view is the primary requirement. Not a turnaround board: six separate usable sprites of ONE rear direction.",
+      "limitations": "Six single key poses; rear oblique view. Variable atlas crop gutters audited; PNG unedited."
+    }
+  ],
+  "rejected": [
+    {
+      "id": "bandit",
+      "prompt": "Use case: precise-object-edit. Game-ready transparent RGBA enemy key-pose sheet. Use input only as identity/costume reference. Produce 1024x1536, exact 4 columns x6 rows, each cell256x256. Columns ALWAYS SE facing down-right, SW facing down-left, NW back facing up-left, NE back facing up-right. Back views must actually show back not mirrored faces. Rows: 1 idle,2 walking stride,3 attack windup raised weapon/claw,4 committed attack contact extension,5 recoil hit,6 dead collapsed on ground. Same single full-body creature in every cell, no detached parts, no head replacement, no glow outside silhouette, no scenery/text/grid. All body+weapon within central180x190 of each cell with at least30px transparent gutter. Constant anatomy and costume, proper weapon hand. This is a four-direction six-state prototype, not six same-direction animation rows. Preserve stocky topknot red-scarf bandit and curved short saber.",
+      "reason": "Required directions inconsistent across actions."
+    },
+    {
+      "id": "shade",
+      "prompt": "Use case: precise-object-edit. Game-ready transparent RGBA enemy key-pose sheet. Use input only as identity/costume reference. Produce 1024x1536, exact 4 columns x6 rows, each cell256x256. Columns ALWAYS SE facing down-right, SW facing down-left, NW back facing up-left, NE back facing up-right. Back views must actually show back not mirrored faces. Rows: 1 idle,2 walking stride,3 attack windup raised weapon/claw,4 committed attack contact extension,5 recoil hit,6 dead collapsed on ground. Same single full-body creature in every cell, no detached parts, no head replacement, no glow outside silhouette, no scenery/text/grid. All body+weapon within central180x190 of each cell with at least30px transparent gutter. Constant anatomy and costume, proper weapon hand. This is a four-direction six-state prototype, not six same-direction animation rows. Preserve slender black-blue crystalline claw humanoid with blue chest core, absolutely no clothes or sword.",
+      "reason": "Required directions inconsistent across actions."
+    },
+    {
+      "id": "masked",
+      "prompt": "undefined Preserve slender black red cloaked silver-mask cult swordsman short curved saber.",
+      "reason": "Required directions inconsistent across actions."
+    },
+    {
+      "id": "drone",
+      "prompt": "undefined Preserve small mechanical blue-core twin-rotor flying drone with metal claws. No human anatomy. Windup charge, contact extended claws, hit tilted recoil, death collapsed machine. Back views show rear casing not front core.",
+      "reason": "Wrong layout with labels; not a runtime sprite atlas."
+    }
+  ]
+}

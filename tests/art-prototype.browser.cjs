@@ -20,7 +20,9 @@ const {buildSite}=require('../scripts/build-site.cjs');
   const areas=await p.evaluate(()=>Object.keys(DualWorld.AREAS));assert.equal(areas.length,12);
   for(const area of areas){
    await p.evaluate(area=>{__game.enter(area);__game.events=[];__game.player.invuln=999;},area);
+   await p.waitForFunction(()=>{const world=DualWorld.AREAS[__game.area].world==='현실'?'reality':'murim';return ArtPreview.diagnostics.get(world+'.hero')?.status==='candidate'&&ArtPreview.diagnostics.get(world+'.ground-dressing')?.count>0;});
    await p.waitForFunction(()=>ArtPreview.residency.pending===0);
+   await p.waitForTimeout(250);
    await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
    assert.equal(await p.evaluate(()=>ArtPreview.error),null);assert.equal(await p.evaluate(()=>__game.area),area);
    await p.screenshot({path:path.join(evidence,area+'.png')});

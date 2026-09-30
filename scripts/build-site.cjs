@@ -30,7 +30,8 @@ function buildSite({root=path.join(__dirname,'..'),out,commit,requireApprovedArt
  }
  payloads.set(catalogPath,Buffer.from(JSON.stringify(runtime,null,2)+'\n'));
  if(includePrototype){
-  payloads.set('art-play.html',Buffer.from(html.replace('</head>','<script>globalThis.SSANGGYE_PROTOTYPE=true;</script><script defer src="art-runtime.js"></script><script defer src="art-preview-runtime.js"></script></head>')));
+  payloads.set('art-play.html',Buffer.from(require('./prototype-html.cjs').prototypeHtml(html,{commit,publicBuild:true})));
+  payloads.set('index.html',payloads.get('art-play.html'));
   payloads.set('art-review.html',Buffer.from(payloads.get('art-review.html').toString().replace('LOCAL REVIEW','PROTOTYPE REVIEW').replace('href="/"','href="art-play.html"')));
  }
  // Refuse stale output rather than leaving previously copied documents/candidates online.

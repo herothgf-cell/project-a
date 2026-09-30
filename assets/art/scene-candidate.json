@@ -103,6 +103,30 @@
                 ]
               }
             }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.64453125,
+                0.95703125
+              ],
+              "duration": 1.2,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  330,
+                  490
+                ]
+              }
+            }
           ]
         },
         "move": {
@@ -188,6 +212,30 @@
                 "foot": [
                   138,
                   238
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.498046875,
+                0.9375
+              ],
+              "duration": 0.48,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  255,
+                  480
                 ]
               }
             }
@@ -279,6 +327,30 @@
                 ]
               }
             }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.458984375,
+                0.947265625
+              ],
+              "duration": 0.4,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  235,
+                  485
+                ]
+              }
+            }
           ]
         },
         "attack": {
@@ -364,6 +436,30 @@
                 "foot": [
                   99,
                   217
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                0,
+                512,
+                550,
+                512
+              ],
+              "pivot": [
+                0.5181818181818182,
+                0.908203125
+              ],
+              "duration": 0.4,
+              "displayHeight": 153.6,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  285,
+                  465
                 ]
               }
             }
@@ -455,6 +551,30 @@
                 ]
               }
             }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                550,
+                512,
+                463,
+                512
+              ],
+              "pivot": [
+                0.6047516198704104,
+                0.83984375
+              ],
+              "duration": 0.12,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  280,
+                  430
+                ]
+              }
+            }
           ]
         },
         "death": {
@@ -543,13 +663,44 @@
                 ]
               }
             }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                1013,
+                512,
+                523,
+                512
+              ],
+              "pivot": [
+                0.5353728489483748,
+                0.830078125
+              ],
+              "duration": 0.6,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  280,
+                  425
+                ]
+              }
+            }
           ]
         }
       },
       "review": {
         "visual": false,
         "evidence": [],
-        "note": "Independent concept-derived runtime candidate; SE actions only. No spawning/rule changes; other directions remain BLOCKED_ART."
+        "note": "Independent concept-derived prototype. Rear is one key pose per state; oblique direction and gait simplified, not final animation."
+      },
+      "atlases": {
+        "rear": {
+          "path": "assets/art/murim/enemy/masked-rear-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        }
       }
     },
     {
@@ -1203,6 +1354,30 @@
                 ]
               }
             }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.537109375,
+                0.8203125
+              ],
+              "duration": 1.2,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  275,
+                  420
+                ]
+              }
+            }
           ]
         },
         "move": {
@@ -1288,6 +1463,30 @@
                 "foot": [
                   138,
                   194
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.52734375,
+                0.87890625
+              ],
+              "duration": 0.48,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  270,
+                  450
                 ]
               }
             }
@@ -1379,6 +1578,30 @@
                 ]
               }
             }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.52734375,
+                0.87890625
+              ],
+              "duration": 0.4,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  270,
+                  450
+                ]
+              }
+            }
           ]
         },
         "attack": {
@@ -1464,6 +1687,30 @@
                 "foot": [
                   138,
                   182
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                0,
+                512,
+                585,
+                512
+              ],
+              "pivot": [
+                0.5128205128205128,
+                0.859375
+              ],
+              "duration": 0.4,
+              "displayHeight": 128,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  300,
+                  440
                 ]
               }
             }
@@ -1555,6 +1802,30 @@
                 ]
               }
             }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                585,
+                512,
+                425,
+                512
+              ],
+              "pivot": [
+                0.5411764705882353,
+                0.80078125
+              ],
+              "duration": 0.12,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  230,
+                  410
+                ]
+              }
+            }
           ]
         },
         "death": {
@@ -1643,13 +1914,44 @@
                 ]
               }
             }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                1010,
+                512,
+                526,
+                512
+              ],
+              "pivot": [
+                0.5228136882129277,
+                0.849609375
+              ],
+              "duration": 0.6,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  275,
+                  435
+                ]
+              }
+            }
           ]
         }
       },
       "review": {
         "visual": false,
         "evidence": [],
-        "note": "Independent concept-derived runtime candidate; SE actions only. No spawning/rule changes; other directions remain BLOCKED_ART."
+        "note": "Independent concept-derived prototype. Rear is one key pose per state; oblique direction and gait simplified, not final animation."
+      },
+      "atlases": {
+        "rear": {
+          "path": "assets/art/reality/enemy/drone-rear-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        }
       }
     },
     {

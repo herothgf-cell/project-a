@@ -20,7 +20,7 @@ function createServer({artReview=false}={}){
   const file=url==='/'?'index.html':url.slice(1);if(!allowed.has(file)){res.writeHead(404);return res.end('Not found');}
   fs.readFile(path.join(__dirname,file==='art-play.html'?'index.html':file),(error,content)=>{
    if(error){res.writeHead(500);return res.end('Unable to read game asset');}
-   if(file==='art-play.html')content=Buffer.from(content.toString('utf8').replace('</head>','<script defer src="art-runtime.js"></script><script defer src="art-preview-runtime.js"></script></head>'));
+   if(file==='art-play.html')content=Buffer.from(require('./scripts/prototype-html.cjs').prototypeHtml(content.toString('utf8')));
    res.writeHead(200,{'Content-Type':types[path.extname(file)]});res.end(req.method==='HEAD'?undefined:content);
   });
 });}

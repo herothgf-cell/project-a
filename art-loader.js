@@ -73,6 +73,50 @@
   function files({preview=false}={}){return [...new Set(manifest.assets.filter(a=>a.status==='approved'||preview&&a.status==='candidate').flatMap(a=>[a.atlas,...Object.values(a.atlases||{})].map(s=>s.path)))];}
   return {resolve,sample,releaseIssues,files,manifest};
  }
+ function prototypeProfile(input){
+  const result=JSON.parse(JSON.stringify(input));
+  for(const a of result.assets)if(a.entityId==='hero')for(const [action,indices]of Object.entries({walk:[0,1,3,4],hit:[0,3]})){
+   for(const [facing,frames]of Object.entries(a.clips?.[action]||{}))if(frames.length>indices.length){
+    const total=frames.reduce((sum,f)=>sum+f.duration,0);
+    a.clips[action][facing]=indices.map(i=>({...frames[i],duration:total/indices.length}));
+   }
+  }
+  for(const a of result.assets)if(a.kind==='enemy')for(const facings of Object.values(a.clips||{})){
+   // Prototype-only whole-sprite reflection, never a different entity or world.
+   for(const [from,to]of [['se','sw'],['nw','ne']])if(facings[from]&&!facings[to])facings[to]=facings[from].map(f=>({...f,flipX:!f.flipX}));
+  }
+  return result;
+ }
+ function createContinuityCatalog(source,images){
+  const last=new Map(),directions=['e','se','s','sw','w','nw','n','ne'];
+  function read(method,q,options={}){
+   let used={...q},v=source[method](q,options);
+   const a=source.manifest.assets.find(a=>a.world===q.world&&a.entityId===q.entityId);
+   if(!a||a.status==='BLOCKED_ART'||a.status!=='approved'&&!options.preview)return v;
+   if(method==='sample'&&(!Number.isFinite(q.elapsed)||q.elapsed<0))return v;
+   if(v.status==='BLOCKED_ART'&&v.reason?.startsWith('missing clip')){
+    const facings=Object.keys(a.clips[q.action]||{}),index=directions.indexOf(q.facing);
+    const distance=f=>{const d=Math.abs(directions.indexOf(f)-index);return Math.min(d,8-d);};
+    if(index>=0&&facings.length){used.facing=facings.sort((x,y)=>distance(x)-distance(y))[0];v=source[method](used,options);}
+    else if(q.action.startsWith('portrait-')){used.action='portrait-neutral';v=source[method](used,options);}
+   }
+   const actor=a.kind==='actor'||a.kind==='enemy'||a.kind==='npc',portrait=q.action.startsWith('portrait-');
+   const key=q.world+':'+q.entityId+':'+(portrait?'portrait':actor?'body':q.action);
+   if(v.status!=='BLOCKED_ART'&&images.request(v)){
+    const result={...v,substituted:used.facing!==q.facing||used.action!==q.action,actualFacing:used.facing,actualAction:used.action};
+    last.delete(key);last.set(key,result);while(last.size>80)last.delete(last.keys().next().value);return result;
+   }
+   const held=last.get(key);
+   if(held&&images.get(held.atlas.path))return {...held,substituted:true,reason:v.reason||images.failure(v.atlas.path)||'loading image'};
+   // A known idle pose is preferable to resurrecting the retired renderer.
+   if(actor&&!portrait&&q.action!=='idle'){
+    const idle=read('resolve',{...q,action:'idle',frame:0},options);
+    if(idle.status!=='BLOCKED_ART')return {...idle,substituted:true};
+   }
+   return {...v,status:'BLOCKED_ART',reason:v.reason||images.failure(v.atlas?.path)||'loading image'};
+  }
+  return {resolve:(q,o)=>read('resolve',q,o),sample:(q,o)=>read('sample',q,o)};
+ }
  function createImageCache({ImageClass=globalThis.Image,maxEntries=24}={}){
   const cache=new Map();
   async function load(visual){
@@ -105,7 +149,7 @@
    if(!Number.isFinite(cost)||cost<=0||cost>maxBytes){failed.set(path,'image exceeds resident budget');return null;}
    pending.add(path);queue.push({visual,path,cost});pump();return null;
   }
-  return {request,get,failure:path=>failed.get(path),get bytes(){return bytes;},get size(){return resident.size;},get pending(){return pending.size;}};
+  return {request,get,retryFailures:()=>failed.clear(),failure:path=>failed.get(path),get failures(){return failed.size;},get bytes(){return bytes;},get size(){return resident.size;},get pending(){return pending.size;}};
  }
- return {safePath,validate,createCatalog,createImageCache,createResidentImages};
+ return {safePath,validate,createCatalog,prototypeProfile,createContinuityCatalog,createImageCache,createResidentImages};
 });

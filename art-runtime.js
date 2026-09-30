@@ -21,9 +21,13 @@
   return {world,entityId,action,semanticAction,facing,elapsed:active?time-a.startedAt:e.walking?(m.stride||0)*.72/50:time,loop:!active};
  }
  function placement(visual,e,height){
-  const f=visual.frame,r=f.rect,p=f.pivot,scale=height/r[3],w=r[2]*scale,x=e.x-w*p[0],y=e.y-height*p[1],sockets={};
-  for(const [name,point]of Object.entries(f.sockets||{}))sockets[name]={x:x+point[0]*scale,y:y+point[1]*scale};
+  const f=visual.frame,r=f.rect,p=f.pivot,scale=height/r[3],w=r[2]*scale,x=e.x-w*(f.flipX?1-p[0]:p[0]),y=e.y-height*p[1],sockets={};
+  for(const [name,point]of Object.entries(f.sockets||{}))sockets[name]={x:x+(f.flipX?r[2]-point[0]:point[0])*scale,y:y+point[1]*scale};
   return {destination:[x,y,w,height],sockets};
+ }
+ function drawFrame(c,image,visual,placed){
+  if(!visual.frame.flipX){c.drawImage(image,...visual.frame.rect,...placed.destination);return;}
+  const [x,y,w,h]=placed.destination;c.save();c.translate(x+w,y);c.scale(-1,1);c.drawImage(image,...visual.frame.rect,0,0,w,h);c.restore();
  }
  function npcIdentity(world,id){
   const ids={reality:{warden:'seorin',shop:'supply',partner:'dogyeom','witness-hunter':'dogyeom',hunter:'dogyeom'},murim:{master:'baekryun',shop:'apothecary','returned-yeonhwa':'yeonhwa','stranded-yeonhwa':'yeonhwa',yeonhwa:'yeonhwa'}};
@@ -32,6 +36,12 @@
  function environmentIdentity(area,index){
   const world=area==='city'?'reality':area==='village'?'murim':null;
   return world&&Number.isInteger(index)&&index>=0?{world,entityId:'environment.'+area,action:'building-'+index,facing:'none'}:null;
+ }
+ function blockVisual(world,kind){
+  if(!['reality','murim'].includes(world))return null;
+  if(kind==='rock')return {entityId:'environment.dressing',cell:world==='murim'?1:3,flat:true};
+  const cells=world==='reality'?{building:0,container:3,crate:3,ruin:1}:{temple:0,templeruin:0,house:1,ruin:0};
+  return Object.hasOwn(cells,kind)?{entityId:'environment.buildings',cell:cells[kind]}:null;
  }
  function portalState(g,o){
   if(o.id==='portal'&&g.progress===0||o.need>g.progress)return 'locked';
@@ -80,7 +90,7 @@
   if(action==='death')angle=e.motion?.enemyDeathAngle??angle;
   else if(action==='telegraph'&&Math.hypot(e.tx-e.x,e.ty-e.y)>.01)angle=Math.atan2(e.ty-e.y,e.tx-e.x);
   else if(action==='attack')angle=e.motion?.enemyAttackAngle??angle;
-  const facing=directions[((Math.round(angle/(Math.PI/4))%8)+8)%8];
+  const facing=observed.fourDirections?['se','sw','nw','ne'][((Math.round((angle-Math.PI/4)/(Math.PI/2))%4)+4)%4]:directions[((Math.round(angle/(Math.PI/4))%8)+8)%8];
   return {world,entityId:'enemy.'+e.kind,action,facing,elapsed,loop};
  }
  function groundDetails(area,world){
@@ -123,5 +133,5 @@
    c.drawImage(image,...rect,0,0,size,size);c.restore();
   }
  }
- return {query,placement,npcIdentity,environmentIdentity,portalState,effectQuery,effectRotation,fieldVisual,enemyQuery,groundDetails,foregroundDetails,drawTerrainRepeat};
+ return {query,placement,drawFrame,npcIdentity,environmentIdentity,blockVisual,portalState,effectQuery,effectRotation,fieldVisual,enemyQuery,groundDetails,foregroundDetails,drawTerrainRepeat};
 });

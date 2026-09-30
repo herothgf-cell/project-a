@@ -7,13 +7,15 @@ test('explicit prototype build packages candidate play without promoting product
   assert.ok(fs.existsSync(path.join(out,'art-play.html')),'prototype entry is missing');
   const html=fs.readFileSync(path.join(out,'art-play.html'),'utf8');
   assert.match(html,/art-preview-runtime.js/);assert.match(html,/SSANGGYE_PROTOTYPE/);
+  assert.match(html,/data-art-loading/);
+  for(const [,url]of html.matchAll(/(?:src|href)="([^"\s]+\.(?:js|css)[^"\s]*)"/g))assert.ok(url.endsWith('?build='+'c'.repeat(40)),url);
   const manifest=JSON.parse(fs.readFileSync(path.join(out,'asset-manifest.json')));
   for(const file of ['art-runtime.js','art-preview-runtime.js','art-review.html','assets/art/scene-candidate.json'])assert.ok(manifest.assets[file],file);
   const scene=JSON.parse(fs.readFileSync(path.join(out,'assets/art/scene-candidate.json')));
   assert.ok(scene.assets.every(a=>a.status==='candidate'));
   for(const a of scene.assets)for(const atlas of [a.atlas,...Object.values(a.atlases||{})].filter(Boolean))assert.ok(manifest.assets[atlas.path],atlas.path);
   assert.equal(fs.existsSync(path.join(out,'references')),false);
-  assert.equal(fs.readFileSync(path.join(out,'index.html'),'utf8').includes('art-preview-runtime.js'),false);
+  assert.equal(fs.readFileSync(path.join(out,'index.html'),'utf8').includes('art-preview-runtime.js'),true,'public root must use the current art, not the retired entry');
  }finally{fs.rmSync(out,{recursive:true,force:true});}
 });
 test('site build contains every versioned runtime asset and records exactly their source hashes',()=>{

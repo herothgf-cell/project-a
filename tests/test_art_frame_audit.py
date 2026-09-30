@@ -58,6 +58,17 @@ class FrameAuditTests(unittest.TestCase):
                         result = self.api.audit_frame(image, frame)
                         self.assertEqual(result['status'], 'needs_visual_review', result)
 
+    def test_new_rear_key_poses_have_clear_cell_boundaries(self):
+        root = SCRIPT.parents[1]
+        manifest = json.loads((root / 'assets/art/scene-candidate.json').read_text(encoding='utf-8'))
+        for asset in manifest['assets']:
+            if asset['entityId'] not in ('enemy.masked', 'enemy.drone'):
+                continue
+            for action, facings in asset['clips'].items():
+                for frame in facings['nw']:
+                    with self.subTest(asset=asset['id'], action=action), Image.open(root / asset['atlases'][frame['atlas']]['path']) as image:
+                        self.assertEqual(self.api.audit_frame(image, frame)['status'], 'needs_visual_review')
+
     def test_hero_motion_cells_do_not_clip_boots_hair_or_weapons(self):
         root = SCRIPT.parents[1]
         for world in ('reality', 'murim'):

@@ -1,6 +1,11 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),Art=require('../art-loader.js');
 const visual=(name,size=4)=>({status:'candidate',atlas:{path:`assets/art/reality/test/${name}.png`,width:size,height:size}});
+test('explicit retry recovers a failed image without reloading the game or save',async()=>{
+ let attempt=0;const v=visual('retry'),c=Art.createResidentImages({load:async()=>++attempt===1?{status:'BLOCKED_ART',reason:'network'}:{status:'loaded',image:{ok:true}}});
+ c.request(v);await new Promise(setImmediate);assert.equal(c.failure(v.atlas.path),'network');
+ c.retryFailures();c.request(v);await new Promise(setImmediate);assert.equal(c.get(v.atlas.path).ok,true);assert.equal(attempt,2);
+});
 test('failed asynchronous images notify a static review page so loading does not hang',async()=>{
  const errors=[];const c=Art.createResidentImages({load:async()=>({status:'BLOCKED_ART',reason:'network'}),onError:(path,reason)=>errors.push({path,reason})});
  c.request(visual('missing'));await new Promise(setImmediate);
