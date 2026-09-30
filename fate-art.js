@@ -44,10 +44,11 @@
     else {polygon(c,[[o.x-15,o.y-74+bob],[o.x+15,o.y-74+bob],[o.x+11,o.y-29+bob],[o.x-11,o.y-29+bob]],'#b4d1b4',col);text(c,'結',o.x,o.y-43+bob,'#225e62',21);}
     c.globalAlpha=1;if(proven)text(c,'증명',o.x,o.y+32,col,12);c.restore();
   }
+  function field(c,f,q,t){const col=colors.seal;c.save();ellipse(c,f.x,f.y,f.radius,f.radius,'#42c7bd14');c.strokeStyle=col+'a0';c.lineWidth=2;c.beginPath();c.arc(f.x,f.y,f.radius,0,TAU);c.stroke();rune(c,f.x,f.y,f.radius,col+'a0',t*.1,8);if(q>0)rune(c,f.x,f.y,f.radius*.6,col+'60',-t*.14);c.restore();}
   function ground(c,g,q,t){
     const combat=g.combat;
-    if(combat.field){const f=combat.field,col=colors.seal;c.save();ellipse(c,f.x,f.y,f.radius,f.radius,'#42c7bd14');c.strokeStyle=col+'a0';c.lineWidth=2;c.beginPath();c.arc(f.x,f.y,f.radius,0,TAU);c.stroke();rune(c,f.x,f.y,f.radius,col+'a0',t*.1,8);if(q>0)rune(c,f.x,f.y,f.radius*.6,col+'60',-t*.14);c.restore();}
-    if(combat.echo){const e=combat.echo;c.save();c.globalAlpha=.25+Math.sin(t*4)*.06;human(c,{x:e.x,y:e.y,face:e.face,walking:false},0,'hero',1.15);c.globalAlpha=.7;ring(c,e.x,e.y+3,30,colors.echo);text(c,'R · 귀환',e.x,e.y-88,colors.echo,10);c.restore();}
+    if(combat.field)root.FateArt.field(c,combat.field,q,t);
+    if(combat.echo){const e=combat.echo;c.save();c.globalAlpha=.25+Math.sin(t*4)*.06;WorldArt.human(c,root.Presentation?Presentation.echoPose(e):{x:e.x,y:e.y,face:e.face,walking:false},0,'hero',1.15);c.globalAlpha=.7;ring(c,e.x,e.y+3,30,colors.echo);text(c,'R · 귀환',e.x,e.y-88,colors.echo,10);c.restore();}
     const col=colors[g.trial?.path||g.fate.path];if(col){ring(c,g.player.x,g.player.y+3,25,col+'70');if(combat.parry>0){c.save();c.strokeStyle=colors.ripple;c.lineWidth=3;c.beginPath();c.arc(g.player.x,g.player.y-25,43,-2.9,.8);c.stroke();c.restore();}}
     if(q>0&&g.area==='sanctum')for(let i=0;i<(q>1?16:7);i++){const an=i*2.399+t*.08;ellipse(c,755+Math.cos(an)*310,650+Math.sin(an)*150-Math.sin(t+i)*10,1.4,2,'#dfdab68a');}
   }
@@ -94,5 +95,5 @@
   function overlay(c,g,w,h,q){
     const f=g.fx.find(f=>f.kind==='fate-ultimate');if(!f||q<=0)return;const col=colors[f.path];c.save();const k=Math.min(.25,f.life/f.max*.2),gr=c.createLinearGradient(0,0,w,0);gr.addColorStop(0,col);gr.addColorStop(.22,col+'00');gr.addColorStop(.78,col+'00');gr.addColorStop(1,col);c.globalAlpha=k;c.fillStyle=gr;c.fillRect(0,0,w,h);c.restore();
   }
-  root.FateArt={terrain,relic,ground,costume,effect,atmosphere,overlay,colors};
+  root.FateArt={terrain,relic,ground,field,costume,effect,atmosphere,overlay,colors};
 })(globalThis);

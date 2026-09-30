@@ -42,7 +42,7 @@
   if(o.kind==='experiment')return dialog(o.label,'지금은 고요하다. 가까운 물건을 기감으로 읽어 보고 울림이 모일 때 다시 살펴보자.');
   return old.interact.call(this);
  };
- P.act=function(action,...args){if(action==='sense')return this.sense();const r=R(this),s=S(this),p=this.player,at={x:p.x,y:p.y};
+ P.act=function(action,...args){if(action==='sense')return this.sense();const r=R(this),s=S(this),p=this.player,at={x:p.x,y:p.y,face:p.face};
   const result=old.act.call(this,action,...args);if(!result)return result;r.lastAction=this.playTime;
   if(this.area==='archive'){
    const q=r.pulse;

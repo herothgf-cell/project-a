@@ -2,19 +2,22 @@
 (function(root,factory){const api=factory(typeof module==='object'&&module.exports?require('./chapter-five.js'):root.DualWorld);if(typeof module==='object'&&module.exports)module.exports=api;else root.Presentation=api;})(globalThis,function(api){
  'use strict';
  const {Game,AREAS,Fate,dist}=api,proto=Game.prototype;
- const previous={act:proto.act,step:proto.step,enter:proto.enter,takeHit:proto.takeHit};
+ const previous={act:proto.act,step:proto.step,enter:proto.enter,takeHit:proto.takeHit,strike:proto.strike};
  const actionSequences=new WeakMap();
  const DISCLOSURE='실제 멀티 채팅이 아닌 연출 시뮬레이션입니다.';
  const channels=[['all','전체'],['world','월드'],['server','서버'],['recruit','모집'],['system','시스템']];
  const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
  function worldStyle(area){const world=area?.world==='현실'?'현실':'무림';return {world,architecture:world==='현실'?'modern':'martial',npc:world==='현실'?'uniform':'robe',accent:world==='현실'?'#82dbe7':'#e0c18a'};}
  function fresh(){return {stride:0,speed:0,action:'idle',at:-10,angle:Math.PI/2,duration:.32,combo:0};}
+ function echoPose(e){if(!e)return null;return {x:e.x,y:e.y,face:e.presentation?.angle??e.face??Math.PI/2,walking:false,presentationTime:e.presentation?.startedAt,motion:e.presentation?{instance:e.presentation}:{}};}
+ function deathVisible(e,time){return e.hp<=0&&Number.isFinite(e.motion?.deathAt)&&time-e.motion.deathAt>=0&&time-e.motion.deathAt<1.2;}
+ proto.strike=function(e,...args){const hp=e.hp,m=e.motion||(e.motion=fresh()),angle=e.wind>0&&Math.hypot(e.tx-e.x,e.ty-e.y)>.01?Math.atan2(e.ty-e.y,e.tx-e.x):Number.isFinite(m.enemyAttackAt)&&this.playTime-m.enemyAttackAt<.4?m.enemyAttackAngle:m.enemyFacing;const result=previous.strike.call(this,e,...args);if(hp>0&&e.hp<=0){m.deathAt=this.playTime;m.enemyDeathAngle=angle??e.face??Math.PI/4;}return result;};
  proto.takeHit=function(...args){
   const hp=this.player.hp,result=previous.takeHit.apply(this,args);
   if(this.player.hp<hp){const m=this.player.motion||(this.player.motion=fresh()),sequence=(actionSequences.get(this)||0)+1;actionSequences.set(this,sequence);m.reaction=Object.freeze({actionId:'hit-'+sequence,action:'hit',startedAt:this.playTime,contactAt:this.playTime,duration:.18,angle:this.player.face});}
   return result;
  };
- function pose(e,time=0,{linger=false}={}){const motion=e.motion||fresh(),m=motion.instance?{...motion,...motion.instance,at:motion.instance.startedAt}:motion,age=Math.max(0,time-m.at),active=(age<m.duration||linger)&&m.action!=='idle';
+ function pose(e,time=0,{linger=false}={}){const motion={...fresh(),...e.motion},m=motion.instance?{...motion,...motion.instance,at:motion.instance.startedAt}:motion,age=Math.max(0,(e.presentationTime??time)-m.at),active=(age<m.duration||linger)&&m.action!=='idle';
   const u=active?clamp(age/m.duration,0,1):1,angle=active?m.angle:Number.isFinite(e.face)?e.face:Math.PI/2;
   const step=m.stride*Math.PI/25,strength=e.walking?clamp(m.speed/150,0,1):0,foot=Math.sin(step)*strength;
   const magic=active&&['storm','seal','ultimate-seal'].includes(m.action);
@@ -32,14 +35,25 @@
   const m=this.player.motion||(this.player.motion=fresh()),path=Fate.active(this);m.action=action==='signature1'||action==='signature2'?path:action==='ultimate'?'ultimate-'+path:action;m.at=this.playTime;m.angle=this.player.face;m.duration=action==='dash'?.22:action==='ultimate'?.58:.3;m.combo=this.combo;
   const sequence=(actionSequences.get(this)||0)+1;actionSequences.set(this,sequence);
   m.instance=Object.freeze({actionId:'player-'+sequence,action:m.action,input:action,charge,startedAt:m.at,contactAt:['attack','moon','storm'].includes(action)?m.at:null,angle:m.angle,duration:m.duration,combo:m.combo});
+  if(action==='signature1'&&path==='echo'&&this.combat.echo)this.combat.echo.presentation=m.instance;
+  for(const h of [...(this.combat?.pending||[]),...(this.experimentRuntime?.pending||[])])if(!h.actionInstance){h.actionInstance=m.instance;h.presentationAngle=m.angle;}
   for(const f of this.fx)if(!before.has(f)){
    f.actionInstance=m.instance;
+   f.presentationAngle=m.angle;
+   if(f.kind==='interpret-echo-replay')f.presentationPhase='prepare';
    if(['slash','fate-wave'].includes(f.kind)){f.actorBound=true;f.motionAt=m.at;f.motionAngle=m.angle;f.motionCombo=m.combo;}
   }
   return ok;
  };
- proto.step=function(dt,input={}){const entities=[this.player,...this.enemies],positions=entities.map(e=>[e.x,e.y]),t=this.playTime;previous.step.call(this,dt,input);const elapsed=this.playTime-t;if(elapsed<=0)return;
-  entities.forEach((e,i)=>{if(e!==this.player&&!this.enemies.includes(e))return;const d=Math.hypot(e.x-positions[i][0],e.y-positions[i][1]),m=e.motion||(e.motion=fresh());if(d<80)m.stride+=d;m.speed=d<80?d/elapsed:0;e.walking=d>.08;});
+ proto.step=function(dt,input={}){const entities=[this.player,...this.enemies],positions=entities.map(e=>[e.x,e.y]),winds=entities.map(e=>e.wind),priorFx=new Set(this.fx),t=this.playTime;previous.step.call(this,dt,input);const elapsed=this.playTime-t;if(elapsed<=0)return;
+  const impacts=this.fx.filter(f=>!priorFx.has(f)&&f.kind==='impact');
+  entities.forEach((e,i)=>{if(e!==this.player&&!this.enemies.includes(e))return;const d=Math.hypot(e.x-positions[i][0],e.y-positions[i][1]),m=e.motion||(e.motion=fresh());if(d<80)m.stride+=d;m.speed=d<80?d/elapsed:0;e.walking=d>.08;
+   if(e!==this.player&&e.hp>0){
+    if(d>.08&&d<80&&winds[i]<=0)m.enemyFacing=Math.atan2(e.y-positions[i][1],e.x-positions[i][0]);
+    if(e.wind>0&&Math.hypot(e.tx-e.x,e.ty-e.y)>.01)m.enemyFacing=Math.atan2(e.ty-e.y,e.tx-e.x);
+    if(winds[i]>0&&e.wind<=0&&impacts.some(f=>f.x===e.tx&&f.y===e.ty)){m.enemyAttackAt=this.playTime;m.enemyAttackAngle=Math.hypot(e.tx-positions[i][0],e.ty-positions[i][1])>.01?Math.atan2(e.ty-positions[i][1],e.tx-positions[i][0]):m.enemyFacing??Math.PI/4;}
+   }
+  });
  };
  function guide(g,path){
   const a=AREAS[g.area],points=g.points?g.points():a.points,s=g.journey;
@@ -64,5 +78,5 @@
   rows.push({id:'local-notice',channel:'system',speaker:'시스템 안내',text:'서버 탭은 현재 여정에서 발생한 사건을 알리는 연출입니다. 실제 서버 최초·접속자·다른 유저의 기록이 아닙니다.',at:null,simulated:true,origin:'싱글플레이 안내'});
   return rows.slice(-40);
  }
- return {worldStyle,pose,effectPose,guide,news,DISCLOSURE,channels};
+ return {worldStyle,pose,effectPose,echoPose,deathVisible,guide,news,DISCLOSURE,channels};
 });

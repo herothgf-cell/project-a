@@ -7,11 +7,12 @@
    // Tangible silhouettes exist before labels appear. Sensing reveals meaning, not the whole object.
    for(const o of g.points().filter(o=>o.kind==='discovery')){ellipse(c,o.x,o.y,65,23,'#333d3245');ellipse(c,o.x,o.y-2,49,16,'#7c8b7750');if(!g.journey.facts.some(f=>f.id==='sense-'+o.path))prop(c,o,t,false);}
    const q=r.pulse;if(q&&q.wind>0){const k=Math.max(0,Math.min(1,1-q.wind/q.max));c.save();c.strokeStyle=color(q.path);c.fillStyle=color(q.path)+'25';c.lineWidth=2;c.beginPath();c.ellipse(q.x,q.y,120,72,0,0,TAU);c.fill();c.stroke();c.setLineDash([8,7]);c.beginPath();c.ellipse(q.x,q.y,Math.max(1,120*(1-k)),Math.max(1,72*(1-k)),0,0,TAU);c.stroke();c.setLineDash([]);text(c,q.path==='echo'?'발자국을 당기는 울림':q.path==='seal'?'금 사이로 모이는 파동':'되돌아오는 검풍',q.x,q.y+105,color(q.path),13);c.restore();}
-   if(r.echo){c.save();c.globalAlpha=.6;A.human(c,{...r.echo,face:g.player.face},t,'hero',.9);c.restore();line(c,[[r.echo.x-14,r.echo.y+4],[r.echo.x+15,r.echo.y+4]],'#e0c6ff',2);}
+   if(r.echo){c.save();c.globalAlpha=.6;WorldArt.human(c,{...r.echo,face:r.echo.face??Math.PI/2,walking:false,presentationTime:r.echo.at??0},0,'hero',.9);c.restore();line(c,[[r.echo.x-14,r.echo.y+4],[r.echo.x+15,r.echo.y+4]],'#e0c6ff',2);}
   }
-  if(r.guard){const z=r.guard;ellipse(c,z.x,z.y,z.radius,z.radius*.55,'#ebdba522');ring(c,z.x,z.y,z.radius,'#f7dc99',t);}
+  if(r.guard)root.JourneyArt.guard(c,r.guard,quality,t);
   if(r.sense>0){c.save();c.strokeStyle='#b3e7d6';c.lineWidth=1.5;c.setLineDash([12,9]);c.beginPath();c.ellipse(g.player.x,g.player.y,g.senseRange(),g.senseRange()*.65,0,0,TAU);c.stroke();c.setLineDash([]);for(const o of g.points().filter(o=>o.kind==='discovery'))if(DualWorld.dist(g.player,o)<=g.senseRange())ring(c,o.x,o.y,60,color(o.path),t);c.restore();}
  }
+ function guard(c,z,quality,t){ellipse(c,z.x,z.y,z.radius,z.radius*.55,'#ebdba522');ring(c,z.x,z.y,z.radius,'#f7dc99',t);}
  function ring(c,x,y,r,col,t){c.save();c.strokeStyle=col;c.lineWidth=1.7;c.beginPath();c.ellipse(x,y,r,r*.55,0,0,TAU);c.stroke();for(let i=0;i<6;i++){const a=i*TAU/6+t*.2;polygon(c,[[x+Math.cos(a)*r,y+Math.sin(a)*r*.55-4],[x+Math.cos(a)*r+3,y+Math.sin(a)*r*.55],[x+Math.cos(a)*r,y+Math.sin(a)*r*.55+4],[x+Math.cos(a)*r-3,y+Math.sin(a)*r*.55]],col);}c.restore();}
  function prop(c,o,t,known=true){c.save();c.translate(o.x,o.y);ellipse(c,2,5,29,10,'#162c3966');
   if(o.path==='echo'){polygon(c,[[-25,-20],[-16,-50],[27,-43],[20,-15]],'#dbcda9');line(c,[[-18,-23],[-11,-44],[20,-39]],'#8f8868',2);for(let i=0;i<4;i++)line(c,[[-9+i*6,-36],[12+i*2,-31]],'#4b5551',1);}
@@ -30,5 +31,5 @@
   else {ring(c,f.x,f.y,r,color(f.path),age);if(quality>0)ring(c,f.x,f.y,r*.74,color(f.path)+'88',-age);}
   c.restore();
  }
- root.JourneyArt={ground,prop,actor,effect};
+ root.JourneyArt={ground,guard,prop,actor,effect};
 })(globalThis);

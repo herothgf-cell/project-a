@@ -1,0 +1,24 @@
+{
+  "outputs": [
+    {
+      "action": "move",
+      "tool": "builtin imagegen",
+      "reference": "assets/art/reality/enemy/shade-idle-nw-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Edit reference into a FOUR-FRAME walking gait loop sprite atlas of exactly the SAME slender black-blue crystalline SHADOW creature, seen from the SAME rear three-quarter NORTHWEST direction: head, chest and clawed feet all aim upper-left, back facing camera. Keep anatomy, spikes, claws, blue fissures, silhouette and painterly style. Four genuinely different alternating leg poses: left foot forward/right back; feet passing under pelvis; right foot forward/left back; opposite passing. Torso remains northwest in every pose, never front chest. No turning. Arms counter-swing. Landscape 1536x1024, exactly TWO columns and TWO rows of four whole-body sprites. Each 768x512 cell has complete claws/spikes/feet with >=25px clear margins. Same character size all cells, feet near local y470. True alpha-zero transparent background, no black haze or floor or shadow, no labels/UI/borders. Keep all appendages wholly in their own cell. This is runtime animation, not a concept board.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-34d05106-b348-4a46-aa72-b205dfb25d55.png",
+      "path": "assets/art/reality/enemy/shade-move-nw-candidate-v2.png",
+      "status": "candidate",
+      "alphaBoundary": "4/4 clear"
+    },
+    {
+      "action": "hit",
+      "tool": "builtin imagegen",
+      "reference": "assets/art/reality/enemy/shade-idle-nw-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Edit reference into a FOUR-FRAME hurt recoil then recovery sprite atlas of exactly the SAME slender black-blue crystalline SHADOW creature, seen from the SAME rear three-quarter NORTHWEST direction: head, chest and clawed feet all aim upper-left, back facing camera. Keep anatomy, spikes, claws, blue fissures, silhouette and painterly style. Four sequential small recoil poses: torso jerks backward-right from an upper-left impact, knees flex, steadies, recovers. Never turns head or torso toward camera. Landscape 1536x1024, exactly TWO columns and TWO rows of four whole-body sprites. Each 768x512 cell has complete claws/spikes/feet with >=25px clear margins. Same character size all cells, feet near local y470. True alpha-zero transparent background, no black haze or floor or shadow, no labels/UI/borders. Keep all appendages wholly in their own cell. This is runtime animation, not a concept board.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-fdc3134a-ad49-42c8-90d3-5e34ef17d1d9.png",
+      "path": "assets/art/reality/enemy/shade-hit-nw-candidate-v2.png",
+      "status": "candidate",
+      "alphaBoundary": "4/4 clear"
+    }
+  ]
+}

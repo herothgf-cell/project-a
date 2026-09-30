@@ -1,0 +1,85 @@
+{
+  "tool": "builtin image_gen",
+  "status": "candidate",
+  "approved": false,
+  "records": [
+    {
+      "world": "murim",
+      "key": "murimForegroundLayoutResult",
+      "width": 1254,
+      "height": 1254,
+      "split": 627,
+      "feet": [
+        [
+          365,
+          556
+        ],
+        [
+          953,
+          563
+        ],
+        [
+          365,
+          1162
+        ],
+        [
+          949,
+          1163
+        ]
+      ],
+      "heights": [
+        300,
+        300,
+        290,
+        220
+      ],
+      "path": "assets/art/murim/environment/foreground-candidate-v1.png",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-87ee8053-9e9f-4c1a-9f4d-4f2e1c3e04ca.png",
+      "prompts": [
+        "Use case: stylized-concept. Production environment sprites for SSANGGYE murim Cheongun village, matching reference hand-painted detailed isometric Korean wuxia game style. Make exactly FOUR standalone objects arranged in a clean 2x2 equal-cell sprite atlas, genuine transparent background. Top-left: one graceful mature green-leaf tree with twisted trunk, full canopy and small root base. Top-right: a compact cluster of five slender bamboo stems with airy leaves, full tops and roots. Bottom-left: one small flowering cherry tree, restrained dusty pink petals and gnarled brown trunk, full crown and roots. Bottom-right: weathered wooden village lantern post, warm paper lantern, ivy and little stone base. All objects seen at SAME fixed elevated 3/4 game camera, light upper-left, warm natural muted palette, detailed painterly texture not chibi. No people, houses, ground tile, backdrop, interface, borders, text, fog or background shadow. Each complete object fits entirely inside own quadrant, 10 percent clear transparent padding on every side, no overlapping foliage. Reference is style only; create original isolated foreground/depth props, not a scene or concept board.",
+        "Use case: precise-object-edit. ONLY adjust layout/padding of the four supplied environmental sprites. Uniformly shrink EACH complete object by 25 percent, centered within its own equal 2x2 quadrant. Redraw the tiny clipped uppermost leaves of top-left tree naturally. All foliage, branches, stones and roots must fit inside each quadrant with large empty transparent gutters at x=50% and y=50%, and on every outer edge. Keep identical object designs, colors, textures, camera and full root bases. Do not add shadows, scene, matte, grid, labels. Actual transparent alpha background."
+      ]
+    },
+    {
+      "world": "reality",
+      "key": "realityForegroundResult",
+      "width": 1254,
+      "height": 1254,
+      "split": 700,
+      "feet": [
+        [
+          367,
+          644
+        ],
+        [
+          946,
+          650
+        ],
+        [
+          352,
+          1155
+        ],
+        [
+          945,
+          1137
+        ]
+      ],
+      "heights": [
+        220,
+        285,
+        175,
+        146
+      ],
+      "path": "assets/art/reality/environment/foreground-candidate-v1.png",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-1004f0ee-1162-4b33-8eea-a486f7649b6c.png",
+      "prompts": [
+        "Use case: stylized-concept. Four separate production environment sprites for modern Korean HUNTER BASE, painterly isometric RPG matching supplied steel/concrete reference. Exactly 2x2 atlas, genuine alpha transparency. Top-left compact urban green-leaf street tree in a low rectangular grey concrete planter. Top-right modern tall slim dark steel streetlamp with twin cool-white LED fixtures and surveillance camera, small bolted foot. Bottom-left stacked sealed maintenance crates and cable reel beside a low ventilated utility cabinet. Bottom-right a short metal security bollard cluster with yellow-black safety bands and a small standing blue indicator. Modern flat industrial design only, NO traditional roofs/wooden lanterns/bamboo. Fixed elevated three-quarter camera, restrained cool grey/blue palette, subtle warm edge light, precise hand-painted readable shapes. Every complete object occupies ONLY central 65 percent of its cell, large empty transparent margins on all sides and between cells. No background, no ground tile, no matte shadow, no people, no symbols/text/labels/grid. Reference identity/style only, not copied objects."
+      ]
+    }
+  ],
+  "notes": [
+    "Eight transparent cells pass alpha boundary checks",
+    "Deterministic border placement avoids roads, interaction points and buildings; no collision changes",
+    "Y-sorted with actors; fades where it would obscure player"
+  ]
+}

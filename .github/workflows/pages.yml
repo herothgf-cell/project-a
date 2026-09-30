@@ -55,7 +55,7 @@ jobs:
           path: browser-results/
           if-no-files-found: ignore
       - name: Prepare browser assets only
-        run: node scripts/build-site.cjs site "$GITHUB_SHA"
+        run: node scripts/build-site.cjs site "$GITHUB_SHA" --include-prototype
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
@@ -80,7 +80,7 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
       - name: Verify live version and all runtime bytes
-        run: python3 scripts/check-live.py --url=https://herothgf-cell.github.io/project-a/ --commit="$GITHUB_SHA"
+        run: python3 scripts/check-live.py --url=https://herothgf-cell.github.io/project-a/ --commit="$GITHUB_SHA" --include-prototype
       - name: Keep live release receipt
         uses: actions/upload-artifact@v4
         with:

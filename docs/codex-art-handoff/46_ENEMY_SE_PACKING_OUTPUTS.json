@@ -1,0 +1,31 @@
+{
+  "outputs": [
+    {
+      "id": "shade",
+      "tool": "builtin imagegen",
+      "prompt": "Precise-object-edit. Fix sprite-atlas packing only. Original shade enemy sheet has 4 columns x 6 rows, 24 full-body poses, portrait 1024x1536. Preserve all 24 original poses in same order and camera direction, exact blue-black dimensional monster identity/material/equipment. Shrink EACH separate complete character PLUS all limbs/weapons/fragments to 60% of its current size, INSIDE ITS OWN cell. Every cell is 256x256, centers x=128/384/640/896, ground at local y=215. Complete pose extents must remain within local x=25..231,y=25..235, including wide attacks and horizontal death poses; clear alpha-zero gutters all four sides. No loss of appendages, no neighboring body pixels inside another cell. Do not shrink entire sheet or change row/column count. Rows idle/walk/windup/strike/recoil/death remain in place. Actual transparent alpha0 background, no haze/shadow/floor/grid/text. Retain painterly RPG rendering.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-96ec4fa8-15a9-4e35-8b29-f3babc90a23b.png",
+      "path": "assets/art/reality/enemy/shade-candidate-v2.png",
+      "status": "candidate",
+      "note": "Variable atlas frame rectangles verified against alpha; no gameplay changes. Clear frame boundaries do not certify gait quality."
+    },
+    {
+      "id": "sentinel",
+      "tool": "builtin imagegen",
+      "prompt": "Precise-object-edit. Fix sprite-atlas packing only. Original sentinel enemy sheet has 4 columns x 6 rows, 24 full-body poses, portrait 1024x1536. Preserve all 24 original poses in same order and camera direction, exact blue-black dimensional monster identity/material/equipment. Shrink EACH separate complete character PLUS all limbs/weapons/fragments to 60% of its current size, INSIDE ITS OWN cell. Every cell is 256x256, centers x=128/384/640/896, ground at local y=215. Complete pose extents must remain within local x=25..231,y=25..235, including wide attacks and horizontal death poses; clear alpha-zero gutters all four sides. No loss of appendages, no neighboring body pixels inside another cell. Do not shrink entire sheet or change row/column count. Rows idle/walk/windup/strike/recoil/death remain in place. Actual transparent alpha0 background, no haze/shadow/floor/grid/text. Retain painterly RPG rendering.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-f5a03efe-10be-40e0-a94e-c04d7a968cfe.png",
+      "path": "assets/art/reality/enemy/sentinel-candidate-v2.png",
+      "status": "candidate",
+      "note": "Variable atlas frame rectangles verified against alpha; no gameplay changes. Clear frame boundaries do not certify gait quality."
+    },
+    {
+      "id": "bandit",
+      "tool": "builtin imagegen",
+      "prompt": "Precise-object-edit. Fix sprite-atlas packing only. Original bandit enemy sheet has 4 columns x 6 rows, 24 full-body poses, portrait 1024x1536. Preserve all 24 original poses in same order and camera direction, exact rust-brown bandit with curved saber identity/material/equipment. Shrink EACH separate complete character PLUS all limbs/weapons/fragments to 60% of its current size, INSIDE ITS OWN cell. Every cell is 256x256, centers x=128/384/640/896, ground at local y=215. Complete pose extents must remain within local x=25..231,y=25..235, including wide attacks and horizontal death poses; clear alpha-zero gutters all four sides. No loss of appendages, no neighboring body pixels inside another cell. Do not shrink entire sheet or change row/column count. Rows idle/walk/windup/strike/recoil/death remain in place. Actual transparent alpha0 background, no haze/shadow/floor/grid/text. Retain painterly RPG rendering.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-5fea845a-2627-4cd0-8fd6-32d5ee163d95.png",
+      "path": "assets/art/murim/enemy/bandit-candidate-v2.png",
+      "status": "candidate",
+      "note": "Variable atlas frame rectangles verified against alpha; no gameplay changes. Clear frame boundaries do not certify gait quality."
+    }
+  ]
+}

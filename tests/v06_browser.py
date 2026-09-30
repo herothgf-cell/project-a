@@ -74,13 +74,15 @@ def main():
             assert not p2.evaluate('__game.blocked(775,600,16)');assert p2.evaluate('__game.fate.path')==path
             p2.wait_for_timeout(120);p2.screenshot(path=str(out/f'bridge-{path}.png'))
             p2.evaluate("()=>{__game.enemies.filter(e=>!e.boss).forEach(e=>__game.strike(e,99999,'storm'));const e=__game.enemies.find(e=>e.boss);__game.strike(e,99999,'storm');}")
-            p2.wait_for_function('__game.chapter4.phase===2');dismiss(p2)
+            p2.wait_for_function('__game.chapter4.phase===2')
+            expect(p2.locator('#dialog')).to_be_visible();expect(p2.locator('#dialogTitle')).to_have_text('제4장 · 길을 남긴 사람');dismiss(p2)
             p2.evaluate("()=>{__game.enter('village');__game.events=[];const o=DualWorld.AREAS.village.points.find(o=>o.id==='returned-yeonhwa');Object.assign(__game.player,{x:o.x,y:o.y+20});}")
             p2.keyboard.press('KeyE');expect(p2.locator('#dialog')).to_be_visible();assert '가게' in p2.locator('#dialogBody').inner_text();assert p2.locator('#portrait').get_attribute('data-portrait')=='yeonhwa'
             if path=='ripple':p2.screenshot(path=str(out/'returned-npc.png'))
             dismiss(p2);p2.evaluate("()=>{__game.enter('returnDock');__game.events=[];Object.assign(__game.player,{x:750,y:610});}");p2.wait_for_timeout(200);p2.screenshot(path=str(out/f'dock-{path}.png'));assert not errors,errors
             assert 'NPC 시뮬레이션' in p2.locator('#rumorPanel').inner_text();assert '실제 유저 채팅 아님' in p2.locator('#rumorPanel').inner_text();assert p2.locator('.rumor-entry').count()>1
-            p2.evaluate("()=>{__game.enemies.filter(e=>!e.boss).forEach(e=>__game.strike(e,99999,'storm'));__game.strike(__game.enemies.find(e=>e.boss),99999,'storm');}");p2.wait_for_function('__game.chapter4.phase===3');dismiss(p2)
+            p2.evaluate("()=>{__game.enemies.filter(e=>!e.boss).forEach(e=>__game.strike(e,99999,'storm'));__game.strike(__game.enemies.find(e=>e.boss),99999,'storm');}");p2.wait_for_function('__game.chapter4.phase===3')
+            expect(p2.locator('#dialog')).to_be_visible();expect(p2.locator('#dialogTitle')).to_have_text('건너온 울림 · 귀환 부두 안정');dismiss(p2)
             p2.evaluate("()=>{__game.enter('city');__game.events=[];const o=DualWorld.AREAS.city.points.find(o=>o.id==='warden');Object.assign(__game.player,{x:o.x,y:o.y});}");p2.keyboard.press('KeyE');p2.wait_for_function('__game.chapter4.phase===4');dismiss(p2)
             # Menu/continue through native storage in HTTP or equivalent offline snapshot.
             p2.locator('#menu').click();p2.get_by_role('button',name='타이틀로',exact=True).click();p2.locator('#continue').click();p2.wait_for_function('__game.chapter4.phase===4');assert p2.evaluate('__game.chapter4.route')==path

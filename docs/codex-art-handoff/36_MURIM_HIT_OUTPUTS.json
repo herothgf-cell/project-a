@@ -1,0 +1,1052 @@
+{
+  "status": "candidate",
+  "tool": "built-in image_gen",
+  "notes": [
+    "Unapproved visual candidates. Full runtime and visual QA required; no damage/save rule change."
+  ],
+  "outputs": [
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-e5ec2ffe-2a5e-4652-95d6-d71e783f50a1.png",
+      "destination": "assets/art/murim/hero/yunseo/hit-e-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_e_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.8771929824561403,
+            0.9059011164274322
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              550,
+              568
+            ],
+            "hand": [
+              331,
+              349
+            ],
+            "blade": [
+              565,
+              513
+            ],
+            "effect": [
+              565,
+              513
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_e_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.8213716108452951,
+            0.9122807017543859
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              515,
+              572
+            ],
+            "hand": [
+              271,
+              382
+            ],
+            "blade": [
+              497,
+              553
+            ],
+            "effect": [
+              497,
+              553
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_e_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.8580542264752791,
+            0.84688995215311
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              538,
+              531
+            ],
+            "hand": [
+              307,
+              316
+            ],
+            "blade": [
+              500,
+              513
+            ],
+            "effect": [
+              500,
+              513
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_e_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7926634768740032,
+            0.861244019138756
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              497,
+              540
+            ],
+            "hand": [
+              289,
+              303
+            ],
+            "blade": [
+              475,
+              510
+            ],
+            "effect": [
+              475,
+              510
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nUse LEFT-facing CAST reference only for identity and direction. Replace casting with nonlethal recoil: empty left hand curls at chest, right sword low. Torso backward recoil then knee dip then recovery. Always LEFT, no hand swapping or mirror, fixed planted feet.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-bf93dc44-46d4-4bdd-83e2-7a0640a19b83.png",
+      "destination": "assets/art/murim/hero/yunseo/hit-w-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_w_v2",
+          "rect": [
+            0,
+            0,
+            650,
+            630
+          ],
+          "pivot": [
+            0.36923076923076925,
+            0.9396825396825397
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              240,
+              592
+            ],
+            "hand": [
+              259,
+              365
+            ],
+            "blade": [
+              48,
+              503
+            ],
+            "effect": [
+              48,
+              503
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "hit_w_v2",
+          "rect": [
+            650,
+            0,
+            604,
+            630
+          ],
+          "pivot": [
+            0.3443708609271523,
+            0.9396825396825397
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              208,
+              592
+            ],
+            "hand": [
+              227,
+              396
+            ],
+            "blade": [
+              15,
+              518
+            ],
+            "effect": [
+              15,
+              518
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "hit_w_v2",
+          "rect": [
+            0,
+            630,
+            650,
+            624
+          ],
+          "pivot": [
+            0.3646153846153846,
+            0.8717948717948718
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              237,
+              544
+            ],
+            "hand": [
+              254,
+              319
+            ],
+            "blade": [
+              43,
+              447
+            ],
+            "effect": [
+              43,
+              447
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        },
+        {
+          "atlas": "hit_w_v2",
+          "rect": [
+            650,
+            630,
+            604,
+            624
+          ],
+          "pivot": [
+            0.33278145695364236,
+            0.8717948717948718
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              201,
+              544
+            ],
+            "hand": [
+              210,
+              321
+            ],
+            "blade": [
+              15,
+              450
+            ],
+            "effect": [
+              15,
+              450
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nReference NORTH CAST identity/direction only. Replace raised arm with empty LEFT hand defensively near chest. RIGHT sword remains low viewer RIGHT. Show backward shoulder recoil, deeper bent knees, recovery, ready. All four BACK NORTH, no turns, no casting gesture, feet grounded.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-388c1eb7-351e-47c3-88ab-4e8a00d5db67.png",
+      "destination": "assets/art/murim/hero/yunseo/hit-n-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_n_v2",
+          "rect": [
+            0,
+            0,
+            650,
+            630
+          ],
+          "pivot": [
+            0.7046153846153846,
+            0.946031746031746
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              458,
+              596
+            ],
+            "hand": [
+              449,
+              354
+            ],
+            "blade": [
+              611,
+              504
+            ],
+            "effect": [
+              611,
+              504
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "hit_n_v2",
+          "rect": [
+            650,
+            0,
+            604,
+            630
+          ],
+          "pivot": [
+            0.6721854304635762,
+            0.946031746031746
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              406,
+              596
+            ],
+            "hand": [
+              407,
+              383
+            ],
+            "blade": [
+              561,
+              512
+            ],
+            "effect": [
+              561,
+              512
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "hit_n_v2",
+          "rect": [
+            0,
+            630,
+            650,
+            624
+          ],
+          "pivot": [
+            0.7230769230769231,
+            0.8862179487179487
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              470,
+              553
+            ],
+            "hand": [
+              477,
+              313
+            ],
+            "blade": [
+              628,
+              456
+            ],
+            "effect": [
+              628,
+              456
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        },
+        {
+          "atlas": "hit_n_v2",
+          "rect": [
+            650,
+            630,
+            604,
+            624
+          ],
+          "pivot": [
+            0.6887417218543046,
+            0.8862179487179487
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              416,
+              553
+            ],
+            "hand": [
+              429,
+              318
+            ],
+            "blade": [
+              577,
+              455
+            ],
+            "effect": [
+              577,
+              455
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style. Reference is SOUTH casting sheet: preserve identity and camera direction but REPLACE casting with hit recoil. Empty anatomical LEFT hand clutches own chest; no pointing or spell gesture. Anatomical RIGHT hand (viewer LEFT) grips lowered sword throughout. Keep both boots at stable fixed ground positions across poses. Actual transparent background.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-4c110572-d369-47df-abec-d547df235e9a.png",
+      "destination": "assets/art/murim/hero/yunseo/hit-s-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_s_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            620
+          ],
+          "pivot": [
+            0.33811802232854865,
+            0.9612903225806452
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              212,
+              596
+            ],
+            "hand": [
+              212,
+              365
+            ],
+            "blade": [
+              97,
+              590
+            ],
+            "effect": [
+              97,
+              590
+            ]
+          },
+          "displayHeight": 118.66028708133972
+        },
+        {
+          "atlas": "hit_s_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            620
+          ],
+          "pivot": [
+            0.2679425837320574,
+            0.9612903225806452
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              168,
+              596
+            ],
+            "hand": [
+              175,
+              390
+            ],
+            "blade": [
+              259,
+              615
+            ],
+            "effect": [
+              259,
+              615
+            ]
+          },
+          "displayHeight": 118.66028708133972
+        },
+        {
+          "atlas": "hit_s_v2",
+          "rect": [
+            0,
+            620,
+            627,
+            634
+          ],
+          "pivot": [
+            0.3189792663476874,
+            0.9116719242902208
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              200,
+              578
+            ],
+            "hand": [
+              229,
+              337
+            ],
+            "blade": [
+              284,
+              583
+            ],
+            "effect": [
+              284,
+              583
+            ]
+          },
+          "displayHeight": 121.33971291866028
+        },
+        {
+          "atlas": "hit_s_v2",
+          "rect": [
+            627,
+            620,
+            627,
+            634
+          ],
+          "pivot": [
+            0.266347687400319,
+            0.9116719242902208
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              167,
+              578
+            ],
+            "hand": [
+              187,
+              340
+            ],
+            "blade": [
+              268,
+              585
+            ],
+            "effect": [
+              268,
+              585
+            ]
+          },
+          "displayHeight": 121.33971291866028
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style. Reference is northeast back-three-quarter casting sheet. Keep this SAME camera and facing toward upper RIGHT, back mostly visible. REPLACE casting with recoil; empty left hand at own chest (mostly hidden), right hand keeps sword low at viewer right. No raised casting fingers. Fixed planted feet and consistent scale. Actual transparent alpha.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-d3eef9f4-c883-4652-b4e5-eaaf46c93cac.png",
+      "destination": "assets/art/murim/hero/yunseo/hit-ne-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_ne_v2",
+          "rect": [
+            0,
+            0,
+            660,
+            640
+          ],
+          "pivot": [
+            0.7075757575757575,
+            0.95
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              467,
+              608
+            ],
+            "hand": [
+              465,
+              350
+            ],
+            "blade": [
+              619,
+              515
+            ],
+            "effect": [
+              619,
+              515
+            ]
+          },
+          "displayHeight": 122.48803827751196
+        },
+        {
+          "atlas": "hit_ne_v2",
+          "rect": [
+            660,
+            0,
+            594,
+            640
+          ],
+          "pivot": [
+            0.6818181818181818,
+            0.946875
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              405,
+              606
+            ],
+            "hand": [
+              384,
+              377
+            ],
+            "blade": [
+              555,
+              523
+            ],
+            "effect": [
+              555,
+              523
+            ]
+          },
+          "displayHeight": 122.48803827751196
+        },
+        {
+          "atlas": "hit_ne_v2",
+          "rect": [
+            0,
+            640,
+            660,
+            614
+          ],
+          "pivot": [
+            0.746969696969697,
+            0.8827361563517915
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              493,
+              542
+            ],
+            "hand": [
+              502,
+              290
+            ],
+            "blade": [
+              641,
+              441
+            ],
+            "effect": [
+              641,
+              441
+            ]
+          },
+          "displayHeight": 117.51196172248804
+        },
+        {
+          "atlas": "hit_ne_v2",
+          "rect": [
+            660,
+            640,
+            594,
+            614
+          ],
+          "pivot": [
+            0.7289562289562289,
+            0.8843648208469055
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              433,
+              543
+            ],
+            "hand": [
+              425,
+              309
+            ],
+            "blade": [
+              574,
+              450
+            ],
+            "effect": [
+              574,
+              450
+            ]
+          },
+          "displayHeight": 117.51196172248804
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style. Reference is northwest back-three-quarter casting sheet. Keep SAME camera facing upper LEFT, back mostly visible. REPLACE casting with recoil, LEFT empty hand clutches chest (near left/front and partly hidden), RIGHT sword hand remains viewer RIGHT/far side holding sword low throughout. NO hand switching, no mirroring, no raised spell fingers. Two planted boots and stable scale. Real transparent alpha.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-55b4cf59-e4b0-419b-a414-1f53a7d8bb84.png",
+      "destination": "assets/art/murim/hero/yunseo/hit-nw-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            0,
+            0,
+            665,
+            640
+          ],
+          "pivot": [
+            0.2781954887218045,
+            0.9171875
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              185,
+              587
+            ],
+            "hand": [
+              480,
+              370
+            ],
+            "blade": [
+              622,
+              518
+            ],
+            "effect": [
+              622,
+              518
+            ]
+          },
+          "displayHeight": 122.48803827751196
+        },
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            665,
+            0,
+            589,
+            640
+          ],
+          "pivot": [
+            0.200339558573854,
+            0.9203125
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              118,
+              589
+            ],
+            "hand": [
+              418,
+              380
+            ],
+            "blade": [
+              563,
+              528
+            ],
+            "effect": [
+              563,
+              528
+            ]
+          },
+          "displayHeight": 122.48803827751196
+        },
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            0,
+            640,
+            665,
+            614
+          ],
+          "pivot": [
+            0.28721804511278193,
+            0.8745928338762216
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              191,
+              537
+            ],
+            "hand": [
+              500,
+              310
+            ],
+            "blade": [
+              647,
+              447
+            ],
+            "effect": [
+              647,
+              447
+            ]
+          },
+          "displayHeight": 117.51196172248804
+        },
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            665,
+            640,
+            589,
+            614
+          ],
+          "pivot": [
+            0.21052631578947367,
+            0.8843648208469055
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              124,
+              543
+            ],
+            "hand": [
+              435,
+              320
+            ],
+            "blade": [
+              568,
+              461
+            ],
+            "effect": [
+              568,
+              461
+            ]
+          },
+          "displayHeight": 117.51196172248804
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style. Reference is southwest front-three-quarter casting sheet. Keep SAME facing toward lower LEFT. REPLACE casting with recoil. Empty anatomical LEFT hand at own chest, RIGHT hand (viewer LEFT) holds lowered sword consistently. No casting fingers or magic. Both planted boots retain fixed ground positions. Real transparent alpha.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-30fd15c0-fc6a-4e0d-9826-e06dfc29ca38.png",
+      "destination": "assets/art/murim/hero/yunseo/hit-sw-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_sw_v2",
+          "rect": [
+            0,
+            0,
+            650,
+            630
+          ],
+          "pivot": [
+            0.3646153846153846,
+            0.9492063492063492
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              237,
+              598
+            ],
+            "hand": [
+              227,
+              385
+            ],
+            "blade": [
+              50,
+              564
+            ],
+            "effect": [
+              50,
+              564
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "hit_sw_v2",
+          "rect": [
+            650,
+            0,
+            604,
+            630
+          ],
+          "pivot": [
+            0.2897350993377483,
+            0.953968253968254
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              175,
+              601
+            ],
+            "hand": [
+              170,
+              421
+            ],
+            "blade": [
+              22,
+              569
+            ],
+            "effect": [
+              22,
+              569
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "hit_sw_v2",
+          "rect": [
+            0,
+            630,
+            650,
+            624
+          ],
+          "pivot": [
+            0.36,
+            0.8926282051282052
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              234,
+              557
+            ],
+            "hand": [
+              239,
+              339
+            ],
+            "blade": [
+              52,
+              526
+            ],
+            "effect": [
+              52,
+              526
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        },
+        {
+          "atlas": "hit_sw_v2",
+          "rect": [
+            650,
+            630,
+            604,
+            624
+          ],
+          "pivot": [
+            0.304635761589404,
+            0.8942307692307693
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              184,
+              558
+            ],
+            "hand": [
+              188,
+              337
+            ],
+            "blade": [
+              24,
+              526
+            ],
+            "effect": [
+              24,
+              526
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        }
+      ]
+    }
+  ]
+}

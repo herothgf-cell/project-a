@@ -1,0 +1,49 @@
+{
+  "status": "candidate",
+  "approved": false,
+  "method": "built-in image generation, independent full-body poses; no image postprocessing",
+  "entries": [
+    {
+      "facing": "e",
+      "path": "assets/art/murim/hero/yunseo/attack1-e-candidate-v3.png",
+      "prompt": "Use case: identity-preserve. Image 1 is the existing four-frame east-facing attack animation. Change ONLY layout and spacing: redraw the SAME FOUR complete poses in a SQUARE 2 by 2 atlas. Top-left contact sword up-right; top-right follow-through sword lower-right; bottom-left recovery horizontal sword; bottom-right neutral guard sword low-right. Preserve exact character identity, adult anatomy, dark torn cloak, ivory/blue robes, boots, sword and east/right-facing direction in all four frames. Every entire figure INCLUDING sword tip and flowing cloak must fit comfortably inside its own equal quadrant, within central 65% of quadrant width and height. Place each at same scale and support-foot relative position. Add ample genuine transparent padding around every figure. Absolutely no pixel of a figure or sword touches outer canvas or quadrant boundary. No grid lines, text, shadows on a ground plane, extra objects, VFX or panels. This is for strict rectangular sprite slicing; negative space is mandatory.",
+      "alphaBoundaryAudit": "4 frames, zero alpha>32 pixels on slicing edges; not visual acceptance"
+    },
+    {
+      "facing": "n",
+      "path": "assets/art/murim/hero/yunseo/attack1-n-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Input image is CHARACTER AND STYLE REFERENCE, not layout to copy. New full-body 2D RPG attack1 animation atlas for SAME long black-haired male martial swordsman, charcoal torn cloak, ivory/slate-blue robes, brown boots, steel sword in right hand. Square transparent canvas, exactly FOUR frames in 2x2 equal quadrants. All four views face due NORTH / AWAY from camera: back of head and back of body visible, no face, no front-facing pose, no right-facing profile. Camera fixed 3/4 elevated from behind. Top-left first contact: right arm and sword extended diagonally up-right toward away-facing target; top-right follows through to right; bottom-left draws sword back; bottom-right returns to back-facing guard. Complete sword blade and right hand remain readable beside body. SAME support left boot position within each cell and consistent scale. Each whole silhouette incl sword and hair inside central 70 percent of quadrant with ample empty alpha around all edges. No figure touching quadrant boundaries. No head swap, no mirrored east pose, no VFX, no ground, no labels, no grid, no text. Natural adult anatomy and coherent hand gripping sword.",
+      "alphaBoundaryAudit": "4 frames, zero alpha>32 pixels on slicing edges; not visual acceptance"
+    },
+    {
+      "facing": "w",
+      "path": "assets/art/murim/hero/yunseo/attack1-w-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Image 1 is character and painterly style reference. Produce a NEW west-facing attack1 sprite animation for this SAME long-haired male Korean martial swordsman (dark torn cloak, ivory/slate blue robe, brown boots, one steel sword). Do NOT mirror the input: draw anatomically correct right-hand sword grip and asymmetrical clothing from the opposite side. All four complete figures face WEST toward the left edge; left-facing profile, no frontal face. Exactly four consecutive attack poses in a 2x2 square atlas on genuine transparent alpha: top-left contact sword extended upper-left; top-right follow-through blade lower-left; bottom-left recovery sword held close; bottom-right west-facing guard. Same fixed elevated 3/4 game camera, constant character scale, planted support foot at same relative position per cell. Every whole character INCLUDING hair, shoes, hand and complete sword must stay well inside its own quadrant, central70% of width/height, no boundary crossings. Wide transparent gutters, no cropping. No ground, no shadows, no VFX, no extra weapons, no labels, no grid lines or text.",
+      "alphaBoundaryAudit": "4 frames, zero alpha>32 pixels on slicing edges; not visual acceptance"
+    },
+    {
+      "facing": "s",
+      "path": "assets/art/murim/hero/yunseo/attack1-s-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Reference image supplies character identity and clothing only. Create a NEW SOUTH-facing attack1 atlas, four complete full-body animation frames in exact 2x2 square layout, transparent alpha. Same adult Korean swordsman: handsome face, long black tied hair, charcoal weathered cloak, ivory sleeves over slate-blue layered robes, brown boots and one steel sword in RIGHT hand. All frames face toward viewer/down-screen, front of torso and both eyes visible; NOT a side or back view. Camera is elevated 3/4 overhead game view, looking slightly down on head/shoulders. Top-left contact across front diagonally lower-left; top-right cut follow-through to his right, bottom-left retract weapon, bottom-right south-facing relaxed guard. Right hand always grips sword, no hand switching. Same planted left boot at same relative spot and constant body scale. Each whole figure including complete sword blade fits within central70% of its quadrant. Keep spacious transparent margins at all edges. No VFX, no floor, no text, no grid, no labels, no cropped tips or overlapping cells. Render complete independent body poses, no collage.",
+      "alphaBoundaryAudit": "4 frames, zero alpha>32 pixels on slicing edges; not visual acceptance"
+    },
+    {
+      "facing": "ne",
+      "path": "assets/art/murim/hero/yunseo/attack1-ne-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Input is character/style reference only. New NORTHEAST-facing first sword-cut animation of this exact adult black-haired martial swordsman, charcoal tattered cloak over ivory and slate blue robe, brown boots, right-hand steel sword. Fixed elevated 3/4 RPG camera. Four complete full-body consecutive poses in square 2x2 transparent sprite atlas. All bodies point diagonally UP-RIGHT, mainly back visible but small right cheek/profile visible, clearly distinct from front and pure side. Top-left contact blade extended up-right toward target; top-right follow-through toward right; bottom-left recover close; bottom-right northeast guard. Right hand remains gripping sword. Same scale and planted foot registration across frames. Wide transparent gutters: every whole silhouette including sword must stay within central70% of its quadrant, at least50pixels of clear alpha from each boundary on a1254square canvas. No cropped weapon, no overlap, no ground, no shadow backdrop, no VFX, no text, no gridlines.",
+      "alphaBoundaryAudit": "4 frames, zero alpha>32 pixels on slicing edges; not visual acceptance"
+    },
+    {
+      "facing": "nw",
+      "path": "assets/art/murim/hero/yunseo/attack1-nw-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Input is this martial swordsman's identity/style reference. Create NEW NORTHWEST first sword cut, not a horizontal mirror: same right-handed adult warrior, long tied black hair, torn dark cloak, ivory and blue-gray robes, brown boots. All four full bodies face diagonally UP-LEFT away from viewer, back dominates with a glimpse of left cheek only. Elevated 3/4 2D RPG camera. Exactly 4 frames in square 2x2 atlas on genuinely transparent alpha. Top-left contact: sword extending up-left in natural right-hand cross-body grip; top-right follow-through down-left; bottom-left retract to right shoulder; bottom-right northwest guard. Same scale and planted support foot registration. Each entire figure including sword/hair within central70% of each cell; generously separated transparent margins, no crossing midpoint or canvas edges, no clipped extremities. No ground, no VFX, no labels, no grid, no text. Preserve layered asymmetric garment construction and draw independent whole-body poses, never swap heads.",
+      "alphaBoundaryAudit": "4 frames, zero alpha>32 pixels on slicing edges; not visual acceptance"
+    },
+    {
+      "facing": "sw",
+      "path": "assets/art/murim/hero/yunseo/attack1-sw-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Character/style reference only. Create a NEW SOUTHWEST-facing first sword-cut atlas for the same adult male martial swordsman: long tied black hair, ivory sleeves and blue-gray layered robe, weathered charcoal cloak, brown boots and one steel sword always in right hand. Exactly four full-body poses in 2x2 square transparent-alpha layout. Every body faces diagonally DOWN-LEFT TOWARD camera; front of chest and face in 3/4 visible, unlike back-facing reference. Elevated fixed RPG camera. Top-left contact with right hand extending sword down-left; top-right cut follow-through across torso; bottom-left retract sword to shoulder; bottom-right southwest-facing ready guard. Preserve same scale, natural anatomy, consistent handedness and same planted support boot location per cell. Fit each COMPLETE sword/body/hair/boots comfortably inside central70% of its quadrant with generous clear transparent gutters at all edges. No touching boundaries, cropping, overlapping, mirroring, head graft, ground, VFX, text, labels or grid.",
+      "alphaBoundaryAudit": "4 frames, zero alpha>32 pixels on slicing edges; not visual acceptance"
+    }
+  ]
+}

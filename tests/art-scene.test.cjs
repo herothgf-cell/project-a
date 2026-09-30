@@ -1,4 +1,9 @@
 'use strict';
+// Optional scenery has separate world identities, never a concept-board fallback.
+require('node:test')('P0 optional props have independent atlases with bounded cells',()=>{
+ const assert=require('node:assert/strict'),manifest=require('../assets/art/scene-candidate.json');
+ for(const world of ['reality','murim']){const a=manifest.assets.find(a=>a.id===world+'.environment.props');assert.ok(a);assert.ok(a.atlas.path.includes('/'+world+'/'));assert.equal(Object.keys(a.clips).length,4);for(const clip of Object.values(a.clips)){const [x,y,w,h]=clip.none[0].rect;assert.ok(x+w<=a.atlas.width&&y+h<=a.atlas.height);}}
+});
 const test=require('node:test'),assert=require('node:assert/strict');
 const A=require('../art-runtime.js');
 test('enemy identities are world-specific and read actual telegraph/hit state',()=>{
@@ -34,4 +39,12 @@ test('portal status uses actual lock, distance and travel state, without unlocki
  assert.equal(A.portalState(g,o),'locked');g.progress=2;assert.equal(A.portalState(g,o),'active');
  g.player.x=300;assert.equal(A.portalState(g,o),'available');
  assert.equal(g.progress,2);
+});
+test('new-save boundary stone stays visually locked until the actual introductory permission',()=>{
+ const {Game,AREAS}=require('../game.js'),g=new Game(),portal=AREAS.city.points.find(p=>p.id==='portal');
+ Object.assign(g.player,{x:portal.x,y:portal.y});
+ assert.equal(g.interact().type,'dialog');assert.equal(g.area,'city');
+ assert.equal(A.portalState(g,portal),'locked');
+ g.progress=1;assert.equal(A.portalState(g,portal),'active');
+ assert.equal(g.interact().type,'travel');assert.equal(g.area,'village');
 });

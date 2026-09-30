@@ -18,6 +18,13 @@
       },
       "clips": {
         "hit": {
+          "e": [{"atlas":"hit_e_v2","rect":[0,0,627,627],"pivot":[0.7910685805422647,0.9186602870813397],"duration":0.045,"contact":false,"sockets":{"foot":[496,576],"hand":[231,374],"blade":[429,548],"effect":[429,548]},"displayHeight":120},{"atlas":"hit_e_v2","rect":[627,0,627,627],"pivot":[0.722488038277512,0.9202551834130781],"duration":0.045,"contact":false,"sockets":{"foot":[453,577],"hand":[186,422],"blade":[388,557],"effect":[388,557]},"displayHeight":120},{"atlas":"hit_e_v2","rect":[0,627,627,627],"pivot":[0.7783094098883573,0.8532695374800638],"duration":0.045,"contact":false,"sockets":{"foot":[488,535],"hand":[227,320],"blade":[417,518],"effect":[417,518]},"displayHeight":120},{"atlas":"hit_e_v2","rect":[627,627,627,627],"pivot":[0.7464114832535885,0.8660287081339713],"duration":0.045,"contact":false,"sockets":{"foot":[468,543],"hand":[212,316],"blade":[394,508],"effect":[394,508]},"displayHeight":120}],
+          "w": [{"atlas":"hit_w_v2","rect":[0,0,627,627],"pivot":[0.4529505582137161,0.9393939393939394],"duration":0.045,"contact":false,"sockets":{"foot":[284,589],"hand":[294,365],"blade":[93,501],"effect":[93,501]},"displayHeight":120},{"atlas":"hit_w_v2","rect":[627,0,627,627],"pivot":[0.4130781499202552,0.9393939393939394],"duration":0.045,"contact":false,"sockets":{"foot":[259,589],"hand":[262,397],"blade":[65,530],"effect":[65,530]},"displayHeight":120},{"atlas":"hit_w_v2","rect":[0,627,627,627],"pivot":[0.45933014354066987,0.8484848484848485],"duration":0.045,"contact":false,"sockets":{"foot":[288,532],"hand":[287,318],"blade":[95,465],"effect":[95,465]},"displayHeight":120},{"atlas":"hit_w_v2","rect":[627,627,627,627],"pivot":[0.39872408293460926,0.8548644338118022],"duration":0.045,"contact":false,"sockets":{"foot":[250,536],"hand":[238,316],"blade":[54,466],"effect":[54,466]},"displayHeight":120}],
+          "n": [{"atlas":"hit_n_v2","rect":[0,0,627,627],"pivot":[0.6874003189792663,0.9441786283891547],"duration":0.045,"contact":false,"sockets":{"foot":[431,592],"hand":[408,306],"blade":[578,464],"effect":[578,464]},"displayHeight":120},{"atlas":"hit_n_v2","rect":[627,0,627,627],"pivot":[0.6363636363636364,0.9473684210526315],"duration":0.045,"contact":false,"sockets":{"foot":[399,594],"hand":[397,355],"blade":[572,508],"effect":[572,508]},"displayHeight":120},{"atlas":"hit_n_v2","rect":[0,627,627,627],"pivot":[0.69377990430622,0.8995215311004785],"duration":0.045,"contact":false,"sockets":{"foot":[435,564],"hand":[442,305],"blade":[605,459],"effect":[605,459]},"displayHeight":120},{"atlas":"hit_n_v2","rect":[627,627,627,627],"pivot":[0.6682615629984051,0.9090909090909091],"duration":0.045,"contact":false,"sockets":{"foot":[419,570],"hand":[422,310],"blade":[583,461],"effect":[583,461]},"displayHeight":120}],
+          "s": [{"atlas":"hit_s_v2","rect":[0,0,627,627],"pivot":[0.39553429027113235,0.960127591706539],"duration":0.045,"contact":false,"sockets":{"foot":[248,602],"hand":[237,372],"blade":[140,594],"effect":[140,594]},"displayHeight":120},{"atlas":"hit_s_v2","rect":[627,0,627,627],"pivot":[0.2759170653907496,0.960127591706539],"duration":0.045,"contact":false,"sockets":{"foot":[173,602],"hand":[157,396],"blade":[63,600],"effect":[63,600]},"displayHeight":120},{"atlas":"hit_s_v2","rect":[0,627,627,627],"pivot":[0.36363636363636365,0.8771929824561403],"duration":0.045,"contact":false,"sockets":{"foot":[228,550],"hand":[237,323],"blade":[143,539],"effect":[143,539]},"displayHeight":120},{"atlas":"hit_s_v2","rect":[627,627,627,627],"pivot":[0.2679425837320574,0.8835725677830941],"duration":0.045,"contact":false,"sockets":{"foot":[168,554],"hand":[159,318],"blade":[80,543],"effect":[80,543]},"displayHeight":120}],
+          "ne": [{"atlas":"hit_ne_v2","rect":[0,0,676,627],"pivot":[0.6479289940828402,0.9505582137161085],"duration":0.045,"contact":false,"sockets":{"foot":[438,596],"hand":[420,338],"blade":[595,492],"effect":[595,492]},"displayHeight":120},{"atlas":"hit_ne_v2","rect":[676,0,578,627],"pivot":[0.5761245674740484,0.9649122807017544],"duration":0.045,"contact":false,"sockets":{"foot":[333,605],"hand":[337,384],"blade":[512,529],"effect":[512,529]},"displayHeight":120},{"atlas":"hit_ne_v2","rect":[0,627,676,627],"pivot":[0.7100591715976331,0.9043062200956937],"duration":0.045,"contact":false,"sockets":{"foot":[480,567],"hand":[480,318],"blade":[653,463],"effect":[653,463]},"displayHeight":120},{"atlas":"hit_ne_v2","rect":[676,627,578,627],"pivot":[0.6038062283737025,0.9059011164274322],"duration":0.045,"contact":false,"sockets":{"foot":[349,568],"hand":[342,319],"blade":[510,474],"effect":[510,474]},"displayHeight":120}],
+          "nw": [{"atlas":"hit_nw_v2","rect":[0,0,627,627],"pivot":[0.7384370015948963,0.9712918660287081],"duration":0.045,"contact":false,"sockets":{"foot":[463,609],"hand":[452,361],"blade":[600,492],"effect":[600,492]},"displayHeight":120},{"atlas":"hit_nw_v2","rect":[627,0,627,627],"pivot":[0.7081339712918661,0.9633173843700159],"duration":0.045,"contact":false,"sockets":{"foot":[444,604],"hand":[444,371],"blade":[581,506],"effect":[581,506]},"displayHeight":120},{"atlas":"hit_nw_v2","rect":[0,627,627,627],"pivot":[0.7607655502392344,0.8995215311004785],"duration":0.045,"contact":false,"sockets":{"foot":[477,564],"hand":[459,312],"blade":[600,435],"effect":[600,435]},"displayHeight":120},{"atlas":"hit_nw_v2","rect":[627,627,627,627],"pivot":[0.7017543859649122,0.9043062200956937],"duration":0.045,"contact":false,"sockets":{"foot":[440,567],"hand":[439,309],"blade":[583,441],"effect":[583,441]},"displayHeight":120}],
+          "sw": [{"atlas":"hit_sw_v2","rect":[0,0,627,627],"pivot":[0.4274322169059011,0.9792663476874003],"duration":0.045,"contact":false,"sockets":{"foot":[268,614],"hand":[247,391],"blade":[86,531],"effect":[86,531]},"displayHeight":120},{"atlas":"hit_sw_v2","rect":[627,0,627,627],"pivot":[0.4194577352472089,0.9537480063795853],"duration":0.045,"contact":false,"sockets":{"foot":[263,598],"hand":[181,436],"blade":[37,565],"effect":[37,565]},"displayHeight":120},{"atlas":"hit_sw_v2","rect":[0,627,627,627],"pivot":[0.42902711323763953,0.8995215311004785],"duration":0.045,"contact":false,"sockets":{"foot":[269,564],"hand":[243,348],"blade":[89,482],"effect":[89,482]},"displayHeight":120},{"atlas":"hit_sw_v2","rect":[627,627,627,627],"pivot":[0.379585326953748,0.8995215311004785],"duration":0.045,"contact":false,"sockets":{"foot":[238,564],"hand":[207,352],"blade":[50,482],"effect":[50,482]},"displayHeight":120}],
           "se": [
             {
               "atlas": "hit_se",
@@ -158,6 +165,13 @@
           ]
         },
         "cast": {
+          "e": [{"atlas":"cast_e_v2","rect":[0,0,627,627],"pivot":[0.7623604465709729,0.9425837320574163],"duration":0.075,"contact":false,"sockets":{"foot":[478,591],"hand":[217,354],"blade":[409,551],"effect":[541,139]},"displayHeight":120},{"atlas":"cast_e_v2","rect":[627,0,627,627],"pivot":[0.722488038277512,0.9425837320574163],"duration":0.075,"contact":false,"sockets":{"foot":[453,591],"hand":[160,365],"blade":[357,566],"effect":[528,145]},"displayHeight":120},{"atlas":"cast_e_v2","rect":[0,627,627,627],"pivot":[0.8277511961722488,0.8851674641148325],"duration":0.075,"contact":false,"sockets":{"foot":[519,555],"hand":[242,324],"blade":[424,520],"effect":[477,110]},"displayHeight":120},{"atlas":"cast_e_v2","rect":[627,627,627,627],"pivot":[0.7400318979266348,0.8915470494417863],"duration":0.075,"contact":false,"sockets":{"foot":[464,559],"hand":[192,324],"blade":[371,530],"effect":[429,302]},"displayHeight":120}],
+          "w": [{"atlas":"cast_w_v2","rect":[0,0,627,627],"pivot":[0.44657097288676234,0.9393939393939394],"duration":0.075,"contact":false,"sockets":{"foot":[280,589],"hand":[298,368],"blade":[105,525],"effect":[268,206]},"displayHeight":120},{"atlas":"cast_w_v2","rect":[627,0,627,627],"pivot":[0.39712918660287083,0.9457735247208932],"duration":0.075,"contact":false,"sockets":{"foot":[249,593],"hand":[260,365],"blade":[73,525],"effect":[225,205]},"displayHeight":120},{"atlas":"cast_w_v2","rect":[0,627,627,627],"pivot":[0.44657097288676234,0.8452950558213717],"duration":0.075,"contact":false,"sockets":{"foot":[280,530],"hand":[294,304],"blade":[106,462],"effect":[260,141]},"displayHeight":120},{"atlas":"cast_w_v2","rect":[627,627,627,627],"pivot":[0.3763955342902711,0.8437001594896332],"duration":0.075,"contact":false,"sockets":{"foot":[236,529],"hand":[233,312],"blade":[51,461],"effect":[387,289]},"displayHeight":120}],
+          "n": [{"atlas":"cast_n_v2","rect":[0,0,627,627],"pivot":[0.6555023923444976,0.9585326953748007],"duration":0.075,"contact":false,"sockets":{"foot":[411,601],"hand":[431,375],"blade":[579,506],"effect":[249,145]},"displayHeight":120},{"atlas":"cast_n_v2","rect":[627,0,627,627],"pivot":[0.5757575757575758,0.9681020733652312],"duration":0.075,"contact":false,"sockets":{"foot":[361,607],"hand":[374,386],"blade":[524,514],"effect":[172,110]},"displayHeight":120},{"atlas":"cast_n_v2","rect":[0,627,627,627],"pivot":[0.6602870813397129,0.8995215311004785],"duration":0.075,"contact":false,"sockets":{"foot":[414,564],"hand":[432,346],"blade":[581,477],"effect":[228,43]},"displayHeight":120},{"atlas":"cast_n_v2","rect":[627,627,627,627],"pivot":[0.5917065390749602,0.9122807017543859],"duration":0.075,"contact":false,"sockets":{"foot":[371,572],"hand":[389,355],"blade":[540,474],"effect":[174,321]},"displayHeight":120}],
+          "s": [{"atlas":"cast_s_v2","rect":[0,0,627,627],"pivot":[0.32854864433811803,0.960127591706539],"duration":0.075,"contact":false,"sockets":{"foot":[206,602],"hand":[216,365],"blade":[133,595],"effect":[478,208]},"displayHeight":120},{"atlas":"cast_s_v2","rect":[627,0,627,627],"pivot":[0.19138755980861244,0.960127591706539],"duration":0.075,"contact":false,"sockets":{"foot":[120,602],"hand":[133,366],"blade":[49,591],"effect":[395,161]},"displayHeight":120},{"atlas":"cast_s_v2","rect":[0,627,627,627],"pivot":[0.3365231259968102,0.8819776714513556],"duration":0.075,"contact":false,"sockets":{"foot":[211,553],"hand":[217,320],"blade":[133,537],"effect":[502,131]},"displayHeight":120},{"atlas":"cast_s_v2","rect":[627,627,627,627],"pivot":[0.21052631578947367,0.8883572567783095],"duration":0.075,"contact":false,"sockets":{"foot":[132,557],"hand":[143,326],"blade":[83,550],"effect":[422,334]},"displayHeight":120}],
+          "ne": [{"atlas":"cast_ne_v2","rect":[0,0,627,627],"pivot":[0.6842105263157895,0.9744816586921851],"duration":0.075,"contact":false,"sockets":{"foot":[429,611],"hand":[438,373],"blade":[602,514],"effect":[415,124]},"displayHeight":120},{"atlas":"cast_ne_v2","rect":[627,0,627,627],"pivot":[0.6044657097288676,0.9760765550239234],"duration":0.075,"contact":false,"sockets":{"foot":[379,612],"hand":[376,385],"blade":[543,524],"effect":[376,93]},"displayHeight":120},{"atlas":"cast_ne_v2","rect":[0,627,627,627],"pivot":[0.7256778309409888,0.9202551834130781],"duration":0.075,"contact":false,"sockets":{"foot":[455,577],"hand":[460,351],"blade":[612,481],"effect":[451,63]},"displayHeight":120},{"atlas":"cast_ne_v2","rect":[627,627,627,627],"pivot":[0.6076555023923444,0.9282296650717703],"duration":0.075,"contact":false,"sockets":{"foot":[381,582],"hand":[398,363],"blade":[556,490],"effect":[174,322]},"displayHeight":120}],
+          "nw": [{"atlas":"cast_nw_v2","rect":[0,0,627,627],"pivot":[0.7400318979266348,0.9712918660287081],"duration":0.075,"contact":false,"sockets":{"foot":[464,609],"hand":[456,373],"blade":[604,509],"effect":[179,105]},"displayHeight":120},{"atlas":"cast_nw_v2","rect":[627,0,627,627],"pivot":[0.6921850079744817,0.9840510366826156],"duration":0.075,"contact":false,"sockets":{"foot":[434,617],"hand":[428,381],"blade":[572,518],"effect":[125,104]},"displayHeight":120},{"atlas":"cast_nw_v2","rect":[0,627,627,627],"pivot":[0.7432216905901117,0.9043062200956937],"duration":0.075,"contact":false,"sockets":{"foot":[466,567],"hand":[461,347],"blade":[609,473],"effect":[179,66]},"displayHeight":120},{"atlas":"cast_nw_v2","rect":[627,627,627,627],"pivot":[0.7017543859649122,0.9138755980861244],"duration":0.075,"contact":false,"sockets":{"foot":[440,573],"hand":[441,364],"blade":[575,481],"effect":[184,342]},"displayHeight":120}],
+          "sw": [{"atlas":"cast_sw_v2","rect":[0,0,627,627],"pivot":[0.4130781499202552,0.9744816586921851],"duration":0.075,"contact":false,"sockets":{"foot":[259,611],"hand":[234,379],"blade":[89,517],"effect":[339,288]},"displayHeight":120},{"atlas":"cast_sw_v2","rect":[627,0,627,627],"pivot":[0.3492822966507177,0.9744816586921851],"duration":0.075,"contact":false,"sockets":{"foot":[219,611],"hand":[181,393],"blade":[35,527],"effect":[499,239]},"displayHeight":120},{"atlas":"cast_sw_v2","rect":[0,627,627,627],"pivot":[0.4019138755980861,0.89792663476874],"duration":0.075,"contact":false,"sockets":{"foot":[252,563],"hand":[235,336],"blade":[85,486],"effect":[460,185]},"displayHeight":120},{"atlas":"cast_sw_v2","rect":[627,627,627,627],"pivot":[0.3444976076555024,0.8995215311004785],"duration":0.075,"contact":false,"sockets":{"foot":[216,564],"hand":[198,344],"blade":[52,487],"effect":[398,285]},"displayHeight":120}],
           "se": [
             {
               "atlas": "cast_se",
@@ -298,6 +312,972 @@
           ]
         },
         "dodge": {
+          "w": [
+            {
+              "atlas": "dodge_w_v2",
+              "rect": [
+                0,
+                0,
+                650,
+                635
+              ],
+              "pivot": [
+                0.44153846153846155,
+                0.952755905511811
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  287,
+                  605
+                ],
+                "hand": [
+                  423,
+                  441
+                ],
+                "blade": [
+                  635,
+                  525
+                ],
+                "effect": [
+                  635,
+                  525
+                ]
+              },
+              "displayHeight": 130.19751231823096
+            },
+            {
+              "atlas": "dodge_w_v2",
+              "rect": [
+                650,
+                0,
+                604,
+                635
+              ],
+              "pivot": [
+                0.4205298013245033,
+                0.9322834645669291
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  254,
+                  592
+                ],
+                "hand": [
+                  332,
+                  388
+                ],
+                "blade": [
+                  565,
+                  441
+                ],
+                "effect": [
+                  565,
+                  441
+                ]
+              },
+              "displayHeight": 130.19751231823096
+            },
+            {
+              "atlas": "dodge_w_v2",
+              "rect": [
+                0,
+                635,
+                650,
+                619
+              ],
+              "pivot": [
+                0.4015384615384615,
+                0.7802907915993538
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  261,
+                  483
+                ],
+                "hand": [
+                  414,
+                  294
+                ],
+                "blade": [
+                  635,
+                  374
+                ],
+                "effect": [
+                  635,
+                  374
+                ]
+              },
+              "displayHeight": 126.91694507871648
+            },
+            {
+              "atlas": "dodge_w_v2",
+              "rect": [
+                650,
+                635,
+                604,
+                619
+              ],
+              "pivot": [
+                0.24834437086092714,
+                0.7673667205169629
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  150,
+                  475
+                ],
+                "hand": [
+                  350,
+                  295
+                ],
+                "blade": [
+                  555,
+                  399
+                ],
+                "effect": [
+                  555,
+                  399
+                ]
+              },
+              "displayHeight": 126.91694507871648
+            }
+          ],
+          "n": [
+            {
+              "atlas": "dodge_n_v2",
+              "rect": [
+                0,
+                0,
+                650,
+                640
+              ],
+              "pivot": [
+                0.54,
+                0.8640625
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  351,
+                  553
+                ],
+                "hand": [
+                  457,
+                  468
+                ],
+                "blade": [
+                  614,
+                  558
+                ],
+                "effect": [
+                  614,
+                  558
+                ]
+              },
+              "displayHeight": 120.00881180587251
+            },
+            {
+              "atlas": "dodge_n_v2",
+              "rect": [
+                650,
+                0,
+                604,
+                640
+              ],
+              "pivot": [
+                0.445364238410596,
+                0.996875
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  269,
+                  638
+                ],
+                "hand": [
+                  424,
+                  350
+                ],
+                "blade": [
+                  558,
+                  480
+                ],
+                "effect": [
+                  558,
+                  480
+                ]
+              },
+              "displayHeight": 120.00881180587251
+            },
+            {
+              "atlas": "dodge_n_v2",
+              "rect": [
+                0,
+                640,
+                650,
+                614
+              ],
+              "pivot": [
+                0.683076923076923,
+                0.7328990228013029
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  444,
+                  450
+                ],
+                "hand": [
+                  478,
+                  336
+                ],
+                "blade": [
+                  630,
+                  434
+                ],
+                "effect": [
+                  630,
+                  434
+                ]
+              },
+              "displayHeight": 115.13345382625894
+            },
+            {
+              "atlas": "dodge_n_v2",
+              "rect": [
+                650,
+                640,
+                604,
+                614
+              ],
+              "pivot": [
+                0.5778145695364238,
+                0.8697068403908795
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  349,
+                  534
+                ],
+                "hand": [
+                  409,
+                  276
+                ],
+                "blade": [
+                  546,
+                  401
+                ],
+                "effect": [
+                  546,
+                  401
+                ]
+              },
+              "displayHeight": 115.13345382625894
+            }
+          ],
+          "s": [
+            {
+              "atlas": "dodge_s_v2",
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.4194577352472089,
+                0.9362041467304625
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  263,
+                  587
+                ],
+                "hand": [
+                  207,
+                  408
+                ],
+                "blade": [
+                  99,
+                  569
+                ],
+                "effect": [
+                  99,
+                  569
+                ]
+              },
+              "displayHeight": 119.55979745149075
+            },
+            {
+              "atlas": "dodge_s_v2",
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.45933014354066987,
+                0.9218500797448166
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  288,
+                  578
+                ],
+                "hand": [
+                  147,
+                  305
+                ],
+                "blade": [
+                  66,
+                  482
+                ],
+                "effect": [
+                  66,
+                  482
+                ]
+              },
+              "displayHeight": 119.55979745149075
+            },
+            {
+              "atlas": "dodge_s_v2",
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.46730462519936206,
+                0.8437001594896332
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  293,
+                  529
+                ],
+                "hand": [
+                  216,
+                  349
+                ],
+                "blade": [
+                  110,
+                  517
+                ],
+                "effect": [
+                  110,
+                  517
+                ]
+              },
+              "displayHeight": 119.55979745149075
+            },
+            {
+              "atlas": "dodge_s_v2",
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.2934609250398724,
+                0.8341307814992025
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  184,
+                  523
+                ],
+                "hand": [
+                  162,
+                  284
+                ],
+                "blade": [
+                  89,
+                  464
+                ],
+                "effect": [
+                  89,
+                  464
+                ]
+              },
+              "displayHeight": 119.55979745149075
+            }
+          ],
+          "ne": [
+            {
+              "atlas": "dodge_ne_v2",
+              "rect": [
+                0,
+                0,
+                690,
+                635
+              ],
+              "pivot": [
+                0.5304347826086957,
+                0.8818897637795275
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  366,
+                  560
+                ],
+                "hand": [
+                  514,
+                  425
+                ],
+                "blade": [
+                  674,
+                  485
+                ],
+                "effect": [
+                  674,
+                  485
+                ]
+              },
+              "displayHeight": 124.9632045068135
+            },
+            {
+              "atlas": "dodge_ne_v2",
+              "rect": [
+                690,
+                0,
+                564,
+                635
+              ],
+              "pivot": [
+                0.29609929078014185,
+                0.9354330708661417
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  167,
+                  594
+                ],
+                "hand": [
+                  395,
+                  281
+                ],
+                "blade": [
+                  534,
+                  222
+                ],
+                "effect": [
+                  534,
+                  222
+                ]
+              },
+              "displayHeight": 124.9632045068135
+            },
+            {
+              "atlas": "dodge_ne_v2",
+              "rect": [
+                0,
+                635,
+                750,
+                619
+              ],
+              "pivot": [
+                0.6066666666666667,
+                0.7867528271405493
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  455,
+                  487
+                ],
+                "hand": [
+                  570,
+                  333
+                ],
+                "blade": [
+                  732,
+                  403
+                ],
+                "effect": [
+                  732,
+                  403
+                ]
+              },
+              "displayHeight": 121.81452533813788
+            },
+            {
+              "atlas": "dodge_ne_v2",
+              "rect": [
+                750,
+                635,
+                504,
+                619
+              ],
+              "pivot": [
+                0.6190476190476191,
+                0.8174474959612278
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  312,
+                  506
+                ],
+                "hand": [
+                  307,
+                  262
+                ],
+                "blade": [
+                  475,
+                  319
+                ],
+                "effect": [
+                  475,
+                  319
+                ]
+              },
+              "displayHeight": 121.81452533813788
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "dodge_nw_v2",
+              "rect": [
+                0,
+                0,
+                650,
+                627
+              ],
+              "pivot": [
+                0.4846153846153846,
+                0.8755980861244019
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  315,
+                  549
+                ],
+                "hand": [
+                  454,
+                  432
+                ],
+                "blade": [
+                  619,
+                  481
+                ],
+                "effect": [
+                  619,
+                  481
+                ]
+              },
+              "displayHeight": 169.6766440544444
+            },
+            {
+              "atlas": "dodge_nw_v2",
+              "rect": [
+                650,
+                0,
+                604,
+                627
+              ],
+              "pivot": [
+                0.5182119205298014,
+                0.94896331738437
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  313,
+                  595
+                ],
+                "hand": [
+                  390,
+                  368
+                ],
+                "blade": [
+                  558,
+                  423
+                ],
+                "effect": [
+                  558,
+                  423
+                ]
+              },
+              "displayHeight": 169.6766440544444
+            },
+            {
+              "atlas": "dodge_nw_v2",
+              "rect": [
+                0,
+                627,
+                650,
+                627
+              ],
+              "pivot": [
+                0.5169230769230769,
+                0.6778309409888357
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  336,
+                  425
+                ],
+                "hand": [
+                  465,
+                  286
+                ],
+                "blade": [
+                  624,
+                  346
+                ],
+                "effect": [
+                  624,
+                  346
+                ]
+              },
+              "displayHeight": 169.6766440544444
+            },
+            {
+              "atlas": "dodge_nw_v2",
+              "rect": [
+                650,
+                627,
+                604,
+                627
+              ],
+              "pivot": [
+                0.41721854304635764,
+                0.7400318979266348
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  252,
+                  464
+                ],
+                "hand": [
+                  408,
+                  283
+                ],
+                "blade": [
+                  557,
+                  369
+                ],
+                "effect": [
+                  557,
+                  369
+                ]
+              },
+              "displayHeight": 169.6766440544444
+            }
+          ],
+          "sw": [
+            {
+              "atlas": "dodge_sw_v2",
+              "rect": [
+                0,
+                0,
+                655,
+                627
+              ],
+              "pivot": [
+                0.44122137404580153,
+                0.8819776714513556
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  289,
+                  553
+                ],
+                "hand": [
+                  178,
+                  456
+                ],
+                "blade": [
+                  49,
+                  591
+                ],
+                "effect": [
+                  49,
+                  591
+                ]
+              },
+              "displayHeight": 114.70594479830149
+            },
+            {
+              "atlas": "dodge_sw_v2",
+              "rect": [
+                655,
+                0,
+                599,
+                627
+              ],
+              "pivot": [
+                0.5726210350584308,
+                0.9362041467304625
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  343,
+                  587
+                ],
+                "hand": [
+                  121,
+                  387
+                ],
+                "blade": [
+                  21,
+                  551
+                ],
+                "effect": [
+                  21,
+                  551
+                ]
+              },
+              "displayHeight": 114.70594479830149
+            },
+            {
+              "atlas": "dodge_sw_v2",
+              "rect": [
+                0,
+                627,
+                655,
+                627
+              ],
+              "pivot": [
+                0.44732824427480916,
+                0.8293460925039873
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  293,
+                  520
+                ],
+                "hand": [
+                  194,
+                  331
+                ],
+                "blade": [
+                  50,
+                  474
+                ],
+                "effect": [
+                  50,
+                  474
+                ]
+              },
+              "displayHeight": 114.70594479830149
+            },
+            {
+              "atlas": "dodge_sw_v2",
+              "rect": [
+                655,
+                627,
+                599,
+                627
+              ],
+              "pivot": [
+                0.2704507512520868,
+                0.8676236044657097
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  162,
+                  544
+                ],
+                "hand": [
+                  272,
+                  302
+                ],
+                "blade": [
+                  531,
+                  419
+                ],
+                "effect": [
+                  531,
+                  419
+                ]
+              },
+              "displayHeight": 114.70594479830149
+            }
+          ],
+          "e": [
+            {
+              "atlas": "dodge_e_v2",
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5901116427432217,
+                0.8692185007974481
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  370,
+                  545
+                ],
+                "hand": [
+                  353,
+                  448
+                ],
+                "blade": [
+                  583,
+                  537
+                ],
+                "effect": [
+                  583,
+                  537
+                ]
+              },
+              "displayHeight": 135.53875315335404
+            },
+            {
+              "atlas": "dodge_e_v2",
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.7974481658692185,
+                0.8851674641148325
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  500,
+                  555
+                ],
+                "hand": [
+                  348,
+                  375
+                ],
+                "blade": [
+                  575,
+                  430
+                ],
+                "effect": [
+                  575,
+                  430
+                ]
+              },
+              "displayHeight": 135.53875315335404
+            },
+            {
+              "atlas": "dodge_e_v2",
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.7655502392344498,
+                0.7799043062200957
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  480,
+                  489
+                ],
+                "hand": [
+                  411,
+                  334
+                ],
+                "blade": [
+                  619,
+                  418
+                ],
+                "effect": [
+                  619,
+                  418
+                ]
+              },
+              "displayHeight": 135.53875315335404
+            },
+            {
+              "atlas": "dodge_e_v2",
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.7097288676236044,
+                0.7814992025518341
+              ],
+              "duration": 0.055,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  445,
+                  490
+                ],
+                "hand": [
+                  335,
+                  290
+                ],
+                "blade": [
+                  551,
+                  384
+                ],
+                "effect": [
+                  551,
+                  384
+                ]
+              },
+              "displayHeight": 135.53875315335404
+            }
+          ],
           "se": [
             {
               "atlas": "dodge_se",
@@ -438,6 +1418,13 @@
           ]
         },
         "attack3": {
+"e": [{"atlas":"attack3_e_v2","rect":[0,0,650,627],"pivot":[0.8153846153846154,0.9138755980861244],"duration":0.06,"contact":true,"sockets":{"foot":[530,573],"hand":[221,267],"blade":[625,301],"effect":[625,301]},"displayHeight":150},{"atlas":"attack3_e_v2","rect":[650,0,604,627],"pivot":[0.7036423841059603,0.9218500797448166],"duration":0.075,"contact":false,"sockets":{"foot":[425,578],"hand":[428,449],"blade":[592,570],"effect":[592,570]},"displayHeight":150},{"atlas":"attack3_e_v2","rect":[0,627,650,627],"pivot":[0.8123076923076923,0.8325358851674641],"duration":0.075,"contact":false,"sockets":{"foot":[528,522],"hand":[301,239],"blade":[582,325],"effect":[582,325]},"displayHeight":150},{"atlas":"attack3_e_v2","rect":[650,627,604,627],"pivot":[0.7433774834437086,0.8421052631578947],"duration":0.09,"contact":false,"sockets":{"foot":[449,528],"hand":[197,316],"blade":[413,460],"effect":[413,460]},"displayHeight":150}],
+"w": [{"atlas":"attack3_w_v2","rect":[0,0,627,640],"pivot":[0.24401913875598086,0.946875],"duration":0.06,"contact":true,"sockets":{"foot":[153,606],"hand":[389,281],"blade":[50,277],"effect":[50,277]},"displayHeight":153.11004784688996},{"atlas":"attack3_w_v2","rect":[627,0,627,640],"pivot":[0.2822966507177033,0.95625],"duration":0.075,"contact":false,"sockets":{"foot":[177,612],"hand":[347,409],"blade":[67,533],"effect":[67,533]},"displayHeight":153.11004784688996},{"atlas":"attack3_w_v2","rect":[0,640,650,614],"pivot":[0.2553846153846154,0.8371335504885994],"duration":0.075,"contact":false,"sockets":{"foot":[166,514],"hand":[382,346],"blade":[125,438],"effect":[125,438]},"displayHeight":146.88995215311004},{"atlas":"attack3_w_v2","rect":[650,640,604,614],"pivot":[0.25662251655629137,0.8403908794788274],"duration":0.09,"contact":false,"sockets":{"foot":[155,516],"hand":[173,301],"blade":[326,478],"effect":[326,478]},"displayHeight":146.88995215311004}],
+"n": [{"atlas":"attack3_n_v2","rect":[0,0,627,627],"pivot":[0.7304625199362041,0.7894736842105263],"duration":0.06,"contact":true,"sockets":{"foot":[458,495],"hand":[452,290],"blade":[615,340],"effect":[615,340]},"displayHeight":180},{"atlas":"attack3_n_v2","rect":[627,0,627,627],"pivot":[0.6012759170653907,0.7687400318979266],"duration":0.075,"contact":false,"sockets":{"foot":[377,482],"hand":[421,214],"blade":[554,111],"effect":[554,111]},"displayHeight":180},{"atlas":"attack3_n_v2","rect":[0,627,627,627],"pivot":[0.6985645933014354,0.7464114832535885],"duration":0.075,"contact":false,"sockets":{"foot":[438,468],"hand":[434,314],"blade":[568,421],"effect":[568,421]},"displayHeight":180},{"atlas":"attack3_n_v2","rect":[627,627,627,627],"pivot":[0.6140350877192983,0.7974481658692185],"duration":0.09,"contact":false,"sockets":{"foot":[385,500],"hand":[395,319],"blade":[512,432],"effect":[512,432]},"displayHeight":180}],
+"s": [{"atlas":"attack3_s_v2","rect":[0,0,660,627],"pivot":[0.8803030303030303,0.9537480063795853],"duration":0.06,"contact":true,"sockets":{"foot":[581,598],"hand":[349,390],"blade":[87,506],"effect":[87,506]},"displayHeight":150},{"atlas":"attack3_s_v2","rect":[660,0,594,627],"pivot":[0.7323232323232324,0.9090909090909091],"duration":0.075,"contact":false,"sockets":{"foot":[435,570],"hand":[387,431],"blade":[563,590],"effect":[563,590]},"displayHeight":150},{"atlas":"attack3_s_v2","rect":[0,627,660,627],"pivot":[0.8636363636363636,0.84688995215311],"duration":0.075,"contact":false,"sockets":{"foot":[570,531],"hand":[210,335],"blade":[40,508],"effect":[40,508]},"displayHeight":150},{"atlas":"attack3_s_v2","rect":[660,627,594,627],"pivot":[0.7373737373737373,0.8548644338118022],"duration":0.09,"contact":false,"sockets":{"foot":[438,536],"hand":[181,335],"blade":[370,515],"effect":[370,515]},"displayHeight":150}],
+"ne": [{"atlas":"attack3_ne_v2","rect":[0,0,627,627],"pivot":[0.6953748006379585,0.8405103668261563],"duration":0.06,"contact":true,"sockets":{"foot":[436,527],"hand":[439,355],"blade":[580,431],"effect":[580,431]},"displayHeight":190},{"atlas":"attack3_ne_v2","rect":[627,0,627,627],"pivot":[0.631578947368421,0.7527910685805422],"duration":0.075,"contact":false,"sockets":{"foot":[396,472],"hand":[389,236],"blade":[522,177],"effect":[522,177]},"displayHeight":190},{"atlas":"attack3_ne_v2","rect":[0,627,627,627],"pivot":[0.6778309409888357,0.7671451355661882],"duration":0.075,"contact":false,"sockets":{"foot":[425,481],"hand":[437,317],"blade":[564,419],"effect":[564,419]},"displayHeight":190},{"atlas":"attack3_ne_v2","rect":[627,627,627,627],"pivot":[0.6586921850079744,0.773524720893142],"duration":0.09,"contact":false,"sockets":{"foot":[413,485],"hand":[405,324],"blade":[536,423],"effect":[536,423]},"displayHeight":190}],
+"nw": [{"atlas":"attack3_nw_v2","rect":[0,0,627,650],"pivot":[0.37799043062200954,0.9476923076923077],"duration":0.06,"contact":true,"sockets":{"foot":[237,616],"hand":[312,285],"blade":[78,317],"effect":[78,317]},"displayHeight":155.5023923444976},{"atlas":"attack3_nw_v2","rect":[627,0,627,650],"pivot":[0.1547049441786284,0.9523076923076923],"duration":0.075,"contact":false,"sockets":{"foot":[97,619],"hand":[385,357],"blade":[598,445],"effect":[598,445]},"displayHeight":155.5023923444976},{"atlas":"attack3_nw_v2","rect":[0,650,710,604],"pivot":[0.27323943661971833,0.8261589403973509],"duration":0.075,"contact":false,"sockets":{"foot":[194,499],"hand":[505,267],"blade":[689,411],"effect":[689,411]},"displayHeight":144.4976076555024},{"atlas":"attack3_nw_v2","rect":[710,650,544,604],"pivot":[0.11397058823529412,0.8294701986754967],"duration":0.09,"contact":false,"sockets":{"foot":[62,501],"hand":[330,290],"blade":[493,435],"effect":[493,435]},"displayHeight":144.4976076555024}],
+"sw": [{"atlas":"attack3_sw_v2","rect":[0,0,627,650],"pivot":[0.45614035087719296,0.9292307692307692],"duration":0.06,"contact":true,"sockets":{"foot":[286,604],"hand":[393,321],"blade":[117,388],"effect":[117,388]},"displayHeight":155.5023923444976},{"atlas":"attack3_sw_v2","rect":[627,0,627,650],"pivot":[0.3333333333333333,0.9292307692307692],"duration":0.075,"contact":false,"sockets":{"foot":[209,604],"hand":[420,323],"blade":[611,417],"effect":[611,417]},"displayHeight":155.5023923444976},{"atlas":"attack3_sw_v2","rect":[0,650,627,604],"pivot":[0.4354066985645933,0.8559602649006622],"duration":0.075,"contact":false,"sockets":{"foot":[273,517],"hand":[254,325],"blade":[83,471],"effect":[83,471]},"displayHeight":144.4976076555024},{"atlas":"attack3_sw_v2","rect":[627,650,627,604],"pivot":[0.29984051036682613,0.8625827814569537],"duration":0.09,"contact":false,"sockets":{"foot":[188,521],"hand":[290,315],"blade":[497,463],"effect":[497,463]},"displayHeight":144.4976076555024}],
           "se": [
             {
               "atlas": "attack3_se",
@@ -578,6 +1565,13 @@
           ]
         },
         "attack2": {
+"e": [{"atlas":"attack2_e_v2","rect":[0,0,650,650],"pivot":[0.6876923076923077,0.9446153846153846],"duration":0.06,"contact":true,"sockets":{"foot":[447,614],"hand":[354,348],"blade":[517,213],"effect":[517,213]},"displayHeight":155.5023923444976},{"atlas":"attack2_e_v2","rect":[650,0,604,650],"pivot":[0.6456953642384106,0.943076923076923],"duration":0.075,"contact":false,"sockets":{"foot":[390,613],"hand":[351,170],"blade":[517,59],"effect":[517,59]},"displayHeight":155.5023923444976},{"atlas":"attack2_e_v2","rect":[0,650,650,604],"pivot":[0.7,0.8162251655629139],"duration":0.075,"contact":false,"sockets":{"foot":[455,493],"hand":[450,317],"blade":[635,437],"effect":[635,437]},"displayHeight":144.4976076555024},{"atlas":"attack2_e_v2","rect":[650,650,604,604],"pivot":[0.6423841059602649,0.8145695364238411],"duration":0.09,"contact":false,"sockets":{"foot":[388,492],"hand":[276,310],"blade":[510,419],"effect":[510,419]},"displayHeight":144.4976076555024}],
+"w": [{"atlas":"attack2_w_v2","rect":[0,0,627,660],"pivot":[0.3269537480063796,0.9409090909090909],"duration":0.06,"contact":true,"sockets":{"foot":[205,621],"hand":[299,313],"blade":[110,155],"effect":[110,155]},"displayHeight":157.89473684210526},{"atlas":"attack2_w_v2","rect":[627,0,627,660],"pivot":[0.2711323763955343,0.9484848484848485],"duration":0.075,"contact":false,"sockets":{"foot":[170,626],"hand":[307,154],"blade":[91,30],"effect":[91,30]},"displayHeight":157.89473684210526},{"atlas":"attack2_w_v2","rect":[0,660,627,594],"pivot":[0.379585326953748,0.8501683501683501],"duration":0.075,"contact":false,"sockets":{"foot":[238,505],"hand":[205,313],"blade":[65,469],"effect":[65,469]},"displayHeight":142.10526315789474},{"atlas":"attack2_w_v2","rect":[627,660,627,594],"pivot":[0.3253588516746411,0.8417508417508418],"duration":0.09,"contact":false,"sockets":{"foot":[204,500],"hand":[198,311],"blade":[16,387],"effect":[16,387]},"displayHeight":142.10526315789474}],
+"n": [{"atlas":"attack2_n_v2","rect":[0,0,627,685],"pivot":[0.7113237639553429,0.945985401459854],"duration":0.06,"contact":true,"sockets":{"foot":[446,648],"hand":[418,282],"blade":[553,160],"effect":[553,160]},"displayHeight":163.8755980861244},{"atlas":"attack2_n_v2","rect":[627,0,627,685],"pivot":[0.7081339712918661,0.9474452554744526],"duration":0.075,"contact":false,"sockets":{"foot":[444,649],"hand":[402,148],"blade":[565,31],"effect":[565,31]},"displayHeight":163.8755980861244},{"atlas":"attack2_n_v2","rect":[0,685,627,569],"pivot":[0.6858054226475279,0.8945518453427065],"duration":0.075,"contact":false,"sockets":{"foot":[430,509],"hand":[467,301],"blade":[620,409],"effect":[620,409]},"displayHeight":136.1244019138756},{"atlas":"attack2_n_v2","rect":[627,685,627,569],"pivot":[0.696969696969697,0.9050966608084359],"duration":0.09,"contact":false,"sockets":{"foot":[437,515],"hand":[403,294],"blade":[591,414],"effect":[591,414]},"displayHeight":136.1244019138756}],
+"s": [{"atlas":"attack2_s_v2","rect":[0,0,627,650],"pivot":[0.7878787878787878,0.9523076923076923],"duration":0.06,"contact":true,"sockets":{"foot":[494,619],"hand":[291,331],"blade":[524,184],"effect":[524,184]},"displayHeight":155.5023923444976},{"atlas":"attack2_s_v2","rect":[627,0,627,650],"pivot":[0.7272727272727273,0.9523076923076923],"duration":0.075,"contact":false,"sockets":{"foot":[456,619],"hand":[372,165],"blade":[579,51],"effect":[579,51]},"displayHeight":155.5023923444976},{"atlas":"attack2_s_v2","rect":[0,650,627,604],"pivot":[0.7878787878787878,0.8642384105960265],"duration":0.075,"contact":false,"sockets":{"foot":[494,522],"hand":[280,287],"blade":[474,450],"effect":[474,450]},"displayHeight":144.4976076555024},{"atlas":"attack2_s_v2","rect":[627,650,627,604],"pivot":[0.733652312599681,0.8625827814569537],"duration":0.09,"contact":false,"sockets":{"foot":[460,521],"hand":[219,336],"blade":[413,469],"effect":[413,469]},"displayHeight":144.4976076555024}],
+"ne": [{"atlas":"attack2_ne_v2","rect":[0,0,690,655],"pivot":[0.6782608695652174,0.8045801526717558],"duration":0.06,"contact":true,"sockets":{"foot":[468,527],"hand":[480,274],"blade":[620,124],"effect":[620,124]},"displayHeight":156.69856459330143},{"atlas":"attack2_ne_v2","rect":[690,0,564,655],"pivot":[0.650709219858156,0.8244274809160306],"duration":0.075,"contact":false,"sockets":{"foot":[367,540],"hand":[364,157],"blade":[502,28],"effect":[502,28]},"displayHeight":156.69856459330143},{"atlas":"attack2_ne_v2","rect":[0,655,690,599],"pivot":[0.6536231884057971,0.7595993322203672],"duration":0.075,"contact":false,"sockets":{"foot":[451,455],"hand":[478,240],"blade":[670,171],"effect":[670,171]},"displayHeight":143.30143540669857},{"atlas":"attack2_ne_v2","rect":[690,655,564,599],"pivot":[0.6276595744680851,0.7762938230383973],"duration":0.09,"contact":false,"sockets":{"foot":[354,465],"hand":[358,220],"blade":[500,58],"effect":[500,58]},"displayHeight":143.30143540669857}],
+"nw": [{"atlas":"attack2_nw_v2","rect":[0,0,627,670],"pivot":[0.3365231259968102,0.9343283582089552],"duration":0.06,"contact":true,"sockets":{"foot":[211,626],"hand":[274,237],"blade":[114,96],"effect":[114,96]},"displayHeight":160.28708133971293},{"atlas":"attack2_nw_v2","rect":[627,0,627,670],"pivot":[0.2727272727272727,0.9417910447761194],"duration":0.075,"contact":false,"sockets":{"foot":[171,631],"hand":[397,130],"blade":[132,39],"effect":[132,39]},"displayHeight":160.28708133971293},{"atlas":"attack2_nw_v2","rect":[0,670,627,584],"pivot":[0.37320574162679426,0.8715753424657534],"duration":0.075,"contact":false,"sockets":{"foot":[234,509],"hand":[272,181],"blade":[97,72],"effect":[97,72]},"displayHeight":139.71291866028707},{"atlas":"attack2_nw_v2","rect":[627,670,627,584],"pivot":[0.23125996810207336,0.875],"duration":0.09,"contact":false,"sockets":{"foot":[145,511],"hand":[451,277],"blade":[586,432],"effect":[586,432]},"displayHeight":139.71291866028707}],
+"sw": [{"atlas":"attack2_sw_v2","rect":[0,0,627,730],"pivot":[0.32057416267942584,0.9616438356164384],"duration":0.06,"contact":true,"sockets":{"foot":[201,702],"hand":[368,349],"blade":[473,211],"effect":[473,211]},"displayHeight":174.64114832535884},{"atlas":"attack2_sw_v2","rect":[627,0,627,730],"pivot":[0.215311004784689,0.9616438356164384],"duration":0.075,"contact":false,"sockets":{"foot":[135,702],"hand":[330,420],"blade":[91,424],"effect":[91,424]},"displayHeight":174.64114832535884},{"atlas":"attack2_sw_v2","rect":[0,730,627,524],"pivot":[0.31100478468899523,0.8893129770992366],"duration":0.075,"contact":false,"sockets":{"foot":[195,466],"hand":[399,279],"blade":[250,425],"effect":[250,425]},"displayHeight":125.35885167464114},{"atlas":"attack2_sw_v2","rect":[627,730,627,524],"pivot":[0.2551834130781499,0.9026717557251909],"duration":0.09,"contact":false,"sockets":{"foot":[160,473],"hand":[333,270],"blade":[107,333],"effect":[107,333]},"displayHeight":125.35885167464114}],
           "se": [
             {
               "atlas": "attack2_se",
@@ -1780,6 +2774,13 @@
           ]
         },
         "attack1": {
+          "nw": [{"atlas":"attack1_nw","rect":[0,0,627,627],"pivot":[0.32057416267942584,0.9266347687400319],"duration":0.075,"contact":true,"sockets":{"foot":[201,581],"hand":[417,145],"blade":[174,48],"effect":[174,48]},"displayHeight":130},{"atlas":"attack1_nw","rect":[627,0,627,627],"pivot":[0.31259968102073366,0.9266347687400319],"duration":0.075,"contact":false,"sockets":{"foot":[196,581],"hand":[296,303],"blade":[144,403],"effect":[144,403]},"displayHeight":130},{"atlas":"attack1_nw","rect":[0,627,627,627],"pivot":[0.36044657097288674,0.8740031897926634],"duration":0.075,"contact":false,"sockets":{"foot":[226,548],"hand":[455,113],"blade":[240,44],"effect":[240,44]},"displayHeight":130},{"atlas":"attack1_nw","rect":[627,627,627,627],"pivot":[0.23444976076555024,0.8724082934609251],"duration":0.075,"contact":false,"sockets":{"foot":[147,547],"hand":[381,357],"blade":[561,491],"effect":[561,491]},"displayHeight":130}],
+          "sw": [{"atlas":"attack1_sw","rect":[0,0,627,627],"pivot":[0.5215311004784688,0.9011164274322169],"duration":0.075,"contact":true,"sockets":{"foot":[327,565],"hand":[239,361],"blade":[101,464],"effect":[101,464]},"displayHeight":165},{"atlas":"attack1_sw","rect":[627,0,627,627],"pivot":[0.37320574162679426,0.9170653907496013],"duration":0.075,"contact":false,"sockets":{"foot":[234,575],"hand":[361,399],"blade":[513,506],"effect":[513,506]},"displayHeight":165},{"atlas":"attack1_sw","rect":[0,627,627,627],"pivot":[0.44178628389154706,0.7894736842105263],"duration":0.075,"contact":false,"sockets":{"foot":[277,495],"hand":[354,256],"blade":[551,291],"effect":[551,291]},"displayHeight":165},{"atlas":"attack1_sw","rect":[627,627,627,627],"pivot":[0.32057416267942584,0.8038277511961722],"duration":0.075,"contact":false,"sockets":{"foot":[201,504],"hand":[333,335],"blade":[525,435],"effect":[525,435]},"displayHeight":165}],
+          "ne": [{"atlas":"attack1_ne","rect":[0,0,627,627],"pivot":[0.37161084529505584,0.9043062200956937],"duration":0.075,"contact":true,"sockets":{"foot":[233,567],"hand":[484,222],"blade":[614,130],"effect":[614,130]},"displayHeight":145},{"atlas":"attack1_ne","rect":[627,0,627,627],"pivot":[0.2743221690590112,0.9059011164274322],"duration":0.075,"contact":false,"sockets":{"foot":[172,568],"hand":[409,193],"blade":[525,105],"effect":[525,105]},"displayHeight":145},{"atlas":"attack1_ne","rect":[0,627,627,627],"pivot":[0.39872408293460926,0.8277511961722488],"duration":0.075,"contact":false,"sockets":{"foot":[250,519],"hand":[450,228],"blade":[562,129],"effect":[562,129]},"displayHeight":145},{"atlas":"attack1_ne","rect":[627,627,627,627],"pivot":[0.3141945773524721,0.8341307814992025],"duration":0.075,"contact":false,"sockets":{"foot":[197,523],"hand":[398,217],"blade":[491,69],"effect":[491,69]},"displayHeight":145}],
+          "s": [{"atlas":"attack1_s","rect":[0,0,627,627],"pivot":[0.31100478468899523,0.886762360446571],"duration":0.075,"contact":true,"sockets":{"foot":[195,556],"hand":[297,305],"blade":[423,459],"effect":[423,459]},"displayHeight":120},{"atlas":"attack1_s","rect":[627,0,627,627],"pivot":[0.1722488038277512,0.886762360446571],"duration":0.075,"contact":false,"sockets":{"foot":[108,556],"hand":[286,219],"blade":[558,138],"effect":[558,138]},"displayHeight":120},{"atlas":"attack1_s","rect":[0,627,627,627],"pivot":[0.2902711323763955,0.8915470494417863],"duration":0.075,"contact":false,"sockets":{"foot":[182,559],"hand":[294,327],"blade":[509,470],"effect":[509,470]},"displayHeight":120},{"atlas":"attack1_s","rect":[627,627,627,627],"pivot":[0.2535885167464115,0.8915470494417863],"duration":0.075,"contact":false,"sockets":{"foot":[159,559],"hand":[171,324],"blade":[293,533],"effect":[293,533]},"displayHeight":120}],
+          "w": [{"atlas":"attack1_w","rect":[0,0,627,627],"pivot":[0.5151515151515151,0.8133971291866029],"duration":0.075,"contact":true,"sockets":{"foot":[323,510],"hand":[250,264],"blade":[67,264],"effect":[67,264]},"displayHeight":175},{"atlas":"attack1_w","rect":[627,0,627,627],"pivot":[0.45933014354066987,0.8740031897926634],"duration":0.075,"contact":false,"sockets":{"foot":[288,548],"hand":[249,286],"blade":[83,317],"effect":[83,317]},"displayHeight":175},{"atlas":"attack1_w","rect":[0,627,627,627],"pivot":[0.5055821371610846,0.7352472089314195],"duration":0.075,"contact":false,"sockets":{"foot":[317,461],"hand":[351,350],"blade":[202,457],"effect":[202,457]},"displayHeight":175},{"atlas":"attack1_w","rect":[627,627,627,627],"pivot":[0.39074960127591707,0.7687400318979266],"duration":0.075,"contact":false,"sockets":{"foot":[245,482],"hand":[273,269],"blade":[128,141],"effect":[128,141]},"displayHeight":175}],
+          "n": [{"atlas":"attack1_n","rect":[0,0,627,627],"pivot":[0.44019138755980863,0.8995215311004785],"duration":0.075,"contact":true,"sockets":{"foot":[276,564],"hand":[417,244],"blade":[543,188],"effect":[543,188]},"displayHeight":170},{"atlas":"attack1_n","rect":[627,0,627,627],"pivot":[0.3572567783094099,0.7878787878787878],"duration":0.075,"contact":false,"sockets":{"foot":[224,494],"hand":[371,200],"blade":[508,108],"effect":[508,108]},"displayHeight":170},{"atlas":"attack1_n","rect":[0,627,627,627],"pivot":[0.38118022328548645,0.6985645933014354],"duration":0.075,"contact":false,"sockets":{"foot":[239,438],"hand":[411,316],"blade":[534,409],"effect":[534,409]},"displayHeight":170},{"atlas":"attack1_n","rect":[627,627,627,627],"pivot":[0.33811802232854865,0.7862838915470495],"duration":0.075,"contact":false,"sockets":{"foot":[212,493],"hand":[405,318],"blade":[543,393],"effect":[543,393]},"displayHeight":170}],
+          "e": [{"atlas":"attack1_e","rect":[0,0,627,627],"pivot":[0.2902711323763955,0.8086124401913876],"duration":0.075,"contact":true,"sockets":{"foot":[182,507],"hand":[432,238],"blade":[589,165],"effect":[589,165]},"displayHeight":190},{"atlas":"attack1_e","rect":[627,0,627,627],"pivot":[0.24561403508771928,0.8149920255183413],"duration":0.075,"contact":false,"sockets":{"foot":[154,511],"hand":[393,364],"blade":[512,469],"effect":[512,469]},"displayHeight":190},{"atlas":"attack1_e","rect":[0,627,627,627],"pivot":[0.29984051036682613,0.7496012759170654],"duration":0.075,"contact":false,"sockets":{"foot":[188,470],"hand":[315,241],"blade":[507,300],"effect":[507,300]},"displayHeight":190},{"atlas":"attack1_e","rect":[627,627,627,627],"pivot":[0.29984051036682613,0.7496012759170654],"duration":0.075,"contact":false,"sockets":{"foot":[188,470],"hand":[298,315],"blade":[482,414],"effect":[482,414]},"displayHeight":190}],
           "se": [
             {
               "atlas": "attack1_se",
@@ -1932,6 +2933,48 @@
         "userDirectionApproved": "2026-09-30"
       },
       "atlases": {
+        "hit_e_v2": {"path":"assets/art/reality/hero/yunseo/hit-e-candidate-v2.png","width":1254,"height":1254},
+        "hit_w_v2": {"path":"assets/art/reality/hero/yunseo/hit-w-candidate-v2.png","width":1254,"height":1254},
+        "hit_n_v2": {"path":"assets/art/reality/hero/yunseo/hit-n-candidate-v2.png","width":1254,"height":1254},
+        "hit_s_v2": {"path":"assets/art/reality/hero/yunseo/hit-s-candidate-v2.png","width":1254,"height":1254},
+        "hit_ne_v2": {"path":"assets/art/reality/hero/yunseo/hit-ne-candidate-v2.png","width":1254,"height":1254},
+        "hit_nw_v2": {"path":"assets/art/reality/hero/yunseo/hit-nw-candidate-v3.png","width":1254,"height":1254},
+        "hit_sw_v2": {"path":"assets/art/reality/hero/yunseo/hit-sw-candidate-v2.png","width":1254,"height":1254},
+        "cast_e_v2": {"path":"assets/art/reality/hero/yunseo/cast-e-candidate-v2.png","width":1254,"height":1254},
+        "cast_w_v2": {"path":"assets/art/reality/hero/yunseo/cast-w-candidate-v2.png","width":1254,"height":1254},
+        "cast_n_v2": {"path":"assets/art/reality/hero/yunseo/cast-n-candidate-v2.png","width":1254,"height":1254},
+        "cast_s_v2": {"path":"assets/art/reality/hero/yunseo/cast-s-candidate-v2.png","width":1254,"height":1254},
+        "cast_ne_v2": {"path":"assets/art/reality/hero/yunseo/cast-ne-candidate-v3.png","width":1254,"height":1254},
+        "cast_nw_v2": {"path":"assets/art/reality/hero/yunseo/cast-nw-candidate-v2.png","width":1254,"height":1254},
+        "cast_sw_v2": {"path":"assets/art/reality/hero/yunseo/cast-sw-candidate-v3.png","width":1254,"height":1254},
+"attack3_e_v2": {"path":"assets/art/reality/hero/yunseo/attack3-e-candidate-v2.png","width":1254,"height":1254},
+"attack3_w_v2": {"path":"assets/art/reality/hero/yunseo/attack3-w-candidate-v2.png","width":1254,"height":1254},
+"attack3_n_v2": {"path":"assets/art/reality/hero/yunseo/attack3-n-candidate-v2.png","width":1254,"height":1254},
+"attack3_s_v2": {"path":"assets/art/reality/hero/yunseo/attack3-s-candidate-v2.png","width":1254,"height":1254},
+"attack3_ne_v2": {"path":"assets/art/reality/hero/yunseo/attack3-ne-candidate-v2.png","width":1254,"height":1254},
+"attack3_nw_v2": {"path":"assets/art/reality/hero/yunseo/attack3-nw-candidate-v2.png","width":1254,"height":1254},
+"attack3_sw_v2": {"path":"assets/art/reality/hero/yunseo/attack3-sw-candidate-v2.png","width":1254,"height":1254},
+"attack2_e_v2": {"path":"assets/art/reality/hero/yunseo/attack2-e-candidate-v2.png","width":1254,"height":1254},
+"attack2_w_v2": {"path":"assets/art/reality/hero/yunseo/attack2-w-candidate-v2.png","width":1254,"height":1254},
+"attack2_n_v2": {"path":"assets/art/reality/hero/yunseo/attack2-n-candidate-v2.png","width":1254,"height":1254},
+"attack2_s_v2": {"path":"assets/art/reality/hero/yunseo/attack2-s-candidate-v2.png","width":1254,"height":1254},
+"attack2_ne_v2": {"path":"assets/art/reality/hero/yunseo/attack2-ne-candidate-v2.png","width":1254,"height":1254},
+"attack2_nw_v2": {"path":"assets/art/reality/hero/yunseo/attack2-nw-candidate-v2.png","width":1254,"height":1254},
+"attack2_sw_v2": {"path":"assets/art/reality/hero/yunseo/attack2-sw-candidate-v2.png","width":1254,"height":1254},
+        "dodge_w_v2": {"path":"assets/art/reality/hero/yunseo/dodge-w-candidate-v2.png","width":1254,"height":1254},
+        "dodge_n_v2": {"path":"assets/art/reality/hero/yunseo/dodge-n-candidate-v2.png","width":1254,"height":1254},
+        "dodge_s_v2": {"path":"assets/art/reality/hero/yunseo/dodge-s-candidate-v2.png","width":1254,"height":1254},
+        "dodge_ne_v2": {"path":"assets/art/reality/hero/yunseo/dodge-ne-candidate-v2.png","width":1254,"height":1254},
+        "dodge_nw_v2": {"path":"assets/art/reality/hero/yunseo/dodge-nw-candidate-v3.png","width":1254,"height":1254},
+        "dodge_sw_v2": {"path":"assets/art/reality/hero/yunseo/dodge-sw-candidate-v2.png","width":1254,"height":1254},
+        "dodge_e_v2": {"path":"assets/art/reality/hero/yunseo/dodge-e-candidate-v2.png","width":1254,"height":1254},
+        "attack1_nw": {"path":"assets/art/reality/hero/yunseo/attack1-nw-candidate-v4.png","width":1254,"height":1254},
+        "attack1_sw": {"path":"assets/art/reality/hero/yunseo/attack1-sw-candidate-v2.png","width":1254,"height":1254},
+        "attack1_ne": {"path":"assets/art/reality/hero/yunseo/attack1-ne-candidate-v2.png","width":1254,"height":1254},
+        "attack1_s": {"path":"assets/art/reality/hero/yunseo/attack1-s-candidate-v2.png","width":1254,"height":1254},
+        "attack1_w": {"path":"assets/art/reality/hero/yunseo/attack1-w-candidate-v2.png","width":1254,"height":1254},
+        "attack1_n": {"path":"assets/art/reality/hero/yunseo/attack1-n-candidate-v2.png","width":1254,"height":1254},
+        "attack1_e": {"path":"assets/art/reality/hero/yunseo/attack1-e-candidate-v2.png","width":1254,"height":1254},
         "hit_se": {
           "path": "assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
           "width": 1254,

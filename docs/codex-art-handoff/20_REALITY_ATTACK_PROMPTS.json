@@ -1,0 +1,59 @@
+{
+  "method": "built-in image generation; no image postprocessing",
+  "status": "candidate technical integration",
+  "reference": "assets/art/reality/hero/yunseo/attack1-se-candidate-v1.png (NE/NW/SW use E v2)",
+  "entries": [
+    {
+      "facing": "e",
+      "path": "assets/art/reality/hero/yunseo/attack1-e-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Image1 is reference for identity, uniform, weapon and painterly game style. Create independent EAST-facing attack1 animation for this same short black-haired modern Korean hunter in black tactical hooded jacket, gloves, utility harness, trousers and boots. No robes or long hair. All bodies face RIGHT, side profile. Fixed elevated 3/4 RPG camera. Exactly four full-body poses in square 2x2 transparent-alpha atlas: top-left first contact with right-hand straight steel sword extended upper-right; top-right follow-through lower-right; bottom-left retract sword; bottom-right right-facing guard. Consistent body size and support boot position. Entire sword and figure inside central 70% of each quadrant with wide transparent gutters, no border crossings, no cropped sword. Draw correct independent full bodies, never mirror or graft heads. No floor, no VFX, no labels, no grid, no text.",
+      "correctionPrompts": [
+        "Edit target: four-frame sprite atlas. Preserve exact same hunter, equipment, east-facing poses, sword, style and frame order. Change ONLY spacing and scale: shrink all four entire figures INCLUDING swords to about 70% of current size, each centered in its own equal 2x2 quadrant. Each quadrant must have at least 90px clear transparent padding on ALL FOUR sides at 1254x1254. No part of sword, boot or hair may cross the central x=627 or y=627 lines. True transparent background, no visible grid or text. Crucial top-left sword currently crosses into top-right quadrant: it must fit fully within top-left. Keep equal body scale across all cells."
+      ]
+    },
+    {
+      "facing": "n",
+      "path": "assets/art/reality/hero/yunseo/attack1-n-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Image1 reference identity and uniform only. Independent n attack1 animation, same short black-haired modern Korean male hunter, black tactical hooded jacket, gloves, utility belt, black trousers/boots, RIGHT hand steel sword. All four bodies face NORTH, directly away from camera, back of head and torso, no face visible. Fixed elevated RPG camera, consistent scale, support boot stable. Exactly FOUR full-body consecutive poses in square 2x2 transparent atlas: contact, follow-through, recovery, guard. Each figure AND entire sword occupy central 60% of own quadrant, very large transparent gutters (90px minimum), no sword crossing cell borders. No mirroring, head graft, robe, extra weapons, VFX, floor, text, grid. Full independent drawing, preserve asymmetric equipment.",
+      "correctionPrompts": [
+        "Edit target: four-pose hunter atlas. Keep exact character, equipment, camera, directions and four poses. Change only scale and padding: shrink each COMPLETE silhouette with sword to 65% current size, centered in its own square quadrant. Exactly 2x2 equal quadrants, generous real transparent padding. Each complete figure including sword tips and feet strictly within its quadrant, no pixel at midpoint or outer edge. No text, grids, background, VFX. In particular ensure first frame's boot/sword does not overlap second frame, and second frame's sword has empty space above its tip. Preserve all anatomy and sword grip."
+      ]
+    },
+    {
+      "facing": "w",
+      "path": "assets/art/reality/hero/yunseo/attack1-w-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Image1 reference identity and uniform only. Independent w attack1 animation, same short black-haired modern Korean male hunter, black tactical hooded jacket, gloves, utility belt, black trousers/boots, RIGHT hand steel sword. All four bodies face WEST, left-facing profile, toward left edge. Fixed elevated RPG camera, consistent scale, support boot stable. Exactly FOUR full-body consecutive poses in square 2x2 transparent atlas: contact, follow-through, recovery, guard. Each figure AND entire sword occupy central 60% of own quadrant, very large transparent gutters (90px minimum), no sword crossing cell borders. No mirroring, head graft, robe, extra weapons, VFX, floor, text, grid. Full independent drawing, preserve asymmetric equipment.",
+      "correctionPrompts": [
+        "Edit target: four-pose hunter atlas. Keep exact character, equipment, camera, directions and four poses. Change only scale and padding: shrink each COMPLETE silhouette with sword to 65% current size, centered in its own square quadrant. Exactly 2x2 equal quadrants, generous real transparent padding. Each complete figure including sword tips and feet strictly within its quadrant, no pixel at midpoint or outer edge. No text, grids, background, VFX. In particular ensure first frame's boot/sword does not overlap second frame, and second frame's sword has empty space above its tip. Preserve all anatomy and sword grip."
+      ]
+    },
+    {
+      "facing": "s",
+      "path": "assets/art/reality/hero/yunseo/attack1-s-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Image1 reference identity and uniform only. Independent s attack1 animation, same short black-haired modern Korean male hunter, black tactical hooded jacket, gloves, utility belt, black trousers/boots, RIGHT hand steel sword. All four bodies face SOUTH, toward camera/down-screen, frontal chest and face. Fixed elevated RPG camera, consistent scale, support boot stable. Exactly FOUR full-body consecutive poses in square 2x2 transparent atlas: contact, follow-through, recovery, guard. Each figure AND entire sword occupy central 60% of own quadrant, very large transparent gutters (90px minimum), no sword crossing cell borders. No mirroring, head graft, robe, extra weapons, VFX, floor, text, grid. Full independent drawing, preserve asymmetric equipment.",
+      "correctionPrompts": []
+    },
+    {
+      "facing": "ne",
+      "path": "assets/art/reality/hero/yunseo/attack1-ne-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Image1 is character reference only. SAME modern short-haired black tactical hunter, right-hand steel sword, black jacket, harness and boots. Create NORTHEAST up-right: back dominates, small right cheek attack1 sequence. FOUR complete full bodies arranged square 2x2 transparent atlas in order: first contact cutting toward facing; follow-through; retract; guard. Fixed elevated RPG camera. All four figures clearly face NORTHEAST up-right: back dominates, small right cheek, keep anatomy and equipment identity, independent poses not mirroring or head swap. Each complete silhouette AND sword must be SMALL inside its own quadrant, central 60 percent, minimum 90px transparent padding, no edge or midpoint crossing. Same body size and support foot per frame. No robes, long hair, text, floor, VFX or grid.",
+      "correctionPrompts": []
+    },
+    {
+      "facing": "nw",
+      "path": "assets/art/reality/hero/yunseo/attack1-nw-candidate-v4.png",
+      "prompt": "Use case: identity-preserve. Image1 is character reference only. SAME modern short-haired black tactical hunter, right-hand steel sword, black jacket, harness and boots. Create NORTHWEST up-left: back dominates, small left cheek attack1 sequence. FOUR complete full bodies arranged square 2x2 transparent atlas in order: first contact cutting toward facing; follow-through; retract; guard. Fixed elevated RPG camera. All four figures clearly face NORTHWEST up-left: back dominates, small left cheek, keep anatomy and equipment identity, independent poses not mirroring or head swap. Each complete silhouette AND sword must be SMALL inside its own quadrant, central 60 percent, minimum 90px transparent padding, no edge or midpoint crossing. Same body size and support foot per frame. No robes, long hair, text, floor, VFX or grid.",
+      "correctionPrompts": [
+        "Edit target four-frame NORTHWEST-facing modern hunter atlas. Correct ONLY top-left first contact pose: sword must be held in the character's anatomical RIGHT hand, reaching from his right shoulder across his chest toward upper-left, right forearm crossing in front of his upper torso. Currently the left arm holds it, fix that. Left hand stays empty near belt/behind body. Preserve the same north-west BACK-facing viewpoint and same equipment. Other three frames unchanged. All figures/swords wholly contained in same square quadrants on transparent background. No text or grid, no cropping.",
+        "Image1 identity reference only, do NOT copy incorrect first pose. New 2x2 square transparent sprite sheet, modern hunter facing NORTHWEST with back toward camera throughout. In EVERY pose RIGHT ARM is the arm on the RIGHT SIDE OF IMAGE, right hand grips sword, left arm on left side is empty. Four poses: top-left RIGHT arm raised above RIGHT shoulder, elbow at right edge, sword extends diagonally UP-LEFT across ABOVE his head; top-right same RIGHT hand cuts diagonally down-left across front of chest (mostly occluded by torso); bottom-left RIGHT hand retracts above right shoulder, sword above head; bottom-right RIGHT hand near RIGHT hip sword pointed diagonally lower-right in guard. Never put sword in the left/image-left arm. Whole body including boots, same black tactical clothing short black hair. Correct anatomy, stable planted boots, central60% of each cell, ample transparent padding and no cropped weapons or overlapping. No VFX or text.",
+        "Edit ONLY bottom-right quadrant. Keep top-left/top-right/bottom-left pixels, layout, transparency and character unchanged. Bottom-right hunter must face NORTHWEST up-left like the bottom-left hunter, back to viewer with left cheek visible, NOT up-right. Entire torso/hips/head/feet reorient up-left, anatomical RIGHT hand holds sword beside RIGHT hip, left hand empty. Draw independent pose not horizontal flip. Same full-body scale and planted left boot. Complete sword inside cell with transparent padding. No other changes, no text."
+      ]
+    },
+    {
+      "facing": "sw",
+      "path": "assets/art/reality/hero/yunseo/attack1-sw-candidate-v2.png",
+      "prompt": "Use case: identity-preserve. Image1 is character reference only. SAME modern short-haired black tactical hunter, right-hand steel sword, black jacket, harness and boots. Create SOUTHWEST down-left: chest and face visible in three-quarter view attack1 sequence. FOUR complete full bodies arranged square 2x2 transparent atlas in order: first contact cutting toward facing; follow-through; retract; guard. Fixed elevated RPG camera. All four figures clearly face SOUTHWEST down-left: chest and face visible in three-quarter view, keep anatomy and equipment identity, independent poses not mirroring or head swap. Each complete silhouette AND sword must be SMALL inside its own quadrant, central 60 percent, minimum 90px transparent padding, no edge or midpoint crossing. Same body size and support foot per frame. No robes, long hair, text, floor, VFX or grid.",
+      "correctionPrompts": []
+    }
+  ]
+}

@@ -1,0 +1,1061 @@
+{
+  "records": [
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-19485aab-e8a5-4dbf-a819-d44242c15b04.png",
+      "destination": "assets/art/murim/hero/yunseo/cast-e-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "cast_e_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7049441786283892,
+            0.9585326953748007
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              442,
+              601
+            ],
+            "hand": [
+              249,
+              381
+            ],
+            "blade": [
+              414,
+              588
+            ],
+            "effect": [
+              516,
+              194
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "cast_e_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7256778309409888,
+            0.9569377990430622
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              455,
+              600
+            ],
+            "hand": [
+              239,
+              381
+            ],
+            "blade": [
+              416,
+              588
+            ],
+            "effect": [
+              546,
+              153
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "cast_e_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7464114832535885,
+            0.8899521531100478
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              468,
+              558
+            ],
+            "hand": [
+              261,
+              341
+            ],
+            "blade": [
+              433,
+              549
+            ],
+            "effect": [
+              536,
+              122
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "cast_e_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7177033492822966,
+            0.8915470494417863
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              450,
+              559
+            ],
+            "hand": [
+              259,
+              343
+            ],
+            "blade": [
+              434,
+              543
+            ],
+            "effect": [
+              433,
+              322
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-46c6a7b4-350a-4ad7-aaed-240d417ae1fd.png",
+      "destination": "assets/art/murim/hero/yunseo/cast-w-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "cast_w_v2",
+          "rect": [
+            0,
+            0,
+            630,
+            630
+          ],
+          "pivot": [
+            0.37777777777777777,
+            0.9285714285714286
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              238,
+              585
+            ],
+            "hand": [
+              272,
+              372
+            ],
+            "blade": [
+              45,
+              486
+            ],
+            "effect": [
+              234,
+              208
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "cast_w_v2",
+          "rect": [
+            630,
+            0,
+            624,
+            630
+          ],
+          "pivot": [
+            0.3269230769230769,
+            0.9301587301587302
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              204,
+              586
+            ],
+            "hand": [
+              247,
+              379
+            ],
+            "blade": [
+              29,
+              497
+            ],
+            "effect": [
+              117,
+              228
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "cast_w_v2",
+          "rect": [
+            0,
+            630,
+            630,
+            624
+          ],
+          "pivot": [
+            0.35873015873015873,
+            0.8669871794871795
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              226,
+              541
+            ],
+            "hand": [
+              264,
+              330
+            ],
+            "blade": [
+              49,
+              440
+            ],
+            "effect": [
+              128,
+              178
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        },
+        {
+          "atlas": "cast_w_v2",
+          "rect": [
+            630,
+            630,
+            624,
+            624
+          ],
+          "pivot": [
+            0.32371794871794873,
+            0.8669871794871795
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              202,
+              541
+            ],
+            "hand": [
+              242,
+              332
+            ],
+            "blade": [
+              34,
+              440
+            ],
+            "effect": [
+              288,
+              345
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-dcaf2f64-56cb-47f9-a62d-81a4a19e2716.png",
+      "destination": "assets/art/murim/hero/yunseo/cast-n-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "cast_n_v2",
+          "rect": [
+            0,
+            0,
+            650,
+            640
+          ],
+          "pivot": [
+            0.3292307692307692,
+            0.9734375
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              214,
+              623
+            ],
+            "hand": [
+              474,
+              417
+            ],
+            "blade": [
+              610,
+              547
+            ],
+            "effect": [
+              212,
+              150
+            ]
+          },
+          "displayHeight": 122.48803827751196
+        },
+        {
+          "atlas": "cast_n_v2",
+          "rect": [
+            650,
+            0,
+            604,
+            640
+          ],
+          "pivot": [
+            0.2433774834437086,
+            0.9734375
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              147,
+              623
+            ],
+            "hand": [
+              419,
+              417
+            ],
+            "blade": [
+              561,
+              549
+            ],
+            "effect": [
+              174,
+              83
+            ]
+          },
+          "displayHeight": 122.48803827751196
+        },
+        {
+          "atlas": "cast_n_v2",
+          "rect": [
+            0,
+            640,
+            650,
+            614
+          ],
+          "pivot": [
+            0.32769230769230767,
+            0.8892508143322475
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              213,
+              546
+            ],
+            "hand": [
+              478,
+              335
+            ],
+            "blade": [
+              615,
+              466
+            ],
+            "effect": [
+              208,
+              28
+            ]
+          },
+          "displayHeight": 117.51196172248804
+        },
+        {
+          "atlas": "cast_n_v2",
+          "rect": [
+            650,
+            640,
+            604,
+            614
+          ],
+          "pivot": [
+            0.25496688741721857,
+            0.8908794788273615
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              154,
+              547
+            ],
+            "hand": [
+              416,
+              335
+            ],
+            "blade": [
+              566,
+              468
+            ],
+            "effect": [
+              105,
+              333
+            ]
+          },
+          "displayHeight": 117.51196172248804
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-9cd03ce6-98a4-4cf5-9b70-743acee8dacd.png",
+      "destination": "assets/art/murim/hero/yunseo/cast-s-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "cast_s_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.24720893141945774,
+            0.9505582137161085
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              155,
+              596
+            ],
+            "hand": [
+              196,
+              365
+            ],
+            "blade": [
+              330,
+              603
+            ],
+            "effect": [
+              452,
+              159
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "cast_s_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.20893141945773525,
+            0.9537480063795853
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              131,
+              598
+            ],
+            "hand": [
+              170,
+              369
+            ],
+            "blade": [
+              311,
+              603
+            ],
+            "effect": [
+              403,
+              151
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "cast_s_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.24880382775119617,
+            0.9106858054226475
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              156,
+              571
+            ],
+            "hand": [
+              197,
+              339
+            ],
+            "blade": [
+              350,
+              567
+            ],
+            "effect": [
+              410,
+              143
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "cast_s_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.21690590111642744,
+            0.9122807017543859
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              136,
+              572
+            ],
+            "hand": [
+              178,
+              335
+            ],
+            "blade": [
+              324,
+              568
+            ],
+            "effect": [
+              478,
+              315
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-0df6a3b8-75af-437f-b9ab-d7187c2aa9c3.png",
+      "destination": "assets/art/murim/hero/yunseo/cast-ne-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "cast_ne_v2",
+          "rect": [
+            0,
+            0,
+            665,
+            641
+          ],
+          "pivot": [
+            0.6917293233082706,
+            0.9750390015600624
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              460,
+              625
+            ],
+            "hand": [
+              480,
+              405
+            ],
+            "blade": [
+              625,
+              539
+            ],
+            "effect": [
+              413,
+              132
+            ]
+          },
+          "displayHeight": 122.67942583732058
+        },
+        {
+          "atlas": "cast_ne_v2",
+          "rect": [
+            665,
+            0,
+            589,
+            641
+          ],
+          "pivot": [
+            0.6994906621392191,
+            0.9765990639625585
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              412,
+              626
+            ],
+            "hand": [
+              415,
+              405
+            ],
+            "blade": [
+              560,
+              547
+            ],
+            "effect": [
+              393,
+              83
+            ]
+          },
+          "displayHeight": 122.67942583732058
+        },
+        {
+          "atlas": "cast_ne_v2",
+          "rect": [
+            0,
+            641,
+            665,
+            613
+          ],
+          "pivot": [
+            0.7353383458646616,
+            0.9070146818923328
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              489,
+              556
+            ],
+            "hand": [
+              499,
+              345
+            ],
+            "blade": [
+              642,
+              475
+            ],
+            "effect": [
+              447,
+              39
+            ]
+          },
+          "displayHeight": 117.32057416267942
+        },
+        {
+          "atlas": "cast_ne_v2",
+          "rect": [
+            665,
+            641,
+            589,
+            613
+          ],
+          "pivot": [
+            0.7215619694397284,
+            0.9135399673735726
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              425,
+              560
+            ],
+            "hand": [
+              443,
+              346
+            ],
+            "blade": [
+              575,
+              478
+            ],
+            "effect": [
+              120,
+              306
+            ]
+          },
+          "displayHeight": 117.32057416267942
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-88955930-4d58-4aa4-b04b-880d1306557a.png",
+      "destination": "assets/art/murim/hero/yunseo/cast-nw-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "cast_nw_v2",
+          "rect": [
+            0,
+            0,
+            665,
+            630
+          ],
+          "pivot": [
+            0.2721804511278195,
+            0.9238095238095239
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              181,
+              582
+            ],
+            "hand": [
+              485,
+              379
+            ],
+            "blade": [
+              622,
+              514
+            ],
+            "effect": [
+              188,
+              129
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "cast_nw_v2",
+          "rect": [
+            665,
+            0,
+            589,
+            630
+          ],
+          "pivot": [
+            0.1935483870967742,
+            0.9301587301587302
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              114,
+              586
+            ],
+            "hand": [
+              423,
+              382
+            ],
+            "blade": [
+              556,
+              513
+            ],
+            "effect": [
+              120,
+              57
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "cast_nw_v2",
+          "rect": [
+            0,
+            630,
+            665,
+            624
+          ],
+          "pivot": [
+            0.2706766917293233,
+            0.8701923076923077
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              180,
+              543
+            ],
+            "hand": [
+              484,
+              339
+            ],
+            "blade": [
+              617,
+              468
+            ],
+            "effect": [
+              171,
+              37
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        },
+        {
+          "atlas": "cast_nw_v2",
+          "rect": [
+            665,
+            630,
+            589,
+            624
+          ],
+          "pivot": [
+            0.2071307300509338,
+            0.8910256410256411
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              122,
+              556
+            ],
+            "hand": [
+              432,
+              344
+            ],
+            "blade": [
+              570,
+              483
+            ],
+            "effect": [
+              106,
+              343
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        }
+      ]
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-f770814f-81e8-441a-8b9b-be5858022a87.png",
+      "destination": "assets/art/murim/hero/yunseo/cast-sw-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "cast_sw_v2",
+          "rect": [
+            0,
+            0,
+            650,
+            630
+          ],
+          "pivot": [
+            0.3630769230769231,
+            0.9507936507936507
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              236,
+              599
+            ],
+            "hand": [
+              213,
+              375
+            ],
+            "blade": [
+              48,
+              550
+            ],
+            "effect": [
+              359,
+              242
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "cast_sw_v2",
+          "rect": [
+            650,
+            0,
+            604,
+            630
+          ],
+          "pivot": [
+            0.2897350993377483,
+            0.9571428571428572
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              175,
+              603
+            ],
+            "hand": [
+              183,
+              383
+            ],
+            "blade": [
+              21,
+              556
+            ],
+            "effect": [
+              252,
+              269
+            ]
+          },
+          "displayHeight": 120.57416267942584
+        },
+        {
+          "atlas": "cast_sw_v2",
+          "rect": [
+            0,
+            630,
+            650,
+            624
+          ],
+          "pivot": [
+            0.3323076923076923,
+            0.9102564102564102
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              216,
+              568
+            ],
+            "hand": [
+              234,
+              327
+            ],
+            "blade": [
+              54,
+              514
+            ],
+            "effect": [
+              527,
+              236
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        },
+        {
+          "atlas": "cast_sw_v2",
+          "rect": [
+            650,
+            630,
+            604,
+            624
+          ],
+          "pivot": [
+            0.27980132450331124,
+            0.9134615384615384
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              169,
+              570
+            ],
+            "hand": [
+              198,
+              344
+            ],
+            "blade": [
+              25,
+              519
+            ],
+            "effect": [
+              416,
+              305
+            ]
+          },
+          "displayHeight": 119.42583732057416
+        }
+      ]
+    }
+  ],
+  "prompts": {
+    "E": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nMandatory strict RIGHT-facing SIDE view, not front three-quarter. Body and toes point right in all four cells. Right hand holds sword down, far LEFT hand makes small casting gestures. Whole figure stationary with both feet planted, stable body scale.",
+    "W": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nReference sets exact LEFT-facing direction. Replace attack with stationary casting: RIGHT sword hand low, LEFT empty hand makes two-finger gesture toward LEFT. All four frames same side view, same two feet planted. Only tiny arm extension and recovery, no torso spin. Do not swap sword hand. Full sword margins.",
+    "N": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nReference defines NORTH BACK view. Change action to stationary casting: anatomical RIGHT viewer-RIGHT sword hand low, anatomical LEFT viewer-LEFT empty hand raises two-finger gesture upscreen. Back and fixed planted feet maintained all frames, no torso turn or lunge, clear two-arm anatomy.",
+    "S": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nMandatory SOUTH straight FRONT view, looking toward viewer; both shoulders visible. Right sword hand viewer LEFT low, left empty hand viewer RIGHT makes two-finger gesture toward viewer. Feet planted; only gesture changes. Do not inherit southeast direction from reference.",
+    "NE": "Identity-preserve game sprite edit. Rotate each of these four NORTH CAST poses 45 degrees to face UPPER RIGHT / northeast back three-quarter. Preserve corresponding casting gesture, identity and equipment. Anatomical RIGHT viewer-RIGHT hand holds slim straight silver sword down by hip in every frame. LEFT empty hand on far side raises and extends up-right; shoulder may be hidden by cloak, never invent third arm. Exactly two arms/two hands. Keep full bodies, planted feet, identical scale, 2x2 generous gutters, transparent alpha, no text/shadows/magic. Same sword without serrations.",
+    "NW": "Identity-preserve game sprite edit. Rotate each of these four NORTH CAST poses 45 degrees to face UPPER LEFT / northwest back three-quarter. Preserve corresponding casting gesture, identity and equipment. Anatomical RIGHT viewer-RIGHT/far hand holds slim straight silver sword down by hip in every frame. LEFT empty hand nearer viewer LEFT raises and extends up-left. Exactly two arms/two hands, no mirroring. Full bodies, planted feet, identical scale, 2x2 separate cells with very generous gutters, transparent alpha, no text/shadows/magic. Entire sword and cloak inside cell. Same sword without serrations.",
+    "SW": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nUse TOP LEFT reference direction exactly: DOWN LEFT, front three-quarter. Replace attacking with stationary spellcasting. RIGHT hand on viewer LEFT keeps sword LOW and angled down-left. LEFT hand viewer RIGHT crosses chest, two-finger gesture toward down-left. Four slight gesture changes and ready recovery, feet planted, no torso spin. Never switch hands."
+  },
+  "notes": [
+    "Built-in independent whole-body candidates, not final approval.",
+    "Manual provisional sockets; 0.3-second four-frame timeline, no contact frames.",
+    "Final pose/foot/scale continuity and SW recovery arm motion remain visual-review gates."
+  ]
+}

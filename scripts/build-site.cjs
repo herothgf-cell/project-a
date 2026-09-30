@@ -2,7 +2,7 @@
 // Runtime-only package. References, review candidates, tests and docs never ship.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const Art=require('../art-loader.js');
-function buildSite({root=path.join(__dirname,'..'),out,commit,requireApprovedArt=false}){
+function buildSite({root=path.join(__dirname,'..'),out,commit,requireApprovedArt=false,includePrototype=false}){
  root=path.resolve(root);out=path.resolve(out||'site');
  if(!/^[a-f0-9]{40}$/.test(commit||''))throw Error('A complete tested commit SHA is required.');
  if(out===root||root.startsWith(out+path.sep))throw Error('Output cannot contain source tree.');
@@ -16,12 +16,23 @@ function buildSite({root=path.join(__dirname,'..'),out,commit,requireApprovedArt
  if(requireApprovedArt&&blocked.length)throw Error('BLOCKED_ART: '+blocked.map(x=>x.id).join(', '));
  const runtime={...catalog.manifest,releaseState:blocked.length?'BLOCKED_ART':'approved',assets:catalog.manifest.assets.map(a=>a.status==='approved'?a:{id:a.id,world:a.world,entityId:a.entityId,kind:a.kind,status:'BLOCKED_ART',reason:a.reason||'Awaiting visual approval'})};
  const payloads=new Map();
+ if(includePrototype){
+  files.push('art-runtime.js','art-preview-runtime.js','art-review.html','art-review.js');
+  for(const name of ['assets/art/scene-candidate.json',...['reality','murim'].map(w=>'assets/art/'+w+'/hero/yunseo/candidate.json')]){
+   const review=Art.createCatalog(JSON.parse(fs.readFileSync(path.join(root,name))));
+   files.push(name,...review.files({preview:true}));
+  }
+ }
  for(const name of [...files,...catalog.files()]){
   const filename=path.join(root,name),real=fs.realpathSync(filename);
   if(!real.startsWith(fs.realpathSync(root)+path.sep))throw Error('Runtime symlink outside source: '+name);
   payloads.set(name,fs.readFileSync(filename));
  }
  payloads.set(catalogPath,Buffer.from(JSON.stringify(runtime,null,2)+'\n'));
+ if(includePrototype){
+  payloads.set('art-play.html',Buffer.from(html.replace('</head>','<script>globalThis.SSANGGYE_PROTOTYPE=true;</script><script defer src="art-runtime.js"></script><script defer src="art-preview-runtime.js"></script></head>')));
+  payloads.set('art-review.html',Buffer.from(payloads.get('art-review.html').toString().replace('LOCAL REVIEW','PROTOTYPE REVIEW').replace('href="/"','href="art-play.html"')));
+ }
  // Refuse stale output rather than leaving previously copied documents/candidates online.
  if(fs.existsSync(out)&&fs.readdirSync(out).length)throw Error('Build output must be empty.');
  fs.mkdirSync(out,{recursive:true});
@@ -31,5 +42,5 @@ function buildSite({root=path.join(__dirname,'..'),out,commit,requireApprovedArt
  fs.writeFileSync(path.join(out,'asset-manifest.json'),JSON.stringify({version,commit,assets},null,2)+'\n');
  return {version,commit,runtimeAssets:payloads.size,artReady:blocked.length===0};
 }
-if(require.main===module)console.log(JSON.stringify(buildSite({out:process.argv[2],commit:process.argv[3],requireApprovedArt:process.argv.includes('--require-approved-art')})));
+if(require.main===module)console.log(JSON.stringify(buildSite({out:process.argv[2],commit:process.argv[3],requireApprovedArt:process.argv.includes('--require-approved-art'),includePrototype:process.argv.includes('--include-prototype')})));
 module.exports={buildSite};

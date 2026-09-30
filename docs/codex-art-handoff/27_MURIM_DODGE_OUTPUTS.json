@@ -1,0 +1,878 @@
+{
+  "records": [
+    {
+      "world": "murim",
+      "facing": "w",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-1eaa114b-157d-4d1a-a645-06530f82809c.png",
+      "destination": "assets/art/murim/hero/yunseo/dodge-w-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "dodge_w_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.6539074960127592,
+            0.9346092503987241
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              410,
+              586
+            ],
+            "hand": [
+              268,
+              477
+            ],
+            "blade": [
+              58,
+              527
+            ],
+            "effect": [
+              58,
+              527
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_w_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.8660287081339713,
+            0.9728867623604466
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              543,
+              610
+            ],
+            "hand": [
+              184,
+              414
+            ],
+            "blade": [
+              18,
+              477
+            ],
+            "effect": [
+              18,
+              477
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_w_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.38915470494417864,
+            0.8181818181818182
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              244,
+              513
+            ],
+            "hand": [
+              270,
+              371
+            ],
+            "blade": [
+              77,
+              431
+            ],
+            "effect": [
+              77,
+              431
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_w_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7416267942583732,
+            0.8628389154704944
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              465,
+              541
+            ],
+            "hand": [
+              372,
+              328
+            ],
+            "blade": [
+              157,
+              469
+            ],
+            "effect": [
+              157,
+              469
+            ]
+          },
+          "displayHeight": 170
+        }
+      ],
+      "technicalStatus": "candidate; manual sockets provisional; final continuity review pending"
+    },
+    {
+      "world": "murim",
+      "facing": "n",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-43884f1d-d4fa-4493-9fe9-46375d7121f6.png",
+      "destination": "assets/art/murim/hero/yunseo/dodge-n-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "dodge_n_v2",
+          "rect": [
+            0,
+            0,
+            675,
+            627
+          ],
+          "pivot": [
+            0.4740740740740741,
+            0.9409888357256778
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              320,
+              590
+            ],
+            "hand": [
+              480,
+              397
+            ],
+            "blade": [
+              656,
+              529
+            ],
+            "effect": [
+              656,
+              529
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_n_v2",
+          "rect": [
+            675,
+            0,
+            579,
+            627
+          ],
+          "pivot": [
+            0.3903281519861831,
+            0.9346092503987241
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              226,
+              586
+            ],
+            "hand": [
+              379,
+              305
+            ],
+            "blade": [
+              549,
+              440
+            ],
+            "effect": [
+              549,
+              440
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_n_v2",
+          "rect": [
+            0,
+            627,
+            735,
+            627
+          ],
+          "pivot": [
+            0.7346938775510204,
+            0.8644338118022329
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              540,
+              542
+            ],
+            "hand": [
+              528,
+              331
+            ],
+            "blade": [
+              708,
+              453
+            ],
+            "effect": [
+              708,
+              453
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_n_v2",
+          "rect": [
+            735,
+            627,
+            519,
+            627
+          ],
+          "pivot": [
+            0.5684007707129094,
+            0.8628389154704944
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              295,
+              541
+            ],
+            "hand": [
+              325,
+              305
+            ],
+            "blade": [
+              488,
+              455
+            ],
+            "effect": [
+              488,
+              455
+            ]
+          },
+          "displayHeight": 170
+        }
+      ],
+      "technicalStatus": "candidate; manual sockets provisional; final continuity review pending"
+    },
+    {
+      "world": "murim",
+      "facing": "s",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-2d879d49-8cef-4c83-a388-30837557f8d2.png",
+      "destination": "assets/art/murim/hero/yunseo/dodge-s-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "dodge_s_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.46570972886762363,
+            0.8309409888357256
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              292,
+              521
+            ],
+            "hand": [
+              195,
+              393
+            ],
+            "blade": [
+              84,
+              585
+            ],
+            "effect": [
+              84,
+              585
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_s_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.5167464114832536,
+            0.9282296650717703
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              324,
+              582
+            ],
+            "hand": [
+              163,
+              352
+            ],
+            "blade": [
+              86,
+              576
+            ],
+            "effect": [
+              86,
+              576
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_s_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.48165869218500795,
+            0.8070175438596491
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              302,
+              506
+            ],
+            "hand": [
+              212,
+              315
+            ],
+            "blade": [
+              91,
+              493
+            ],
+            "effect": [
+              91,
+              493
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_s_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7384370015948963,
+            0.8628389154704944
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              463,
+              541
+            ],
+            "hand": [
+              214,
+              302
+            ],
+            "blade": [
+              345,
+              525
+            ],
+            "effect": [
+              345,
+              525
+            ]
+          },
+          "displayHeight": 170
+        }
+      ],
+      "technicalStatus": "candidate; manual sockets provisional; final continuity review pending"
+    },
+    {
+      "world": "murim",
+      "facing": "ne",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-ca5f7cae-5ab9-4857-88aa-a8e0e73fe9f3.png",
+      "destination": "assets/art/murim/hero/yunseo/dodge-ne-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "dodge_ne_v2",
+          "rect": [
+            0,
+            0,
+            650,
+            627
+          ],
+          "pivot": [
+            0.2523076923076923,
+            0.8803827751196173
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              164,
+              552
+            ],
+            "hand": [
+              473,
+              399
+            ],
+            "blade": [
+              614,
+              480
+            ],
+            "effect": [
+              614,
+              480
+            ]
+          },
+          "displayHeight": 200
+        },
+        {
+          "atlas": "dodge_ne_v2",
+          "rect": [
+            650,
+            0,
+            604,
+            627
+          ],
+          "pivot": [
+            0.2897350993377483,
+            0.8660287081339713
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              175,
+              543
+            ],
+            "hand": [
+              426,
+              290
+            ],
+            "blade": [
+              536,
+              215
+            ],
+            "effect": [
+              536,
+              215
+            ]
+          },
+          "displayHeight": 200
+        },
+        {
+          "atlas": "dodge_ne_v2",
+          "rect": [
+            0,
+            627,
+            650,
+            627
+          ],
+          "pivot": [
+            0.7738461538461539,
+            0.7113237639553429
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              503,
+              446
+            ],
+            "hand": [
+              481,
+              329
+            ],
+            "blade": [
+              628,
+              393
+            ],
+            "effect": [
+              628,
+              393
+            ]
+          },
+          "displayHeight": 200
+        },
+        {
+          "atlas": "dodge_ne_v2",
+          "rect": [
+            650,
+            627,
+            604,
+            627
+          ],
+          "pivot": [
+            0.6357615894039735,
+            0.7767145135566188
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              384,
+              487
+            ],
+            "hand": [
+              398,
+              272
+            ],
+            "blade": [
+              528,
+              163
+            ],
+            "effect": [
+              528,
+              163
+            ]
+          },
+          "displayHeight": 200
+        }
+      ],
+      "technicalStatus": "candidate; manual sockets provisional; final continuity review pending"
+    },
+    {
+      "world": "murim",
+      "facing": "nw",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-bba9f281-fb85-4fd1-a577-e8d19f0b6741.png",
+      "destination": "assets/art/murim/hero/yunseo/dodge-nw-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "dodge_nw_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.8293460925039873,
+            0.9170653907496013
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              520,
+              575
+            ],
+            "hand": [
+              236,
+              385
+            ],
+            "blade": [
+              83,
+              272
+            ],
+            "effect": [
+              83,
+              272
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_nw_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7543859649122807,
+            0.9059011164274322
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              473,
+              568
+            ],
+            "hand": [
+              148,
+              277
+            ],
+            "blade": [
+              28,
+              214
+            ],
+            "effect": [
+              28,
+              214
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_nw_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.8819776714513556,
+            0.8437001594896332
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              553,
+              529
+            ],
+            "hand": [
+              215,
+              292
+            ],
+            "blade": [
+              50,
+              203
+            ],
+            "effect": [
+              50,
+              203
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_nw_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.3317384370015949,
+            0.861244019138756
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              208,
+              540
+            ],
+            "hand": [
+              237,
+              182
+            ],
+            "blade": [
+              98,
+              83
+            ],
+            "effect": [
+              98,
+              83
+            ]
+          },
+          "displayHeight": 170
+        }
+      ],
+      "technicalStatus": "candidate; manual sockets provisional; final continuity review pending"
+    },
+    {
+      "world": "murim",
+      "facing": "sw",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-8426da4f-99d7-4f11-b2d3-473fbb513f86.png",
+      "destination": "assets/art/murim/hero/yunseo/dodge-sw-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "dodge_sw_v2",
+          "rect": [
+            0,
+            0,
+            609,
+            627
+          ],
+          "pivot": [
+            0.5796387520525451,
+            0.8787878787878788
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              353,
+              551
+            ],
+            "hand": [
+              269,
+              485
+            ],
+            "blade": [
+              62,
+              589
+            ],
+            "effect": [
+              62,
+              589
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_sw_v2",
+          "rect": [
+            609,
+            0,
+            645,
+            627
+          ],
+          "pivot": [
+            0.8046511627906977,
+            0.9457735247208932
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              519,
+              593
+            ],
+            "hand": [
+              140,
+              402
+            ],
+            "blade": [
+              2,
+              531
+            ],
+            "effect": [
+              2,
+              531
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_sw_v2",
+          "rect": [
+            0,
+            627,
+            675,
+            627
+          ],
+          "pivot": [
+            0.39555555555555555,
+            0.8277511961722488
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              267,
+              519
+            ],
+            "hand": [
+              248,
+              369
+            ],
+            "blade": [
+              44,
+              473
+            ],
+            "effect": [
+              44,
+              473
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_sw_v2",
+          "rect": [
+            675,
+            627,
+            579,
+            627
+          ],
+          "pivot": [
+            0.3298791018998273,
+            0.8708133971291866
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              191,
+              546
+            ],
+            "hand": [
+              182,
+              316
+            ],
+            "blade": [
+              17,
+              446
+            ],
+            "effect": [
+              17,
+              446
+            ]
+          },
+          "displayHeight": 170
+        }
+      ],
+      "technicalStatus": "candidate; manual sockets provisional; final continuity review pending"
+    }
+  ],
+  "corrections": {
+    "ne": "Use case: precise-object-edit. Edit target: attached northeast dodge sprite sheet. Preserve these exact four complete poses, identity, anatomy, costume, sword in right hand, painting style and facing. Change ONLY layout: uniformly reduce each entire figure including sword and cloak by 25 percent and center each in its own equal quadrant of a 2x2 square sheet. Leave a wide genuinely transparent gutter at the vertical and horizontal center lines. All four figures and complete weapons must fit inside their own cell with at least 15% clear transparent margin. No overlap, no cut-offs, no new objects, no shadows or text. True transparent alpha background.",
+    "nw": "Edit target image1, four-frame NORTHWEST dodge sprite. Fix anatomy and handedness, preserve costume/identity/rendering/layout. Bottom-left frame has THREE HANDS: remove the extra empty hand protruding to the RIGHT of the shoulder/cloak; retain exactly TWO arms total, sword-gripping anatomical RIGHT arm extending toward upper-left and empty anatomical LEFT arm extending toward lower-left. Bottom-right recovery currently sword in wrong near arm: keep the near LEFT hand empty at lower-left, put sword grip in far anatomical RIGHT hand on upper-left side near chest, blade extending diagonally up-left as in top-left. All frames exactly two hands and sword consistently in RIGHT hand. Rear three-quarter northwest face away-left, same long hair, charcoal cloak, cream/indigo robe, bronze sword guard, both boots fully visible, transparent alpha, no new effects/text. No head grafts."
+  }
+}

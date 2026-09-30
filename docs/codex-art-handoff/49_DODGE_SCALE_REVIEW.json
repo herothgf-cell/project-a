@@ -1,0 +1,91 @@
+{
+  "status": "candidate",
+  "reason": "Fourteen additional-direction dodge recovery silhouettes were larger than the same direction idle, causing shrink on return. Normalize each whole clip uniformly, not each pose separately; preserve pivots, sockets, durations and simulation.",
+  "rule": "Recovery body silhouette target 94% of standing idle; existing SE within80–110% left unchanged. This is a continuity guard, not proof of full anatomical quality.",
+  "before": {
+    "murim": {
+      "w": {
+        "idle": 105.78274760383387,
+        "recovery": 127.16108452950559,
+        "factor": 0.781967086200271
+      },
+      "n": {
+        "idle": 105.43130990415337,
+        "recovery": 145.86921850079744,
+        "factor": 0.6794129174645737
+      },
+      "s": {
+        "idle": 106.8370607028754,
+        "recovery": 145.86921850079744,
+        "factor": 0.6884717563641013
+      },
+      "ne": {
+        "idle": 107.18849840255592,
+        "recovery": 127.91068580542264,
+        "factor": 0.7877151769139452
+      },
+      "nw": {
+        "idle": 105.78274760383387,
+        "recovery": 142.07336523125997,
+        "factor": 0.699890388221235
+      },
+      "sw": {
+        "idle": 105.78274760383387,
+        "recovery": 138.548644338118,
+        "factor": 0.7176958188413447
+      },
+      "e": {
+        "idle": 107.18849840255592,
+        "recovery": 127.82296650717703,
+        "factor": 0.7882557513069861
+      },
+      "se": {
+        "idle": 107.53993610223642,
+        "recovery": 94.73684210526316,
+        "factor": 1
+      }
+    },
+    "reality": {
+      "w": {
+        "idle": 104.04458598726114,
+        "recovery": 129.33014354066987,
+        "factor": 0.7562189923439631
+      },
+      "n": {
+        "idle": 104.72843450479233,
+        "recovery": 125.5980861244019,
+        "factor": 0.7838075521071048
+      },
+      "s": {
+        "idle": 105.07987220447285,
+        "recovery": 119.792663476874,
+        "factor": 0.8245503272516603
+      },
+      "ne": {
+        "idle": 105.09554140127389,
+        "recovery": 120.09569377990431,
+        "factor": 0.8225924328165046
+      },
+      "nw": {
+        "idle": 105.07987220447285,
+        "recovery": 119.33811802232854,
+        "factor": 0.8276909466070459
+      },
+      "sw": {
+        "idle": 103.34394904458598,
+        "recovery": 122.79904306220095,
+        "factor": 0.7910754813675964
+      },
+      "e": {
+        "idle": 105.09554140127389,
+        "recovery": 131.19617224880383,
+        "factor": 0.7529930730741892
+      },
+      "se": {
+        "idle": 105.07987220447285,
+        "recovery": 98.94736842105263,
+        "factor": 1
+      }
+    }
+  }
+}

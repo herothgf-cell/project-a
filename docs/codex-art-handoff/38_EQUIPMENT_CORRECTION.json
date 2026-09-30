@@ -1,0 +1,9 @@
+{
+  "tool": "built-in image_gen",
+  "prompt": "Use case: precise-object-edit. Edit target: four-frame 2x2 transparent hunter hit reaction sheet. Remove ONLY the blue dangling ID cards accidentally visible on the BACK in top-left, top-right, bottom-left frames; fill those small areas with matching charcoal jacket fabric. Back harness straps remain. Bottom-right no badge already: unchanged. Preserve every pose, body scale, silhouette, sword, hands, equipment, facing, boots, framing, transparent alpha exactly. No other edits. The chest ID badge is on the hidden front, must not appear on back.",
+  "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-4b17f660-c121-446d-89b9-f22dff8736b3.png",
+  "destination": "assets/art/reality/hero/yunseo/hit-nw-candidate-v3.png",
+  "status": "candidate",
+  "approved": false,
+  "notes": "Removed back-facing chest ID badges only. Retained original pose coordinates and timing."
+}

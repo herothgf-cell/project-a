@@ -1,0 +1,17 @@
+{
+  "method": "built-in image generation; no raster postprocessing",
+  "entries": [
+    {
+      "kind": "seal",
+      "input": "assets/art/shared/vfx/seal-candidate-v1.png",
+      "output": "assets/art/shared/vfx/seal-candidate-v2.png",
+      "prompt": "Edit target: seal VFX sprite atlas. Preserve all four independent effects, their colors/design and ordering (top-left, top-right, bottom-left, bottom-right). Fix ONLY layout and scale for strict sprite slicing. Square 2x2 equal quadrants. Make EACH effect including ALL glow/particles much smaller, maximum 65 percent of quadrant width and height, centered within its own quadrant. Keep at least 90 pixels genuinely transparent on every edge of every quadrant in a1254-square canvas. Absolutely no neighboring effect crossing center lines, no glow touching outer canvas, no clipped rings. Maintain smooth alpha falloff and transparent empty background. No grid, text, extra effects or opaque matte."
+    },
+    {
+      "kind": "ripple",
+      "input": "assets/art/shared/vfx/ripple-candidate-v1.png",
+      "output": "assets/art/shared/vfx/ripple-candidate-v2.png",
+      "prompt": "Edit target: ripple VFX sprite atlas. Preserve all four independent effects, their colors/design and ordering (top-left, top-right, bottom-left, bottom-right). Fix ONLY layout and scale for strict sprite slicing. Square 2x2 equal quadrants. Make EACH effect including ALL glow/particles much smaller, maximum 65 percent of quadrant width and height, centered within its own quadrant. Keep at least 90 pixels genuinely transparent on every edge of every quadrant in a1254-square canvas. Absolutely no neighboring effect crossing center lines, no glow touching outer canvas, no clipped rings. Maintain smooth alpha falloff and transparent empty background. No grid, text, extra effects or opaque matte."
+    }
+  ]
+}

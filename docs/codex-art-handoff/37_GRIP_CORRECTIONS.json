@@ -1,0 +1,377 @@
+{
+  "tool": "built-in image_gen",
+  "notes": [
+    "Visual corrections only; damage/contact/durations preserved. Foot and scale review remains provisional."
+  ],
+  "outputs": [
+    {
+      "action": "dodge",
+      "facing": "w",
+      "result": "murimDodgeWGripResult",
+      "prompt": "Use case: precise-object-edit. Edit target is attached 2x2 transparent martial hero dodge sprite sheet. Preserve identity, costume, camera, WEST facing LEFT, all four full-body poses, transparent alpha and cell layout. Fix ONLY anatomical sword hand continuity: all four frames must hold sword in anatomical RIGHT hand, with LEFT hand empty. In frame4 bottom-right the sword incorrectly switched to the nearer LEFT arm. Redraw that frame with right sword arm reaching low forward toward left as in frames1-3, far-side arm anatomically connected to right shoulder; empty left arm visible near torso. Single slim straight silver sword with bronze guard, complete blade and boots inside cell. No text, background, effects, head grafts, extra arms or mirrored character.",
+      "height": 170,
+      "points": [
+        [
+          410,
+          586,
+          268,
+          477,
+          58,
+          527
+        ],
+        [
+          1170,
+          610,
+          811,
+          414,
+          645,
+          477
+        ],
+        [
+          244,
+          1140,
+          270,
+          998,
+          77,
+          1058
+        ],
+        [
+          842,
+          1144,
+          841,
+          937,
+          648,
+          1018
+        ]
+      ],
+      "frames": [
+        {
+          "atlas": "dodge_w_v3",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.6539074960127592,
+            0.9346092503987241
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              410,
+              586
+            ],
+            "hand": [
+              268,
+              477
+            ],
+            "blade": [
+              58,
+              527
+            ],
+            "effect": [
+              58,
+              527
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_w_v3",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.8660287081339713,
+            0.9728867623604466
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              543,
+              610
+            ],
+            "hand": [
+              184,
+              414
+            ],
+            "blade": [
+              18,
+              477
+            ],
+            "effect": [
+              18,
+              477
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_w_v3",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.38915470494417864,
+            0.8181818181818182
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              244,
+              513
+            ],
+            "hand": [
+              270,
+              371
+            ],
+            "blade": [
+              77,
+              431
+            ],
+            "effect": [
+              77,
+              431
+            ]
+          },
+          "displayHeight": 170
+        },
+        {
+          "atlas": "dodge_w_v3",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.34290271132376393,
+            0.8245614035087719
+          ],
+          "duration": 0.055,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              215,
+              517
+            ],
+            "hand": [
+              214,
+              310
+            ],
+            "blade": [
+              21,
+              391
+            ],
+            "effect": [
+              21,
+              391
+            ]
+          },
+          "displayHeight": 170
+        }
+      ],
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-27b16624-646f-4ce9-a635-5054ac0517ec.png",
+      "destination": "assets/art/murim/hero/yunseo/dodge-w-candidate-v3.png",
+      "status": "candidate",
+      "approved": false
+    },
+    {
+      "action": "attack1",
+      "facing": "nw",
+      "result": "murimAttack1NWLayoutResult",
+      "prompt": [
+        "Use case: precise-object-edit. Edit target is NW martial swordsman four-frame attack1 sprite sheet. Preserve full-body identity, cream indigo robes charcoal cloak long ponytail, fixed NORTHWEST back-three-quarter camera, 2x2 layout transparent alpha. Correct anatomical grip continuity with a TWO-HANDED sword grip in ALL FOUR FRAMES. Both hands on same single sword handle, right hand nearer bronze guard, left behind it; no free arm or hand switching. Frame1 sword extended upper-left at contact; frame2 sweep down-left; frame3 recover blade above right shoulder; frame4 raised compact guard. Feet stay planted. Straight narrow silver blade, no curved scimitar. Entire sword/hair/boots within each cell, large transparent gutters. No slash effects or magic or text. Redraw arms naturally connected, exactly two arms.",
+        "Edit this exact transparent 2x2 sprite sheet. Keep all four poses, two-handed grips, character identity, facing, sword shape and painterly rendering unchanged. Correct layout ONLY: make each entire character including full sword and cloak 20 percent smaller within its own equal quadrant; center horizontally, align foot baselines within quadrants. At least 45 pixels transparent gap on EACH side of the vertical and horizontal centerlines. No pixel from any sprite may cross cell boundary. No other changes, actual transparent background."
+      ],
+      "height": 153,
+      "points": [
+        [
+          495,
+          568,
+          242,
+          213,
+          106,
+          109
+        ],
+        [
+          1112,
+          570,
+          849,
+          379,
+          681,
+          494
+        ],
+        [
+          455,
+          1153,
+          422,
+          837,
+          276,
+          784
+        ],
+        [
+          1090,
+          1150,
+          874,
+          847,
+          804,
+          737
+        ]
+      ],
+      "frames": [
+        {
+          "atlas": "attack1_nw_v3",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7894736842105263,
+            0.9059011164274322
+          ],
+          "duration": 0.075,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              495,
+              568
+            ],
+            "hand": [
+              242,
+              213
+            ],
+            "blade": [
+              106,
+              109
+            ],
+            "effect": [
+              106,
+              109
+            ]
+          },
+          "displayHeight": 153
+        },
+        {
+          "atlas": "attack1_nw_v3",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.773524720893142,
+            0.9090909090909091
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              485,
+              570
+            ],
+            "hand": [
+              222,
+              379
+            ],
+            "blade": [
+              54,
+              494
+            ],
+            "effect": [
+              54,
+              494
+            ]
+          },
+          "displayHeight": 153
+        },
+        {
+          "atlas": "attack1_nw_v3",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7256778309409888,
+            0.8389154704944178
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              455,
+              526
+            ],
+            "hand": [
+              422,
+              210
+            ],
+            "blade": [
+              276,
+              157
+            ],
+            "effect": [
+              276,
+              157
+            ]
+          },
+          "displayHeight": 153
+        },
+        {
+          "atlas": "attack1_nw_v3",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7384370015948963,
+            0.8341307814992025
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              463,
+              523
+            ],
+            "hand": [
+              247,
+              220
+            ],
+            "blade": [
+              177,
+              110
+            ],
+            "effect": [
+              177,
+              110
+            ]
+          },
+          "displayHeight": 153
+        }
+      ],
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-44d7fe83-a07a-43be-8d48-0cc63bd338b8.png",
+      "destination": "assets/art/murim/hero/yunseo/attack1-nw-candidate-v3.png",
+      "status": "candidate",
+      "approved": false
+    }
+  ]
+}

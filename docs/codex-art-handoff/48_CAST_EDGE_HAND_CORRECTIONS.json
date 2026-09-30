@@ -1,0 +1,20 @@
+{
+  "outputs": [
+    {
+      "dir": "ne",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-07bb51ba-172b-4f41-9abe-50ec3c102850.png",
+      "path": "assets/art/reality/hero/yunseo/cast-ne-candidate-v3.png",
+      "prompt": "Use case: precise-object-edit. Correct only the white/blue ragged fringe around the sword edges in this exact 4-frame 2x2 runtime sprite sheet.  Swords are plain clean narrow steel blades, NO baked energy/white halo/blue glow or particles. Keep EVERY body pose, head, costume, gear, camera direction, sword grip and position, boot contact location and size as unchanged as possible. No changing stance, no new weapon. Preserve all four complete bodies, equal cells and alpha-zero transparent background. Preserve image dimensions1254x1254. Do not add text, shadow, ground, border, matte or haze. Exact supplied image is edit target, not just style reference.",
+      "tool": "builtin imagegen",
+      "status": "candidate"
+    },
+    {
+      "dir": "sw",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-48fe9486-051f-4502-9187-82da9abf45b9.png",
+      "path": "assets/art/reality/hero/yunseo/cast-sw-candidate-v3.png",
+      "prompt": "Use case: precise-object-edit. Correct only the left EMPTY casting hand anatomy and white/blue fringe along sword edges in this exact 4-frame 2x2 runtime sprite sheet. The left hand has five anatomically coherent fingers, index and middle close together in a two-finger casting sign, thumb folded correctly over other fingers. Keep the right hand gripping the sword in all four poses. Swords are plain clean narrow steel blades, NO baked energy/white halo/blue glow or particles. Keep EVERY body pose, head, costume, gear, camera direction, sword grip and position, boot contact location and size as unchanged as possible. No changing stance, no new weapon. Preserve all four complete bodies, equal cells and alpha-zero transparent background. Preserve image dimensions1254x1254. Do not add text, shadow, ground, border, matte or haze. Exact supplied image is edit target, not just style reference.",
+      "tool": "builtin imagegen",
+      "status": "candidate"
+    }
+  ]
+}

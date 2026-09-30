@@ -1,0 +1,146 @@
+{
+  "tool": "built-in image_gen",
+  "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-2abc7542-e801-4a73-82e7-3fc5fe80d56e.png",
+  "destination": "assets/art/murim/enemy/bandit-attack-se-candidate-v2.png",
+  "prompt": "Transparent PNG game sprite sheet, exactly 2x2 four isolated FULL BODY animation poses of ONE rugged Korean medieval martial bandit. Hand-painted detailed 2D isometric RPG enemy. Muscular stocky adult man, short scruffy beard, black hair topknot, weathered brown sleeveless leather armor, muted brick red scarf and waist sash, dark brown trousers and leather boots. One curved short dao held in anatomical RIGHT hand, LEFT hand empty. Exactly2arms2legs in all poses. Fixed southeast front-three-quarter facing toward lower RIGHT. Four chronological ATTACK FOLLOW-THROUGH frames: top-left decisive sword contact down-forward-right, top-right follow-through low extended blade, bottom-left blade recovery drawn toward own right hip, bottom-right compact ready guard. Feet stay planted, hips rotate subtly, body facing does NOT reverse. Same proportions and scale. Each complete character including full sword fits within middle70percent of own equal quadrant. Generous empty alpha around silhouettes and between cells. ACTUAL TRANSPARENT background, no colored backdrop, NO brown gradient, NO shadow haze, no ground, no slash trails, no labels or text or grid. Not a concept poster. Usable independent enemy sprites.",
+  "status": "candidate",
+  "approved": false,
+  "frames": [
+    {
+      "atlas": "attack_se_v2",
+      "rect": [
+        0,
+        0,
+        630,
+        623
+      ],
+      "pivot": [
+        0.173015873015873,
+        0.9229534510433387
+      ],
+      "duration": 0.1,
+      "displayHeight": 135,
+      "contact": true,
+      "sockets": {
+        "foot": [
+          109,
+          575
+        ],
+        "hand": [
+          377,
+          329
+        ],
+        "blade": [
+          582,
+          484
+        ],
+        "effect": [
+          582,
+          484
+        ]
+      }
+    },
+    {
+      "atlas": "attack_se_v2",
+      "rect": [
+        630,
+        0,
+        631,
+        623
+      ],
+      "pivot": [
+        0.1410459587955626,
+        0.9261637239165329
+      ],
+      "duration": 0.1,
+      "displayHeight": 135,
+      "contact": false,
+      "sockets": {
+        "foot": [
+          89,
+          577
+        ],
+        "hand": [
+          413,
+          383
+        ],
+        "blade": [
+          610,
+          510
+        ],
+        "effect": [
+          610,
+          510
+        ]
+      }
+    },
+    {
+      "atlas": "attack_se_v2",
+      "rect": [
+        0,
+        623,
+        630,
+        624
+      ],
+      "pivot": [
+        0.19682539682539682,
+        0.8958333333333334
+      ],
+      "duration": 0.1,
+      "displayHeight": 135,
+      "contact": false,
+      "sockets": {
+        "foot": [
+          124,
+          559
+        ],
+        "hand": [
+          214,
+          256
+        ],
+        "blade": [
+          411,
+          270
+        ],
+        "effect": [
+          411,
+          270
+        ]
+      }
+    },
+    {
+      "atlas": "attack_se_v2",
+      "rect": [
+        630,
+        623,
+        631,
+        624
+      ],
+      "pivot": [
+        0.1838351822503962,
+        0.9006410256410257
+      ],
+      "duration": 0.1,
+      "displayHeight": 135,
+      "contact": false,
+      "sockets": {
+        "foot": [
+          116,
+          562
+        ],
+        "hand": [
+          288,
+          268
+        ],
+        "blade": [
+          472,
+          105
+        ],
+        "effect": [
+          472,
+          105
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "tool": "built-in image_gen",
+  "outputs": [
+    {
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-cfafc18c-a085-46e7-82e2-3add5df6407b.png",
+      "destination": "assets/art/reality/environment/dressing-candidate-v1.png",
+      "prompt": "Transparent PNG sprite atlas, FOUR small isolated flat urban game decals, square 2x2 layout, empty alpha everywhere between decals. Painterly 2D RPG NOT photoreal studio product render. Top-left simple small grey iron drain grate, top-right three weathered yellow painted road stripes, bottom-left few thin pale-blue puddle highlight strokes, bottom-right sparse dark-grey hairline pavement cracks with three tiny stones. All shapes ISOLATED on genuine transparent background. Absolutely NO ground slab, NO backdrop, NO gradient, NO surrounding grey haze, NO cast shadow, NO rectangular tile. Each decal fills middle half of its square quadrant. Mostly empty alpha. Slightly elevated isometric view, restrained cool blue-grey colors. No text/grid/labels. Modern city ground details only, not nature.",
+      "asset": {
+        "id": "reality.environment.dressing",
+        "world": "reality",
+        "entityId": "environment.dressing",
+        "kind": "environment",
+        "status": "candidate",
+        "sources": [
+          "R01"
+        ],
+        "atlas": {
+          "path": "assets/art/reality/environment/dressing-candidate-v1.png",
+          "width": 1261,
+          "height": 1247
+        },
+        "clips": {
+          "cell-0": {
+            "none": [
+              {
+                "rect": [
+                  0,
+                  0,
+                  630,
+                  623
+                ],
+                "pivot": [
+                  0.5,
+                  0.5
+                ],
+                "duration": 1,
+                "displayHeight": 110
+              }
+            ]
+          },
+          "cell-1": {
+            "none": [
+              {
+                "rect": [
+                  630,
+                  0,
+                  631,
+                  623
+                ],
+                "pivot": [
+                  0.5,
+                  0.5
+                ],
+                "duration": 1,
+                "displayHeight": 110
+              }
+            ]
+          },
+          "cell-2": {
+            "none": [
+              {
+                "rect": [
+                  0,
+                  623,
+                  630,
+                  624
+                ],
+                "pivot": [
+                  0.5,
+                  0.5
+                ],
+                "duration": 1,
+                "displayHeight": 110
+              }
+            ]
+          },
+          "cell-3": {
+            "none": [
+              {
+                "rect": [
+                  630,
+                  623,
+                  631,
+                  624
+                ],
+                "pivot": [
+                  0.5,
+                  0.5
+                ],
+                "duration": 1,
+                "displayHeight": 110
+              }
+            ]
+          }
+        },
+        "review": {
+          "visual": false,
+          "limitations": [
+            "Ground dressing candidate, visual blend review pending"
+          ]
+        }
+      }
+    },
+    {
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-55dd41dd-bfd8-4cee-ab2e-7a99c632077b.png",
+      "destination": "assets/art/murim/environment/dressing-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Production game environmental ground overlay atlas for Korean murim Cheongun village, painterly hand-painted isometric RPG matching cream stone, muted olive grass, warm wood world. Four independent flat ground-detail patches in exact 2x2 equal square cells on actual transparent alpha. Top-left: irregular low mossy grass clump with tiny white wildflowers, no tall bush. Top-right: cluster of three flat worn stepping stones with moss seams, viewed from elevated isometric camera. Bottom-left: sparse tiny warm pink petals and low green leaves scattered irregularly on invisible ground. Bottom-right: irregular flat patch of dry tan soil with small pebbles and feathered sparse grass at edges. Each patch compact centered and complete with 20 percent transparent margin; no square outline, no base plate, no shadow rectangle, no text, no border, no people, no building. These are walkable decorative overlays, not obstacles or concept boards. Consistent top-left soft daylight, detailed but restrained game-readable texture.",
+      "asset": {
+        "id": "murim.environment.dressing",
+        "world": "murim",
+        "entityId": "environment.dressing",
+        "kind": "environment",
+        "status": "candidate",
+        "sources": [
+          "R02"
+        ],
+        "atlas": {
+          "path": "assets/art/murim/environment/dressing-candidate-v1.png",
+          "width": 1254,
+          "height": 1254
+        },
+        "clips": {
+          "cell-0": {
+            "none": [
+              {
+                "rect": [
+                  0,
+                  0,
+                  627,
+                  627
+                ],
+                "pivot": [
+                  0.5,
+                  0.5
+                ],
+                "duration": 1,
+                "displayHeight": 110
+              }
+            ]
+          },
+          "cell-1": {
+            "none": [
+              {
+                "rect": [
+                  627,
+                  0,
+                  627,
+                  627
+                ],
+                "pivot": [
+                  0.5,
+                  0.5
+                ],
+                "duration": 1,
+                "displayHeight": 110
+              }
+            ]
+          },
+          "cell-2": {
+            "none": [
+              {
+                "rect": [
+                  0,
+                  627,
+                  627,
+                  627
+                ],
+                "pivot": [
+                  0.5,
+                  0.5
+                ],
+                "duration": 1,
+                "displayHeight": 110
+              }
+            ]
+          },
+          "cell-3": {
+            "none": [
+              {
+                "rect": [
+                  627,
+                  627,
+                  627,
+                  627
+                ],
+                "pivot": [
+                  0.5,
+                  0.5
+                ],
+                "duration": 1,
+                "displayHeight": 110
+              }
+            ]
+          }
+        },
+        "review": {
+          "visual": false,
+          "limitations": [
+            "Ground dressing candidate, visual blend review pending"
+          ]
+        }
+      }
+    }
+  ]
+}

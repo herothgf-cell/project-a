@@ -26,7 +26,10 @@ async function main(){
   await page.screenshot({path:path.join(out,'hero-contact-socket-review.png'),fullPage:true});
   await page.selectOption('#reviewAction','attack2');
   await page.selectOption('#reviewFacing','n');
-  assert.equal(await page.locator('[data-blocked="true"]').count(),2,'missing facing must not reuse southeast');
+  await page.waitForFunction(()=>[...document.querySelectorAll('canvas[data-action]')].every(c=>c.dataset.loading==='false'));
+  assert.equal(await page.locator('[data-blocked="true"]').count(),0,'north attack2 is now a distinct candidate');
+  await page.evaluate(()=>{const f=document.getElementById('reviewFrame');f.max='9';f.value='9';f.dispatchEvent(new Event('input'));});
+  assert.equal(await page.locator('[data-blocked="true"]').count(),2,'absent frame must not substitute another clip');
   await page.selectOption('#reviewFacing','se');
   assert.equal(await page.locator('[data-action="attack2"][data-contact="true"]').count(),2);
   await page.selectOption('#reviewAction','walk');
@@ -65,11 +68,13 @@ async function main(){
   await review.goto(url+'/art-play.html');await review.waitForFunction(()=>window.ArtPreview?.ready||window.ArtPreview?.error);assert.equal(await review.evaluate(()=>ArtPreview.error),null);
   await review.click('#start');await review.locator('#dialogActions button').first().click();
   await review.waitForFunction(()=>ArtPreview.diagnostics.get('reality.hero')?.id==='reality.hero.yunseo');
+  await review.waitForFunction(()=>document.getElementById('hudPortrait').dataset.productionPortrait==='reality.hero.yunseo');
   assert.equal(await review.getAttribute('#hudPortrait','data-production-portrait'),'reality.hero.yunseo');
   await review.screenshot({path:path.join(out,'preview-reality-full-body.png')});
   await review.evaluate(()=>{__game.progress=2;__game.training=1;__game.enter('village');__game.events=[];});
   await review.waitForFunction(()=>ArtPreview.diagnostics.get('murim.hero')?.id==='murim.hero.yunseo');
   await review.waitForFunction(()=>document.getElementById('realmBadge').textContent.includes('무림'));
+  await review.waitForFunction(()=>document.getElementById('hudPortrait').dataset.productionPortrait==='murim.hero.yunseo');
   assert.equal(await review.getAttribute('#hudPortrait','data-production-portrait'),'murim.hero.yunseo');
   const portraitProbe=await review.evaluate(()=>{const cv=document.createElement('canvas');cv.width=256;cv.height=288;WorldArt.portrait(cv,'hero','hurt');return {id:cv.dataset.productionPortrait,expression:cv.dataset.expression};});
   assert.deepEqual(portraitProbe,{id:'murim.hero.yunseo',expression:'hurt'});
@@ -83,16 +88,16 @@ async function main(){
   await review.waitForFunction(()=>__game.player.cool.attack===0);
   await review.evaluate(()=>{__game.player.face=0;});
   await review.keyboard.press('KeyJ');
-  await review.waitForFunction(()=>ArtPreview.diagnostics.get('murim.hero')?.status==='BLOCKED_ART');
+  await review.waitForFunction(()=>ArtPreview.diagnostics.get('murim.hero')?.facing==='e'&&ArtPreview.diagnostics.get('murim.hero')?.status==='candidate');
   assert.ok(await review.locator('#artPreviewBadge').isVisible());assert.deepEqual(errors,[]);
-  report.previewWorlds=['reality.hero.yunseo','murim.hero.yunseo'];report.checks.push('local-only in-game full-body previews retain distinct world identity; missing attack explicitly blocked');
+  report.previewWorlds=['reality.hero.yunseo','murim.hero.yunseo'];report.checks.push('local-only full-body previews retain distinct world identity and directional actions');
   report.spriteContact=spriteContact;
   const expectedHit=await review.evaluate(()=>{__game.enter('forest');__game.events=[];const e=__game.enemies[0];__game.enemies=[e];e.hp=e.maxHp=1000;e.cd=10;Object.assign(__game.player,{x:e.x-28,y:e.y-28,face:Math.PI/4});__game.player.cool.attack=0;__game.combo=0;__game.lastAttack=-10;return __game.stats().attack;});
   await review.keyboard.press('KeyJ');
   const contactDamage=await review.evaluate(()=>({damage:1000-__game.enemies[0].hp,contact:__game.player.motion.instance.contactAt,started:__game.player.motion.instance.startedAt}));
   assert.equal(contactDamage.damage,expectedHit);assert.equal(contactDamage.contact,contactDamage.started);
   report.contactDamage=contactDamage;report.userDirectionApproved=true;report.previewArtIntegrated=true;
-  report.checks.push('SE walk/attack1/attack2 frame scrub exposes contact sockets; missing north-facing attack2 is BLOCKED_ART without substitution');
+  report.checks.push('directional frame scrub exposes contact sockets; nonexistent frames remain BLOCKED_ART without substitution');
   report.comboEvidence=[];
   for(const [area,world]of [['rift','reality'],['forest','murim']]){
    await review.evaluate(area=>{__game.training=1;__game.enter(area);__game.events=[];__game.enemies=__game.enemies.slice(0,1);__game.enemies[0].hp=1000;__game.enemies[0].cd=999;__game.combo=0;__game.lastAttack=-10;},area);
@@ -103,14 +108,14 @@ async function main(){
     await review.waitForFunction(()=>__game.player.cool.attack===0);
     const before=await review.evaluate(()=>{const e=__game.enemies[0];e.cd=999;Object.assign(__game.player,{x:e.x-28,y:e.y-28,face:Math.PI/4});return e.hp;});
     await review.keyboard.press('KeyJ');
-    await review.waitForFunction(({world,combo})=>ArtPreview.diagnostics.get(world+'.hero')?.action==='attack'+combo,{world,combo});
+    await review.waitForFunction(({world,combo})=>ArtPreview.diagnostics.get(world+'.hero')?.action==='attack'+combo&&ArtPreview.diagnostics.get(world+'.hero')?.status==='candidate',{world,combo});
     const probe=await review.evaluate(({world,before})=>{const a=__game.player.motion.instance;return {damage:before-__game.enemies[0].hp,contactAt:a.contactAt,startedAt:a.startedAt,body:ArtPreview.diagnostics.get(world+'.hero'),effect:ArtPreview.effectDiagnostics.get(a.actionId)};},{world,before});
     assert.equal(probe.damage,[22,24,37][combo-1]);assert.equal(probe.body.status,'candidate');assert.equal(probe.body.frame,probe.effect.frame);assert.equal(probe.body.elapsed,probe.effect.elapsed);assert.equal(probe.contactAt,probe.startedAt);
     report.comboEvidence.push({world,combo,...probe});await review.screenshot({path:path.join(out,world+'-combo-'+combo+'.png')});
    }
    await review.evaluate(()=>{__game.enemies=[];__game.player.face=Math.PI/4;__game.player.cool.dash=0;});
    await review.keyboard.press('Space');
-   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action==='dodge',world);
+   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action==='dodge'&&ArtPreview.diagnostics.get(world+'.hero')?.status==='candidate',world);
    assert.equal(await review.evaluate(world=>ArtPreview.diagnostics.get(world+'.hero').status,world),'candidate');
    await review.screenshot({path:path.join(out,world+'-dodge.png')});
    await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action!=='dodge',world);
@@ -118,12 +123,12 @@ async function main(){
    assert.ok(recording.length>1000);fs.writeFileSync(path.join(out,world+'-combo-dodge.webm'),Buffer.from(recording));
    await review.evaluate(()=>{__game.training=3;__game.player.mp=80;__game.player.face=Math.PI/4;__game.player.cool.storm=0;});
    await review.keyboard.press('KeyL');
-   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action==='cast',world);
+   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action==='cast'&&ArtPreview.diagnostics.get(world+'.hero')?.status==='candidate',world);
    assert.equal(await review.evaluate(world=>ArtPreview.diagnostics.get(world+'.hero').status,world),'candidate');
    await review.screenshot({path:path.join(out,world+'-cast.png')});
    await review.waitForFunction(()=>__game.playTime>=__game.player.motion.instance.startedAt+.3);
    const hpBefore=await review.evaluate(()=>{__game.player.invuln=0;const hp=__game.player.hp;__game.takeHit({damage:10});return hp;});
-   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action==='hit',world);
+   await review.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.action==='hit'&&ArtPreview.diagnostics.get(world+'.hero')?.status==='candidate',world);
    assert.equal(await review.evaluate(world=>ArtPreview.diagnostics.get(world+'.hero').status,world),'candidate');
    assert.equal(await review.evaluate(()=>__game.player.hp),hpBefore-9);
    await review.screenshot({path:path.join(out,world+'-hit.png')});

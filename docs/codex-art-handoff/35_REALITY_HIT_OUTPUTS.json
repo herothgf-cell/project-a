@@ -1,0 +1,1060 @@
+{
+  "records": [
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-eb4d9ce3-3227-461f-a9e4-42224fec7c97.png",
+      "destination": "assets/art/reality/hero/yunseo/hit-e-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_e_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7910685805422647,
+            0.9186602870813397
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              496,
+              576
+            ],
+            "hand": [
+              231,
+              374
+            ],
+            "blade": [
+              429,
+              548
+            ],
+            "effect": [
+              429,
+              548
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_e_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.722488038277512,
+            0.9202551834130781
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              453,
+              577
+            ],
+            "hand": [
+              186,
+              422
+            ],
+            "blade": [
+              388,
+              557
+            ],
+            "effect": [
+              388,
+              557
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_e_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7783094098883573,
+            0.8532695374800638
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              488,
+              535
+            ],
+            "hand": [
+              227,
+              320
+            ],
+            "blade": [
+              417,
+              518
+            ],
+            "effect": [
+              417,
+              518
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_e_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7464114832535885,
+            0.8660287081339713
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              468,
+              543
+            ],
+            "hand": [
+              212,
+              316
+            ],
+            "blade": [
+              394,
+              508
+            ],
+            "effect": [
+              394,
+              508
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-6a1ee6da-7f70-4032-be86-3412ddad0399.png",
+      "destination": "assets/art/reality/hero/yunseo/hit-w-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_w_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.4529505582137161,
+            0.9393939393939394
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              284,
+              589
+            ],
+            "hand": [
+              294,
+              365
+            ],
+            "blade": [
+              93,
+              501
+            ],
+            "effect": [
+              93,
+              501
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_w_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.4130781499202552,
+            0.9393939393939394
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              259,
+              589
+            ],
+            "hand": [
+              262,
+              397
+            ],
+            "blade": [
+              65,
+              530
+            ],
+            "effect": [
+              65,
+              530
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_w_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.45933014354066987,
+            0.8484848484848485
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              288,
+              532
+            ],
+            "hand": [
+              287,
+              318
+            ],
+            "blade": [
+              95,
+              465
+            ],
+            "effect": [
+              95,
+              465
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_w_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.39872408293460926,
+            0.8548644338118022
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              250,
+              536
+            ],
+            "hand": [
+              238,
+              316
+            ],
+            "blade": [
+              54,
+              466
+            ],
+            "effect": [
+              54,
+              466
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-38a35b9b-e87c-43ae-ad03-962d40b443d1.png",
+      "destination": "assets/art/reality/hero/yunseo/hit-n-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_n_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.6874003189792663,
+            0.9441786283891547
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              431,
+              592
+            ],
+            "hand": [
+              408,
+              306
+            ],
+            "blade": [
+              578,
+              464
+            ],
+            "effect": [
+              578,
+              464
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_n_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.6363636363636364,
+            0.9473684210526315
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              399,
+              594
+            ],
+            "hand": [
+              397,
+              355
+            ],
+            "blade": [
+              572,
+              508
+            ],
+            "effect": [
+              572,
+              508
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_n_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.69377990430622,
+            0.8995215311004785
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              435,
+              564
+            ],
+            "hand": [
+              442,
+              305
+            ],
+            "blade": [
+              605,
+              459
+            ],
+            "effect": [
+              605,
+              459
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_n_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.6682615629984051,
+            0.9090909090909091
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              419,
+              570
+            ],
+            "hand": [
+              422,
+              310
+            ],
+            "blade": [
+              583,
+              461
+            ],
+            "effect": [
+              583,
+              461
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-1a359ff2-af2c-4583-bd12-0e95f0826fdb.png",
+      "destination": "assets/art/reality/hero/yunseo/hit-s-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_s_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.39553429027113235,
+            0.960127591706539
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              248,
+              602
+            ],
+            "hand": [
+              237,
+              372
+            ],
+            "blade": [
+              140,
+              594
+            ],
+            "effect": [
+              140,
+              594
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_s_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.2759170653907496,
+            0.960127591706539
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              173,
+              602
+            ],
+            "hand": [
+              157,
+              396
+            ],
+            "blade": [
+              63,
+              600
+            ],
+            "effect": [
+              63,
+              600
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_s_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.36363636363636365,
+            0.8771929824561403
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              228,
+              550
+            ],
+            "hand": [
+              237,
+              323
+            ],
+            "blade": [
+              143,
+              539
+            ],
+            "effect": [
+              143,
+              539
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_s_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.2679425837320574,
+            0.8835725677830941
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              168,
+              554
+            ],
+            "hand": [
+              159,
+              318
+            ],
+            "blade": [
+              80,
+              543
+            ],
+            "effect": [
+              80,
+              543
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-7f831236-fac0-45a6-9524-7b019ec52aba.png",
+      "destination": "assets/art/reality/hero/yunseo/hit-ne-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_ne_v2",
+          "rect": [
+            0,
+            0,
+            676,
+            627
+          ],
+          "pivot": [
+            0.6479289940828402,
+            0.9505582137161085
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              438,
+              596
+            ],
+            "hand": [
+              420,
+              338
+            ],
+            "blade": [
+              595,
+              492
+            ],
+            "effect": [
+              595,
+              492
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_ne_v2",
+          "rect": [
+            676,
+            0,
+            578,
+            627
+          ],
+          "pivot": [
+            0.5761245674740484,
+            0.9649122807017544
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              333,
+              605
+            ],
+            "hand": [
+              337,
+              384
+            ],
+            "blade": [
+              512,
+              529
+            ],
+            "effect": [
+              512,
+              529
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_ne_v2",
+          "rect": [
+            0,
+            627,
+            676,
+            627
+          ],
+          "pivot": [
+            0.7100591715976331,
+            0.9043062200956937
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              480,
+              567
+            ],
+            "hand": [
+              480,
+              318
+            ],
+            "blade": [
+              653,
+              463
+            ],
+            "effect": [
+              653,
+              463
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_ne_v2",
+          "rect": [
+            676,
+            627,
+            578,
+            627
+          ],
+          "pivot": [
+            0.6038062283737025,
+            0.9059011164274322
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              349,
+              568
+            ],
+            "hand": [
+              342,
+              319
+            ],
+            "blade": [
+              510,
+              474
+            ],
+            "effect": [
+              510,
+              474
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-7dbf9472-0976-473d-abe9-2885d060d46c.png",
+      "destination": "assets/art/reality/hero/yunseo/hit-nw-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7384370015948963,
+            0.9712918660287081
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              463,
+              609
+            ],
+            "hand": [
+              452,
+              361
+            ],
+            "blade": [
+              600,
+              492
+            ],
+            "effect": [
+              600,
+              492
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7081339712918661,
+            0.9633173843700159
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              444,
+              604
+            ],
+            "hand": [
+              444,
+              371
+            ],
+            "blade": [
+              581,
+              506
+            ],
+            "effect": [
+              581,
+              506
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7607655502392344,
+            0.8995215311004785
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              477,
+              564
+            ],
+            "hand": [
+              459,
+              312
+            ],
+            "blade": [
+              600,
+              435
+            ],
+            "effect": [
+              600,
+              435
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.7017543859649122,
+            0.9043062200956937
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              440,
+              567
+            ],
+            "hand": [
+              439,
+              309
+            ],
+            "blade": [
+              583,
+              441
+            ],
+            "effect": [
+              583,
+              441
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-5143abda-874b-4420-b402-5ff789a72bad.png",
+      "destination": "assets/art/reality/hero/yunseo/hit-sw-candidate-v2.png",
+      "status": "candidate",
+      "approved": false,
+      "frames": [
+        {
+          "atlas": "hit_sw_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.4274322169059011,
+            0.9792663476874003
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              268,
+              614
+            ],
+            "hand": [
+              247,
+              391
+            ],
+            "blade": [
+              86,
+              531
+            ],
+            "effect": [
+              86,
+              531
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_sw_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.4194577352472089,
+            0.9537480063795853
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              263,
+              598
+            ],
+            "hand": [
+              181,
+              436
+            ],
+            "blade": [
+              37,
+              565
+            ],
+            "effect": [
+              37,
+              565
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_sw_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.42902711323763953,
+            0.8995215311004785
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              269,
+              564
+            ],
+            "hand": [
+              243,
+              348
+            ],
+            "blade": [
+              89,
+              482
+            ],
+            "effect": [
+              89,
+              482
+            ]
+          },
+          "displayHeight": 120
+        },
+        {
+          "atlas": "hit_sw_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.379585326953748,
+            0.8995215311004785
+          ],
+          "duration": 0.045,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              238,
+              564
+            ],
+            "hand": [
+              207,
+              352
+            ],
+            "blade": [
+              50,
+              482
+            ],
+            "effect": [
+              50,
+              482
+            ]
+          },
+          "displayHeight": 120
+        }
+      ]
+    }
+  ],
+  "prompts": {
+    "W": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nUse this LEFT-facing hunter identity and direction. Replace CAST with nonlethal HIT REACTION. Empty left hand retracts toward chest, never casts. Sword stays in anatomical RIGHT viewer-left hand angled low. Every frame faces LEFT; no mirrored equipment. Full body, fixed foot anchors, recoil then recover.",
+    "N": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nUse NORTH CAST reference only for identity/back direction. Replace raised casting arm with defensive hand at chest. All four frames show BACK NORTH, right sword down on viewer RIGHT. Frame1 torso recoils backward, frame2 knees dip deepest, frame3 recovers, frame4 upright. No casting fingers or raised arm. Feet remain grounded, keep full bodies and clear margins.",
+    "S": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nUse FRONT SOUTH CAST reference for identity/direction only. Remove casting gesture: empty left hand curls defensively near chest. RIGHT hand viewer LEFT keeps sword down. Frame1 recoils backward, frame2 deeper recoil bent knees, frame3 balance recovery, frame4 upright. All FRONT SOUTH, both feet grounded, no added effects.",
+    "NE": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nUse this NE BACK three-quarter cast reference for direction and identity ONLY. Change to hit reaction, LEFT empty arm drops to defensive chest height, never raised casting. RIGHT sword stays down on viewer RIGHT. Visible backward shoulder recoil, bent-knee peak, then straighten. Keep all four bodies facing UPPER RIGHT, only two arms, planted feet, smooth slim blade.",
+    "NW": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nUse NW CAST reference for identity and UPPER-LEFT back direction only. Replace raised spell hand with empty left hand guarding chest. RIGHT sword remains low on viewer RIGHT throughout. Backward recoil, deeper bent-knee recoil, balance recovery, ready. No raised casting hand, no extra limbs, no sword serrations. Same planted feet, whole bodies within cells.",
+    "SW": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nUse SW CAST reference identity/direction, looks DOWN LEFT front three-quarter. Replace casting with nonlethal hit reaction: empty left hand curls near chest, right sword hand remains viewer LEFT low. Frame1 backward lean, frame2 deepest recoil/bent knees, frame3 balance recovery, frame4 ready. Never turn right. Fixed grounded feet, slim smooth straight sword."
+  },
+  "notes": [
+    "Built-in whole-body candidates; no final approval.",
+    "0.18-second reaction, no contact. Manual provisional sockets and scale.",
+    "Review recoil readability, equipment shape/edge fringe and return-to-idle continuity before promotion."
+  ]
+}

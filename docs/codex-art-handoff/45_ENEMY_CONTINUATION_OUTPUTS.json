@@ -1,0 +1,53 @@
+{
+  "tool": "built-in image_gen",
+  "outputs": [
+    {
+      "action": "idle",
+      "source": "C:/Users/USER/.codex/generated_images/01a0ed50-b112-73d2-9c3d-b3b6afc54025/exec-996b6ee9-91d3-4133-ad50-a166e95a4b22.png",
+      "dest": "assets/art/reality/enemy/shade-idle-nw-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite atlas: 2 columns x 2 rows, four idle breathing frames of ONE obsidian dimensional humanoid monster. Use reference ONLY for monster identity: angular black chitin, long bladed claws, spiked head, digitigrade legs, icy blue energy. Required NORTHWEST facing in ALL FOUR cells: camera sees BACK and LEFT shoulder, face looks UPPER LEFT of image, nose/beak tip points LEFT. Never face screen right. Blue chest core is hidden on FAR side, show blue energy seam along back spine only. Fixed elevated isometric RPG camera, consistent detailed painted rendering, two arms and two legs. Frame1 neutral, frame2 subtle inhale shoulders rise, frame3 exhale, frame4 neutral. Exact same planted feet and body size in all four cells. Full body including claws/spikes/feet wholly inside equal quadrants with generous 10 percent margin. True transparent alpha, absolutely no floor, no brown or grey matte, no shadow, no text, no dividers, no additional objects.",
+      "status": "candidate",
+      "alphaBoundaryFrames": 4
+    },
+    {
+      "action": "telegraph",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-8767d3ba-db27-41c1-800e-eea75893ef94.png",
+      "dest": "assets/art/reality/enemy/shade-telegraph-nw-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Production transparent PNG whole-body enemy sprite atlas. Image1 is the exact NW rear-three-quarter identity/camera reference. Image2 is same creature's SE animation reference, anatomy/material only; DO NOT use its SE orientation. Create FOUR sequential telegraph frames in strict equal 2x2 square atlas. Enemy attack windup only. Frame1 slight knee bend, both feet planted; frame2 shoulders coil and right scythe-arm raised back; frame3 deepen crouch, scythe arm drawn farther behind; frame4 maximum ready-to-strike tension, same planted feet. No impact, no attacking yet. Same lean obsidian armored humanoid rift monster, serrated head, long scythe forearms and dim icy-blue glowing spinal cracks. Camera elevated 3/4 game view, NW heading screen upper-left; back and left profile visible in every frame. Lock the same design and painterly material across all four. Each complete creature INCLUDING every claw/spike must fit within middle 70% of its own quadrant, generous transparent padding at every edge, equal scale. True alpha0 background, NO gray haze, backdrop, shadow, floor, grid, text, labels, gore, or painted attack effect. Four separate complete bodies, not cut/reassembled pieces.",
+      "status": "candidate",
+      "alphaBoundaryFrames": 4
+    },
+    {
+      "action": "attack",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-0d72415f-21c2-434d-a3bc-026ced77f9f4.png",
+      "dest": "assets/art/reality/enemy/shade-attack-nw-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Production transparent PNG whole-body enemy sprite atlas. Image1 is the exact NW rear-three-quarter identity/camera reference. Image2 is same creature's SE animation reference, anatomy/material only; DO NOT use its SE orientation. Create FOUR sequential attack frames in strict equal 2x2 square atlas. Enemy claw attack contact and recovery. Frame1 right scythe arm fully extended to upper-left at impact, body lunged; frame2 follow-through across upper-left target; frame3 retract right arm and recover; frame4 standing ready matching reference. ALL four face upper-left/back-left, never front. No duplicate arms. Same lean obsidian armored humanoid rift monster, serrated head, long scythe forearms and dim icy-blue glowing spinal cracks. Camera elevated 3/4 game view, NW heading screen upper-left; back and left profile visible in every frame. Lock the same design and painterly material across all four. Each complete creature INCLUDING every claw/spike must fit within middle 70% of its own quadrant, generous transparent padding at every edge, equal scale. True alpha0 background, NO gray haze, backdrop, shadow, floor, grid, text, labels, gore, or painted attack effect. Four separate complete bodies, not cut/reassembled pieces.",
+      "status": "candidate",
+      "alphaBoundaryFrames": 4
+    },
+    {
+      "action": "death",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-11e6257d-3b24-4e76-ad8d-73c654f46b99.png",
+      "dest": "assets/art/reality/enemy/shade-death-nw-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Production transparent PNG whole-body enemy sprite atlas. Image1 is the exact NW rear-three-quarter identity/camera reference. Image2 is same creature's SE animation reference, anatomy/material only; DO NOT use its SE orientation. Create FOUR sequential death frames in strict equal 2x2 square atlas. Non-gory collapse animation. Frame1 knees buckle; frame2 kneel with torso leaning to upper-left; frame3 torso falling onto ground toward upper-left; frame4 complete prone dead creature resting on ground, blue cracks dim. All recognizable full-body limbs/claws/head retained inside each cell. Same lean obsidian armored humanoid rift monster, serrated head, long scythe forearms and dim icy-blue glowing spinal cracks. Camera elevated 3/4 game view, NW heading screen upper-left; back and left profile visible in every frame. Lock the same design and painterly material across all four. Each complete creature INCLUDING every claw/spike must fit within middle 70% of its own quadrant, generous transparent padding at every edge, equal scale. True alpha0 background, NO gray haze, backdrop, shadow, floor, grid, text, labels, gore, or painted attack effect. Four separate complete bodies, not cut/reassembled pieces.",
+      "status": "candidate",
+      "alphaBoundaryFrames": 4
+    },
+    {
+      "entity": "murim.enemy.chief",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-579f96a1-99b1-45b4-a4f8-9b91762499ec.png",
+      "output": "assets/art/murim/enemy/chief-candidate-v3.png",
+      "prompts": [
+        "Use case: precise-object-edit. This is a game enemy sprite atlas with 4 equal columns and 6 equal rows, 24 full-body poses. Fix ONLY cell overflow and missing gutters. Keep the original 1024x1536 portrait aspect and EXACT 4x6 layout, character identity, rough brown fur/leather material, axe, directions, sequence and pose for every existing cell. Scale EACH of the 24 separate complete body+axe images down to 65% of its present size INSIDE ITS OWN original cell. Position each reduced image horizontally centered in that cell and ground its feet/body at 80% down that cell. Every axe/hair/boot must be inside its own cell with wide alpha-zero gutters; never move a pose to another cell. Row1 idle, row2 walking, row3 raising axe telegraph, row4 axe strike/recovery, row5 recoil, row6 fall/death. Preserve 24 distinct poses, NO new rows/columns. Genuine transparent alpha0 background, no background glow, floor or shadow, no labels/grid. This is atlas packing correction, NOT character redesign.",
+        "Precise sprite atlas edit. Preserve the 1024x1536 portrait 4-column by 6-row atlas exactly, ALL poses and artwork of rows1 through5 UNCHANGED. Edit ONLY the four poses in the bottom SIXTH row (death animation): shrink each of those four complete bodies PLUS its axe to 70% of current size inside its own quarter-width cell. Center each horizontally at x=128,384,640,896; keep entire body/axe inside x ranges 30..226,286..482,542..738,798..994 respectively. Vertically keep their ground at y=1470. There must be clear transparent gap between third dying body/axe and fourth prone body/axe; currently these overflow. Genuine transparent alpha, no background, no labels. Do not crop limbs or weapons; preserve the four original death poses, identity, materials. Do NOT change or rearrange other rows."
+      ],
+      "status": "candidate",
+      "review": "Old runtime atlas:20 cropped cells reproduced by Python regression; corrected atlas with manual attack row splits passes24 boundaries. Real game six action-state captures pass; direction coverage not complete."
+    }
+  ],
+  "limitations": [
+    "Shade NW move/hit missing; new four actions do not claim full direction coverage.",
+    "Chief extra directions missing; boundary tests do not establish gait/contact visual quality.",
+    "No production promotion or publication."
+  ]
+}

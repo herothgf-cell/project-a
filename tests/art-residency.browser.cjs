@@ -1,0 +1,32 @@
+'use strict';
+const {chromium}=require('playwright'),assert=require('node:assert/strict');
+const {createServer}=require('../server.cjs');
+(async()=>{const server=createServer({artReview:true});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
+try{browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined});const page=await browser.newPage();const requests=[],errors=[];
+page.on('request',r=>{if(/assets\/art\/.*\.png/.test(r.url()))requests.push(r.url());});page.on('pageerror',e=>errors.push(String(e)));
+await page.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;const step=v.Game.prototype.step;v.Game.prototype.step=function(...args){window.__game=this;return step.apply(this,args);};}});});
+await page.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await page.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);
+assert.equal(await page.evaluate(()=>ArtPreview.error),null);assert.ok(requests.length<50,`startup eagerly requested ${requests.length} atlases`);
+assert.ok(await page.evaluate(()=>ArtPreview.residency.bytes<=128*1024*1024));assert.deepEqual(errors,[]);
+await page.click('#start');await page.locator('#dialogActions button').first().click();await page.waitForFunction(()=>window.__game);
+const samples=[];
+for(const [area,world]of [['city','reality'],['village','murim'],['city','reality']]){
+ await page.evaluate(area=>{__game.progress=8;__game.enter(area);__game.events=[];},area);
+ await page.waitForFunction(world=>ArtPreview.diagnostics.get(world+'.hero')?.status==='candidate',world);
+ await page.waitForFunction(()=>ArtPreview.residency.pending===0);
+ const bytes=await page.evaluate(()=>ArtPreview.residency.bytes);assert.ok(bytes>0&&bytes<=128*1024*1024);samples.push({world,bytes});
+}
+assert.ok(new Set(requests).size<100,'world traversal must not fetch all action directions');assert.deepEqual(errors,[]);
+console.log(JSON.stringify({requestedAtlases:new Set(requests).size,samples,retainedRGBABytes:await page.evaluate(()=>ArtPreview.residency.bytes),pageErrors:errors}));
+const reviewRequests=[];const review=await browser.newPage();review.on('request',r=>{if(/assets\/art\/.*\.png/.test(r.url()))reviewRequests.push(r.url());});
+await review.goto('http://127.0.0.1:'+server.address().port+'/art-review.html');await review.waitForFunction(()=>document.body.dataset.ready==='true');
+assert.ok(new Set(reviewRequests).size<=6,`review eagerly loads ${new Set(reviewRequests).size} images`);
+await review.selectOption('#reviewAction','attack3');await review.selectOption('#reviewFacing','w');
+await review.waitForFunction(()=>[...document.querySelectorAll('canvas[data-action]')].every(c=>c.dataset.loading==='false'));
+assert.ok(new Set(reviewRequests).size<=10,'review should load only selected actions');
+console.log(JSON.stringify({reviewRequestedAtlases:new Set(reviewRequests).size}));
+await review.route('**/cast-nw-candidate-v2.png',route=>route.abort());
+await review.selectOption('#reviewAction','cast');await review.selectOption('#reviewFacing','nw');
+await review.waitForFunction(()=>[...document.querySelectorAll('canvas[data-action]')].every(c=>c.dataset.blocked==='true'&&c.dataset.loading==='false'));
+console.log('failed gallery downloads settle to BLOCKED_ART without a substituted image');
+}finally{if(browser)await browser.close();await new Promise(r=>server.close(r));}})().catch(e=>{console.error(e);process.exitCode=1;});

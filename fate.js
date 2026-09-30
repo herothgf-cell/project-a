@@ -123,7 +123,7 @@
     if(c.echo){c.echo.life-=dt;if(c.echo.life<=0)c.echo=null;}
     if(c.field){c.field.life-=dt;if(c.field.life<=0)c.field=null;}
     const ready=[];for(const hit of c.pending){hit.delay-=dt;if(hit.delay<=0)ready.push(hit);}c.pending=c.pending.filter(h=>h.delay>0);
-    for(const hit of ready){areaHit(g,hit,hit.radius,hit.mult,hit.source);emit(g,'fate-wave',hit.x,hit.y,{angle:hit.delay*5+g.player.face,range:hit.radius});}
+    for(const hit of ready){areaHit(g,hit,hit.radius,hit.mult,hit.source);emit(g,'fate-wave',hit.x,hit.y,{angle:hit.delay*5+g.player.face,range:hit.radius,actionInstance:hit.actionInstance,presentationAngle:hit.presentationAngle,presentationPhase:'contact'});}
   }
   function speed(g,e){return g.combat.field&&dist(e,g.combat.field)<g.combat.field.radius?.4:1;}
   function reward(g,e){

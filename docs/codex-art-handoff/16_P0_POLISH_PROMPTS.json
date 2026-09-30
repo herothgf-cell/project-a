@@ -1,0 +1,29 @@
+{
+  "mode": "built-in image_gen",
+  "status": "candidate",
+  "date": "2026-09-30",
+  "assets": [
+    {
+      "key": "groundReality",
+      "prompt": "Use case: stylized-concept. Asset type: production 2D game ground texture atlas, NOT a concept board. Create a wide 2:1 opaque image with two equal square seamless material textures flush side by side, no borders. LEFT: understated cool slate gray fine worn concrete plaza for a modern Korean hunter headquarters. RIGHT: charcoal blue-gray fine asphalt road, no painted lines. Hand-painted sophisticated illustrated RPG materials viewed directly overhead, uniform diffuse light, very low contrast, very fine subtle wear. Each half must tile seamlessly on all four edges; avoid visible grids, square paving joints, repeating distinctive cracks, patches, large stones, highlights, gradients or focal landmarks. Surfaces should be quiet behind detailed characters. No people, architecture, props, words, symbols, interface, palette swatches or watermarks. Cover the canvas edge to edge."
+    },
+    {
+      "key": "groundMurim",
+      "prompt": "Use case: stylized-concept. Asset type: production 2D game ground texture atlas, NOT concept board. Wide 2:1 opaque image containing two equal seamless square materials flush side by side no borders. LEFT: muted olive green short grass blending with tiny moss and earthen flecks for a traditional Korean martial village. RIGHT: warm gray-beige compacted earth path with very fine mineral grains and sparse small embedded worn flagstone fragments. Sophisticated hand-painted illustrated RPG, directly overhead, uniform diffuse light. Both halves very LOW CONTRAST with fine subtle texture; each separately seamless on all four edges. No large rocks or leaf clusters, no distinctive repeating patterns, no gridded pavers, no flowers, no architecture, no characters, no shadows, no focal landmarks, no gradients, no text, no UI, no watermark. This is quiet playable ground underneath separate characters and buildings. Fill every edge."
+    },
+    {
+      "key": "propsReality",
+      "prompt": "Use case: stylized-concept. Asset type: transparent production modern RPG environment sprite atlas. Exact 2x2 equal square cells on square canvas. Four standalone independent props, each all inside CENTRAL 70% of its cell with generous transparent padding; nothing may touch cell boundaries. TOP LEFT: modern hunter base resting bench, brushed gunmetal with blue padded seat, compact medical supply case beside it. TOP RIGHT: modern industrial security checkpoint gate open, two gunmetal posts with steel overhead beam, small cool blue lamps, futuristic but believable, no portal magic. BOTTOM LEFT: compact fenced industrial access gate with red locked indicator and closed metal mesh doors. BOTTOM RIGHT: low modern blue-lit circular maintenance platform, toolbox and coiled cable. Sophisticated painterly game illustration for an elevated three-quarter 2D camera, muted blue-gray, concrete and metal material detail, clear complete silhouettes. Genuine transparent alpha background, no ground rectangles, no people, no traditional roofs, no grid lines, no text, no labels, no interface, no watermark. Functional game assets not a concept board."
+    },
+    {
+      "key": "propsMurim",
+      "prompt": "Use case: stylized-concept. Asset type: transparent production RPG environment sprite atlas. Four independent fully painted props in exact 2x2 equal square cells, all objects comfortably contained with 12 percent empty transparent padding and no overlap or clipping. Upper left: traditional Korean martial village shallow oval lotus pond, turquoise water, mossy irregular stone rim, few lotus leaves, small reeds. Upper right: weathered wooden resting bench and tea table with a small warm lantern. Lower left: open traditional wooden mountain trail gate with curved charcoal tiled small roof and two stone footings, no doors, path entrance empty. Lower right: small traditional scholar garden entrance arch of aged gray stone with hanging pale teal tassel. 3/4 elevated 2D RPG camera, coherent hand-painted illustration, detailed natural warm timber and stone, not cartoon, no people. Every prop separately on genuine transparent alpha, no ground rectangle, no white background, no grid lines, no labels, no text, no interface. This is a functional asset atlas not a concept board. Keep complete outlines and isolated shadows inside their own cells. Square canvas."
+    },
+    {
+      "key": "murimAttack1East",
+      "prompt": "Use case: identity-preserve. Image 1 is character/style reference only. Generate a NEW functional 2D game sprite strip showing ONLY its black-haired Korean martial swordsman in charcoal torn cloak, ivory sleeves, slate blue robe and brown boots. EXACTLY FOUR complete full-body frames in a single horizontal row, wide 3:1 canvas, genuinely transparent background. All frames FACE EAST (toward right), torso and feet facing right, distinct profile face, no front views. One quick sword cut sequence: frame1 contact with sword pointing diagonally up-right, frame2 follow-through lower right, frame3 recover elbow bent sword close right side, frame4 neutral right-facing guard. Each whole figure and COMPLETE sword must fit within central 65% width of its equal quarter of the canvas. Large transparent gaps. Feet at same level and planted support foot at same relative location within each quarter. No movement across the cell. Consistent adult anatomy and scale. Keep right hand naturally gripping sword across frames, no energy effects. No cropped blades, no overlapping neighboring frames, no panels, no words, no ground or backdrop.",
+      "file": "assets/art/murim/hero/yunseo/attack1-e-candidate-v2.png",
+      "status": "candidate; provisional sockets; minor slice boundary contamination requires review"
+    }
+  ]
+}

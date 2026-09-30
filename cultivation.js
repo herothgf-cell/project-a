@@ -5,7 +5,7 @@
  const targets=(g,o,r)=>g.enemies.filter(e=>e.hp>0&&dist(e,o)<=r+e.r&&g.lineClear(o,e)&&!(e.boss&&g.bossLocked()));
  function credit(g,p,e){if(g.trial||!e||e.residual||e.hp>0&&e.boss&&g.bossLocked()||!Object.hasOwn(S(g).mastery,p))return;const r=R(g),s=S(g),key=p+':'+e.id,count=r.credits||(r.credits={});if((count[key]||0)>=3)return;count[key]=(count[key]||0)+1;s.mastery[p]=Math.min(30,s.mastery[p]+1);const world=AREAS[g.area].world;if(!s.worlds.includes(world))s.worlds.push(world);}
  function recognize(g,key,e){const s=S(g);if(!key||!s.known.includes(key)||AREAS[g.area].world!=='현실'||g.trial||!e?.id||e.boss&&g.bossLocked())return;if(typeof g.onInterpretation==='function')g.onInterpretation(key,e);if(s.sync[key]!==2){s.sync[key]=2;g.toast(D.variants[key].name+' · 현실에서도 같은 반응이 나타났다.');g.effect('reality-settled',g.player.x,g.player.y,{life:1.2,max:1.2,path:D.variants[key].path});}}
- function fx(g,key,o=g.player){g.effect('interpret-'+key,o.x,o.y,{path:D.variants[key].path,range:190,life:.8,max:.8});}
+ function fx(g,key,o=g.player,phase){g.effect('interpret-'+key,o.x,o.y,{path:D.variants[key].path,range:190,life:.8,max:.8,presentationPhase:phase,...(o.actionInstance?{actionInstance:o.actionInstance,presentationAngle:o.presentationAngle,presentationPhase:'contact'}:{})});}
  P.stats=function(){const n=old.stats.call(this),s=S(this);if(s.realm){n.hp+=12;n.mp+=8;n.attack+=2;}return n;};
  P.setBreath=function(mode){if(!AREAS[this.area].safe||!['flow','focus'].includes(mode))return false;S(this).breath=mode;this.toast(mode==='flow'?'유수심법 · 무공 사이의 호흡으로 내력을 회복합니다.':'집중심법 · 호흡을 고른 첫 검격에 내력을 싣습니다.');return true;};
  P.breakthrough=function(){const s=S(this);if(!AREAS[this.area].safe||s.realm||Object.values(s.mastery).reduce((a,b)=>a+b,0)<8||s.worlds.length<2||!s.known.length)return false;s.realm=1;this.player.hp=this.stats().hp;this.player.mp=this.stats().mp;this.emit('dialog',{title:'경지 돌파 · 이류의 호흡',text:'검을 많이 휘둘렀기 때문만은 아니다.\n두 하늘에서 몸으로 확인한 힘과, 스스로 읽어 낸 해석이 한 호흡으로 이어졌다.\n\n최대 체력 +12 · 내력 +8 · 공격력 +2\n레벨과는 별도로 남는 첫 경지다.',portrait:'hero'});return true;};
@@ -17,12 +17,12 @@
    p.mp-=k.cost;p.cool.signature2=k.cool;p.swing=.3;this.combat.echo=null;r.pending.push({x:echo.x,y:echo.y,delay:.45,key,area:this.area,mult:3.3});r.lastAction=this.playTime;fx(this,key,echo);this.emit('sound',{name:'echo'});return true;
   }
   const charge=r.charge||0,ok=old.act.call(this,action,...args);if(!ok)return ok;
-  if(action==='attack'&&charge>0){r.charge=0;const o=p;for(const e of targets(this,o,320))if(Math.cos(Math.atan2(e.y-o.y,e.x-o.x)-o.face)>.86)this.strike(e,Math.round(this.stats().attack*1.6),'interpret:ripple-return');fx(this,'ripple-return');}
+  if(action==='attack'&&charge>0){r.charge=0;const o=p;for(const e of targets(this,o,320))if(Math.cos(Math.atan2(e.y-o.y,e.x-o.x)-o.face)>.86)this.strike(e,Math.round(this.stats().attack*1.6),'interpret:ripple-return');fx(this,'ripple-return',p,'contact');}
   if(key==='ripple-return'&&action==='signature2'){r.charge=1;fx(this,key);}
   if(key==='ripple-guard'&&action==='signature1'){r.guard={x:p.x,y:p.y,radius:145,life:4};fx(this,key);}
   if(key==='echo-return'&&action==='signature2'){p.invuln=Math.max(p.invuln,.7);for(const e of targets(this,p,175))this.strike(e,Math.round(this.stats().attack*.8),'interpret:'+key);fx(this,key);}
-  if(key==='seal-hold'&&action==='signature1'){this.combat.field.life=6;const hostile=victims.find(v=>v.wind>0&&dist(v.e,p)<165+v.e.r);if(hostile){hostile.e.root=hostile.e.boss?.55:1.5;recognize(this,key,hostile.e);credit(this,'seal',hostile.e);}fx(this,key);}
-  if(key==='seal-guide'&&action==='signature2'){for(const v of victims.filter(v=>v.e.root>0).slice(0,2)){const e=v.e;this.move(e,Math.cos(p.face)*85,Math.sin(p.face)*85);if(v.wind>0){recognize(this,key,e);for(const other of targets(this,e,115))this.strike(other,Math.round(this.stats().attack*.9),'interpret:'+key);}}fx(this,key);}
+  if(key==='seal-hold'&&action==='signature1'){this.combat.field.life=6;const hostile=victims.find(v=>v.wind>0&&dist(v.e,p)<165+v.e.r);if(hostile){hostile.e.root=hostile.e.boss?.55:1.5;recognize(this,key,hostile.e);credit(this,'seal',hostile.e);}fx(this,key,hostile?.e||p,hostile?'bind':'field');}
+  if(key==='seal-guide'&&action==='signature2'){let contact=false;for(const v of victims.filter(v=>v.e.root>0).slice(0,2)){const e=v.e;this.move(e,Math.cos(p.face)*85,Math.sin(p.face)*85);if(v.wind>0){recognize(this,key,e);for(const other of targets(this,e,115))if(this.strike(other,Math.round(this.stats().attack*.9),'interpret:'+key)>0)contact=true;}}fx(this,key,p,contact?'contact':'field');}
   return ok;
  };
  P.strike=function(e,amount,source='attack'){const s=S(this),r=R(this),key=active(this);let damage=amount;

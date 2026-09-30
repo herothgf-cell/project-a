@@ -1,0 +1,396 @@
+{
+  "jobs": [
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "cast",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "cast",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "cast",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "cast",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "cast",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "cast",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "cast",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "reality",
+      "action": "hit",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/reality/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male hunter, short black hair, charcoal tactical jacket and trousers, grey undershirt, black gloves/boots, blue ID badge, single slim straight silver tactical sword; no robes or ponytail. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: reverse rising recovery slash of a three-hit combo: frame1 CONTACT blade crossing upward in front of torso, frame2 higher follow-through, frame3 settle low, frame4 ready stance. Not four identical stances. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "cast",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/cast-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: spell stance: frame1 poised activation empty left hand extended with two-finger gesture, frame2 stronger extension, frame3 held gesture, frame4 lower left arm and return ready. Sword remains in right hand pointed safely low. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    },
+    {
+      "world": "murim",
+      "action": "hit",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/hit-se-candidate-v1.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: nonlethal hit reaction: frame1 shoulder recoils and torso leans backward, frame2 deepest recoil knees bend, frame3 recovering balance, frame4 upright ready. Both feet remain on ground. No wound, blood or enemy. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style."
+    }
+  ]
+}

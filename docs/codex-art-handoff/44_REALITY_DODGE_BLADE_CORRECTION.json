@@ -1,0 +1,10 @@
+{
+  "tool": "built-in image_gen",
+  "editTarget": "assets/art/reality/hero/yunseo/dodge-nw-candidate-v2.png",
+  "supportingReference": "assets/art/reality/hero/yunseo/dodge-n-candidate-v2.png",
+  "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-a40e7d0d-f2a5-4871-af61-7bce9a0b71d1.png",
+  "output": "assets/art/reality/hero/yunseo/dodge-nw-candidate-v3.png",
+  "prompt": "Use case: precise-object-edit. Edit target image 1 is a four-frame NW dodge game sprite sheet. Supporting image 2 is the same hunter's north dodge, sword-width/style reference only. Change ONLY the steel blade width in all four frames of image1: reduce the broad cleaver-like blade to the slender straight silver combat sword with subtle blue edge in image2. Preserve exactly image1's four full-body NW poses, right hand holding the same hilt, head/hair, face, black tactical clothes, shoulder insignia, boots, backpack, scale, placement, 2x2 layout, true transparent alpha background, and all margins. Keep the same sword length, angle, tip location and hilt location in each frame; only narrow blade thickness and remove broad bulging white edges. No shadows/backdrop, text, new effects, or extra equipment. Output complete transparent PNG sprite atlas.",
+  "status": "candidate",
+  "review": "Four whole-body NW poses retained, slimmer blade reviewed visually; four cell alpha boundaries clear. Existing 0.22s action duration and no-damage contact flags unchanged. Not final foot-slide/transition acceptance."
+}

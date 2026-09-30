@@ -13,12 +13,12 @@ def verify_release(expected, read):
     return {'version':info['version'],'commit':info['commit'],'root':'matched','assets':list(expected['assets']),'count':len(expected['assets'])}
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--url',required=True);p.add_argument('--commit',required=True);a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--url',required=True);p.add_argument('--commit',required=True);p.add_argument('--include-prototype',action='store_true');a=p.parse_args()
     if not re.fullmatch('[0-9a-f]{40}',a.commit):raise ValueError('Expected complete commit SHA')
     if a.url!='https://herothgf-cell.github.io/project-a/':raise ValueError('Unexpected deployment origin')
     # Use the exact packaging function, including approved-only catalog serialization.
     with tempfile.TemporaryDirectory(prefix='ssanggye-live-') as out:
-        subprocess.run(['node',str(ROOT/'scripts/build-site.cjs'),out,a.commit],cwd=ROOT,check=True,capture_output=True)
+        subprocess.run(['node',str(ROOT/'scripts/build-site.cjs'),out,a.commit]+(['--include-prototype'] if a.include_prototype else []),cwd=ROOT,check=True,capture_output=True)
         expected=json.loads((Path(out)/'asset-manifest.json').read_text())
     def read(name,attempt=0):
         req=urllib.request.Request(a.url+name+'?verified='+a.commit+'-'+str(attempt),headers={'Cache-Control':'no-cache','User-Agent':'Ssanggye-release-check'})

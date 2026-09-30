@@ -1,0 +1,1059 @@
+{
+  "records": [
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "e",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing EAST, strict side view looking RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-b92b9b37-4cef-4d63-8b82-8a5a04607ce5.png",
+      "destination": "assets/art/murim/hero/yunseo/attack3-e-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "attack3_e_v2",
+          "rect": [
+            0,
+            0,
+            680,
+            627
+          ],
+          "pivot": [
+            0.6852941176470588,
+            0.8676236044657097
+          ],
+          "duration": 0.06,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              466,
+              544
+            ],
+            "hand": [
+              425,
+              301
+            ],
+            "blade": [
+              636,
+              301
+            ],
+            "effect": [
+              636,
+              301
+            ]
+          },
+          "displayHeight": 190
+        },
+        {
+          "atlas": "attack3_e_v2",
+          "rect": [
+            680,
+            0,
+            574,
+            627
+          ],
+          "pivot": [
+            0.7073170731707317,
+            0.8660287081339713
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              406,
+              543
+            ],
+            "hand": [
+              388,
+              417
+            ],
+            "blade": [
+              528,
+              518
+            ],
+            "effect": [
+              528,
+              518
+            ]
+          },
+          "displayHeight": 190
+        },
+        {
+          "atlas": "attack3_e_v2",
+          "rect": [
+            0,
+            627,
+            660,
+            627
+          ],
+          "pivot": [
+            0.7272727272727273,
+            0.784688995215311
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              480,
+              492
+            ],
+            "hand": [
+              440,
+              317
+            ],
+            "blade": [
+              608,
+              441
+            ],
+            "effect": [
+              608,
+              441
+            ]
+          },
+          "displayHeight": 190
+        },
+        {
+          "atlas": "attack3_e_v2",
+          "rect": [
+            660,
+            627,
+            594,
+            627
+          ],
+          "pivot": [
+            0.702020202020202,
+            0.7910685805422647
+          ],
+          "duration": 0.09,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              417,
+              496
+            ],
+            "hand": [
+              263,
+              318
+            ],
+            "blade": [
+              410,
+              477
+            ],
+            "effect": [
+              410,
+              477
+            ]
+          },
+          "displayHeight": 190
+        }
+      ],
+      "status": "candidate",
+      "approved": false
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "w",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing WEST, strict side view looking LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-73285620-f466-4b50-a1e1-71ec54c7c44d.png",
+      "destination": "assets/art/murim/hero/yunseo/attack3-w-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "attack3_w_v2",
+          "rect": [
+            0,
+            0,
+            633,
+            627
+          ],
+          "pivot": [
+            0.22906793048973143,
+            0.937799043062201
+          ],
+          "duration": 0.06,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              145,
+              588
+            ],
+            "hand": [
+              365,
+              330
+            ],
+            "blade": [
+              18,
+              286
+            ],
+            "effect": [
+              18,
+              286
+            ]
+          },
+          "displayHeight": 150
+        },
+        {
+          "atlas": "attack3_w_v2",
+          "rect": [
+            633,
+            0,
+            621,
+            627
+          ],
+          "pivot": [
+            0.1529790660225443,
+            0.9617224880382775
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              95,
+              603
+            ],
+            "hand": [
+              187,
+              384
+            ],
+            "blade": [
+              5,
+              542
+            ],
+            "effect": [
+              5,
+              542
+            ]
+          },
+          "displayHeight": 150
+        },
+        {
+          "atlas": "attack3_w_v2",
+          "rect": [
+            0,
+            627,
+            645,
+            627
+          ],
+          "pivot": [
+            0.2744186046511628,
+            0.84688995215311
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              177,
+              531
+            ],
+            "hand": [
+              199,
+              332
+            ],
+            "blade": [
+              38,
+              486
+            ],
+            "effect": [
+              38,
+              486
+            ]
+          },
+          "displayHeight": 150
+        },
+        {
+          "atlas": "attack3_w_v2",
+          "rect": [
+            645,
+            627,
+            609,
+            627
+          ],
+          "pivot": [
+            0.2545155993431856,
+            0.8437001594896332
+          ],
+          "duration": 0.09,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              155,
+              529
+            ],
+            "hand": [
+              187,
+              320
+            ],
+            "blade": [
+              21,
+              482
+            ],
+            "effect": [
+              21,
+              482
+            ]
+          },
+          "displayHeight": 150
+        }
+      ],
+      "status": "candidate",
+      "approved": false
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "n",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTH, back view looking away/up; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-866b3418-f771-428c-b763-3b083645f522.png",
+      "destination": "assets/art/murim/hero/yunseo/attack3-n-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "attack3_n_v2",
+          "rect": [
+            0,
+            0,
+            690,
+            627
+          ],
+          "pivot": [
+            0.736231884057971,
+            0.9457735247208932
+          ],
+          "duration": 0.06,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              508,
+              593
+            ],
+            "hand": [
+              469,
+              287
+            ],
+            "blade": [
+              668,
+              309
+            ],
+            "effect": [
+              668,
+              309
+            ]
+          },
+          "displayHeight": 150
+        },
+        {
+          "atlas": "attack3_n_v2",
+          "rect": [
+            690,
+            0,
+            564,
+            627
+          ],
+          "pivot": [
+            0.10283687943262411,
+            0.9569377990430622
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              58,
+              600
+            ],
+            "hand": [
+              400,
+              224
+            ],
+            "blade": [
+              518,
+              101
+            ],
+            "effect": [
+              518,
+              101
+            ]
+          },
+          "displayHeight": 150
+        },
+        {
+          "atlas": "attack3_n_v2",
+          "rect": [
+            0,
+            627,
+            700,
+            627
+          ],
+          "pivot": [
+            0.6957142857142857,
+            0.8564593301435407
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              487,
+              537
+            ],
+            "hand": [
+              494,
+              296
+            ],
+            "blade": [
+              653,
+              427
+            ],
+            "effect": [
+              653,
+              427
+            ]
+          },
+          "displayHeight": 150
+        },
+        {
+          "atlas": "attack3_n_v2",
+          "rect": [
+            700,
+            627,
+            554,
+            627
+          ],
+          "pivot": [
+            0.6353790613718412,
+            0.8564593301435407
+          ],
+          "duration": 0.09,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              352,
+              537
+            ],
+            "hand": [
+              351,
+              321
+            ],
+            "blade": [
+              500,
+              464
+            ],
+            "effect": [
+              500,
+              464
+            ]
+          },
+          "displayHeight": 150
+        }
+      ],
+      "status": "candidate",
+      "approved": false
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "s",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTH, front view looking down/toward camera; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-1d074092-7ca1-45e9-8364-f26b3675c216.png",
+      "destination": "assets/art/murim/hero/yunseo/attack3-s-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "attack3_s_v2",
+          "rect": [
+            0,
+            0,
+            684,
+            636
+          ],
+          "pivot": [
+            0.7573099415204678,
+            0.9716981132075472
+          ],
+          "duration": 0.06,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              518,
+              618
+            ],
+            "hand": [
+              376,
+              348
+            ],
+            "blade": [
+              665,
+              466
+            ],
+            "effect": [
+              665,
+              466
+            ]
+          },
+          "displayHeight": 152.1531100478469
+        },
+        {
+          "atlas": "attack3_s_v2",
+          "rect": [
+            684,
+            0,
+            570,
+            636
+          ],
+          "pivot": [
+            0.7929824561403509,
+            0.9842767295597484
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              452,
+              626
+            ],
+            "hand": [
+              385,
+              343
+            ],
+            "blade": [
+              557,
+              423
+            ],
+            "effect": [
+              557,
+              423
+            ]
+          },
+          "displayHeight": 152.1531100478469
+        },
+        {
+          "atlas": "attack3_s_v2",
+          "rect": [
+            0,
+            636,
+            680,
+            618
+          ],
+          "pivot": [
+            0.7823529411764706,
+            0.8592233009708737
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              532,
+              531
+            ],
+            "hand": [
+              376,
+              311
+            ],
+            "blade": [
+              604,
+              531
+            ],
+            "effect": [
+              604,
+              531
+            ]
+          },
+          "displayHeight": 147.8468899521531
+        },
+        {
+          "atlas": "attack3_s_v2",
+          "rect": [
+            680,
+            636,
+            574,
+            618
+          ],
+          "pivot": [
+            0.740418118466899,
+            0.8770226537216829
+          ],
+          "duration": 0.09,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              425,
+              542
+            ],
+            "hand": [
+              180,
+              309
+            ],
+            "blade": [
+              338,
+              542
+            ],
+            "effect": [
+              338,
+              542
+            ]
+          },
+          "displayHeight": 147.8468899521531
+        }
+      ],
+      "status": "candidate",
+      "approved": false
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "ne",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-c7a2ab22-8523-4a60-bca7-142f55cae69c.png",
+      "destination": "assets/art/murim/hero/yunseo/attack3-ne-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "attack3_ne_v2",
+          "rect": [
+            0,
+            0,
+            673,
+            640
+          ],
+          "pivot": [
+            0.6983655274888558,
+            0.8890625
+          ],
+          "duration": 0.06,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              470,
+              569
+            ],
+            "hand": [
+              451,
+              271
+            ],
+            "blade": [
+              657,
+              252
+            ],
+            "effect": [
+              657,
+              252
+            ]
+          },
+          "displayHeight": 153.11004784688996
+        },
+        {
+          "atlas": "attack3_ne_v2",
+          "rect": [
+            673,
+            0,
+            581,
+            640
+          ],
+          "pivot": [
+            0.6781411359724613,
+            0.91875
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              394,
+              588
+            ],
+            "hand": [
+              388,
+              385
+            ],
+            "blade": [
+              561,
+              485
+            ],
+            "effect": [
+              561,
+              485
+            ]
+          },
+          "displayHeight": 153.11004784688996
+        },
+        {
+          "atlas": "attack3_ne_v2",
+          "rect": [
+            0,
+            640,
+            684,
+            614
+          ],
+          "pivot": [
+            0.6929824561403509,
+            0.8306188925081434
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              474,
+              510
+            ],
+            "hand": [
+              452,
+              322
+            ],
+            "blade": [
+              618,
+              433
+            ],
+            "effect": [
+              618,
+              433
+            ]
+          },
+          "displayHeight": 146.88995215311004
+        },
+        {
+          "atlas": "attack3_ne_v2",
+          "rect": [
+            684,
+            640,
+            570,
+            614
+          ],
+          "pivot": [
+            0.7140350877192982,
+            0.8420195439739414
+          ],
+          "duration": 0.09,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              407,
+              517
+            ],
+            "hand": [
+              384,
+              256
+            ],
+            "blade": [
+              516,
+              115
+            ],
+            "effect": [
+              516,
+              115
+            ]
+          },
+          "displayHeight": 146.88995215311004
+        }
+      ],
+      "status": "candidate",
+      "approved": false
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "nw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHWEST, back three-quarter looking upper LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-b4038fa6-c6d3-40d8-ac62-269429fa1cb1.png",
+      "destination": "assets/art/murim/hero/yunseo/attack3-nw-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "attack3_nw_v2",
+          "rect": [
+            0,
+            0,
+            671,
+            640
+          ],
+          "pivot": [
+            0.338301043219076,
+            0.921875
+          ],
+          "duration": 0.06,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              227,
+              590
+            ],
+            "hand": [
+              275,
+              265
+            ],
+            "blade": [
+              34,
+              245
+            ],
+            "effect": [
+              34,
+              245
+            ]
+          },
+          "displayHeight": 153.11004784688996
+        },
+        {
+          "atlas": "attack3_nw_v2",
+          "rect": [
+            671,
+            0,
+            583,
+            640
+          ],
+          "pivot": [
+            0.2607204116638079,
+            0.9296875
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              152,
+              595
+            ],
+            "hand": [
+              185,
+              397
+            ],
+            "blade": [
+              5,
+              535
+            ],
+            "effect": [
+              5,
+              535
+            ]
+          },
+          "displayHeight": 153.11004784688996
+        },
+        {
+          "atlas": "attack3_nw_v2",
+          "rect": [
+            0,
+            640,
+            704,
+            614
+          ],
+          "pivot": [
+            0.34801136363636365,
+            0.8355048859934854
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              245,
+              513
+            ],
+            "hand": [
+              277,
+              319
+            ],
+            "blade": [
+              99,
+              409
+            ],
+            "effect": [
+              99,
+              409
+            ]
+          },
+          "displayHeight": 146.88995215311004
+        },
+        {
+          "atlas": "attack3_nw_v2",
+          "rect": [
+            704,
+            640,
+            550,
+            614
+          ],
+          "pivot": [
+            0.21636363636363637,
+            0.8403908794788274
+          ],
+          "duration": 0.09,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              119,
+              516
+            ],
+            "hand": [
+              175,
+              224
+            ],
+            "blade": [
+              42,
+              90
+            ],
+            "effect": [
+              42,
+              90
+            ]
+          },
+          "displayHeight": 146.88995215311004
+        }
+      ],
+      "status": "candidate",
+      "approved": false
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "sw",
+      "reference": "D:/Git/project-a/assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-b1e360b3-346c-413d-ac81-416d84caf292.png",
+      "destination": "assets/art/murim/hero/yunseo/attack3-sw-candidate-v2.png",
+      "frames": [
+        {
+          "atlas": "attack3_sw_v2",
+          "rect": [
+            0,
+            0,
+            660,
+            630
+          ],
+          "pivot": [
+            0.3560606060606061,
+            0.9587301587301588
+          ],
+          "duration": 0.06,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              235,
+              604
+            ],
+            "hand": [
+              209,
+              375
+            ],
+            "blade": [
+              33,
+              558
+            ],
+            "effect": [
+              33,
+              558
+            ]
+          },
+          "displayHeight": 150.7177033492823
+        },
+        {
+          "atlas": "attack3_sw_v2",
+          "rect": [
+            660,
+            0,
+            594,
+            630
+          ],
+          "pivot": [
+            0.2441077441077441,
+            0.9603174603174603
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              145,
+              605
+            ],
+            "hand": [
+              321,
+              298
+            ],
+            "blade": [
+              34,
+              362
+            ],
+            "effect": [
+              34,
+              362
+            ]
+          },
+          "displayHeight": 150.7177033492823
+        },
+        {
+          "atlas": "attack3_sw_v2",
+          "rect": [
+            0,
+            630,
+            670,
+            624
+          ],
+          "pivot": [
+            0.3402985074626866,
+            0.9006410256410257
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              228,
+              562
+            ],
+            "hand": [
+              202,
+              330
+            ],
+            "blade": [
+              34,
+              496
+            ],
+            "effect": [
+              34,
+              496
+            ]
+          },
+          "displayHeight": 149.2822966507177
+        },
+        {
+          "atlas": "attack3_sw_v2",
+          "rect": [
+            670,
+            630,
+            584,
+            624
+          ],
+          "pivot": [
+            0.24143835616438356,
+            0.9086538461538461
+          ],
+          "duration": 0.09,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              141,
+              567
+            ],
+            "hand": [
+              253,
+              338
+            ],
+            "blade": [
+              7,
+              468
+            ],
+            "effect": [
+              7,
+              468
+            ]
+          },
+          "displayHeight": 149.2822966507177
+        }
+      ],
+      "status": "candidate",
+      "approved": false
+    }
+  ],
+  "corrections": {
+    "e": "Edit attached 2x2 martial swordsman sprite sheet. Fix layout and clipped weapon: shrink each WHOLE figure and sword by 30 percent, center each in own quadrant with broad transparent gutter and 15% margins. Restore complete sword tip in top-right cell; no blade may touch canvas edge or overlap another character. Preserve all four action poses, direction, right-hand weapon, character identity and costume, transparent alpha background. No new effects, no labels. Do not merely add margin around whole sheet: each figure must become smaller inside its own cell.",
+    "ne": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing NORTHEAST, back three-quarter looking upper RIGHT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nCRITICAL: Every frame shows BACK three-quarter facing UPPER RIGHT, same camera and torso direction as reference. Never front-facing recovery. Large finishing sweep is distinct from reference attack1: first contact right-hand blade extends horizontally right, second down-right followthrough, third lowers, fourth ready. Keep figures small with wide clear gutters.",
+    "nw": "Use case: precise-object-edit. Correct this 2x2 game animation sheet. In ALL FOUR frames, BOTH hands must visibly grip the SAME sword hilt together, right hand adjacent to guard and left hand below it, both arms naturally connected to respective shoulders. Two-handed finishing slash, never single-handed. Frame1 horizontal left contact, frame2 diagonal left-down followthrough, frame3 lower deceleration, frame4 compact left-up ready guard. Keep upper-left BACK three-quarter view, identity, clothing, whole-body proportions, transparent alpha, 2x2 layout. Shrink each whole figure 15% inside its own cell for generous margins, no clipped sword or cloak. Exactly two arms/hands/legs. No VFX, text, shadow, ground.",
+    "sw": "Use case: stylized-concept. Game sprite animation asset. Input image is identity, equipment and paint-style reference ONLY. Redraw whole bodies, never head graft or mirror. young Korean male swordsman, long black ponytail, charcoal tattered cloak over cream and indigo robes, brown leather belts and wrapped boots, single straight silver sword with bronze guard; no modern clothing. Four full-body poses facing SOUTHWEST, front three-quarter looking lower LEFT; viewing direction fixed through all frames. Slightly elevated isometric RPG camera. Animation: wide torso-rotation finishing slash of three-hit combo: frame1 CONTACT torso rotated and sword sweeping across front, frame2 follow-through with hips turned, frame3 decelerate, frame4 ready stance. Sword always gripped in anatomical RIGHT hand, left hand empty; exactly two arms, two legs. Exact 2x2 equal cells on transparent alpha. Compact figures at SAME body scale, entire weapon/body/hair/cloak/boots fit in each cell with at least 15% clear margins and large central gutters. Same foot-ground baseline across cells. No sword trails, magic, shadows, labels, grid, text or extra objects. Detailed painterly coherent game-ready sprite style.\nMaintain exact DOWN-LEFT front three-quarter view of reference in every frame. Right sword arm on viewer LEFT; empty left arm on viewer RIGHT. Finishing torso sweep distinct from reference, both arms below shoulders. Compact whole figures, sword tips wholly within each quadrant, no mirroring."
+  },
+  "notes": [
+    "Built-in image generation. Whole-body independent murim candidates.",
+    "Sockets manually inspected and provisional; candidate is not final approval.",
+    "Northwest uses two-handed finishing pose to avoid hand transfer; visual continuity still requires playback review.",
+    "West second-frame handedness and east recovery facing require final visual review before promotion."
+  ]
+}

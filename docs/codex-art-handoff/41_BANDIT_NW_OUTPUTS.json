@@ -1,0 +1,881 @@
+{
+  "tool": "builtin image_gen",
+  "status": "candidate",
+  "approved": false,
+  "records": [
+    {
+      "action": "idle",
+      "key": "banditIdleNWResult",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-96853287-bc72-4324-a688-250097f28051.png",
+      "destination": "assets/art/murim/enemy/bandit-idle-nw-candidate-v2.png",
+      "prompt": "Transparent PNG 2x2 enemy sprite sheet with four full-body IDLE breathing poses. Rugged muscular Korean male bandit, black topknot and short beard, worn sleeveless dark-brown leather vest with back crossed straps, brick red neck scarf and waist sash, brown trousers boots. Fixed NORTHWEST back-three-quarter view, looking upper LEFT, back mostly visible. His anatomicalRIGHT arm is far-side at viewer RIGHT holding one curved short dao low near RIGHT hip; anatomicalLEFT arm near viewerLEFT hangs empty. No hand switching. Four subtly different chronological breathing poses, feet stable. Isometric painterly RPG style, whole independent character. Same scale, complete blade/hair/boots within each quadrant, generous transparent margins. Actual alpha transparency everywhere outside silhouettes. NO studio backdrop, no gradient, no shadows, no text or labels, no ground, no effects, exactlytwoarms twolegs one sword perpose.",
+      "frames": [
+        {
+          "atlas": "idle_nw_v2",
+          "rect": [
+            0,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.4176829268292683,
+            0.9699499165275459
+          ],
+          "duration": 0.3,
+          "displayHeight": 115,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              274,
+              581
+            ],
+            "hand": [
+              482,
+              317
+            ],
+            "blade": [
+              616,
+              373
+            ],
+            "effect": [
+              616,
+              373
+            ]
+          }
+        },
+        {
+          "atlas": "idle_nw_v2",
+          "rect": [
+            656,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.3567073170731707,
+            0.9699499165275459
+          ],
+          "duration": 0.3,
+          "displayHeight": 115,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              234,
+              581
+            ],
+            "hand": [
+              439,
+              317
+            ],
+            "blade": [
+              570,
+              373
+            ],
+            "effect": [
+              570,
+              373
+            ]
+          }
+        },
+        {
+          "atlas": "idle_nw_v2",
+          "rect": [
+            0,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.4176829268292683,
+            0.9616666666666667
+          ],
+          "duration": 0.3,
+          "displayHeight": 115,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              274,
+              577
+            ],
+            "hand": [
+              483,
+              311
+            ],
+            "blade": [
+              619,
+              370
+            ],
+            "effect": [
+              619,
+              370
+            ]
+          }
+        },
+        {
+          "atlas": "idle_nw_v2",
+          "rect": [
+            656,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.3521341463414634,
+            0.96
+          ],
+          "duration": 0.3,
+          "displayHeight": 115,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              231,
+              576
+            ],
+            "hand": [
+              448,
+              313
+            ],
+            "blade": [
+              583,
+              373
+            ],
+            "effect": [
+              583,
+              373
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "action": "move",
+      "key": "banditMoveNWCorrectionResult",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-d7bba53e-e49b-446c-b1f9-a69962bce83c.png",
+      "destination": "assets/art/murim/enemy/bandit-move-nw-candidate-v2.png",
+      "prompt": "Edit target four-frame bandit walking sheet. Fix repeated SAME leg pose: preserve upper body, identity, northwest facing, right-hand sword, alpha and2x2layout. Frame1 top-left keep. Frame2 top-right LEFT leg now swings forward toward upperLEFT, LEFT knee lifted, RIGHT boot planted supporting weight. Frame3 bottom-left LEFT boot now lands forward upperLEFT, RIGHT heel trails lowerRIGHT. Frame4 bottom-right RIGHT leg passes forward while LEFT boot planted. Distinct alternating walk cycle, not fourcopies same leg. Make all four entire silhouettes10percent smaller within quadrants so sword tips do not touch centerline or canvasedge. No additional limbs, no background.",
+      "frames": [
+        {
+          "atlas": "move_nw_v2",
+          "rect": [
+            0,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.4481707317073171,
+            0.9449081803005008
+          ],
+          "duration": 0.1,
+          "displayHeight": 123,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              294,
+              566
+            ],
+            "hand": [
+              468,
+              342
+            ],
+            "blade": [
+              613,
+              398
+            ],
+            "effect": [
+              613,
+              398
+            ]
+          }
+        },
+        {
+          "atlas": "move_nw_v2",
+          "rect": [
+            656,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.5350609756097561,
+            0.9799666110183639
+          ],
+          "duration": 0.1,
+          "displayHeight": 123,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              351,
+              587
+            ],
+            "hand": [
+              441,
+              343
+            ],
+            "blade": [
+              583,
+              403
+            ],
+            "effect": [
+              583,
+              403
+            ]
+          }
+        },
+        {
+          "atlas": "move_nw_v2",
+          "rect": [
+            0,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.4009146341463415,
+            0.83
+          ],
+          "duration": 0.1,
+          "displayHeight": 123,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              263,
+              498
+            ],
+            "hand": [
+              482,
+              300
+            ],
+            "blade": [
+              628,
+              352
+            ],
+            "effect": [
+              628,
+              352
+            ]
+          }
+        },
+        {
+          "atlas": "move_nw_v2",
+          "rect": [
+            656,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.5365853658536586,
+            0.8983333333333333
+          ],
+          "duration": 0.1,
+          "displayHeight": 123,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              352,
+              539
+            ],
+            "hand": [
+              451,
+              312
+            ],
+            "blade": [
+              593,
+              364
+            ],
+            "effect": [
+              593,
+              364
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "action": "telegraph",
+      "key": "banditTelegraphNWLayoutResult",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-537b6e09-b372-4675-b6e8-d2387d6d5ddb.png",
+      "destination": "assets/art/murim/enemy/bandit-telegraph-nw-candidate-v2.png",
+      "prompt": "Edit sprite layout ONLY. Keep all4poses and exact character appearance/RIGHT-hand sword untouched. In each 2x2 quadrant shrink the entire character/sword by20percent and center it within its own equal quadrant. Require45pixels transparent padding from EVERY cellboundary including central horizontal/vertical lines. No part of any blade/boot/hair touches the centerlines. Bottomright overhead blade must sit completely BELOW horizontalcenterline with45pixelsclear. Actual transparent background, no other changes.",
+      "frames": [
+        {
+          "atlas": "telegraph_nw_v2",
+          "rect": [
+            0,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.4176829268292683,
+            0.8881469115191987
+          ],
+          "duration": 0.1,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              274,
+              532
+            ],
+            "hand": [
+              467,
+              337
+            ],
+            "blade": [
+              591,
+              384
+            ],
+            "effect": [
+              591,
+              384
+            ]
+          }
+        },
+        {
+          "atlas": "telegraph_nw_v2",
+          "rect": [
+            656,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.3826219512195122,
+            0.8898163606010017
+          ],
+          "duration": 0.1,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              251,
+              533
+            ],
+            "hand": [
+              374,
+              178
+            ],
+            "blade": [
+              514,
+              199
+            ],
+            "effect": [
+              514,
+              199
+            ]
+          }
+        },
+        {
+          "atlas": "telegraph_nw_v2",
+          "rect": [
+            0,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.4176829268292683,
+            0.885
+          ],
+          "duration": 0.1,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              274,
+              531
+            ],
+            "hand": [
+              399,
+              106
+            ],
+            "blade": [
+              529,
+              173
+            ],
+            "effect": [
+              529,
+              173
+            ]
+          }
+        },
+        {
+          "atlas": "telegraph_nw_v2",
+          "rect": [
+            656,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.38414634146341464,
+            0.895
+          ],
+          "duration": 0.1,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              252,
+              537
+            ],
+            "hand": [
+              359,
+              103
+            ],
+            "blade": [
+              514,
+              115
+            ],
+            "effect": [
+              514,
+              115
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "action": "attack",
+      "key": "banditAttackNWLayoutResult",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-d75f364a-7722-47de-9546-79388cd4a1a1.png",
+      "destination": "assets/art/murim/enemy/bandit-attack-nw-candidate-v2.png",
+      "prompt": "Layout correction only: shrink each of four complete bandit attack sprites by25percent within its own2x2 quadrant; center horizontally, same relative footbaseline. Preserve exact poses and anatomy/equipment, but reconstruct any clipped right boot/scarf fully. Every blade/boot/scarf/hair must have45pixels fullytransparent padding from allcellboundaries and outeredges. Bottomright raisedblade must be entirelybelowhorizontalcenterline. Transparent alpha unchanged, no backgroundtext.",
+      "frames": [
+        {
+          "atlas": "attack_nw_v2",
+          "rect": [
+            0,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.4344512195121951,
+            0.9098497495826378
+          ],
+          "duration": 0.1,
+          "displayHeight": 155,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              285,
+              545
+            ],
+            "hand": [
+              231,
+              267
+            ],
+            "blade": [
+              88,
+              378
+            ],
+            "effect": [
+              88,
+              378
+            ]
+          }
+        },
+        {
+          "atlas": "attack_nw_v2",
+          "rect": [
+            656,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.3795731707317073,
+            0.9181969949916527
+          ],
+          "duration": 0.1,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              249,
+              550
+            ],
+            "hand": [
+              241,
+              367
+            ],
+            "blade": [
+              88,
+              457
+            ],
+            "effect": [
+              88,
+              457
+            ]
+          }
+        },
+        {
+          "atlas": "attack_nw_v2",
+          "rect": [
+            0,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.4115853658536585,
+            0.8916666666666667
+          ],
+          "duration": 0.1,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              270,
+              535
+            ],
+            "hand": [
+              292,
+              222
+            ],
+            "blade": [
+              169,
+              293
+            ],
+            "effect": [
+              169,
+              293
+            ]
+          }
+        },
+        {
+          "atlas": "attack_nw_v2",
+          "rect": [
+            656,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.40396341463414637,
+            0.9133333333333333
+          ],
+          "duration": 0.1,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              265,
+              548
+            ],
+            "hand": [
+              341,
+              161
+            ],
+            "blade": [
+              504,
+              48
+            ],
+            "effect": [
+              504,
+              48
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "action": "hit",
+      "key": "banditHitNWResult",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-c4f52a0b-445c-44fa-add4-36bae1473336.png",
+      "destination": "assets/art/murim/enemy/bandit-hit-nw-candidate-v2.png",
+      "prompt": "Use case: stylized-concept. Reference bandit identity and northwestback camera preserved. Four fullbody HIT REACTION poses in2x2transparent sheet. Backmostlyvisible lookingupperLEFT throughout. Frame1 shoulderjoltsback, frame2kneesbenddeeprecoil, frame3balance recovery, frame4uprightready. Bothboots planted. AnatomicalRIGHT hand viewerRIGHT holds curveddao low;LEFTempty nearownchest,neverotherhand. Exactlytwoarms. Samebrownleathervest crossedbackstrapsredscarfandsashblacktopknotbrownboots. Keep whole character/sword compact middle65percentofeachcell withwideempty gutters, noframeoverlap. Actualtransparentalpha,no studio backgroundgradient/no haze/no ground/no text/noeffects/noblood.",
+      "frames": [
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            0,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.39634146341463417,
+            0.9582637729549248
+          ],
+          "duration": 0.03,
+          "displayHeight": 120,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              260,
+              574
+            ],
+            "hand": [
+              481,
+              355
+            ],
+            "blade": [
+              625,
+              424
+            ],
+            "effect": [
+              625,
+              424
+            ]
+          }
+        },
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            656,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.3231707317073171,
+            0.9582637729549248
+          ],
+          "duration": 0.03,
+          "displayHeight": 120,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              212,
+              574
+            ],
+            "hand": [
+              463,
+              416
+            ],
+            "blade": [
+              611,
+              470
+            ],
+            "effect": [
+              611,
+              470
+            ]
+          }
+        },
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            0,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.4024390243902439,
+            0.925
+          ],
+          "duration": 0.03,
+          "displayHeight": 120,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              264,
+              555
+            ],
+            "hand": [
+              504,
+              309
+            ],
+            "blade": [
+              647,
+              378
+            ],
+            "effect": [
+              647,
+              378
+            ]
+          }
+        },
+        {
+          "atlas": "hit_nw_v2",
+          "rect": [
+            656,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.375,
+            0.9266666666666666
+          ],
+          "duration": 0.03,
+          "displayHeight": 120,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              246,
+              556
+            ],
+            "hand": [
+              477,
+              309
+            ],
+            "blade": [
+              619,
+              377
+            ],
+            "effect": [
+              619,
+              377
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "action": "death",
+      "key": "banditDeathNWLayoutResult",
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-75a451be-b8b8-43c5-910d-1d6ac6698b38.png",
+      "destination": "assets/art/murim/enemy/bandit-death-nw-candidate-v2.png",
+      "prompt": "Use case: precise-object-edit. Edit only the sprite-sheet layout of the supplied 2x2 north-west-facing bandit death animation. Keep exactly these four successive full-body poses, identity, clothing, sword in right hand, anatomy, art style and transparent background unchanged. Scale EACH complete figure including entire weapon and boots uniformly down by 25 percent within its own equal quadrant. Center each independently in its quadrant. Large fully transparent gutters at canvas vertical and horizontal midlines and all outer edges. No figure, sword, foot, shadow or pixel may cross quadrant boundaries. Exactly 4 frames, 2 rows by 2 columns. No text, no grid, no matte. Preserve genuine alpha transparency.",
+      "frames": [
+        {
+          "atlas": "death_nw_v2",
+          "rect": [
+            0,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.4344512195121951,
+            0.8514190317195326
+          ],
+          "duration": 0.15,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              285,
+              510
+            ],
+            "hand": [
+              443,
+              371
+            ],
+            "blade": [
+              563,
+              425
+            ],
+            "effect": [
+              563,
+              425
+            ]
+          }
+        },
+        {
+          "atlas": "death_nw_v2",
+          "rect": [
+            656,
+            0,
+            656,
+            599
+          ],
+          "pivot": [
+            0.4481707317073171,
+            0.8681135225375626
+          ],
+          "duration": 0.15,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              294,
+              520
+            ],
+            "hand": [
+              431,
+              423
+            ],
+            "blade": [
+              551,
+              466
+            ],
+            "effect": [
+              551,
+              466
+            ]
+          }
+        },
+        {
+          "atlas": "death_nw_v2",
+          "rect": [
+            0,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.5030487804878049,
+            0.71
+          ],
+          "duration": 0.15,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              330,
+              426
+            ],
+            "hand": [
+              437,
+              318
+            ],
+            "blade": [
+              574,
+              348
+            ],
+            "effect": [
+              574,
+              348
+            ]
+          }
+        },
+        {
+          "atlas": "death_nw_v2",
+          "rect": [
+            656,
+            599,
+            656,
+            600
+          ],
+          "pivot": [
+            0.49390243902439024,
+            0.6983333333333334
+          ],
+          "duration": 0.15,
+          "displayHeight": 155,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              324,
+              419
+            ],
+            "hand": [
+              406,
+              309
+            ],
+            "blade": [
+              554,
+              348
+            ],
+            "effect": [
+              554,
+              348
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Alpha boundaries pass 24 frames; not a visual-quality approval",
+    "Attack contact remains existing impact instant; corpse visibility remains 1.2 seconds"
+  ]
+}

@@ -85,5 +85,27 @@
   }
   return {load,clear:()=>cache.clear(),get size(){return cache.size;}};
  }
- return {safePath,validate,createCatalog,createImageCache};
+ function createResidentImages({maxBytes=128*1024*1024,maxConcurrent=2,load,onLoad=()=>{},onError=()=>{}}={}){
+  const loader=load||createImageCache({maxEntries:1}).load,resident=new Map(),pending=new Set(),failed=new Map(),queue=[];
+  let bytes=0,active=0;
+  function fail(path,reason){failed.set(path,reason);onError(path,reason);}
+  maxBytes=Math.max(1,Number.isFinite(maxBytes)?maxBytes:128*1024*1024);maxConcurrent=Math.max(1,Math.floor(maxConcurrent)||1);
+  function get(path){const entry=resident.get(path);if(!entry)return;resident.delete(path);resident.set(path,entry);return entry.image;}
+  function pump(){while(active<maxConcurrent&&queue.length){const {visual,path,cost}=queue.shift();active++;
+   let task;try{task=loader(visual);}catch(error){task=Promise.reject(error);}
+   Promise.resolve(task).then(result=>{
+    if(result.status!=='loaded'){fail(path,result.reason||'image load failed');return;}
+    while(bytes+cost>maxBytes&&resident.size){const first=resident.keys().next().value;bytes-=resident.get(first).cost;resident.delete(first);}
+    resident.set(path,{image:result.image,cost});bytes+=cost;onLoad(path);
+   }).catch(()=>fail(path,'image load failed')).finally(()=>{active--;pending.delete(path);pump();});
+  }}
+  function request(visual){const path=visual?.atlas?.path;if(visual?.status==='BLOCKED_ART'||!safePath(path))return null;
+   const image=get(path);if(image)return image;if(pending.has(path)||failed.has(path))return null;
+   const cost=visual.atlas.width*visual.atlas.height*4;
+   if(!Number.isFinite(cost)||cost<=0||cost>maxBytes){failed.set(path,'image exceeds resident budget');return null;}
+   pending.add(path);queue.push({visual,path,cost});pump();return null;
+  }
+  return {request,get,failure:path=>failed.get(path),get bytes(){return bytes;},get size(){return resident.size;},get pending(){return pending.size;}};
+ }
+ return {safePath,validate,createCatalog,createImageCache,createResidentImages};
 });

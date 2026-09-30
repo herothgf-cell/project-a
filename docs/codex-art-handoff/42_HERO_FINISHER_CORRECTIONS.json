@@ -1,0 +1,302 @@
+{
+  "tool": "builtin image_gen",
+  "status": "candidate",
+  "approved": false,
+  "records": [
+    {
+      "facing": "w",
+      "key": "murimAttack3WLayoutResult",
+      "prompts": [
+        "Use case: precise-object-edit. Correct this game sprite sheet's sword grip continuity ONLY. Keep exact 2x2 four-frame left-facing (WEST) full-body martial swordsman attack-finisher sequence, face identity, black long ponytail, ivory/blue robes, black weathered cloak, boots, sword design, transparent background. In ALL FOUR frames BOTH hands must grip the SAME single sword hilt: anatomical right hand adjacent to guard, left hand immediately behind right toward pommel. Two arms only, no floating extra hands. The sword must never transfer hands. Frame1 leftward contact slash, frame2 low left followthrough, frame3 settling stance, frame4 left-facing low two-handed ready stance. Keep face and torso consistently looking screen LEFT, no front-facing recovery. Each complete body AND blade stays within its own quadrant with at least 30px clear transparent margins at outer edges and midlines. Equal scale across four cells, fixed camera, no slash effects, no text, no floor.",
+        "Use case: precise-object-edit. Layout-only correction: retain exactly these four left-facing swordsman poses with BOTH hands gripping single sword in all frames, same face, costume, sword, style and transparency. Uniformly shrink EACH entire figure including blade and cloak by 18 percent around its own quadrant center. Keep 2x2 equal grid. Ensure at least 35 pixels of completely transparent space between every full figure and every quadrant boundary, especially sword-tip and cloak-tail margins. No pose changes, no new elements, no opaque backdrop, no grid or labels. Genuine alpha transparency."
+      ],
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-7150f68e-6d2a-4194-9572-ff1ed031b86b.png",
+      "path": "assets/art/murim/hero/yunseo/attack3-w-candidate-v3.png",
+      "frames": [
+        {
+          "atlas": "attack3_w_v2",
+          "rect": [
+            0,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.29505582137161085,
+            0.8564593301435407
+          ],
+          "duration": 0.06,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              185,
+              537
+            ],
+            "hand": [
+              363,
+              333
+            ],
+            "blade": [
+              80,
+              298
+            ],
+            "effect": [
+              80,
+              298
+            ]
+          },
+          "displayHeight": 183
+        },
+        {
+          "atlas": "attack3_w_v2",
+          "rect": [
+            627,
+            0,
+            627,
+            627
+          ],
+          "pivot": [
+            0.2759170653907496,
+            0.8835725677830941
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              173,
+              554
+            ],
+            "hand": [
+              260,
+              393
+            ],
+            "blade": [
+              85,
+              520
+            ],
+            "effect": [
+              85,
+              520
+            ]
+          },
+          "displayHeight": 183
+        },
+        {
+          "atlas": "attack3_w_v2",
+          "rect": [
+            0,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.32216905901116427,
+            0.773524720893142
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              202,
+              485
+            ],
+            "hand": [
+              308,
+              332
+            ],
+            "blade": [
+              129,
+              456
+            ],
+            "effect": [
+              129,
+              456
+            ]
+          },
+          "displayHeight": 183
+        },
+        {
+          "atlas": "attack3_w_v2",
+          "rect": [
+            627,
+            627,
+            627,
+            627
+          ],
+          "pivot": [
+            0.2583732057416268,
+            0.7862838915470495
+          ],
+          "duration": 0.09,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              162,
+              493
+            ],
+            "hand": [
+              261,
+              337
+            ],
+            "blade": [
+              83,
+              471
+            ],
+            "effect": [
+              83,
+              471
+            ]
+          },
+          "displayHeight": 183
+        }
+      ]
+    },
+    {
+      "facing": "e",
+      "key": "murimAttack3ERecoveryResult",
+      "prompts": [
+        "Use case: precise-object-edit. Change ONLY the BOTTOM RIGHT frame of this 2x2 game sprite sheet. It must be the SAME swordsman in the same strict screen-RIGHT EAST facing as the other three frames, same elevated isometric camera. Show recovery to ready pose with face/torso/hips pointing RIGHT, right sword hand still toward camera with blade lowered diagonally toward screen right, empty left hand behind. Do not rotate to frontal or southeast. Preserve the TOP LEFT, TOP RIGHT, BOTTOM LEFT frames exactly, clothing, identity, limbs, sword, equal character scale, cell boundaries. Full body and complete blade fit within bottom-right quadrant, 25px transparent margins. No background, preserve actual alpha transparency; no labels, no effects."
+      ],
+      "source": "C:\\Users\\USER\\.codex\\generated_images\\01a0ed50-b112-73d2-9c3d-b3b6afc54025\\exec-334a18d8-78d7-408d-bbba-66a253e2f504.png",
+      "path": "assets/art/murim/hero/yunseo/attack3-e-candidate-v3.png",
+      "frames": [
+        {
+          "atlas": "attack3_e_v2",
+          "rect": [
+            0,
+            0,
+            680,
+            627
+          ],
+          "pivot": [
+            0.6852941176470588,
+            0.8676236044657097
+          ],
+          "duration": 0.06,
+          "contact": true,
+          "sockets": {
+            "foot": [
+              466,
+              544
+            ],
+            "hand": [
+              425,
+              301
+            ],
+            "blade": [
+              636,
+              301
+            ],
+            "effect": [
+              636,
+              301
+            ]
+          },
+          "displayHeight": 190
+        },
+        {
+          "atlas": "attack3_e_v2",
+          "rect": [
+            680,
+            0,
+            574,
+            627
+          ],
+          "pivot": [
+            0.7073170731707317,
+            0.8660287081339713
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              406,
+              543
+            ],
+            "hand": [
+              388,
+              417
+            ],
+            "blade": [
+              528,
+              518
+            ],
+            "effect": [
+              528,
+              518
+            ]
+          },
+          "displayHeight": 190
+        },
+        {
+          "atlas": "attack3_e_v2",
+          "rect": [
+            0,
+            627,
+            660,
+            627
+          ],
+          "pivot": [
+            0.7272727272727273,
+            0.784688995215311
+          ],
+          "duration": 0.075,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              480,
+              492
+            ],
+            "hand": [
+              440,
+              317
+            ],
+            "blade": [
+              608,
+              441
+            ],
+            "effect": [
+              608,
+              441
+            ]
+          },
+          "displayHeight": 190
+        },
+        {
+          "atlas": "attack3_e_v2",
+          "rect": [
+            660,
+            627,
+            594,
+            627
+          ],
+          "pivot": [
+            0.7289562289562289,
+            0.7862838915470495
+          ],
+          "duration": 0.09,
+          "contact": false,
+          "sockets": {
+            "foot": [
+              433,
+              493
+            ],
+            "hand": [
+              286,
+              317
+            ],
+            "blade": [
+              488,
+              476
+            ],
+            "effect": [
+              488,
+              476
+            ]
+          },
+          "displayHeight": 190
+        }
+      ]
+    }
+  ]
+}
