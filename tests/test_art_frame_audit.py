@@ -58,6 +58,23 @@ class FrameAuditTests(unittest.TestCase):
                         result = self.api.audit_frame(image, frame)
                         self.assertEqual(result['status'], 'needs_visual_review', result)
 
+    def test_attack_recovery_scale_matches_same_facing_idle(self):
+        root = SCRIPT.parents[1]
+        for world in ('reality', 'murim'):
+            a = json.loads((root / f'assets/art/{world}/hero/yunseo/candidate.json').read_text(encoding='utf-8'))['assets'][0]
+            def height(f):
+                with Image.open(root / a['atlases'][f['atlas']]['path']) as image:
+                    bounds = self.api.audit_frame(image, f)['bounds']
+                return (bounds[3] - bounds[1]) * f.get('displayHeight', 110) / f['rect'][3]
+            for action in ('attack1', 'attack2', 'attack3'):
+                for facing, frames in a['clips'][action].items():
+                    with self.subTest(world=world, action=action, facing=facing):
+                        ratio = height(frames[-1]) / height(a['clips']['idle'][facing][-1])
+                        self.assertLess(abs(ratio - 1), .06, f'recovery/idle scale ratio {ratio}')
+                        # One scale throughout a clip: never resize each pose independently.
+                        scales = [f.get('displayHeight', 110) / f['rect'][3] for f in frames]
+                        self.assertLess(max(scales) - min(scales), 1e-9)
+
     def test_new_rear_key_poses_have_clear_cell_boundaries(self):
         root = SCRIPT.parents[1]
         manifest = json.loads((root / 'assets/art/scene-candidate.json').read_text(encoding='utf-8'))

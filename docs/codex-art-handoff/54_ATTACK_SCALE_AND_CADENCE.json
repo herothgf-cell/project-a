@@ -1,0 +1,395 @@
+{
+  "scope": "Attack direction scale and walk cadence correction",
+  "method": "Read-only PNG alpha bounds of last recovery pose calibrated to same-facing idle silhouette; one pixel scale per entire clip, including all socket/effect placements. This is silhouette calibration, not anatomy or final animation approval.",
+  "walk": {
+    "oldCycleDistance": 50,
+    "newCycleDistance": 100,
+    "simulationSpeedUnchanged": true
+  },
+  "metrics": [
+    {
+      "world": "reality",
+      "action": "attack1",
+      "facing": "nw",
+      "scale": 0.24526565457796798,
+      "before": 88.53269537480064,
+      "target": 104.72843450479233
+    },
+    {
+      "world": "reality",
+      "action": "attack1",
+      "facing": "sw",
+      "scale": 0.2698275431973524,
+      "before": 100.78947368421052,
+      "target": 103.34394904458598
+    },
+    {
+      "world": "reality",
+      "action": "attack1",
+      "facing": "ne",
+      "scale": 0.22579413248953203,
+      "before": 107.99840510366826,
+      "target": 105.44585987261146
+    },
+    {
+      "world": "reality",
+      "action": "attack1",
+      "facing": "s",
+      "scale": 0.1931615297876339,
+      "before": 104.11483253588517,
+      "target": 105.07987220447285
+    },
+    {
+      "world": "reality",
+      "action": "attack1",
+      "facing": "w",
+      "scale": 0.2715431537087588,
+      "before": 105.50239234449761,
+      "target": 102.64331210191082
+    },
+    {
+      "world": "reality",
+      "action": "attack1",
+      "facing": "n",
+      "scale": 0.26313677011254355,
+      "before": 107.91068580542264,
+      "target": 104.72843450479233
+    },
+    {
+      "world": "reality",
+      "action": "attack1",
+      "facing": "e",
+      "scale": 0.2911233833830302,
+      "before": 109.39393939393939,
+      "target": 105.09554140127389
+    },
+    {
+      "world": "reality",
+      "action": "attack1",
+      "facing": "se",
+      "scale": 0.18899257590732527,
+      "before": 106.41148325358851,
+      "target": 105.07987220447285
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "e",
+      "scale": 0.24786684292753275,
+      "before": 101.4354066985646,
+      "target": 105.09554140127389
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "w",
+      "scale": 0.2343454614198877,
+      "before": 104.7846889952153,
+      "target": 102.64331210191082
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "n",
+      "scale": 0.21286267175770798,
+      "before": 117.70334928229664,
+      "target": 104.72843450479233
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "s",
+      "scale": 0.2356050946288629,
+      "before": 106.69856459330144,
+      "target": 105.07987220447285
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "ne",
+      "scale": 0.21475735208271174,
+      "before": 117.46411483253588,
+      "target": 105.44585987261146
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "nw",
+      "scale": 0.2181842385516507,
+      "before": 114.83253588516746,
+      "target": 104.72843450479233
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "sw",
+      "scale": 0.22613555589624942,
+      "before": 109.33014354066987,
+      "target": 103.34394904458598
+    },
+    {
+      "world": "reality",
+      "action": "attack2",
+      "facing": "se",
+      "scale": 0.22993407484567363,
+      "before": 109.33014354066985,
+      "target": 105.07987220447285
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "e",
+      "scale": 0.21019108280254778,
+      "before": 119.61722488038278,
+      "target": 105.09554140127389
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "w",
+      "scale": 0.20569802024431028,
+      "before": 119.37799043062202,
+      "target": 102.64331210191082
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "n",
+      "scale": 0.26991864563090806,
+      "before": 111.38755980861244,
+      "target": 104.72843450479233
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "s",
+      "scale": 0.2101597444089457,
+      "before": 119.61722488038278,
+      "target": 105.07987220447285
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "ne",
+      "scale": 0.293721058140979,
+      "before": 108.78787878787878,
+      "target": 105.44585987261146
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "nw",
+      "scale": 0.2301723835270161,
+      "before": 108.85167464114835,
+      "target": 104.72843450479233
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "sw",
+      "scale": 0.20877565463552725,
+      "before": 118.42105263157896,
+      "target": 103.34394904458598
+    },
+    {
+      "world": "reality",
+      "action": "attack3",
+      "facing": "se",
+      "scale": 0.19714797786955507,
+      "before": 102.00956937799043,
+      "target": 105.07987220447285
+    },
+    {
+      "world": "murim",
+      "action": "attack1",
+      "facing": "s",
+      "scale": 0.2045582030583128,
+      "before": 91.9298245614035,
+      "target": 107.18849840255591
+    },
+    {
+      "world": "murim",
+      "action": "attack1",
+      "facing": "ne",
+      "scale": 0.2673029885350522,
+      "before": 89.53748006379585,
+      "target": 107.18849840255592
+    },
+    {
+      "world": "murim",
+      "action": "attack1",
+      "facing": "nw",
+      "scale": 0.25067001801856365,
+      "before": 102.97607655502392,
+      "target": 105.78274760383387
+    },
+    {
+      "world": "murim",
+      "action": "attack1",
+      "facing": "sw",
+      "scale": 0.21156549520766774,
+      "before": 87.71929824561404,
+      "target": 105.78274760383387
+    },
+    {
+      "world": "murim",
+      "action": "attack1",
+      "facing": "e",
+      "scale": 0.2520826490698994,
+      "before": 88.74003189792664,
+      "target": 107.89137380191694
+    },
+    {
+      "world": "murim",
+      "action": "attack1",
+      "facing": "n",
+      "scale": 0.2309666978249648,
+      "before": 94.96012759170654,
+      "target": 105.78274760383387
+    },
+    {
+      "world": "murim",
+      "action": "attack1",
+      "facing": "w",
+      "scale": 0.25162603795740657,
+      "before": 86.87400318979266,
+      "target": 105.43130990415335
+    },
+    {
+      "world": "murim",
+      "action": "attack1",
+      "facing": "se",
+      "scale": 0.2036741214057508,
+      "before": 101.05263157894737,
+      "target": 107.53993610223642
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "e",
+      "scale": 0.24190890986976893,
+      "before": 106.69856459330144,
+      "target": 107.89137380191694
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "w",
+      "scale": 0.2390732650887831,
+      "before": 105.50239234449762,
+      "target": 105.43130990415335
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "n",
+      "scale": 0.22317035359458623,
+      "before": 113.39712918660285,
+      "target": 105.78274760383387
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "s",
+      "scale": 0.2256599966369598,
+      "before": 113.63636363636364,
+      "target": 107.18849840255591
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "ne",
+      "scale": 0.2233093716719915,
+      "before": 114.83253588516749,
+      "target": 107.18849840255592
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "nw",
+      "scale": 0.2314720954132032,
+      "before": 109.33014354066987,
+      "target": 105.78274760383387
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "sw",
+      "scale": 0.2203807241746539,
+      "before": 114.83253588516747,
+      "target": 105.78274760383387
+    },
+    {
+      "world": "murim",
+      "action": "attack2",
+      "facing": "se",
+      "scale": 0.23687210595206262,
+      "before": 102.81977671451355,
+      "target": 107.53993610223642
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "e",
+      "scale": 0.2724529641462549,
+      "before": 120,
+      "target": 107.89137380191694
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "w",
+      "scale": 0.2752775715513142,
+      "before": 111.7846889952153,
+      "target": 105.43130990415335
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "n",
+      "scale": 0.21114320879008755,
+      "before": 119.85645933014354,
+      "target": 105.78274760383387
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "s",
+      "scale": 0.1984972192639924,
+      "before": 129.18660287081337,
+      "target": 107.18849840255591
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "ne",
+      "scale": 0.2504404168284017,
+      "before": 102.39234449760765,
+      "target": 107.18849840255592
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "nw",
+      "scale": 0.2404153354632588,
+      "before": 105.26315789473684,
+      "target": 105.78274760383387
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "sw",
+      "scale": 0.19772476187632498,
+      "before": 127.99043062200958,
+      "target": 105.78274760383387
+    },
+    {
+      "world": "murim",
+      "action": "attack3",
+      "facing": "se",
+      "scale": 0.20100922635932042,
+      "before": 102.39234449760765,
+      "target": 107.53993610223642
+    }
+  ]
+}

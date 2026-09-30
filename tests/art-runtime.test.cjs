@@ -2,12 +2,12 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 const file=path.join(__dirname,'../art-runtime.js');
 const load=()=>{assert.ok(fs.existsSync(file),'sprite runtime must exist');return require(file);};
-test('walking animation advances one gait per fifty travelled pixels, not per wall-clock second',()=>{
+test('walking animation advances one gait per hundred travelled pixels, not per wall-clock second',()=>{
  const R=load(),Art=require('../art-loader.js');
  for(const world of ['reality','murim']){
   const catalog=Art.createCatalog(require('../assets/art/'+world+'/hero/yunseo/candidate.json'));
   const frame=stride=>catalog.sample(R.query(world,'hero',{face:0,walking:true,motion:{stride}},999),{preview:true}).frameIndex;
-  assert.equal(frame(0),0);assert.equal(frame(25),3);assert.equal(frame(50),0);
+  assert.equal(frame(0),0);assert.equal(frame(50),3);assert.equal(frame(100),0);
   const e={face:0,walking:true,motion:{stride:25}};
   assert.equal(R.query(world,'hero',e,1).elapsed,R.query(world,'hero',e,900).elapsed);
  }
@@ -15,7 +15,7 @@ test('walking animation advances one gait per fifty travelled pixels, not per wa
 test('sprite queries keep world, entity, facing and the original action clock',()=>{
  const R=load(),e={x:10,y:20,face:Math.PI,walking:true,motion:{stride:43,instance:{actionId:'player-4',action:'attack',combo:2,angle:Math.PI/4,startedAt:2,duration:.3}}};
  const q=R.query('reality','hero',e,2.1);assert.equal(q.world,'reality');assert.equal(q.entityId,'hero');assert.equal(q.action,'attack2');assert.equal(q.facing,'se');assert.ok(Math.abs(q.elapsed-.1)<1e-8);assert.equal(q.loop,false);
- const walking=R.query('murim','hero',e,3);assert.equal(walking.action,'walk');assert.equal(walking.facing,'w');assert.equal(walking.elapsed,43*.72/50);assert.equal(walking.loop,true);
+ const walking=R.query('murim','hero',e,3);assert.equal(walking.action,'walk');assert.equal(walking.facing,'w');assert.equal(walking.elapsed,43*.72/100);assert.equal(walking.loop,true);
  e.walking=false;assert.equal(R.query('murim','master',e,3).action,'idle');
 });
 test('every martial input selects an explicit whole-body action and never an idle substitute',()=>{

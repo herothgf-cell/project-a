@@ -1451,7 +1451,7 @@
                   301
                 ]
               },
-              "displayHeight": 190
+              "displayHeight": 170.82800851970183
             },
             {
               "atlas": "attack3_e_v2",
@@ -1485,7 +1485,7 @@
                   518
                 ]
               },
-              "displayHeight": 190
+              "displayHeight": 170.82800851970183
             },
             {
               "atlas": "attack3_e_v2",
@@ -1519,7 +1519,7 @@
                   441
                 ]
               },
-              "displayHeight": 190
+              "displayHeight": 170.82800851970183
             },
             {
               "atlas": "attack3_e_v2",
@@ -1553,7 +1553,7 @@
                   476
                 ]
               },
-              "displayHeight": 190
+              "displayHeight": 170.82800851970183
             }
           ],
           "w": [
@@ -1589,7 +1589,7 @@
                   298
                 ]
               },
-              "displayHeight": 183
+              "displayHeight": 172.599037362674
             },
             {
               "atlas": "attack3_w_v2",
@@ -1623,7 +1623,7 @@
                   520
                 ]
               },
-              "displayHeight": 183
+              "displayHeight": 172.599037362674
             },
             {
               "atlas": "attack3_w_v2",
@@ -1657,7 +1657,7 @@
                   456
                 ]
               },
-              "displayHeight": 183
+              "displayHeight": 172.599037362674
             },
             {
               "atlas": "attack3_w_v2",
@@ -1691,7 +1691,7 @@
                   471
                 ]
               },
-              "displayHeight": 183
+              "displayHeight": 172.599037362674
             }
           ],
           "n": [
@@ -1727,7 +1727,7 @@
                   309
                 ]
               },
-              "displayHeight": 150
+              "displayHeight": 132.3867919113849
             },
             {
               "atlas": "attack3_n_v2",
@@ -1761,7 +1761,7 @@
                   101
                 ]
               },
-              "displayHeight": 150
+              "displayHeight": 132.3867919113849
             },
             {
               "atlas": "attack3_n_v2",
@@ -1795,7 +1795,7 @@
                   427
                 ]
               },
-              "displayHeight": 150
+              "displayHeight": 132.3867919113849
             },
             {
               "atlas": "attack3_n_v2",
@@ -1829,7 +1829,7 @@
                   464
                 ]
               },
-              "displayHeight": 150
+              "displayHeight": 132.3867919113849
             }
           ],
           "s": [
@@ -1865,7 +1865,7 @@
                   466
                 ]
               },
-              "displayHeight": 152.1531100478469
+              "displayHeight": 126.24423145189918
             },
             {
               "atlas": "attack3_s_v2",
@@ -1899,7 +1899,7 @@
                   423
                 ]
               },
-              "displayHeight": 152.1531100478469
+              "displayHeight": 126.24423145189918
             },
             {
               "atlas": "attack3_s_v2",
@@ -1933,7 +1933,7 @@
                   531
                 ]
               },
-              "displayHeight": 147.8468899521531
+              "displayHeight": 122.6712815051473
             },
             {
               "atlas": "attack3_s_v2",
@@ -1967,7 +1967,7 @@
                   542
                 ]
               },
-              "displayHeight": 147.8468899521531
+              "displayHeight": 122.6712815051473
             }
           ],
           "ne": [
@@ -2003,7 +2003,7 @@
                   252
                 ]
               },
-              "displayHeight": 153.11004784688996
+              "displayHeight": 160.2818667701771
             },
             {
               "atlas": "attack3_ne_v2",
@@ -2037,7 +2037,7 @@
                   485
                 ]
               },
-              "displayHeight": 153.11004784688996
+              "displayHeight": 160.2818667701771
             },
             {
               "atlas": "attack3_ne_v2",
@@ -2071,7 +2071,7 @@
                   433
                 ]
               },
-              "displayHeight": 146.88995215311004
+              "displayHeight": 153.77041593263863
             },
             {
               "atlas": "attack3_ne_v2",
@@ -2105,7 +2105,7 @@
                   115
                 ]
               },
-              "displayHeight": 146.88995215311004
+              "displayHeight": 153.77041593263863
             }
           ],
           "nw": [
@@ -2141,7 +2141,7 @@
                   245
                 ]
               },
-              "displayHeight": 153.11004784688996
+              "displayHeight": 153.86581469648564
             },
             {
               "atlas": "attack3_nw_v2",
@@ -2175,7 +2175,7 @@
                   535
                 ]
               },
-              "displayHeight": 153.11004784688996
+              "displayHeight": 153.86581469648564
             },
             {
               "atlas": "attack3_nw_v2",
@@ -2209,7 +2209,7 @@
                   409
                 ]
               },
-              "displayHeight": 146.88995215311004
+              "displayHeight": 147.6150159744409
             },
             {
               "atlas": "attack3_nw_v2",
@@ -2243,7 +2243,7 @@
                   90
                 ]
               },
-              "displayHeight": 146.88995215311004
+              "displayHeight": 147.6150159744409
             }
           ],
           "sw": [
@@ -2279,7 +2279,7 @@
                   558
                 ]
               },
-              "displayHeight": 150.7177033492823
+              "displayHeight": 124.56659998208474
             },
             {
               "atlas": "attack3_sw_v2",
@@ -2313,7 +2313,7 @@
                   362
                 ]
               },
-              "displayHeight": 150.7177033492823
+              "displayHeight": 124.56659998208474
             },
             {
               "atlas": "attack3_sw_v2",
@@ -2347,7 +2347,7 @@
                   496
                 ]
               },
-              "displayHeight": 149.2822966507177
+              "displayHeight": 123.38025141082679
             },
             {
               "atlas": "attack3_sw_v2",
@@ -2381,7 +2381,7 @@
                   468
                 ]
               },
-              "displayHeight": 149.2822966507177
+              "displayHeight": 123.38025141082679
             }
           ],
           "se": [
@@ -2417,7 +2417,7 @@
                   581
                 ]
               },
-              "displayHeight": 120
+              "displayHeight": 126.0327849272939
             },
             {
               "atlas": "attack3_se",
@@ -2451,7 +2451,7 @@
                   625
                 ]
               },
-              "displayHeight": 121.91387559808612
+              "displayHeight": 128.0428771908871
             },
             {
               "atlas": "attack3_se",
@@ -2485,7 +2485,7 @@
                   430
                 ]
               },
-              "displayHeight": 118.08612440191388
+              "displayHeight": 124.0226926637007
             },
             {
               "atlas": "attack3_se",
@@ -2519,18 +2519,18 @@
                   527
                 ]
               },
-              "displayHeight": 118.08612440191388
+              "displayHeight": 124.0226926637007
             }
           ]
         },
         "attack2": {
-"e": [{"atlas":"attack2_e_v2","rect":[0,0,627,650],"pivot":[0.8452950558213717,0.9292307692307692],"duration":0.06,"contact":true,"sockets":{"foot":[530,604],"hand":[415,281],"blade":[587,133],"effect":[587,133]},"displayHeight":155.5023923444976},{"atlas":"attack2_e_v2","rect":[627,0,627,650],"pivot":[0.8118022328548644,0.9292307692307692],"duration":0.075,"contact":false,"sockets":{"foot":[509,604],"hand":[433,165],"blade":[597,32],"effect":[597,32]},"displayHeight":155.5023923444976},{"atlas":"attack2_e_v2","rect":[0,650,690,604],"pivot":[0.7594202898550725,0.8460264900662252],"duration":0.075,"contact":false,"sockets":{"foot":[524,511],"hand":[478,322],"blade":[687,440],"effect":[687,440]},"displayHeight":144.4976076555024},{"atlas":"attack2_e_v2","rect":[690,650,564,604],"pivot":[0.75,0.8509933774834437],"duration":0.09,"contact":false,"sockets":{"foot":[423,514],"hand":[250,312],"blade":[525,437],"effect":[525,437]},"displayHeight":144.4976076555024}],
-"w": [{"atlas":"attack2_w_v2","rect":[0,0,606,650],"pivot":[0.24257425742574257,0.9538461538461539],"duration":0.06,"contact":true,"sockets":{"foot":[147,620],"hand":[337,340],"blade":[540,171],"effect":[540,171]},"displayHeight":155.5023923444976},{"atlas":"attack2_w_v2","rect":[606,0,648,650],"pivot":[0.18364197530864199,0.9538461538461539],"duration":0.075,"contact":false,"sockets":{"foot":[119,620],"hand":[284,366],"blade":[13,341],"effect":[13,341]},"displayHeight":155.5023923444976},{"atlas":"attack2_w_v2","rect":[0,650,606,604],"pivot":[0.24917491749174916,0.8543046357615894],"duration":0.075,"contact":false,"sockets":{"foot":[151,516],"hand":[259,348],"blade":[434,513],"effect":[434,513]},"displayHeight":144.4976076555024},{"atlas":"attack2_w_v2","rect":[606,650,648,604],"pivot":[0.2330246913580247,0.8559602649006622],"duration":0.09,"contact":false,"sockets":{"foot":[151,517],"hand":[192,337],"blade":[24,480],"effect":[24,480]},"displayHeight":144.4976076555024}],
-"n": [{"atlas":"attack2_n_v2","rect":[0,0,627,670],"pivot":[0.430622009569378,0.9402985074626866],"duration":0.06,"contact":true,"sockets":{"foot":[270,630],"hand":[490,207],"blade":[307,114],"effect":[307,114]},"displayHeight":160.28708133971293},{"atlas":"attack2_n_v2","rect":[627,0,627,670],"pivot":[0.32854864433811803,0.9462686567164179],"duration":0.075,"contact":false,"sockets":{"foot":[206,634],"hand":[443,162],"blade":[572,46],"effect":[572,46]},"displayHeight":160.28708133971293},{"atlas":"attack2_n_v2","rect":[0,670,627,584],"pivot":[0.3588516746411483,0.8784246575342466],"duration":0.075,"contact":false,"sockets":{"foot":[225,513],"hand":[481,295],"blade":[609,394],"effect":[609,394]},"displayHeight":139.71291866028707},{"atlas":"attack2_n_v2","rect":[627,670,627,584],"pivot":[0.34609250398724084,0.8784246575342466],"duration":0.09,"contact":false,"sockets":{"foot":[217,513],"hand":[425,295],"blade":[577,406],"effect":[577,406]},"displayHeight":139.71291866028707}],
-"s": [{"atlas":"attack2_s_v2","rect":[0,0,627,660],"pivot":[0.8149920255183413,0.9333333333333333],"duration":0.06,"contact":true,"sockets":{"foot":[511,616],"hand":[334,350],"blade":[554,192],"effect":[554,192]},"displayHeight":157.89473684210526},{"atlas":"attack2_s_v2","rect":[627,0,627,660],"pivot":[0.8149920255183413,0.9409090909090909],"duration":0.075,"contact":false,"sockets":{"foot":[511,621],"hand":[386,143],"blade":[595,42],"effect":[595,42]},"displayHeight":157.89473684210526},{"atlas":"attack2_s_v2","rect":[0,660,627,594],"pivot":[0.89792663476874,0.8417508417508418],"duration":0.075,"contact":false,"sockets":{"foot":[563,500],"hand":[282,341],"blade":[105,479],"effect":[105,479]},"displayHeight":142.10526315789474},{"atlas":"attack2_s_v2","rect":[627,660,627,594],"pivot":[0.8165869218500797,0.8552188552188552],"duration":0.09,"contact":false,"sockets":{"foot":[512,508],"hand":[250,317],"blade":[430,519],"effect":[430,519]},"displayHeight":142.10526315789474}],
-"ne": [{"atlas":"attack2_ne_v2","rect":[0,0,627,650],"pivot":[0.8325358851674641,0.8784615384615385],"duration":0.06,"contact":true,"sockets":{"foot":[522,571],"hand":[474,235],"blade":[574,94],"effect":[574,94]},"displayHeight":155.5023923444976},{"atlas":"attack2_ne_v2","rect":[627,0,627,650],"pivot":[0.748006379585327,0.88],"duration":0.075,"contact":false,"sockets":{"foot":[469,572],"hand":[439,182],"blade":[594,50],"effect":[594,50]},"displayHeight":155.5023923444976},{"atlas":"attack2_ne_v2","rect":[0,650,690,604],"pivot":[0.755072463768116,0.7301324503311258],"duration":0.075,"contact":false,"sockets":{"foot":[521,441],"hand":[487,328],"blade":[665,473],"effect":[665,473]},"displayHeight":144.4976076555024},{"atlas":"attack2_ne_v2","rect":[690,650,564,604],"pivot":[0.7606382978723404,0.7996688741721855],"duration":0.09,"contact":false,"sockets":{"foot":[429,483],"hand":[372,271],"blade":[545,153],"effect":[545,153]},"displayHeight":144.4976076555024}],
-"nw": [{"atlas":"attack2_nw_v2","rect":[0,0,627,655],"pivot":[0.2886762360446571,0.9206106870229007],"duration":0.06,"contact":true,"sockets":{"foot":[181,603],"hand":[253,218],"blade":[115,80],"effect":[115,80]},"displayHeight":156.69856459330143},{"atlas":"attack2_nw_v2","rect":[627,0,627,655],"pivot":[0.25996810207336524,0.9404580152671755],"duration":0.075,"contact":false,"sockets":{"foot":[163,616],"hand":[274,137],"blade":[120,39],"effect":[120,39]},"displayHeight":156.69856459330143},{"atlas":"attack2_nw_v2","rect":[0,655,730,599],"pivot":[0.2547945205479452,0.8313856427378965],"duration":0.075,"contact":false,"sockets":{"foot":[186,498],"hand":[519,279],"blade":[705,384],"effect":[705,384]},"displayHeight":143.30143540669857},{"atlas":"attack2_nw_v2","rect":[730,655,524,599],"pivot":[0.11068702290076336,0.8530884808013356],"duration":0.09,"contact":false,"sockets":{"foot":[58,511],"hand":[373,325],"blade":[507,411],"effect":[507,411]},"displayHeight":143.30143540669857}],
-"sw": [{"atlas":"attack2_sw_v2","rect":[0,0,627,680],"pivot":[0.2647527910685805,0.9661764705882353],"duration":0.06,"contact":true,"sockets":{"foot":[166,657],"hand":[342,378],"blade":[500,184],"effect":[500,184]},"displayHeight":162.67942583732057},{"atlas":"attack2_sw_v2","rect":[627,0,627,680],"pivot":[0.2025518341307815,0.9661764705882353],"duration":0.075,"contact":false,"sockets":{"foot":[127,657],"hand":[317,410],"blade":[33,414],"effect":[33,414]},"displayHeight":162.67942583732057},{"atlas":"attack2_sw_v2","rect":[0,680,627,574],"pivot":[0.2807017543859649,0.8466898954703833],"duration":0.075,"contact":false,"sockets":{"foot":[176,486],"hand":[342,287],"blade":[126,467],"effect":[126,467]},"displayHeight":137.32057416267943},{"atlas":"attack2_sw_v2","rect":[627,680,627,574],"pivot":[0.2535885167464115,0.8536585365853658],"duration":0.09,"contact":false,"sockets":{"foot":[159,490],"hand":[263,286],"blade":[451,461],"effect":[451,461]},"displayHeight":137.32057416267943}],
+"e": [{"atlas":"attack2_e_v2","rect":[0,0,627,650],"pivot":[0.8452950558213717,0.9292307692307692],"duration":0.06,"contact":true,"sockets":{"foot":[530,604],"hand":[415,281],"blade":[587,133],"effect":[587,133]},"displayHeight":157.2407914153498},{"atlas":"attack2_e_v2","rect":[627,0,627,650],"pivot":[0.8118022328548644,0.9292307692307692],"duration":0.075,"contact":false,"sockets":{"foot":[509,604],"hand":[433,165],"blade":[597,32],"effect":[597,32]},"displayHeight":157.2407914153498},{"atlas":"attack2_e_v2","rect":[0,650,690,604],"pivot":[0.7594202898550725,0.8460264900662252],"duration":0.075,"contact":false,"sockets":{"foot":[524,511],"hand":[478,322],"blade":[687,440],"effect":[687,440]},"displayHeight":146.11298156134043},{"atlas":"attack2_e_v2","rect":[690,650,564,604],"pivot":[0.75,0.8509933774834437],"duration":0.09,"contact":false,"sockets":{"foot":[423,514],"hand":[250,312],"blade":[525,437],"effect":[525,437]},"displayHeight":146.11298156134043}],
+"w": [{"atlas":"attack2_w_v2","rect":[0,0,606,650],"pivot":[0.24257425742574257,0.9538461538461539],"duration":0.06,"contact":true,"sockets":{"foot":[147,620],"hand":[337,340],"blade":[540,171],"effect":[540,171]},"displayHeight":155.397622307709},{"atlas":"attack2_w_v2","rect":[606,0,648,650],"pivot":[0.18364197530864199,0.9538461538461539],"duration":0.075,"contact":false,"sockets":{"foot":[119,620],"hand":[284,366],"blade":[13,341],"effect":[13,341]},"displayHeight":155.397622307709},{"atlas":"attack2_w_v2","rect":[0,650,606,604],"pivot":[0.24917491749174916,0.8543046357615894],"duration":0.075,"contact":false,"sockets":{"foot":[151,516],"hand":[259,348],"blade":[434,513],"effect":[434,513]},"displayHeight":144.400252113625},{"atlas":"attack2_w_v2","rect":[606,650,648,604],"pivot":[0.2330246913580247,0.8559602649006622],"duration":0.09,"contact":false,"sockets":{"foot":[151,517],"hand":[192,337],"blade":[24,480],"effect":[24,480]},"displayHeight":144.400252113625}],
+"n": [{"atlas":"attack2_n_v2","rect":[0,0,627,670],"pivot":[0.430622009569378,0.9402985074626866],"duration":0.06,"contact":true,"sockets":{"foot":[270,630],"hand":[490,207],"blade":[307,114],"effect":[307,114]},"displayHeight":149.52413690837278},{"atlas":"attack2_n_v2","rect":[627,0,627,670],"pivot":[0.32854864433811803,0.9462686567164179],"duration":0.075,"contact":false,"sockets":{"foot":[206,634],"hand":[443,162],"blade":[572,46],"effect":[572,46]},"displayHeight":149.52413690837278},{"atlas":"attack2_n_v2","rect":[0,670,627,584],"pivot":[0.3588516746411483,0.8784246575342466],"duration":0.075,"contact":false,"sockets":{"foot":[225,513],"hand":[481,295],"blade":[609,394],"effect":[609,394]},"displayHeight":130.33148649923837},{"atlas":"attack2_n_v2","rect":[627,670,627,584],"pivot":[0.34609250398724084,0.8784246575342466],"duration":0.09,"contact":false,"sockets":{"foot":[217,513],"hand":[425,295],"blade":[577,406],"effect":[577,406]},"displayHeight":130.33148649923837}],
+"s": [{"atlas":"attack2_s_v2","rect":[0,0,627,660],"pivot":[0.8149920255183413,0.9333333333333333],"duration":0.06,"contact":true,"sockets":{"foot":[511,616],"hand":[334,350],"blade":[554,192],"effect":[554,192]},"displayHeight":148.93559778039346},{"atlas":"attack2_s_v2","rect":[627,0,627,660],"pivot":[0.8149920255183413,0.9409090909090909],"duration":0.075,"contact":false,"sockets":{"foot":[511,621],"hand":[386,143],"blade":[595,42],"effect":[595,42]},"displayHeight":148.93559778039346},{"atlas":"attack2_s_v2","rect":[0,660,627,594],"pivot":[0.89792663476874,0.8417508417508418],"duration":0.075,"contact":false,"sockets":{"foot":[563,500],"hand":[282,341],"blade":[105,479],"effect":[105,479]},"displayHeight":134.0420380023541},{"atlas":"attack2_s_v2","rect":[627,660,627,594],"pivot":[0.8165869218500797,0.8552188552188552],"duration":0.09,"contact":false,"sockets":{"foot":[512,508],"hand":[250,317],"blade":[430,519],"effect":[430,519]},"displayHeight":134.0420380023541}],
+"ne": [{"atlas":"attack2_ne_v2","rect":[0,0,627,650],"pivot":[0.8325358851674641,0.8784615384615385],"duration":0.06,"contact":true,"sockets":{"foot":[522,571],"hand":[474,235],"blade":[574,94],"effect":[574,94]},"displayHeight":145.15109158679448},{"atlas":"attack2_ne_v2","rect":[627,0,627,650],"pivot":[0.748006379585327,0.88],"duration":0.075,"contact":false,"sockets":{"foot":[469,572],"hand":[439,182],"blade":[594,50],"effect":[594,50]},"displayHeight":145.15109158679448},{"atlas":"attack2_ne_v2","rect":[0,650,690,604],"pivot":[0.755072463768116,0.7301324503311258],"duration":0.075,"contact":false,"sockets":{"foot":[521,441],"hand":[487,328],"blade":[665,473],"effect":[665,473]},"displayHeight":134.87886048988287},{"atlas":"attack2_ne_v2","rect":[690,650,564,604],"pivot":[0.7606382978723404,0.7996688741721855],"duration":0.09,"contact":false,"sockets":{"foot":[429,483],"hand":[372,271],"blade":[545,153],"effect":[545,153]},"displayHeight":134.87886048988287}],
+"nw": [{"atlas":"attack2_nw_v2","rect":[0,0,627,655],"pivot":[0.2886762360446571,0.9206106870229007],"duration":0.06,"contact":true,"sockets":{"foot":[181,603],"hand":[253,218],"blade":[115,80],"effect":[115,80]},"displayHeight":151.6142224956481},{"atlas":"attack2_nw_v2","rect":[627,0,627,655],"pivot":[0.25996810207336524,0.9404580152671755],"duration":0.075,"contact":false,"sockets":{"foot":[163,616],"hand":[274,137],"blade":[120,39],"effect":[120,39]},"displayHeight":151.6142224956481},{"atlas":"attack2_nw_v2","rect":[0,655,730,599],"pivot":[0.2547945205479452,0.8313856427378965],"duration":0.075,"contact":false,"sockets":{"foot":[186,498],"hand":[519,279],"blade":[705,384],"effect":[705,384]},"displayHeight":138.65178515250872},{"atlas":"attack2_nw_v2","rect":[730,655,524,599],"pivot":[0.11068702290076336,0.8530884808013356],"duration":0.09,"contact":false,"sockets":{"foot":[58,511],"hand":[373,325],"blade":[507,411],"effect":[507,411]},"displayHeight":138.65178515250872}],
+"sw": [{"atlas":"attack2_sw_v2","rect":[0,0,627,680],"pivot":[0.2647527910685805,0.9661764705882353],"duration":0.06,"contact":true,"sockets":{"foot":[166,657],"hand":[342,378],"blade":[500,184],"effect":[500,184]},"displayHeight":149.85889243876466},{"atlas":"attack2_sw_v2","rect":[627,0,627,680],"pivot":[0.2025518341307815,0.9661764705882353],"duration":0.075,"contact":false,"sockets":{"foot":[127,657],"hand":[317,410],"blade":[33,414],"effect":[33,414]},"displayHeight":149.85889243876466},{"atlas":"attack2_sw_v2","rect":[0,680,627,574],"pivot":[0.2807017543859649,0.8466898954703833],"duration":0.075,"contact":false,"sockets":{"foot":[176,486],"hand":[342,287],"blade":[126,467],"effect":[126,467]},"displayHeight":126.49853567625134},{"atlas":"attack2_sw_v2","rect":[627,680,627,574],"pivot":[0.2535885167464115,0.8536585365853658],"duration":0.09,"contact":false,"sockets":{"foot":[159,490],"hand":[263,286],"blade":[451,461],"effect":[451,461]},"displayHeight":126.49853567625134}],
           "se": [
             {
               "atlas": "attack2_se",
@@ -2564,7 +2564,7 @@
                   195
                 ]
               },
-              "displayHeight": 142
+              "displayHeight": 148.51881043194325
             },
             {
               "atlas": "attack2_se",
@@ -2598,7 +2598,7 @@
                   116
                 ]
               },
-              "displayHeight": 142
+              "displayHeight": 148.51881043194325
             },
             {
               "atlas": "attack2_se",
@@ -2632,7 +2632,7 @@
                   419
                 ]
               },
-              "displayHeight": 142
+              "displayHeight": 148.51881043194325
             },
             {
               "atlas": "attack2_se",
@@ -2666,7 +2666,7 @@
                   508
                 ]
               },
-              "displayHeight": 142
+              "displayHeight": 148.51881043194325
             }
           ]
         },
@@ -3829,13 +3829,13 @@
           ]
         },
         "attack1": {
-          "s": [{"atlas":"attack1_s_v2","rect":[0,0,627,627],"pivot":[0.7192982456140351,0.8899521531100478],"duration":0.075,"contact":true,"sockets":{"foot":[451,558],"hand":[324,377],"blade":[176,581],"effect":[176,581]},"displayHeight":110},{"atlas":"attack1_s_v2","rect":[627,0,627,627],"pivot":[0.6044657097288676,0.9314194577352473],"duration":0.075,"contact":false,"sockets":{"foot":[379,584],"hand":[343,321],"blade":[598,406],"effect":[598,406]},"displayHeight":110},{"atlas":"attack1_s_v2","rect":[0,627,627,627],"pivot":[0.7464114832535885,0.8532695374800638],"duration":0.075,"contact":false,"sockets":{"foot":[468,535],"hand":[228,195],"blade":[155,33],"effect":[155,33]},"displayHeight":110},{"atlas":"attack1_s_v2","rect":[627,627,627,627],"pivot":[0.6746411483253588,0.8261562998405104],"duration":0.075,"contact":false,"sockets":{"foot":[423,518],"hand":[267,319],"blade":[326,564],"effect":[326,564]},"displayHeight":110}],
-          "ne": [{"atlas":"attack1_ne_v2","rect":[0,0,627,627],"pivot":[0.2711323763955343,0.9585326953748007],"duration":0.075,"contact":true,"sockets":{"foot":[170,601],"hand":[449,225],"blade":[578,91],"effect":[578,91]},"displayHeight":140},{"atlas":"attack1_ne_v2","rect":[627,0,627,627],"pivot":[0.20574162679425836,0.9617224880382775],"duration":0.075,"contact":false,"sockets":{"foot":[129,603],"hand":[402,303],"blade":[567,263],"effect":[567,263]},"displayHeight":140},{"atlas":"attack1_ne_v2","rect":[0,627,627,627],"pivot":[0.33811802232854865,0.8771929824561403],"duration":0.075,"contact":false,"sockets":{"foot":[212,550],"hand":[448,347],"blade":[585,410],"effect":[585,410]},"displayHeight":140},{"atlas":"attack1_ne_v2","rect":[627,627,627,627],"pivot":[0.30462519936204147,0.8819776714513556],"duration":0.075,"contact":false,"sockets":{"foot":[191,553],"hand":[425,301],"blade":[541,177],"effect":[541,177]},"displayHeight":140}],
-          "nw": [{"atlas":"attack1_nw_v3","rect":[0,0,627,627],"pivot":[0.7894736842105263,0.9059011164274322],"duration":0.075,"contact":true,"sockets":{"foot":[495,568],"hand":[242,213],"blade":[106,109],"effect":[106,109]},"displayHeight":153},{"atlas":"attack1_nw_v3","rect":[627,0,627,627],"pivot":[0.773524720893142,0.9090909090909091],"duration":0.075,"contact":false,"sockets":{"foot":[485,570],"hand":[222,379],"blade":[54,494],"effect":[54,494]},"displayHeight":153},{"atlas":"attack1_nw_v3","rect":[0,627,627,627],"pivot":[0.7256778309409888,0.8389154704944178],"duration":0.075,"contact":false,"sockets":{"foot":[455,526],"hand":[422,210],"blade":[276,157],"effect":[276,157]},"displayHeight":153},{"atlas":"attack1_nw_v3","rect":[627,627,627,627],"pivot":[0.7384370015948963,0.8341307814992025],"duration":0.075,"contact":false,"sockets":{"foot":[463,523],"hand":[247,220],"blade":[177,110],"effect":[177,110]},"displayHeight":153}],
-          "sw": [{"atlas":"attack1_sw_v2","rect":[0,0,627,627],"pivot":[0.38596491228070173,0.9298245614035088],"duration":0.075,"contact":true,"sockets":{"foot":[242,583],"hand":[217,378],"blade":[64,552],"effect":[64,552]},"displayHeight":110},{"atlas":"attack1_sw_v2","rect":[627,0,627,627],"pivot":[0.2822966507177033,0.9298245614035088],"duration":0.075,"contact":false,"sockets":{"foot":[177,583],"hand":[332,270],"blade":[75,350],"effect":[75,350]},"displayHeight":110},{"atlas":"attack1_sw_v2","rect":[0,627,627,627],"pivot":[0.3141945773524721,0.8899521531100478],"duration":0.075,"contact":false,"sockets":{"foot":[197,558],"hand":[231,122],"blade":[430,37],"effect":[430,37]},"displayHeight":110},{"atlas":"attack1_sw_v2","rect":[627,627,627,627],"pivot":[0.28708133971291866,0.8899521531100478],"duration":0.075,"contact":false,"sockets":{"foot":[180,558],"hand":[299,342],"blade":[59,474],"effect":[59,474]},"displayHeight":110}],
-          "e": [{"atlas":"attack1_e_v3","rect":[0,0,627,627],"pivot":[0.189792663476874,0.9266347687400319],"duration":0.075,"contact":true,"sockets":{"foot":[119,581],"hand":[417,216],"blade":[546,76],"effect":[546,76]},"displayHeight":130},{"atlas":"attack1_e_v3","rect":[627,0,627,627],"pivot":[0.16427432216905902,0.9266347687400319],"duration":0.075,"contact":false,"sockets":{"foot":[103,581],"hand":[355,384],"blade":[550,477],"effect":[550,477]},"displayHeight":130},{"atlas":"attack1_e_v3","rect":[0,627,627,627],"pivot":[0.26953748006379585,0.8771929824561403],"duration":0.075,"contact":false,"sockets":{"foot":[169,550],"hand":[326,332],"blade":[552,342],"effect":[552,342]},"displayHeight":130},{"atlas":"attack1_e_v3","rect":[627,627,627,627],"pivot":[0.2934609250398724,0.8787878787878788],"duration":0.075,"contact":false,"sockets":{"foot":[184,551],"hand":[304,355],"blade":[517,458],"effect":[517,458]},"displayHeight":130}],
-          "n": [{"atlas":"attack1_n_v2","rect":[0,0,627,627],"pivot":[0.291866028708134,0.94896331738437],"duration":0.075,"contact":true,"sockets":{"foot":[183,595],"hand":[459,196],"blade":[585,64],"effect":[585,64]},"displayHeight":130},{"atlas":"attack1_n_v2","rect":[627,0,627,627],"pivot":[0.2025518341307815,0.94896331738437],"duration":0.075,"contact":false,"sockets":{"foot":[127,595],"hand":[431,323],"blade":[587,357],"effect":[587,357]},"displayHeight":130},{"atlas":"attack1_n_v2","rect":[0,627,627,627],"pivot":[0.33014354066985646,0.8787878787878788],"duration":0.075,"contact":false,"sockets":{"foot":[207,551],"hand":[416,153],"blade":[255,57],"effect":[255,57]},"displayHeight":130},{"atlas":"attack1_n_v2","rect":[627,627,627,627],"pivot":[0.30462519936204147,0.8787878787878788],"duration":0.075,"contact":false,"sockets":{"foot":[191,551],"hand":[414,334],"blade":[577,429],"effect":[577,429]},"displayHeight":130}],
-          "w": [{"atlas":"attack1_w_v2","rect":[0,0,590,627],"pivot":[0.8898305084745762,0.9250398724082934],"duration":0.075,"contact":true,"sockets":{"foot":[525,580],"hand":[195,216],"blade":[62,86],"effect":[62,86]},"displayHeight":130},{"atlas":"attack1_w_v2","rect":[590,0,664,627],"pivot":[0.7725903614457831,0.9250398724082934],"duration":0.075,"contact":false,"sockets":{"foot":[513,580],"hand":[210,387],"blade":[25,491],"effect":[25,491]},"displayHeight":130},{"atlas":"attack1_w_v2","rect":[0,627,590,627],"pivot":[0.8491525423728814,0.8692185007974481],"duration":0.075,"contact":false,"sockets":{"foot":[501,545],"hand":[308,323],"blade":[113,326],"effect":[113,326]},"displayHeight":130},{"atlas":"attack1_w_v2","rect":[590,627,664,627],"pivot":[0.7680722891566265,0.8660287081339713],"duration":0.075,"contact":false,"sockets":{"foot":[510,543],"hand":[299,305],"blade":[144,196],"effect":[144,196]},"displayHeight":130}],
+          "s": [{"atlas":"attack1_s_v2","rect":[0,0,627,627],"pivot":[0.7192982456140351,0.8899521531100478],"duration":0.075,"contact":true,"sockets":{"foot":[451,558],"hand":[324,377],"blade":[176,581],"effect":[176,581]},"displayHeight":128.25799331756212},{"atlas":"attack1_s_v2","rect":[627,0,627,627],"pivot":[0.6044657097288676,0.9314194577352473],"duration":0.075,"contact":false,"sockets":{"foot":[379,584],"hand":[343,321],"blade":[598,406],"effect":[598,406]},"displayHeight":128.25799331756212},{"atlas":"attack1_s_v2","rect":[0,627,627,627],"pivot":[0.7464114832535885,0.8532695374800638],"duration":0.075,"contact":false,"sockets":{"foot":[468,535],"hand":[228,195],"blade":[155,33],"effect":[155,33]},"displayHeight":128.25799331756212},{"atlas":"attack1_s_v2","rect":[627,627,627,627],"pivot":[0.6746411483253588,0.8261562998405104],"duration":0.075,"contact":false,"sockets":{"foot":[423,518],"hand":[267,319],"blade":[326,564],"effect":[326,564]},"displayHeight":128.25799331756212}],
+          "ne": [{"atlas":"attack1_ne_v2","rect":[0,0,627,627],"pivot":[0.2711323763955343,0.9585326953748007],"duration":0.075,"contact":true,"sockets":{"foot":[170,601],"hand":[449,225],"blade":[578,91],"effect":[578,91]},"displayHeight":167.59897381147772},{"atlas":"attack1_ne_v2","rect":[627,0,627,627],"pivot":[0.20574162679425836,0.9617224880382775],"duration":0.075,"contact":false,"sockets":{"foot":[129,603],"hand":[402,303],"blade":[567,263],"effect":[567,263]},"displayHeight":167.59897381147772},{"atlas":"attack1_ne_v2","rect":[0,627,627,627],"pivot":[0.33811802232854865,0.8771929824561403],"duration":0.075,"contact":false,"sockets":{"foot":[212,550],"hand":[448,347],"blade":[585,410],"effect":[585,410]},"displayHeight":167.59897381147772},{"atlas":"attack1_ne_v2","rect":[627,627,627,627],"pivot":[0.30462519936204147,0.8819776714513556],"duration":0.075,"contact":false,"sockets":{"foot":[191,553],"hand":[425,301],"blade":[541,177],"effect":[541,177]},"displayHeight":167.59897381147772}],
+          "nw": [{"atlas":"attack1_nw_v3","rect":[0,0,627,627],"pivot":[0.7894736842105263,0.9059011164274322],"duration":0.075,"contact":true,"sockets":{"foot":[495,568],"hand":[242,213],"blade":[106,109],"effect":[106,109]},"displayHeight":157.1701012976394},{"atlas":"attack1_nw_v3","rect":[627,0,627,627],"pivot":[0.773524720893142,0.9090909090909091],"duration":0.075,"contact":false,"sockets":{"foot":[485,570],"hand":[222,379],"blade":[54,494],"effect":[54,494]},"displayHeight":157.1701012976394},{"atlas":"attack1_nw_v3","rect":[0,627,627,627],"pivot":[0.7256778309409888,0.8389154704944178],"duration":0.075,"contact":false,"sockets":{"foot":[455,526],"hand":[422,210],"blade":[276,157],"effect":[276,157]},"displayHeight":157.1701012976394},{"atlas":"attack1_nw_v3","rect":[627,627,627,627],"pivot":[0.7384370015948963,0.8341307814992025],"duration":0.075,"contact":false,"sockets":{"foot":[463,523],"hand":[247,220],"blade":[177,110],"effect":[177,110]},"displayHeight":157.1701012976394}],
+          "sw": [{"atlas":"attack1_sw_v2","rect":[0,0,627,627],"pivot":[0.38596491228070173,0.9298245614035088],"duration":0.075,"contact":true,"sockets":{"foot":[242,583],"hand":[217,378],"blade":[64,552],"effect":[64,552]},"displayHeight":132.65156549520768},{"atlas":"attack1_sw_v2","rect":[627,0,627,627],"pivot":[0.2822966507177033,0.9298245614035088],"duration":0.075,"contact":false,"sockets":{"foot":[177,583],"hand":[332,270],"blade":[75,350],"effect":[75,350]},"displayHeight":132.65156549520768},{"atlas":"attack1_sw_v2","rect":[0,627,627,627],"pivot":[0.3141945773524721,0.8899521531100478],"duration":0.075,"contact":false,"sockets":{"foot":[197,558],"hand":[231,122],"blade":[430,37],"effect":[430,37]},"displayHeight":132.65156549520768},{"atlas":"attack1_sw_v2","rect":[627,627,627,627],"pivot":[0.28708133971291866,0.8899521531100478],"duration":0.075,"contact":false,"sockets":{"foot":[180,558],"hand":[299,342],"blade":[59,474],"effect":[59,474]},"displayHeight":132.65156549520768}],
+          "e": [{"atlas":"attack1_e_v3","rect":[0,0,627,627],"pivot":[0.189792663476874,0.9266347687400319],"duration":0.075,"contact":true,"sockets":{"foot":[119,581],"hand":[417,216],"blade":[546,76],"effect":[546,76]},"displayHeight":158.05582096682693},{"atlas":"attack1_e_v3","rect":[627,0,627,627],"pivot":[0.16427432216905902,0.9266347687400319],"duration":0.075,"contact":false,"sockets":{"foot":[103,581],"hand":[355,384],"blade":[550,477],"effect":[550,477]},"displayHeight":158.05582096682693},{"atlas":"attack1_e_v3","rect":[0,627,627,627],"pivot":[0.26953748006379585,0.8771929824561403],"duration":0.075,"contact":false,"sockets":{"foot":[169,550],"hand":[326,332],"blade":[552,342],"effect":[552,342]},"displayHeight":158.05582096682693},{"atlas":"attack1_e_v3","rect":[627,627,627,627],"pivot":[0.2934609250398724,0.8787878787878788],"duration":0.075,"contact":false,"sockets":{"foot":[184,551],"hand":[304,355],"blade":[517,458],"effect":[517,458]},"displayHeight":158.05582096682693}],
+          "n": [{"atlas":"attack1_n_v2","rect":[0,0,627,627],"pivot":[0.291866028708134,0.94896331738437],"duration":0.075,"contact":true,"sockets":{"foot":[183,595],"hand":[459,196],"blade":[585,64],"effect":[585,64]},"displayHeight":144.81611953625293},{"atlas":"attack1_n_v2","rect":[627,0,627,627],"pivot":[0.2025518341307815,0.94896331738437],"duration":0.075,"contact":false,"sockets":{"foot":[127,595],"hand":[431,323],"blade":[587,357],"effect":[587,357]},"displayHeight":144.81611953625293},{"atlas":"attack1_n_v2","rect":[0,627,627,627],"pivot":[0.33014354066985646,0.8787878787878788],"duration":0.075,"contact":false,"sockets":{"foot":[207,551],"hand":[416,153],"blade":[255,57],"effect":[255,57]},"displayHeight":144.81611953625293},{"atlas":"attack1_n_v2","rect":[627,627,627,627],"pivot":[0.30462519936204147,0.8787878787878788],"duration":0.075,"contact":false,"sockets":{"foot":[191,551],"hand":[414,334],"blade":[577,429],"effect":[577,429]},"displayHeight":144.81611953625293}],
+          "w": [{"atlas":"attack1_w_v2","rect":[0,0,590,627],"pivot":[0.8898305084745762,0.9250398724082934],"duration":0.075,"contact":true,"sockets":{"foot":[525,580],"hand":[195,216],"blade":[62,86],"effect":[62,86]},"displayHeight":157.76952579929392},{"atlas":"attack1_w_v2","rect":[590,0,664,627],"pivot":[0.7725903614457831,0.9250398724082934],"duration":0.075,"contact":false,"sockets":{"foot":[513,580],"hand":[210,387],"blade":[25,491],"effect":[25,491]},"displayHeight":157.76952579929392},{"atlas":"attack1_w_v2","rect":[0,627,590,627],"pivot":[0.8491525423728814,0.8692185007974481],"duration":0.075,"contact":false,"sockets":{"foot":[501,545],"hand":[308,323],"blade":[113,326],"effect":[113,326]},"displayHeight":157.76952579929392},{"atlas":"attack1_w_v2","rect":[590,627,664,627],"pivot":[0.7680722891566265,0.8660287081339713],"duration":0.075,"contact":false,"sockets":{"foot":[510,543],"hand":[299,305],"blade":[144,196],"effect":[144,196]},"displayHeight":157.76952579929392}],
           "se": [
             {
               "atlas": "attack1_se",
@@ -3869,7 +3869,7 @@
                   390
                 ]
               },
-              "displayHeight": 120
+              "displayHeight": 127.70367412140575
             },
             {
               "atlas": "attack1_se",
@@ -3903,7 +3903,7 @@
                   326
                 ]
               },
-              "displayHeight": 120
+              "displayHeight": 127.70367412140575
             },
             {
               "atlas": "attack1_se",
@@ -3937,7 +3937,7 @@
                   457
                 ]
               },
-              "displayHeight": 120
+              "displayHeight": 127.70367412140575
             },
             {
               "atlas": "attack1_se",
@@ -3971,7 +3971,7 @@
                   554
                 ]
               },
-              "displayHeight": 120
+              "displayHeight": 127.70367412140575
             }
           ]
         }

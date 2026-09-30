@@ -16,9 +16,9 @@
   else if(action==='seal'||action==='ultimate-seal')action='cast';
   else if(action==='ripple')action=a.input==='signature2'?'attack2':'cast';
   else if(action==='echo')action=a.input==='signature2'?'attack1':'dodge';
-  // Six .12s source poses describe one 50px gait, matching the original
-  // presentation stride. Travel, not simulation speed or wall time, drives it.
-  return {world,entityId,action,semanticAction,facing,elapsed:active?time-a.startedAt:e.walking?(m.stride||0)*.72/50:time,loop:!active};
+  // One gait per 100px of actual travel. Slower leg cadence does not change
+  // movement speed, collision, attack clocks, or animate walking at a wall.
+  return {world,entityId,action,semanticAction,facing,elapsed:active?time-a.startedAt:e.walking?(m.stride||0)*.72/100:time,loop:!active};
  }
  function placement(visual,e,height){
   const f=visual.frame,r=f.rect,p=f.pivot,scale=height/r[3],w=r[2]*scale,x=e.x-w*(f.flipX?1-p[0]:p[0]),y=e.y-height*p[1],sockets={};
