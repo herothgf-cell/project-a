@@ -1,6 +1,7 @@
 """Chromium offline-document UI checks. Local assets are inlined because browser HTTP navigation is administrator-blocked. Storage shim checks app logic, NOT real browser disk persistence. Test instrumentation never ships."""
 import argparse, json, os, re, subprocess, time
 from pathlib import Path
+from legacy_browser_compat import finish_intro
 from playwright.sync_api import sync_playwright, expect
 ROOT=Path(__file__).resolve().parents[1]
 INSTRUMENT="""(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api},set(v){api=v;for(const k of ['save','step']){const original=api.Game.prototype[k];api.Game.prototype[k]=function(...args){window.__game=this;return original.apply(this,args)}}}})})();"""
@@ -50,7 +51,7 @@ def main():
             context.add_init_script(INSTRUMENT);page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)));page.on('console',lambda m:errors.append(m.text) if m.type=='error' else None)
             load(page);page.screenshot(path=str(out/'title.png'));page.locator('#start').click();expect(page.locator('#dialog')).to_be_visible(timeout=1500)
             if args.red: print('unexpected RED pass');return
-            page.locator('#dialogActions button').first.click();expect(page.locator('#dialog')).not_to_be_visible();expect(page.locator('#canvas')).to_be_visible();expect(page.locator('#title')).not_to_be_visible()
+            finish_intro(page);expect(page.locator('#dialog')).not_to_be_visible();expect(page.locator('#canvas')).to_be_visible();expect(page.locator('#title')).not_to_be_visible()
             page.wait_for_timeout(100);x=page.evaluate('__game.player.x');page.keyboard.down('KeyD');page.wait_for_function('(x)=>__game.player.x>x+30',arg=x,timeout=2500);page.keyboard.up('KeyD');assert page.evaluate('__game.player.x')>x+30, {'start':x,'end':page.evaluate('__game.player.x'),'errors':errors,'dialog':page.locator('#dialog').inner_text() if page.locator('#dialog').is_visible() else '', 'player':page.evaluate('__game.player')}
             assert 'undefined' not in page.locator('#objective').inner_text();assert not errors,errors;results.append('new journey, intro close, visible canvas and keyboard movement')
             page.screenshot(path=str(out/'desktop-city.png'))
@@ -73,7 +74,7 @@ def main():
             reload_page(page);page.locator('#continue').click();page.wait_for_timeout(150);assert page.evaluate('__game.progress')==6;assert page.evaluate('__game.gold')==135;assert page.evaluate('__game.area')=='city';results.append('retreat and v1 saved-game migration/continue')
             for width,height in [(390,844),(360,640),(844,390)]:
                 mobile=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=2,is_mobile=True,has_touch=True)
-                mobile.add_init_script(INSTRUMENT);m=mobile.new_page();me=[];m.on('pageerror',lambda e:me.append(str(e)));m.on('console',lambda x:me.append(x.text) if x.type=='error' else None);load(m);m.locator('#start').click();m.locator('#dialogActions button').first.click();m.wait_for_timeout(150)
+                mobile.add_init_script(INSTRUMENT);m=mobile.new_page();me=[];m.on('pageerror',lambda e:me.append(str(e)));m.on('console',lambda x:me.append(x.text) if x.type=='error' else None);load(m);m.locator('#start').click();finish_intro(m);m.wait_for_timeout(150)
                 cb=m.locator('#canvas').bounding_box();assert cb['height']>200;assert cb['y']+cb['height']<=height+1
                 sb=m.locator('#stick').bounding_box();ab=m.locator('[data-action=attack]').bounding_box();assert sb and ab
                 cdp=mobile.new_cdp_session(m)

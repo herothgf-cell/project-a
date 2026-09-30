@@ -11,11 +11,26 @@
   const assets=[];
   const sceneResponse=await fetch('assets/art/scene-candidate.json',{cache:'no-cache'});if(!sceneResponse.ok)throw Error('Missing scene review catalog');assets.push(...(await sceneResponse.json()).assets);
   for(const world of ['reality','murim']){
-   const response=await fetch('assets/art/'+world+'/hero/yunseo/candidate.json',{cache:'no-cache'});if(!response.ok)throw Error('Missing '+world+' review catalog');
+   const response=await fetch('assets/art/'+world+'/hero/yunseo/runtime.json',{cache:'no-cache'});if(!response.ok)throw Error('Missing '+world+' runtime catalog');
    assets.push(...(await response.json()).assets);
   }
   const sourceCatalog=ProductionArt.createCatalog(ProductionArt.prototypeProfile({schemaVersion:1,required:[],assets}));
   const catalog=ProductionArt.createContinuityCatalog(sourceCatalog,images);
+  let preparedWorld=null,preparingWorld=null,preparation=null,failedWorld=null;
+  state.ensureWorld=function(world){
+   state.targetWorld=world;
+   if(preparingWorld||failedWorld===world)return false;
+   if(preparedWorld===world)return true;
+   preparingWorld=world;state.targetWorld=world;state.ready=false;state.error=null;document.documentElement.setAttribute('data-art-loading','');
+   const hero=sourceCatalog.manifest.assets.find(a=>a.world===world&&a.entityId==='hero');
+   const sheets=hero?[hero.atlas,...Object.values(hero.atlases||{})]:[];
+   preparation=images.prepare(sheets.map(atlas=>({status:'candidate',atlas}))).then(result=>{
+    preparingWorld=null;if(!result.ok){failedWorld=world;state.error=result.reason;retry.hidden=false;return false;}
+    preparedWorld=world;state.ready=true;state.world=world;document.documentElement.removeAttribute('data-art-loading');dispatchEvent(new Event('art-controls-ready'));return true;
+   });return false;
+  };
+  state.prepare=world=>{state.ensureWorld(world);return preparation||Promise.resolve(true);};
+  retry.onclick=()=>{images.retryFailures();retry.hidden=true;const world=state.targetWorld||'reality';preparedWorld=null;failedWorld=null;state.ensureWorld(world);dispatchEvent(new Event('wuxia-assets-ready'));};
   const badge=document.createElement('div');badge.id='artPreviewBadge';badge.textContent='제작 검수 · 양 세계 주인공 동작 8방향 후보 · 시각·지역 검수 진행 중 · 미배포';
   if(globalThis.SSANGGYE_PROTOTYPE)badge.textContent='프로토타입 · 후보 아트 / 일부 방향·지역은 간소화 표현 · 최종 아트 검수 미완료';
   badge.style.cssText='position:fixed;bottom:23px;left:10px;z-index:200;background:#152432e8;color:#ffe1a3;font:11px system-ui;padding:5px 8px;pointer-events:none;max-width:85vw';document.body.append(badge);
@@ -144,7 +159,6 @@
    const p=ArtRuntime.placement(v,o,270);c.drawImage(images.get(v.atlas.path),...v.frame.rect,...p.destination);
   };
   dispatchEvent(new Event('wuxia-assets-ready'));
-  state.ready=true;
-  document.documentElement.removeAttribute('data-art-loading');
+  await state.prepare('reality');
  }catch(error){state.error=error.message;retry.hidden=false;retry.textContent='아트 목록 로딩 실패 · 다시 불러오기';retry.onclick=()=>location.reload();console.error('Art preview:',error.message);}
 })();

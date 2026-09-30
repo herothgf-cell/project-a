@@ -31,7 +31,7 @@
  }
  function npcIdentity(world,id){
   const ids={reality:{warden:'seorin',shop:'supply',partner:'dogyeom','witness-hunter':'dogyeom',hunter:'dogyeom'},murim:{master:'baekryun',shop:'apothecary','returned-yeonhwa':'yeonhwa','stranded-yeonhwa':'yeonhwa',yeonhwa:'yeonhwa'}};
-  const name=ids[world]?.[id];return name?'npc.'+name:null;
+  const name=ids[world]?.[id]||world==='murim'&&id.startsWith('intro-')&&'baekryun';return name?'npc.'+name:null;
  }
  function environmentIdentity(area,index){
   const world=area==='city'?'reality':area==='village'?'murim':null;

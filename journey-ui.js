@@ -54,7 +54,7 @@
    para(body,allowed?'몸이 먼저 반응했고, 이름은 그 다음에 남았다. 이 운용을 받아들이거나 기록만 남겨도 좋다.':'그 현상은 기록했습니다. 해당 계열이 몸에 새겨지면 이 해석을 운용할 수 있습니다. 다른 계열로 강제 전환하지 않습니다.');
    show(e.title,body,[{label:v.name+' 이어가기',disabled:!allowed,run:()=>{g.chooseInterpretation(e.key);refresh();}},{label:'지금은 발견만 기록한다',secondary:true}],'hero','현상 → 스스로 붙인 해석');
   }
-  function update(){const g=game();sense.disabled=g.progress<2;sense.classList.toggle('sensing',g.experimentRuntime?.sense>0);sense.title=g.progress<2?'공통 무공을 익힌 뒤 기감이 열립니다.':'B · 기감 / 재사용 '+Math.ceil(g.player.cool.sense||0)+'초';}
+  function update(){const g=game();sense.disabled=g.progress<2;sense.classList.toggle('sensing',g.experimentRuntime?.sense>0);sense.title=g.progress<2?'공통 무공을 익힌 뒤 기감이 열립니다.':(globalThis.Controls?.key('sense')||'B')+' · 기감 / 재사용 '+Math.ceil(g.player.cool.sense||0)+'초';}
   return {open,offer,update};
  }
  root.JourneyUI={create};

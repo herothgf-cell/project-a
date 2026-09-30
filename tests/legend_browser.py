@@ -4,6 +4,7 @@ mode has inline assets and a storage shim; CI uses HTTP/native storage instead.
 """
 import argparse,json,os,re
 from pathlib import Path
+from legacy_browser_compat import finish_intro
 from playwright.sync_api import sync_playwright,expect
 from browser_smoke import INSTRUMENT
 ROOT=Path(__file__).resolve().parents[1]
@@ -21,7 +22,7 @@ def main():
     html=(ROOT/'index.html').read_text();page.goto('about:blank');page.set_content(re.sub(r'<script[^>]*>.*?</script>|<link rel="stylesheet"[^>]*>','',html,flags=re.S));page.evaluate("()=>{const m=new Map();Object.defineProperty(window,'localStorage',{configurable:true,value:{getItem:k=>m.get(k)??null,setItem:(k,v)=>m.set(k,String(v)),removeItem:k=>m.delete(k)}})}");page.evaluate(INSTRUMENT)
     for css in re.findall(r'<link rel="stylesheet" href="([^?\"]+)',html):page.add_style_tag(content=(ROOT/css).read_text())
     for js in re.findall(r'<script defer src="([^?\"]+)',html):page.add_script_tag(content=(ROOT/js).read_text())
-   page.locator('#start').click();page.locator('#dialogActions button').first.click();page.wait_for_timeout(100)
+   page.locator('#start').click();finish_intro(page);page.wait_for_timeout(100)
   def field(page):page.evaluate("()=>{__game.progress=2;__game.training=1;__game.enter('forest');__game.events=[];__game.player.invuln=0;}")
   def counter(page,i):
    page.evaluate("i=>{const e=__game.enemies[i];Object.assign(e,{x:650,y:650,hp:500,maxHp:500,wind:.28,windMax:1,attacks:1,tx:610,ty:650,range:90,cd:10});Object.assign(__game.player,{x:610,y:650,face:0});__game.player.cool.attack=0;__game.hitStop=0;}",i);page.keyboard.press('KeyJ');page.wait_for_timeout(60)

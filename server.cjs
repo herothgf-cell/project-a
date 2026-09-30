@@ -4,11 +4,12 @@ const assets=new Set(['journey-data.js','journey.js','cultivation.js','chapter-f
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.webp':'image/webp','.ogg':'audio/ogg','.wav':'audio/wav'};
 function createServer({artReview=false}={}){
  const Art=require('./art-loader.js'),allowed=new Set([...assets,'art-loader.js','assets/art/manifest.json']);
+ for(const file of ['controls.js','revision.js','intro-ui.js','growth-ui.js','revision.css',...['signal','stone','return','report','compare'].map(id=>'assets/art/intro/'+id+'.webp')])allowed.add(file);
  const catalog=Art.createCatalog(JSON.parse(fs.readFileSync(path.join(__dirname,'assets/art/manifest.json'))));
  for(const file of catalog.files())allowed.add(file);
  if(artReview){
   for(const p of ['art-review.html','art-review.js','art-play.html','art-runtime.js','art-preview-runtime.js'])allowed.add(p);
-  for(const file of ['assets/art/scene-candidate.json',...['reality','murim'].map(world=>'assets/art/'+world+'/hero/yunseo/candidate.json')]){
+  for(const file of ['assets/art/scene-candidate.json',...['reality','murim'].flatMap(world=>['candidate','runtime'].map(kind=>'assets/art/'+world+'/hero/yunseo/'+kind+'.json'))]){
    if(fs.existsSync(path.join(__dirname,file))){allowed.add(file);const review=Art.createCatalog(JSON.parse(fs.readFileSync(path.join(__dirname,file))));for(const p of review.files({preview:true}))allowed.add(p);}
   }
  }

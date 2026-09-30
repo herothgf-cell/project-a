@@ -102,7 +102,7 @@
   proto.act=function(action,...args){
     const echo=this.combat?.echo?{...this.combat.echo}:null,before={x:this.player.x,y:this.player.y},pulse=runtime(this).pulse;
     const result=old.act.call(this,action,...args);
-    if(result&&action==='signature2'&&Fate.active(this)==='echo'&&echo&&dist(before,echo)>60&&pulse.wind>0&&(dist(before,pulse)<230||dist(echo,pulse)<205))resolve(this,'echo');
+    if(result&&action==='signature2'&&Fate.active(this)==='echo'&&echo&&dist(before,echo)>60&&dist(this.player,echo)<2&&dist(before,this.player)>60&&pulse.wind>0&&(dist(before,pulse)<230||dist(echo,pulse)<205))resolve(this,'echo');
     return result;
   };
   proto.step=function(dt,input={}){

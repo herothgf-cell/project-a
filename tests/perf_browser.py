@@ -1,6 +1,7 @@
 """Opt-in performance overlay contract. Chromium is a UI check, not device benchmarking."""
 import argparse, os, re
 from pathlib import Path
+from legacy_browser_compat import finish_intro
 from playwright.sync_api import sync_playwright, expect
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -24,7 +25,7 @@ def main():
 
                 for f in re.findall(r'<link rel="stylesheet"[^>]+href="([^"?]+)',(ROOT/'index.html').read_text()):page.add_style_tag(content=(ROOT/f).read_text())
                 for file in FILES:page.add_script_tag(content=(ROOT/file).read_text())
-            page.locator('#start').click();page.locator('#dialogActions button').first.click()
+            page.locator('#start').click();finish_intro(page)
             hud=page.locator('#perfHud')
             if enabled:
                 expect(hud).to_contain_text('viewport 390×844',timeout=3000)

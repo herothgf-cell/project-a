@@ -57,7 +57,7 @@
  };
  function guide(g,path){
   const a=AREAS[g.area],points=g.points?g.points():a.points,s=g.journey;
-  if(g.progress<2)return {stage:'locked',title:'먼저 기본기를 익히세요',text:'현실 서린 → 무림 백련 순서로 대화하면 기감을 사용할 수 있습니다. 기감은 주변 흔적을 찾는 도구이며 직업 보상이 아닙니다.',target:null};
+  if(g.progress<2)return {stage:'locked',title:'먼저 기본기를 익히세요',text:'청운촌의 백련과 재회하여 월영참을 배우면 기감을 사용할 수 있습니다.',target:null};
   if(g.area!=='archive')return {stage:'travel',title:'환서정으로 가기 · 선택 탐험',text:a.world==='현실'?'무림으로 이동한 뒤 청운촌 남동쪽 「환서정」으로 가세요. 기존 무공을 다른 방식으로 쓰는 단서를 찾는 곳입니다.':'청운촌 남동쪽 「환서정」으로 가세요. B 기감 → 가까이 E 조사 → N 수첩 순서로 시작합니다.',target:points.find(o=>o.id===(g.area==='village'?'archiveGate':a.safe?'portal':'exit'))||null};
   const candidates=points.filter(o=>o.kind==='discovery'&&o.path!=='station');
   const o=candidates.find(o=>o.path===(path||g.guidePath||g.fate.path))||candidates.slice().sort((a,b)=>dist(a,g.player)-dist(b,g.player))[0];
@@ -72,6 +72,7 @@
  }
  function news(g){const rows=[],feed=g.chapter4?.feed||[];
   for(const m of feed)rows.push({id:'event-'+m.key,channel:m.kind==='npc'?'world':'server',speaker:m.speaker,text:m.text,at:m.at||0,simulated:true,origin:'현재 여정 · NPC 연출'});
+  for(const h of g.revision?.history||[])if(h.id.startsWith('inherit-'))rows.push({id:'event-'+h.id,channel:'system',speaker:'계승 공지',text:'윤서님이 잃어버린 무공 「'+Fate.PATHS[h.id.slice(8)].name+'」을 계승했습니다.',at:h.at,simulated:true,origin:AREAS[h.area].world==='무림'?'강호의 계승 기록 · 싱글플레이 연출':'현실의 계승 기록 · 싱글플레이 연출'});
   const rumors=typeof globalThis.JourneyData!=='undefined'?globalThis.JourneyData.rumors(g.journey):require('./journey-data.js').rumors(g.journey);
   rumors.forEach((m,i)=>rows.push({id:'traveler-'+i,channel:'world',speaker:m.speaker,text:m.text,at:null,simulated:true,origin:'가상 모험가'}));
   rows.push({id:'ai-party',channel:'recruit',speaker:'동행 안내',text:'제5장 공명 관측소의 도겸은 AI 동료입니다. 도겸에게 직접 대화해 동행을 제안하세요. 실제 유저 모집이나 파티 연결은 없습니다.',at:null,simulated:true,origin:'AI 동행 안내'});

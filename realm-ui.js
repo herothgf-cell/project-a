@@ -42,11 +42,10 @@
    show('기감과 무공 해석 · 처음 해보기',body,[{label:'길잡이 켜고 직접 해보기',disabled:g.progress<2,run:()=>{g.guideActive=true;refresh();}},{label:'수첩 열기',secondary:true,run:()=>notes.open('facts')},{label:'혼자 살펴보기',secondary:true,run:()=>{g.guideActive=false;refresh();}}],'hero','조작은 알려드리고, 발견은 직접 합니다');
   }
   function notebookHint(body){const g=game(),u=P.guide(g),card=node('div','guide-next');card.append(node('small','','다음에 할 수 있는 행동'),node('b','',u.title),node('p','',u.text));card.append(button('실제 화면에서 안내 받기',()=>{g.guideActive=true;openHelp();}));body.prepend(card);}
-  root.addEventListener('keydown',e=>{if(e.code==='KeyH'&&!e.repeat&&active()&&!$('dialog').open){e.preventDefault();openHelp();}});
   function update(){const g=game(),a=DualWorld.AREAS[g.area];if(g!==lastGame){lastGame=g;signature='';}
    const world=P.worldStyle(a);$('game').dataset.realm=world.architecture;worldBadge.textContent=world.world==='현실'?'현실 / HUNTER DISTRICT':'무림 / MARTIAL REALM';
    const mapLabel=$('mapWorld');if(mapLabel)mapLabel.textContent='['+a.world+'] '+a.name.split(' · ')[0];
-   const stamp=JSON.stringify([g.chapter4?.feed,g.journey?.seed,g.journey?.phase]);if(stamp!==signature){signature=stamp;newsViews=newsViews.filter(v=>v.root.isConnected);newsViews.forEach(v=>v.render());$('rumorCount').textContent=String(g.chapter4?.feed?.length||0);}
+   const stamp=JSON.stringify([g.chapter4?.feed,g.journey?.seed,g.journey?.phase,g.revision?.inherited]);if(stamp!==signature){signature=stamp;newsViews=newsViews.filter(v=>v.root.isConnected);newsViews.forEach(v=>v.render());$('rumorCount').textContent=String((g.chapter4?.feed?.length||0)+(g.revision?.inherited?.length||0));}
    help.classList.toggle('help-recommended',g.progress>=2&&!g.journey?.facts?.length);
    guideHint.hidden=!g.guideActive;const u=P.guide(g);if(g.guideActive){guideHint.querySelector('p').textContent=u.title;guideHint.querySelector('strong').textContent='선택 탐험 · '+(u.path?DualWorld.Fate.PATHS[u.path].name:'기감 안내');}
    if(a.world!==lastWorld){lastWorld=a.world;$('hudPortrait').setAttribute('aria-label',a.world+'의 윤서');}

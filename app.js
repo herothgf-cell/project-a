@@ -10,10 +10,12 @@
   if(perfHud){perfHud.id='perfHud';perfHud.setAttribute('aria-label','성능 진단');perfHud.style.cssText='position:fixed;top:8px;right:8px;z-index:1000;max-width:calc(100vw - 16px);margin:0;padding:8px 10px;background:#101e24e8;color:#f3e5be;border:1px solid #d0bb7b;font:11px/1.4 monospace;white-space:pre-wrap;pointer-events:none;';$('game').append(perfHud);}
   let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0,lastPerfHud=0;
   let sound=false,audio=null,bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
-  let journeyUI=null,realmUI=null;
+  let journeyUI=null,realmUI=null,growthUI=null,introUI=null;
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
-  const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;};
-  const running=()=>active&&!dialog.open&&!document.hidden;
+  const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=Controls.format(text);return e;};
+  const artReady=()=>{if(!globalThis.ArtPreview)return !document.documentElement.hasAttribute('data-art-loading');return globalThis.ArtPreview.ensureWorld?.(AREAS[g.area].world==='현실'?'reality':'murim')===true;};
+  const running=()=>active&&!dialog.open&&!document.hidden&&artReady();
+  window.addEventListener('art-controls-ready',()=>{clearInput();lastFrame=performance.now();});
   function clearInput(){keys.clear();held.clear();joy={x:0,y:0};joyId=null;$('stick').querySelector('i').style.transform='';}
   function toast(text){const e=node('div','toast',text);$('toasts').append(e);while($('toasts').children.length>3)$('toasts').firstChild.remove();setTimeout(()=>e.remove(),3000);}
   function inspectSave(){
@@ -24,14 +26,15 @@
   }
   function backup(force=false){try{const raw=localStorage.getItem(SAVE);if(raw!==null&&(force||!localStorage.getItem(BACKUP)))localStorage.setItem(BACKUP,raw);}catch(error){/* Storage may be unavailable; never block play. */}}
   function persist(){
-    if(!active)return;
+    if(!active||introUI?.replay)return;
     try{localStorage.setItem(SAVE,g.save());$('save').textContent='저장됨';hasSave=true;lastSave=performance.now();}
     catch(error){$('save').textContent='저장 불가';if(!saveWarning){toast('자동 저장 불가 · 메뉴에서 저장 파일을 내려받으세요.');saveWarning=true;}}
   }
-  function closeDialog(){if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker);}}
+  function closeDialog(){if(introUI?.active)return introUI.resume();if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker);}}
   function show(title,body,actions=[{label:'계속하기'}],portrait='system',kicker='쌍계 · 이야기'){
+    dialog.classList.toggle('intro-dialog',!!body?.classList?.contains('intro-scene'));dialog.classList.toggle('growth-dialog',!!body?.classList?.contains('growth-screen'));
     RealmArt.begin(g);clearInput();dialog.classList.toggle('story-dialog',typeof body==='string'&&portrait!=='system'&&!kicker.includes('일시정지'));dialog.classList.toggle('news-dialog',!!body?.classList?.contains('realm-news'));dialog.classList.toggle('help-dialog',!!body?.classList?.contains('realm-help-sheet'));dialog.classList.toggle('legend-offer',kicker.includes('발현')||kicker.includes('각성'));$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
-    $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=body;else $('dialogBody').append(body);
+    $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=Controls.format(body);else $('dialogBody').append(body);
     WorldArt.portrait($('portrait'),portrait);$('dialogActions').replaceChildren();
     actions.forEach(a=>{const b=node('button',a.secondary?'secondary':a.danger?'danger':'primary',a.label);b.disabled=!!a.disabled;b.addEventListener('click',()=>{queued=[];if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(a.run)a.run();});$('dialogActions').append(b);});
     if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
@@ -84,12 +87,14 @@
   }
   function start(load=false){
     backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
-    if(!load)show('제1장 · 낯선 신호','당신은 해온시의 신입 헌터, 윤서.\n균열에서 회수한 경계석이 당신의 손에서 깨어났다.\n\n무림에서 익힌 무공은 현실에서도 사라지지 않는다.\n먼저 관리관 서린을 찾아가자.\n\n이동: WASD / 왼쪽 조이스틱\n대화: E / 화면 아래 대화 버튼\n금빛 방향 표식이 다음 목표를 안내합니다.',[{label:'여정 시작'}],'hero');
+    if(!load){g.beginIntro(true);introUI.start();persist();}
+    else if(g.introActive)introUI.resume();
     else toast('안전한 거점에서 이어갑니다. 기존 성장과 무공을 유지했습니다.');
   }
   function newGame(){if(hasSave)show('새로운 여정을 시작할까요?','현재 진행을 새 저장으로 교체합니다. 이전 저장은 브라우저의 백업 항목에도 보관합니다.\n\n기존 여정은 이어하기로 계속할 수 있습니다.',[{label:'취소',secondary:true},{label:'새로 시작',danger:true,run:()=>{backup(true);start(false);}}],'system','저장 데이터 확인');else start(false);}
   function grid(items){const e=node('div','stat-grid');for(const [label,value]of items){const b=node('div','',label);b.append(node('b','',String(value)));e.append(b);}return e;}
   function inventory(){
+    if(growthUI)return growthUI.open();
     if(!active)return;const s=g.stats(),body=node('div');body.append(grid([['두 세계 공격력',s.attack],['무기 강화','+'+g.upgrade],['최대 체력',s.hp],['최대 내력',s.mp]]));
     body.append(node('p','dialog-note',`${g.training>=2?'청명검':'수련검'} · 모든 장비와 무공은 현실 / 무림에서 공유됩니다.`));
     const list=[['劍','연환검','기본 3연격. 세 번째 공격은 더 넓고 강합니다. J / 공격 버튼 길게 누르기.',true],['月','월영참','전방 광역 베기 · 내력 18 · 재사용 2.8초. 백련에게 배웁니다.',g.training>=1],['雷','천뢰격','주변 광역 낙뢰 · 내력 32 · 재사용 6초. 죽림 공략 후 습득.',g.training>=2],['界','경계 공명','지속 효과: 공격력 +6, 받는 피해 15% 감소. 제2장 폐사 공략 후 습득.',g.training>=3]];
@@ -117,11 +122,12 @@
   }
   function help(){show('첫 여정을 위한 안내','WASD / 방향키: 이동\nJ / 공격 버튼 길게 누르기: 연환검\nK: 월영참 · L: 천뢰격\nSpace / Shift: 회피 · 짧은 무적\nE: 대화 / 출입구 이동 · 1: 회복약\nQ / R: 기연 무공 · F: 오의 (기세 100)\nB: 기감 · N: 관찰 수첩/성장/다른 여정\nI: 무공과 장비 · M: 지도 · Esc: 메뉴\n\n모바일에서는 왼쪽 조이스틱으로 이동하면서 오른쪽 공격과 무공을 함께 누를 수 있습니다.\n\n붉은 원은 적의 공격 예고입니다. 원 밖으로 피하거나 회피의 무적으로 넘기세요. 호위와 봉인을 해제해야 보스의 보호막이 사라집니다.');}
   function menu(){
+    if(introUI?.active)return introUI.resume();
     if(!active)return;const actions=[{label:'계속하기'},{label:'나의 기연 도감',secondary:true,run:fateJournal},{label:'관찰 수첩 · 성장',secondary:true,run:()=>journeyUI.open()},{label:'조작 안내',secondary:true,run:help},{label:'지역 지도',secondary:true,run:map},{label:'저장 파일 다운로드',secondary:true,run:()=>exportSave()},{label:'저장 파일 불러오기',secondary:true,run:importSave},{label:renderer.reduced?'화면 효과 켜기':'화면 효과 줄이기',secondary:true,run:()=>{renderer.reduced=!renderer.reduced;menu();}}];
     actions.push({label:'이펙트 품질: '+['낮음','보통','높음'][renderer.quality]+(renderer.autoLow?' (자동 절약)':''),secondary:true,run:()=>{renderer.quality=(renderer.quality+1)%3;renderer.autoLow=false;renderer.slowFrames=0;menu();}});
     if(!AREAS[g.area].safe)actions.push({label:'거점으로 후퇴',secondary:true,run:()=>show('거점으로 돌아갈까요?','무공과 이야기 진행은 유지됩니다.\n다시 입장하면 호위와 아직 완료하지 않은 봉인 공략을 처음부터 시작합니다.',[{label:'취소',secondary:true},{label:'후퇴하기',run:()=>{g.retreat();processEvents();persist();update();}}])});
     else actions.push({label:'보급 / 강화',secondary:true,run:shop});
-    actions.push({label:'타이틀로',secondary:true,run:()=>{persist();active=false;clearInput();$('game').hidden=true;$('title').hidden=false;inspectSave();WorldArt.cover($('cover'));}});
+    actions.push({label:'입력 설정',secondary:true,run:controlSettings},{label:'인트로 다시 보기',secondary:true,run:()=>introUI.start(true)},{label:'타이틀로',secondary:true,run:()=>{persist();active=false;clearInput();$('game').hidden=true;$('title').hidden=false;inspectSave();WorldArt.cover($('cover'));}});
     show('잠시, 호흡을 고르다',`Lv.${g.level} · ${AREAS[g.area].name}\n${g.objective().title}\n\n메뉴와 대화가 열려 있는 동안 전투가 멈춥니다.`,actions,'hero','일시정지 · v'+VERSION);
   }
   function playSound(name){
@@ -140,7 +146,7 @@
       if(['transfer','victory','defeat','dialog','awakening','trial-complete','legend-ready'].includes(e.type)){story(e);persist();}
     }
   }
-  function interact(){if(!running())return;const result=g.interact();if(result?.type==='dialog'&&['master','warden'].includes(result.portrait)&&g.witness()&&!result.text.includes(g.witness()))result.text=g.witness()+result.text;if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
+  function interact(){if(!running())return;const result=g.interact();if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
   function act(action){
     if(!running())return;const k=g.skillInfo(action);if(!k)return;
     if(!g.act(action)){
@@ -156,6 +162,9 @@
   function updateNews(){realmUI?.update();}
   function update(){
     updateNews();journeyUI?.update();
+    $('canvas').setAttribute('aria-label',`게임 화면. 이동 ${['up','left','down','right'].map(a=>Controls.key(a)).join('/')}, 공격 ${Controls.key('attack')}, 월영참 ${Controls.key('moon')}, 천뢰격 ${Controls.key('storm')}, 회피 ${Controls.key('dash')}, 상호작용 ${Controls.key('interact')}`);
+    for(const btn of document.querySelectorAll('[data-action]')){const k=btn.querySelector('kbd');if(k)k.textContent=Controls.key(btn.dataset.action);}
+    for(const [id,action]of [['inventory','growth'],['interact','interact'],['potion','potion'],['fieldNotes','notes'],['sense','sense'],['helpButton','help']]){const el=$(id);if(el){const k=el.querySelector('kbd');if(k)k.textContent=Controls.key(action);el.setAttribute('aria-label',Controls.labels[action]+' '+Controls.key(action));}}
     const a=AREAS[g.area],s=g.stats(),p=g.player,original=g.objective(),hint=realmUI?.guide();
     const o=hint?.target?{...original,text:hint.text,target:hint.target}:original;
     $('world').textContent=a.world;$('rank').textContent=g.journey?.realm?'이류 · 돌파':g.training?'입문 · 수련 중':'미각성';$('place').textContent=a.name;$('sub').textContent=a.sub;$('lv').textContent=g.level;$('gold').textContent=g.gold;
@@ -173,6 +182,10 @@
     if(boss){$('boss').querySelector('span').textContent=boss.name;$('boss').querySelector('u').style.width=boss.hp/boss.maxHp*100+'%';$('boss').querySelector('small').textContent=g.bossLocked()?'호위 / 봉인 해제 후 공격 가능':boss.hp<boss.maxHp/2?'격노 · 더 빠른 공격 예고':'공격 예고를 피하고 빈틈을 노리세요';}
     for(const action of ['moon','storm','dash']){const btn=document.querySelector(`[data-action="${action}"]`),k=SKILLS[action];btn.classList.toggle('locked',g.training<k.need);btn.classList.toggle('no-mana',p.mp<k.cost);btn.setAttribute('aria-label',`${k.name}${g.training<k.need?' 미습득':''}`);const cd=btn.querySelector('em');cd.classList.toggle('active',p.cool[action]>.04);cd.textContent=p.cool[action]>=1?Math.ceil(p.cool[action]):p.cool[action].toFixed(1);}
     document.querySelector('.scene-bottom>span').textContent=matchMedia('(pointer:coarse)').matches?'왼쪽 이동 · 오른쪽 공격 / 회피':'WASD 이동 · J 공격 · Space 회피 · E 대화';
+    $('questDesc').textContent=Controls.format(o.text);$('objectiveHint').textContent=Controls.format(o.text);
+    document.querySelector('.scene-bottom>span').textContent=Controls.format(document.querySelector('.scene-bottom>span').textContent);
+    $('rank').textContent='E급 헌터'+(g.journey?.phase===5?' · C급 현장 인증':'');
+    $('inventory').querySelector('span').textContent='성장';
   }
   if(!matchMedia('(max-width:1099px), (pointer:coarse)').matches){$('rumorContent').hidden=false;$('rumorToggle').setAttribute('aria-expanded','true');$('rumorPanel').classList.remove('collapsed');}
   window.addEventListener('wuxia-assets-ready',()=>{renderer.cache={};WorldArt.portrait($('hudPortrait'),'hero');if(!$('title').hidden)WorldArt.cover($('cover'));});
@@ -180,15 +193,23 @@
   $('start').addEventListener('click',newGame);$('continue').addEventListener('click',()=>start(true));$('menu').addEventListener('click',menu);$('inventory').addEventListener('click',inventory);$('journal').addEventListener('click',journal);$('mapBtn').addEventListener('click',map);$('interact').addEventListener('click',interact);$('potion').addEventListener('click',()=>act('potion'));$('closeDialog').addEventListener('click',closeDialog);
   // Clear synchronously at every close/cancel path. Native close is queued and
   // must not erase a fresh movement key pressed after the dialog disappeared.
-  dialog.addEventListener('cancel',()=>{queued=[];clearInput();});
+  dialog.addEventListener('cancel',e=>{queued=[];clearInput();if(introUI?.active){e.preventDefault();introUI.resume();}});
   $('sound').addEventListener('click',()=>{sound=!sound;$('sound').textContent=sound?'♫':'♪';$('sound').setAttribute('aria-label',sound?'소리 끄기':'소리 켜기');playSound('reward');});
   $('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('game').requestFullscreen();}catch(error){toast('이 브라우저에서는 전체 화면을 지원하지 않습니다.');}});
-  const keyActions={KeyQ:'signature1',KeyR:'signature2',KeyF:'ultimate',KeyJ:'attack',KeyK:'moon',KeyL:'storm',Space:'dash',ShiftLeft:'dash',ShiftRight:'dash',Digit1:'potion'};
+  function controlSettings(){
+    const body=node('section','control-settings');
+    for(const [a,label]of Object.entries(Controls.labels)){
+      const row=node('div','control-row'),b=node('button','secondary');b.textContent=Controls.key(a);row.append(node('span','',label),b);body.append(row);
+      b.onclick=()=>{b.textContent='키를 누르세요';b.onkeydown=e=>{e.preventDefault();e.stopPropagation();if(e.repeat)return;const result=Controls.bind(a,e.code);b.onkeydown=null;if(result.conflict)show('겹치는 키',Controls.labels[result.conflict]+'에 이미 배정되어 있습니다.',[{label:'서로 교환',run:()=>{Controls.bind(a,e.code,true);controlSettings();}},{label:'취소',run:controlSettings}]);else controlSettings();};b.focus();};
+    }
+    show('입력 설정',body,[{label:'오른손 기본 배치',run:()=>{Controls.preset('right');controlSettings();}},{label:'기존 배치',secondary:true,run:()=>{Controls.preset('legacy');controlSettings();}},{label:'돌아가기',run:()=>{clearInput();update();}}]);
+  }
   window.addEventListener('keydown',e=>{
     if(!active)return;if(dialog.open)return;
-    if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();
-    if(e.code==='Escape'){e.preventDefault();menu();return;}if(!running())return;keys.add(e.code);if(e.repeat)return;
-    if(keyActions[e.code])act(keyActions[e.code]);if(e.code==='KeyE')interact();if(e.code==='KeyI')inventory();if(e.code==='KeyM')map();
+    const action=Controls.action(e.code);if(action)e.preventDefault();
+    if(action==='menu'){menu();return;}if(!running())return;if(e.repeat&&!keys.has(e.code))return;keys.add(e.code);if(e.repeat)return;
+    if(['attack','moon','storm','signature1','signature2','ultimate','dash','potion','sense'].includes(action))act(action);
+    if(action==='interact')interact();if(g.introActive)return;if(action==='growth')inventory();if(action==='map')map();if(action==='notes')journeyUI.open();if(action==='help')realmUI.openHelp();
   });window.addEventListener('keyup',e=>keys.delete(e.code));
   for(const btn of document.querySelectorAll('[data-action]')){
     const action=btn.dataset.action;btn.addEventListener('pointerdown',e=>{e.preventDefault();if(!running())return;btn.setPointerCapture(e.pointerId);if(action==='attack')held.add(e.pointerId);act(action);});
@@ -206,13 +227,14 @@
     const elapsed=now-lastFrame,dt=Math.min(elapsed/1000,.05);lastFrame=now;
     try{
       if(perf&&running()&&elapsed>0&&elapsed<1000){perf.record(elapsed);if(now-lastPerfHud>500){const quality=renderer.reduced||renderer.autoLow?0:renderer.quality;perfHud.textContent=`PERF · local only\navg ${perf.averageMs.toFixed(1)} ms · recent ${perf.recentMs.toFixed(1)} ms (120 frames)\nslow >35 ms ${perf.slowTotal} · pressure ${renderer.slowFrames}\nautoLow ${renderer.autoLow?'ON':'OFF'} · quality ${quality} (base ${renderer.quality})\nviewport ${innerWidth}×${innerHeight} · canvas ${Math.round(renderer.w)}×${Math.round(renderer.h)} · DPR ${renderer.dpr}`;lastPerfHud=now;}}
-      if(running()){const x=joy.x+(keys.has('KeyD')||keys.has('ArrowRight')?1:0)-(keys.has('KeyA')||keys.has('ArrowLeft')?1:0),y=joy.y+(keys.has('KeyS')||keys.has('ArrowDown')?1:0)-(keys.has('KeyW')||keys.has('ArrowUp')?1:0);g.step(dt,{x,y,attack:keys.has('KeyJ')||held.size>0});processEvents();if(now-lastSave>4000)persist();}
+      if(running()){const pressed=a=>[...keys].some(k=>Controls.action(k)===a),x=joy.x+(pressed('right')?1:0)-(pressed('left')?1:0),y=joy.y+(pressed('down')?1:0)-(pressed('up')?1:0);g.step(dt,{x,y,attack:pressed('attack')||held.size>0});processEvents();if(now-lastSave>4000)persist();}
       if(active){renderer.draw(g,dt);if(now-lastHud>70){update();lastHud=now;}}
     }catch(error){if(!errorReported){errorReported=true;console.error(error);show('게임 실행 중 오류가 발생했습니다','저장된 진행은 그대로 보관됩니다. 새로고침 후에도 반복되면 이 내용을 알려 주세요.\n\n'+error.message);}}
     requestAnimationFrame(frame);
   }
   journeyUI=JourneyUI.create({game:()=>g,show,node,grid,refresh:()=>{processEvents();persist();update();},act,running,active:()=>active});
-  window.addEventListener('keydown',e=>{if(e.code==='KeyN'&&!e.repeat&&active&&!dialog.open){e.preventDefault();journeyUI.open();}if(e.code==='KeyB'&&!e.repeat&&running()){e.preventDefault();act('sense');}});
   realmUI=RealmUI.create({game:()=>g,show,node,refresh:()=>{processEvents();persist();update();},active:()=>active,clearInput,notes:journeyUI});
+  introUI=IntroUI.create({game:()=>g,setGame:value=>{g=value;renderer.area=null;clearInput();},show,node,refresh:()=>{processEvents();persist();update();}});
+  growthUI=GrowthUI.create({game:()=>g,show,node,grid,close:closeDialog,refresh:()=>{processEvents();persist();update();},notes:journeyUI,shop});
   inspectSave();WorldArt.cover($('cover'));WorldArt.portrait($('hudPortrait'),'hero');update();requestAnimationFrame(frame);
 })();

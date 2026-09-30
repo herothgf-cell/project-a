@@ -3,6 +3,7 @@ Uses real buttons, keyboard and CDP touch. Model fixtures arrange encounters;
 this is not an unassisted playthrough or physical-device benchmark.
 """
 from pathlib import Path
+from legacy_browser_compat import finish_intro
 import argparse,json,re,os
 from playwright.sync_api import sync_playwright,expect
 ROOT=Path(__file__).resolve().parents[1]
@@ -19,7 +20,7 @@ def load(page,url=None,seed=None):
         for f in SCRIPTS:page.add_script_tag(content=(ROOT/f).read_text())
     page.wait_for_function('window.WuxiaArt && WuxiaArt.ready()',timeout=10000)
 def new_game(page):
-    page.locator('#start').click();expect(page.locator('#dialog')).to_be_visible();page.locator('#dialogActions button').first.click();expect(page.locator('#dialog')).not_to_be_visible();expect(page.locator('#canvas')).to_be_visible()
+    page.locator('#start').click();expect(page.locator('#dialog')).to_be_visible();finish_intro(page);expect(page.locator('#dialog')).not_to_be_visible();expect(page.locator('#canvas')).to_be_visible()
 def dismiss(page):
     for i in range(3):
         if not page.locator('#dialog').is_visible():return

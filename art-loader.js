@@ -117,13 +117,13 @@
   }
   return {resolve:(q,o)=>read('resolve',q,o),sample:(q,o)=>read('sample',q,o)};
  }
- function createImageCache({ImageClass=globalThis.Image,maxEntries=24}={}){
+ function createImageCache({ImageClass=globalThis.Image,maxEntries=24,timeoutMs=20000}={}){
   const cache=new Map();
   async function load(visual){
    if(visual?.status==='BLOCKED_ART')return visual;
    const p=visual?.atlas?.path;if(!safePath(p))return {status:'BLOCKED_ART',reason:'invalid image path'};
    if(cache.has(p)){const promise=cache.get(p);cache.delete(p);cache.set(p,promise);return promise;}
-   const promise=new Promise(resolve=>{const img=new ImageClass();img.onload=()=>resolve(img.naturalWidth===visual.atlas.width&&img.naturalHeight===visual.atlas.height?{status:'loaded',image:img}:{status:'BLOCKED_ART',reason:'image dimensions differ'});img.onerror=()=>resolve({status:'BLOCKED_ART',reason:'image load failed'});img.src=p;});
+   const promise=new Promise(resolve=>{const img=new ImageClass();let done=false;const finish=result=>{if(done)return;done=true;clearTimeout(timer);resolve(result);};const timer=setTimeout(()=>{finish({status:'BLOCKED_ART',reason:'image load timed out'});img.src='';},timeoutMs);timer.unref?.();img.onload=async()=>{try{if(img.decode)await img.decode();finish(img.naturalWidth===visual.atlas.width&&img.naturalHeight===visual.atlas.height?{status:'loaded',image:img}:{status:'BLOCKED_ART',reason:'image dimensions differ'});}catch{finish({status:'BLOCKED_ART',reason:'image decode failed'});}};img.onerror=()=>finish({status:'BLOCKED_ART',reason:'image load failed'});img.src=p;});
    cache.set(p,promise);while(cache.size>maxEntries)cache.delete(cache.keys().next().value);
    const result=await promise;if(result.status!=='loaded'&&cache.get(p)===promise)cache.delete(p);return result;
   }
@@ -131,7 +131,8 @@
  }
  function createResidentImages({maxBytes=128*1024*1024,maxConcurrent=2,load,onLoad=()=>{},onError=()=>{}}={}){
   const loader=load||createImageCache({maxEntries:1}).load,resident=new Map(),pending=new Set(),failed=new Map(),queue=[];
-  let bytes=0,active=0;
+  let bytes=0,active=0,pinned=new Set();const waiters=new Map();
+  function settle(path){for(const fn of waiters.get(path)||[])fn();waiters.delete(path);}
   function fail(path,reason){failed.set(path,reason);onError(path,reason);}
   maxBytes=Math.max(1,Number.isFinite(maxBytes)?maxBytes:128*1024*1024);maxConcurrent=Math.max(1,Math.floor(maxConcurrent)||1);
   function get(path){const entry=resident.get(path);if(!entry)return;resident.delete(path);resident.set(path,entry);return entry.image;}
@@ -139,9 +140,9 @@
    let task;try{task=loader(visual);}catch(error){task=Promise.reject(error);}
    Promise.resolve(task).then(result=>{
     if(result.status!=='loaded'){fail(path,result.reason||'image load failed');return;}
-    while(bytes+cost>maxBytes&&resident.size){const first=resident.keys().next().value;bytes-=resident.get(first).cost;resident.delete(first);}
+    while(bytes+cost>maxBytes&&resident.size){const first=[...resident.keys()].find(p=>!pinned.has(p));if(!first){fail(path,'resident budget reserved for player');return;}bytes-=resident.get(first).cost;resident.delete(first);}
     resident.set(path,{image:result.image,cost});bytes+=cost;onLoad(path);
-   }).catch(()=>fail(path,'image load failed')).finally(()=>{active--;pending.delete(path);pump();});
+   }).catch(()=>fail(path,'image load failed')).finally(()=>{active--;pending.delete(path);settle(path);pump();});
   }}
   function request(visual){const path=visual?.atlas?.path;if(visual?.status==='BLOCKED_ART'||!safePath(path))return null;
    const image=get(path);if(image)return image;if(pending.has(path)||failed.has(path))return null;
@@ -149,7 +150,14 @@
    if(!Number.isFinite(cost)||cost<=0||cost>maxBytes){failed.set(path,'image exceeds resident budget');return null;}
    pending.add(path);queue.push({visual,path,cost});pump();return null;
   }
-  return {request,get,retryFailures:()=>failed.clear(),failure:path=>failed.get(path),get failures(){return failed.size;},get bytes(){return bytes;},get size(){return resident.size;},get pending(){return pending.size;}};
+  async function prepare(visuals){
+   const unique=[...new Map(visuals.map(v=>[v?.atlas?.path,v])).values()];
+   if(unique.some(v=>v?.status==='BLOCKED_ART'||!safePath(v?.atlas?.path))||unique.reduce((n,v)=>n+v.atlas.width*v.atlas.height*4,0)>maxBytes)return {ok:false,reason:'player images exceed resident budget'};
+   pinned=new Set(unique.map(v=>v.atlas.path));
+   await Promise.all(unique.map(v=>new Promise(resolve=>{const p=v.atlas.path;if(get(p)||failed.has(p)){resolve();return;}const list=waiters.get(p)||[];list.push(resolve);waiters.set(p,list);request(v);if(!pending.has(p))settle(p);})));
+   const missing=unique.filter(v=>!resident.has(v.atlas.path));return {ok:!missing.length,reason:missing.map(v=>failed.get(v.atlas.path)||'image unavailable').join(', ')};
+  }
+  return {request,get,prepare,retryFailures:()=>failed.clear(),failure:path=>failed.get(path),get failures(){return failed.size;},get bytes(){return bytes;},get size(){return resident.size;},get pending(){return pending.size;}};
  }
  return {safePath,validate,createCatalog,prototypeProfile,createContinuityCatalog,createImageCache,createResidentImages};
 });

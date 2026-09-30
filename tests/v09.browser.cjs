@@ -1,0 +1,37 @@
+'use strict';
+const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs');
+const {createServer}=require('../server.cjs');
+(async()=>{const server=createServer({artReview:true});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
+ try{
+  browser=await chromium.launch({headless:true,channel:process.env.CHROMIUM_PATH?undefined:'chrome',executablePath:process.env.CHROMIUM_PATH});const p=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
+  p.on('pageerror',e=>errors.push(String(e)));p.on('response',r=>{if(r.status()>=400)errors.push(r.status()+' '+r.url());});
+  await p.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;for(const method of ['enter','step']){const old=v.Game.prototype[method];v.Game.prototype[method]=function(...a){const result=old.apply(this,a);window.__game=this;return result;};}}});});
+  await p.route('**/murim/hero/yunseo/runtime-*.webp',async route=>{await new Promise(r=>setTimeout(r,350));await route.continue();});
+  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
+  fs.mkdirSync('.codex_doc_review/v09',{recursive:true});
+  await p.click('#start');await p.waitForSelector('.intro-still');await p.locator('.intro-still').evaluate(img=>img.decode());await p.screenshot({path:'.codex_doc_review/v09/intro.png'});
+  await p.getByRole('button',{name:'인트로 건너뛰기',exact:true}).click();await p.waitForFunction(()=>__game.progress===1&&!document.querySelector('#dialog').open);
+  await p.keyboard.press('KeyI');await p.getByText('윤서 / E급 헌터',{exact:true}).waitFor();await p.screenshot({path:'.codex_doc_review/v09/growth.png'});await p.getByRole('button',{name:'돌아가기',exact:true}).click();
+  await p.evaluate(()=>{__game.player.face=0;__game.events=[];});await p.keyboard.press('KeyJ');await p.waitForTimeout(50);
+  assert.equal(await p.evaluate(()=>ArtPreview.diagnostics.get('reality.hero').actualAction),'attack1');assert.equal(await p.evaluate(()=>ArtPreview.diagnostics.get('reality.hero').substituted),false);
+  const start=await p.evaluate(()=>{__game.enter('village');return __game.playTime;});await p.waitForTimeout(180);assert.equal(await p.evaluate(()=>__game.playTime),start,'world preparation pauses simulation');
+  await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.keyboard.press('KeyJ');await p.waitForTimeout(50);assert.equal(await p.evaluate(()=>ArtPreview.diagnostics.get('murim.hero').substituted),false);assert.ok(await p.evaluate(()=>ArtPreview.residency.bytes<=128*1024*1024));
+  await p.evaluate(()=>{__game.events=[];__game.enter('city');});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='reality');
+  await p.keyboard.press('Tab');await p.getByText('관찰 수첩 · 기록에 없는 호흡',{exact:true}).waitFor();await p.getByRole('button',{name:'돌아가기',exact:true}).click();
+  await p.keyboard.press('Escape');await p.getByRole('button',{name:'입력 설정',exact:true}).click();await p.getByRole('button',{name:'기존 배치',exact:true}).click();assert.equal(await p.evaluate(()=>Controls.action('KeyQ')),'signature1');await p.getByRole('button',{name:'오른손 기본 배치',exact:true}).click();await p.getByRole('button',{name:'돌아가기',exact:true}).click();
+  const before=await p.evaluate(()=>__game.save());await p.keyboard.press('Escape');await p.getByRole('button',{name:'인트로 다시 보기',exact:true}).click();await p.getByRole('button',{name:'회상 끝내기',exact:true}).click();await p.waitForFunction(()=>__game.progress===1);assert.equal(JSON.parse(await p.evaluate(()=>__game.save())).progress,JSON.parse(before).progress);
+  await p.evaluate(()=>{__game.progress=12;__game.training=3;__game.fate.stage=2;__game.fate.proven=['echo'];__game.fate.discovered=['echo'];__game.events=[];});
+  await p.keyboard.press('KeyI');await p.getByRole('button',{name:'무공',exact:true}).click();assert.equal(await p.getByRole('button',{name:'계승 수락',exact:true}).isDisabled(),true);
+  await p.getByRole('button',{name:'돌아가기',exact:true}).click();await p.evaluate(()=>{__game.enter('village');__game.events=[];});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');
+  await p.keyboard.press('KeyI');await p.getByRole('button',{name:'무공',exact:true}).click();await p.getByRole('button',{name:'계승 수락',exact:true}).click();await p.getByText('계승 완료 · 잔영보',{exact:true}).waitFor();await p.getByRole('button',{name:'계속하기',exact:true}).click();
+  await p.keyboard.press('Escape');await p.getByRole('button',{name:'인트로 다시 보기',exact:true}).click();
+  for(let i=0;i<4;i++)await p.getByRole('button',{name:i===3?'응급처치하기':'계속하기',exact:true}).click();
+  await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.evaluate(()=>Object.assign(__game.player,{x:400,y:740}));await p.keyboard.press('KeyE');await p.evaluate(()=>Object.assign(__game.player,{x:480,y:680}));await p.keyboard.press('KeyE');
+  for(let i=0;i<3;i++)await p.getByRole('button',{name:i===2?'백련을 다시 만나러':'계속하기',exact:true}).click();await p.waitForFunction(()=>__game.progress===12&&!document.querySelector('#dialog').open);
+  await p.setViewportSize({width:390,height:844});await p.keyboard.press('KeyI');await p.screenshot({path:'.codex_doc_review/v09/mobile-growth.png'});assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  const failure=await browser.newPage();let fail=true;await failure.route('**/reality/hero/yunseo/runtime-walk.webp',route=>fail?route.abort():route.continue());
+  await failure.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await failure.waitForFunction(()=>!!ArtPreview.error);assert.equal(await failure.evaluate(()=>ArtPreview.ready),false);assert.equal(await failure.locator('#artRetry').isVisible(),true);
+  fail=false;await failure.click('#artRetry');await failure.waitForFunction(()=>ArtPreview.ready);assert.equal(await failure.evaluate(()=>ArtPreview.error),null);await failure.close();
+  assert.deepEqual(errors,[]);console.log('v0.9 browser: cold actions, world readiness, failed atlas retry, direct rescue/skip/replay, inheritance dialog, growth, presets, mobile passed');
+ }finally{await browser?.close();await new Promise(r=>server.close(r));}
+})().catch(e=>{console.error(e);process.exitCode=1;});
