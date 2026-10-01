@@ -40,8 +40,8 @@
   if(result?.type==='awakening'&&fate===5)result.text='서린: 현장의 기록을 정리했어. 이번 별호는 네 움직임을 보고 붙인 이름이야.\n\n별호 · '+Fate.PATHS[this.fate.path].title+' / 금화 160';
   return result;
  };
- P.target=function(){if(inIntro(this)&&state(this).intro===3)return rescuePoints[state(this).aid];return old.target.call(this);};
- P.objective=function(){if(inIntro(this))return {title:'첫 만남 · 백련 구조',text:state(this).aid?'처마 아래까지 이동해 E로 부축을 마치세요.':'핏자국을 따라 백련에게 다가가 E로 응급처치하세요.',target:rescuePoints[Math.min(1,state(this).aid)],chapter:0};const result=old.objective.call(this);if(this.area==='archive'&&this.journey.phase===0)return {...result,title:'환서정 · 선택 탐험',text:'본편과 별개로 현상을 관찰하고 해석을 발견할 수 있습니다.',chapter:Math.max(1,this.progress>=7?2:1)};return result;};
+ P.target=function(){if(inIntro(this))return state(this).intro===3?rescuePoints[state(this).aid]:null;return old.target.call(this);};
+ P.objective=function(){if(inIntro(this)){const s=state(this);return {priority:true,title:s.intro===3?'지금 할 일 · 백련 구조':s.intro>=4?'구조 완료 · 현실로 귀환':'첫 만남 · 다음 장면',text:s.intro===3?(s.aid?'처마 아래 표식으로 이동 → E로 부축 마무리':'백련에게 이동 → E로 응급처치'):'대화창에서 E / Enter를 눌러 다음 장면으로 진행하세요.',target:s.intro===3?rescuePoints[s.aid]:null,chapter:0};}const result=old.objective.call(this);if(this.progress===1&&AREAS[this.area].safe){const village=this.area==='village';return {...result,priority:true,title:'지금 할 일 · '+(village?'백련과 재회':'청운촌으로 이동'),text:village?'백련에게 이동 → E로 대화해 첫 무공 배우기':'경계석으로 이동 → E로 청운촌 진입',target:this.points().find(o=>o.id===(village?'master':'portal'))};}if(this.area==='archive'&&this.journey.phase===0)return {...result,title:'환서정 · 선택 탐험',text:'본편과 별개로 현상을 관찰하고 해석을 발견할 수 있습니다.',chapter:Math.max(1,this.progress>=7?2:1)};return result;};
  P.emit=function(type,extra={}){
   const s=state(this);
   if(type==='victory'&&this.area==='heart')extra={...extra,text:'경계의 심장이 고요해졌다. 서린에게 돌아가 결과를 보고하자.'};

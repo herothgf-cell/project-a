@@ -50,7 +50,7 @@
       const shake=this.reduced?0:g.shake*15;c.translate(Math.sin(g.playTime*137)*shake,Math.cos(g.playTime*149)*shake);c.scale(zoom,zoom);c.translate(-this.camera.x,-this.camera.y);
       const scene=this.scenery(g.area);c.drawImage(scene.terrain,0,0);FateArt.ground(c,g,quality,t);if(root.WuxiaArt)WuxiaArt.drawWorld(c,g,quality,t);if(root.JourneyArt)JourneyArt.ground(c,g,quality,t);
       for(const e of g.enemies){if(e.hp<=0||e.wind<=0)continue;const k=1-e.wind/e.windMax;c.fillStyle='#ec9d7930';c.strokeStyle=e.pattern==='dive'?'#d7a8df':'#edaa8e';c.lineWidth=2;c.beginPath();c.arc(e.tx,e.ty,e.range,0,TAU);c.fill();c.stroke();c.fillStyle='#ffca9437';c.beginPath();c.moveTo(e.tx,e.ty);c.arc(e.tx,e.ty,e.range,-Math.PI/2,-Math.PI/2+k*TAU);c.closePath();c.fill();text(c,e.pattern==='sweep'?'광역 베기':e.pattern==='dive'?'도약 공격':e.pattern==='rush'?'돌진 예고':e.pattern==='combo'?(e.followup?'연속 베기 · 2타':'연속 베기 · 1타'):e.pattern==='volley'?(e.followup?'연사 · 2발':'연사 · 1발'):'공격 예고',e.tx,e.ty+5,'#f8d5b8',10);}
-      const target=g.guideActive?Presentation.guide(g).target:g.target(),objects=[];
+      const target=g.guideActive&&!g.objective().priority?Presentation.guide(g).target:g.target(),objects=[];
       for(const b of a.blocks)objects.push({y:b.y+b.h,draw:()=>prop(c,b,a.theme)});
       for(const b of scene.decorations)objects.push({y:b.y,draw:()=>b.kind==='production-foreground'?WorldArt.foreground?.(c,b):bamboo(c,b.x,b.y,b.scale,t)});
       for(const o of (g.points?g.points():a.points).filter(o=>root.JourneyRules?JourneyRules.visiblePoint(g,o):!root.ChronicleRules||ChronicleRules.visiblePoint(g,o)))objects.push({y:o.y,draw:()=>{
@@ -92,7 +92,7 @@
       c.restore();
     }
     edgeMarker(g){
-      const o=g.guideActive?Presentation.guide(g).target:g.target();if(!o)return;const sx=(o.x-this.camera.x)*this.zoom,sy=(o.y-this.camera.y)*this.zoom;
+      const o=g.guideActive&&!g.objective().priority?Presentation.guide(g).target:g.target();if(!o)return;const sx=(o.x-this.camera.x)*this.zoom,sy=(o.y-this.camera.y)*this.zoom;
       if(sx>40&&sx<this.w-40&&sy>25&&sy<this.h-30)return;
       const c=this.c,landscape=this.h<390,top=landscape?100:220,bottom=landscape?this.h-70:this.h-200;
       const x=clamp(sx,34,this.w-34),y=clamp(sy,Math.min(top,this.h*.45),Math.max(top+20,bottom));

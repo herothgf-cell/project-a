@@ -1,12 +1,13 @@
 {
   "name": "dualworld-project-a",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "private": true,
   "description": "쌍계 — 두 세계의 호흡. World-specific art, anchored motion, unified interface and accessible discovery guidance.",
   "scripts": {
     "start": "node server.cjs",
     "test": "node --test tests/*.test.cjs",
     "test:browser:v09": "node tests/v09.browser.cjs",
+    "test:browser:keyboard": "node tests/dialog-keyboard.browser.cjs",
     "test:browser:feedback": "node tests/feedback.browser.cjs",
     "test:browser:v010": "node tests/v010.browser.cjs",
     "check:revision": "node --check progression.js && node --check martial-tree.js && node --check contract-ui.js && node --check progression-ui.js && node --check controls.js && node --check revision.js && node --check growth-ui.js && node --check intro-ui.js && node --check art-loader.js && node --check art-preview-runtime.js && node --check scripts/optimize-hero-art.cjs",
