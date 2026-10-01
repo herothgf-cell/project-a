@@ -49,14 +49,15 @@
       c.setTransform(this.dpr,0,0,this.dpr,0,0);c.clearRect(0,0,this.w,this.h);c.fillStyle=(palettes[g.area]||palettes[a.theme]||palettes.village)[1];c.fillRect(0,0,this.w,this.h);c.save();
       const shake=this.reduced?0:g.shake*15;c.translate(Math.sin(g.playTime*137)*shake,Math.cos(g.playTime*149)*shake);c.scale(zoom,zoom);c.translate(-this.camera.x,-this.camera.y);
       const scene=this.scenery(g.area);c.drawImage(scene.terrain,0,0);FateArt.ground(c,g,quality,t);if(root.WuxiaArt)WuxiaArt.drawWorld(c,g,quality,t);if(root.JourneyArt)JourneyArt.ground(c,g,quality,t);
+      if(g.area==='woundDock'&&root.ChapterSeven){const b=ChapterSeven.battle(g);c.fillStyle='#75d9bf25';c.strokeStyle='#9bf0d4';c.lineWidth=3;c.beginPath();c.arc(b.x,b.y,b.safeRadius,0,TAU);c.fill();c.stroke();text(c,g.laterStory.passOpened?'무림에서 연 안전 영역':'압력이 남은 좁은 안전 영역',b.x,b.y-b.safeRadius+24,'#dafff3',14);const left=Math.max(0,b.pulseInterval-(g.laterRuntime?.pulse||0));text(c,'압력 파동까지 '+left.toFixed(1)+'초 · 원 안에서 보호',b.x,b.y-b.safeRadius+44,left<1?'#ffc098':'#dafff3',13);}
       for(const e of g.enemies){if(e.hp<=0||e.wind<=0)continue;const k=1-e.wind/e.windMax;c.fillStyle='#ec9d7930';c.strokeStyle=e.pattern==='dive'?'#d7a8df':'#edaa8e';c.lineWidth=2;c.beginPath();c.arc(e.tx,e.ty,e.range,0,TAU);c.fill();c.stroke();c.fillStyle='#ffca9437';c.beginPath();c.moveTo(e.tx,e.ty);c.arc(e.tx,e.ty,e.range,-Math.PI/2,-Math.PI/2+k*TAU);c.closePath();c.fill();text(c,e.pattern==='sweep'?'광역 베기':e.pattern==='dive'?'도약 공격':e.pattern==='rush'?'돌진 예고':e.pattern==='combo'?(e.followup?'연속 베기 · 2타':'연속 베기 · 1타'):e.pattern==='volley'?(e.followup?'연사 · 2발':'연사 · 1발'):'공격 예고',e.tx,e.ty+5,'#f8d5b8',10);}
       const target=root.ObjectiveModel?ObjectiveModel.resolve(g).target:g.target(),objects=[];
       for(const b of a.blocks)objects.push({y:b.y+b.h,draw:()=>prop(c,b,a.theme)});
       for(const b of scene.decorations)objects.push({y:b.y,draw:()=>b.kind==='production-foreground'?WorldArt.foreground?.(c,b):bamboo(c,b.x,b.y,b.scale,t)});
       for(const o of (g.points?g.points():a.points).filter(o=>root.JourneyRules?JourneyRules.visiblePoint(g,o):!root.ChronicleRules||ChronicleRules.visiblePoint(g,o)))objects.push({y:o.y,draw:()=>{
         const selected=target?.id===o.id,near=dist(o,p)<230;
-        if(['portal','gate','exit','fate-gate','story-gate','journey-gate'].includes(o.kind))portal(c,o,t,a.theme,o.need>g.progress);
-        else if(['discovery','experiment'].includes(o.kind)&&root.JourneyArt)JourneyArt.prop(c,o,t);
+        if(['portal','gate','exit','fate-gate','story-gate','journey-gate','later-gate'].includes(o.kind))portal(c,o,t,a.theme,o.need>g.progress);
+        else if(['discovery','experiment','later-device'].includes(o.kind)&&root.JourneyArt)JourneyArt.prop(c,o,t);
         else if(['mechanism','story-clue'].includes(o.kind)&&root.WuxiaArt)WuxiaArt.mechanism(c,o,t);
         else if(o.kind==='relic')FateArt.relic(c,o,t,g.fate.proven.includes(o.path));
         else if(o.kind==='scar')ClassicArt.scar(c,o,t,g);

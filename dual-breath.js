@@ -4,8 +4,8 @@
  function status(g){const r=runtime(g);return {discount:r.discount,opening:Math.max(0,r.opening-g.playTime)};}
  function valid(g,e,c){return g.laterStory?.dualBreath&&c?.manual&&!g.trial&&e&&!e.trial&&!e.residual&&g.enemies.includes(e)&&!(e.boss&&g.bossLocked());}
  function contact(g,e,c){if(!valid(g,e,c))return;const r=runtime(g),key=c.id+':'+c.family;if(r.seen.has(key))return;r.seen.add(key);if(r.seen.size>128)r.seen.delete(r.seen.values().next().value);
-  if(g.journey.breath==='flow'){if(r.last&&r.last.family!==c.family&&g.playTime-r.last.at<=4){r.discount=6;e.dualSuppressedUntil=g.playTime+6;g.onDualLink?.(e);g.toast('쌍계 호흡 · 다음 유료 무공 내력 -6');}r.last={family:c.family,at:g.playTime};}
-  else if(c.family==='sword'&&c.action==='attack'&&c.focus){r.opening=g.playTime+4;g.toast('쌍계 호흡 · 재생의 틈이 드러났습니다.');}
+  if(g.journey.breath==='flow'){if(r.last&&r.last.family!==c.family&&g.playTime-r.last.at<=(g.dualAssist?8:4)){r.discount=6;e.dualSuppressedUntil=g.playTime+6;g.onDualLink?.(e);g.toast('쌍계 호흡 · 다음 유료 무공 내력 -6');}r.last={family:c.family,at:g.playTime};}
+  else if(c.family==='sword'&&c.action==='attack'&&c.focus){r.opening=g.playTime+(g.dualAssist?8:4);g.toast('쌍계 호흡 · 재생의 틈이 드러났습니다.');}
   else if(c.family!=='sword'&&r.opening>g.playTime){r.opening=0;e.dualSuppressedUntil=g.playTime+6;g.onDualLink?.(e);g.toast('쌍계 호흡 · 재생 6초 정지');}
  }
  P.skillInfo=function(action){const info=old.skillInfo.call(this,action);return info&&this.laterStory?.dualBreath&&runtime(this).discount&&info.cost>0?{...info,cost:Math.max(1,info.cost-6)}:info;};
