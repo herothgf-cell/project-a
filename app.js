@@ -40,7 +40,7 @@
     WorldArt.portrait($('portrait'),portrait);$('dialogActions').replaceChildren();
     actions.forEach(a=>{const b=node('button',a.secondary?'secondary':a.danger?'danger':'primary',a.label);b.disabled=!!a.disabled;b.addEventListener('click',()=>{queued=[];if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(a.run)a.run();});$('dialogActions').append(b);});
     $('closeDialog').hidden=!!introUI?.active;
-    if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
+    if(!dialog.open)dialog.showModal();dialog.scrollTop=0;$('dialogBody').scrollTop=0;
     ($('dialogActions').querySelector('button:not(:disabled):not(.danger)')||$('closeDialog')).focus({preventScroll:true});
   }
   function legendOffer(event){
@@ -73,10 +73,10 @@
     show('나의 기연 · 기억의 장',body,actions,'hero','내 발걸음에 남은 이야기');
   }
   function fateChoice(){
-    const f=g.fate,body=node('div');body.append(node('p','','네가 직접 증명한 길만 받아들일 수 있습니다. 이미 완성한 이야기와 무공은 계열을 바꾸어도 사라지지 않습니다. 거점에서 재수련은 무료입니다.'));
+    const f=g.fate,body=node('div');body.append(node('p','','직접 증명한 무공을 계승합니다. 기술의 효과를 살펴보고 선택하세요.'));
     for(const id of f.proven){const path=Fate.PATHS[id];body.append(node('h3','',path.name),node('p','',path.skills.map((sk,i)=>`${['Q','R','F'][i]} · ${sk[0]}: ${sk[4]}`).join('\n')));}
     if(!f.proven.length)body.append(node('p','','먼저 무명 비경의 흔적을 조사하고, 임시 무공으로 시험을 통과하세요.'));
-    show('백련 · 너의 호흡을 받아들여라',body,[...f.proven.map(id=>({label:Fate.PATHS[id].name+' 수락',run:()=>{g.acceptFate(id);processEvents();persist();update();}})),{label:'더 생각해 보기',secondary:true}],'master','선택형 연습 · 이미 겪은 호흡의 재해석');
+    show('무공 · 첫 계승',body,[...f.proven.map(id=>({label:Fate.PATHS[id].name+' 수락',run:()=>{g.acceptFate(id);processEvents();persist();update();}})),{label:'더 생각해 보기',secondary:true}],'hero','계승할 무공 선택');
   }
   function trialPrompt(event){show(event.title,event.text,[{label:'공명 시험 시작',run:()=>{g.beginTrial(event.path);processEvents();persist();update();}},{label:'지금은 관찰만',secondary:true}],'hero','선택형 기억 연습 · 현장 발현과 별개');}
   function story(event){

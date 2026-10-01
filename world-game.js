@@ -42,7 +42,7 @@
   breakthrough(){return Growth.worldOf(this)==='murim'&&super.breakthrough();}
   grantExperience(info){return Growth.grantExperience(this,info);}
   activeFamily(){return this.worldGrowth?this.worldGrowth[Growth.worldOf(this)].equipped:this.fate.path;}
-  acceptFate(path){const ok=super.acceptFate(path);if(ok&&this.worldGrowth)this.worldGrowth.murim.equipped=path;return ok;}
+  acceptFate(path){if(this.worldGrowth&&this.worldGrowth.murim.equipped===path&&this.revision.inherited.includes(path))return false;const ok=super.acceptFate(path);if(ok&&this.worldGrowth)this.worldGrowth.murim.equipped=path;return ok;}
   awaken(path){const ok=super.awaken(path);if(ok&&this.worldGrowth)this.worldGrowth.murim.equipped=path;return ok;}
   emit(type,extra){if(this.worldGrowth&&type==='transfer')return;return super.emit(type,extra);}
   reward(e){if(e.comparison){e.rewarded=true;return;}if(!this.worldGrowth)return super.reward(e);const w=Growth.worldOf(this),before=this.level,xp=this.xp,events=this.events.length;super.reward(e);const after=this.level;let amount=this.xp-xp;for(let level=before;level<after;level++)amount+=70+level*45;this.worldGrowth[w].level=before;this.worldGrowth[w].xp=xp;this.events=this.events.filter((e,i)=>i<events||e.type!=='level-up');if(amount>0)this.grantExperience({world:w,amount});}
