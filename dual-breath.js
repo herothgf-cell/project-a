@@ -18,5 +18,5 @@
  P.takeHit=function(e){const r=runtime(this),charges=this.combat.charges,previous=r.cast;r.cast=r.guard;try{const result=old.takeHit.call(this,e);if(this.combat.charges>charges)contact(this,e,r.guard);return result;}finally{r.cast=previous;}};
  P.enter=function(...args){const ok=old.enter.apply(this,args);if(ok)reset(this);return ok;};
  P.setBreath=function(mode){const ok=old.setBreath.call(this,mode);if(ok)reset(this);return ok;};
- return {...api,status};
+ return {...api,status,contact};
 });

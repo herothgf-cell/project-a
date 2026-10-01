@@ -11,7 +11,7 @@
   return old.interact.call(this);
  };
  P.onDualLink=function(){if(this.area==='stabilization'&&S(this).six===3){this.laterRuntime.linked=true;this.laterRuntime.suppress=this.playTime+6;}};
- P.step=function(dt,input){const time=this.playTime;old.step.call(this,dt,input);const d=this.playTime-time;if(this.area!=='stabilization'||d<=0)return;const s=S(this),r=this.laterRuntime;if(s.six===1||s.six===3){if(this.playTime>=r.suppress)for(const e of this.enemies)if(e.hp>0)e.hp=Math.min(e.maxHp,e.hp+d*4);if(s.six===3&&r.linked&&!this.enemies.some(e=>e.hp>0)){s.six=4;this.toast('안정화 완료 · 서린에게 보고하세요.');}}};
+ P.step=function(dt,input){const time=this.playTime;old.step.call(this,dt,input);const d=this.playTime-time;if(this.area!=='stabilization'||d<=0)return;const s=S(this),r=this.laterRuntime;if(s.six===1||s.six===3){if(this.playTime>=r.suppress)for(const e of this.enemies)if(e.hp>0)this.regenerateEnemy?this.regenerateEnemy(e,d*4):e.hp=Math.min(e.maxHp,e.hp+d*4);if(s.six===3&&r.linked&&!this.enemies.some(e=>e.hp>0)){s.six=4;this.toast('안정화 완료 · 서린에게 보고하세요.');}}};
  P.laterObjective=function(){if(this.journey.phase!==5)return null;const s=S(this),status=s.six===0?'start':s.six===2?'learn':s.six===4?'report':'combat',destination=s.six===0||s.six>=4?{area:'city',id:'warden'}:s.six===2?{area:'village',id:'master'}:{area:'stabilization',id:'six-record'};return {kind:'story',chapter:6,purpose:'두 세계의 호흡으로 현실의 현장 안정화',condition:s.six===3?'유효 연계로 재생을 끊고 남은 적 처치':'기록 확인 → 백련과 운용 완성 → 현장 안정 → 보고',currentAction:s.six===0?'현실 기지의 서린과 후속 조사 시작':s.six===1?'안정화 현장의 기록 확인':s.six===2?'청운촌의 백련에게 흐름 전하기':s.six===3?'쌍계 호흡 연계 후 현장 위협 처치':s.six===4?'현실 기지의 서린에게 보고':'서린에게 다음 공동 조사 확인',status,destination,rewards:['쌍계 호흡 · 공동 조사 권한','보고 금화 100 · 경험치 120']};};
  return {...api};
 });

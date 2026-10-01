@@ -12,7 +12,7 @@
  P.takeHit=function(e){if(this.area==='woundDock'&&e.laterPulse){const b=battle(this);if(Math.hypot(this.player.x-b.x,this.player.y-b.y)<b.safeRadius)return;}return old.takeHit.call(this,e);};
  P.step=function(dt,input){const t=this.playTime;old.step.call(this,dt,input);const d=this.playTime-t,area=this.area;if(d<=0||!['woundPass','woundDock','woundCore'].includes(area))return;const s=S(this),r=this.laterRuntime;
   if(area==='woundDock'){const b=battle(this);r.pulse=(r.pulse||0)+d;if(r.pulse>=b.pulseInterval){r.pulse=0;this.effect('seal',b.x,b.y,{range:b.safeRadius,life:1,max:1});if(this.playTime>=r.suppress)this.takeHit({laterPulse:true,residual:true,id:'world-pressure',name:'되돌아오는 압력',x:this.player.x+20,y:this.player.y,hp:1,damage:14});}}
-  if(area==='woundCore'&&this.playTime>=r.suppress)for(const e of this.enemies)if(e.hp>0)e.hp=Math.min(e.maxHp,e.hp+d*5);
+  if(area==='woundCore'&&this.playTime>=r.suppress)for(const e of this.enemies)if(e.hp>0)this.regenerateEnemy?this.regenerateEnemy(e,d*5):e.hp=Math.min(e.maxHp,e.hp+d*5);
   if(!r.linked||this.enemies.some(e=>e.hp>0))return;
   if(area==='woundPass'&&s.seven===1){s.passOpened=true;s.seven=2;api.record(this,'seven-pass','무림의 압력을 흘려 현실 안전 영역을 넓혔다.');this.toast('무림 준비 완료 · 현실 공동 방어선의 파동이 약해졌습니다.');}
   if(area==='woundDock'&&s.seven===2){s.dockStabilized=true;s.coreOpened=true;s.seven=3;api.record(this,'seven-dock','현실 안정 결과로 무림 중심부의 길을 열었다.');this.toast('현실 안정 완료 · 청운촌의 천흔 중심부 개방');}

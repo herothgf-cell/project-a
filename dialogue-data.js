@@ -22,7 +22,7 @@
  };
  const scenes=Object.fromEntries(Object.entries(authored).map(([id,rows])=>[id,rows.map(r=>scene(...r))]));
  const titles={'백련 · 첫 번째 호흡':'chapter-1','백련 · 경계를 베는 검':'training-2','서린 · 현실에 남은 검':'reality-test','제2장 · 잔월의 서약':'chapter-2','백련 · 잔월의 흔적':'temple','제3장 · 이름 없는 전설':'chapter-3','서린 · 돌아오지 못한 사람':'chapter-4','서린 · 기록에 없는 귀환자':'chapter-5','서린 · 먼저 움직인 사람':'certification'};
- function lookup(title,text,portrait){if(titles[title])return scenes[titles[title]];if(portrait==='system')return null;const name=Object.keys(portraits).find(k=>portraits[k]===portrait)||'이야기';return [scene(name,text.replace(/^(서린|백련|윤서|연화|도겸):\s*/,''))];}
+ function lookup(title,text,portrait){if(titles[title])return scenes[titles[title]];if(portrait==='system')return null;const name=Object.keys(portraits).find(k=>portraits[k]===portrait)||'이야기',parts=text.split(/(?=^(?:서린|백련|윤서|연화|도겸):\s*)/m).filter(Boolean);return parts.map(part=>{const m=part.match(/^(서린|백련|윤서|연화|도겸):\s*([\s\S]*)$/);return scene(m?m[1]:name,(m?m[2]:part).trim());});}
  function sequence(pages,actions){let index=0,done=false;return {get index(){return index;},next(){index=Math.min(pages.length-1,index+1);},skip(){index=pages.length-1;},choose(i){if(done||index!==pages.length-1||!actions[i]||actions[i].disabled)return;done=true;actions[i].run?.();}};}
  return {scenes,lookup,sequence,scene};
 });
