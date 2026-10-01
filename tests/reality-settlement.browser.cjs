@@ -1,0 +1,5 @@
+const {run}=require('./browser-harness.cjs'),assert=require('node:assert/strict');
+run(async p=>{for(const family of ['ripple','echo','seal']){
+ const result=await p.evaluate(family=>{const g=__game;g.progress=12;g.training=3;g.fate.stage=2;g.fate.discovered.push(family);g.fate.proven.push(family);g.enter('village');g.acceptFate(family);g.enter('city');g.equipReality(family);g.beginComparison();g.events=[];g.player.invuln=0;const e=g.enemies[0];Object.assign(e,{wind:.15,tx:g.player.x,ty:g.player.y,range:62});const ok=g.act('signature1');if(family==='ripple')g.takeHit(e);if(family==='echo')for(let i=0;i<5;i++)g.step(.05);const status=g.realityStatus(family),motion=g.player.motion?.instance?.input;g.enter('city');const restored=WorldGame.Game.load(g.save()).realityStatus(family);return {ok,status,restored,motion};},family);
+ assert.equal(result.ok,true);assert.equal(result.status,'settled');assert.equal(result.restored,'settled');assert.equal(result.motion,'signature1');
+ }console.log('three reality families: real effects, animation and save passed');});

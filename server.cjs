@@ -5,7 +5,7 @@ const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=
 function createServer({artReview=false}={}){
  const archived=require('./scripts/legacy-assets.cjs').payloads(__dirname);
  const Art=require('./art-loader.js'),allowed=new Set([...assets,'art-loader.js','assets/art/manifest.json']);
- for(const name of ['save-slots','world-growth','world-achievements','save-v10','world-game'])allowed.add(name+'.js');
+ for(const name of ['save-slots','world-growth','world-achievements','reality-skills','save-v10','world-game'])allowed.add(name+'.js');
  for(const file of ['controls.js','revision.js','progression.js','martial-tree.js','contract-ui.js','progression-ui.js','progression.css','intro-ui.js','growth-ui.js','revision.css',...['signal','stone','return','report','compare'].map(id=>'assets/art/intro/'+id+'.webp')])allowed.add(file);
   for(const name of ['chapter-seven.js','dual-breath.js','later-story-data.js','chapter-six.js','growth-model.js','dialogue-data.js','dialogue-ui.js','quest-data.js','economy.js','save-v9.js','objective-model.js','objective-ui.js','feedback-two.css'])allowed.add(name);
   const catalog=Art.createCatalog(JSON.parse(fs.readFileSync(path.join(__dirname,'assets/art/manifest.json'))));
