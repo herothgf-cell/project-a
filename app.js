@@ -1,8 +1,8 @@
 /* Browser adapter: input lifecycle, modal flow, save migration, and readable HUD. */
 (function(){
   'use strict';
-  const {Game,AREAS,QUESTS,SKILLS,VERSION,dist,Fate,Legend}=DualWorld;
-  const $=id=>document.getElementById(id),SAVE='dualworld.save.v1',BACKUP='dualworld.backup.v1';
+  const {Game,AREAS,QUESTS,SKILLS,VERSION,dist,Fate,Legend}=globalThis.WorldGame||DualWorld;
+  const $=id=>document.getElementById(id),SAVE=SaveSlots.keys.current,BACKUP=SaveSlots.keys.backup;
   const dialog=$('dialog'),renderer=new WorldRenderer($('canvas'),$('mini'));
   const perfEnabled=new URLSearchParams(location.search).get('perf')==='1';
   const perf=perfEnabled?new PerfMeter():null;
@@ -23,6 +23,7 @@
     try{const raw=localStorage.getItem(SAVE);hasSave=raw!==null;if(raw!==null)resume=Game.load(raw);}
     catch(error){$('titleError').textContent='저장 데이터를 읽을 수 없습니다. 기존 데이터는 유지됩니다. 새 여정은 확인 후 시작합니다.';}
     $('continue').hidden=!resume;$('start').className=resume?'secondary':'primary';
+    if(!$('legacyOptions')){const box=node('div');box.id='legacyOptions';const link=node('a','','v0.11.0 보관판 열기');link.href='legacy/v011/';box.append(link);try{const raw=SaveSlots.read(localStorage,SaveSlots.keys.legacyOriginal);if(raw!==null){box.append(node('p','','이전 기록은 보관됩니다. 개편판은 별도 여정으로 시작합니다.'));const b=node('button','secondary','이전 기록 원문 다운로드');b.onclick=()=>exportSave(raw,'ssanggye-v011-original.json');box.append(b);}}catch{}$('titleError').after(box);}
   }
   function backup(force=false){try{const raw=localStorage.getItem(SAVE);if(raw!==null&&(force||!localStorage.getItem(BACKUP)))localStorage.setItem(BACKUP,raw);}catch(error){/* Storage may be unavailable; never block play. */}}
   function persist(){
