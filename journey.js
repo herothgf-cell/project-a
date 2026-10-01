@@ -15,7 +15,7 @@
   g.emit('interpretation',{key,title:'이름보다 먼저 움직인 힘',text:D.facts['proof-'+key]+'\n\n'+v.name+'\n'+v.description,portrait:'hero'});return true;
  }
  P.points=function(){const seed=S(this).seed%3,sites=[420,800,1140];return AREAS[this.area].points.map(o=>{if(this.area!=='archive'||!['discovery','experiment'].includes(o.kind))return o;const i=D.paths.indexOf(o.path);return {...o,x:sites[(i+seed)%3]+(o.kind==='experiment'?65:0),y:(o.kind==='experiment'?570:480)+[0,25,-25][seed]};});};
- function visiblePoint(g,o){if(!api.visiblePoint(g,o))return false;const s=S(g);if(o.id==='archiveGate')return g.progress>=2;if(o.id==='stationGate')return s.phase>=3;if(o.id==='partner'&&s.companion)return false;if(o.path==='station')return true;
+ function visiblePoint(g,o){if(!api.visiblePoint(g,o))return false;const s=S(g);if(o.id==='archiveGate')return g.progress>=2;if(o.id==='stationGate')return s.phase>=3;if(o.path==='station')return true;
   if(o.kind==='discovery')return s.facts.some(f=>f.id===(o.path==='station'?'station-sense':'sense-'+o.path))||R(g).sense>0&&dist(g.player,o)<=g.senseRange();return true;}
  P.nearestPoint=function(){return this.points().filter(o=>visiblePoint(this,o)&&dist(o,this.player)<90).sort((a,b)=>dist(a,this.player)-dist(b,this.player))[0]||null;};
  P.senseRange=function(){return 260+(S(this).lens?80:0);};

@@ -19,14 +19,14 @@ def main():
   p.evaluate("()=>{const g=__game;g.experimentRuntime.pulse={path:'echo',x:g.player.x,y:g.player.y,wind:1.5,max:1.5};g.player.cool.dash=0;g.player.face=0;}")
   p.keyboard.press('Space');p.wait_for_function('__game.experimentRuntime.echo?.moved');p.keyboard.press('KeyJ');p.wait_for_function("__game.journey.known.includes('echo-replay')")
   expect(p.locator('#dialogTitle')).to_contain_text('이름보다');p.screenshot(path=str(out/'first-interpretation.png'));p.get_by_role('button',name='지금은 발견만 기록한다',exact=True).click()
-  p.keyboard.press('KeyN');expect(p.locator('#dialogTitle')).to_contain_text('관찰 수첩');p.get_by_role('button',name='다른 여정',exact=True).click();assert '시뮬레이션' in p.locator('#dialogBody').inner_text();assert '실제 유저' in p.locator('#dialogBody').inner_text();p.screenshot(path=str(out/'other-journeys.png'));dismiss(p)
-  results.append('sense -> real item -> dash and remote slash -> voluntary discovered interpretation; labeled rumors')
+  p.keyboard.press('KeyN');expect(p.locator('#dialogTitle')).to_contain_text('관찰 수첩');assert p.get_by_role('button',name='다른 여정',exact=True).count()==0;p.screenshot(path=str(out/'observations.png'));dismiss(p)
+  results.append('sense -> real item -> dash and remote slash -> voluntary discovered interpretation; personal observation records')
   # Arrange a valid advanced save; create chapter4 via its real interactions.
   p.evaluate("""()=>{const g=__game;g.progress=12;g.training=3;g.level=12;Object.assign(g.fate,{stage:6,path:'echo',proven:['echo'],discovered:['echo']});g.enter('city');const at=id=>Object.assign(g.player,g.points().find(o=>o.id===id));at('warden');g.interact();g.enter('returnPass');for(const e of g.enemies.filter(e=>!e.boss))g.strike(e,999999);at('winch');g.interact();for(const e of g.enemies)g.strike(e,999999);g.enter('returnDock');for(const e of g.enemies)g.strike(e,999999);g.enter('city');at('warden');g.interact();g.events=[];}""")
   p.keyboard.press('KeyE');expect(p.locator('#dialogTitle')).to_contain_text('기록에 없는');dismiss(p)
-  p.evaluate("()=>{__game.enter('archive');__game.events=[];}");p.keyboard.press('KeyN');p.get_by_role('button',name='무공 해석',exact=True).click();p.get_by_role('button',name='먹향 · 재현검 이어가기',exact=True).click();assert p.evaluate('__game.journey.phase')==2;dismiss(p)
+  p.evaluate("()=>{__game.enter('archive');__game.events=[];}");p.keyboard.press('KeyN');p.get_by_role('button',name='무공 해석',exact=True).click();p.get_by_role('button',name='먹향 · 재현검 · 이 해석 장착',exact=True).click();assert p.evaluate('__game.journey.phase')==2;dismiss(p)
   p.evaluate("()=>{__game.enter('city');__game.events=[];Object.assign(__game.player,__game.points().find(o=>o.id==='warden'));}");p.keyboard.press('KeyE');dismiss(p);assert p.evaluate('__game.journey.phase')==3
-  p.evaluate("()=>{__game.enter('station');__game.events=[];Object.assign(__game.player,__game.points().find(o=>o.id==='partner'));}");p.keyboard.press('KeyE');dismiss(p);assert p.evaluate('__game.journey.companion')
+  p.evaluate("()=>{__game.enter('station');__game.events=[];Object.assign(__game.player,__game.points().find(o=>o.id==='partner'));}");p.keyboard.press('KeyE');dismiss(p);assert p.evaluate('__game.experimentRuntime.companion') is None
   p.evaluate("()=>{Object.assign(__game.player,__game.points().find(o=>o.id==='station-lens'));}");p.keyboard.press('KeyB');p.wait_for_function("__game.journey.facts.some(f=>f.id==='station-sense')")
   p.evaluate("()=>{const g=__game;g.enemies.forEach(e=>e.cd=99);const e=g.enemies[0];Object.assign(e,{x:850,y:620,hp:3000,maxHp:3000});Object.assign(g.player,{x:745,y:620,mp:500,face:0});g.combat.echo={x:850,y:620,life:5};g.player.cool.signature2=0;}");p.keyboard.press('KeyR');p.wait_for_function('__game.journey.measured===true',timeout=3500);p.screenshot(path=str(out/'reality-reproduction.png'))
   p.evaluate("()=>{const g=__game;for(const e of g.enemies)g.strike(e,999999);}")
@@ -39,7 +39,7 @@ def main():
   expect(p.locator('#dialog')).not_to_be_visible()
   p.evaluate("()=>{__game.enter('city');__game.events=[];Object.assign(__game.player,__game.points().find(o=>o.id==='warden'));}");p.keyboard.press('KeyE');expect(p.locator('#dialogBody')).to_contain_text('C급 현장 인증');dismiss(p)
   p.locator('#menu').click();p.get_by_role('button',name='타이틀로',exact=True).click();p.locator('#continue').click();assert p.evaluate('__game.journey.phase')==5;assert p.evaluate('__game.journey.seed')>0;assert not errors,errors
-  results.append('chapter5 real UI: legacy finish -> choice -> ally -> sense -> delayed skill -> certification -> save/continue')
+  results.append('chapter5 real UI: legacy finish -> choice -> adviser -> sense -> delayed skill -> certification -> save/continue')
   ctx.close()
   for w,h in [(390,844),(360,640),(844,390)]:
    ctx=b.new_context(viewport={'width':w,'height':h},device_scale_factor=2,is_mobile=True,has_touch=True);ctx.add_init_script(HOOK);p=ctx.new_page();p.on('pageerror',lambda e:errors.append(str(e)));load(p,a.url);new_game(p)

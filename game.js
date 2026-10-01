@@ -30,8 +30,8 @@
       else {
         const scale=id==='harbor'?1+Math.min(this.harborClears,30)*.15:id==='rift'?1+Math.min(this.clears,30)*.12:1;
         a.positions.forEach(([x,y],i)=>{
-          const boss=i===a.positions.length-1,hp=Math.round((boss?a.bossHp:a.hp)*scale);
-          this.enemies.push({id:'enemy-'+i,x,y,r:boss?31:19,boss,hp,maxHp:hp,name:boss?a.boss:a.mob,kind:boss?a.bossKind:a.mobKind,damage:Math.round((boss?a.damage*1.7:a.damage)*scale),speed:boss?78:94,cd:.6+i*.09,wind:0,windMax:1,tx:x,ty:y,range:boss?130:64,flash:0,attacks:0,pattern:'strike',rewarded:false});
+          const boss=i===a.positions.length-1,tier=id==='forest'?1.2:1.35,hp=Math.round((boss?a.bossHp:a.hp)*scale*tier);
+          this.enemies.push({id:'enemy-'+i,x,y,r:boss?31:19,boss,hp,maxHp:hp,name:boss?a.boss:a.mob,kind:boss?a.bossKind:a.mobKind,damage:Math.round((boss?a.damage*1.7:a.damage)*scale*(id==='forest'?1.15:1.25)),speed:boss?90:108,cd:.6+i*.09,wind:0,windMax:1,tx:x,ty:y,range:boss?130:64,flash:0,attacks:0,pattern:'strike',rewarded:false});
         });
       }
       Fate.entry(this);Legend.enter(this);this.emit('area',{text:a.name});
@@ -219,15 +219,18 @@
           if(e.wind<=0){
             Legend.impact(this,e);
             this.effect('impact',e.tx,e.ty,{range:e.range,pattern:e.pattern,life:.42,max:.42});
-            if(e.pattern==='dive'){this.move(e,e.tx-e.x,e.ty-e.y);}
+            if(e.pattern==='dive'||e.pattern==='rush'){this.move(e,e.tx-e.x,e.ty-e.y);}
             if(Math.hypot(p.x-e.tx,p.y-e.ty)<e.range+p.r*.4&&p.invuln<=0){
               this.takeHit(e);
             }
             e.cd=e.boss?(e.hp<e.maxHp*.5?1.2:1.7):1.5;
+            if(!e.trial&&!e.followup&&['combo','volley'].includes(e.pattern)&&this.lineClear(e,p)&&d<(e.pattern==='combo'?130:340)){e.followup=true;e.windMax=e.pattern==='combo'?.65:.8;e.wind=e.windMax;e.tx=p.x;e.ty=p.y;}else e.followup=false;
           }
         }else if(d<(e.boss?270:e.kind==='shade'||e.kind==='drone'?240:100)&&e.cd<=0&&this.lineClear(e,p)){
           e.attacks++;e.windMax=e.trial?1.3:e.boss?(e.hp<e.maxHp*.5?.75:1):.85;e.wind=e.windMax;
-          e.pattern=e.boss&&e.attacks%2===0?'sweep':e.boss&&['tide','guardian'].includes(e.kind)?'dive':'strike';
+          const ranged=['shade','drone'].includes(e.kind);e.followup=false;
+          e.pattern=e.trial?'strike':ranged&&e.attacks%2===0?'volley':!ranged&&e.attacks%3===0?'rush':!ranged&&e.attacks%2===0?'combo':e.boss&&['tide','guardian'].includes(e.kind)?'dive':'strike';
+          if(e.boss&&e.attacks%4===0)e.pattern='sweep';if(e.pattern==='rush')e.wind=e.windMax=1.05;
           e.tx=e.pattern==='sweep'?e.x:p.x;e.ty=e.pattern==='sweep'?e.y:p.y;e.range=e.pattern==='sweep'?175:e.boss?108:e.kind==='shade'||e.kind==='drone'?72:62;
         }else if(d<570&&d>60&&e.root<=0){
           const angle=Math.atan2(p.y-e.y,p.x-e.x),before={x:e.x,y:e.y};this.move(e,Math.cos(angle)*e.speed*Fate.speed(this,e)*dt,Math.sin(angle)*e.speed*Fate.speed(this,e)*dt);

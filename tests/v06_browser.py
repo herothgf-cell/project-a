@@ -81,7 +81,7 @@ def main():
             p2.keyboard.press('KeyE');expect(p2.locator('#dialog')).to_be_visible();assert '가게' in p2.locator('#dialogBody').inner_text();assert p2.locator('#portrait').get_attribute('data-portrait')=='yeonhwa'
             if path=='ripple':p2.screenshot(path=str(out/'returned-npc.png'))
             dismiss(p2);p2.evaluate("()=>{__game.enter('returnDock');__game.events=[];Object.assign(__game.player,{x:750,y:610});}");p2.wait_for_timeout(200);p2.screenshot(path=str(out/f'dock-{path}.png'));assert not errors,errors
-            assert 'NPC 시뮬레이션' in p2.locator('#rumorPanel').inner_text();assert '실제 유저 채팅 아님' in p2.locator('#rumorPanel').inner_text();assert p2.locator('.rumor-entry').count()>1
+            expect(p2.locator('#rumorPanel')).not_to_be_visible()
             p2.evaluate("()=>{__game.enemies.filter(e=>!e.boss).forEach(e=>__game.strike(e,99999,'storm'));__game.strike(__game.enemies.find(e=>e.boss),99999,'storm');}");p2.wait_for_function('__game.chapter4.phase===3')
             expect(p2.locator('#dialog')).to_be_visible();expect(p2.locator('#dialogTitle')).to_have_text('건너온 울림 · 귀환 부두 안정');dismiss(p2)
             p2.evaluate("()=>{__game.enter('city');__game.events=[];const o=DualWorld.AREAS.city.points.find(o=>o.id==='warden');Object.assign(__game.player,{x:o.x,y:o.y});}");p2.keyboard.press('KeyE');p2.wait_for_function('__game.chapter4.phase===4');dismiss(p2)
@@ -89,13 +89,13 @@ def main():
             p2.locator('#menu').click();p2.get_by_role('button',name='타이틀로',exact=True).click();p2.locator('#continue').click();p2.wait_for_function('__game.chapter4.phase===4');assert p2.evaluate('__game.chapter4.route')==path
             print('complete',path,flush=True);results.append(f'{path}: timed skill rescue, open collision, returned NPC, new battle, ending, save/continue');ctx2.close()
         # News never asks the player to believe in a populated online server; closable.
-        p.locator('#rumorToggle').click();expect(p.locator('#rumorContent')).not_to_be_visible();p.locator('#rumorToggle').click();expect(p.locator('#rumorContent')).to_be_visible();results.append('truthful NPC news disclosure and close/open')
+        expect(p.locator('#rumorPanel')).not_to_be_visible();results.append('simulated news removed from play HUD')
         ctx.close()
         for w,h in [(390,844),(360,640),(844,390)]:
             print('MOBILE',w,h,flush=True)
             ctx,p=context(viewport={'width':w,'height':h},is_mobile=True,has_touch=True,device_scale_factor=1);load(p,args.url);new_game(p)
             p.evaluate("()=>{const g=__game;g.progress=12;g.training=3;Object.assign(g.fate,{stage:6,path:'seal',discovered:['seal'],proven:['seal'],focus:100});g.enter('village');g.events=[];Object.assign(g.player,{x:650,y:610});}");p.wait_for_timeout(100)
-            selectors=['#stick','[data-action=attack]','[data-action=signature1]','[data-action=signature2]','[data-action=ultimate]','#potion','#interact','#rumorToggle','#fateJournal','#inventory'];boxes={}
+            selectors=['#stick','[data-action=attack]','[data-action=signature1]','[data-action=signature2]','[data-action=ultimate]','#potion','#interact','#fateJournal','#inventory'];boxes={}
             for s in selectors:
                 a=p.locator(s).bounding_box();assert a and a['width']>=28 and a['height']>=28,(w,h,s,a);assert a['x']>=-.5 and a['y']>=-.5 and a['x']+a['width']<=w+1 and a['y']+a['height']<=h+1,(w,h,s,a);boxes[s]=a
             for i,s in enumerate(selectors):
@@ -105,7 +105,7 @@ def main():
             def touch(x,y,i):return {'x':x,'y':y,'id':i,'radiusX':2,'radiusY':2,'force':1}
             x=p.evaluate('__game.player.x');cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[touch(sx,sy,1)]});cdp.send('Input.dispatchTouchEvent',{'type':'touchMove','touchPoints':[touch(sx+22,sy,1)]});cdp.send('Input.dispatchTouchEvent',{'type':'touchStart','touchPoints':[touch(sx+22,sy,1),touch(qx,qy,2)]});p.wait_for_function('x=>__game.player.x>x+20',arg=x);assert p.evaluate('__game.player.cool.signature1')>0
             cdp.send('Input.dispatchTouchEvent',{'type':'touchCancel','touchPoints':[]});p.wait_for_timeout(70);x=p.evaluate('__game.player.x');p.wait_for_timeout(180);assert abs(p.evaluate('__game.player.x')-x)<.1
-            p.locator('#rumorToggle').tap();expect(p.locator('#dialog')).to_be_visible();assert '실제 유저' in p.locator('#dialogBody').inner_text();p.get_by_role('button',name='돌아가기',exact=True).click();expect(p.locator('#dialog')).not_to_be_visible();p.screenshot(path=str(out/f'mobile-{w}x{h}.png'));assert not errors,errors;results.append(f'{w}x{h}: controls, multi-touch, cancel, NPC news');ctx.close()
+            p.locator('#inventory').tap();expect(p.locator('#dialog')).to_be_visible();p.get_by_role('button',name='돌아가기',exact=True).click();expect(p.locator('#dialog')).not_to_be_visible();p.screenshot(path=str(out/f'mobile-{w}x{h}.png'));assert not errors,errors;results.append(f'{w}x{h}: controls, multi-touch, cancel, growth screen');ctx.close()
         b.close()
     result={'passed':len(results),'mode':'HTTP / native storage' if args.url else 'offline document / storage shim','checks':results,'page_errors':errors};(out/'results.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False,indent=2))
 if __name__=='__main__':main()

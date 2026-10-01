@@ -31,9 +31,6 @@
   };
   state.prepare=world=>{state.ensureWorld(world);return preparation||Promise.resolve(true);};
   retry.onclick=()=>{images.retryFailures();retry.hidden=true;const world=state.targetWorld||'reality';preparedWorld=null;failedWorld=null;state.ensureWorld(world);dispatchEvent(new Event('wuxia-assets-ready'));};
-  const badge=document.createElement('div');badge.id='artPreviewBadge';badge.textContent='제작 검수 · 양 세계 주인공 동작 8방향 후보 · 시각·지역 검수 진행 중 · 미배포';
-  if(globalThis.SSANGGYE_PROTOTYPE)badge.textContent='프로토타입 · 후보 아트 / 일부 방향·지역은 간소화 표현 · 최종 아트 검수 미완료';
-  badge.style.cssText='position:fixed;bottom:23px;left:10px;z-index:200;background:#152432e8;color:#ffe1a3;font:11px system-ui;padding:5px 8px;pointer-events:none;max-width:85vw';document.body.append(badge);
    const begin=RealmArt.begin,enemyObservations=new Map(),portraitRequests=new WeakMap();let game,portraitWorld;
   addEventListener('wuxia-assets-ready',()=>{
    portraitWorld=null;if(!game)return;

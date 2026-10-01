@@ -26,10 +26,7 @@ def main():
   if a.baseline:return
   p.wait_for_timeout(120);assert p.locator('#game').get_attribute('data-realm')=='modern';expect(p.locator('#realmBadge')).to_contain_text('현실');expect(p.locator('#mapWorld')).to_contain_text('현실')
   p.screenshot(path=str(out/'city.png'));assert p.evaluate("Presentation.worldStyle(DualWorld.AREAS.city).architecture")=='modern'
-  expect(p.locator('#rumorPanel')).to_contain_text(DISCLOSURE)
-  for name in ['전체','월드','서버','모집','시스템']:
-   b=p.locator('#rumorPanel').get_by_role('tab',name=name,exact=True);b.click();expect(b).to_have_attribute('aria-selected','true');expect(p.locator('#rumorPanel .news-disclosure')).to_be_visible();expect(p.locator('#rumorPanel .news-disclosure')).to_have_text(DISCLOSURE)
-  p.screenshot(path=str(out/'news.png'));checks.append('modern world identity, five working news filters and persistent simulation disclosure')
+  expect(p.locator('#rumorPanel')).not_to_be_visible();checks.append('modern world identity and removed simulated news')
   p.evaluate("__game.progress=2;__game.training=1;__game.enter('village');__game.events=[]");p.wait_for_timeout(130);assert p.locator('#game').get_attribute('data-realm')=='martial';p.screenshot(path=str(out/'village.png'))
   print('guide help',flush=True);p.keyboard.press('KeyH');expect(p.locator('#dialogTitle')).to_contain_text('처음 해보기');p.get_by_role('button',name='길잡이 켜고 직접 해보기',exact=True).click();p.wait_for_timeout(120);assert p.evaluate('__game.guideActive');expect(p.locator('#objectiveTarget')).to_contain_text('환서정')
   print('guide travel',flush=True);p.evaluate("()=>{const o=__game.points().find(x=>x.id==='archiveGate');Object.assign(__game.player,{x:o.x,y:o.y});}");p.keyboard.press('KeyE');p.wait_for_function("__game.area==='archive'")
@@ -42,12 +39,9 @@ def main():
   p.evaluate("__game.enter('rift');__game.events=[];__game.enemies.forEach(e=>e.cd=999)");p.wait_for_timeout(80);p.screenshot(path=str(out/'rift-enemies.png'));ctx.close()
   for w,h in [(390,844),(360,640),(844,390)]:
    ctx,p=start(w,h,True);p.evaluate("__game.progress=2;__game.training=1;Object.assign(__game.fate,{path:'echo',discovered:['echo'],proven:['echo']});__game.enter('archive');__game.events=[]");p.wait_for_timeout(160)
-   check_boxes(p,['#sense','#fieldNotes','#helpButton','#stick','#interact','#potion','#rumorToggle','#fateJournal','#inventory','[data-action=attack]','[data-action=signature1]','[data-action=signature2]','[data-action=ultimate]'],w,h)
-   p.locator('#rumorToggle').click();expect(p.locator('#dialogBody')).to_contain_text(DISCLOSURE)
-   for name in ['월드','서버','모집','시스템','전체']:
-    tab=p.locator('#dialogBody').get_by_role('tab',name=name,exact=True);tab.click();expect(tab).to_have_attribute('aria-selected','true');expect(p.locator('#dialogBody .news-disclosure')).to_be_visible()
-   p.screenshot(path=str(out/f'news-{w}x{h}.png'));base.dismiss(p);p.locator('#helpButton').click();expect(p.locator('#dialogTitle')).to_contain_text('처음 해보기');p.screenshot(path=str(out/f'help-{w}x{h}.png'));p.get_by_role('button',name='혼자 살펴보기',exact=True).click();assert not p.evaluate('__game.guideActive')
-   p.screenshot(path=str(out/f'field-{w}x{h}.png'));ctx.close();checks.append(f'{w}x{h}: unobstructed controls, disclosed tabs, readable help and cancel')
+   check_boxes(p,['#sense','#fieldNotes','#helpButton','#contractButton','#stick','#interact','#potion','#fateJournal','#inventory','[data-action=attack]','[data-action=signature1]','[data-action=signature2]','[data-action=ultimate]'],w,h)
+   expect(p.locator('#rumorPanel')).not_to_be_visible();p.locator('#helpButton').click();expect(p.locator('#dialogTitle')).to_contain_text('처음 해보기');p.screenshot(path=str(out/f'help-{w}x{h}.png'));p.get_by_role('button',name='혼자 살펴보기',exact=True).click();assert not p.evaluate('__game.guideActive')
+   p.screenshot(path=str(out/f'field-{w}x{h}.png'));ctx.close();checks.append(f'{w}x{h}: unobstructed controls, removed news, readable help and cancel')
   ctx=browser.new_context(viewport={'width':1280,'height':800},reduced_motion='reduce');ctx.add_init_script(base.HOOK);p=ctx.new_page();p.on('pageerror',lambda e:errors.append(str(e)));base.load(p,a.url);base.new_game(p);p.keyboard.press('KeyJ');p.wait_for_timeout(600);assert not p.evaluate('RealmArt.pose(__game.player).active');ctx.close();checks.append('reduced motion uses the real recovery clock; no permanently frozen attack pose')
   browser.close()
  assert not errors,errors

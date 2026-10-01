@@ -58,12 +58,15 @@
  function guide(g,path){
   const a=AREAS[g.area],points=g.points?g.points():a.points,s=g.journey;
   if(g.progress<2)return {stage:'locked',title:'먼저 기본기를 익히세요',text:'청운촌의 백련과 재회하여 월영참을 배우면 기감을 사용할 수 있습니다.',target:null};
+  const active=path||g.guidePath||g.fate.path;
+  if(g.area!=='archive'&&active===g.fate.path&&s.known.includes(s.selected[active]))return {stage:'equipped',title:'해석 장착 완료 · 본편 이어가기',text:'장착한 해석은 이미 적용 중입니다. '+g.objective().text,target:g.objective().target,path:active};
   if(g.area!=='archive')return {stage:'travel',title:'환서정으로 가기 · 선택 탐험',text:a.world==='현실'?'무림으로 이동한 뒤 청운촌 남동쪽 「환서정」으로 가세요. 기존 무공을 다른 방식으로 쓰는 단서를 찾는 곳입니다.':'청운촌 남동쪽 「환서정」으로 가세요. B 기감 → 가까이 E 조사 → N 수첩 순서로 시작합니다.',target:points.find(o=>o.id===(g.area==='village'?'archiveGate':a.safe?'portal':'exit'))||null};
   const candidates=points.filter(o=>o.kind==='discovery'&&o.path!=='station');
   const o=candidates.find(o=>o.path===(path||g.guidePath||g.fate.path))||candidates.slice().sort((a,b)=>dist(a,g.player)-dist(b,g.player))[0];
   if(!o)return {stage:'done',title:'주변을 살펴보세요',text:'관찰 수첩에는 실제 발견만 남습니다.',target:null};
   const known=s.known.filter(k=>k.startsWith(o.path+'-'));
-  if(known.length)return {stage:'interpret',title:'발견한 운용을 살펴보세요',text:g.fate.path===o.path?'N 수첩 → 무공 해석에서 읽고 「이어가기」를 선택하세요. 같은 계열의 Q/R 사용법을 바꾸며 무료로 되돌릴 수 있습니다.':'새 해석은 발견했지만 해당 기연 계열을 아직 익히지 않았습니다. 기록은 보존됩니다. 나의 기연에서 계열을 확인하세요.',target:o,path:o.path};
+  if(g.fate.path===o.path&&known.includes(s.selected[o.path]))return {stage:'equipped',title:'해석 장착 완료',text:s.phase===1||s.phase===2?'새 해석을 장착했습니다. 청운촌을 거쳐 현실의 서린에게 돌아가세요.':'해석이 적용되었습니다. 다른 흔적을 자유롭게 살피거나 청운촌으로 돌아가 본편을 이어가세요.',target:points.find(p=>p.id==='exit'),path:o.path};
+  if(known.length)return {stage:'interpret',title:'발견한 운용을 살펴보세요',text:g.fate.path===o.path?'N 수첩 → 무공 해석에서 읽고 「이 해석 장착」을 선택하세요. 같은 계열의 Q/R 사용법을 바꾸며 무료로 되돌릴 수 있습니다.':'새 해석은 발견했지만 해당 기연 계열을 아직 익히지 않았습니다. 기록은 보존됩니다. 나의 기연에서 계열을 확인하세요.',target:o,path:o.path};
   if(dist(g.player,o)>230)return {stage:'approach',title:'물건 가까이 다가가기',text:'빛이 머무는 물건에 가까이 가세요. B 기감은 주변의 흔적만 드러냅니다. 멀리서 눌러도 모든 물건을 찾아주지는 않습니다.',target:o,path:o.path};
   if(!s.facts.some(f=>f.id==='sense-'+o.path))return {stage:'sense',title:'B · 기감으로 살펴보기',text:'B 또는 「기감」을 누르세요. 지금 앞에 있는 물건의 보이지 않던 기운이 드러납니다.',target:o,path:o.path};
   if(!s.items.includes(o.path))return {stage:'inspect',title:'E · 물건 조사하기',text:'물건 가까이에서 E / 「조사」를 누르세요. 읽는 것만으로 무공을 받지는 않습니다. 알아낸 사실은 N 수첩에 남습니다.',target:o,path:o.path};

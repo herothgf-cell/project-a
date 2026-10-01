@@ -4,7 +4,7 @@
  const paths=['ripple','echo','seal'];
  const variants={
   'ripple-return':{path:'ripple',name:'역파 · 반전검',glyph:'返',color:'#f3d399',description:'R 역류참 뒤 다음 기본 검격이 전방의 적을 관통합니다. 빈 검격에도 축적은 소모됩니다.'},
-  'ripple-guard':{path:'ripple',name:'잔파 · 수호진',glyph:'護',color:'#ffe5b8',description:'Q 파문세에 4초 수호진을 남깁니다. 진 안에서 받는 피해를 줄이고 동료도 보호합니다.'},
+  'ripple-guard':{path:'ripple',name:'잔파 · 수호진',glyph:'護',color:'#ffe5b8',description:'Q 파문세에 4초 수호진을 남깁니다. 진 안에서 자신이 받는 피해를 줄입니다.'},
   'echo-return':{path:'echo',name:'회향 · 귀환보',glyph:'歸',color:'#aecafa',description:'R 귀환보의 도착점에서 원형 검격이 퍼집니다. 돌아온 뒤 0.7초 무적입니다.'},
   'echo-replay':{path:'echo',name:'먹향 · 재현검',glyph:'寫',color:'#d0b3ff',description:'R은 이동하지 않고 잔향에 검격을 맡깁니다. 0.45초 뒤 잔향 위치에서 실제로 베어 냅니다.'},
   'seal-hold':{path:'seal',name:'정박 · 불동인',glyph:'定',color:'#9ee4d4',description:'Q 결계가 6초 머물며 안쪽의 첫 공격 예고를 속박으로 끊습니다.'},
