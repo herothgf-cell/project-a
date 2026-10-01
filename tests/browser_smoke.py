@@ -71,7 +71,7 @@ def main():
             page.evaluate("()=>{__game.progress=8;__game.training=2;__game.enter('ruins');__game.events=[];}");page.locator('#menu').click();page.get_by_role('button',name='거점으로 후퇴',exact=True).click();page.get_by_role('button',name='후퇴하기',exact=True).click();page.wait_for_timeout(120);assert page.evaluate('__game.area')=='village';assert page.evaluate('__game.progress')==8
             # Exported/imported schema and continue exercise browser localStorage, same key.
             seed_save_at_title(page,json.dumps(dict(version=1,area="rift",progress=6,training=2,level=5,xp=10,gold=135,potions=2,upgrade=3,clears=1)))
-            reload_page(page);page.locator('#continue').click();page.wait_for_timeout(150);assert page.evaluate('__game.progress')==6;assert page.evaluate('__game.gold')==135;assert page.evaluate('__game.area')=='city';results.append('retreat and v1 saved-game migration/continue')
+            reload_page(page);page.locator('#continue').click();page.wait_for_timeout(150);assert page.evaluate('__game.progress')==6;assert page.evaluate('__game.gold')==555;assert page.evaluate('__game.economy.legacyAttack')==12;assert page.evaluate('__game.area')=='city';results.append('retreat and v1 saved-game migration with exact upgrade refund/continue')
             for width,height in [(390,844),(360,640),(844,390)]:
                 mobile=browser.new_context(viewport={'width':width,'height':height},device_scale_factor=2,is_mobile=True,has_touch=True)
                 mobile.add_init_script(INSTRUMENT);m=mobile.new_page();me=[];m.on('pageerror',lambda e:me.append(str(e)));m.on('console',lambda x:me.append(x.text) if x.type=='error' else None);load(m);m.locator('#start').click();finish_intro(m);m.wait_for_timeout(150)

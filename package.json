@@ -1,6 +1,6 @@
 {
   "name": "dualworld-project-a",
-  "version": "0.10.3",
+  "version": "0.11.0",
   "private": true,
   "description": "쌍계 — 두 세계의 호흡. World-specific art, anchored motion, unified interface and accessible discovery guidance.",
   "scripts": {
@@ -10,8 +10,11 @@
     "test:browser:keyboard": "node tests/dialog-keyboard.browser.cjs",
     "test:browser:feedback": "node tests/feedback.browser.cjs",
     "test:browser:v010": "node tests/v010.browser.cjs",
-    "check:revision": "node --check progression.js && node --check martial-tree.js && node --check contract-ui.js && node --check progression-ui.js && node --check controls.js && node --check revision.js && node --check growth-ui.js && node --check intro-ui.js && node --check art-loader.js && node --check art-preview-runtime.js && node --check scripts/optimize-hero-art.cjs",
-    "check": "node --check presentation.js && node --check realm-art.js && node --check realm-ui.js && node --check journey-data.js && node --check journey.js && node --check cultivation.js && node --check chapter-five.js && node --check journey-art.js && node --check journey-ui.js && node --check sequel.js && node --check wuxia-direction.js && node --check wuxia-data.js && node --check wuxia-art.js && node --check legend.js && node --check classic-art.js && node --check portrait-data.js && node --check world.js && node --check fate.js && node --check fate-art.js && node --check game.js && node --check art.js && node --check render.js && node --check app.js && node --check server.cjs"
+    "check:revision": "node --check progression.js && node --check martial-tree.js && node --check contract-ui.js && node --check progression-ui.js && node --check controls.js && node --check revision.js && node --check growth-ui.js && node --check intro-ui.js && node --check art-loader.js && node --check art-preview-runtime.js && node --check scripts/optimize-hero-art.cjs && node --check objective-model.js && node --check objective-ui.js && node --check economy.js && node --check save-v9.js && node --check dialogue-data.js && node --check dialogue-ui.js && node --check quest-data.js && node --check growth-model.js && node --check dual-breath.js && node --check later-story-data.js && node --check chapter-six.js && node --check chapter-seven.js",
+    "check": "node --check presentation.js && node --check realm-art.js && node --check realm-ui.js && node --check journey-data.js && node --check journey.js && node --check cultivation.js && node --check chapter-five.js && node --check journey-art.js && node --check journey-ui.js && node --check sequel.js && node --check wuxia-direction.js && node --check wuxia-data.js && node --check wuxia-art.js && node --check legend.js && node --check classic-art.js && node --check portrait-data.js && node --check world.js && node --check fate.js && node --check fate-art.js && node --check game.js && node --check art.js && node --check render.js && node --check app.js && node --check server.cjs",
+    "test:browser:later": "node tests/later-story.browser.cjs",
+    "test:browser:dialogue": "node tests/dialogue.browser.cjs",
+    "test:browser:navigation": "node tests/navigation.browser.cjs"
   },
   "engines": {
     "node": ">=20"

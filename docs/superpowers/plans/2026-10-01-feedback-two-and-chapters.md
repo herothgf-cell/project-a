@@ -8,7 +8,9 @@
 
 **Tech Stack:** 기존 JavaScript UMD/CommonJS, Canvas, HTML/CSS, Node test runner, Playwright, Python browser regression, GitHub Pages. 제품 의존성을 추가하지 않는다.
 
-**Spec:** `docs/superpowers/specs/2026-10-01-feedback-two-design.md`, `docs/superpowers/specs/2026-10-01-chapters-six-seven-story.md`. 사용자 메시지 ‘승인 개발 진행해줘’로 두 설계 승인. 이 구현 계획은 아직 검토 전이다.
+**Spec:** `docs/superpowers/specs/2026-10-01-feedback-two-design.md`, `docs/superpowers/specs/2026-10-01-chapters-six-seven-story.md`. 사용자 메시지 ‘승인 개발 진행해줘’로 두 설계 승인. 이후 직접 순차 구현·독립 최종 검토·main 배포 승인까지 확인했다.
+
+**실행 상태 (2026-10-01):** Tasks 1–7 구현 및 독립 코드 검토 완료. Task 8의 로컬 문법 검사, 단위 검사 445개, JS 브라우저 9종, Python 브라우저 7종 통과. 아래 체크리스트는 실행 전 원본 계획이며 최종 배포 성공 여부는 해당 릴리스의 GitHub Actions와 공개 build-info로 확인한다. 검토에서 발견한 환경 파동의 가짜 처치 보상, 신규 보스의 장애물 중첩, 집중 준비 표시를 회귀 테스트로 재현하고 수정했다. 추가 화면 검수에서 좁은 화면의 목표창 겹침과 관측소 보스 보상 차이를 수정했다.
 
 ## Global Constraints
 

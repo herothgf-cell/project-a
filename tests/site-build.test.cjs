@@ -26,6 +26,7 @@ test('site build contains every versioned runtime asset and records exactly thei
   const manifest=JSON.parse(fs.readFileSync(path.join(output,'asset-manifest.json'))),info=JSON.parse(fs.readFileSync(path.join(output,'build-info.json')));
   assert.equal(info.version,require('../package.json').version);assert.equal(manifest.commit,info.commit);
   assert.ok(Object.hasOwn(manifest.assets,'chapter-five.js'));assert.ok(Object.hasOwn(manifest.assets,'journey.css'));assert.ok(!Object.hasOwn(manifest.assets,'server.cjs'));
+  for(const file of ['objective-model.js','objective-ui.js','feedback-two.css','economy.js','save-v9.js','dialogue-data.js','dialogue-ui.js','quest-data.js','growth-model.js','dual-breath.js','later-story-data.js','chapter-six.js','chapter-seven.js'])assert.ok(Object.hasOwn(manifest.assets,file),file);
   assert.ok(Object.hasOwn(manifest.assets,'assets/art/manifest.json'),'binary art catalog is packaged and hashed');
   for(const [file,sha]of Object.entries(manifest.assets)){const bytes=fs.readFileSync(path.join(output,file));assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),sha,file);}
   assert.equal(fs.existsSync(path.join(output,'tests')),false);assert.equal(fs.existsSync(path.join(output,'docs')),false);
