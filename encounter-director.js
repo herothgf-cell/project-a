@@ -1,0 +1,16 @@
+(function(root,f){const api=f();if(typeof module==='object'&&module.exports)module.exports=api;else root.EncounterDirector=api;})(globalThis,function(){
+ 'use strict';const counts={forest:7,rift:7,ruins:9,harbor:9,returnPass:9,returnDock:9,station:9,stabilization:6,woundPass:6,woundDock:6,woundCore:6};const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+ function populate(g){const n=counts[g.area];if(!n)return;const original=g.enemies,mob=original.find(e=>!e.boss),boss=original.find(e=>e.boss);if(!mob||!boss)return;const out=[],centers=[{x:mob.x,y:mob.y},original[Math.floor(original.length/2)]],per=Math.ceil((n-1)/2);
+  for(let i=0;i<n;i++){const isBoss=i===n-1,group=isBoss?2:Math.floor(i/per),role=isBoss?'boss':['pressure','heavy','ranged'][i%3],source=isBoss?boss:mob,e={...source,id:'group-'+group+'-'+i,boss:isBoss,group,role,awake:false,wind:0,attacks:0,rewarded:false};const center=isBoss?boss:centers[group];let found=false;
+   for(let radius=0;radius<=360&&!found;radius+=70)for(let a=0;a<8;a++){const x=center.x+Math.cos(a*Math.PI/4)*radius,y=center.y+Math.sin(a*Math.PI/4)*radius;if(g.blocked(x,y,e.r)||out.some(o=>distance(o,{x,y})<o.r+e.r+20))continue;Object.assign(e,{x,y,homeX:x,homeY:y,tx:x,ty:y});found=true;break;}if(!found)throw Error('적 배치 경로 오류: '+g.area);
+   const chapter=g.area==='forest'?1:['rift','ruins','harbor'].includes(g.area)?2:3;e.hp=e.maxHp=isBoss?(chapter===1?350:chapter===2?510:760):(role==='heavy'?110:role==='ranged'?70:85)+(chapter-1)*15;e.damage=isBoss?30:role==='heavy'?24:role==='ranged'?15:18;e.speed=role==='heavy'?70:role==='ranged'?65:95;e.name=(isBoss?'':role==='heavy'?'강타 · ':role==='ranged'?'사격 · ':'압박 · ')+source.name;out.push(e);
+  }g.enemies=out;
+ }
+ function step(g,dt){const groups=new Set(g.enemies.filter(e=>e.hp>0&&(distance(e,g.player)<=350||e.alerted)).map(e=>e.group));for(const e of g.enemies){if(e.group===undefined)continue;if(groups.has(e.group))e.awake=true;if(distance(e,{x:e.homeX,y:e.homeY})>600){e.returning=true;e.awake=false;e.wind=0;}if(e.returning){const dx=e.homeX-e.x,dy=e.homeY-e.y,n=Math.hypot(dx,dy);g.move(e,dx/Math.max(n,1)*100*dt,dy/Math.max(n,1)*100*dt);if(n<15){e.returning=false;e.alerted=false;}}}}
+ function allow(g,e){return e.group===undefined||e.awake&&!e.returning;}
+ function mayStartAttack(g,e){if(!allow(g,e))return false;if(e.role==='ranged')return true;return g.enemies.filter(x=>x!==e&&x.hp>0&&x.group===e.group&&x.role!=='ranged'&&x.wind>0).length<2;}
+ function prepare(g,e){if(!e.role)return;if(e.role==='heavy'){e.wind=e.windMax=1.15;e.pattern='heavy';e.range=95;}if(e.role==='ranged'){e.wind=e.windMax=1;e.pattern='shot';e.range=24;}e.telegraph={x:e.x,y:e.y,tx:e.tx,ty:e.ty,width:24};}
+ function segmentDistance(p,t){const dx=t.tx-t.x,dy=t.ty-t.y,u=Math.max(0,Math.min(1,((p.x-t.x)*dx+(p.y-t.y)*dy)/(dx*dx+dy*dy||1)));return distance(p,{x:t.x+u*dx,y:t.y+u*dy});}
+ function impact(g,e){if(e.pattern!=='shot')return false;const t=e.telegraph;if(!t)return false;g.effect('fate-chain',t.x,t.y,{path:'ripple',tx:t.tx,ty:t.ty,life:.25,max:.25});if(segmentDistance(g.player,t)<t.width+g.player.r*.4&&g.lineClear(e,g.player))g.takeHit(e);return true;}
+ return {counts,populate,step,allow,mayStartAttack,prepare,impact,segmentDistance};
+});

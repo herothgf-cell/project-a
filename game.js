@@ -214,24 +214,26 @@
       for(const e of this.enemies){
         e.flash=Math.max(0,e.flash-dt);e.stun=Math.max(0,(e.stun||0)-dt);e.root=Math.max(0,(e.root||0)-dt);if(e.stun>0)continue;if(e.hp<=0||e.boss&&this.bossLocked())continue;
         e.cd=Math.max(0,e.cd-dt);const d=dist(e,p);
+        if(this.allowEnemyStep&&!this.allowEnemyStep(e))continue;
         if(e.wind>0){
           e.wind-=dt*(Fate.speed(this,e)<1?.6:1);
           if(e.wind<=0){
             Legend.impact(this,e);
             this.effect('impact',e.tx,e.ty,{range:e.range,pattern:e.pattern,life:.42,max:.42});
             if(e.pattern==='dive'||e.pattern==='rush'){this.move(e,e.tx-e.x,e.ty-e.y);}
-            if(Math.hypot(p.x-e.tx,p.y-e.ty)<e.range+p.r*.4&&p.invuln<=0){
+            if(!this.enemyImpact?.(e)&&Math.hypot(p.x-e.tx,p.y-e.ty)<e.range+p.r*.4&&p.invuln<=0){
               this.takeHit(e);
             }
             e.cd=e.boss?(e.hp<e.maxHp*.5?1.2:1.7):1.5;
             if(!e.trial&&!e.followup&&['combo','volley'].includes(e.pattern)&&this.lineClear(e,p)&&d<(e.pattern==='combo'?130:340)){e.followup=true;e.windMax=e.pattern==='combo'?.65:.8;e.wind=e.windMax;e.tx=p.x;e.ty=p.y;}else e.followup=false;
           }
-        }else if(d<(e.boss?270:e.kind==='shade'||e.kind==='drone'?240:100)&&e.cd<=0&&this.lineClear(e,p)){
+        }else if(d<(e.role?(e.role==='ranged'?300:e.boss?270:110):e.boss?270:e.kind==='shade'||e.kind==='drone'?240:100)&&e.cd<=0&&this.lineClear(e,p)&&(!this.mayStartAttack||this.mayStartAttack(e))){
           e.attacks++;e.windMax=e.trial?1.3:e.boss?(e.hp<e.maxHp*.5?.75:1):.85;e.wind=e.windMax;
           const ranged=['shade','drone'].includes(e.kind);e.followup=false;
           e.pattern=e.trial?'strike':ranged&&e.attacks%2===0?'volley':!ranged&&e.attacks%3===0?'rush':!ranged&&e.attacks%2===0?'combo':e.boss&&['tide','guardian'].includes(e.kind)?'dive':'strike';
           if(e.boss&&e.attacks%4===0)e.pattern='sweep';if(e.pattern==='rush')e.wind=e.windMax=1.05;
           e.tx=e.pattern==='sweep'?e.x:p.x;e.ty=e.pattern==='sweep'?e.y:p.y;e.range=e.pattern==='sweep'?175:e.boss?108:e.kind==='shade'||e.kind==='drone'?72:62;
+          this.prepareEnemyAttack?.(e);
         }else if(d<570&&d>60&&e.root<=0){
           const angle=Math.atan2(p.y-e.y,p.x-e.x),before={x:e.x,y:e.y};this.move(e,Math.cos(angle)*e.speed*Fate.speed(this,e)*dt,Math.sin(angle)*e.speed*Fate.speed(this,e)*dt);
           if(dist(before,e)<.2)this.move(e,Math.cos(angle+1.1)*e.speed*Fate.speed(this,e)*dt,Math.sin(angle+1.1)*e.speed*Fate.speed(this,e)*dt);
