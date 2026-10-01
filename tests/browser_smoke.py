@@ -39,7 +39,7 @@ def main():
             page.get_by_role('button',name='타이틀로',exact=True).click()
         expect(page.locator('#title')).to_be_visible()
         expect(page.locator('#game')).not_to_be_visible()
-        page.evaluate("raw=>localStorage.setItem('dualworld.save.v1',raw)",raw)
+        page.evaluate("raw=>localStorage.setItem('dualworld.legacy.v011',raw)",raw)
     results=[]
     try:
         with sync_playwright() as p:
@@ -87,7 +87,7 @@ def main():
                 m.evaluate("document.getElementById('menu').click()");cdp.send('Input.dispatchTouchEvent',{'type':'touchCancel','touchPoints':[]});after=m.evaluate('__game.player.x');m.locator('#closeDialog').click();m.wait_for_timeout(220);assert abs(m.evaluate('__game.player.x')-after)<.1;assert not me,me
                 m.screenshot(path=str(out/f'mobile-{width}x{height}.png'));mobile.close();results.append(f'{width}x{height}: viewport, multitouch movement+attack, cancel and modal reset')
             # Corrupt storage is preserved; overwrite requires confirmation.
-            seed_save_at_title(page,"broken-save");reload_page(page);assert page.locator('#continue').is_hidden();assert '읽을 수 없' in page.locator('#titleError').inner_text();page.locator('#start').click();assert page.evaluate("localStorage.getItem('dualworld.save.v1')")=='broken-save';page.locator('#closeDialog').click();assert page.evaluate("localStorage.getItem('dualworld.save.v1')")=='broken-save';results.append('corrupt storage preserved until explicit confirmation')
+            seed_save_at_title(page,"broken-save");reload_page(page);assert page.locator('#continue').is_hidden();assert '읽을 수 없' in page.locator('#titleError').inner_text();page.locator('#start').click();assert page.evaluate("localStorage.getItem('dualworld.legacy.v011')")=='broken-save';page.locator('#closeDialog').click();assert page.evaluate("localStorage.getItem('dualworld.legacy.v011')")=='broken-save';results.append('corrupt storage preserved until explicit confirmation')
             assert not errors,errors;browser.close()
             (out/'results.json').write_text(json.dumps({'mode':'HTTP origin; real browser storage' if url else 'offline document; storage shim','passed':len(results),'checks':results,'page_errors':errors},ensure_ascii=False,indent=2),encoding='utf-8');print(json.dumps({'passed':len(results),'checks':results},ensure_ascii=False,indent=2))
     finally:

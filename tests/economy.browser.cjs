@@ -1,4 +1,4 @@
-const {run}=require('./browser-harness.cjs');
+const {run}=require('./legacy-browser-harness.cjs');
 const assert=require('node:assert/strict');
 run(async p=>{
  await p.locator('#inventory').click();

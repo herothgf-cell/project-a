@@ -1,0 +1,2 @@
+const test=require('node:test'),assert=require('node:assert/strict'),{five,six}=require('./helpers/world-journey.cjs'),{talk}=require('./world-fixtures.cjs');
+test('late chapter reward explains the two independently paid worlds',()=>{const g=five();assert.match(g.laterObjective().rewards.join(' '),/현실.*60.*무림.*60/);six(g,'ripple');talk(g,'warden');assert.match(g.laterObjective().rewards.join(' '),/현실.*90.*무림.*90/);g.laterStory.seven=5;g.laterStory.completed=true;assert.doesNotMatch(g.laterObjective().currentAction,/의뢰/);});

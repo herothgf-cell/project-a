@@ -21,12 +21,19 @@ function createServer({artReview=false}={}){
  return http.createServer((req,res)=>{
   res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('Cache-Control','no-cache');
   if(!['GET','HEAD'].includes(req.method)){res.writeHead(405,{Allow:'GET, HEAD'});return res.end('Method not allowed');}
-  let url;try{url=decodeURIComponent(new URL(req.url,'http://localhost').pathname);}catch{res.writeHead(400);return res.end('Bad request');}
+  let url,params;try{const parsed=new URL(req.url,'http://localhost');url=decodeURIComponent(parsed.pathname);params=parsed.searchParams;}catch{res.writeHead(400);return res.end('Bad request');}
+  const dev=artReview&&params.get('dev')==='1'&&['127.0.0.1','::1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress);
+  if(dev&&url==='/__dev/start'){
+   const stage=params.get('stage');if(!['new','five','six'].includes(stage)){res.writeHead(400);return res.end('Unknown start');}
+   try{const {Game}=require('./world-game.js'),{five,six}=require('./tests/helpers/world-journey.cjs');const g=stage==='new'?new Game():stage==='five'?five():six(five(),'ripple');const raw=g.save();Game.load(raw);res.writeHead(200,{'Content-Type':types['.json']});return res.end(req.method==='HEAD'?undefined:raw);}catch{res.writeHead(500);return res.end('Unable to prepare start');}
+  }
+  if(dev&&url==='/__dev/starts.js'){res.writeHead(200,{'Content-Type':types['.js']});return res.end(req.method==='HEAD'?undefined:fs.readFileSync(path.join(__dirname,'tests/dev-starts-ui.js')));}
   if(url==='/favicon.ico'){res.writeHead(204);return res.end();}
   const file=url==='/'?'index.html':url==='/legacy/v011/'?'legacy/v011/index.html':url.slice(1);if(archived.has(file)){res.writeHead(200,{'Content-Type':types[path.extname(file)]});return res.end(req.method==='HEAD'?undefined:archived.get(file));}if(!allowed.has(file)){res.writeHead(404);return res.end('Not found');}
   fs.readFile(path.join(__dirname,file==='art-play.html'?'index.html':file),(error,content)=>{
    if(error){res.writeHead(500);return res.end('Unable to read game asset');}
    if(file==='art-play.html')content=Buffer.from(require('./scripts/prototype-html.cjs').prototypeHtml(content.toString('utf8')));
+   if(dev&&['art-play.html','index.html'].includes(file))content=Buffer.from(content.toString('utf8').replace('<head>','<head><script>globalThis.SSANGGYE_DEV=true;</script>').replace('</body>','<script src="/__dev/starts.js?dev=1"></script></body>'));
    res.writeHead(200,{'Content-Type':types[path.extname(file)]});res.end(req.method==='HEAD'?undefined:content);
   });
 });}

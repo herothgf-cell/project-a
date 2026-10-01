@@ -36,6 +36,8 @@ function buildSite({root=path.join(__dirname,'..'),out,commit,requireApprovedArt
   payloads.set('art-review.html',Buffer.from(payloads.get('art-review.html').toString().replace('LOCAL REVIEW','PROTOTYPE REVIEW').replace('href="/"','href="art-play.html"')));
  }
  // Refuse stale output rather than leaving previously copied documents/candidates online.
+ // The release must have identical hashes on Windows and Linux checkouts.
+ for(const [name,bytes]of payloads)if(/\.(?:html|js|css|json)$/.test(name))payloads.set(name,Buffer.from(bytes.toString('utf8').replace(/\r\n/g,'\n')));
  if(fs.existsSync(out)&&fs.readdirSync(out).length)throw Error('Build output must be empty.');
  fs.mkdirSync(out,{recursive:true});
  for(const [name,bytes]of require('./legacy-assets.cjs').payloads(root))payloads.set(name,bytes);

@@ -23,8 +23,11 @@ def main():
      if (ROOT/f).exists():page.add_script_tag(content=(ROOT/f).read_text())
    page.locator('#start').click();finish_intro(page);page.wait_for_timeout(80)
   def dismiss(page):
-   if page.locator('#dialog').is_visible():page.locator('#dialogActions button').first.click()
+   for _ in range(12):
+    if not page.locator('#dialog').is_visible():return
+    page.locator('#dialogActions button').first.click()
   def at(page,id):
+   page.wait_for_function('!globalThis.ArtPreview || ArtPreview.ready')
    page.evaluate("id=>{const p=DualWorld.AREAS[__game.area].points.find(p=>p.id===id);__game.player.x=p.x;__game.player.y=p.y;}",id);page.keyboard.press('KeyE');page.wait_for_timeout(80)
   for path in ['ripple','echo','seal']:
    ctx=browser.new_context(viewport={'width':1440,'height':900});ctx.add_init_script(INSTRUMENT);p=ctx.new_page();load(p)
@@ -39,6 +42,7 @@ def main():
    assert p.evaluate('__game.trial.feat'), {'path':path,'combat':p.evaluate('__game.combat'),'enemy':p.evaluate('__game.enemies[0]'),'errors':errors}
    p.evaluate("()=>{const e=__game.enemies[0];__game.strike(e,e.hp,'attack');}");p.wait_for_timeout(90);p.get_by_role('button',name='거점으로 귀환',exact=True).click();at(p,'master');p.get_by_role('button',name={'ripple':'파문검','echo':'잔영보','seal':'경계봉인'}[path]+' 수락',exact=True).click();dismiss(p)
    assert p.evaluate('__game.fate.path')==path;at(p,'portal');dismiss(p);at(p,'warden');dismiss(p);at(p,'heart');p.wait_for_timeout(100)
+   assert p.evaluate('__game.area')=='heart',p.evaluate('({area:__game.area,fate:__game.fate,dialog:document.querySelector("#dialog").textContent,loading:ArtPreview.ready})')
    p.evaluate("()=>{const e=__game.enemies[0];__game.player.x=e.x-60;__game.player.y=e.y;__game.fate.focus=100;}");p.keyboard.press('KeyF');p.wait_for_timeout(60)
    assert not p.locator('#areaBanner').evaluate("e=>e.classList.contains('show')"),'ultimate and area banner must not overlap';assert p.evaluate('__game.player.cool.ultimate')>0;expect(p.locator('#ultimateBanner')).to_have_class(re.compile('show'));p.screenshot(path=str(out/f'ultimate-{path}.png'))
    p.locator('#fateJournal').click();assert {'ripple':'파문검','echo':'잔영보','seal':'경계봉인'}[path] in p.locator('#dialogBody').inner_text();p.locator('#closeDialog').click();assert not errors,errors

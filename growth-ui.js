@@ -2,6 +2,7 @@
  function create(env){const {game,show,node,grid,refresh,notes,shop,close}=env;
   function button(label,run,disabled=false){const b=node('button','secondary',label);b.disabled=disabled;b.onclick=run;return b;}
   function open(tab='status'){
+   if(game().worldGrowth&&tab!=='history'&&env.route)return env.route(tab);
    const g=game();if(g.introActive)return;const r=Revision.summary(g),j=g.journey,s=Revision.state(g),body=node('section','growth-screen'),nav=node('nav','growth-tabs');
    for(const [id,label]of [['status','상태'],['martial','무공'],['history','행적']]){const b=button(label,()=>open(id));b.classList.toggle('selected',id===tab);b.setAttribute('aria-current',id===tab?'page':'false');nav.append(b);}body.append(nav);
    if(tab==='status'){

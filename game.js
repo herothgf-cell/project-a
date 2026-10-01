@@ -173,7 +173,7 @@
       this.shake=source==='attack'?.06:.13;this.hitStop=source==='attack'?.025:.045;
       this.effect('text',e.x,e.y-50,{text:String(before-e.hp),color:source==='attack'?'#fff4d5':Fate.PATHS[Fate.active(this)]?.color||'#e2d493',life:.8,max:.8});
       this.effect('spark',e.x,e.y-20,{life:.3,max:.3});
-      if(source!=='ultimate')this.fate.focus=Math.min(100,this.fate.focus+(source==='attack'?6:11));
+      if(source!=='ultimate'&&!source.startsWith('reality-ultimate:'))this.fate.focus=Math.min(100,this.fate.focus+(source==='attack'?6:11));
       if(!e.boss&&!e.trial){const angle=Math.atan2(e.y-this.player.y,e.x-this.player.x);this.move(e,Math.cos(angle)*14,Math.sin(angle)*14);}
       Legend.hit(this,e,source);if(e.hp===0)this.reward(e);return before-e.hp;
     }

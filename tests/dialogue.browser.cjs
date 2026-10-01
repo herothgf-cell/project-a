@@ -6,5 +6,5 @@ run(async p=>{
  await p.getByRole('button',{name:'대화 건너뛰기',exact:true}).click();assert.match(await p.locator('.quest-result').innerText(),/월영참/);assert.deepEqual(await p.evaluate(()=>({gold:__game.gold,training:__game.training})),before);
  await p.keyboard.press('Enter');assert.equal(await p.locator('#dialog').evaluate(x=>x.open),false);
  await p.click('#objective');for(const text of ['수행 목표','보고 대상','예정 보상'])assert.match(await p.locator('#dialog').innerText(),new RegExp(text));
- await p.keyboard.press('Escape');await p.click('#contractButton');assert.equal(await p.locator('.contract-section').count(),4);
+ await p.keyboard.press('Escape');assert.equal(await p.locator('#contractButton').count(),0);
 });

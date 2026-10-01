@@ -71,6 +71,7 @@
       }});
       for(const e of g.enemies){if(e.hp<=0){if(root.ArtPreview?.ready&&root.Presentation?.deathVisible(e,g.playTime))objects.push({y:e.y,draw:()=>{c.save();c.globalAlpha=Math.min(1,(1.2-(g.playTime-e.motion.deathAt))/.35);human(c,e,t,e.kind,e.boss?1.72:1.08);c.restore();}});continue;}objects.push({y:e.y,draw:()=>{
         const scale=e.boss?1.72:e.trial?1.25:1.08;human(c,{...e,face:Math.atan2(p.y-e.y,p.x-e.x),walking:e.walking??(e.wind<=0&&dist(e,p)<570&&(!e.boss||!g.bossLocked()))},t,e.kind,scale);
+        if(e.realitySuppressedUntil>g.playTime){c.save();c.strokeStyle='#94ffdf';c.lineWidth=3;c.strokeRect(e.x-25,e.y-88,50,70);text(c,'재생 억제',e.x,e.y-98,'#b5ffe8',13);c.restore();}
         if(e.boss&&g.bossLocked()){c.strokeStyle='#b9d3c37a';c.lineWidth=2;c.setLineDash([8,7]);c.beginPath();c.ellipse(e.x,e.y-41,48,70,0,0,TAU);c.stroke();c.setLineDash([]);text(c,'보호막',e.x,e.y-218,'#c7d8c5',11);}
         if(!e.boss&&(e.hp<e.maxHp||dist(e,p)<180)){box(c,e.x-22,e.y-127,44,4,'#15313ae5',1);box(c,e.x-22,e.y-127,44*e.hp/e.maxHp,4,'#d8aa87',1);}
         
@@ -78,7 +79,7 @@
       if(g.experimentRuntime?.companion)objects.push({y:g.experimentRuntime.companion.y,draw:()=>JourneyArt.actor(c,g,t)});
       objects.push({y:p.y,draw:()=>{if(p.invuln>0&&p.dash>0)ellipse(c,p.x,p.y,28,12,'#c5deba66');human(c,p,t,'hero',1.15);if(!ClassicArt.spriteReady())FateArt.costume(c,g,t);text(c,g.fate.path?DualWorld.Fate.PATHS[g.fate.path].title:'윤서',p.x,p.y-140,'#fff3c6',10);}});
       objects.sort((a,b)=>a.y-b.y);for(const o of objects)if(o.y>this.camera.y-150&&o.y<this.camera.y+vh+240)o.draw();
-      for(const f of g.fx){if(root.RealmArt&&RealmArt.effect(c,f,quality,g))continue;this.effect(c,f);FateArt.effect(c,f,quality);ClassicArt.effect(c,f,quality);if(root.JourneyArt)JourneyArt.effect(c,f,quality);}
+      for(const f of g.fx){if(f.reality){FateArt.effect(c,f,quality);continue;}if(root.RealmArt&&RealmArt.effect(c,f,quality,g))continue;this.effect(c,f);FateArt.effect(c,f,quality);ClassicArt.effect(c,f,quality);if(root.JourneyArt)JourneyArt.effect(c,f,quality);}
       if(quality>0){const rng=random(842);for(let i=0;i<24;i++){const x=(rng()*a.w+t*(i%2?3:-2)+a.w)%a.w,y=(rng()*a.h+t*.7)%a.h;ellipse(c,x,y,1.2,1.2,'#eee4b54d');}}
       FateArt.atmosphere(c,g,this.camera,vw,vh,quality,t);if(target)this.marker(c,target,t);c.restore();FateArt.overlay(c,g,this.w,this.h,quality);this.edgeMarker(g);this.drawMini(g,this.mini);
     }

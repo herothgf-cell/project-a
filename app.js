@@ -2,7 +2,7 @@
 (function(){
   'use strict';
   const {Game,AREAS,QUESTS,SKILLS,VERSION,dist,Fate,Legend}=globalThis.WorldGame||DualWorld;
-  const $=id=>document.getElementById(id),SAVE=SaveSlots.keys.current,BACKUP=SaveSlots.keys.backup;
+  const $=id=>document.getElementById(id),devMode=globalThis.SSANGGYE_DEV===true&&['localhost','127.0.0.1','[::1]'].includes(location.hostname),SAVE=devMode?SaveSlots.keys.test:SaveSlots.keys.current,BACKUP=devMode?null:SaveSlots.keys.backup;
   const dialog=$('dialog'),renderer=new WorldRenderer($('canvas'),$('mini'));
   const perfEnabled=new URLSearchParams(location.search).get('perf')==='1';
   const perf=perfEnabled?new PerfMeter():null;
@@ -25,7 +25,7 @@
     $('continue').hidden=!resume;$('start').className=resume?'secondary':'primary';
     if(!$('legacyOptions')){const box=node('div');box.id='legacyOptions';const link=node('a','','v0.11.0 보관판 열기');link.href='legacy/v011/';box.append(link);try{const raw=SaveSlots.read(localStorage,SaveSlots.keys.legacyOriginal);if(raw!==null){box.append(node('p','','이전 기록은 보관됩니다. 개편판은 별도 여정으로 시작합니다.'));const b=node('button','secondary','이전 기록 원문 다운로드');b.onclick=()=>exportSave(raw,'ssanggye-v011-original.json');box.append(b);}}catch{}$('titleError').after(box);}
   }
-  function backup(force=false){try{const raw=localStorage.getItem(SAVE);if(raw!==null&&(force||!localStorage.getItem(BACKUP)))localStorage.setItem(BACKUP,raw);}catch(error){/* Storage may be unavailable; never block play. */}}
+  function backup(force=false){if(!BACKUP)return;try{const raw=localStorage.getItem(SAVE);if(raw!==null&&(force||!localStorage.getItem(BACKUP)))localStorage.setItem(BACKUP,raw);}catch(error){/* Storage may be unavailable; never block play. */}}
   function persist(){
     if(!active||introUI?.replay)return;
     try{localStorage.setItem(SAVE,g.save());$('save').textContent='저장됨';hasSave=true;lastSave=performance.now();}
@@ -108,6 +108,7 @@
     show('몸에 새겨진 힘',body,[{label:'돌아가기',secondary:true},...(AREAS[g.area].safe?[{label:'보급',run:shop}]:[])],'hero','무공 · 장비');
   }
   function shop(){
+    if(g.worldGrowth){if(!AREAS[g.area].safe)return;const body=node('div');body.append(grid([['소지 금화',g.gold],['회복약',g.potions]]),node('p','','회복약은 최대 체력의 55%를 회복합니다. 거점에서는 체력과 자원을 무료로 회복합니다.'));return show('여정을 위한 준비',body,[{label:'회복약 · 25 금화',disabled:g.gold<25||g.potions>=99,run:()=>{g.buy('potion');processEvents();persist();shop();}},{label:'돌아가기',secondary:true}],'shop','보급');}
     if(!AREAS[g.area].safe)return;const body=node('div'),balance=g.economy?.refundBalance||0;body.append(grid([['소지 금화',g.gold],['회복약',g.potions],['정산 잔액',balance]]));body.append(node('p','','회복약: 최대 체력의 55% 회복\n거점에서는 무료로 체력과 내력을 회복합니다. 공격력은 수련과 성장으로 높입니다.\n이전 버전의 남은 환급금은 금화 한도가 생기면 수령할 수 있습니다.'));
     show('여정을 위한 준비',body,[{label:'회복약 · 25 금화',disabled:g.gold<25||g.potions>=99,run:()=>{g.buy('potion');processEvents();persist();shop();}},{label:'정산 잔액 수령',disabled:!balance||g.gold>=999999,run:()=>{g.claimSettlement();processEvents();persist();shop();}},{label:'돌아가기',secondary:true}],'shop','보급');
   }
@@ -178,6 +179,7 @@
     for(const [id,action]of [['inventory','growth'],['interact','interact'],['potion','potion'],['fieldNotes','notes'],['sense','sense'],['helpButton','help']]){const el=$(id);if(el){const k=el.querySelector('kbd');if(k)k.textContent=Controls.key(action);el.setAttribute('aria-label',Controls.labels[action]+' '+Controls.key(action));}}
     const a=AREAS[g.area],s=g.stats(),p=g.player,o=ObjectiveModel.resolve(g);
     const murim=WorldGrowth.worldOf(g)==='murim';$('growthStatus').textContent=(g.journey.breath==='flow'?(murim?'유수심법':'회복 운용'):(murim?'집중심법':'집중 운용'))+' · 성장';
+    $('mpTrack').setAttribute('aria-label',murim?'내력':'자원');$('mpTrack').parentElement.querySelector('label').textContent=murim?'내력':'자원';
     $('world').textContent=a.world;$('rank').textContent=murim?(g.journey?.realm?'이류 · 돌파':g.training?'입문 · 수련 중':'미각성'):'E급 헌터';$('place').textContent=a.name;$('sub').textContent=a.sub;$('lv').textContent=g.level;$('gold').textContent=g.gold;
     for(const [id,val,max]of [['hp',p.hp,s.hp],['mp',p.mp,s.mp]]){$(id).style.width=Math.max(0,val/max*100)+'%';$(id+'Text').textContent=`${Math.ceil(val)} / ${max}`;$(id+'Track').setAttribute('aria-valuemin','0');$(id+'Track').setAttribute('aria-valuemax',String(max));$(id+'Track').setAttribute('aria-valuenow',String(Math.ceil(val)));}
     $('quest').textContent=o.title;$('questDesc').textContent=o.text;$('chapterKicker').textContent=o.category||'CHAPTER 0'+o.chapter;$('chapterTitle').textContent=o.category?'현실의 실전':o.chapter===7?'같은 상처의 두 끝':o.chapter===6?'두 하늘의 호흡':o.chapter===5?'기록에 없는 귀환자':o.chapter===4?'끊긴 귀환로':o.chapter===3?'나의 전설':o.chapter===2?'잔월의 서약':'경계를 넘는 자';$('sync').textContent='현실 Lv.'+g.worldGrowth.reality.level+' / 무림 Lv.'+g.worldGrowth.murim.level;
@@ -257,7 +259,7 @@
   realmUI=RealmUI.create({game:()=>g,show,node,refresh:()=>{processEvents();persist();update();},active:()=>active,clearInput,notes:journeyUI});
   introUI=IntroUI.create({game:()=>g,setGame:value=>{g=value;renderer.area=null;progressionUI?.clear();clearInput();},show,node,refresh:()=>{processEvents();persist();update();}});
   const refreshGrowth=()=>{processEvents();persist();update();};
-  const historyUI=GrowthUI.create({game:()=>g,show,node,grid,close:closeDialog,refresh:refreshGrowth,notes:journeyUI,shop});
+  const historyUI=GrowthUI.create({game:()=>g,show,node,grid,close:closeDialog,refresh:refreshGrowth,notes:journeyUI,shop,route:tab=>tab==='status'?characterUI.open():growthUI.open('skills')});
   characterUI=CharacterUI.create({game:()=>g,show,node,grid});
   newsUI=NewsUI.create({game:()=>g,show,node,refresh:refreshGrowth,openDestination:item=>item.section==='status'?characterUI.open('reality'):growthUI.open(item.section,item.subject)});
   growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI});

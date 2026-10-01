@@ -1,6 +1,6 @@
 {
   "name": "dualworld-project-a",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "private": true,
   "description": "쌍계 — 두 세계의 호흡. World-specific art, anchored motion, unified interface and accessible discovery guidance.",
   "scripts": {
@@ -14,7 +14,8 @@
     "check": "node --check presentation.js && node --check realm-art.js && node --check realm-ui.js && node --check journey-data.js && node --check journey.js && node --check cultivation.js && node --check chapter-five.js && node --check journey-art.js && node --check journey-ui.js && node --check sequel.js && node --check wuxia-direction.js && node --check wuxia-data.js && node --check wuxia-art.js && node --check legend.js && node --check classic-art.js && node --check portrait-data.js && node --check world.js && node --check fate.js && node --check fate-art.js && node --check game.js && node --check art.js && node --check render.js && node --check app.js && node --check server.cjs",
     "test:browser:later": "node tests/later-story.browser.cjs",
     "test:browser:dialogue": "node tests/dialogue.browser.cjs",
-    "test:browser:navigation": "node tests/navigation.browser.cjs"
+    "test:browser:navigation": "node tests/navigation.browser.cjs",
+    "check:world": "node --check save-slots.js && node --check world-growth.js && node --check world-achievements.js && node --check reality-skills.js && node --check world-reports.js && node --check personal-news.js && node --check save-v10.js && node --check world-game.js && node --check encounter-director.js && node --check character-ui.js && node --check development-ui.js && node --check news-ui.js"
   },
   "engines": {
     "node": ">=20"

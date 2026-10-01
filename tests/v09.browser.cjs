@@ -7,7 +7,7 @@ const {createServer}=require('../server.cjs');
   p.on('pageerror',e=>errors.push(String(e)));p.on('response',r=>{if(r.status()>=400)errors.push(r.status()+' '+r.url());});
   await p.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;for(const method of ['enter','step']){const old=v.Game.prototype[method];v.Game.prototype[method]=function(...a){const result=old.apply(this,a);window.__game=this;return result;};}}});});
   await p.route('**/murim/hero/yunseo/runtime-*.webp',async route=>{await new Promise(r=>setTimeout(r,350));await route.continue();});
-  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
+  await p.goto('http://127.0.0.1:'+server.address().port+'/legacy/v011/');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
   fs.mkdirSync('.codex_doc_review/v09',{recursive:true});
   await p.click('#start');await p.waitForSelector('.intro-still');await p.locator('.intro-still').evaluate(img=>img.decode());await p.screenshot({path:'.codex_doc_review/v09/intro.png'});
   await p.getByRole('button',{name:'인트로 건너뛰기',exact:true}).click();await p.waitForFunction(()=>__game.progress===1&&!document.querySelector('#dialog').open);
@@ -30,7 +30,7 @@ const {createServer}=require('../server.cjs');
   for(let i=0;i<20&&await p.evaluate(()=>document.querySelector('#dialog').open);i++)await p.keyboard.press('KeyG');await p.waitForFunction(()=>__game.progress===12&&!document.querySelector('#dialog').open);
   await p.setViewportSize({width:390,height:844});await p.keyboard.press('KeyI');await p.screenshot({path:'.codex_doc_review/v09/mobile-growth.png'});assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
   const failure=await browser.newPage();let fail=true;await failure.route('**/reality/hero/yunseo/runtime-walk.webp',route=>fail?route.abort():route.continue());
-  await failure.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await failure.waitForFunction(()=>!!ArtPreview.error);assert.equal(await failure.evaluate(()=>ArtPreview.ready),false);assert.equal(await failure.locator('#artRetry').isVisible(),true);
+  await failure.goto('http://127.0.0.1:'+server.address().port+'/legacy/v011/');await failure.waitForFunction(()=>!!ArtPreview.error);assert.equal(await failure.evaluate(()=>ArtPreview.ready),false);assert.equal(await failure.locator('#artRetry').isVisible(),true);
   fail=false;await failure.click('#artRetry');await failure.waitForFunction(()=>ArtPreview.ready);assert.equal(await failure.evaluate(()=>ArtPreview.error),null);await failure.close();
   assert.deepEqual(errors,[]);console.log('v0.9 browser: cold actions, world readiness, failed atlas retry, direct rescue/skip/replay, inheritance dialog, growth, presets, mobile passed');
  }finally{await browser?.close();await new Promise(r=>server.close(r));}

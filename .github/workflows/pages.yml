@@ -23,7 +23,7 @@ jobs:
           node-version: '22'
           package-manager-cache: false
       - name: Syntax and simulation tests
-        run: npm run check && npm run check:revision && npm test
+        run: npm run check && npm run check:revision && npm run check:world && npm test
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
@@ -41,13 +41,13 @@ jobs:
             if curl --fail --silent http://127.0.0.1:3000/ > /dev/null; then break; fi
             sleep 1
           done
-          python tests/browser_smoke.py --url=http://127.0.0.1:3000/ --output=browser-results
-          python tests/fate_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/fate
-          python tests/legend_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/legend
-          python tests/v06_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v06
-          python tests/perf_browser.py --url=http://127.0.0.1:3000/
-          python tests/v07_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v07
-          python tests/v08_browser.py --url=http://127.0.0.1:3000/ --output=browser-results/v08
+          python tests/browser_smoke.py --url=http://127.0.0.1:3000/legacy/v011/ --output=browser-results
+          python tests/fate_browser.py --url=http://127.0.0.1:3000/legacy/v011/ --output=browser-results/fate
+          python tests/legend_browser.py --url=http://127.0.0.1:3000/legacy/v011/ --output=browser-results/legend
+          python tests/v06_browser.py --url=http://127.0.0.1:3000/legacy/v011/ --output=browser-results/v06
+          python tests/perf_browser.py --url=http://127.0.0.1:3000/legacy/v011/
+          python tests/v07_browser.py --url=http://127.0.0.1:3000/legacy/v011/ --output=browser-results/v07
+          python tests/v08_browser.py --url=http://127.0.0.1:3000/legacy/v011/ --output=browser-results/v08
           CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/v09.browser.cjs
           CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/v010.browser.cjs
           CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/feedback.browser.cjs
@@ -57,6 +57,16 @@ jobs:
           CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/economy.browser.cjs
           CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/later-story.browser.cjs
           CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/ui-qa.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/legacy-v011.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/world-growth.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/reality-settlement.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/world-ui.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/world-balance.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/dev-starts.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/world-ui-details.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/world-runtime.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/world-art.browser.cjs
+          CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')" node tests/world-news-details.browser.cjs
       - name: Keep browser test evidence
         if: always()
         uses: actions/upload-artifact@v4

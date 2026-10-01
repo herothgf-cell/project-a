@@ -1,11 +1,11 @@
 (function(root){'use strict';
  const actions=['signature1','signature2','ultimate'];
  const variantAction=key=>['ripple-guard','seal-hold'].includes(key)?0:1;
- function create({g,node,close,refresh,notes}){
-  const rootEl=node('section','martial-tree'),map=node('div','tree-map'),detail=node('section','tree-detail');detail.setAttribute('aria-live','polite');let selected='common:attack';
+ function create({g,node,close,refresh,notes,subject=null,onDetail=()=>{}}){
+  const rootEl=node('section','martial-tree'),map=node('div','tree-map'),detail=node('section','tree-detail');detail.setAttribute('aria-live','polite');let selected=JourneyData.variants[subject]&&g.journey.known.includes(subject)?'variant:'+subject:g.revision.inherited.includes(subject)?'family:'+subject:'common:attack';
   const b=(label,fn,disabled=false)=>{const e=node('button','secondary',label);e.type='button';e.disabled=disabled;e.onclick=fn;return e;};
   const owned=path=>g.revision.inherited.includes(path),ready=path=>g.legend.ready.includes(path)||g.fate.proven.includes(path);
-  function nodeButton(id,glyph,name,state){const e=b('',()=>{selected=id;render();map.querySelector('[data-node="'+id+'"]')?.focus({preventScroll:true});detail.scrollIntoView({block:'nearest'});});e.className='tree-node '+state;e.dataset.node=id;e.setAttribute('aria-pressed',String(selected===id));e.append(node('span','tree-glyph',glyph),node('b','',name),node('small','',state==='locked'?'미발견':state==='equipped'?'장착 중':state==='ready'?'계승 가능':state==='owned'?'습득':'흔적 발견'));e.setAttribute('aria-label',name+' · '+e.lastChild.textContent);return e;}
+  function nodeButton(id,glyph,name,state){const e=b('',()=>{selected=id;render();notifyDetail();map.querySelector('[data-node="'+id+'"]')?.focus({preventScroll:true});detail.scrollIntoView({block:'nearest'});});e.className='tree-node '+state;e.dataset.node=id;e.setAttribute('aria-pressed',String(selected===id));e.append(node('span','tree-glyph',glyph),node('b','',name),node('small','',state==='locked'?'미발견':state==='equipped'?'장착 중':state==='ready'?'계승 가능':state==='owned'?'습득':'흔적 발견'));e.setAttribute('aria-label',name+' · '+e.lastChild.textContent);return e;}
   function render(){map.replaceChildren();detail.replaceChildren();
    const common=node('section','common-tree');common.append(node('h3','','공통 무공 · 수련으로 학습'));
    const row=node('div','common-nodes');for(const [i,a]of ['attack','moon','storm'].entries()){const k=g.skillInfo(a);row.append(nodeButton('common:'+a,k.glyph,k.name,g.training>=i?'owned':'locked'));}common.append(row,node('p','tree-legend','실선: 학습 흐름 · 연결선: 계열 소속 · 점선: 기술 변형 대상'));map.append(common);
@@ -28,8 +28,9 @@
     else {const base=DualWorld.Fate.PATHS[path].skills[variantAction(id)],have=g.fate.path===path,chosen=g.journey.selected[path]===id,allowed=have&&!g.trial&&(DualWorld.AREAS[g.area].safe||g.area==='archive');detail.append(node('h3','',v.name),node('small','',owned(path)?'기술 변형 · '+base[0]:'기술 변형 · 기본 기술은 계승 후 공개'),node('p','comparison-base',owned(path)?'기본: '+base[4]:'아직 기본 기술을 계승하지 않았습니다.'),node('p','comparison-new','변형: '+(owned(path)?v.description:v.description.replace(base[0],'해당 기술'))),b(chosen?'장착 중':'이 해석 장착',()=>{g.chooseInterpretation(id);refresh();render();},chosen||!allowed));if(!have)detail.append(node('p','','먼저 해당 계열을 계승하고 운용하세요. 발견 기록은 유지됩니다.'));else if(!allowed)detail.append(node('p','','시험을 마친 뒤 환서정 또는 안전 거점에서 장착하세요.'));if(chosen)detail.append(node('p','node-state','적용 완료 · 본편을 이어가거나 다른 흔적을 살펴보세요.'));showMastery(path);}
    }
   }
+  function notifyDetail(){const [kind,id]=selected.split(':');if(kind==='variant'&&g.journey.known.includes(id)||kind==='family'&&owned(id))onDetail(id);}
   function showMastery(path){const m=Progression.mastery(g,path);detail.append(node('p','mastery-effect',`계열 숙련 ${m.value}/30 · 해당 계열 피해 +${m.percent}%`),node('p','',m.next===null?'숙련 최종 단계 달성':`다음 단계: 숙련 ${m.next} · 피해 +${m.percent+3}%`));}
-  rootEl.append(node('p','tree-intro','발견 → 계승 → 실전 숙련 → 기술 변형. 포인트로 구매하는 트리가 아닙니다.'),detail,map,b('관찰 기록과 요청형 힌트',()=>notes.open('facts')),b('기본 운용으로 복귀',()=>{g.clearInterpretation();refresh();render();},!DualWorld.AREAS[g.area].safe||!!g.trial));render();return rootEl;
+  rootEl.append(node('p','tree-intro','발견 → 계승 → 실전 숙련 → 기술 변형. 포인트로 구매하는 트리가 아닙니다.'),detail,map,b('관찰 기록과 요청형 힌트',()=>notes.open('facts')),b('기본 운용으로 복귀',()=>{g.clearInterpretation();refresh();render();},!DualWorld.AREAS[g.area].safe||!!g.trial));render();notifyDetail();return rootEl;
  }
  root.MartialTree={create};
 })(globalThis);

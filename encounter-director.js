@@ -12,5 +12,6 @@
  function prepare(g,e){if(!e.role)return;if(e.role==='heavy'){e.wind=e.windMax=1.15;e.pattern='heavy';e.range=95;}if(e.role==='ranged'){e.wind=e.windMax=1;e.pattern='shot';e.range=24;}e.telegraph={x:e.x,y:e.y,tx:e.tx,ty:e.ty,width:24};}
  function segmentDistance(p,t){const dx=t.tx-t.x,dy=t.ty-t.y,u=Math.max(0,Math.min(1,((p.x-t.x)*dx+(p.y-t.y)*dy)/(dx*dx+dy*dy||1)));return distance(p,{x:t.x+u*dx,y:t.y+u*dy});}
  function impact(g,e){if(e.pattern!=='shot')return false;const t=e.telegraph;if(!t)return false;g.effect('fate-chain',t.x,t.y,{path:'ripple',tx:t.tx,ty:t.ty,life:.25,max:.25});if(segmentDistance(g.player,t)<t.width+g.player.r*.4&&g.lineClear(e,g.player))g.takeHit(e);return true;}
- return {counts,populate,step,allow,mayStartAttack,prepare,impact,segmentDistance};
+ function contains(p,e){return e.pattern==='shot'&&e.telegraph?segmentDistance(p,e.telegraph)<e.telegraph.width+p.r*.4:distance(p,{x:e.tx,y:e.ty})<e.range+p.r*.4;}
+ return {counts,populate,step,allow,mayStartAttack,prepare,impact,segmentDistance,contains};
 });
