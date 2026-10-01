@@ -18,4 +18,9 @@ def finish_intro(page):
             page.wait_for_function("!globalThis.ArtPreview || !globalThis.__game || ArtPreview.ensureWorld(DualWorld.AREAS[__game.area].world==='현실'?'reality':'murim')===true")
             return original_press(key, **kwargs)
         page.keyboard.press = press_ready
+        original_down = page.keyboard.down
+        def down_ready(key, **kwargs):
+            page.wait_for_function("!globalThis.ArtPreview || !globalThis.__game || ArtPreview.ensureWorld(DualWorld.AREAS[__game.area].world==='현실'?'reality':'murim')===true")
+            return original_down(key, **kwargs)
+        page.keyboard.down = down_ready
         page._asset_aware_keys = True
