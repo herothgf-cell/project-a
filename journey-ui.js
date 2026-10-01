@@ -29,7 +29,7 @@
     action(body,'기본 운용으로 돌아가기',()=>{g.clearInterpretation();open('styles');},!DualWorld.AREAS[g.area].safe);
     para(body,'환서정과 안전한 거점에서는 무료로 해석을 바꿀 수 있습니다. 다른 계열은 기존 나의 기연 도감에서 재수련하세요.','notebook-muted');
    }else if(tab==='growth'){
-    body.append(grid([['독립 경지',s.realm?'이류 · 첫 돌파':'입문 · 체득 중'],['헌터 평가',s.rank],['심법',s.breath==='flow'?'유수심법':'집중심법'],['마정석',s.materials]]));
+    body.append(grid([['독립 경지',s.realm?'이류 · 첫 돌파':'입문 · 체득 중'],['헌터 평가',s.rank],['심법',s.breath==='flow'?'유수심법':'집중심법'],['금화',g.gold]]));
     const inherited=Revision.state(g).inherited,labels={sword:'공통 무공',ripple:inherited.includes('ripple')?'파문검':'미계승 기연 ①',echo:inherited.includes('echo')?'잔영보':'미계승 기연 ②',seal:inherited.includes('seal')?'경계봉인':'미계승 기연 ③'};
     for(const [p,value]of Object.entries(s.mastery)){const row=node('div','mastery-row');row.append(node('span','',labels[p]),node('b','',value+' / 30'));const track=node('progress');track.max=30;track.value=value;track.setAttribute('aria-label',labels[p]+' 숙련');row.append(track);body.append(row);}
     para(body,'숙련 5 / 10 / 20 / 30마다 해당 계열 피해 +3%, 최대 +12%. 성장 화면의 무공 트리에서 현재 효과를 확인할 수 있습니다.');
@@ -39,10 +39,7 @@
     const ready=!s.realm&&Object.values(s.mastery).reduce((a,b)=>a+b,0)>=8&&s.worlds.length===2&&s.known.length>0;
     para(body,s.realm?'첫 돌파의 변화 · 체력 +12 / 내력 +8 / 공격력 +2':'첫 경지는 유효 숙련 합계 8, 두 세계의 실전, 직접 확인한 해석이 모였을 때 거점에서 돌파할 수 있습니다.');
     action(body,s.realm?'첫 경지 돌파 완료':'운기조식 · 경지 돌파',()=>{g.breakthrough();refresh();},!safe||!ready);
-    para(body,'현실 전리품은 감정·판매하거나 관측 렌즈 제작에 쓸 수 있습니다. 렌즈 없이도 모든 해석을 발견할 수 있습니다.');
-    action(body,'마정석 1개 판매 · 금화 +30',()=>{g.tradeMaterial('sell');open('growth');},!safe||s.materials<1||g.gold>999969);
-    action(body,s.lens?'관측 렌즈 보유 · 기감 범위 +80':'관측 렌즈 · 마정석 2 / 금화 60',()=>{g.tradeMaterial('lens');open('growth');},!safe||s.lens||s.materials<2||g.gold<60);
-    if(!safe)para(body,'심법 변경·돌파·거래는 안전한 거점에서 할 수 있습니다.','notebook-muted');
+    if(!safe)para(body,'심법 변경·돌파는 안전한 거점에서 할 수 있습니다.','notebook-muted');
    }
    show('관찰 수첩 · 기록에 없는 호흡',body,[{label:'돌아가기',secondary:true}],'hero','직접 확인한 사실 / 기술 변형 / 성장');
   }

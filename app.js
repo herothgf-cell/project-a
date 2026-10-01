@@ -97,16 +97,16 @@
   function grid(items){const e=node('div','stat-grid');for(const [label,value]of items){const b=node('div','',label);b.append(node('b','',String(value)));e.append(b);}return e;}
   function inventory(){
     if(growthUI)return growthUI.open();
-    if(!active)return;const s=g.stats(),body=node('div');body.append(grid([['두 세계 공격력',s.attack],['무기 강화','+'+g.upgrade],['최대 체력',s.hp],['최대 내력',s.mp]]));
+    if(!active)return;const s=g.stats(),body=node('div');body.append(grid([['두 세계 공격력',s.attack],['기존 성장 보정',g.economy?.legacyAttack||0],['최대 체력',s.hp],['최대 내력',s.mp]]));
     body.append(node('p','dialog-note',`${g.training>=2?'청명검':'수련검'} · 모든 장비와 무공은 현실 / 무림에서 공유됩니다.`));
     const list=[['劍','연환검','기본 3연격. 세 번째 공격은 더 넓고 강합니다. J / 공격 버튼 길게 누르기.',true],['月','월영참','전방 광역 베기 · 내력 18 · 재사용 2.8초. 백련에게 배웁니다.',g.training>=1],['雷','천뢰격','주변 광역 낙뢰 · 내력 32 · 재사용 6초. 죽림 공략 후 습득.',g.training>=2],['界','경계 공명','지속 효과: 공격력 +6, 받는 피해 15% 감소. 제2장 폐사 공략 후 습득.',g.training>=3]];
     for(const [symbol,name,desc,learned]of list){const row=node('div','skill-row'),copy=node('div');row.append(node('span','',symbol));copy.append(node('b','',name+(learned?'':' · 미습득')),node('p','',desc));row.append(copy);body.append(row);}
     if(Fate.active(g))for(const a of Fate.names){const k=g.skillInfo(a),row=node('div','skill-row');row.append(node('span','',k.glyph),node('p','',`${k.key} · ${k.name} — ${k.description}`));body.append(row);}
-    show('몸에 새겨진 힘',body,[{label:'돌아가기',secondary:true},...(AREAS[g.area].safe?[{label:'보급 / 강화',run:shop}]:[])],'hero','무공 · 장비');
+    show('몸에 새겨진 힘',body,[{label:'돌아가기',secondary:true},...(AREAS[g.area].safe?[{label:'보급',run:shop}]:[])],'hero','무공 · 장비');
   }
   function shop(){
-    if(!AREAS[g.area].safe)return;const body=node('div');body.append(grid([['소지 금화',g.gold],['회복약',g.potions],['강화 단계','+'+g.upgrade],['공격력',g.stats().attack]]));body.append(node('p','','회복약: 최대 체력의 55% 회복\n무기 강화: 단계마다 두 세계 공격력 +4\n거점의 휴식 장소에서는 무료로 체력과 내력을 회복합니다.'));
-    show('여정을 위한 준비',body,[{label:'회복약 · 25 금화',disabled:g.gold<25||g.potions>=99,run:()=>{g.buy('potion');processEvents();persist();shop();}},{label:g.upgrade>=10?'최대 강화':`강화 · ${80+g.upgrade*60} 금화`,disabled:g.upgrade>=10||g.gold<80+g.upgrade*60,run:()=>{g.buy('upgrade');processEvents();persist();shop();}},{label:'돌아가기',secondary:true}],'shop','보급 · 강화');
+    if(!AREAS[g.area].safe)return;const body=node('div'),balance=g.economy?.refundBalance||0;body.append(grid([['소지 금화',g.gold],['회복약',g.potions],['정산 잔액',balance]]));body.append(node('p','','회복약: 최대 체력의 55% 회복\n거점에서는 무료로 체력과 내력을 회복합니다. 공격력은 수련과 성장으로 높입니다.\n이전 버전의 남은 환급금은 금화 한도가 생기면 수령할 수 있습니다.'));
+    show('여정을 위한 준비',body,[{label:'회복약 · 25 금화',disabled:g.gold<25||g.potions>=99,run:()=>{g.buy('potion');processEvents();persist();shop();}},{label:'정산 잔액 수령',disabled:!balance||g.gold>=999999,run:()=>{g.claimSettlement();processEvents();persist();shop();}},{label:'돌아가기',secondary:true}],'shop','보급');
   }
   function map(){const body=node('div'),canvas=node('canvas','map-full');canvas.width=460;canvas.height=340;renderer.drawMini(g,canvas,true);body.append(canvas,node('p','dialog-note','◆ 현재 위치 · 붉은 점: 적 · 금빛 점: 인물과 출입구\n화면의 방향 표식과 현재 목표를 함께 확인하세요.'));show(AREAS[g.area].name,body,[{label:'돌아가기'}],'system','지역 지도');}
   function journal(){
@@ -128,7 +128,7 @@
     if(!active)return;const actions=[{label:'계속하기'},{label:'나의 기연 도감',secondary:true,run:fateJournal},{label:'관찰 수첩 · 성장',secondary:true,run:()=>journeyUI.open()},{label:'조작 안내',secondary:true,run:help},{label:'지역 지도',secondary:true,run:map},{label:'저장 파일 다운로드',secondary:true,run:()=>exportSave()},{label:'저장 파일 불러오기',secondary:true,run:importSave},{label:renderer.reduced?'화면 효과 켜기':'화면 효과 줄이기',secondary:true,run:()=>{renderer.reduced=!renderer.reduced;menu();}}];
     actions.push({label:'이펙트 품질: '+['낮음','보통','높음'][renderer.quality]+(renderer.autoLow?' (자동 절약)':''),secondary:true,run:()=>{renderer.quality=(renderer.quality+1)%3;renderer.autoLow=false;renderer.slowFrames=0;menu();}});
     if(!AREAS[g.area].safe)actions.push({label:'거점으로 후퇴',secondary:true,run:()=>show('거점으로 돌아갈까요?','무공과 이야기 진행은 유지됩니다.\n다시 입장하면 호위와 아직 완료하지 않은 봉인 공략을 처음부터 시작합니다.',[{label:'취소',secondary:true},{label:'후퇴하기',run:()=>{g.retreat();processEvents();persist();update();}}])});
-    else actions.push({label:'보급 / 강화',secondary:true,run:shop});
+    else actions.push({label:'보급',secondary:true,run:shop});
     actions.push({label:'입력 설정',secondary:true,run:controlSettings},{label:'인트로 다시 보기',secondary:true,run:()=>introUI.start(true)},{label:'타이틀로',secondary:true,run:()=>{persist();active=false;progressionUI?.clear();clearInput();$('game').hidden=true;$('title').hidden=false;inspectSave();WorldArt.cover($('cover'));}});
     show('잠시, 호흡을 고르다',`Lv.${g.level} · ${AREAS[g.area].name}\n${g.objective().title}\n\n메뉴와 대화가 열려 있는 동안 전투가 멈춥니다.`,actions,'hero','일시정지 · v'+VERSION);
   }
@@ -175,7 +175,7 @@
     $('quest').textContent=o.title;$('questDesc').textContent=o.text;$('chapterKicker').textContent=o.category||'CHAPTER 0'+o.chapter;$('chapterTitle').textContent=o.category?'현실의 실전':o.chapter===5?'기록에 없는 귀환자':o.chapter===4?'끊긴 귀환로':o.chapter===3?'나의 전설':o.chapter===2?'잔월의 서약':'경계를 넘는 자';$('sync').textContent=g.training?`${Math.min(2,g.training)}개 무공 · ${g.training>=3?'경계 공명 완성':'두 세계에 전승'}`:'경계석의 신호를 따라가세요';
     const phase=o.chapter===5?g.journey.phase:o.chapter===4?g.chapter4.phase:o.chapter===3?g.fate.stage:o.chapter===1?g.progress:g.progress-6;if($('questSteps').dataset.step!==`${g.progress}:${g.fate.stage}:${g.chapter4?.phase||0}:${g.journey?.phase||0}`){$('questSteps').replaceChildren(...Array.from({length:o.chapter===4?4:6},(_,i)=>node('i',i<phase?'done':'')));$('questSteps').dataset.step=`${g.progress}:${g.fate.stage}:${g.chapter4?.phase||0}:${g.journey?.phase||0}`;}
     $('xp').style.width=g.xp/s.next*100+'%';$('xpText').textContent=`${g.xp} / ${s.next}`;$('atk').textContent='공격력 '+s.attack;$('potion').querySelector('b').textContent=g.potions;
-    const near=g.nearestPoint();$('interact').classList.toggle('near',!!near);$('interact').querySelector('span').textContent=near?near.kind==='npc'?'대화 · '+near.label:near.kind==='shop'?'보급 / 강화':near.kind==='rest'?'휴식하기':near.label:'대화 / 이동';
+    const near=g.nearestPoint();$('interact').classList.toggle('near',!!near);$('interact').querySelector('span').textContent=near?near.kind==='npc'?'대화 · '+near.label:near.kind==='shop'?'보급':near.kind==='rest'?'휴식하기':near.label:'대화 / 이동';
     $('objectiveArrow').hidden=!o.target;if(!o.target){$('objectiveTarget').textContent=o.title;$('objectiveHint').textContent=Controls.format(o.text);}
     if(o.target){$('objectiveTarget').textContent=`${o.target.label} · ${Math.round(dist(p,o.target)/10)}걸음`;$('objectiveHint').textContent=o.text;$('objectiveArrow').style.transform=`rotate(${Math.atan2(o.target.y-p.y,o.target.x-p.x)*180/Math.PI+90}deg)`;}
     const path=Fate.active(g);$('game').classList.toggle('has-fate',!!path);$('fateControls').hidden=!path;
