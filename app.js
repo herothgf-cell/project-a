@@ -37,8 +37,7 @@
     $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=Controls.format(body);else $('dialogBody').append(body);
     WorldArt.portrait($('portrait'),portrait);$('dialogActions').replaceChildren();
     actions.forEach(a=>{const b=node('button',a.secondary?'secondary':a.danger?'danger':'primary',a.label);b.disabled=!!a.disabled;b.addEventListener('click',()=>{queued=[];if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(a.run)a.run();});$('dialogActions').append(b);});
-    let keyHelp=$('dialogKeys');if(!keyHelp){keyHelp=node('p','dialog-key-help');keyHelp.id='dialogKeys';$('dialogActions').before(keyHelp);}keyHelp.textContent=`방향키 / Tab 선택 · ${Controls.key('interact')} / Enter 확인`+(introUI?.active?'':' · Esc 닫기');
-    for(const b of $('dialogActions').querySelectorAll('button')){b.setAttribute('aria-label',b.textContent);const k=node('kbd');k.textContent=Controls.key('interact')+' / Enter';k.setAttribute('aria-hidden','true');b.append(k);}
+    $('closeDialog').hidden=!!introUI?.active;
     if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
     ($('dialogActions').querySelector('button:not(:disabled):not(.danger)')||$('closeDialog')).focus({preventScroll:true});
   }
