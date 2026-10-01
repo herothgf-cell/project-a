@@ -171,6 +171,7 @@
     for(const btn of document.querySelectorAll('[data-action]')){const k=btn.querySelector('kbd');if(k)k.textContent=Controls.key(btn.dataset.action);}
     for(const [id,action]of [['inventory','growth'],['interact','interact'],['potion','potion'],['fieldNotes','notes'],['sense','sense'],['helpButton','help']]){const el=$(id);if(el){const k=el.querySelector('kbd');if(k)k.textContent=Controls.key(action);el.setAttribute('aria-label',Controls.labels[action]+' '+Controls.key(action));}}
     const a=AREAS[g.area],s=g.stats(),p=g.player,o=ObjectiveModel.resolve(g);
+    const growth=GrowthModel.describe(g);$('growthStatus').textContent=(g.journey.breath==='flow'?'유수':'집중')+' · '+growth.realm+(growth.readiness==='focus-ready'?' · 집중 준비':growth.readiness==='flow-recovery'?' · 내력 회복':'');
     $('world').textContent=a.world;$('rank').textContent=g.journey?.realm?'이류 · 돌파':g.training?'입문 · 수련 중':'미각성';$('place').textContent=a.name;$('sub').textContent=a.sub;$('lv').textContent=g.level;$('gold').textContent=g.gold;
     for(const [id,val,max]of [['hp',p.hp,s.hp],['mp',p.mp,s.mp]]){$(id).style.width=Math.max(0,val/max*100)+'%';$(id+'Text').textContent=`${Math.ceil(val)} / ${max}`;$(id+'Track').setAttribute('aria-valuemin','0');$(id+'Track').setAttribute('aria-valuemax',String(max));$(id+'Track').setAttribute('aria-valuenow',String(Math.ceil(val)));}
     $('quest').textContent=o.title;$('questDesc').textContent=o.text;$('chapterKicker').textContent=o.category||'CHAPTER 0'+o.chapter;$('chapterTitle').textContent=o.category?'현실의 실전':o.chapter===5?'기록에 없는 귀환자':o.chapter===4?'끊긴 귀환로':o.chapter===3?'나의 전설':o.chapter===2?'잔월의 서약':'경계를 넘는 자';$('sync').textContent=g.training?`${Math.min(2,g.training)}개 무공 · ${g.training>=3?'경계 공명 완성':'두 세계에 전승'}`:'경계석의 신호를 따라가세요';
@@ -244,6 +245,7 @@
     }catch(error){if(!errorReported){errorReported=true;console.error(error);show('게임 실행 중 오류가 발생했습니다','저장된 진행은 그대로 보관됩니다. 새로고침 후에도 반복되면 이 내용을 알려 주세요.\n\n'+error.message);}}
     requestAnimationFrame(frame);
   }
+  $('growthStatus').onclick=()=>inventory();
   dialogueUI=DialogueUI.create({show,node});
   journeyUI=JourneyUI.create({game:()=>g,show,node,grid,refresh:()=>{processEvents();persist();update();},act,running,active:()=>active});
   realmUI=RealmUI.create({game:()=>g,show,node,refresh:()=>{processEvents();persist();update();},active:()=>active,clearInput,notes:journeyUI});

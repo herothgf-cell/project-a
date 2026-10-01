@@ -35,7 +35,7 @@
     else if(fate===0)result.text='서린: 현장 영상에 네가 없는 위치에서도 검격이 남았어. 같은 파형이 반복돼.\n백련에게 이 흔적을 보여 주고 네가 발견한 힘을 확인해 보자.';
    }
    if(id==='warden'&&![0,4,6,10,12].includes(progress))result.text='서린: 출발 전 보급 챙기고, 돌아오면 기록을 같이 보자.\n지금 해야 할 일은 '+this.objective().title+'야.';
-   if(id==='master'&&fate===1&&this.fate.path)result.text='백련: 그 파문은 옛 기록에서 본 적이 있다. 하지만 네가 움직인 방식까지 적혀 있지는 않았지.\n잃어버린 무공도 이어받는 사람의 삶을 따라 달라진다. 다음에 무엇을 지킬지는 네가 정해라.\n\n현실로 돌아가 이 힘을 확인하자.';
+   if(id==='master'&&fate===1&&this.fate.path)result.text='백련: '+({ripple:'그 파문',echo:'그 잔향',seal:'그 봉인'}[this.fate.path]||'그 힘')+'은 옛 기록에서 본 적이 있다. 하지만 네가 움직인 방식까지 적혀 있지는 않았지.\n잃어버린 무공도 이어받는 사람의 삶을 따라 달라진다. 다음에 무엇을 지킬지는 네가 정해라.\n\n현실로 돌아가 이 힘을 확인하자.';
   }
   if(result?.type==='awakening'&&fate===5)result.text='서린: 현장의 기록을 정리했어. 이번 별호는 네 움직임을 보고 붙인 이름이야.\n\n별호 · '+Fate.PATHS[this.fate.path].title+' / 금화 160';
   return result;
