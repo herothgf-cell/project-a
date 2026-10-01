@@ -50,7 +50,7 @@
       const shake=this.reduced?0:g.shake*15;c.translate(Math.sin(g.playTime*137)*shake,Math.cos(g.playTime*149)*shake);c.scale(zoom,zoom);c.translate(-this.camera.x,-this.camera.y);
       const scene=this.scenery(g.area);c.drawImage(scene.terrain,0,0);FateArt.ground(c,g,quality,t);if(root.WuxiaArt)WuxiaArt.drawWorld(c,g,quality,t);if(root.JourneyArt)JourneyArt.ground(c,g,quality,t);
       for(const e of g.enemies){if(e.hp<=0||e.wind<=0)continue;const k=1-e.wind/e.windMax;c.fillStyle='#ec9d7930';c.strokeStyle=e.pattern==='dive'?'#d7a8df':'#edaa8e';c.lineWidth=2;c.beginPath();c.arc(e.tx,e.ty,e.range,0,TAU);c.fill();c.stroke();c.fillStyle='#ffca9437';c.beginPath();c.moveTo(e.tx,e.ty);c.arc(e.tx,e.ty,e.range,-Math.PI/2,-Math.PI/2+k*TAU);c.closePath();c.fill();text(c,e.pattern==='sweep'?'광역 베기':e.pattern==='dive'?'도약 공격':e.pattern==='rush'?'돌진 예고':e.pattern==='combo'?(e.followup?'연속 베기 · 2타':'연속 베기 · 1타'):e.pattern==='volley'?(e.followup?'연사 · 2발':'연사 · 1발'):'공격 예고',e.tx,e.ty+5,'#f8d5b8',10);}
-      const target=g.guideActive&&!g.objective().priority?Presentation.guide(g).target:g.target(),objects=[];
+      const target=root.ObjectiveModel?ObjectiveModel.resolve(g).target:g.target(),objects=[];
       for(const b of a.blocks)objects.push({y:b.y+b.h,draw:()=>prop(c,b,a.theme)});
       for(const b of scene.decorations)objects.push({y:b.y,draw:()=>b.kind==='production-foreground'?WorldArt.foreground?.(c,b):bamboo(c,b.x,b.y,b.scale,t)});
       for(const o of (g.points?g.points():a.points).filter(o=>root.JourneyRules?JourneyRules.visiblePoint(g,o):!root.ChronicleRules||ChronicleRules.visiblePoint(g,o)))objects.push({y:o.y,draw:()=>{
@@ -63,23 +63,23 @@
         else if(o.kind==='seal')seal(c,o,t,g.activated.includes(o.id),g.area==='harbor');
         else if(o.kind==='rest'){if(!root.WorldArt.rest?.(c,o,t,a.theme)){ellipse(c,o.x,o.y+2,36,13,'#102e324a');box(c,o.x-28,o.y-13,56,12,'#acac87',2);line(c,[[o.x-20,o.y],[o.x-20,o.y+9]],'#556e59',4);line(c,[[o.x+20,o.y],[o.x+20,o.y+9]],'#556e59',4);}}
         else human(c,{...o,face:Math.atan2(p.y-o.y,p.x-o.x)},t,o.role||(o.id==='warden'?'warden':o.id==='master'?'master':'shop'));
-        if(selected)this.marker(c,o,t);
+        
         if(near||selected){const w=Math.max(80,o.label.length*10+16),height=WorldArt.pointLabelHeight?.(o)||138;box(c,o.x-w/2,o.y-height,w,22,'#132a32d9',4);text(c,o.label,o.x,o.y-height+15,selected?'#e7d397':'#c4d1bf',10);}
       }});
       for(const e of g.enemies){if(e.hp<=0){if(root.ArtPreview?.ready&&root.Presentation?.deathVisible(e,g.playTime))objects.push({y:e.y,draw:()=>{c.save();c.globalAlpha=Math.min(1,(1.2-(g.playTime-e.motion.deathAt))/.35);human(c,e,t,e.kind,e.boss?1.72:1.08);c.restore();}});continue;}objects.push({y:e.y,draw:()=>{
         const scale=e.boss?1.72:e.trial?1.25:1.08;human(c,{...e,face:Math.atan2(p.y-e.y,p.x-e.x),walking:e.walking??(e.wind<=0&&dist(e,p)<570&&(!e.boss||!g.bossLocked()))},t,e.kind,scale);
         if(e.boss&&g.bossLocked()){c.strokeStyle='#b9d3c37a';c.lineWidth=2;c.setLineDash([8,7]);c.beginPath();c.ellipse(e.x,e.y-41,48,70,0,0,TAU);c.stroke();c.setLineDash([]);text(c,'보호막',e.x,e.y-218,'#c7d8c5',11);}
         if(!e.boss&&(e.hp<e.maxHp||dist(e,p)<180)){box(c,e.x-22,e.y-127,44,4,'#15313ae5',1);box(c,e.x-22,e.y-127,44*e.hp/e.maxHp,4,'#d8aa87',1);}
-        if(target?.id===e.id)this.marker(c,e,t);
+        
       }});}
       if(g.experimentRuntime?.companion)objects.push({y:g.experimentRuntime.companion.y,draw:()=>JourneyArt.actor(c,g,t)});
       objects.push({y:p.y,draw:()=>{if(p.invuln>0&&p.dash>0)ellipse(c,p.x,p.y,28,12,'#c5deba66');human(c,p,t,'hero',1.15);if(!ClassicArt.spriteReady())FateArt.costume(c,g,t);text(c,g.fate.path?DualWorld.Fate.PATHS[g.fate.path].title:'윤서',p.x,p.y-140,'#fff3c6',10);}});
       objects.sort((a,b)=>a.y-b.y);for(const o of objects)if(o.y>this.camera.y-150&&o.y<this.camera.y+vh+240)o.draw();
       for(const f of g.fx){if(root.RealmArt&&RealmArt.effect(c,f,quality,g))continue;this.effect(c,f);FateArt.effect(c,f,quality);ClassicArt.effect(c,f,quality);if(root.JourneyArt)JourneyArt.effect(c,f,quality);}
       if(quality>0){const rng=random(842);for(let i=0;i<24;i++){const x=(rng()*a.w+t*(i%2?3:-2)+a.w)%a.w,y=(rng()*a.h+t*.7)%a.h;ellipse(c,x,y,1.2,1.2,'#eee4b54d');}}
-      FateArt.atmosphere(c,g,this.camera,vw,vh,quality,t);c.restore();FateArt.overlay(c,g,this.w,this.h,quality);this.edgeMarker(g);this.drawMini(g,this.mini);
+      FateArt.atmosphere(c,g,this.camera,vw,vh,quality,t);if(target)this.marker(c,target,t);c.restore();FateArt.overlay(c,g,this.w,this.h,quality);this.edgeMarker(g);this.drawMini(g,this.mini);
     }
-    marker(c,o,t){c.strokeStyle='#e4d091bd';c.lineWidth=1;c.setLineDash([4,7]);c.beginPath();c.ellipse(o.x,o.y+5,31,14,0,0,TAU);c.stroke();c.setLineDash([]);const labelHeight=WorldArt.pointLabelHeight?.(o),y=o.y-(labelHeight?labelHeight+8:o.boss?224:139)+Math.sin(t*3)*3;polygon(c,[[o.x,y-5],[o.x+4,y],[o.x,y+5],[o.x-4,y]],'#e9d090');}
+    marker(c,o,t){const z=this.zoom||1,r=10/z,y=o.y-(WorldArt.pointLabelHeight?.(o)||150)-22/z; c.save();c.strokeStyle='#ffe4a0';c.lineWidth=3/z;c.beginPath();c.ellipse(o.x,o.y+5,36,18,0,0,TAU);c.stroke();polygon(c,[[o.x,y-r],[o.x+r,y],[o.x,y+r],[o.x-r,y]],'#ffe4a0','#071827',3/z);const label=(o.label||o.name||'목적지'),w=(label.length*13+24)/z;box(c,o.x-w/2,y-34/z,w,23/z,'#071827f2',3/z);text(c,label,o.x,y-18/z,'#fff2ca',13/z);c.restore();}
     effect(c,f){
       const k=clamp(f.life/f.max,0,1);c.save();c.globalAlpha=k;
       if(f.kind==='text')text(c,f.text,f.x,f.y-(1-k)*32,f.color||'#fff5d5',String(f.text).length<5?21:11);
@@ -92,7 +92,7 @@
       c.restore();
     }
     edgeMarker(g){
-      const o=g.guideActive&&!g.objective().priority?Presentation.guide(g).target:g.target();if(!o)return;const sx=(o.x-this.camera.x)*this.zoom,sy=(o.y-this.camera.y)*this.zoom;
+      const o=root.ObjectiveModel?ObjectiveModel.resolve(g).target:g.target();if(!o)return;const sx=(o.x-this.camera.x)*this.zoom,sy=(o.y-this.camera.y)*this.zoom;
       if(sx>40&&sx<this.w-40&&sy>25&&sy<this.h-30)return;
       const c=this.c,landscape=this.h<390,top=landscape?100:220,bottom=landscape?this.h-70:this.h-200;
       const x=clamp(sx,34,this.w-34),y=clamp(sy,Math.min(top,this.h*.45),Math.max(top+20,bottom));
@@ -103,7 +103,7 @@
       if(!canvas)return;const c=canvas.getContext('2d'),a=AREAS[g.area],w=canvas.width,h=canvas.height,s=Math.min((w-22)/a.w,(h-22)/a.h),ox=(w-a.w*s)/2,oy=(h-a.h*s)/2;
       c.clearRect(0,0,w,h);box(c,0,0,w,h,'#12282f',3);c.save();c.translate(ox,oy);c.scale(s,s);c.drawImage(this.scenery(g.area).terrain,0,0);for(const b of a.blocks)box(c,b.x,b.y,b.w,b.h,'#c4c7ad4f',4);c.restore();
       for(const o of (g.points?g.points():a.points).filter(o=>root.JourneyRules?JourneyRules.visiblePoint(g,o):!root.ChronicleRules||ChronicleRules.visiblePoint(g,o))){ellipse(c,ox+o.x*s,oy+o.y*s,o.kind==='portal'?4:3,o.kind==='portal'?4:3,o.need>g.progress?'#708678':o.kind==='seal'?'#beb1d3':'#e1c38a');if(labels)text(c,o.label,ox+o.x*s,oy+o.y*s-9,'#e3dbb2',10);}
-      for(const e of g.enemies)if(e.hp>0)ellipse(c,ox+e.x*s,oy+e.y*s,e.boss?4:2,e.boss?4:2,'#d39987');const p=g.player,x=ox+p.x*s,y=oy+p.y*s;polygon(c,[[x,y-6],[x+4,y+4],[x,y+2],[x-4,y+4]],'#fff0af');
+      const goal=root.ObjectiveModel?ObjectiveModel.resolve(g).target:g.target();if(goal){c.strokeStyle='#ffe08a';c.lineWidth=3;c.beginPath();c.arc(ox+goal.x*s,oy+goal.y*s,7,0,TAU);c.stroke();}for(const e of g.enemies)if(e.hp>0)ellipse(c,ox+e.x*s,oy+e.y*s,e.boss?4:2,e.boss?4:2,'#d39987');const p=g.player,x=ox+p.x*s,y=oy+p.y*s;polygon(c,[[x,y-6],[x+4,y+4],[x,y+2],[x-4,y+4]],'#fff0af');
       if(!labels){c.strokeStyle='#e0e0b75e';c.lineWidth=1;const x1=clamp(this.camera.x,0,a.w),y1=clamp(this.camera.y,0,a.h),x2=clamp(this.camera.x+this.w/this.zoom,0,a.w),y2=clamp(this.camera.y+this.h/this.zoom,0,a.h);c.strokeRect(ox+x1*s,oy+y1*s,(x2-x1)*s,(y2-y1)*s);}
     }
   }

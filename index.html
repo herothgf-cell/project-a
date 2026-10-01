@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="realm.css?v=0.10.3">
   <link rel="stylesheet" href="revision.css?v=0.10.3">
   <link rel="stylesheet" href="progression.css?v=0.10.3">
+  <link rel="stylesheet" href="feedback-two.css?v=0.10.3">
   <script defer src="world.js?v=0.10.3"></script>
   <script defer src="controls.js?v=0.10.3"></script>
   <script defer src="fate.js?v=0.10.3"></script>
@@ -46,6 +47,7 @@
   <script defer src="render.js?v=0.10.3"></script>
   <script defer src="realm-ui.js?v=0.10.3"></script>
   <script defer src="objective-model.js?v=0.10.3"></script>
+  <script defer src="objective-ui.js?v=0.10.3"></script>
   <script defer src="app.js?v=0.10.3"></script>
 </head>
 <body>
@@ -70,7 +72,7 @@
     <button id="fateJournal" class="fate-journal" aria-label="기연 도감">✧ <span>나의 기연</span></button>
     <button id="inventory" class="inventory-button">▣ <span>무공 · 장비</span><kbd>I</kbd></button>
     <div class="hud"><canvas id="hudPortrait" width="112" height="126" aria-hidden="true"></canvas><div class="level"><small>LV</small><b id="lv">1</b></div><div class="vitals"><div><label>체력</label><i role="progressbar" aria-label="체력" id="hpTrack"><u id="hp"></u></i><b id="hpText"></b></div><div><label>내력</label><i class="mana" role="progressbar" aria-label="내력" id="mpTrack"><u id="mp"></u></i><b id="mpText"></b></div></div><div class="money">◈ <b id="gold">40</b></div></div>
-    <div id="objective"><span id="objectiveArrow">↑</span><div><b id="objectiveTarget"></b><small id="objectiveHint"></small></div></div>
+    <button id="objective" type="button" aria-label="길 안내"><span id="objectiveArrow" aria-hidden="true">↑</span><span class="route-copy"><span class="route-label">길 안내 · 직접 이동</span><b id="objectiveTarget"></b><small id="objectiveHint"></small></span></button>
     <section id="rumorPanel" class="rumor-panel collapsed" aria-label="강호 소식 NPC 시뮬레이션">
       <button id="rumorToggle" type="button" aria-expanded="false" aria-controls="rumorContent"><span>강호 소식</span><small>NPC 시뮬레이션</small><b id="rumorCount">0</b><span class="rumor-chevron">▾</span></button>
       <div id="rumorContent" hidden><p class="rumor-disclosure">오프라인 연출 · 실제 유저 채팅 아님</p><div id="rumorMessages" role="log" aria-live="off"></div></div>
