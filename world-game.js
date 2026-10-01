@@ -9,7 +9,7 @@
   stats(){return this.worldGrowth?Growth.stats(this):super.stats();}
   collectAchievements(){if(this.worldState)return Achievements.collect(this);}
   achievementBonuses(){return Achievements.bonuses(this);}
-  validateWorldState(){Achievements.validate(this);Reality.validate(this);Reports.validate(this);News.validate(this);const {achievements,reality,reports,news}=this.worldState;this.worldState={achievements,reality,reports,news};}
+  validateWorldState(){Achievements.validate(this);Reality.validate(this);Reports.validate(this);News.validate(this);const {achievements,reality,reports,news,potionHintSeen=false}=this.worldState;if(typeof potionHintSeen!=='boolean')throw Error('회복약 안내 기록 오류');this.worldState={achievements,reality,reports,news,potionHintSeen};if(this.contract?.status!=='idle'||this.contract?.completed)throw Error('개편판에는 반복 의뢰가 없습니다.');}
   reportFact(id){Reports.collect(this);return Reports.report(this,id);}
   publishNews(item){return News.publish(this,item);}
   refreshNews(){return News.refresh(this);}
@@ -17,6 +17,11 @@
   readNews(id){return News.read(this,id);}
   unreadNews(section){return News.unread(this,section);}
   realmReady(){return News.realmReady(this);}
+  startContract(){return false;}
+  claimContract(){return false;}
+  cancelContract(){return false;}
+  points(){return super.points().filter(p=>p.id!=='contract-board');}
+  potionHint(){if(this.worldState.potionHintSeen||this.potions<=0||this.player.hp>this.stats().hp*.4)return '';this.worldState.potionHintSeen=true;return '회복약을 직접 사용하면 최대 체력의 55%를 회복합니다. 보유 '+this.potions+'개 · 자동 사용되지 않습니다.';}
   regenerateEnemy(e,amount){if(e.realitySuppressedUntil>this.playTime){if(e.hp<e.maxHp&&e.realitySuppressionCast){e.realitySuppressionProven=true;Reality.onEffect(this,e.realitySuppressionCast,e,'suppress');}return;}e.hp=Math.min(e.maxHp,e.hp+amount);}
   onRealityEffect(e){const {family,kind,target}=e,key=this.journey.selected[family];if(key&&this.journey.known.includes(key)&&(family==='ripple'&&['absorb','counter'].includes(kind)||family==='echo'&&kind==='pursuit'||family==='seal'&&kind==='weakness')){this.journey.sync[key]=2;this.onInterpretation(key,target);}Dual.contact(this,target,{id:'reality-'+e.castId,family,action:e.action,manual:e.manual});}
   realityStatus(f){return Reality.status(this,f);}

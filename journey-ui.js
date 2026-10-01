@@ -9,6 +9,7 @@
   const para=(p,t,c='')=>p.append(node('p',c,t));
   function action(p,label,fn,disabled=false){const b=node('button','notebook-action',label);b.type='button';b.disabled=disabled;b.addEventListener('click',()=>{fn();refresh();});p.append(b);return b;}
   function open(tab='facts'){
+   if(tab==='growth'&&game().worldGrowth&&env.growth)return env.growth();
    if(!active()||game().introActive)return;const g=game(),s=g.journey,body=node('section','notebook'),tabs=node('nav','notebook-tabs');tabs.setAttribute('aria-label','수첩 분류');
    for(const [id,label]of [['facts','관찰'],['styles','무공 해석'],['growth','성장 · 준비']]){const b=action(tabs,label,()=>open(id));b.classList.toggle('selected',id===tab);b.setAttribute('aria-current',id===tab?'page':'false');}body.append(tabs);
    if(tab==='facts'){

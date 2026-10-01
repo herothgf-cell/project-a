@@ -1,0 +1,3 @@
+const test=require('node:test'),assert=require('node:assert/strict'),{inherited}=require('./world-fixtures.cjs');
+test('latest model removes contract execution and board',()=>{const g=inherited();assert.equal(g.startContract(),false);assert.equal(g.claimContract(),false);g.enter('city');assert.ok(g.points().every(p=>p.id!=='contract-board'));});
+test('potion hint describes actual recovery and remains once after reload',()=>{const g=inherited();g.player.hp=30;assert.equal(typeof g.potionHint,'function');assert.match(g.potionHint(),/55%/);assert.equal(g.potionHint(),'');assert.equal(g.constructor.load(g.save()).potionHint(),'');});
