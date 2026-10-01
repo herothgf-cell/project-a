@@ -40,7 +40,7 @@
  P.step=function(dt,input={}){const before=this.playTime,area=this.area;old.step.call(this,dt,input);const d=this.playTime-before;if(d<=0||area!==this.area)return;const r=R(this),s=S(this);r.focusSpent=false;
   if(s.breath==='flow'&&this.playTime-r.lastAction>1.2)this.player.mp=Math.min(this.stats().mp,this.player.mp+d*3);
   if(r.guard){r.guard.life-=d;if(r.guard.life<=0)r.guard=null;}
-  const queue=r.pending;r.pending=[];for(const h of queue){if(h.area!==this.area)continue;h.delay-=d;if(h.delay>0){r.pending.push(h);continue;}for(const e of targets(this,h,180))this.strike(e,Math.round(this.stats().attack*h.mult),'interpret:'+h.key);fx(this,h.key,h);}
+  const queue=r.pending;r.pending=[];for(const h of queue){if(h.area!==this.area)continue;h.delay-=d;if(h.delay>0){r.pending.push(h);continue;}for(const e of targets(this,h,180))this.strike(e,Math.round(this.stats().attack*h.mult),'interpret:'+h.key,h.dualCast);fx(this,h.key,h);}
  };
  return {...api,recognize,credit};
 });

@@ -30,9 +30,9 @@
   function info(g,a){if(!names.includes(a))return null;const p=active(g),i=names.indexOf(a),s=p?PATHS[p].skills[i]:['미완성 기연','?',0,0,'비경에서 자신의 기연을 발견하세요.'];return {name:s[0],glyph:s[1],cost:s[2],cool:s[3],description:s[4],need:0,key:['Q','R','F'][i],locked:!p||(a==='ultimate'&&(!g.fate.path||!!g.trial)),path:p};}
   function entry(g){reset(g);}
   function note(g,path){g.fate.feats[path]=Math.min(999999,g.fate.feats[path]+1);g.fate.focus=Math.min(100,g.fate.focus+20);if(g.trial?.path===path&&!g.trial.feat){g.trial.feat=true;g.toast('기연의 호흡을 증명했습니다! 이제 시험 잔상을 제압하세요.');}}
-  function strike(g,e,amount,source='signature'){return g.strike(e,Math.round(g.stats().attack*amount),source);}
+  function strike(g,e,amount,source='signature',cast=null){return g.strike(e,Math.round(g.stats().attack*amount),source,cast);}
   function targets(g,origin,radius){return g.enemies.filter(e=>e.hp>0&&dist(e,origin)<=radius+e.r&&g.lineClear(origin,e));}
-  function areaHit(g,origin,radius,mult,source='signature'){let n=0;for(const e of targets(g,origin,radius))if(strike(g,e,mult,source)>0)n++;return n;}
+  function areaHit(g,origin,radius,mult,source='signature',cast=null){let n=0;for(const e of targets(g,origin,radius))if(strike(g,e,mult,source,cast)>0)n++;return n;}
   function emit(g,kind,x,y,extra={}){g.effect(kind,x,y,{path:active(g),life:.65,max:.65,...extra});}
   function begin(g,path){
     if(g.area!=='sanctum'||g.fate.stage<2||!valid(path)||!g.fate.discovered.includes(path))return false;
@@ -123,7 +123,7 @@
     if(c.echo){c.echo.life-=dt;if(c.echo.life<=0)c.echo=null;}
     if(c.field){c.field.life-=dt;if(c.field.life<=0)c.field=null;}
     const ready=[];for(const hit of c.pending){hit.delay-=dt;if(hit.delay<=0)ready.push(hit);}c.pending=c.pending.filter(h=>h.delay>0);
-    for(const hit of ready){areaHit(g,hit,hit.radius,hit.mult,hit.source);emit(g,'fate-wave',hit.x,hit.y,{angle:hit.delay*5+g.player.face,range:hit.radius,actionInstance:hit.actionInstance,presentationAngle:hit.presentationAngle,presentationPhase:'contact'});}
+    for(const hit of ready){areaHit(g,hit,hit.radius,hit.mult,hit.source,hit.dualCast);emit(g,'fate-wave',hit.x,hit.y,{angle:hit.delay*5+g.player.face,range:hit.radius,actionInstance:hit.actionInstance,presentationAngle:hit.presentationAngle,presentationPhase:'contact'});}
   }
   function speed(g,e){return g.combat.field&&dist(e,g.combat.field)<g.combat.field.radius?.4:1;}
   function reward(g,e){
