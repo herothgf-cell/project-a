@@ -1,0 +1,446 @@
+{
+  "version": "0.11.0",
+  "commit": "18bb83671dab8b84ee6c9f2e32b4847307c0c5c0",
+  "files": {
+    "index.html": {
+      "sha256": "a714c83754755c8e3b3f89272303171d97bc654a39b4f0b29ab1c031af6f1bf9",
+      "original": "5a112dfceb92a1040ec0846b02e3f7036a9e8792491790fa17457bc3f5682c0f"
+    },
+    "style.css": {
+      "sha256": "f3efeae3c734591effc753fdc94cb0486a1a5f1c710b17c23ffde9a8681dc0d8",
+      "original": "f3efeae3c734591effc753fdc94cb0486a1a5f1c710b17c23ffde9a8681dc0d8"
+    },
+    "classic.css": {
+      "sha256": "888c8a50dfed1fb806dd24fd45cae6d381a52acbe66c04459cf1250be2ca105d",
+      "original": "888c8a50dfed1fb806dd24fd45cae6d381a52acbe66c04459cf1250be2ca105d"
+    },
+    "wuxia.css": {
+      "sha256": "fd8d44b8545207e65457aaa7a4e9ea8e0bd0c71ad11c2515df313ad249100d4a",
+      "original": "fd8d44b8545207e65457aaa7a4e9ea8e0bd0c71ad11c2515df313ad249100d4a"
+    },
+    "journey.css": {
+      "sha256": "c61420c2cf9967c60f60f33a03ef2fda5f1db07e23f3292ef9f0471a8fea1024",
+      "original": "c61420c2cf9967c60f60f33a03ef2fda5f1db07e23f3292ef9f0471a8fea1024"
+    },
+    "realm.css": {
+      "sha256": "17b7ff535c6539ee6460260e9b4b7eac430ecc40a33eabd84ff745164a5e3319",
+      "original": "17b7ff535c6539ee6460260e9b4b7eac430ecc40a33eabd84ff745164a5e3319"
+    },
+    "revision.css": {
+      "sha256": "aa86a8603d41c4dfaddc342d83ae8f137619c027674eba5ec3380233d3e6de09",
+      "original": "aa86a8603d41c4dfaddc342d83ae8f137619c027674eba5ec3380233d3e6de09"
+    },
+    "progression.css": {
+      "sha256": "a9e106cef6ca7e28685fbffb85b946da66f1e7c1243b24eeb14f6175ad69d33c",
+      "original": "a9e106cef6ca7e28685fbffb85b946da66f1e7c1243b24eeb14f6175ad69d33c"
+    },
+    "feedback-two.css": {
+      "sha256": "ed80890924cb8db317725dd5edbe1bcd3b0b179185a81a26ca76600ad9dea6d0",
+      "original": "ed80890924cb8db317725dd5edbe1bcd3b0b179185a81a26ca76600ad9dea6d0"
+    },
+    "world.js": {
+      "sha256": "25fb3595a0f3b1d445824c597aeab169f1b34f2eda70cbfa94eaf178cfa3fb2d",
+      "original": "25fb3595a0f3b1d445824c597aeab169f1b34f2eda70cbfa94eaf178cfa3fb2d"
+    },
+    "controls.js": {
+      "sha256": "9c342c34b3831b3dff656b59e1ed55eac154e704903b29e7ac948e4d39622aaa",
+      "original": "9c342c34b3831b3dff656b59e1ed55eac154e704903b29e7ac948e4d39622aaa"
+    },
+    "fate.js": {
+      "sha256": "01237927470189e90735e81b19e2f42b999a8dc96dfd8e839bdc5b88036d1c3e",
+      "original": "01237927470189e90735e81b19e2f42b999a8dc96dfd8e839bdc5b88036d1c3e"
+    },
+    "legend.js": {
+      "sha256": "5f23a4e9bb3344efc6d62d042b79533397345e0b050dee04ca76e2f3185b0562",
+      "original": "5f23a4e9bb3344efc6d62d042b79533397345e0b050dee04ca76e2f3185b0562"
+    },
+    "game.js": {
+      "sha256": "4277d25ff9bb9bbb8791c8309f83d20d0b3c09a2bff7f01ea2e362cb21a096a9",
+      "original": "4277d25ff9bb9bbb8791c8309f83d20d0b3c09a2bff7f01ea2e362cb21a096a9"
+    },
+    "sequel.js": {
+      "sha256": "2ed293cb78acdf8ee69045dbc77836adf8d2fca99fcf99964d2e9edc002ce8eb",
+      "original": "2ed293cb78acdf8ee69045dbc77836adf8d2fca99fcf99964d2e9edc002ce8eb"
+    },
+    "journey-data.js": {
+      "sha256": "18b142c0dccf18d99047edd840fd7e7b9dcbee374ec498a8aa08229a10e5402b",
+      "original": "18b142c0dccf18d99047edd840fd7e7b9dcbee374ec498a8aa08229a10e5402b"
+    },
+    "journey.js": {
+      "sha256": "b43f28c0796f79e3b48c3adfa699c622899e2587d929b737649412891b3a8945",
+      "original": "b43f28c0796f79e3b48c3adfa699c622899e2587d929b737649412891b3a8945"
+    },
+    "cultivation.js": {
+      "sha256": "242b0ddd085af1b72ec599e57f593ab45b0edd239976999f96c6085d05636298",
+      "original": "242b0ddd085af1b72ec599e57f593ab45b0edd239976999f96c6085d05636298"
+    },
+    "chapter-five.js": {
+      "sha256": "55d7517b7f46cb9bf3a6755f2ddf41f1ad92c1b0ea21b7638edceeb331874a29",
+      "original": "55d7517b7f46cb9bf3a6755f2ddf41f1ad92c1b0ea21b7638edceeb331874a29"
+    },
+    "presentation.js": {
+      "sha256": "9e84b8ed318d394561696fb2386fc5423984cb6a40fe466929fea7275074813d",
+      "original": "9e84b8ed318d394561696fb2386fc5423984cb6a40fe466929fea7275074813d"
+    },
+    "revision.js": {
+      "sha256": "819acb5916d2073e10c71136ef44816b941b10de25ece3997c2aaea3fadff179",
+      "original": "819acb5916d2073e10c71136ef44816b941b10de25ece3997c2aaea3fadff179"
+    },
+    "progression.js": {
+      "sha256": "bf1ef355cc4c910ad880865679c00bafc055f8a7288c5524d53b712625f194ef",
+      "original": "bf1ef355cc4c910ad880865679c00bafc055f8a7288c5524d53b712625f194ef"
+    },
+    "martial-tree.js": {
+      "sha256": "38b0fa3132621396af0f52fb3d3411fe2f38fadae61fce1122630aa2f9b0b25b",
+      "original": "38b0fa3132621396af0f52fb3d3411fe2f38fadae61fce1122630aa2f9b0b25b"
+    },
+    "contract-ui.js": {
+      "sha256": "e526f2d5cd958f12dd7af9807bf096ac53a153cbca43d1432fd224bd92660568",
+      "original": "e526f2d5cd958f12dd7af9807bf096ac53a153cbca43d1432fd224bd92660568"
+    },
+    "progression-ui.js": {
+      "sha256": "f174c65f6054adef264acc2d40293442707e2aec87ccd4ea3704221b77aa9253",
+      "original": "f174c65f6054adef264acc2d40293442707e2aec87ccd4ea3704221b77aa9253"
+    },
+    "intro-ui.js": {
+      "sha256": "e1d5695111d97ae9cf40a23fde247feb32df21850c0fab656c0e0aa5d17a5fda",
+      "original": "e1d5695111d97ae9cf40a23fde247feb32df21850c0fab656c0e0aa5d17a5fda"
+    },
+    "growth-ui.js": {
+      "sha256": "71c9385cb536391bc2a21e1d30aaebd8bc2230a620bcd29e76a488bb38a6beed",
+      "original": "71c9385cb536391bc2a21e1d30aaebd8bc2230a620bcd29e76a488bb38a6beed"
+    },
+    "art-loader.js": {
+      "sha256": "6e1529c8a9c4c2c0a8dc96d03403beee434922bb9e15661f4def3808f462689c",
+      "original": "6e1529c8a9c4c2c0a8dc96d03403beee434922bb9e15661f4def3808f462689c"
+    },
+    "wuxia-direction.js": {
+      "sha256": "64e424d3b71ef3b4ab769243dcd1ff767cf951af834583d330e61186fbcf5d6b",
+      "original": "64e424d3b71ef3b4ab769243dcd1ff767cf951af834583d330e61186fbcf5d6b"
+    },
+    "art.js": {
+      "sha256": "d4ade43824c04038b9aabbe4546166dbf22d3b78be26b6be870db5014c1d3304",
+      "original": "d4ade43824c04038b9aabbe4546166dbf22d3b78be26b6be870db5014c1d3304"
+    },
+    "portrait-data.js": {
+      "sha256": "308c58793083549a8d444997656a1cc7a5ca87db57bdc62db773e53a0d1a2fe9",
+      "original": "308c58793083549a8d444997656a1cc7a5ca87db57bdc62db773e53a0d1a2fe9"
+    },
+    "classic-art.js": {
+      "sha256": "8f9153fe9d2b34a7a85ff2e7befba6002ef6cf2233863a0f575405c8669319be",
+      "original": "8f9153fe9d2b34a7a85ff2e7befba6002ef6cf2233863a0f575405c8669319be"
+    },
+    "wuxia-data.js": {
+      "sha256": "469b9a42f91546f86170f8c72ccdfb6a4dce9301c85ac1085054cad44f6609cb",
+      "original": "469b9a42f91546f86170f8c72ccdfb6a4dce9301c85ac1085054cad44f6609cb"
+    },
+    "wuxia-art.js": {
+      "sha256": "e93086e045e62ce52928ddba6006c539aba0a5d529958e5cb14f1c5a5f3d8f1d",
+      "original": "e93086e045e62ce52928ddba6006c539aba0a5d529958e5cb14f1c5a5f3d8f1d"
+    },
+    "realm-art.js": {
+      "sha256": "ea740fe484e408493bbfa5a8637733576e52fa8cce22795e33a5a7950ffd2f49",
+      "original": "ea740fe484e408493bbfa5a8637733576e52fa8cce22795e33a5a7950ffd2f49"
+    },
+    "fate-art.js": {
+      "sha256": "63fa26a6b888a7ce6b644cf589494287501b59e703a4284a0447baf55cdc412a",
+      "original": "63fa26a6b888a7ce6b644cf589494287501b59e703a4284a0447baf55cdc412a"
+    },
+    "journey-art.js": {
+      "sha256": "30f2b5cda2aa64f82f0744d7f2af5c62d710090dd87c9ef153fa2ece702b81f3",
+      "original": "30f2b5cda2aa64f82f0744d7f2af5c62d710090dd87c9ef153fa2ece702b81f3"
+    },
+    "journey-ui.js": {
+      "sha256": "6c5e4a4757e4c94f4868fdbe04f48ccfae0e5611bc4d805b60d6f8b81c13c2ba",
+      "original": "6c5e4a4757e4c94f4868fdbe04f48ccfae0e5611bc4d805b60d6f8b81c13c2ba"
+    },
+    "render.js": {
+      "sha256": "412e17cba732dfd089218b6ce8bb5a824b455b9e27bcf983c5c7ec5f39c7c80b",
+      "original": "412e17cba732dfd089218b6ce8bb5a824b455b9e27bcf983c5c7ec5f39c7c80b"
+    },
+    "realm-ui.js": {
+      "sha256": "740e04b10c5b7a87b6f910e389891a8f54b2bce2765567b252bcf742870583b9",
+      "original": "740e04b10c5b7a87b6f910e389891a8f54b2bce2765567b252bcf742870583b9"
+    },
+    "growth-model.js": {
+      "sha256": "24d397ca0a01c8e223bef2d92769810becf8b3b72df9e393d898640038806d1d",
+      "original": "24d397ca0a01c8e223bef2d92769810becf8b3b72df9e393d898640038806d1d"
+    },
+    "economy.js": {
+      "sha256": "5cdcf9c4c9b581afc941c00edfc80453d071045cc8b3f8b1f1314496f5ecce77",
+      "original": "5cdcf9c4c9b581afc941c00edfc80453d071045cc8b3f8b1f1314496f5ecce77"
+    },
+    "dual-breath.js": {
+      "sha256": "9e9ea39b503e454f269b1eafa5c9153b5961423bd112123c0bd98f3e858b90c9",
+      "original": "9e9ea39b503e454f269b1eafa5c9153b5961423bd112123c0bd98f3e858b90c9"
+    },
+    "later-story-data.js": {
+      "sha256": "7111a1f0eb6a13d9aee20c252d5dd4af2cb37e47c418c47e4f2ee2e5b4b74278",
+      "original": "7111a1f0eb6a13d9aee20c252d5dd4af2cb37e47c418c47e4f2ee2e5b4b74278"
+    },
+    "chapter-six.js": {
+      "sha256": "756e7b80569e63ee87caa3243acc35e22dd3a72f58d4c03a0faad631f758bba5",
+      "original": "756e7b80569e63ee87caa3243acc35e22dd3a72f58d4c03a0faad631f758bba5"
+    },
+    "chapter-seven.js": {
+      "sha256": "405ccc10194fb3b38f490255df088a992f0ca1768bda0ba65d6c219a05319ae6",
+      "original": "405ccc10194fb3b38f490255df088a992f0ca1768bda0ba65d6c219a05319ae6"
+    },
+    "save-v9.js": {
+      "sha256": "a781fbab50937819f88a66bf2afe1ed17c25c62f1e3ad264f11b9753f3bed294",
+      "original": "a781fbab50937819f88a66bf2afe1ed17c25c62f1e3ad264f11b9753f3bed294"
+    },
+    "objective-model.js": {
+      "sha256": "41463fa0aee175275ddd5901fde3c4a3ced247afcf394908c5d5033d487a5cab",
+      "original": "41463fa0aee175275ddd5901fde3c4a3ced247afcf394908c5d5033d487a5cab"
+    },
+    "dialogue-data.js": {
+      "sha256": "750e5ba3417e218a821c354dfcf8e908bb64a109783e8a9771d0ecdbc0208bd0",
+      "original": "750e5ba3417e218a821c354dfcf8e908bb64a109783e8a9771d0ecdbc0208bd0"
+    },
+    "dialogue-ui.js": {
+      "sha256": "7f40b651468e130b171a9e179f0d0587005bbe791af3127d736512f0f5a74158",
+      "original": "7f40b651468e130b171a9e179f0d0587005bbe791af3127d736512f0f5a74158"
+    },
+    "quest-data.js": {
+      "sha256": "eb159c0ec99ef641c48232c8210502d6a0bb56c61325499c65e02536549918d1",
+      "original": "eb159c0ec99ef641c48232c8210502d6a0bb56c61325499c65e02536549918d1"
+    },
+    "objective-ui.js": {
+      "sha256": "1282a2ca08815ebc7e2707aa8d84e03d6f38597c69a713a6f9167451722de2f7",
+      "original": "1282a2ca08815ebc7e2707aa8d84e03d6f38597c69a713a6f9167451722de2f7"
+    },
+    "app.js": {
+      "sha256": "6ada0407afeffc989a580d0071790a994adad6638132e07a8a8a7bf38986022a",
+      "original": "336cb9542603ccea39a860c0ae9fa5038a9f4081b88ff99e3190563f7a728cb8"
+    },
+    "art-runtime.js": {
+      "sha256": "9997896348724b94374df438108d723410f6d8b8ec55a37175552f7742ea2f56",
+      "original": "9997896348724b94374df438108d723410f6d8b8ec55a37175552f7742ea2f56"
+    },
+    "art-preview-runtime.js": {
+      "sha256": "b3504a3c73774def372277820556932bd9fa84e155bb57476f7e508e03834bec",
+      "original": "b3504a3c73774def372277820556932bd9fa84e155bb57476f7e508e03834bec"
+    },
+    "assets/art/manifest.json": {
+      "sha256": "451febaba39783871d6280257fe81df7a0456351555cec03b2889ae61f61e942",
+      "original": "451febaba39783871d6280257fe81df7a0456351555cec03b2889ae61f61e942"
+    },
+    "assets/art/scene-candidate.json": {
+      "sha256": "ac10f1fa7622e77361f1f401a49b92d97f86bb87acdef41558d7cad85544932d",
+      "original": "ac10f1fa7622e77361f1f401a49b92d97f86bb87acdef41558d7cad85544932d"
+    },
+    "assets/art/reality/hero/yunseo/candidate.json": {
+      "sha256": "3335040dfede4da64232e8c3a2d40c8f828170c8b8190ab9f524c6858379950a",
+      "original": "3335040dfede4da64232e8c3a2d40c8f828170c8b8190ab9f524c6858379950a"
+    },
+    "assets/art/reality/hero/yunseo/runtime.json": {
+      "sha256": "50f95fe7490407d3410e7bdbc53e33bea1021c2a97d1487581703d412ed3665c",
+      "original": "50f95fe7490407d3410e7bdbc53e33bea1021c2a97d1487581703d412ed3665c"
+    },
+    "assets/art/murim/hero/yunseo/candidate.json": {
+      "sha256": "0113b497ec0c2634b10dbea1b6dd8f8b422aea78c44f3b61c5f4eec7bdf7f6cb",
+      "original": "0113b497ec0c2634b10dbea1b6dd8f8b422aea78c44f3b61c5f4eec7bdf7f6cb"
+    },
+    "assets/art/murim/hero/yunseo/runtime.json": {
+      "sha256": "fa7b3462b1b47e29afc0f5ab2fb0e384deeb2e1221dfee75867c9b2e1aca9566",
+      "original": "fa7b3462b1b47e29afc0f5ab2fb0e384deeb2e1221dfee75867c9b2e1aca9566"
+    }
+  },
+  "shared": {
+    "assets/art/intro/signal.webp": "875996287ea0af6f1619f677dd2020f8a8686618f3c80ac49c50e5b9b851a7b7",
+    "assets/art/intro/stone.webp": "73b0d8ffaa7be1fb21f2a61b1252ce38a09c4e7452c4c208776399a7d215ace0",
+    "assets/art/intro/return.webp": "b099af57174c94c468c4987a1f8fd117e7a9bc4b177313c0dbc2d4c4ef5098df",
+    "assets/art/intro/report.webp": "58a1352aed3f22c191688946b895766ae293998309083e77b1f10bfe6f140b2c",
+    "assets/art/intro/compare.webp": "0500f3b71e8c11086b3686164321bb00089ddab46269b0cfb27aaea3e9488ff8",
+    "assets/art/murim/enemy/masked-candidate-v2.png": "fdf51e881dc6ccbb57be2b229a8ed3d359b4ed52dee1719b1e886e26e077d51b",
+    "assets/art/murim/enemy/masked-rear-candidate-v1.png": "d7b4779316c169e76a7fabf83a47687a6a2b492e3f1728f0ca9a4fad9de91d4f",
+    "assets/art/murim/enemy/guardian-candidate-v3.png": "a3e3d6b0dd61e969a33ced59571f42016217a8d10259c145147f852da85dba72",
+    "assets/art/reality/enemy/drone-candidate-v2.png": "5144c27fcfe7497fc807a5d6d408e6dff4c2a230f4322b9134a3a151d0201cf4",
+    "assets/art/reality/enemy/drone-rear-candidate-v1.png": "b1b550056cffc7ad41da81e2c54eb26191eab48e06369865112e3795c93243f2",
+    "assets/art/reality/enemy/tide-candidate-v2.png": "4673022db1efd9a80b3ccc72e232702fc0229ace7df2952c67dd8687dab4f552",
+    "assets/art/reality/environment/dressing-candidate-v1.png": "5772ef3b4189bec606e73c272ba0fe8ae7c9f65ccce120e8f3aaf790d6db6f74",
+    "assets/art/murim/environment/dressing-candidate-v1.png": "00528d2e50a71801a985c93b23eb8a7b11d4ce0fd8520f8c82ee0122b9a0da7a",
+    "assets/art/reality/environment/props-candidate-v1.png": "560e0b3446f7261deb61e718bd59da42d41d899d53491102f777dd3bfff48165",
+    "assets/art/murim/environment/props-candidate-v1.png": "aa8f06bedaad83672c53f7d971209fc4a4561de03de60602faf44f499e96f300",
+    "assets/art/reality/npc/seorin-candidate-v1.png": "fc61676820152fa8b8fcfcf819743c95c6650d02e1b77762f04180c14a663b2b",
+    "assets/art/reality/npc/dogyeom-candidate-v1.png": "fd8e5e6d4f8fd8d1ee31348ff7852279e1d14a690b8e4fe2c895d3ad9327c448",
+    "assets/art/reality/npc/supply-candidate-v1.png": "1ca084436724b2aa89e7de5b624cd63684d84f511b851f58ba0b175827c607e7",
+    "assets/art/murim/npc/baekryun-candidate-v1.png": "5db5f2a803e92801b2f17128ff2116f61ba048a1b5dd6797921f9f964b850fd7",
+    "assets/art/murim/npc/yeonhwa-candidate-v1.png": "3b2e92c1307080a892c9ad9783753b66dc22997135d3ab40071562440684b5cf",
+    "assets/art/murim/npc/apothecary-candidate-v1.png": "98667f374dadf94c906504a59a9144f3c5dbdf8aaa0a684b874a51bb4d4d1ad3",
+    "assets/art/reality/environment/buildings-candidate-v2.png": "08e39f9f9c74f38c5d66fbde1a7ac9b01e39d1da463a66890cfff2950495eff4",
+    "assets/art/reality/environment/ground-candidate-v2.png": "78650355f88dad1226f86306830d99bcfd18e2e5419e2f31b96747afb001ec3e",
+    "assets/art/reality/environment/portal-candidate-v1.png": "52f410d665245bbcb41da9e958346263aa1e149b506551d9792c825a03358e8b",
+    "assets/art/murim/environment/buildings-candidate-v2.png": "bd8f334c84d5acc91a5f96b8ddc878da5adaf200e96b4011c5c7253f80967fa8",
+    "assets/art/murim/environment/ground-candidate-v2.png": "5d5874d010cd8ed0fb6e2d1f509474a10095804d6f61db0e4193c3c37d5dbc61",
+    "assets/art/murim/environment/portal-candidate-v2.png": "ab0101142576dbc9a5f1c506dc712db653c08e361d730e3b18f31e4e200cd0f6",
+    "assets/art/shared/vfx/blade-candidate-v1.png": "917d044d4ed3e835cf27c9f6d96cf3fa479599c2a33246cc9d2f2ea53d37a9e5",
+    "assets/art/shared/vfx/storm-candidate-v1.png": "5dc452031d6c4de75b5e0ca89d2f2a25bf59cdce1fcf9246e9d867c2a7c53bec",
+    "assets/art/shared/vfx/seal-candidate-v2.png": "e35a6b6495b15e5c80922490cd093e0789dd2d15347614e99ff874a0dc32f079",
+    "assets/art/shared/vfx/ripple-candidate-v2.png": "f27f1ca1e3fdbb1d6381ae255af9ab45728a1ed2d65eff20c22b8f34fb4dbd0e",
+    "assets/art/shared/vfx/echo-candidate-v1.png": "c804c998907f9f901d325360ae678eb3692deb8f94479205578300afd67a4414",
+    "assets/art/reality/enemy/shade-candidate-v2.png": "2fd7d5ca497b56bfe20276c5d68d6a462027ca7e4c192a37152217f4177f56e0",
+    "assets/art/reality/enemy/shade-idle-nw-candidate-v2.png": "cc202850aed38b45a87a960222b8e5f659bc526c933cce3a8fc426e65e78693c",
+    "assets/art/reality/enemy/shade-telegraph-nw-candidate-v2.png": "834dd4a7b3315893368933e206932f3fdcf8ffd790be6636b18d6b7b5979df55",
+    "assets/art/reality/enemy/shade-attack-nw-candidate-v2.png": "7c6864d1cfc81ed242d22700f36800dbab25550b10e6b87c03714caf2dd7dac5",
+    "assets/art/reality/enemy/shade-death-nw-candidate-v2.png": "e504ad38e62e36888ee56c67005cddb4944e50bf0f8ca35d351240477ae42265",
+    "assets/art/reality/enemy/shade-move-nw-candidate-v2.png": "02aa1867e3b14c6223dba601f700212f1bf32d9ff14596053e5e7a6bba397e15",
+    "assets/art/reality/enemy/shade-hit-nw-candidate-v2.png": "3d21ff1e41d32bb66fc60486d3c1fd1640004eb667ca815f40b4727ae2899097",
+    "assets/art/reality/enemy/sentinel-candidate-v2.png": "574e1a9bcf2eac20291b4fc27f3fe3dc0c4716f80704df9dddd2758de330301d",
+    "assets/art/murim/enemy/bandit-candidate-v2.png": "6f3cc11c6da85fac535abc64e2c4cd1830653bcc67301565ab19038df6fb0f7f",
+    "assets/art/murim/enemy/bandit-attack-se-candidate-v2.png": "cf91b7a42426c129ca63a3bb296e17ad7e40f2a4af30c3b0167f0e4bee991bce",
+    "assets/art/murim/enemy/bandit-idle-nw-candidate-v2.png": "e9dde2a98fb7f3f100f6b6876372d81d96738ea60e3339b9586eac99d7596cab",
+    "assets/art/murim/enemy/bandit-move-nw-candidate-v2.png": "13cc53ed1dd83d7177f510933289f4f8caeea223b9409a22954eb87f9a2becf3",
+    "assets/art/murim/enemy/bandit-telegraph-nw-candidate-v2.png": "ea3fcd3cdfd9a126174bda6eaa053c8d81c4975da7faf13907701bdf8501dd49",
+    "assets/art/murim/enemy/bandit-attack-nw-candidate-v2.png": "9a257ade655a82a063439aa56763b95a348ab36f9f876b3f55f4164943243c24",
+    "assets/art/murim/enemy/bandit-hit-nw-candidate-v2.png": "3756d2fe277983085d90b72f2c0614d07a4bc1914732b82fcc514137b3ab0268",
+    "assets/art/murim/enemy/bandit-death-nw-candidate-v2.png": "0886a2323133da26647a498f65d95da67268d587a8770ee0b4947047e91cefc8",
+    "assets/art/murim/enemy/chief-candidate-v3.png": "c8cbee81a1883c9a49939419a9e7aee0f72533d386fb898f6390c4ed867d2cfe",
+    "assets/art/murim/environment/foreground-candidate-v1.png": "58066fc2b51f61a5952ebcdf48e64855bfc6092bc662896debcfaabb97e9c0cb",
+    "assets/art/reality/environment/foreground-candidate-v1.png": "3ca57c86eb87ea530529e3cc26c29ff5c05de6888f11a7cad50edd9c31b5eefe",
+    "assets/art/reality/hero/yunseo/idle-candidate-v1.png": "fe5b7fe8c5e3c957e5af9c501e53af3678060e7cd04142f1be14af8e43a27618",
+    "assets/art/reality/hero/yunseo/hit-e-candidate-v2.png": "f4a2fa45fb4efc3bf3b17658ec74994e0761c6d6a70f2c5bbcaabea1f73fb094",
+    "assets/art/reality/hero/yunseo/hit-w-candidate-v2.png": "dfd1d318cfb153bd3158c227eefbfb271651365505d8d2157140b56f86fc966b",
+    "assets/art/reality/hero/yunseo/hit-n-candidate-v2.png": "9ff7964502ba1e869992511aaf2a3127a230dec858276221c0ba3b0593ad2be5",
+    "assets/art/reality/hero/yunseo/hit-s-candidate-v2.png": "8bf0eddd0baeafa0af85e6cac0ff1431eceb43d341f8d5757fe0a6c5dbdbacfe",
+    "assets/art/reality/hero/yunseo/hit-ne-candidate-v2.png": "2b102ee7b49362e0d9f0f2ec7903b629a7ce5395beb57e39e253d42ea5b34412",
+    "assets/art/reality/hero/yunseo/hit-nw-candidate-v3.png": "6e380f6845a5e1831e7f7e674e152990d1843c9eca13a8149058a258375e8046",
+    "assets/art/reality/hero/yunseo/hit-sw-candidate-v2.png": "bb962fd658f19230a2ee929152999cda4554e6fe3e5a03c9f6d1865ad790bbba",
+    "assets/art/reality/hero/yunseo/cast-e-candidate-v2.png": "f42aa9bd52b44e57a20b6ad51321184f7c0263cf45e4a8564b27aa74e1af5f0e",
+    "assets/art/reality/hero/yunseo/cast-w-candidate-v2.png": "213336b87328b908024e6b6b310834e6af77646259a4527607cb99a78117802e",
+    "assets/art/reality/hero/yunseo/cast-n-candidate-v2.png": "3e9983ac8d8fab0ea0c86917fc3b12fdfe4910fdf6b481943aab7266e70156cd",
+    "assets/art/reality/hero/yunseo/cast-s-candidate-v2.png": "16cae7d742d75c6ca3330223cdf7b4fbbd5cb8d9df4ab61e1d943545d9ae4c8e",
+    "assets/art/reality/hero/yunseo/cast-ne-candidate-v3.png": "b31d56438a78db2713582869a4c82d728974d90e74c51ce3d58881068ed6754c",
+    "assets/art/reality/hero/yunseo/cast-nw-candidate-v2.png": "8bf11646739549e677760a84c462755033ae4c6d73d7bad60c32337f8cedd67f",
+    "assets/art/reality/hero/yunseo/cast-sw-candidate-v3.png": "b9a2ae5c9228c9417ee88ad81e961aa9187f6e478eeee7a700d956470eeb0591",
+    "assets/art/reality/hero/yunseo/attack3-e-candidate-v2.png": "781506780070ad96d811ca35bb023d9dffd0843a959eafff360472bb91f87860",
+    "assets/art/reality/hero/yunseo/attack3-w-candidate-v2.png": "6b3307bf46cc907a1716ad09dbc195e6c6ea2efd8bd0eeaa2daf8b57f28e3744",
+    "assets/art/reality/hero/yunseo/attack3-n-candidate-v2.png": "4cf97cd3b2d5a930377e2b5dc08cf4db98fd1af00ed180eb138bcfd2ca619a19",
+    "assets/art/reality/hero/yunseo/attack3-s-candidate-v2.png": "2ab55da5f826466e9496c3b9dbd4d1b01593c34d44351dba633d1a18aff2a5df",
+    "assets/art/reality/hero/yunseo/attack3-ne-candidate-v2.png": "1aa52a9b6b4a952da12de01cddbe30798f5a2b394feb7e70cd0bebc211b30a57",
+    "assets/art/reality/hero/yunseo/attack3-nw-candidate-v2.png": "5249f438d4349ce9c4ca319b4dac0e34590c5cb404f9bfc3be2978ac0f476db7",
+    "assets/art/reality/hero/yunseo/attack3-sw-candidate-v2.png": "ad9318e02f370ca142c8b356478edec473d73074cca0c316791964664b6654a4",
+    "assets/art/reality/hero/yunseo/attack2-e-candidate-v2.png": "2dc14f9c7d4abf00da9485f3332697057fc7b8a032f0a0f7f35c9aeabd0d18db",
+    "assets/art/reality/hero/yunseo/attack2-w-candidate-v2.png": "08f0d77b8229b26c998a2735d7439dc9da9629fbe4af68fc89d75cfea9cb67b0",
+    "assets/art/reality/hero/yunseo/attack2-n-candidate-v2.png": "716199868a60a028b346c095bd835dd50266a9258d3854e3c561f7c7f047f80c",
+    "assets/art/reality/hero/yunseo/attack2-s-candidate-v2.png": "cdb4db1805d7c1c4459b5206a895875360274672deb1185e39a5ee4c7306ab97",
+    "assets/art/reality/hero/yunseo/attack2-ne-candidate-v2.png": "93457a8d72f3251ca45d0da0af0dfed2b0681ab460223d5c53195a14250f3721",
+    "assets/art/reality/hero/yunseo/attack2-nw-candidate-v2.png": "134a4c9cd8218544442dbb7f61d5909d6efbb0c0d29de5ff7769bddc1d770865",
+    "assets/art/reality/hero/yunseo/attack2-sw-candidate-v2.png": "590487ca7f61aee25ab7c718f16af1d62ab531b5d7c00f56704dcb3fa5bbb6f9",
+    "assets/art/reality/hero/yunseo/dodge-w-candidate-v2.png": "b0e28150604c228a440c78091c8d181c99ef4a5f46b80670b5520441b09bb330",
+    "assets/art/reality/hero/yunseo/dodge-n-candidate-v2.png": "a9d6621231e8883736778f5a5ad5ecbbc985c3d30dc03fea7afa3425a3fdd776",
+    "assets/art/reality/hero/yunseo/dodge-s-candidate-v2.png": "a1576591673db6d3494768305d059de818e0262fd2adf45b1a032f1effad8990",
+    "assets/art/reality/hero/yunseo/dodge-ne-candidate-v2.png": "a25daf4c6ffad600ddd9f2e2909e005741b67393a914745d8b1a63b85eaaeec6",
+    "assets/art/reality/hero/yunseo/dodge-nw-candidate-v3.png": "ae9b9f74efafe4cd2875dc48c055dc4f894a3934f3df696f5be54215b5396afb",
+    "assets/art/reality/hero/yunseo/dodge-sw-candidate-v2.png": "cfc763a5129007985ac55467a96ae278d11d7c69b9ceed299827cfb2a3e6619a",
+    "assets/art/reality/hero/yunseo/dodge-e-candidate-v2.png": "2212ac3adb1fe2d67d77451c789c21ac89c750de9e81ca0281adeeb8aa170359",
+    "assets/art/reality/hero/yunseo/attack1-nw-candidate-v4.png": "42ac941b95cee86f7c3bd923711e1041ddb7299606b24e9d4eb336357591051b",
+    "assets/art/reality/hero/yunseo/attack1-sw-candidate-v2.png": "c456bc70f600336896cd26ee5d1bca5d720a11cd53e2484cda0814c930f5f388",
+    "assets/art/reality/hero/yunseo/attack1-ne-candidate-v2.png": "974e7da7f3abd676f2a4619d4081fff2143e7400ff3ed8524334294b0ce1a56f",
+    "assets/art/reality/hero/yunseo/attack1-s-candidate-v2.png": "379b75a3f36068e1a29a25b1d8c086905124efc3d987702f7937da7d62184203",
+    "assets/art/reality/hero/yunseo/attack1-w-candidate-v2.png": "45a8f011d464279c2b1d56c26ebceb00ad75cc2a0ed83b00753a2d3051376cb9",
+    "assets/art/reality/hero/yunseo/attack1-n-candidate-v2.png": "790f83e70bf003720538446293edf73307370a15852bd6fe37572cc8e2d0e347",
+    "assets/art/reality/hero/yunseo/attack1-e-candidate-v2.png": "4e8bebac73d5d1b7d5390410caada28f2f30554fd157a654cb4b9ee9cf1f9c47",
+    "assets/art/reality/hero/yunseo/hit-se-candidate-v1.png": "62336aa2fbdfeddaa7bf482e52c5a660891269aaf2fe335eef053aaaeae7db34",
+    "assets/art/reality/hero/yunseo/cast-se-candidate-v1.png": "1036941f75229084c54afb40f37eb75a2a56a1fa5c43ae6ebf054618639f6188",
+    "assets/art/reality/hero/yunseo/dodge-se-candidate-v1.png": "57fd012731ebd892b201f3272bf50be5259ff31a32c34535d54a6cadb37a771a",
+    "assets/art/reality/hero/yunseo/attack3-se-candidate-v2.png": "6b3a82e7b364c962f5acfce1b9b043d5cf845e58cee18fd661063ab019b04d51",
+    "assets/art/reality/hero/yunseo/attack2-se-candidate-v2.png": "5037e402d8fb855a68e751b53b8c462119c5424afeeed76d4954a4d967f80a26",
+    "assets/art/reality/hero/yunseo/portraits-candidate-v1.png": "521f840e56f351c14dbbce8ebb58d2888d77a82c57e3f5c8d5d4489a7ba8b14f",
+    "assets/art/reality/hero/yunseo/walk-se-candidate-v1.png": "4adfa87b2353e286f685b14e4b9de4555dc9ee9f1221c3023edd24f3babde961",
+    "assets/art/reality/hero/yunseo/attack1-se-candidate-v1.png": "d20d4aab77384816ef18a8870e982ab51e1490e3bccc29c52588f15f37cd344e",
+    "assets/art/reality/hero/yunseo/walk-s-candidate-v1.png": "06b3b71d260616bc3c3683f3c3e068caf264ef31a4bd782b3e7b60bc2473edc0",
+    "assets/art/reality/hero/yunseo/walk-e-candidate-v1.png": "2c43321412b241b9ac930add1ba020e4901dc13e10b3a9c113d5f93261ae5e71",
+    "assets/art/reality/hero/yunseo/walk-ne-candidate-v1.png": "4dec27494433e60203768820acbee0849322e2889329eeac1a752d60277e8945",
+    "assets/art/reality/hero/yunseo/walk-n-candidate-v1.png": "90bc87951487f62f9447ee42a26d2b119d5ef3e5e183759b6da4bba2efd24413",
+    "assets/art/reality/hero/yunseo/walk-nw-candidate-v1.png": "7f8ffa45a9828561110c7853c4ae56aa7205240a006bb1e3df7087b3e0021b51",
+    "assets/art/reality/hero/yunseo/walk-w-candidate-v1.png": "97a6a8b5d3405d0400dbb1d15c3d7665858caaaf09b30ca1b5077f3df4a63be9",
+    "assets/art/reality/hero/yunseo/walk-sw-candidate-v1.png": "43326fd5c5d8d0c22d103fe38973a598f635990a5fc5f1ab26f7f78fb16aee8e",
+    "assets/art/reality/hero/yunseo/idle-eight-directions-candidate-v1.png": "556efa4fbb9c85fe556506d6cd55d7b45f8b4fcb3e887c55683bac7cf89a281c",
+    "assets/art/reality/hero/yunseo/runtime-hit.webp": "466322b46e0e02615dcc316776884101a9f36898a06a1ba9c7e87ae8ecd0b4d9",
+    "assets/art/reality/hero/yunseo/runtime-cast.webp": "21f5ae69f7e12bb5a5cb4ce83ac43eff6de7d5a10f9f1dcf8356b1b14b612c6d",
+    "assets/art/reality/hero/yunseo/runtime-dodge.webp": "e5b8c23226fc62319ded3e3d371ba6effac4a18ba6d80bb12389b9b69da50f07",
+    "assets/art/reality/hero/yunseo/runtime-attack3.webp": "8ac2f3aa0c65959e8a899f9a0deed5cfeb875622b08009c87cb18cae060b59b4",
+    "assets/art/reality/hero/yunseo/runtime-attack2.webp": "5f757828a3e94f3033984d37fb446369bbbdeaef4384d1f12f8682eca9671599",
+    "assets/art/reality/hero/yunseo/runtime-portrait-neutral.webp": "2598b13c8fc66a5b07d10133c7da01035154c2ec56d4e9336a1e246f2887bc77",
+    "assets/art/reality/hero/yunseo/runtime-portrait-focus.webp": "ef37c13fb6c04678860cd93c810ac964441a9f9c980008f2c6c8bdefd91b4a5b",
+    "assets/art/reality/hero/yunseo/runtime-portrait-hurt.webp": "f68dabf9c17cd60df2f5d1e19749bb145535a322d4337cb5d0b4c5c675913e9c",
+    "assets/art/reality/hero/yunseo/runtime-portrait-slight-smile.webp": "f62bff86c18ecf09fb8ea65796d7fbaa3f1b90ceb64c9647869ae1a1afe56957",
+    "assets/art/reality/hero/yunseo/runtime-idle.webp": "e802d0c3ec6581d6765665108789b00de4ffc683a5453ee8d92e30844cf2e672",
+    "assets/art/reality/hero/yunseo/runtime-walk.webp": "b59dfd4e0e0a3ee796698571ab984ca125c1ee98a1c780def74c0ac976642dba",
+    "assets/art/reality/hero/yunseo/runtime-attack1.webp": "542acf02355f757a24c94f1a85d839d03f6a015ff369575a2c8a7ddea469b6c3",
+    "assets/art/murim/hero/yunseo/idle-candidate-v1.png": "42509cf8a45248275feb371d9745b04eb702c7ce6d446ffede9880c1b02349a8",
+    "assets/art/murim/hero/yunseo/hit-e-candidate-v2.png": "71218e172c0788ada0b55b696f5980e8e2919dba66b10c197d38ff77d9f299b5",
+    "assets/art/murim/hero/yunseo/hit-w-candidate-v2.png": "d75b58d97991d692ada128fa6bffb4f5a922b348d89437c1e196378d9d4a9fc1",
+    "assets/art/murim/hero/yunseo/hit-n-candidate-v2.png": "2a81804eb73787b3c0fdd1b7809c627bf7ec8e1a9cf2dd848225f08a7f18c285",
+    "assets/art/murim/hero/yunseo/hit-s-candidate-v2.png": "12cf08f753ed8662cd6a11473894fa11fbb743a3d5e7a430ba8b7303a4b07d84",
+    "assets/art/murim/hero/yunseo/hit-ne-candidate-v2.png": "475b50a683f58cc12801f497250f725c568f0abc09fd46ec591ca5990160bfb3",
+    "assets/art/murim/hero/yunseo/hit-nw-candidate-v2.png": "bc120d6119b5765f3395417e79e833134f90a4181c2b93a7df91a4b89bb6b983",
+    "assets/art/murim/hero/yunseo/hit-sw-candidate-v2.png": "0cc5305c27527c5eaa631c69120dfbe4ddf09fa3167ceeb4e9c50883c7a1eb9c",
+    "assets/art/murim/hero/yunseo/cast-e-candidate-v2.png": "8b99d68190f68a0eb610e8fb0302f595b60e446c19b340cb5ea191fb7e95da65",
+    "assets/art/murim/hero/yunseo/cast-w-candidate-v2.png": "854eb28623918f210f04d91962bad57ce8fa8388893d69a8da96de1a2e68a9bf",
+    "assets/art/murim/hero/yunseo/cast-n-candidate-v2.png": "01c113d220fe56591d7c8fd306441e0e585b622937086cfbc2fdd9eb4ae600f8",
+    "assets/art/murim/hero/yunseo/cast-s-candidate-v2.png": "c6758cdb19165beabc6f4842755f113be24d37ae2876d6fdc28d5d293a4fe3dc",
+    "assets/art/murim/hero/yunseo/cast-ne-candidate-v2.png": "b72c4c5074798cf928d4a7651a5a5f103b339cbefd0df9a098d56f6817ba3a2b",
+    "assets/art/murim/hero/yunseo/cast-nw-candidate-v2.png": "0367f38fdd5494c538d1744ec9b2cb6a62e8b0730b29c878f9565c711307e941",
+    "assets/art/murim/hero/yunseo/cast-sw-candidate-v2.png": "71ba5c6d298b34e78ea9f38f085910ae10b7b57f0129f571aa347cd2cd42b2da",
+    "assets/art/murim/hero/yunseo/attack3-e-candidate-v3.png": "818101ac3492eb99da5335b40ef7b5ba3f00da1274ff8913aed070dea72c253f",
+    "assets/art/murim/hero/yunseo/attack3-w-candidate-v3.png": "758513e559a41e7137a2c5e8fb1ba00fecd81399c653c305ea830bab6dbc80f4",
+    "assets/art/murim/hero/yunseo/attack3-n-candidate-v2.png": "76fe31bbbf0c75ce72d11bafa10493604ded65aa010a9c821d61b7a41e025145",
+    "assets/art/murim/hero/yunseo/attack3-s-candidate-v2.png": "0758426b34e7213d74d218237d3e4f4e24b4e1d40b6024b6fcf35e3eb6cbcec4",
+    "assets/art/murim/hero/yunseo/attack3-ne-candidate-v2.png": "da6317fa960d92520be63ee892354b0c4a6aa19755905327f877a2c01ba4b601",
+    "assets/art/murim/hero/yunseo/attack3-nw-candidate-v2.png": "61ce881fc36f429d572fff89f21c35cb4ad7d956eef45d456a8e541802558e31",
+    "assets/art/murim/hero/yunseo/attack3-sw-candidate-v2.png": "88c341b2ea57c826adea4ea799604f1af70b462d806527b85d455055ddae41ac",
+    "assets/art/murim/hero/yunseo/attack2-e-candidate-v2.png": "ed9434f8d2df6b1ad1ff640f95dd4d95af56ed4840ec5b8da79233fa88882e63",
+    "assets/art/murim/hero/yunseo/attack2-w-candidate-v2.png": "161457fd4abfcfe454f15ad2dfba2a8027eabb50744e9dce04468288b91f775f",
+    "assets/art/murim/hero/yunseo/attack2-n-candidate-v2.png": "126e1662ce1c6ebd55dee143451809c0ed0d1d1db0cfab34e9a5ffed53ca55a1",
+    "assets/art/murim/hero/yunseo/attack2-s-candidate-v2.png": "f05674b364ff3f32df23bc63d09a0b7e66cde78808376b264c3056a6ecd5edff",
+    "assets/art/murim/hero/yunseo/attack2-ne-candidate-v2.png": "cc6b2b30a4c873684baa21c85c0056720693a0d185e6fdf322db81306d7c854c",
+    "assets/art/murim/hero/yunseo/attack2-nw-candidate-v2.png": "78b65ea47d06f28bc36ed43fce31f9f7120a418e9f1b79d97d9936d5c71661ec",
+    "assets/art/murim/hero/yunseo/attack2-sw-candidate-v2.png": "354e8ba0144ab157084407390273c33d09ecb8262e761364d2ca43503230171e",
+    "assets/art/murim/hero/yunseo/dodge-w-candidate-v3.png": "015ef56c1e3de9e38c03590e1a3a742263eab30311e3c4620e1717b2ace5da2c",
+    "assets/art/murim/hero/yunseo/dodge-n-candidate-v2.png": "ad0296b144c58cb086f426c92f29b3d75c8ceafea94468150d85588ae823cf86",
+    "assets/art/murim/hero/yunseo/dodge-s-candidate-v2.png": "7674bc89c49ab2a2559c8a7b0b49bac885f59e4f785c222d07ca32b1a34b4487",
+    "assets/art/murim/hero/yunseo/dodge-ne-candidate-v2.png": "df38e4bd32db4c226ea698767be1027b94501de763c71ae86b8735f83177b85b",
+    "assets/art/murim/hero/yunseo/dodge-nw-candidate-v2.png": "c7a1655c2e0d7302cb06005eeeb21a9597eb8af58f02f4fad01a714513af4237",
+    "assets/art/murim/hero/yunseo/dodge-sw-candidate-v2.png": "51b7f04cf8ecc2d189463dc1259c8d80d6a9b492dd081fde5361b742ccd3db0b",
+    "assets/art/murim/hero/yunseo/dodge-e-candidate-v2.png": "23ef705b72dba0ab463000609db0a07f40d7bb17dad556c22ef062f38eb8e3e4",
+    "assets/art/murim/hero/yunseo/attack1-s-candidate-v2.png": "ee3c08b484870014a89155b528273d3eb1709147bbe82fb7fa0973cbc309b7a9",
+    "assets/art/murim/hero/yunseo/attack1-ne-candidate-v2.png": "374dd219710bc647eb523322f464f3e66fa4e6d0da86ce6c10dd002759349cde",
+    "assets/art/murim/hero/yunseo/attack1-nw-candidate-v3.png": "fa698d383fda4d5d790d1c41cdedece26a68cd7987cda9b9066eb292673eecd1",
+    "assets/art/murim/hero/yunseo/attack1-sw-candidate-v2.png": "693884bbba8471c8b9a860e8ae7c499ac6f1998dc628264c1c9cdc86607ecb4e",
+    "assets/art/murim/hero/yunseo/attack1-e-candidate-v3.png": "34353a0bc856f2c4864f12352b884c77e93bfd4f0fcbdffb0a93b5f7ef274a39",
+    "assets/art/murim/hero/yunseo/attack1-n-candidate-v2.png": "58c10951a48d01fec2386bd5e736789add8cf77fe436a28dd75f89c70eda8306",
+    "assets/art/murim/hero/yunseo/attack1-w-candidate-v2.png": "277f8e167258ea594ec405616a51a0dbd64ec65b63edcd893615ccbe231863b3",
+    "assets/art/murim/hero/yunseo/attack1-e-candidate-v2.png": "9a69cdc6493cc6d3a5536dfe97452902a523f7f3ddb0ae04624bffae47b52933",
+    "assets/art/murim/hero/yunseo/hit-se-candidate-v1.png": "efbdd3c9c508db30d04b2285f5753209e7e3d6f87b7391fcd96487050c317ff3",
+    "assets/art/murim/hero/yunseo/cast-se-candidate-v1.png": "7e859de703f50779922db01d2046062c8eb39792d0d504ebc979867b1064d6d2",
+    "assets/art/murim/hero/yunseo/dodge-se-candidate-v1.png": "07aa3fa32235200cab6c843f5dd3f4da3c70fd0b390f7cd1578a0b6e3bd49b49",
+    "assets/art/murim/hero/yunseo/attack3-se-candidate-v2.png": "293dbe6645c4152d8191375176f39e68898ea38ccfab97ce590189fb5d7f68d2",
+    "assets/art/murim/hero/yunseo/attack2-se-candidate-v2.png": "1e0a62e60d566949ee54094f851d98e0961d0101f13d4f771fb3b7b319ddd2c9",
+    "assets/art/murim/hero/yunseo/portraits-candidate-v2.png": "db3f64470eb7c6b0ef04707cb4672f02f0c4d7f925a8b9305c6b7103cf9b6ad2",
+    "assets/art/murim/hero/yunseo/walk-se-candidate-v2.png": "816e1f038651944fc31f51c2599b1f16b7a7fd72435dec20dce12591a8aa59c0",
+    "assets/art/murim/hero/yunseo/attack1-se-candidate-v1.png": "396e20ffa0e5110d9d3c5f9fc5803ef97efe14fb36754332dad3384e9f1dfe72",
+    "assets/art/murim/hero/yunseo/walk-s-candidate-v1.png": "8c823fafccfb3fcfe77aa2df77cf3500e3ff7d40662ab958bb2a2345f6945be8",
+    "assets/art/murim/hero/yunseo/walk-e-candidate-v1.png": "28f54a78cdd6e2c96c1d34b47103d0799e7fdad03d5bd934d9aa20fde21b4e84",
+    "assets/art/murim/hero/yunseo/walk-ne-candidate-v1.png": "2478cfc46a36f29dcf4de3cd70d0b3bbc05f81e6d32dfa296bf570121bcfffe1",
+    "assets/art/murim/hero/yunseo/walk-n-candidate-v1.png": "ffebde177cce512cce291ad9545043cca55f0c13ddecb67004e1c69013360b5c",
+    "assets/art/murim/hero/yunseo/walk-nw-candidate-v1.png": "4a9f0b919d23c09a3937c11311106844750b5fb55b352756c4073964d79f429c",
+    "assets/art/murim/hero/yunseo/walk-w-candidate-v1.png": "9c7e82d632a8b6cd12b3455219e61e7163c1a180435ff43fa96d8aefff608a17",
+    "assets/art/murim/hero/yunseo/walk-sw-candidate-v1.png": "3a33fa716030ba64188461d4f7618ffc4523943f19ed30be163a8bec495d01a1",
+    "assets/art/murim/hero/yunseo/idle-eight-directions-candidate-v1.png": "59520f67a6e7055a100f2747360abbe0da5953469097f4821462b1eb03ff772a",
+    "assets/art/murim/hero/yunseo/runtime-hit.webp": "d11a08573e788126efcc6b54680fc6f0d5207b40647f5f2666fd84897f62f190",
+    "assets/art/murim/hero/yunseo/runtime-cast.webp": "bfca996ed6da15df44f9b43f331a62ccd6f379a8115f25b0fad1a0916a030d8a",
+    "assets/art/murim/hero/yunseo/runtime-dodge.webp": "c21688be8f2034036cdc6e3f2f5324c85897b1e2432c6cb255efb41b66b89652",
+    "assets/art/murim/hero/yunseo/runtime-attack3.webp": "c53733f2b50db8970d1fae47602648e3b0482c2c2cb85bba6a53ba0e0319cf4c",
+    "assets/art/murim/hero/yunseo/runtime-attack2.webp": "9c538972f592ab7f612db43b167acfd8ff5467efdadad32fc4b78df6d979f017",
+    "assets/art/murim/hero/yunseo/runtime-portrait-neutral.webp": "2c2cacb1b8300863953adb7951659badb4a26ce5871a1fbacc77b55b59ee080b",
+    "assets/art/murim/hero/yunseo/runtime-portrait-focus.webp": "d1a3e2f9f2ca68a1ec35b6a30fe1617575f4e5e7fcbeb9086cef63eecfe82765",
+    "assets/art/murim/hero/yunseo/runtime-portrait-hurt.webp": "39e91f455827bbb21ea735f38ede4925cf616e017005c368ca3436f3982ff568",
+    "assets/art/murim/hero/yunseo/runtime-portrait-slight-smile.webp": "80242d15cd35a9dd931df725f853b51efd0737ee5c0e7e30600df86f03a89abf",
+    "assets/art/murim/hero/yunseo/runtime-idle.webp": "5277f0be433e71276afc3995d9652897b86c62661ccd10ace9d00eb23853c5e4",
+    "assets/art/murim/hero/yunseo/runtime-walk.webp": "69f816dcc6deee2835f24e62f8507d82f3d65ac657c0232c45bdeb87c2667225",
+    "assets/art/murim/hero/yunseo/runtime-attack1.webp": "713c17ef35f88484d75e27cd4d9e8a11d139b030342b9ce9dd83bcdfd7a4470a"
+  }
+}

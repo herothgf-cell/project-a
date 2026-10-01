@@ -38,6 +38,7 @@ function buildSite({root=path.join(__dirname,'..'),out,commit,requireApprovedArt
  // Refuse stale output rather than leaving previously copied documents/candidates online.
  if(fs.existsSync(out)&&fs.readdirSync(out).length)throw Error('Build output must be empty.');
  fs.mkdirSync(out,{recursive:true});
+ for(const [name,bytes]of require('./legacy-assets.cjs').payloads(root))payloads.set(name,bytes);
  const assets={};for(const [name,bytes]of payloads){const filename=path.join(out,name);fs.mkdirSync(path.dirname(filename),{recursive:true});fs.writeFileSync(filename,bytes);assets[name]=crypto.createHash('sha256').update(bytes).digest('hex');}
  fs.writeFileSync(path.join(out,'.nojekyll'),'');
  fs.writeFileSync(path.join(out,'build-info.json'),JSON.stringify({version,commit})+'\n');

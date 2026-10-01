@@ -3,6 +3,7 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
 const assets=new Set(['journey-data.js','journey.js','cultivation.js','chapter-five.js','journey-art.js','journey-ui.js','journey.css','sequel.js','wuxia-direction.js','wuxia-data.js','wuxia-art.js','wuxia.css','index.html','presentation.js','realm-art.js','realm-ui.js','realm.css','world.js','fate.js','legend.js','game.js','art.js','fate-art.js','classic-art.js','portrait-data.js','classic.css','render.js','app.js','style.css']);
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.webp':'image/webp','.ogg':'audio/ogg','.wav':'audio/wav'};
 function createServer({artReview=false}={}){
+ const archived=require('./scripts/legacy-assets.cjs').payloads(__dirname);
  const Art=require('./art-loader.js'),allowed=new Set([...assets,'art-loader.js','assets/art/manifest.json']);
  for(const file of ['controls.js','revision.js','progression.js','martial-tree.js','contract-ui.js','progression-ui.js','progression.css','intro-ui.js','growth-ui.js','revision.css',...['signal','stone','return','report','compare'].map(id=>'assets/art/intro/'+id+'.webp')])allowed.add(file);
   for(const name of ['chapter-seven.js','dual-breath.js','later-story-data.js','chapter-six.js','growth-model.js','dialogue-data.js','dialogue-ui.js','quest-data.js','economy.js','save-v9.js','objective-model.js','objective-ui.js','feedback-two.css'])allowed.add(name);
@@ -19,7 +20,7 @@ function createServer({artReview=false}={}){
   if(!['GET','HEAD'].includes(req.method)){res.writeHead(405,{Allow:'GET, HEAD'});return res.end('Method not allowed');}
   let url;try{url=decodeURIComponent(new URL(req.url,'http://localhost').pathname);}catch{res.writeHead(400);return res.end('Bad request');}
   if(url==='/favicon.ico'){res.writeHead(204);return res.end();}
-  const file=url==='/'?'index.html':url.slice(1);if(!allowed.has(file)){res.writeHead(404);return res.end('Not found');}
+  const file=url==='/'?'index.html':url==='/legacy/v011/'?'legacy/v011/index.html':url.slice(1);if(archived.has(file)){res.writeHead(200,{'Content-Type':types[path.extname(file)]});return res.end(req.method==='HEAD'?undefined:archived.get(file));}if(!allowed.has(file)){res.writeHead(404);return res.end('Not found');}
   fs.readFile(path.join(__dirname,file==='art-play.html'?'index.html':file),(error,content)=>{
    if(error){res.writeHead(500);return res.end('Unable to read game asset');}
    if(file==='art-play.html')content=Buffer.from(require('./scripts/prototype-html.cjs').prototypeHtml(content.toString('utf8')));

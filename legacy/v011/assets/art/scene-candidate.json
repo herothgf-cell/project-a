@@ -1,0 +1,8332 @@
+{
+  "schemaVersion": 1,
+  "required": [],
+  "assets": [
+    {
+      "id": "murim.enemy.masked",
+      "world": "murim",
+      "entityId": "enemy.masked",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/enemy/masked-candidate-v2.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                258
+              ],
+              "pivot": [
+                0.5390625,
+                0.9767441860465116
+              ],
+              "duration": 0.3,
+              "displayHeight": 181.40625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  252
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                258
+              ],
+              "pivot": [
+                0.5390625,
+                0.9767441860465116
+              ],
+              "duration": 0.3,
+              "displayHeight": 181.40625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  252
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                258
+              ],
+              "pivot": [
+                0.5390625,
+                0.9767441860465116
+              ],
+              "duration": 0.3,
+              "displayHeight": 181.40625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  252
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                258
+              ],
+              "pivot": [
+                0.5390625,
+                0.9767441860465116
+              ],
+              "duration": 0.3,
+              "displayHeight": 181.40625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  252
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.64453125,
+                0.95703125
+              ],
+              "duration": 1.2,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  330,
+                  490
+                ]
+              }
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                258,
+                256,
+                254
+              ],
+              "pivot": [
+                0.5390625,
+                0.937007874015748
+              ],
+              "duration": 0.12,
+              "displayHeight": 178.59375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  238
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                258,
+                256,
+                254
+              ],
+              "pivot": [
+                0.5390625,
+                0.937007874015748
+              ],
+              "duration": 0.12,
+              "displayHeight": 178.59375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  238
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                258,
+                256,
+                254
+              ],
+              "pivot": [
+                0.5390625,
+                0.937007874015748
+              ],
+              "duration": 0.12,
+              "displayHeight": 178.59375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  238
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                258,
+                256,
+                254
+              ],
+              "pivot": [
+                0.5390625,
+                0.937007874015748
+              ],
+              "duration": 0.12,
+              "displayHeight": 178.59375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  238
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.498046875,
+                0.9375
+              ],
+              "duration": 0.48,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  255,
+                  480
+                ]
+              }
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8984375
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  230
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8984375
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  230
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8984375
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  230
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8984375
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  230
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.458984375,
+                0.947265625
+              ],
+              "duration": 0.4,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  235,
+                  485
+                ]
+              }
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                272,
+                245
+              ],
+              "pivot": [
+                0.5073529411764706,
+                0.8857142857142857
+              ],
+              "duration": 0.1,
+              "displayHeight": 172.265625,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  138,
+                  217
+                ]
+              }
+            },
+            {
+              "rect": [
+                272,
+                768,
+                240,
+                245
+              ],
+              "pivot": [
+                0.5083333333333333,
+                0.8857142857142857
+              ],
+              "duration": 0.1,
+              "displayHeight": 172.265625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  122,
+                  217
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                768,
+                295,
+                245
+              ],
+              "pivot": [
+                0.46779661016949153,
+                0.8857142857142857
+              ],
+              "duration": 0.1,
+              "displayHeight": 172.265625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  217
+                ]
+              }
+            },
+            {
+              "rect": [
+                807,
+                768,
+                217,
+                245
+              ],
+              "pivot": [
+                0.45622119815668205,
+                0.8857142857142857
+              ],
+              "duration": 0.1,
+              "displayHeight": 172.265625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  99,
+                  217
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                0,
+                512,
+                550,
+                512
+              ],
+              "pivot": [
+                0.5181818181818182,
+                0.908203125
+              ],
+              "duration": 0.4,
+              "displayHeight": 153.6,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  285,
+                  465
+                ]
+              }
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1013,
+                256,
+                260
+              ],
+              "pivot": [
+                0.5390625,
+                0.7769230769230769
+              ],
+              "duration": 0.03,
+              "displayHeight": 182.8125,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  202
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                1013,
+                256,
+                260
+              ],
+              "pivot": [
+                0.5390625,
+                0.7769230769230769
+              ],
+              "duration": 0.03,
+              "displayHeight": 182.8125,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  202
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                1013,
+                256,
+                260
+              ],
+              "pivot": [
+                0.5390625,
+                0.7769230769230769
+              ],
+              "duration": 0.03,
+              "displayHeight": 182.8125,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  202
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                1013,
+                256,
+                260
+              ],
+              "pivot": [
+                0.5390625,
+                0.7769230769230769
+              ],
+              "duration": 0.03,
+              "displayHeight": 182.8125,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  202
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                550,
+                512,
+                463,
+                512
+              ],
+              "pivot": [
+                0.6047516198704104,
+                0.83984375
+              ],
+              "duration": 0.12,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  280,
+                  430
+                ]
+              }
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1273,
+                256,
+                263
+              ],
+              "pivot": [
+                0.5390625,
+                0.6730038022813688
+              ],
+              "duration": 0.15,
+              "displayHeight": 184.921875,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  177
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                1273,
+                256,
+                263
+              ],
+              "pivot": [
+                0.5390625,
+                0.6730038022813688
+              ],
+              "duration": 0.15,
+              "displayHeight": 184.921875,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  177
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                1273,
+                252,
+                263
+              ],
+              "pivot": [
+                0.5476190476190477,
+                0.6730038022813688
+              ],
+              "duration": 0.15,
+              "displayHeight": 184.921875,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  177
+                ]
+              }
+            },
+            {
+              "rect": [
+                764,
+                1273,
+                260,
+                263
+              ],
+              "pivot": [
+                0.5461538461538461,
+                0.6730038022813688
+              ],
+              "duration": 0.15,
+              "displayHeight": 184.921875,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  142,
+                  177
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                1013,
+                512,
+                523,
+                512
+              ],
+              "pivot": [
+                0.5353728489483748,
+                0.830078125
+              ],
+              "duration": 0.6,
+              "displayHeight": 153.6,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  280,
+                  425
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "evidence": [],
+        "note": "Independent concept-derived prototype. Rear is one key pose per state; oblique direction and gait simplified, not final animation."
+      },
+      "atlases": {
+        "rear": {
+          "path": "assets/art/murim/enemy/masked-rear-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "id": "murim.enemy.guardian",
+      "world": "murim",
+      "entityId": "enemy.guardian",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/enemy/guardian-candidate-v3.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                280
+              ],
+              "pivot": [
+                0.5390625,
+                0.9321428571428572
+              ],
+              "duration": 0.3,
+              "displayHeight": 153.125,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  261
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                280
+              ],
+              "pivot": [
+                0.5390625,
+                0.9321428571428572
+              ],
+              "duration": 0.3,
+              "displayHeight": 153.125,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  261
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                280
+              ],
+              "pivot": [
+                0.5390625,
+                0.9321428571428572
+              ],
+              "duration": 0.3,
+              "displayHeight": 153.125,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  261
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                280
+              ],
+              "pivot": [
+                0.5390625,
+                0.9321428571428572
+              ],
+              "duration": 0.3,
+              "displayHeight": 153.125,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  261
+                ]
+              }
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                280,
+                256,
+                250
+              ],
+              "pivot": [
+                0.5390625,
+                0.88
+              ],
+              "duration": 0.12,
+              "displayHeight": 136.71875,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  220
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                280,
+                256,
+                250
+              ],
+              "pivot": [
+                0.5390625,
+                0.88
+              ],
+              "duration": 0.12,
+              "displayHeight": 136.71875,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  220
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                280,
+                256,
+                250
+              ],
+              "pivot": [
+                0.5390625,
+                0.88
+              ],
+              "duration": 0.12,
+              "displayHeight": 136.71875,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  220
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                280,
+                256,
+                250
+              ],
+              "pivot": [
+                0.5390625,
+                0.88
+              ],
+              "duration": 0.12,
+              "displayHeight": 136.71875,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  220
+                ]
+              }
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                530,
+                280,
+                270
+              ],
+              "pivot": [
+                0.4928571428571429,
+                0.9074074074074074
+              ],
+              "duration": 0.1,
+              "displayHeight": 147.65625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  245
+                ]
+              }
+            },
+            {
+              "rect": [
+                280,
+                530,
+                232,
+                270
+              ],
+              "pivot": [
+                0.49137931034482757,
+                0.9074074074074074
+              ],
+              "duration": 0.1,
+              "displayHeight": 147.65625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  114,
+                  245
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                530,
+                256,
+                270
+              ],
+              "pivot": [
+                0.5390625,
+                0.9074074074074074
+              ],
+              "duration": 0.1,
+              "displayHeight": 147.65625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  245
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                530,
+                256,
+                270
+              ],
+              "pivot": [
+                0.5390625,
+                0.9074074074074074
+              ],
+              "duration": 0.1,
+              "displayHeight": 147.65625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  245
+                ]
+              }
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                800,
+                256,
+                224
+              ],
+              "pivot": [
+                0.5390625,
+                0.8035714285714286
+              ],
+              "duration": 0.1,
+              "displayHeight": 122.5,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  138,
+                  180
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                800,
+                256,
+                224
+              ],
+              "pivot": [
+                0.5390625,
+                0.8035714285714286
+              ],
+              "duration": 0.1,
+              "displayHeight": 122.5,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  180
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                800,
+                256,
+                224
+              ],
+              "pivot": [
+                0.5390625,
+                0.8035714285714286
+              ],
+              "duration": 0.1,
+              "displayHeight": 122.5,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  180
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                800,
+                256,
+                224
+              ],
+              "pivot": [
+                0.5390625,
+                0.8035714285714286
+              ],
+              "duration": 0.1,
+              "displayHeight": 122.5,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  180
+                ]
+              }
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.796875
+              ],
+              "duration": 0.03,
+              "displayHeight": 140,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  204
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.796875
+              ],
+              "duration": 0.03,
+              "displayHeight": 140,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  204
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.796875
+              ],
+              "duration": 0.03,
+              "displayHeight": 140,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  204
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.796875
+              ],
+              "duration": 0.03,
+              "displayHeight": 140,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  204
+                ]
+              }
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.6640625
+              ],
+              "duration": 0.15,
+              "displayHeight": 140,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  170
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.6640625
+              ],
+              "duration": 0.15,
+              "displayHeight": 140,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  170
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.6640625
+              ],
+              "duration": 0.15,
+              "displayHeight": 140,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  170
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.6640625
+              ],
+              "duration": 0.15,
+              "displayHeight": 140,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  170
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "evidence": [],
+        "note": "Independent concept-derived runtime candidate; SE actions only. No spawning/rule changes; other directions remain BLOCKED_ART."
+      }
+    },
+    {
+      "id": "reality.enemy.drone",
+      "world": "reality",
+      "entityId": "enemy.drone",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/enemy/drone-candidate-v2.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8203125
+              ],
+              "duration": 0.3,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  210
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8203125
+              ],
+              "duration": 0.3,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  210
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8203125
+              ],
+              "duration": 0.3,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  210
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8203125
+              ],
+              "duration": 0.3,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  210
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.537109375,
+                0.8203125
+              ],
+              "duration": 1.2,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  275,
+                  420
+                ]
+              }
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.7578125
+              ],
+              "duration": 0.12,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  194
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.7578125
+              ],
+              "duration": 0.12,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  194
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.7578125
+              ],
+              "duration": 0.12,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  194
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.7578125
+              ],
+              "duration": 0.12,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  194
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.52734375,
+                0.87890625
+              ],
+              "duration": 0.48,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  270,
+                  450
+                ]
+              }
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.765625
+              ],
+              "duration": 0.1,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  196
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.765625
+              ],
+              "duration": 0.1,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  196
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.765625
+              ],
+              "duration": 0.1,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  196
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.765625
+              ],
+              "duration": 0.1,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  196
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.52734375,
+                0.87890625
+              ],
+              "duration": 0.4,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  270,
+                  450
+                ]
+              }
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                270,
+                256
+              ],
+              "pivot": [
+                0.5111111111111111,
+                0.7109375
+              ],
+              "duration": 0.1,
+              "displayHeight": 150,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  138,
+                  182
+                ]
+              }
+            },
+            {
+              "rect": [
+                270,
+                768,
+                242,
+                256
+              ],
+              "pivot": [
+                0.512396694214876,
+                0.7109375
+              ],
+              "duration": 0.1,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  124,
+                  182
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.7109375
+              ],
+              "duration": 0.1,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  182
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.7109375
+              ],
+              "duration": 0.1,
+              "displayHeight": 150,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  182
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                0,
+                512,
+                585,
+                512
+              ],
+              "pivot": [
+                0.5128205128205128,
+                0.859375
+              ],
+              "duration": 0.4,
+              "displayHeight": 128,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  300,
+                  440
+                ]
+              }
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                250
+              ],
+              "pivot": [
+                0.5390625,
+                0.704
+              ],
+              "duration": 0.03,
+              "displayHeight": 146.484375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  176
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                250
+              ],
+              "pivot": [
+                0.5390625,
+                0.704
+              ],
+              "duration": 0.03,
+              "displayHeight": 146.484375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  176
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                250
+              ],
+              "pivot": [
+                0.5390625,
+                0.704
+              ],
+              "duration": 0.03,
+              "displayHeight": 146.484375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  176
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                250
+              ],
+              "pivot": [
+                0.5390625,
+                0.704
+              ],
+              "duration": 0.03,
+              "displayHeight": 146.484375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  176
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                585,
+                512,
+                425,
+                512
+              ],
+              "pivot": [
+                0.5411764705882353,
+                0.80078125
+              ],
+              "duration": 0.12,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  230,
+                  410
+                ]
+              }
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1274,
+                256,
+                262
+              ],
+              "pivot": [
+                0.5390625,
+                0.7480916030534351
+              ],
+              "duration": 0.15,
+              "displayHeight": 153.515625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  196
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                1274,
+                256,
+                262
+              ],
+              "pivot": [
+                0.5390625,
+                0.7480916030534351
+              ],
+              "duration": 0.15,
+              "displayHeight": 153.515625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  196
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                1274,
+                256,
+                262
+              ],
+              "pivot": [
+                0.5390625,
+                0.7480916030534351
+              ],
+              "duration": 0.15,
+              "displayHeight": 153.515625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  196
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                1274,
+                256,
+                262
+              ],
+              "pivot": [
+                0.5390625,
+                0.7480916030534351
+              ],
+              "duration": 0.15,
+              "displayHeight": 153.515625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  196
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "rear",
+              "rect": [
+                1010,
+                512,
+                526,
+                512
+              ],
+              "pivot": [
+                0.5228136882129277,
+                0.849609375
+              ],
+              "duration": 0.6,
+              "displayHeight": 128,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  275,
+                  435
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "evidence": [],
+        "note": "Independent concept-derived prototype. Rear is one key pose per state; oblique direction and gait simplified, not final animation."
+      },
+      "atlases": {
+        "rear": {
+          "path": "assets/art/reality/enemy/drone-rear-candidate-v1.png",
+          "width": 1536,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "id": "reality.enemy.tide",
+      "world": "reality",
+      "entityId": "enemy.tide",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/enemy/tide-candidate-v2.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9765625
+              ],
+              "duration": 0.3,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  250
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9765625
+              ],
+              "duration": 0.3,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  250
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9765625
+              ],
+              "duration": 0.3,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  250
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9765625
+              ],
+              "duration": 0.3,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  250
+                ]
+              }
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9453125
+              ],
+              "duration": 0.12,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  242
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9453125
+              ],
+              "duration": 0.12,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  242
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9453125
+              ],
+              "duration": 0.12,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  242
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9453125
+              ],
+              "duration": 0.12,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  242
+                ]
+              }
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9296875
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  238
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9296875
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  238
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9296875
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  238
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9296875
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  238
+                ]
+              }
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.90625
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  138,
+                  232
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.90625
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  232
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.90625
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  232
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.90625
+              ],
+              "duration": 0.1,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  232
+                ]
+              }
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.84375
+              ],
+              "duration": 0.03,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  216
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.84375
+              ],
+              "duration": 0.03,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  216
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.84375
+              ],
+              "duration": 0.03,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  216
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.84375
+              ],
+              "duration": 0.03,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  216
+                ]
+              }
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.78125
+              ],
+              "duration": 0.15,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  200
+                ]
+              }
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.78125
+              ],
+              "duration": 0.15,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  200
+                ]
+              }
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.78125
+              ],
+              "duration": 0.15,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  200
+                ]
+              }
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.78125
+              ],
+              "duration": 0.15,
+              "displayHeight": 180,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  138,
+                  200
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "evidence": [],
+        "note": "Independent concept-derived runtime candidate; SE actions only. No spawning/rule changes; other directions remain BLOCKED_ART."
+      }
+    },
+{"id":"reality.environment.dressing","world":"reality","entityId":"environment.dressing","kind":"environment","status":"candidate","sources":["R01"],"atlas":{"path":"assets/art/reality/environment/dressing-candidate-v1.png","width":1261,"height":1247},"clips":{"cell-0":{"none":[{"rect":[0,0,630,623],"pivot":[0.5,0.5],"duration":1,"displayHeight":110}]},"cell-1":{"none":[{"rect":[630,0,631,623],"pivot":[0.5,0.5],"duration":1,"displayHeight":110}]},"cell-2":{"none":[{"rect":[0,623,630,624],"pivot":[0.5,0.5],"duration":1,"displayHeight":110}]},"cell-3":{"none":[{"rect":[630,623,631,624],"pivot":[0.5,0.5],"duration":1,"displayHeight":110}]}},"review":{"visual":false,"limitations":["Ground dressing candidate, visual blend review pending"]}},
+{"id":"murim.environment.dressing","world":"murim","entityId":"environment.dressing","kind":"environment","status":"candidate","sources":["R02"],"atlas":{"path":"assets/art/murim/environment/dressing-candidate-v1.png","width":1254,"height":1254},"clips":{"cell-0":{"none":[{"rect":[0,0,627,627],"pivot":[0.5,0.5],"duration":1,"displayHeight":110}]},"cell-1":{"none":[{"rect":[627,0,627,627],"pivot":[0.5,0.5],"duration":1,"displayHeight":110}]},"cell-2":{"none":[{"rect":[0,627,627,627],"pivot":[0.5,0.5],"duration":1,"displayHeight":110}]},"cell-3":{"none":[{"rect":[627,627,627,627],"pivot":[0.5,0.5],"duration":1,"displayHeight":110}]}},"review":{"visual":false,"limitations":["Ground dressing candidate, visual blend review pending"]}},
+    {
+      "id": "reality.environment.props",
+      "world": "reality",
+      "entityId": "environment.props",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/environment/props-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 90
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 165
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 165
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 165
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "murim.environment.props",
+      "world": "murim",
+      "entityId": "environment.props",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/environment/props-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                530
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 170
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                530
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 90
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                530,
+                627,
+                724
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 165
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                530,
+                627,
+                724
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 165
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "reality.npc.seorin",
+      "world": "reality",
+      "entityId": "npc.seorin",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/npc/seorin-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.npc.dogyeom",
+      "world": "reality",
+      "entityId": "npc.dogyeom",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/npc/dogyeom-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.npc.supply",
+      "world": "reality",
+      "entityId": "npc.supply",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/npc/supply-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.npc.baekryun",
+      "world": "murim",
+      "entityId": "npc.baekryun",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/npc/baekryun-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.npc.yeonhwa",
+      "world": "murim",
+      "entityId": "npc.yeonhwa",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/npc/yeonhwa-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.npc.apothecary",
+      "world": "murim",
+      "entityId": "npc.apothecary",
+      "kind": "npc",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/npc/apothecary-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "idle": {
+          "s": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "e": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "n": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ],
+          "w": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-neutral": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        },
+        "portrait-concerned": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.88
+              ],
+              "duration": 1,
+              "displayHeight": 135
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.environment.buildings",
+      "world": "reality",
+      "entityId": "environment.buildings",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/environment/buildings-candidate-v2.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                650,
+                675
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                650,
+                0,
+                604,
+                675
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                675,
+                650,
+                579
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                650,
+                675,
+                604,
+                579
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.environment.ground",
+      "world": "reality",
+      "entityId": "environment.ground",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/environment/ground-candidate-v2.png",
+        "width": 1774,
+        "height": 887
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                887,
+                887
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                887,
+                0,
+                887,
+                887
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.environment.portal",
+      "world": "reality",
+      "entityId": "environment.portal",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/environment/portal-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "locked": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "available": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "active": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "transition": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.environment.buildings",
+      "world": "murim",
+      "entityId": "environment.buildings",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/environment/buildings-candidate-v2.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.environment.ground",
+      "world": "murim",
+      "entityId": "environment.ground",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/environment/ground-candidate-v2.png",
+        "width": 1774,
+        "height": 887
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                887,
+                887
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                887,
+                0,
+                887,
+                887
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "murim.environment.portal",
+      "world": "murim",
+      "entityId": "environment.portal",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/environment/portal-candidate-v2.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "locked": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "available": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "active": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "transition": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.94
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate states need in-game scale and transition QA"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.blade",
+      "world": "shared",
+      "entityId": "vfx.blade",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/blade-candidate-v1.png",
+        "width": 1536,
+        "height": 1024
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                512,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                0,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                0,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-4": {
+          "none": [
+            {
+              "rect": [
+                512,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-5": {
+          "none": [
+            {
+              "rect": [
+                1024,
+                512,
+                512,
+                512
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.storm",
+      "world": "shared",
+      "entityId": "vfx.storm",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/storm-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.seal",
+      "world": "shared",
+      "entityId": "vfx.seal",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/seal-candidate-v2.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.ripple",
+      "world": "shared",
+      "entityId": "vfx.ripple",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/ripple-candidate-v2.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                700
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                700
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                700,
+                627,
+                554
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                700,
+                627,
+                554
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "shared.vfx.echo",
+      "world": "shared",
+      "entityId": "vfx.echo",
+      "kind": "vfx",
+      "status": "candidate",
+      "sources": [
+        "R03"
+      ],
+      "atlas": {
+        "path": "assets/art/shared/vfx/echo-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5,
+                0.85
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate only: in-game scale, clipping and animation QA pending"
+        ]
+      }
+    },
+    {
+      "id": "reality.enemy.shade",
+      "world": "reality",
+      "entityId": "enemy.shade",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/enemy/shade-candidate-v2.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.890625
+              ],
+              "duration": 0.3,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  228
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.88671875
+              ],
+              "duration": 0.3,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  227
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.89453125
+              ],
+              "duration": 0.3,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  229
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.890625
+              ],
+              "duration": 0.3,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  228
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "idle_nw_v2",
+              "rect": [
+                0,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5598958333333334,
+                0.970703125
+              ],
+              "duration": 0.3,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  430,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "idle_nw_v2",
+              "rect": [
+                768,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5494791666666666,
+                0.970703125
+              ],
+              "duration": 0.3,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  422,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "idle_nw_v2",
+              "rect": [
+                0,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5598958333333334,
+                0.982421875
+              ],
+              "duration": 0.3,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  430,
+                  503
+                ]
+              }
+            },
+            {
+              "atlas": "idle_nw_v2",
+              "rect": [
+                768,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5494791666666666,
+                0.982421875
+              ],
+              "duration": 0.3,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  422,
+                  503
+                ]
+              }
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.875
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  224
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.87890625
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  225
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.875
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  224
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8828125
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  226
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "move_nw_v2",
+              "rect": [
+                0,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5859375,
+                0.970703125
+              ],
+              "duration": 0.12,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  450,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "move_nw_v2",
+              "rect": [
+                768,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.54296875,
+                0.970703125
+              ],
+              "duration": 0.12,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  417,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "move_nw_v2",
+              "rect": [
+                0,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5859375,
+                0.94921875
+              ],
+              "duration": 0.12,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  450,
+                  486
+                ]
+              }
+            },
+            {
+              "atlas": "move_nw_v2",
+              "rect": [
+                768,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5234375,
+                0.94921875
+              ],
+              "duration": 0.12,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  402,
+                  486
+                ]
+              }
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.83984375
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  215
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.84375
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  216
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.84375
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  216
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.84765625
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  217
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "telegraph_nw_v2",
+              "rect": [
+                0,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5598958333333334,
+                0.970703125
+              ],
+              "duration": 0.1,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  430,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "telegraph_nw_v2",
+              "rect": [
+                768,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5885416666666666,
+                0.970703125
+              ],
+              "duration": 0.1,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  452,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "telegraph_nw_v2",
+              "rect": [
+                0,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.546875,
+                0.947265625
+              ],
+              "duration": 0.1,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  420,
+                  485
+                ]
+              }
+            },
+            {
+              "atlas": "telegraph_nw_v2",
+              "rect": [
+                768,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5364583333333334,
+                0.947265625
+              ],
+              "duration": 0.1,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  412,
+                  485
+                ]
+              }
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                290,
+                256
+              ],
+              "pivot": [
+                0.47586206896551725,
+                0.7890625
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  202
+                ]
+              },
+              "contact": true
+            },
+            {
+              "rect": [
+                290,
+                768,
+                260,
+                256
+              ],
+              "pivot": [
+                0.4,
+                0.7890625
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  104,
+                  202
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                550,
+                768,
+                260,
+                256
+              ],
+              "pivot": [
+                0.38461538461538464,
+                0.80859375
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  100,
+                  207
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                810,
+                768,
+                214,
+                256
+              ],
+              "pivot": [
+                0.4485981308411215,
+                0.828125
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  96,
+                  212
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "attack_nw_v2",
+              "rect": [
+                0,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.7421875,
+                0.970703125
+              ],
+              "duration": 0.1,
+              "displayHeight": 120,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  570,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "attack_nw_v2",
+              "rect": [
+                768,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.6536458333333334,
+                0.970703125
+              ],
+              "duration": 0.1,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  502,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "attack_nw_v2",
+              "rect": [
+                0,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5989583333333334,
+                0.947265625
+              ],
+              "duration": 0.1,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  460,
+                  485
+                ]
+              }
+            },
+            {
+              "atlas": "attack_nw_v2",
+              "rect": [
+                768,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5625,
+                0.947265625
+              ],
+              "duration": 0.1,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  432,
+                  485
+                ]
+              }
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.80859375
+              ],
+              "duration": 0.03,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  207
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.80859375
+              ],
+              "duration": 0.03,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  207
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.80859375
+              ],
+              "duration": 0.03,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  207
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.80859375
+              ],
+              "duration": 0.03,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  207
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "hit_nw_v2",
+              "rect": [
+                0,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5924479166666666,
+                0.970703125
+              ],
+              "duration": 0.03,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  455,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "hit_nw_v2",
+              "rect": [
+                768,
+                0,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5364583333333334,
+                0.970703125
+              ],
+              "duration": 0.03,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  412,
+                  497
+                ]
+              }
+            },
+            {
+              "atlas": "hit_nw_v2",
+              "rect": [
+                0,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5859375,
+                0.962890625
+              ],
+              "duration": 0.03,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  450,
+                  493
+                ]
+              }
+            },
+            {
+              "atlas": "hit_nw_v2",
+              "rect": [
+                768,
+                512,
+                768,
+                512
+              ],
+              "pivot": [
+                0.5494791666666666,
+                0.962890625
+              ],
+              "duration": 0.03,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  422,
+                  493
+                ]
+              }
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.703125
+              ],
+              "duration": 0.15,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  180
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.72265625
+              ],
+              "duration": 0.15,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  185
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.7421875
+              ],
+              "duration": 0.15,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  190
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.7421875
+              ],
+              "duration": 0.15,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  190
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "death_nw_v2",
+              "rect": [
+                0,
+                0,
+                768,
+                600
+              ],
+              "pivot": [
+                0.5794270833333334,
+                0.9166666666666666
+              ],
+              "duration": 0.15,
+              "displayHeight": 140.625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  445,
+                  550
+                ]
+              }
+            },
+            {
+              "atlas": "death_nw_v2",
+              "rect": [
+                768,
+                0,
+                768,
+                600
+              ],
+              "pivot": [
+                0.5234375,
+                0.9333333333333333
+              ],
+              "duration": 0.15,
+              "displayHeight": 140.625,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  402,
+                  560
+                ]
+              }
+            },
+            {
+              "atlas": "death_nw_v2",
+              "rect": [
+                0,
+                600,
+                768,
+                424
+              ],
+              "pivot": [
+                0.625,
+                0.8183962264150944
+              ],
+              "duration": 0.15,
+              "displayHeight": 99.375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  480,
+                  347
+                ]
+              }
+            },
+            {
+              "atlas": "death_nw_v2",
+              "rect": [
+                768,
+                600,
+                768,
+                424
+              ],
+              "pivot": [
+                0.6015625,
+                0.8490566037735849
+              ],
+              "duration": 0.15,
+              "displayHeight": 99.375,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  462,
+                  360
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "SE packing corrected; planted foot anchors provisional; missing directions remain BLOCKED_ART; not final visual acceptance."
+        ]
+      },
+      "atlases": {
+        "idle_nw_v2": {
+          "path": "assets/art/reality/enemy/shade-idle-nw-candidate-v2.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "telegraph_nw_v2": {
+          "path": "assets/art/reality/enemy/shade-telegraph-nw-candidate-v2.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "attack_nw_v2": {
+          "path": "assets/art/reality/enemy/shade-attack-nw-candidate-v2.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "death_nw_v2": {
+          "path": "assets/art/reality/enemy/shade-death-nw-candidate-v2.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "move_nw_v2": {
+          "path": "assets/art/reality/enemy/shade-move-nw-candidate-v2.png",
+          "width": 1536,
+          "height": 1024
+        },
+        "hit_nw_v2": {
+          "path": "assets/art/reality/enemy/shade-hit-nw-candidate-v2.png",
+          "width": 1536,
+          "height": 1024
+        }
+      }
+    },
+    {
+      "id": "reality.enemy.sentinel",
+      "world": "reality",
+      "entityId": "enemy.sentinel",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/enemy/sentinel-candidate-v2.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9375
+              ],
+              "duration": 0.3,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  240
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9375
+              ],
+              "duration": 0.3,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  240
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9375
+              ],
+              "duration": 0.3,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  240
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9375
+              ],
+              "duration": 0.3,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  240
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9140625
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  234
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9140625
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  234
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9140625
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  234
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.9140625
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  234
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.91015625
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  233
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.91015625
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  233
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.91015625
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  233
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.91015625
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  233
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8671875
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  222
+                ]
+              },
+              "contact": true
+            },
+            {
+              "rect": [
+                256,
+                768,
+                284,
+                232
+              ],
+              "pivot": [
+                0.4859154929577465,
+                0.9353448275862069
+              ],
+              "duration": 0.1,
+              "displayHeight": 167.65625,
+              "sockets": {
+                "foot": [
+                  138,
+                  217
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                540,
+                768,
+                250,
+                256
+              ],
+              "pivot": [
+                0.44,
+                0.8359375
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  110,
+                  214
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                790,
+                768,
+                234,
+                256
+              ],
+              "pivot": [
+                0.49572649572649574,
+                0.8671875
+              ],
+              "duration": 0.1,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  116,
+                  222
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                236
+              ],
+              "pivot": [
+                0.5390625,
+                0.9152542372881356
+              ],
+              "duration": 0.03,
+              "displayHeight": 170.546875,
+              "sockets": {
+                "foot": [
+                  138,
+                  216
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                1000,
+                256,
+                280
+              ],
+              "pivot": [
+                0.5390625,
+                0.8571428571428571
+              ],
+              "duration": 0.03,
+              "displayHeight": 202.34375,
+              "sockets": {
+                "foot": [
+                  138,
+                  240
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.84375
+              ],
+              "duration": 0.03,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  216
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.84375
+              ],
+              "duration": 0.03,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  216
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1260,
+                256,
+                276
+              ],
+              "pivot": [
+                0.5390625,
+                0.8333333333333334
+              ],
+              "duration": 0.15,
+              "displayHeight": 199.453125,
+              "sockets": {
+                "foot": [
+                  138,
+                  230
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.8203125
+              ],
+              "duration": 0.15,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  210
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.78125
+              ],
+              "duration": 0.15,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  200
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.78125
+              ],
+              "duration": 0.15,
+              "displayHeight": 185,
+              "sockets": {
+                "foot": [
+                  138,
+                  200
+                ]
+              },
+              "contact": false
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "SE packing corrected; planted foot anchors provisional; missing directions remain BLOCKED_ART; not final visual acceptance."
+        ]
+      }
+    },
+    {
+      "id": "murim.enemy.bandit",
+      "world": "murim",
+      "entityId": "enemy.bandit",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/enemy/bandit-candidate-v2.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.87890625
+              ],
+              "duration": 0.3,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  225
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.87890625
+              ],
+              "duration": 0.3,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  225
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.87890625
+              ],
+              "duration": 0.3,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  225
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.87890625
+              ],
+              "duration": 0.3,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  225
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "idle_nw_v2",
+              "rect": [
+                0,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.4176829268292683,
+                0.9699499165275459
+              ],
+              "duration": 0.3,
+              "displayHeight": 115,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  274,
+                  581
+                ],
+                "hand": [
+                  482,
+                  317
+                ],
+                "blade": [
+                  616,
+                  373
+                ],
+                "effect": [
+                  616,
+                  373
+                ]
+              }
+            },
+            {
+              "atlas": "idle_nw_v2",
+              "rect": [
+                656,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.3567073170731707,
+                0.9699499165275459
+              ],
+              "duration": 0.3,
+              "displayHeight": 115,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  234,
+                  581
+                ],
+                "hand": [
+                  439,
+                  317
+                ],
+                "blade": [
+                  570,
+                  373
+                ],
+                "effect": [
+                  570,
+                  373
+                ]
+              }
+            },
+            {
+              "atlas": "idle_nw_v2",
+              "rect": [
+                0,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.4176829268292683,
+                0.9616666666666667
+              ],
+              "duration": 0.3,
+              "displayHeight": 115,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  274,
+                  577
+                ],
+                "hand": [
+                  483,
+                  311
+                ],
+                "blade": [
+                  619,
+                  370
+                ],
+                "effect": [
+                  619,
+                  370
+                ]
+              }
+            },
+            {
+              "atlas": "idle_nw_v2",
+              "rect": [
+                656,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.3521341463414634,
+                0.96
+              ],
+              "duration": 0.3,
+              "displayHeight": 115,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  231,
+                  576
+                ],
+                "hand": [
+                  448,
+                  313
+                ],
+                "blade": [
+                  583,
+                  373
+                ],
+                "effect": [
+                  583,
+                  373
+                ]
+              }
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.90234375
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  231
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.90234375
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  231
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.90234375
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  231
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.90234375
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  231
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "move_nw_v2",
+              "rect": [
+                0,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.4481707317073171,
+                0.9449081803005008
+              ],
+              "duration": 0.1,
+              "displayHeight": 123,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  294,
+                  566
+                ],
+                "hand": [
+                  468,
+                  342
+                ],
+                "blade": [
+                  613,
+                  398
+                ],
+                "effect": [
+                  613,
+                  398
+                ]
+              }
+            },
+            {
+              "atlas": "move_nw_v2",
+              "rect": [
+                656,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.5350609756097561,
+                0.9799666110183639
+              ],
+              "duration": 0.1,
+              "displayHeight": 123,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  351,
+                  587
+                ],
+                "hand": [
+                  441,
+                  343
+                ],
+                "blade": [
+                  583,
+                  403
+                ],
+                "effect": [
+                  583,
+                  403
+                ]
+              }
+            },
+            {
+              "atlas": "move_nw_v2",
+              "rect": [
+                0,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.4009146341463415,
+                0.83
+              ],
+              "duration": 0.1,
+              "displayHeight": 123,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  263,
+                  498
+                ],
+                "hand": [
+                  482,
+                  300
+                ],
+                "blade": [
+                  628,
+                  352
+                ],
+                "effect": [
+                  628,
+                  352
+                ]
+              }
+            },
+            {
+              "atlas": "move_nw_v2",
+              "rect": [
+                656,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.5365853658536586,
+                0.8983333333333333
+              ],
+              "duration": 0.1,
+              "displayHeight": 123,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  352,
+                  539
+                ],
+                "hand": [
+                  451,
+                  312
+                ],
+                "blade": [
+                  593,
+                  364
+                ],
+                "effect": [
+                  593,
+                  364
+                ]
+              }
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                280,
+                256
+              ],
+              "pivot": [
+                0.4928571428571429,
+                0.921875
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  236
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                280,
+                512,
+                232,
+                256
+              ],
+              "pivot": [
+                0.49137931034482757,
+                0.921875
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  114,
+                  236
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.921875
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  236
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.921875
+              ],
+              "duration": 0.1,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  236
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "telegraph_nw_v2",
+              "rect": [
+                0,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.4176829268292683,
+                0.8881469115191987
+              ],
+              "duration": 0.1,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  274,
+                  532
+                ],
+                "hand": [
+                  467,
+                  337
+                ],
+                "blade": [
+                  591,
+                  384
+                ],
+                "effect": [
+                  591,
+                  384
+                ]
+              }
+            },
+            {
+              "atlas": "telegraph_nw_v2",
+              "rect": [
+                656,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.3826219512195122,
+                0.8898163606010017
+              ],
+              "duration": 0.1,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  251,
+                  533
+                ],
+                "hand": [
+                  374,
+                  178
+                ],
+                "blade": [
+                  514,
+                  199
+                ],
+                "effect": [
+                  514,
+                  199
+                ]
+              }
+            },
+            {
+              "atlas": "telegraph_nw_v2",
+              "rect": [
+                0,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.4176829268292683,
+                0.885
+              ],
+              "duration": 0.1,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  274,
+                  531
+                ],
+                "hand": [
+                  399,
+                  106
+                ],
+                "blade": [
+                  529,
+                  173
+                ],
+                "effect": [
+                  529,
+                  173
+                ]
+              }
+            },
+            {
+              "atlas": "telegraph_nw_v2",
+              "rect": [
+                656,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.38414634146341464,
+                0.895
+              ],
+              "duration": 0.1,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  252,
+                  537
+                ],
+                "hand": [
+                  359,
+                  103
+                ],
+                "blade": [
+                  514,
+                  115
+                ],
+                "effect": [
+                  514,
+                  115
+                ]
+              }
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "atlas": "attack_se_v2",
+              "rect": [
+                0,
+                0,
+                630,
+                623
+              ],
+              "pivot": [
+                0.173015873015873,
+                0.9229534510433387
+              ],
+              "duration": 0.1,
+              "displayHeight": 135,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  109,
+                  575
+                ],
+                "hand": [
+                  377,
+                  329
+                ],
+                "blade": [
+                  582,
+                  484
+                ],
+                "effect": [
+                  582,
+                  484
+                ]
+              }
+            },
+            {
+              "atlas": "attack_se_v2",
+              "rect": [
+                630,
+                0,
+                631,
+                623
+              ],
+              "pivot": [
+                0.1410459587955626,
+                0.9261637239165329
+              ],
+              "duration": 0.1,
+              "displayHeight": 135,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  89,
+                  577
+                ],
+                "hand": [
+                  413,
+                  383
+                ],
+                "blade": [
+                  610,
+                  510
+                ],
+                "effect": [
+                  610,
+                  510
+                ]
+              }
+            },
+            {
+              "atlas": "attack_se_v2",
+              "rect": [
+                0,
+                623,
+                630,
+                624
+              ],
+              "pivot": [
+                0.19682539682539682,
+                0.8958333333333334
+              ],
+              "duration": 0.1,
+              "displayHeight": 135,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  124,
+                  559
+                ],
+                "hand": [
+                  214,
+                  256
+                ],
+                "blade": [
+                  411,
+                  270
+                ],
+                "effect": [
+                  411,
+                  270
+                ]
+              }
+            },
+            {
+              "atlas": "attack_se_v2",
+              "rect": [
+                630,
+                623,
+                631,
+                624
+              ],
+              "pivot": [
+                0.1838351822503962,
+                0.9006410256410257
+              ],
+              "duration": 0.1,
+              "displayHeight": 135,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  116,
+                  562
+                ],
+                "hand": [
+                  288,
+                  268
+                ],
+                "blade": [
+                  472,
+                  105
+                ],
+                "effect": [
+                  472,
+                  105
+                ]
+              }
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "attack_nw_v2",
+              "rect": [
+                0,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.4344512195121951,
+                0.9098497495826378
+              ],
+              "duration": 0.1,
+              "displayHeight": 155,
+              "contact": true,
+              "sockets": {
+                "foot": [
+                  285,
+                  545
+                ],
+                "hand": [
+                  231,
+                  267
+                ],
+                "blade": [
+                  88,
+                  378
+                ],
+                "effect": [
+                  88,
+                  378
+                ]
+              }
+            },
+            {
+              "atlas": "attack_nw_v2",
+              "rect": [
+                656,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.3795731707317073,
+                0.9181969949916527
+              ],
+              "duration": 0.1,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  249,
+                  550
+                ],
+                "hand": [
+                  241,
+                  367
+                ],
+                "blade": [
+                  88,
+                  457
+                ],
+                "effect": [
+                  88,
+                  457
+                ]
+              }
+            },
+            {
+              "atlas": "attack_nw_v2",
+              "rect": [
+                0,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.4115853658536585,
+                0.8916666666666667
+              ],
+              "duration": 0.1,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  270,
+                  535
+                ],
+                "hand": [
+                  292,
+                  222
+                ],
+                "blade": [
+                  169,
+                  293
+                ],
+                "effect": [
+                  169,
+                  293
+                ]
+              }
+            },
+            {
+              "atlas": "attack_nw_v2",
+              "rect": [
+                656,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.40396341463414637,
+                0.9133333333333333
+              ],
+              "duration": 0.1,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  265,
+                  548
+                ],
+                "hand": [
+                  341,
+                  161
+                ],
+                "blade": [
+                  504,
+                  48
+                ],
+                "effect": [
+                  504,
+                  48
+                ]
+              }
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.86328125
+              ],
+              "duration": 0.03,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  221
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.86328125
+              ],
+              "duration": 0.03,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  221
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.86328125
+              ],
+              "duration": 0.03,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  221
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.86328125
+              ],
+              "duration": 0.03,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  221
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "hit_nw_v2",
+              "rect": [
+                0,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.39634146341463417,
+                0.9582637729549248
+              ],
+              "duration": 0.03,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  260,
+                  574
+                ],
+                "hand": [
+                  481,
+                  355
+                ],
+                "blade": [
+                  625,
+                  424
+                ],
+                "effect": [
+                  625,
+                  424
+                ]
+              }
+            },
+            {
+              "atlas": "hit_nw_v2",
+              "rect": [
+                656,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.3231707317073171,
+                0.9582637729549248
+              ],
+              "duration": 0.03,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  212,
+                  574
+                ],
+                "hand": [
+                  463,
+                  416
+                ],
+                "blade": [
+                  611,
+                  470
+                ],
+                "effect": [
+                  611,
+                  470
+                ]
+              }
+            },
+            {
+              "atlas": "hit_nw_v2",
+              "rect": [
+                0,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.4024390243902439,
+                0.925
+              ],
+              "duration": 0.03,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  264,
+                  555
+                ],
+                "hand": [
+                  504,
+                  309
+                ],
+                "blade": [
+                  647,
+                  378
+                ],
+                "effect": [
+                  647,
+                  378
+                ]
+              }
+            },
+            {
+              "atlas": "hit_nw_v2",
+              "rect": [
+                656,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.375,
+                0.9266666666666666
+              ],
+              "duration": 0.03,
+              "displayHeight": 120,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  246,
+                  556
+                ],
+                "hand": [
+                  477,
+                  309
+                ],
+                "blade": [
+                  619,
+                  377
+                ],
+                "effect": [
+                  619,
+                  377
+                ]
+              }
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.76171875
+              ],
+              "duration": 0.15,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  195
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.76171875
+              ],
+              "duration": 0.15,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  195
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.76171875
+              ],
+              "duration": 0.15,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  195
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5390625,
+                0.76171875
+              ],
+              "duration": 0.15,
+              "displayHeight": 165,
+              "sockets": {
+                "foot": [
+                  138,
+                  195
+                ]
+              },
+              "contact": false
+            }
+          ],
+          "nw": [
+            {
+              "atlas": "death_nw_v2",
+              "rect": [
+                0,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.4344512195121951,
+                0.8514190317195326
+              ],
+              "duration": 0.15,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  285,
+                  510
+                ],
+                "hand": [
+                  443,
+                  371
+                ],
+                "blade": [
+                  563,
+                  425
+                ],
+                "effect": [
+                  563,
+                  425
+                ]
+              }
+            },
+            {
+              "atlas": "death_nw_v2",
+              "rect": [
+                656,
+                0,
+                656,
+                599
+              ],
+              "pivot": [
+                0.4481707317073171,
+                0.8681135225375626
+              ],
+              "duration": 0.15,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  294,
+                  520
+                ],
+                "hand": [
+                  431,
+                  423
+                ],
+                "blade": [
+                  551,
+                  466
+                ],
+                "effect": [
+                  551,
+                  466
+                ]
+              }
+            },
+            {
+              "atlas": "death_nw_v2",
+              "rect": [
+                0,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.5030487804878049,
+                0.71
+              ],
+              "duration": 0.15,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  330,
+                  426
+                ],
+                "hand": [
+                  437,
+                  318
+                ],
+                "blade": [
+                  574,
+                  348
+                ],
+                "effect": [
+                  574,
+                  348
+                ]
+              }
+            },
+            {
+              "atlas": "death_nw_v2",
+              "rect": [
+                656,
+                599,
+                656,
+                600
+              ],
+              "pivot": [
+                0.49390243902439024,
+                0.6983333333333334
+              ],
+              "duration": 0.15,
+              "displayHeight": 155,
+              "contact": false,
+              "sockets": {
+                "foot": [
+                  324,
+                  419
+                ],
+                "hand": [
+                  406,
+                  309
+                ],
+                "blade": [
+                  554,
+                  348
+                ],
+                "effect": [
+                  554,
+                  348
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "SE packing corrected; planted foot anchors provisional; missing directions remain BLOCKED_ART; not final visual acceptance."
+        ]
+      },
+      "atlases": {
+        "attack_se_v2": {
+          "path": "assets/art/murim/enemy/bandit-attack-se-candidate-v2.png",
+          "width": 1261,
+          "height": 1247
+        },
+        "idle_nw_v2": {
+          "path": "assets/art/murim/enemy/bandit-idle-nw-candidate-v2.png",
+          "width": 1312,
+          "height": 1199
+        },
+        "move_nw_v2": {
+          "path": "assets/art/murim/enemy/bandit-move-nw-candidate-v2.png",
+          "width": 1312,
+          "height": 1199
+        },
+        "telegraph_nw_v2": {
+          "path": "assets/art/murim/enemy/bandit-telegraph-nw-candidate-v2.png",
+          "width": 1312,
+          "height": 1199
+        },
+        "attack_nw_v2": {
+          "path": "assets/art/murim/enemy/bandit-attack-nw-candidate-v2.png",
+          "width": 1312,
+          "height": 1199
+        },
+        "hit_nw_v2": {
+          "path": "assets/art/murim/enemy/bandit-hit-nw-candidate-v2.png",
+          "width": 1312,
+          "height": 1199
+        },
+        "death_nw_v2": {
+          "path": "assets/art/murim/enemy/bandit-death-nw-candidate-v2.png",
+          "width": 1312,
+          "height": 1199
+        }
+      }
+    },
+    {
+      "id": "murim.enemy.chief",
+      "world": "murim",
+      "entityId": "enemy.chief",
+      "kind": "enemy",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/enemy/chief-candidate-v3.png",
+        "width": 1024,
+        "height": 1536
+      },
+      "clips": {
+        "idle": {
+          "se": [
+            {
+              "rect": [
+                0,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.546875,
+                0.953125
+              ],
+              "duration": 0.3,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  140,
+                  244
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.54296875,
+                0.94921875
+              ],
+              "duration": 0.3,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  139,
+                  243
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5234375,
+                0.953125
+              ],
+              "duration": 0.3,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  134,
+                  244
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                0,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5078125,
+                0.9453125
+              ],
+              "duration": 0.3,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  130,
+                  242
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "move": {
+          "se": [
+            {
+              "rect": [
+                0,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.546875,
+                0.921875
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  140,
+                  236
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.546875,
+                0.92578125
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  140,
+                  237
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.52734375,
+                0.92578125
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  135,
+                  237
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                256,
+                256,
+                256
+              ],
+              "pivot": [
+                0.515625,
+                0.9296875
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  132,
+                  238
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "telegraph": {
+          "se": [
+            {
+              "rect": [
+                0,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.58984375,
+                0.9140625
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  151,
+                  234
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.57421875,
+                0.9140625
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  147,
+                  234
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5703125,
+                0.91796875
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  146,
+                  235
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                512,
+                256,
+                256
+              ],
+              "pivot": [
+                0.55859375,
+                0.92578125
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  143,
+                  237
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "attack": {
+          "se": [
+            {
+              "rect": [
+                0,
+                768,
+                256,
+                256
+              ],
+              "pivot": [
+                0.546875,
+                0.8671875
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  140,
+                  222
+                ]
+              },
+              "contact": true
+            },
+            {
+              "rect": [
+                256,
+                768,
+                284,
+                256
+              ],
+              "pivot": [
+                0.4894366197183099,
+                0.8671875
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  139,
+                  222
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                540,
+                768,
+                250,
+                256
+              ],
+              "pivot": [
+                0.424,
+                0.87890625
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  106,
+                  225
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                790,
+                768,
+                234,
+                256
+              ],
+              "pivot": [
+                0.45726495726495725,
+                0.87890625
+              ],
+              "duration": 0.1,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  107,
+                  225
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "hit": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.55859375,
+                0.85546875
+              ],
+              "duration": 0.03,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  143,
+                  219
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.546875,
+                0.85546875
+              ],
+              "duration": 0.03,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  140,
+                  219
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.51953125,
+                0.86328125
+              ],
+              "duration": 0.03,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  133,
+                  221
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                1024,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5,
+                0.86328125
+              ],
+              "duration": 0.03,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  128,
+                  221
+                ]
+              },
+              "contact": false
+            }
+          ]
+        },
+        "death": {
+          "se": [
+            {
+              "rect": [
+                0,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.53515625,
+                0.640625
+              ],
+              "duration": 0.15,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  137,
+                  164
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                256,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.55078125,
+                0.64453125
+              ],
+              "duration": 0.15,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  141,
+                  165
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                512,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.53125,
+                0.65625
+              ],
+              "duration": 0.15,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  136,
+                  168
+                ]
+              },
+              "contact": false
+            },
+            {
+              "rect": [
+                768,
+                1280,
+                256,
+                256
+              ],
+              "pivot": [
+                0.5078125,
+                0.65625
+              ],
+              "duration": 0.15,
+              "displayHeight": 110,
+              "sockets": {
+                "foot": [
+                  130,
+                  168
+                ]
+              },
+              "contact": false
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "SE candidate with corrected atlas gutters and per-frame ground anchors; other facings and final motion continuity remain BLOCKED_ART.",
+          "Human chief authored scale compensates legacy boss renderer multiplier; collision radius and combat rules unchanged."
+        ]
+      }
+    }
+    ,
+    {
+      "id": "murim.environment.foreground",
+      "world": "murim",
+      "entityId": "environment.foreground",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R02"
+      ],
+      "atlas": {
+        "path": "assets/art/murim/environment/foreground-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5821371610845295,
+                0.886762360446571
+              ],
+              "duration": 1,
+              "displayHeight": 300
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5199362041467305,
+                0.89792663476874
+              ],
+              "duration": 1,
+              "displayHeight": 300
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5821371610845295,
+                0.8532695374800638
+              ],
+              "duration": 1,
+              "displayHeight": 290
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                627,
+                627,
+                627
+              ],
+              "pivot": [
+                0.5135566188197768,
+                0.8548644338118022
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate foreground placement requires scene review"
+        ]
+      }
+    },
+    {
+      "id": "reality.environment.foreground",
+      "world": "reality",
+      "entityId": "environment.foreground",
+      "kind": "environment",
+      "status": "candidate",
+      "sources": [
+        "R01"
+      ],
+      "atlas": {
+        "path": "assets/art/reality/environment/foreground-candidate-v1.png",
+        "width": 1254,
+        "height": 1254
+      },
+      "clips": {
+        "cell-0": {
+          "none": [
+            {
+              "rect": [
+                0,
+                0,
+                627,
+                700
+              ],
+              "pivot": [
+                0.5853269537480064,
+                0.92
+              ],
+              "duration": 1,
+              "displayHeight": 220
+            }
+          ]
+        },
+        "cell-1": {
+          "none": [
+            {
+              "rect": [
+                627,
+                0,
+                627,
+                700
+              ],
+              "pivot": [
+                0.5087719298245614,
+                0.9285714285714286
+              ],
+              "duration": 1,
+              "displayHeight": 285
+            }
+          ]
+        },
+        "cell-2": {
+          "none": [
+            {
+              "rect": [
+                0,
+                700,
+                627,
+                554
+              ],
+              "pivot": [
+                0.5614035087719298,
+                0.8212996389891697
+              ],
+              "duration": 1,
+              "displayHeight": 175
+            }
+          ]
+        },
+        "cell-3": {
+          "none": [
+            {
+              "rect": [
+                627,
+                700,
+                627,
+                554
+              ],
+              "pivot": [
+                0.507177033492823,
+                0.7888086642599278
+              ],
+              "duration": 1,
+              "displayHeight": 146
+            }
+          ]
+        }
+      },
+      "review": {
+        "visual": false,
+        "limitations": [
+          "Candidate foreground placement requires scene review"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+/* Clear martial silhouettes, subdued ink-blue frames and truthful local news. */
+:root{--gold:#e2c595;--text:#f0eee2;--muted:#c1cbbc}
+.brand small{letter-spacing:1px}.title-copy h2{letter-spacing:4px}.title-description{max-width:380px}
+#portrait{border-radius:2px;box-shadow:0 0 0 2px #6e756c99;width:142px;height:174px;object-fit:cover}
+#hudPortrait{height:57px;width:47px;border-radius:4px}
+.dialog-heading{align-items:center}.dialog-heading h2{font-family:'Batang',Georgia,serif}#dialogBody{line-height:1.9}
+.rumor-panel{position:absolute;right:16px;top:340px;width:260px;z-index:4;pointer-events:auto;border:1px solid #a59f827a;background:linear-gradient(130deg,#142b38eb,#203f40db);box-shadow:0 4px 16px #162a3445;border-radius:3px;color:#d7e2d0}
+#rumorToggle{display:flex;align-items:center;gap:8px;width:100%;min-height:36px;padding:6px 10px;border:0;background:#263c46b3;border-radius:2px;color:#e8d3a7;font-size:12px}
+#rumorToggle small{font-size:9px;color:#bcc9b9;letter-spacing:0}#rumorCount{margin-left:auto;color:#fff0c5;font-size:10px}.rumor-chevron{font-size:11px}.collapsed .rumor-chevron{transform:rotate(180deg)}
+.rumor-disclosure{margin:0;padding:7px 9px;font-size:9px;color:#aebdad;border-bottom:1px solid #b0bc9b25}
+#rumorMessages{max-height:172px;overflow-y:auto;padding:4px 9px 8px;scrollbar-width:thin;touch-action:pan-y}
+.rumor-entry{padding:6px 0;border-bottom:1px solid #cdd5a715}.rumor-entry b{font-size:10px;color:#bcd6ce}.rumor-entry p{font-size:11px;line-height:1.65;margin:3px 0 0;word-break:keep-all}.rumor-entry.world b{color:#e6c58b}.rumor-empty{font-size:11px;line-height:1.8;color:#bdc9b7}
+.world-consequence{border-left:2px solid #cbb883;background:#8b9b7720;padding:13px 15px;white-space:normal}
+@media(min-width:1100px) and (min-height:650px){.rumor-panel{top:352px;width:240px}#rumorMessages{max-height:min(180px,22dvh)}}
+@media(max-width:1099px),(pointer:coarse){
+ .rumor-panel{right:12px;top:152px;width:218px;max-width:calc(100vw - 24px);background:#182e3bf7}
+ #rumorToggle{min-height:30px;padding:5px 8px;font-size:10px;gap:5px}#rumorToggle small{font-size:8px}.rumor-disclosure{font-size:8px;padding:5px 8px}#rumorMessages{max-height:112px}.rumor-entry p{font-size:10px;line-height:1.55}
+ #portrait{width:86px;height:106px}#dialogTitle{font-size:18px}.cover-bottom>span:first-child{max-width:72%;font-size:8px;line-height:1.6}.cover-bottom{align-items:end}
+}
+@media(max-height:520px) and (min-width:600px){
+ .rumor-panel{right:12px;top:88px;width:212px}#rumorMessages{max-height:80px}#rumorToggle{min-height:28px}#portrait{width:49px;height:60px}#dialogBody{max-height:32dvh}
+}
+@media(prefers-reduced-motion:reduce){.rumor-panel{transition:none}}
+/* Compact screens open news as a paused sheet, never on top of objectives or skills. */
+@media(max-width:1099px),(pointer:coarse){
+ .rumor-panel{right:108px;top:15px;width:44px;border:1px solid #c1b29199;background:#203943e8}
+ #rumorToggle{min-height:32px;padding:3px 5px;justify-content:center;gap:3px}
+ #rumorToggle::before{content:'聞';font:16px Georgia,serif}
+ #rumorToggle>span,#rumorCount{display:none}#rumorToggle small{font-size:0}#rumorToggle small::after{content:'NPC';font-size:8px;color:#d3d7bd}
+ .place{max-width:calc(100% - 168px)}.fate-journal{min-width:34px}#rumorContent{display:none}
+}
+@media(max-height:520px) and (min-width:600px){.rumor-panel{top:90px;right:105px}.place{max-width:285px}}
+.rumor-modal .rumor-entry p{font-size:12px;line-height:1.85}.rumor-modal .rumor-disclosure{font-size:11px;color:#e4c68a;padding-left:0}
