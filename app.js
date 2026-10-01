@@ -10,7 +10,7 @@
   if(perfHud){perfHud.id='perfHud';perfHud.setAttribute('aria-label','성능 진단');perfHud.style.cssText='position:fixed;top:8px;right:8px;z-index:1000;max-width:calc(100vw - 16px);margin:0;padding:8px 10px;background:#101e24e8;color:#f3e5be;border:1px solid #d0bb7b;font:11px/1.4 monospace;white-space:pre-wrap;pointer-events:none;';$('game').append(perfHud);}
   let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0,lastPerfHud=0;
   let sound=false,audio=null,bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
-  let journeyUI=null,realmUI=null,growthUI=null,introUI=null,contractUI=null,progressionUI=null;
+  let dialogueUI=null,journeyUI=null,realmUI=null,growthUI=null,introUI=null,contractUI=null,progressionUI=null;
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
   const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=Controls.format(text);return e;};
   const artReady=()=>{if(!globalThis.ArtPreview)return !document.documentElement.hasAttribute('data-art-loading');return globalThis.ArtPreview.ensureWorld?.(AREAS[g.area].world==='현실'?'reality':'murim')===true;};
@@ -30,8 +30,9 @@
     try{localStorage.setItem(SAVE,g.save());$('save').textContent='저장됨';hasSave=true;lastSave=performance.now();}
     catch(error){$('save').textContent='저장 불가';if(!saveWarning){toast('자동 저장 불가 · 메뉴에서 저장 파일을 내려받으세요.');saveWarning=true;}}
   }
-  function closeDialog(){if(introUI?.active)return introUI.resume();if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker);}}
-  function show(title,body,actions=[{label:'계속하기'}],portrait='system',kicker='쌍계 · 이야기'){
+  function closeDialog(){if(introUI?.active)return introUI.resume();if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker,next.result);}}
+  function show(title,body,actions=[{label:'계속하기'}],portrait='system',kicker='쌍계 · 이야기',result=null){
+    if(typeof body==='string'&&dialogueUI){const scenes=DialogueData.lookup(title,body,portrait);if(scenes)return dialogueUI.open({id:title,title,scenes,result,actions});}
     dialog.classList.toggle('intro-dialog',!!body?.classList?.contains('intro-scene'));dialog.classList.toggle('growth-dialog',!!body?.classList?.contains('growth-screen'));
     RealmArt.begin(g);clearInput();dialog.classList.toggle('story-dialog',typeof body==='string'&&portrait!=='system'&&!kicker.includes('일시정지'));dialog.classList.toggle('news-dialog',!!body?.classList?.contains('realm-news'));dialog.classList.toggle('help-dialog',!!body?.classList?.contains('realm-help-sheet'));dialog.classList.toggle('legend-offer',kicker.includes('발현')||kicker.includes('각성'));$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
     $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=Controls.format(body);else $('dialogBody').append(body);
@@ -84,8 +85,8 @@
 
     const actions=['victory','trial-complete'].includes(event.type)?[{label:'거점으로 귀환',run:()=>{g.retreat();processEvents();persist();update();}},{label:'조금 더 둘러보기',secondary:true}]:[{label:event.type==='transfer'?'현실에서 이어가기':event.type==='defeat'?'다시 일어서기':'계속하기'}];
     const kicker=event.type==='awakening'?'나의 전설 · 무공 각성':event.type==='trial-complete'?'기연의 증명':event.type==='victory'?'전투 승리':event.type==='transfer'?'능력 전승':'쌍계 · 이야기';
-    if(dialog.open)queued.push({title:event.title,text:event.text,actions,portrait:event.portrait||'system',kicker});
-    else show(event.title,event.text,actions,event.portrait||'system',kicker);
+    if(dialog.open)queued.push({title:event.title,text:event.text,actions,portrait:event.portrait||'system',kicker,result:event.result});
+    else show(event.title,event.text,actions,event.portrait||'system',kicker,event.result);
   }
   function start(load=false){
     backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
@@ -150,7 +151,7 @@
       if(['transfer','victory','defeat','dialog','awakening','trial-complete','legend-ready'].includes(e.type)){story(e);if(e.inheritance)progressionUI?.inherit(e);persist();}
     }
   }
-  function interact(){if(!running())return;const result=g.interact();if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
+  function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
   function act(action){
     if(!running())return;const k=g.skillInfo(action);if(!k)return;
     if(!g.act(action)){
@@ -243,6 +244,7 @@
     }catch(error){if(!errorReported){errorReported=true;console.error(error);show('게임 실행 중 오류가 발생했습니다','저장된 진행은 그대로 보관됩니다. 새로고침 후에도 반복되면 이 내용을 알려 주세요.\n\n'+error.message);}}
     requestAnimationFrame(frame);
   }
+  dialogueUI=DialogueUI.create({show,node});
   journeyUI=JourneyUI.create({game:()=>g,show,node,grid,refresh:()=>{processEvents();persist();update();},act,running,active:()=>active});
   realmUI=RealmUI.create({game:()=>g,show,node,refresh:()=>{processEvents();persist();update();},active:()=>active,clearInput,notes:journeyUI});
   introUI=IntroUI.create({game:()=>g,setGame:value=>{g=value;renderer.area=null;progressionUI?.clear();clearInput();},show,node,refresh:()=>{processEvents();persist();update();}});

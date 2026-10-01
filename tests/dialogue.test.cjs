@@ -1,0 +1,4 @@
+const test=require('node:test'),assert=require('node:assert/strict');let D;try{D=require('../dialogue-data.js');}catch{}
+test('curated intro and all five chapters have single speaker scenes',()=>{assert.ok(D);for(const [id,scenes]of Object.entries(D.scenes)){assert.ok(scenes.length);for(const s of scenes){assert.ok(s.speaker);assert.doesNotMatch(s.text,/(윤서|서린|백련|연화):/);assert.ok(['speech','narration','result'].includes(s.kind));}}for(let i=0;i<7;i++)assert.ok(D.scenes['intro-'+i]);for(let i=1;i<=5;i++)assert.ok(D.scenes['chapter-'+i]);});
+test('paging and skip never execute a final decision and decision cannot repeat',()=>{assert.ok(D);let calls=0;const p=D.sequence([{},{}],[{run:()=>calls++}]);p.next();p.skip();assert.equal(calls,0);assert.equal(p.index,1);p.choose(0);p.choose(0);assert.equal(calls,1);});
+test('unknown system menus are not converted to story scenes',()=>{assert.ok(D);assert.equal(D.lookup('게임 메뉴','plain','system'),null);});
