@@ -43,7 +43,7 @@ def main():
   ctx.close()
   for w,h in [(390,844),(360,640),(844,390)]:
    ctx=b.new_context(viewport={'width':w,'height':h},device_scale_factor=2,is_mobile=True,has_touch=True);ctx.add_init_script(HOOK);p=ctx.new_page();p.on('pageerror',lambda e:errors.append(str(e)));load(p,a.url);new_game(p)
-   p.evaluate("()=>{__game.progress=2;__game.training=1;Object.assign(__game.fate,{path:'echo',proven:['echo'],discovered:['echo']});__game.enter('archive');__game.events=[];}");p.wait_for_timeout(180)
+   p.evaluate("()=>{__game.progress=2;__game.training=1;Object.assign(__game.fate,{path:'echo',proven:['echo'],discovered:['echo']});__game.enter('archive');__game.events=[];}");p.wait_for_function("!globalThis.ArtPreview || ArtPreview.ensureWorld('murim')===true")
    selectors=['#objective','#sense','#fieldNotes','#stick','#interact','#potion','[data-action=attack]','[data-action=signature1]','[data-action=signature2]','[data-action=ultimate]'];boxes=[]
    for sel in selectors:
     x=p.locator(sel).bounding_box();assert x and x['width']>=32 and x['height']>=30,(w,h,sel,x);assert x['x']>=0 and x['y']>=0 and x['x']+x['width']<=w+1 and x['y']+x['height']<=h+1,(w,h,sel,x);boxes.append((sel,x))
