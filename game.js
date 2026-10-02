@@ -137,7 +137,7 @@
       this.legendRuntime.manual=!held;
       if(Fate.names.includes(action))return Fate.act(this,action);
       if(!Object.hasOwn(SKILLS,action))return false;
-      const p=this.player,k=SKILLS[action];if(p.hp<=0||p.cool[action]>0)return false;
+      const p=this.player,base=SKILLS[action],k=this.paidSkillCost?{...base,cost:this.paidSkillCost(action,base.cost)}:base;if(p.hp<=0||p.cool[action]>0)return false;
       if(this.training<k.need||p.mp<k.cost)return false;
       if(action==='potion'){
         if(this.potions<=0||p.hp>=this.stats().hp)return false;
@@ -209,7 +209,7 @@
       let x=Number.isFinite(input.x)?clamp(input.x,-1,1):0,y=Number.isFinite(input.y)?clamp(input.y,-1,1):0;
       const n=Math.hypot(x,y);if(n>1){x/=n;y/=n;}p.walking=n>.1||p.dash>0;
       if(p.dash>0){p.dash=Math.max(0,p.dash-dt);this.move(p,p.dx*650*dt,p.dy*650*dt);}
-      else {if(n>.1)p.face=Math.atan2(y,x);this.move(p,x*215*dt,y*215*dt);}
+      else {if(n>.1)p.face=Math.atan2(y,x);this.move(p,x*215*(1+(this.trainingSpeed?.()||0))*dt,y*215*(1+(this.trainingSpeed?.()||0))*dt);}
       if(input.attack)this.act('attack',true);
       for(const e of this.enemies){
         e.flash=Math.max(0,e.flash-dt);e.stun=Math.max(0,(e.stun||0)-dt);e.root=Math.max(0,(e.root||0)-dt);if(e.stun>0)continue;if(e.hp<=0||e.boss&&this.bossLocked())continue;
@@ -240,7 +240,7 @@
         }
       }
       for(const f of this.fx)f.life-=dt;this.fx=this.fx.filter(f=>f.life>0);
-      if(p.hp<=0){const inTrial=!!this.trial;this.gold=Math.max(0,this.gold-(inTrial?0:15));this.enter(AREAS[this.area].world==='무림'?'village':'city');this.emit('defeat',{title:'쓰러져도, 성장은 남는다',text:(inTrial?'시험은 금화 손실 없이 다시 도전할 수 있습니다. ':'거점에서 체력과 내력을 회복했습니다. 금화 최대 15를 잃었지만 ')+ '  무공과 이야기 진행은 유지됩니다.\n\n호위와 봉인은 재입장하면 초기화됩니다. 붉은 공격 예고에서 회피하고, 회복약을 준비하세요.'});}
+      if(p.hp<=0){const inTrial=!!this.trial||!!this.advancementTrial;this.gold=Math.max(0,this.gold-(inTrial?0:15));this.enter(AREAS[this.area].world==='무림'?'village':'city');this.emit('defeat',{title:'쓰러져도, 성장은 남는다',text:(inTrial?'시험은 금화 손실 없이 다시 도전할 수 있습니다. ':'거점에서 체력과 내력을 회복했습니다. 금화 최대 15를 잃었지만 ')+ '  무공과 이야기 진행은 유지됩니다.\n\n호위와 봉인은 재입장하면 초기화됩니다. 붉은 공격 예고에서 회피하고, 회복약을 준비하세요.'});}
     }
     retreat(){if(!AREAS[this.area].safe)this.enter(AREAS[this.area].world==='무림'?'village':'city');}
     save(){const d={version:4,fate:this.fate,legend:this.legend};for(const k of ['area','progress','training','level','xp','gold','potions','upgrade','clears','harborClears','playTime'])d[k]=this[k];return JSON.stringify(d);}

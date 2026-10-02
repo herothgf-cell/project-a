@@ -41,6 +41,7 @@
    }
   });
   WorldArt.portrait=function(canvas,kind,expression='neutral'){
+   if(globalThis.OverseerArt?.portrait(canvas,kind,game?DualWorld.AREAS[game.area].world:'무림'))return;
    if(!game){delete canvas.dataset.productionPortrait;canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);return;}
    portraitRequests.set(canvas,{kind,expression,world:DualWorld.AREAS[game.area].world});
    const world=DualWorld.AREAS[game.area].world==='현실'?'reality':'murim',entityId=kind==='hero'?'hero':ArtRuntime.npcIdentity(world,kind),v=catalog.resolve({world,entityId,action:'portrait-'+expression,facing:'none'},{preview:true});
@@ -50,6 +51,7 @@
   };
   RealmArt.begin=function(g){game=g;const result=begin(g),world=DualWorld.AREAS[g.area].world;if(world!==portraitWorld){portraitWorld=world;const hud=document.getElementById('hudPortrait');if(hud)WorldArt.portrait(hud,'hero');}return result;};
   WorldArt.human=function(c,e,t,kind='hero',scale=1){
+   if(globalThis.OverseerArt?.human(c,e,t,kind,scale,game?DualWorld.AREAS[game.area].world:'무림')){diagnostics.set((game?.area||'scene')+':'+e.id,{status:'original-human',id:'code.overseer',phase:e.cyclePhase||1});return;}
    if(!game)return;
    if(kind!=='hero'){
     const enemyWorld=DualWorld.AREAS[game.area].world==='현실'?'reality':'murim',key=game.area+':'+e.id,prior=enemyObservations.get(key),observation={x:e.x,y:e.y,moving:!!prior&&Math.hypot(e.x-prior.x,e.y-prior.y)>.01};

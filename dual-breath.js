@@ -10,7 +10,7 @@
  }
  P.skillInfo=function(action){const info=old.skillInfo.call(this,action);return info&&this.laterStory?.dualBreath&&runtime(this).discount&&info.cost>0?{...info,cost:Math.max(1,info.cost-6)}:info;};
  P.act=function(action,held=false,...args){const r=runtime(this),p=this.player,info=old.skillInfo.call(this,action),paid=['moon','storm','signature1','signature2'].includes(action)&&info?.cost>0,discount=this.laterStory?.dualBreath&&paid?Math.min(r.discount,info.cost-1):0,beforeMp=p.mp;
-  const c={id:++r.serial,action,family:['attack','moon','storm'].includes(action)?'sword':Fate.active(this),manual:!held,focus:action==='attack'&&this.playTime-this.experimentRuntime.lastAction>1.4&&p.mp>=6&&!this.experimentRuntime.focusSpent};r.cast=c;
+  const c={id:++r.serial,action,family:['attack','moon','storm'].includes(action)?'sword':Fate.active(this),manual:!held,focus:action==='attack'&&this.playTime-this.experimentRuntime.lastAction>1.4&&p.mp>=(this.passiveEffects?.().focusCost??6)&&!this.experimentRuntime.focusSpent};r.cast=c;
   const winds=this.enemies.filter(e=>e.hp>0&&e.wind>0).map(e=>({e,wind:e.wind})),pending=new Set([...(this.combat?.pending||[]),...(this.experimentRuntime?.pending||[])]);if(discount){p.mp+=discount;r.discount=0;}
   let ok;try{ok=old.act.call(this,action,held,...args);if(ok){if(action==='signature1')r.guard=c;for(const h of [...(this.combat?.pending||[]),...(this.experimentRuntime?.pending||[])])if(!pending.has(h))h.dualCast=c;if(Fate.active(this)==='seal')for(const {e}of winds)if(e.wind===0&&dist(p,e)<=260)contact(this,e,c);}else if(discount){p.mp=beforeMp;r.discount=6;}}finally{r.cast=null;}return ok;
  };

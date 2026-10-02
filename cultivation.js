@@ -3,8 +3,8 @@
  'use strict';const {Game,AREAS,Fate,dist,Data:D,state:S,runtime:R,active}=api,P=Game.prototype;
  const old=Object.fromEntries(['act','step','strike','takeHit','reward','stats','skillInfo'].map(k=>[k,P[k]]));
  const targets=(g,o,r)=>g.enemies.filter(e=>e.hp>0&&dist(e,o)<=r+e.r&&g.lineClear(o,e)&&!(e.boss&&g.bossLocked()));
- function credit(g,p,e){if(g.trial||!e||e.comparison||e.residual||e.hp>0&&e.boss&&g.bossLocked()||!Object.hasOwn(S(g).mastery,p))return;const r=R(g),s=S(g),key=p+':'+e.id,count=r.credits||(r.credits={});if((count[key]||0)>=3)return;count[key]=(count[key]||0)+1;s.mastery[p]=Math.min(30,s.mastery[p]+1);const world=AREAS[g.area].world;if(!s.worlds.includes(world))s.worlds.push(world);}
- function recognize(g,key,e){const s=S(g);if(!key||!s.known.includes(key)||AREAS[g.area].world!=='현실'||g.trial||!e?.id||e.boss&&g.bossLocked())return;if(typeof g.onInterpretation==='function')g.onInterpretation(key,e);if(s.sync[key]!==2){s.sync[key]=2;g.toast(D.variants[key].name+' · 현실에서도 같은 반응이 나타났다.');g.effect('reality-settled',g.player.x,g.player.y,{life:1.2,max:1.2,path:D.variants[key].path});}}
+ function credit(g,p,e){if(g.advancementTrial||g.trial||!e||e.comparison||e.residual||e.hp>0&&e.boss&&g.bossLocked()||!Object.hasOwn(S(g).mastery,p))return;const r=R(g),s=S(g),key=p+':'+e.id,count=r.credits||(r.credits={});if((count[key]||0)>=3)return;count[key]=(count[key]||0)+1;s.mastery[p]=Math.min(30,s.mastery[p]+1);const world=AREAS[g.area].world;if(!s.worlds.includes(world))s.worlds.push(world);}
+ function recognize(g,key,e){const s=S(g);if(!key||!s.known.includes(key)||AREAS[g.area].world!=='현실'||g.trial||g.advancementTrial||!e?.id||e.boss&&g.bossLocked())return;if(typeof g.onInterpretation==='function')g.onInterpretation(key,e);if(s.sync[key]!==2){s.sync[key]=2;g.toast(D.variants[key].name+' · 현실에서도 같은 반응이 나타났다.');g.effect('reality-settled',g.player.x,g.player.y,{life:1.2,max:1.2,path:D.variants[key].path});}}
  function fx(g,key,o=g.player,phase){g.effect('interpret-'+key,o.x,o.y,{path:D.variants[key].path,range:190,life:.8,max:.8,presentationPhase:phase,...(o.actionInstance?{actionInstance:o.actionInstance,presentationAngle:o.presentationAngle,presentationPhase:'contact'}:{})});}
  P.stats=function(){const n=old.stats.call(this),s=S(this);if(s.realm){n.hp+=12;n.mp+=8;n.attack+=2;}return n;};
  P.setBreath=function(mode){if(!AREAS[this.area].safe||!['flow','focus'].includes(mode))return false;S(this).breath=mode;this.toast(mode==='flow'?'유수심법 · 무공 사이의 호흡으로 내력을 회복합니다.':'집중심법 · 호흡을 고른 첫 검격에 내력을 싣습니다.');return true;};
@@ -13,7 +13,7 @@
  P.skillInfo=function(action){const base=old.skillInfo.call(this,action);if(action==='sense')return {name:'기감',glyph:'感',cost:0,cool:2.5,need:1,description:'기운의 흐름을 살핍니다.',key:'B'};const key=active(this);if(!base||!key||!Fate.names.includes(action))return base;return {...base,description:base.description+'\n'+D.variants[key].description,name:action===(['ripple-guard','seal-hold'].includes(key)?'signature1':'signature2')?D.variants[key].name:base.name};};
  P.act=function(action,...args){const r=R(this),s=S(this),key=active(this),p=this.player;const victims=targets(this,p,260).map(e=>({e,wind:e.wind,x:e.x,y:e.y}));r.held=!!args[0];
   if(key==='echo-replay'&&action==='signature2'){
-   const k=old.skillInfo.call(this,action),echo=this.combat.echo;if(!echo||!k||k.locked||p.hp<=0||p.cool.signature2>0||p.mp<k.cost||!this.lineClear(p,echo)||this.blocked(echo.x,echo.y,p.r))return false;
+   const k=this.skillInfo(action),echo=this.combat.echo;if(!echo||!k||k.locked||p.hp<=0||p.cool.signature2>0||p.mp<k.cost||!this.lineClear(p,echo)||this.blocked(echo.x,echo.y,p.r))return false;
    p.mp-=k.cost;p.cool.signature2=k.cool;p.swing=.3;this.combat.echo=null;r.pending.push({x:echo.x,y:echo.y,delay:.45,key,area:this.area,mult:3.3});r.lastAction=this.playTime;fx(this,key,echo);this.emit('sound',{name:'echo'});return true;
   }
   const charge=r.charge||0,ok=old.act.call(this,action,...args);if(!ok)return ok;
@@ -25,8 +25,8 @@
   if(key==='seal-guide'&&action==='signature2'){let contact=false;for(const v of victims.filter(v=>v.e.root>0).slice(0,2)){const e=v.e;this.move(e,Math.cos(p.face)*85,Math.sin(p.face)*85);if(v.wind>0){recognize(this,key,e);for(const other of targets(this,e,115))if(this.strike(other,Math.round(this.stats().attack*.9),'interpret:'+key)>0)contact=true;}}fx(this,key,p,contact?'contact':'field');}
   return ok;
  };
- P.strike=function(e,amount,source='attack'){const s=S(this),r=R(this),key=active(this);let damage=amount;
-  if(source==='attack'&&s.breath==='focus'&&!r.held&&this.playTime-r.lastAction>1.4&&this.player.mp>=6&&!r.focusSpent){damage=Math.round(amount*1.2);this.player.mp-=6;r.focusSpent=true;}
+ P.strike=function(e,amount,source='attack'){const s=S(this),r=R(this),key=active(this);let damage=amount;const passive=this.passiveEffects?.(),focusCost=passive?.focusCost??6,focusMultiplier=passive?.focusMultiplier??1.2;
+  if(source==='attack'&&s.breath==='focus'&&!r.held&&this.playTime-r.lastAction>1.4&&this.player.mp>=focusCost&&!r.focusSpent){damage=Math.round(amount*focusMultiplier);this.player.mp-=focusCost;r.focusSpent=true;}
   const dealt=old.strike.call(this,e,damage,source);if(dealt>0){if(['attack','moon','storm'].includes(source))credit(this,'sword',e);else if(['signature','ultimate'].includes(source)&&Fate.active(this))credit(this,Fate.active(this),e);if(source.startsWith('interpret:')){recognize(this,source.slice(10),e);credit(this,D.variants[source.slice(10)]?.path,e);}}
   return dealt;
  };
@@ -38,7 +38,7 @@
  };
  P.reward=function(e){if(!e||e.hp>0||e.rewarded)return;old.reward.call(this,e);if(!e.trial&&e.rewarded&&AREAS[this.area].world==='현실'){S(this).materials=Math.min(9999,S(this).materials+(e.boss?3:1));this.toast('마정석 +'+(e.boss?3:1)+' · 거점에서 감정할 수 있습니다.');}};
  P.step=function(dt,input={}){const before=this.playTime,area=this.area;old.step.call(this,dt,input);const d=this.playTime-before;if(d<=0||area!==this.area)return;const r=R(this),s=S(this);r.focusSpent=false;
-  if(s.breath==='flow'&&this.playTime-r.lastAction>1.2)this.player.mp=Math.min(this.stats().mp,this.player.mp+d*3);
+  if(s.breath==='flow'&&this.playTime-r.lastAction>1.2)this.player.mp=Math.min(this.stats().mp,this.player.mp+d*(this.passiveEffects?.().recovery??3));
   if(r.guard){r.guard.life-=d;if(r.guard.life<=0)r.guard=null;}
   const queue=r.pending;r.pending=[];for(const h of queue){if(h.area!==this.area)continue;h.delay-=d;if(h.delay>0){r.pending.push(h);continue;}for(const e of targets(this,h,180))this.strike(e,Math.round(this.stats().attack*h.mult),'interpret:'+h.key,h.dualCast);fx(this,h.key,h);}
  };

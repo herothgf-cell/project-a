@@ -1,24 +1,26 @@
 /* Current interface: one set of shared tokens and components. Archived UI is packaged separately. */
-:root{--ui-bg:#10232b;--ui-panel:#18313a;--ui-raised:#24434c;--ui-text:#edf4f1;--ui-muted:#b7cac9;--ui-line:#527078;--ui-accent:#e5c78e;--ui-danger:#ff9887;--ui-radius:10px;--ui-space:8px}
+:root{--ui-bg:#101823;--ui-panel:#1B2A39;--ui-raised:#294158;--ui-text:#F4F7FB;--ui-muted:#B8C7D8;--ui-line:#63788e;--ui-accent:#E7C477;--ui-danger:#ff9887;--ui-radius:10px;--ui-space:8px}
+:root{--ui-value:#8fdef0;--ui-success:#a0e4bd;--ui-condition:#ffd09a;--ui-label:#bacbdf}
 #game{font-family:system-ui,'Malgun Gothic',sans-serif;color:var(--ui-text)}
 #dialog{box-sizing:border-box;width:min(960px,calc(100vw - 32px));max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:20px;border:1px solid var(--ui-line);border-radius:var(--ui-radius);background:var(--ui-bg);color:var(--ui-text);box-shadow:0 16px 48px #0008;font:1rem/1.65 system-ui,'Malgun Gothic',sans-serif;overflow:auto}
 #dialog::backdrop{background:#051319b8}
 #dialog .dialog-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border:0}
+#dialog .dialog-top #closeDialog{margin-left:auto}
 #dialog .dialog-heading{gap:16px;margin:8px 0 16px}
 #dialog #dialogTitle{font:600 1.4rem/1.4 system-ui,'Malgun Gothic',sans-serif;letter-spacing:0;margin:0;overflow-wrap:anywhere}
 #dialog #portrait{width:56px;height:64px;flex:none}
-#dialog #dialogBody{max-height:55dvh;overflow:auto;font-size:1rem;line-height:1.7;overflow-wrap:anywhere;color:var(--ui-text);scrollbar-gutter:stable;padding:4px;box-sizing:border-box}
+#dialog #dialogBody{max-height:55dvh;overflow:auto;font-size:1.125rem;line-height:1.6;overflow-wrap:anywhere;color:var(--ui-text);scrollbar-gutter:stable;padding:4px;box-sizing:border-box}
 #dialog.growth-dialog #portrait{display:none}#dialog.growth-dialog .dialog-heading{min-height:0;padding:0;margin:4px 0 12px}#dialog.growth-dialog #dialogKicker{display:none}#dialog.growth-dialog #dialogBody{max-height:62dvh}
 #dialog #dialogBody p{margin:8px 0 16px;line-height:1.7}
 #dialog h3{font-size:1.125rem;line-height:1.5;margin:16px 0 8px;color:var(--ui-accent)}
 #dialog h4{font-size:1rem;margin:8px 0}
-#dialog button:not(.icon-button){min-height:44px;box-sizing:border-box;padding:10px 16px;border-radius:8px;font:inherit;font-size:1rem;line-height:1.4;white-space:normal;max-width:100%;touch-action:manipulation}
+#dialog button:not(.icon-button){min-height:48px;box-sizing:border-box;padding:10px 16px;border-radius:8px;font:inherit;font-size:1rem;line-height:1.4;white-space:normal;max-width:100%;touch-action:manipulation}
 #dialog button.secondary,#dialog .tree-node{background:var(--ui-panel);border:1px solid var(--ui-line);color:var(--ui-text);box-shadow:none}
 #dialog button.primary{background:var(--ui-accent);color:#142932;border:1px solid var(--ui-accent);font-weight:650;box-shadow:none}
 #dialog button:disabled{opacity:1;filter:none;background:#20343c;border-color:#48616a;color:#b6c5c9;box-shadow:none;cursor:not-allowed}
 #dialog button:hover:not(:disabled){filter:brightness(1.12)}
 #dialog button:focus-visible,button:focus-visible,#dialog summary:focus-visible{outline:3px solid #ffe0a0;outline-offset:2px}
-#dialog #closeDialog{min-width:44px;min-height:44px;position:sticky;top:0;background:var(--ui-panel);color:var(--ui-text);z-index:5}
+#dialog #closeDialog{min-width:48px;min-height:48px;position:sticky;top:0;background:var(--ui-panel);color:var(--ui-text);z-index:5}
 #dialog #dialogActions{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--ui-line);padding-top:12px;margin-top:12px}
 #dialog #dialogActions button{flex:1 1 140px;min-width:0}
 #dialog .dialog-note,#dialog .stat-origin{font-size:.875rem;color:var(--ui-muted)}
@@ -46,25 +48,26 @@
 .news-dot,.has-news::after{content:'';display:inline-block;flex:none;width:9px;height:9px;border-radius:50%;background:#ff7467;margin-left:6px;vertical-align:middle}
 .has-news:has(>.news-dot)::after{display:none}
 .personal-news p{white-space:pre-line}.quest-result{border-left:3px solid var(--ui-accent);padding:12px;background:var(--ui-panel)}
-.main-navigation{margin-left:auto;order:2}.main-navigation button{min-height:44px;padding:8px 12px;font-size:14px;background:transparent;border:0;color:var(--ui-text)}
+.main-navigation{margin-left:auto;order:2}.main-navigation button{min-height:48px;padding:8px 12px;font-size:14px;background:transparent;border:0;color:var(--ui-text)}
 .header-actions{order:3}.brand{display:none!important}.aside-sub,.aside-footer,footer em,#save{display:none}header .world-chip{max-width:240px}
-#game #character{border:1px solid var(--ui-line);border-radius:8px;padding:0;background:var(--ui-panel);cursor:pointer;flex:none;min-width:44px;min-height:44px}
+#game #character{border:1px solid var(--ui-line);border-radius:8px;padding:0;background:var(--ui-panel);cursor:pointer;flex:none;min-width:48px;min-height:48px}
 #character canvas,#character #hudPortrait{display:block;pointer-events:none}
-#personalNews{min-width:44px;min-height:44px;font-size:14px}
-#game #growthStatus{min-height:44px;font-size:14px;line-height:1.4;background:transparent;border:0;color:var(--ui-accent)}
+#personalNews{min-width:48px;min-height:48px;font-size:14px}
+#game #growthStatus{min-height:48px;font-size:14px;line-height:1.4;background:transparent;border:0;color:var(--ui-accent)}
+#game #inventory{display:none}
 #game .hud{background:#10232bea;box-shadow:none;border:1px solid var(--ui-line)}
 #game .vitals label,#game .vitals b,#game .money b{font-size:12px}
 #game .place{pointer-events:none}#game .place small{display:none}#game .place h2{font-size:18px}
 #game #objective{pointer-events:auto;max-width:340px}
 #game #objectiveTarget{font-size:14px}#game #objectiveHint{font-size:14px;max-height:3.2em;overflow:hidden}
-#game .scene-bottom>span{display:none}#game #potion{min-height:44px;font-size:14px}
+#game .scene-bottom>span{display:none}#game #potion{min-height:48px;font-size:14px}
 #game #interact{font-size:14px;max-width:calc(100% - 24px);white-space:normal}
 #game .actions small,#game .fate-buttons small{font-size:12px}
 #game .actions kbd,#game .fate-buttons kbd{font-size:12px}
 #game #boss{z-index:4}#game #boss>small{font-size:12px}#game #toasts{top:40%;z-index:3}.toast{font-size:14px}
 #game .potion-guidance{outline:3px solid var(--ui-accent);outline-offset:3px}
 .audio-setting{display:grid;grid-template-columns:minmax(110px,1fr) minmax(80px,2fr) 50px;gap:12px;align-items:center;margin:16px 0;white-space:normal}
-.audio-setting input{width:100%;min-height:44px}.audio-previews{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}
+.audio-setting input{width:100%;min-height:48px}.audio-previews{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}
 .dungeon-screen{display:grid;grid-template-columns:minmax(180px,1fr) minmax(200px,1.4fr);gap:16px;white-space:normal}.dungeon-screen>.app-navigation{grid-column:1/-1}
 .dungeon-list{max-height:42dvh;overflow:auto}.dungeon-row{width:100%;display:flex;flex-direction:column;align-items:flex-start;text-align:left;margin-bottom:8px;border:1px solid var(--ui-line);background:var(--ui-panel);color:var(--ui-text)}
 .dungeon-row[aria-pressed=true]{border-color:var(--ui-accent);background:var(--ui-raised)}.dungeon-status{font-size:.875rem;color:var(--ui-muted)}.dungeon-detail{min-width:0}.dungeon-error{color:var(--ui-danger)}#dialog .dungeon-back{display:none}
@@ -77,7 +80,7 @@
  .dungeon-screen{display:block}.dungeon-list{max-height:38dvh}.dungeon-screen:not(.dungeon-detail-open) .dungeon-detail{display:none}.dungeon-detail-open .dungeon-list{display:none}#dialog .dungeon-back{display:block}
  #game header{padding:4px 8px;gap:4px;flex-wrap:wrap;min-height:52px}.main-navigation{flex:1;justify-content:space-around;order:1}.main-navigation button{font-size:14px;padding:6px}header .world-chip{display:none}.header-actions{gap:0}#menu,#sound{min-width:36px;width:36px;padding:4px}
  #game .place{top:8px;left:12px}#game .place h2{font-size:14px}#game .hud{top:38px;left:12px;gap:5px;padding:5px}#character #hudPortrait{width:32px;height:40px}.vitals{width:174px}#game .hud .money{display:none}
- #game #objective{top:104px;left:12px;right:12px;width:auto;max-width:none;min-height:44px;padding:6px 8px}#objective .route-label{display:none}#game #objectiveHint{display:none}
+ #game #objective{top:104px;left:12px;right:12px;width:auto;max-width:none;min-height:48px;padding:6px 8px}#objective .route-label{display:none}#game #objectiveHint{display:none}
  #game #inventory,#game #fateJournal{display:none}#game .journey-tools{top:158px;left:12px;gap:4px}#game .journey-tools button{font-size:12px;padding:5px;min-height:36px}#game #helpButton{display:none}
  #game #boss,.has-fate #boss{top:207px;left:12px;width:calc(100% - 24px);max-width:none;transform:none}#game #boss>small{display:none}#game #boss>span{font-size:14px}
  #game #interact{bottom:180px}#game .fate-heading{font-size:12px}.level-notice{inset:270px 12px auto}
@@ -86,3 +89,60 @@
 @media(prefers-reduced-motion:reduce){#dialog *,#game .toast{transition:none;animation:none}}
 
 #dialog.dungeon-dialog #portrait{display:none}
+
+/* Growth has its own reading and decision surface, separate from character details. */
+#dialog.growth-workspace-dialog{width:min(1180px,calc(100vw - 32px));padding:24px;border-top:3px solid var(--ui-accent)}
+#dialog.growth-workspace-dialog #portrait,#dialog.growth-workspace-dialog #dialogKicker{display:none}
+#dialog.growth-workspace-dialog #dialogTitle{font-size:1.5rem;font-weight:700}
+#dialog.growth-workspace-dialog #dialogBody{max-height:66dvh;padding:0;white-space:normal}
+#dialog.growth-workspace-dialog[open]{display:flex;flex-direction:column;overflow:hidden}
+#dialog.growth-workspace-dialog .dialog-top{position:absolute;right:16px;top:16px;padding:0}
+#dialog.growth-workspace-dialog .dialog-heading{padding-right:60px;min-height:48px;margin:0 0 16px}
+#dialog.growth-workspace-dialog #dialogBody{flex:1;min-height:0;max-height:none}
+#dialog.growth-workspace-dialog #dialogActions{flex:none}
+#dialog.growth-workspace-dialog .growth-footer{width:100%;margin:0;padding:0;border:0}
+#dialog.growth-workspace-dialog #dialogActions:has(.growth-footer)>button{display:none}
+#dialog.growth-workspace-dialog #dialogActions .growth-footer>.primary{flex:2 1 200px}
+.growth-workspace{--growth-accent:#e7c477;min-width:0;white-space:normal}
+.growth-workspace[data-world=reality]{--growth-accent:#76d6e8}
+.growth-context{display:flex;gap:12px;align-items:center;flex-wrap:wrap;color:var(--ui-muted);padding:0 0 16px}
+.growth-context>button{margin-left:auto}.world-tag{display:inline-block;border:1px solid var(--ui-line);border-radius:6px;padding:4px 10px;color:var(--growth-accent);font-size:.875rem}
+.growth-sections{display:flex;gap:8px;padding:12px;background:var(--ui-panel);border-radius:10px;margin-bottom:16px}
+.growth-sections>button{flex:1}.growth-budget{font-weight:600;color:var(--growth-accent)}
+.growth-layout{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2fr);gap:24px}
+.growth-list{display:flex;flex-direction:column;gap:8px}.growth-detail{padding:24px;background:var(--ui-panel);border-radius:12px;min-width:0;border:1px solid var(--ui-line)}
+#dialog .growth-detail h3{font-size:1.5rem;color:var(--ui-text);margin:4px 0 16px}
+#dialog .growth-workspace button[aria-pressed=true]{border-color:var(--growth-accent);background:var(--ui-raised);color:var(--growth-accent);box-shadow:inset 4px 0 var(--growth-accent)}
+.passive-tree{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-top:16px}
+#dialog .passive-node{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;text-align:left;padding:16px;gap:8px;min-height:104px}
+.passive-node small{font-size:.875rem;color:var(--ui-muted);font-weight:400}.eyebrow{font-size:.875rem;color:var(--growth-accent);font-weight:600}
+.effect-description{font-size:1.125rem}.growth-values{display:grid;grid-template-columns:1fr auto 1fr;gap:8px 16px;margin:24px 0;padding:20px 0;border-block:1px solid var(--ui-line)}
+.growth-values>div{color:var(--ui-muted);font-size:.875rem}.growth-values>div:nth-of-type(1){grid-column:1;grid-row:1}.growth-values>div:nth-of-type(2){grid-column:3;grid-row:1}
+.growth-values>strong{font-size:1.5rem;line-height:1.4;overflow-wrap:anywhere;grid-row:2}.growth-values>strong:last-child{grid-column:3;color:var(--growth-accent)}.value-arrow{grid-row:2;grid-column:2;align-self:center}
+.growth-condition,.growth-execution-reason{padding:12px 16px;background:#182637;border-left:3px solid var(--growth-accent)}
+.growth-footer{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid var(--ui-line)}.growth-footer>.primary{flex:2}.growth-footer>button{flex:1}
+.growth-stage{padding:16px;border-left:2px solid var(--ui-line);color:var(--ui-muted)}.growth-stage.current{color:var(--growth-accent);border-color:var(--growth-accent);background:var(--ui-panel)}
+.growth-requirements{padding-left:24px}.growth-requirements li{padding:6px}.growth-requirements .met{color:#94dfc0}
+.growth-allocation{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.allocation-card{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px;border:1px solid var(--ui-line);border-radius:8px}.allocation-card strong,.allocation-card output,.allocation-card p{grid-column:1/-1}.allocation-card output{font-size:1.5rem;color:var(--growth-accent)}
+#dialog .growth-back{display:none}
+@media(max-width:700px){
+ #dialog.growth-workspace-dialog{width:calc(100vw - 16px);padding:12px}#dialog.growth-workspace-dialog #dialogBody{max-height:62dvh}
+ .growth-layout{display:block}.growth-workspace[data-detail=true] .growth-list{display:none}.growth-workspace[data-detail=false] .growth-detail{display:none}
+ #dialog .growth-back{display:block;margin-bottom:16px}.growth-detail{padding:16px}.growth-sections{padding:4px;gap:4px;flex-wrap:wrap}.growth-sections>button{flex:1 1 5rem;padding:8px!important}
+ .growth-values{grid-template-columns:1fr;gap:8px}.growth-values>*,.growth-values>div:nth-of-type(1),.growth-values>div:nth-of-type(2),.growth-values>strong:last-child{grid-column:1;grid-row:auto}.growth-values>strong{font-size:1.4rem}.value-arrow{transform:rotate(90deg);justify-self:center}
+ .growth-footer>button{flex:1 1 40%;min-width:0}.growth-footer>.primary{flex-basis:100%}.growth-allocation{grid-template-columns:1fr}.growth-context>button{margin-left:0}.growth-stage{display:inline-block;padding:8px}
+}
+/* Semantic text hierarchy: retain explicit labels as well as color. */
+#dialog #dialogTitle,#dialog .growth-detail h3{color:var(--ui-accent)}
+#dialog h4,#dialog .dungeon-detail h3{color:var(--ui-label)}
+#dialog .effect-description{color:var(--ui-text)}
+#dialog .growth-values>strong,#dialog .character-screen .stat-grid b,#dialog .allocation-card output{color:var(--ui-value)}
+#dialog .growth-values>strong:last-child{color:var(--ui-success)}
+#dialog .growth-budget{color:var(--ui-value)}
+#dialog .growth-condition,#dialog .growth-execution-reason,#dialog .growth-requirements li{color:var(--ui-condition)}
+#dialog .growth-requirements li.met{color:var(--ui-success)}
+#dialog .growth-values>div,#dialog .character-screen .stat-grid>div{color:var(--ui-label)}
+#dialog .growth-context,#dialog .passive-node small,#dialog .stat-origin,#dialog .dungeon-status{color:var(--ui-muted)}
+#dialog .dungeon-error{color:var(--ui-danger)}
+#game #objectiveTarget{color:var(--ui-accent)}
+#game #objectiveHint{color:var(--ui-label)}

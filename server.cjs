@@ -7,7 +7,7 @@ function createServer({artReview=false}={}){
  const Art=require('./art-loader.js'),allowed=new Set([...assets,'art-loader.js','assets/art/manifest.json']);
  for(const name of ['save-slots','world-growth','world-achievements','reality-skills','world-reports','personal-news','save-v10','world-game'])allowed.add(name+'.js');
  for(const file of ['character-ui.js','development-ui.js','news-ui.js','world-growth.css'])allowed.add(file);
- allowed.add('encounter-director.js');
+ allowed.add('encounter-director.js');for(const file of ['passive-growth.js','advancement.js','cycle-one.js','growth-screen.js','overseer-art.js'])allowed.add(file);
  for(const file of ['dungeon-entry.js','dungeon-ui.js','combat-audio.js','combat-events.js','audio-ui.js'])allowed.add(file);
  for(const file of ['controls.js','revision.js','progression.js','martial-tree.js','contract-ui.js','progression-ui.js','progression.css','intro-ui.js','growth-ui.js','revision.css',...['signal','stone','return','report','compare'].map(id=>'assets/art/intro/'+id+'.webp')])allowed.add(file);
   for(const name of ['chapter-seven.js','dual-breath.js','later-story-data.js','chapter-six.js','growth-model.js','dialogue-data.js','dialogue-ui.js','quest-data.js','economy.js','save-v9.js','objective-model.js','objective-ui.js','feedback-two.css'])allowed.add(name);

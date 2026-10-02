@@ -29,7 +29,7 @@
   function active(g){return g.trial?.path||g.fate.path;}
   function info(g,a){if(!names.includes(a))return null;const p=active(g),i=names.indexOf(a),s=p?PATHS[p].skills[i]:['미완성 기연','?',0,0,'비경에서 자신의 기연을 발견하세요.'];return {name:s[0],glyph:s[1],cost:s[2],cool:s[3],description:s[4],need:0,key:['Q','R','F'][i],locked:!p||(a==='ultimate'&&(!g.fate.path||!!g.trial)),path:p};}
   function entry(g){reset(g);}
-  function note(g,path){g.fate.feats[path]=Math.min(999999,g.fate.feats[path]+1);g.fate.focus=Math.min(100,g.fate.focus+20);if(g.trial?.path===path&&!g.trial.feat){g.trial.feat=true;g.toast('기연의 호흡을 증명했습니다! 이제 시험 잔상을 제압하세요.');}}
+  function note(g,path){if(g.advancementTrial){g.fate.focus=Math.min(100,g.fate.focus+20);return;}g.fate.feats[path]=Math.min(999999,g.fate.feats[path]+1);g.fate.focus=Math.min(100,g.fate.focus+20);if(g.trial?.path===path&&!g.trial.feat){g.trial.feat=true;g.toast('기연의 호흡을 증명했습니다! 이제 시험 잔상을 제압하세요.');}}
   function strike(g,e,amount,source='signature',cast=null){return g.strike(e,Math.round(g.stats().attack*amount),source,cast);}
   function targets(g,origin,radius){return g.enemies.filter(e=>e.hp>0&&dist(e,origin)<=radius+e.r&&g.lineClear(origin,e));}
   function areaHit(g,origin,radius,mult,source='signature',cast=null){let n=0;for(const e of targets(g,origin,radius))if(strike(g,e,mult,source,cast)>0)n++;return n;}
@@ -95,7 +95,7 @@
     return damage;
   }
   function act(g,action){
-    const k=info(g,action),p=g.player,path=active(g),c=g.combat;if(!k||k.locked||p.hp<=0||p.cool[action]>0||p.mp<k.cost)return false;
+    const base=info(g,action),k=base&&g.paidSkillCost?{...base,cost:g.paidSkillCost(action,base.cost)}:base,p=g.player,path=active(g),c=g.combat;if(!k||k.locked||p.hp<=0||p.cool[action]>0||p.mp<k.cost)return false;
     if(action==='ultimate'&&g.fate.focus<100)return false;
     if(path==='echo'&&action==='signature2'&&(!c.echo||!g.lineClear(p,c.echo)||g.blocked(c.echo.x,c.echo.y,p.r)))return false;
     p.mp-=k.cost;p.cool[action]=k.cool;p.swing=.3;

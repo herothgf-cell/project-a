@@ -101,6 +101,7 @@
   }c.restore();
  }
  function human(c,e,t,kind='hero',scale=1){
+  if(root.OverseerArt?.human(c,e,t,kind,scale,current.world))return;
   if(modern()){if(['hero','warden','hunter','shop','master','yeonhwa'].includes(kind))uniform(c,e,t,kind,scale);else threat(c,e,t,kind,scale);return;}
   if(kind==='hero')robe(c,e,t,kind,scale);else previous.human(c,e,t,kind,scale);
  }
@@ -132,7 +133,7 @@
   c.beginPath();c.arc(0,0,r,a-sign*.85,a,sign<0);c.strokeStyle=col;c.lineWidth=grow?6:3;c.stroke();if(q>0){c.globalAlpha=k*.22;c.lineWidth=14;c.stroke();}
   c.globalAlpha=k*.75;line(c,[[Math.cos(a)*r,Math.sin(a)*r],[Math.cos(a)*r*.57,Math.sin(a)*r*.57]],'#fff8e8',2);c.restore();return true;
  }
- function portrait(canvas,kind){const visual=modern()&&['shop','yeonhwa','master'].includes(kind)?(kind==='shop'?'hunter':'warden'):kind;WuxiaArt.portrait(canvas,visual);canvas.dataset.portrait=kind;canvas.dataset.world=current.world;}
+ function portrait(canvas,kind){if(root.OverseerArt?.portrait(canvas,kind,current.world))return;const visual=modern()&&['shop','yeonhwa','master'].includes(kind)?(kind==='shop'?'hunter':'warden'):kind;WuxiaArt.portrait(canvas,visual);canvas.dataset.portrait=kind;canvas.dataset.world=current.world;}
  A.human=human;A.prop=prop;A.portal=portal;A.portrait=portrait;ClassicArt.terrain=terrain;
  root.RealmArt={begin,human,prop,portal,portrait,terrain,effect,pose:e=>P.pose(e,clock),worldStyle:P.worldStyle,ready:()=>sheet.complete&&sheet.naturalWidth>0};
  root.addEventListener('wuxia-assets-ready',()=>{groundCache.clear();buildingCache.clear();});
