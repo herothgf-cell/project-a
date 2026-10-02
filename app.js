@@ -1,6 +1,7 @@
 /* Browser adapter: input lifecycle, modal flow, save migration, and readable HUD. */
 (function(){
   'use strict';
+  CombatEvents.install(globalThis.WorldGame.Game,{worldOf:g=>WorldGrowth.worldOf(g)});
   const {Game,AREAS,QUESTS,SKILLS,VERSION,dist,Fate,Legend}=globalThis.WorldGame||DualWorld;
   const $=id=>document.getElementById(id),devMode=globalThis.SSANGGYE_DEV===true&&['localhost','127.0.0.1','[::1]'].includes(location.hostname),SAVE=devMode?SaveSlots.keys.test:SaveSlots.keys.current,BACKUP=devMode?null:SaveSlots.keys.backup;
   const dialog=$('dialog'),renderer=new WorldRenderer($('canvas'),$('mini'));
@@ -9,8 +10,13 @@
   const perfHud=perfEnabled?document.createElement('pre'):null;
   if(perfHud){perfHud.id='perfHud';perfHud.setAttribute('aria-label','성능 진단');perfHud.style.cssText='position:fixed;top:8px;right:8px;z-index:1000;max-width:calc(100vw - 16px);margin:0;padding:8px 10px;background:#101e24e8;color:#f3e5be;border:1px solid #d0bb7b;font:11px/1.4 monospace;white-space:pre-wrap;pointer-events:none;';$('game').append(perfHud);}
   let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0,lastPerfHud=0;
-  let sound=false,audio=null,bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
+  let bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
   let dialogueUI=null,journeyUI=null,realmUI=null,growthUI=null,introUI=null,contractUI=null,progressionUI=null,characterUI=null,newsUI=null;
+  const audio=CombatAudio.create({storage:{getItem:key=>localStorage.getItem(key),setItem:(key,value)=>localStorage.setItem(key,value)}});
+  let audioUI=null,dungeonUI=null,objectiveUI=null;
+  const viewMemory=new Map();let currentView=null,uiSoundId=0;
+  document.addEventListener('click',event=>{const button=event.target.closest?.('button');if(button&&!button.disabled&&!button.dataset.action&&!button.closest('.audio-previews'))audio.play({kind:'ui',castId:'ui-'+(++uiSoundId),world:WorldGrowth.worldOf(g)});});
+  document.addEventListener('pointerdown',()=>audio.unlock(),{capture:true});document.addEventListener('keydown',()=>audio.unlock(),{capture:true});
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
   const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=Controls.format(text);return e;};
   const artReady=()=>{if(!globalThis.ArtPreview)return !document.documentElement.hasAttribute('data-art-loading');return globalThis.ArtPreview.ensureWorld?.(AREAS[g.area].world==='현실'?'reality':'murim')===true;};
@@ -20,7 +26,7 @@
   function toast(text){const e=node('div','toast',text);$('toasts').append(e);while($('toasts').children.length>3)$('toasts').firstChild.remove();setTimeout(()=>e.remove(),3000);}
   function inspectSave(){
     resume=null;hasSave=false;$('titleError').textContent='';
-    try{const raw=localStorage.getItem(SAVE);hasSave=raw!==null;if(raw!==null)resume=Game.load(raw);}
+    try{const raw=localStorage.getItem(SAVE);hasSave=raw!==null;if(raw!==null){resume=Game.load(raw);if(!devMode&&JSON.parse(raw).improvementVersion===undefined){try{const key=SAVE+'.before-v11';if(localStorage.getItem(key)===null)localStorage.setItem(key,raw);}catch{saveWarning=true;$('titleError').textContent='이전 기록 백업을 저장하지 못했습니다. 저장 공간을 확인하거나 기록을 내려받으세요.';}}}}
     catch(error){$('titleError').textContent='저장 데이터를 읽을 수 없습니다. 기존 데이터는 유지됩니다. 새 여정은 확인 후 시작합니다.';}
     $('continue').hidden=!resume;$('start').className=resume?'secondary':'primary';
     if(!$('legacyOptions')){const box=node('div');box.id='legacyOptions';const link=node('a','','v0.11.0 보관판 열기');link.href='legacy/v011/';box.append(link);try{const raw=SaveSlots.read(localStorage,SaveSlots.keys.legacyOriginal);if(raw!==null){box.append(node('p','','이전 기록은 보관됩니다. 개편판은 별도 여정으로 시작합니다.'));const b=node('button','secondary','이전 기록 원문 다운로드');b.onclick=()=>exportSave(raw,'ssanggye-v011-original.json');box.append(b);}}catch{}$('titleError').after(box);}
@@ -31,8 +37,12 @@
     try{localStorage.setItem(SAVE,g.save());$('save').textContent='저장됨';hasSave=true;lastSave=performance.now();}
     catch(error){$('save').textContent='저장 불가';if(!saveWarning){toast('자동 저장 불가 · 메뉴에서 저장 파일을 내려받으세요.');saveWarning=true;}}
   }
-  function closeDialog(){if(introUI?.active)return introUI.resume();if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker,next.result);}}
+  function closeDialog(){audio.clear();if(introUI?.active)return introUI.resume();if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker,next.result);}}
   function show(title,body,actions=[{label:'계속하기'}],portrait='system',kicker='쌍계 · 이야기',result=null){
+    audio.clear();
+    if(currentView)viewMemory.set(currentView,{scroll:$('dialogBody').scrollTop});
+    currentView=typeof body==='string'?null:title;
+    if(body?.classList&&!body.classList.contains('intro-scene')&&!body.classList.contains('speaker-scene')){const nav=node('nav','app-navigation');nav.setAttribute('aria-label','주 메뉴');for(const [label,run]of [['캐릭터',()=>characterUI.open()],['임무',()=>objectiveUI.open()],['기록',()=>openRecords()],['설정',()=>menu()]]){const b=node('button','secondary',label);b.onclick=run;nav.append(b);}body.prepend(nav);}
     if(typeof body==='string'&&dialogueUI){const scenes=DialogueData.lookup(title,body,portrait);if(scenes)return dialogueUI.open({id:title,title,scenes,result,actions});}
     dialog.classList.toggle('intro-dialog',!!body?.classList?.contains('intro-scene'));dialog.classList.toggle('growth-dialog',!!body?.classList?.contains('growth-screen'));
     RealmArt.begin(g);clearInput();dialog.classList.toggle('story-dialog',typeof body==='string'&&portrait!=='system'&&!kicker.includes('일시정지'));dialog.classList.toggle('news-dialog',!!body?.classList?.contains('realm-news'));dialog.classList.toggle('help-dialog',!!body?.classList?.contains('realm-help-sheet'));dialog.classList.toggle('legend-offer',kicker.includes('발현')||kicker.includes('각성'));$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
@@ -40,7 +50,7 @@
     WorldArt.portrait($('portrait'),portrait);$('dialogActions').replaceChildren();
     actions.forEach(a=>{const b=node('button',a.secondary?'secondary':a.danger?'danger':'primary',a.label);b.disabled=!!a.disabled;b.addEventListener('click',()=>{queued=[];if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(a.run)a.run();});$('dialogActions').append(b);});
     $('closeDialog').hidden=!!introUI?.active;
-    if(!dialog.open)dialog.showModal();dialog.scrollTop=0;$('dialogBody').scrollTop=0;
+    if(!dialog.open)dialog.showModal();dialog.scrollTop=0;$('dialogBody').scrollTop=viewMemory.get(currentView)?.scroll||0;
     ($('dialogActions').querySelector('button:not(:disabled):not(.danger)')||$('closeDialog')).focus({preventScroll:true});
   }
   function legendOffer(event){
@@ -92,9 +102,9 @@
   }
   function start(load=false){
     backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
-    if(!load){g.beginIntro(true);introUI.start();persist();}
+    audio.clear();viewMemory.clear();currentView=null;if(!load){g.beginIntro(true);introUI.start();persist();}
     else if(g.introActive)introUI.resume();
-    else toast('안전한 거점에서 이어갑니다. 기존 성장과 무공을 유지했습니다.');
+    else toast(g.restoreNotice||'저장한 위치와 진행에서 이어갑니다.');
   }
   function newGame(){if(hasSave)show('새로운 여정을 시작할까요?','현재 진행을 새 저장으로 교체합니다. 이전 저장은 브라우저의 백업 항목에도 보관합니다.\n\n기존 여정은 이어하기로 계속할 수 있습니다.',[{label:'취소',secondary:true},{label:'새로 시작',danger:true,run:()=>{backup(true);start(false);}}],'system','저장 데이터 확인');else start(false);}
   function grid(items){const e=node('div','stat-grid');for(const [label,value]of items){const b=node('div','',label);b.append(node('b','',String(value)));e.append(b);}return e;}
@@ -122,23 +132,21 @@
   function importSave(){
     show('저장 파일 불러오기','파일 선택 중에는 게임이 멈춥니다. 선택을 취소했다면 돌아가기를 누르세요.',[{label:'돌아가기'}],'system','저장 데이터');
     const input=node('input');input.type='file';input.accept='.json,application/json';input.addEventListener('change',async()=>{
-      const file=input.files?.[0];if(!file)return;if(file.size>32768){show('불러오지 못했습니다','저장 파일 크기가 너무 큽니다. 현재 진행은 유지됩니다.');return;}
+      const file=input.files?.[0];if(!file)return;if(file.size>500000){show('불러오지 못했습니다','저장 파일 크기가 너무 큽니다. 현재 진행은 유지됩니다.');return;}
       try{const loaded=Game.load(await file.text());show('이 여정을 불러올까요?',`Lv.${loaded.level} · ${QUESTS[loaded.progress][0]}\n현재 진행이 선택한 저장으로 교체됩니다.`,[{label:'취소',secondary:true},{label:'불러오기',run:()=>{backup(true);g=loaded;renderer.area=null;persist();update();toast('저장한 거점에서 이어갑니다.');}}]);}
       catch(error){show('불러오지 못했습니다','손상되었거나 지원하지 않는 저장 파일입니다. 현재 진행은 변경되지 않았습니다.');}
     });input.click();
   }
   function help(){show('첫 여정을 위한 안내','WASD / 방향키: 이동\nJ / 공격 버튼 길게 누르기: 연환검\nK: 월영참 · L: 천뢰격\nSpace / Shift: 회피 · 짧은 무적\nE: 대화 / 출입구 이동 · 1: 회복약\nQ / R: 기연 무공 · F: 오의 (기세 100)\nB: 기감 · N: 관찰 수첩/성장\nI: 무공과 장비 · M: 지도 · Esc: 메뉴\n\n모바일에서는 왼쪽 조이스틱으로 이동하면서 오른쪽 공격과 무공을 함께 누를 수 있습니다.\n\n붉은 원은 적의 공격 예고입니다. 원 밖으로 피하거나 회피의 무적으로 넘기세요. 호위와 봉인을 해제해야 보스의 보호막이 사라집니다.');}
+  function openRecords(){const body=node('section','records-screen');body.append(node('p','','직접 발견한 사실과 귀환 성과를 확인합니다.'));for(const [label,run]of [['내 소식',()=>newsUI.open()],['관찰 수첩',()=>journeyUI.open('facts')],['행적',()=>historyUI.open('history')]]){const b=node('button','secondary',label);b.onclick=run;body.append(b);}show('기록',body,[{label:'돌아가기',secondary:true}]);}
   function menu(){
     if(introUI?.active)return introUI.resume();
-    if(!active)return;const actions=[{label:'계속하기'},{label:'나의 기연 도감',secondary:true,run:fateJournal},{label:'관찰 수첩 · 성장',secondary:true,run:()=>journeyUI.open()},{label:'조작 안내',secondary:true,run:help},{label:'지역 지도',secondary:true,run:map},{label:'저장 파일 다운로드',secondary:true,run:()=>exportSave()},{label:'저장 파일 불러오기',secondary:true,run:importSave},{label:renderer.reduced?'화면 효과 켜기':'화면 효과 줄이기',secondary:true,run:()=>{renderer.reduced=!renderer.reduced;menu();}}];
+    if(!active)return;const actions=[{label:'계속하기'},{label:'소리 설정',secondary:true,run:()=>audioUI.open()},{label:'조작 안내',secondary:true,run:help},{label:'지역 지도',secondary:true,run:map},{label:'저장 파일 다운로드',secondary:true,run:()=>exportSave()},{label:'저장 파일 불러오기',secondary:true,run:importSave},{label:renderer.reduced?'화면 효과 켜기':'화면 효과 줄이기',secondary:true,run:()=>{renderer.reduced=!renderer.reduced;menu();}}];
     actions.push({label:'이펙트 품질: '+['낮음','보통','높음'][renderer.quality]+(renderer.autoLow?' (자동 절약)':''),secondary:true,run:()=>{renderer.quality=(renderer.quality+1)%3;renderer.autoLow=false;renderer.slowFrames=0;menu();}});
     if(!AREAS[g.area].safe)actions.push({label:'거점으로 후퇴',secondary:true,run:()=>show('거점으로 돌아갈까요?','무공과 이야기 진행은 유지됩니다.\n다시 입장하면 호위와 아직 완료하지 않은 봉인 공략을 처음부터 시작합니다.',[{label:'취소',secondary:true},{label:'후퇴하기',run:()=>{g.retreat();processEvents();persist();update();}}])});
     else actions.push({label:'보급',secondary:true,run:shop});
     actions.push({label:'입력 설정',secondary:true,run:controlSettings},{label:'인트로 다시 보기',secondary:true,run:()=>introUI.start(true)},{label:'타이틀로',secondary:true,run:()=>{persist();active=false;progressionUI?.clear();clearInput();$('game').hidden=true;$('title').hidden=false;inspectSave();WorldArt.cover($('cover'));}});
-    show('잠시, 호흡을 고르다',`Lv.${g.level} · ${AREAS[g.area].name}\n${g.objective().title}\n\n메뉴와 대화가 열려 있는 동안 전투가 멈춥니다.`,actions,'hero','일시정지 · v'+VERSION);
-  }
-  function playSound(name){
-    if(!sound)return;try{if(!audio){const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio)return;audio=new Audio();}if(audio.state==='suspended')audio.resume();const osc=audio.createOscillator(),gain=audio.createGain(),f={slash:220,skill:520,dash:160,hurt:105,reward:780,heal:620,ripple:145,echo:740,seal:385,ultimate:98,parry:185}[name]||330;osc.type=name==='slash'?'triangle':'sine';osc.frequency.setValueAtTime(f,audio.currentTime);osc.frequency.exponentialRampToValueAtTime(f*.5,audio.currentTime+.12);gain.gain.setValueAtTime(.025,audio.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.16);osc.connect(gain);gain.connect(audio.destination);osc.start();osc.stop(audio.currentTime+.17);}catch(error){sound=false;}
+    const body=node('section','settings-screen');body.append(node('p','',`Lv.${g.level} · ${AREAS[g.area].name}`),node('p','','화면과 소리, 입력, 저장을 설정합니다.'));const options=node('div','settings-options');for(const action of actions.slice(1)){const b=node('button','secondary',action.label);b.onclick=()=>{if(dialog.open)dialog.close();clearInput();action.run?.();};options.append(b);}body.append(options);show('설정',body,[actions[0]],'hero','일시정지 · v'+VERSION);
   }
   function processEvents(){
     for(const e of g.events.splice(0)){
@@ -146,7 +154,7 @@
       if(e.type==='level-up'){progressionUI?.level(e);persist();}
       if(e.type==='contract-complete'){show(e.title,e.text,[{label:'기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}},{label:'조금 더 둘러보기',secondary:true}]);persist();}
       if(e.type==='interpretation'){journeyUI.offer(e);persist();}
-      if(e.type==='toast')toast(e.text);if(e.type==='sound')playSound(e.name);
+      if(e.type==='toast')toast(e.text);if(e.type==='combat-sound'&&(!dialog.open||e.kind==='attain'))audio.play(e);if(e.type==='audio-clear')audio.clear();
       if(e.type==='area'){clearInput();$('toasts').replaceChildren();if(g.area==='archive'&&!g.journey.known.length)toast('처음이라면 도움말 H · 기감 B → 가까이 E 조사 → 수첩 N');$('areaBanner').querySelector('small').textContent=g.presentationTravel?.from!==g.presentationTravel?.to?g.presentationTravel.from+' → '+g.presentationTravel.to:'['+AREAS[g.area].world+'] 지역 이동';$('areaBanner').querySelector('strong').textContent=e.text;$('areaBanner').classList.add('show');clearTimeout(bannerTimer);bannerTimer=setTimeout(()=>$('areaBanner').classList.remove('show'),1800);persist();}
       if(e.type==='manifestation'){
         clearTimeout(bannerTimer);$('areaBanner').classList.remove('show');$('ultimateBanner').querySelector('small').textContent='이름 없는 발현';$('ultimateBanner').querySelector('strong').textContent=e.title;$('ultimateBanner').style.setProperty('--fate-color',Fate.PATHS[e.path].color);$('ultimateBanner').classList.add('show');clearTimeout(ultimateTimer);ultimateTimer=setTimeout(()=>$('ultimateBanner').classList.remove('show'),2100);toast(e.text.replace('\n',' · '));persist();
@@ -155,7 +163,7 @@
       if(['transfer','victory','defeat','dialog','awakening','trial-complete','legend-ready'].includes(e.type)){story(e);if(e.inheritance)progressionUI?.inherit(e);persist();}
     }
   }
-  function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
+  function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='dungeon-select')dungeonUI.open();if(result?.type==='seven-preparation')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{g.chooseSevenPreparation(choice.id);processEvents();persist();update();}})),'warden','공동 대응 준비');if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
   function act(action){
     if(!running())return;const k=g.skillInfo(action);if(!k)return;
     if(!g.act(action)){
@@ -208,8 +216,8 @@
   $('start').addEventListener('click',newGame);$('continue').addEventListener('click',()=>start(true));$('menu').addEventListener('click',menu);$('inventory').addEventListener('click',inventory);$('journal').addEventListener('click',journal);$('mapBtn').addEventListener('click',map);$('interact').addEventListener('click',interact);$('potion').addEventListener('click',()=>act('potion'));$('closeDialog').addEventListener('click',closeDialog);
   // Clear synchronously at every close/cancel path. Native close is queued and
   // must not erase a fresh movement key pressed after the dialog disappeared.
-  dialog.addEventListener('cancel',e=>{queued=[];clearInput();if(introUI?.active){e.preventDefault();introUI.resume();}});
-  $('sound').addEventListener('click',()=>{sound=!sound;$('sound').textContent=sound?'♫':'♪';$('sound').setAttribute('aria-label',sound?'소리 끄기':'소리 켜기');playSound('reward');});
+  dialog.addEventListener('cancel',e=>{audio.clear();queued=[];clearInput();if(introUI?.active){e.preventDefault();introUI.resume();}});
+  $('sound').addEventListener('click',()=>audioUI.open());$('sound').setAttribute('aria-label','소리 설정');
   $('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('game').requestFullscreen();}catch(error){toast('이 브라우저에서는 전체 화면을 지원하지 않습니다.');}});
   function controlSettings(){
     const body=node('section','control-settings');
@@ -242,7 +250,7 @@
   for(const name of ['pointerup','pointercancel','lostpointercapture'])stick.addEventListener(name,e=>{if(e.pointerId===joyId){joyId=null;joy={x:0,y:0};stick.querySelector('i').style.transform='';}});
   $('canvas').addEventListener('pointerdown',e=>{if(!running()||e.pointerType==='touch')return;e.preventDefault();if(e.button===0){$('canvas').setPointerCapture(e.pointerId);held.add(e.pointerId);const r=$('canvas').getBoundingClientRect();g.player.face=Math.atan2((e.clientY-r.top)/renderer.zoom+renderer.camera.y-g.player.y,(e.clientX-r.left)/renderer.zoom+renderer.camera.x-g.player.x);act('attack');}if(e.button===2)act('dash');});
   for(const name of ['pointerup','pointercancel','lostpointercapture'])$('canvas').addEventListener(name,e=>held.delete(e.pointerId));$('canvas').addEventListener('contextmenu',e=>e.preventDefault());
-  window.addEventListener('blur',clearInput);document.addEventListener('visibilitychange',()=>{clearInput();persist();lastFrame=performance.now();});window.addEventListener('pagehide',persist);
+  window.addEventListener('blur',()=>{clearInput();audio.clear();});document.addEventListener('visibilitychange',()=>{clearInput();audio.clear();persist();lastFrame=performance.now();});window.addEventListener('pagehide',persist);
   new ResizeObserver(()=>{renderer.resize();if(!$('title').hidden)WorldArt.cover($('cover'));}).observe($('playArea'));window.addEventListener('resize',()=>{clearInput();renderer.resize();if(!$('title').hidden)WorldArt.cover($('cover'));});
   function frame(now){
     const elapsed=now-lastFrame,dt=Math.min(elapsed/1000,.05);lastFrame=now;
@@ -260,13 +268,16 @@
   introUI=IntroUI.create({game:()=>g,setGame:value=>{g=value;renderer.area=null;progressionUI?.clear();clearInput();},show,node,refresh:()=>{processEvents();persist();update();}});
   const refreshGrowth=()=>{processEvents();persist();update();};
   const historyUI=GrowthUI.create({game:()=>g,show,node,grid,close:closeDialog,refresh:refreshGrowth,notes:journeyUI,shop,route:tab=>tab==='status'?characterUI.open():growthUI.open('skills')});
-  characterUI=CharacterUI.create({game:()=>g,show,node,grid,refresh:refreshGrowth});
+  characterUI=CharacterUI.create({game:()=>g,show,node,grid,refresh:refreshGrowth,openSection:section=>growthUI.open(section)});
   newsUI=NewsUI.create({game:()=>g,show,node,refresh:refreshGrowth,openDestination:item=>item.section==='status'?characterUI.open('reality'):growthUI.open(item.section,item.subject)});
   growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI});
   const character=node('button'),hudPortrait=$('hudPortrait');character.id='character';character.type='button';character.setAttribute('aria-label','캐릭터 상태');hudPortrait.replaceWith(character);character.append(hudPortrait);character.onclick=()=>characterUI.open();
   const newsButton=node('button','icon-button','소식');newsButton.id='personalNews';newsButton.onclick=()=>newsUI.open();document.querySelector('.header-actions').prepend(newsButton);
   progressionUI=ProgressionUI.create({node});
   // Repeatable contracts remain in the isolated archive only.
-  ObjectiveUI.create({game:()=>g,node,show,refresh:()=>{clearInput();update();}});
+  objectiveUI=ObjectiveUI.create({game:()=>g,node,show,openMap:map,refresh:()=>{clearInput();update();}});
+  audioUI=AudioUI.create({audio,show,node});
+  dungeonUI=DungeonUI.create({game:()=>g,node,show,refresh:refreshGrowth,close:closeDialog,isOpen:()=>dialog.open,prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
+  const mainNav=node('nav','main-navigation');mainNav.setAttribute('aria-label','주 메뉴');for(const [label,run]of [['캐릭터',()=>characterUI.open()],['임무',()=>objectiveUI.open()],['기록',openRecords],['설정',menu]]){const b=node('button','secondary',label);b.onclick=run;mainNav.append(b);}document.querySelector('header').append(mainNav);
   inspectSave();WorldArt.cover($('cover'));WorldArt.portrait($('hudPortrait'),'hero');update();requestAnimationFrame(frame);
 })();

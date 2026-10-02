@@ -58,7 +58,7 @@
       for(const b of scene.decorations)objects.push({y:b.y,draw:()=>b.kind==='production-foreground'?WorldArt.foreground?.(c,b):bamboo(c,b.x,b.y,b.scale,t)});
       for(const o of (g.points?g.points():a.points).filter(o=>root.JourneyRules?JourneyRules.visiblePoint(g,o):!root.ChronicleRules||ChronicleRules.visiblePoint(g,o)))objects.push({y:o.y,draw:()=>{
         const selected=target?.id===o.id,near=dist(o,p)<230;
-        if(['portal','gate','exit','fate-gate','story-gate','journey-gate','later-gate'].includes(o.kind))portal(c,o,t,a.theme,o.need>g.progress);
+        if(['portal','gate','exit','fate-gate','story-gate','journey-gate','later-gate','dungeon-entry'].includes(o.kind))portal(c,o,t,a.theme,o.need>g.progress);
         else if(['discovery','experiment','later-device'].includes(o.kind)&&root.JourneyArt)JourneyArt.prop(c,o,t);
         else if(['mechanism','story-clue'].includes(o.kind)&&root.WuxiaArt)WuxiaArt.mechanism(c,o,t);
         else if(o.kind==='relic')FateArt.relic(c,o,t,g.fate.proven.includes(o.path));

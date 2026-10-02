@@ -6,9 +6,12 @@
   for(const k of g.journey.known)add('interpret:'+k,'skills',k,'새 무공 해석','무공에서 해석의 효과를 확인하고 직접 장착하세요.');
   if(g.training>0)add('mode:unlocked','growth','mode','심법과 현실 운용 개방','성장에서 유수·집중 심법과 현실 회복·집중 운용을 선택할 수 있습니다.');
   if(realmReady(g)||g.journey.realm)add('realm:ready','growth','realm','첫 경지 돌파 가능','무림 거점의 성장 화면에서 조건을 확인하고 직접 돌파하세요.');
-  if(g.laterStory?.dualBreath)add('mode:dual','growth','mode','쌍계 호흡 완성','서로 다른 계열의 실제 효과를 연결해 적의 재생을 끊습니다.');
+  if(g.laterStory?.dualBreath)add('mode:dual','growth','mode','심법 심화 달성','서로 다른 계열의 실제 효과를 연결해 적의 재생을 끊습니다.');
   for(const f of g.worldState.reality?.settled||[])add('response:'+f,'skills',f,'현실 대응 정착','무림의 원리를 현실의 몸으로 실제 사용했습니다.');
-  for(const r of g.worldState.achievements?.results||[])add('return:'+r.id,r.unlocked?'skills':'status',r.unlocked||r.id,'귀환 성과 · '+(r.unlocked?names[r.unlocked]+'의 현실 대응':r.id),'체력 '+r.before.hp+' → '+r.after.hp+' · 자원 '+r.before.mp+' → '+r.after.mp+' · 공격력 '+r.before.attack+' → '+r.after.attack+(r.unlocked?'\n무공에서 현실 대응을 선택해 장착하세요.':''));
+  if(g.worldState.reports?.reported.includes('first-response'))add('role:first-response','status','role','초동 대응자 · 현장 성과 인정','기연 귀환 후 현실 위협을 제압하고 서린에게 보고했습니다. 기지에서 1회 회복약 보급을 받습니다. 공식 헌터 등급은 E급입니다.');
+  if(g.worldState.reports?.reported.includes('yeonhwa-rescued'))add('role:rescue','status','role','핵심 수행자 · 구조 성과 보고','직접 확인한 구조 결과를 전했습니다. 기지 보급과 후속 공동 조사로 이어집니다.');
+  if(g.laterStory?.six===5)add('role:joint','status','role','공동 대응 제안자','7장 준비에서 대피 통로 또는 정예 차단을 선택하면 현재 전장의 조건이 바뀝니다.');
+  for(const r of g.worldState.achievements?.results||[])add('return:'+r.id,r.unlocked?'skills':'status',r.unlocked||r.id,'귀환 성과 · '+(r.unlocked?names[r.unlocked]+'의 현실 대응':r.id==='inherit:first'?'첫 기연의 신체 성장':r.id),'체력 '+r.before.hp+' → '+r.after.hp+' · 자원 '+r.before.mp+' → '+r.after.mp+' · 공격력 '+r.before.attack+' → '+r.after.attack+(r.unlocked?'\n무공에서 현실 대응을 선택해 장착하세요.':''));
   return out;
  }
  function publish(g,item){if(!catalog(g).some(x=>x.id===item.id)||JSON.stringify(item).length>2048)throw Error('허용되지 않은 소식');const s=g.worldState.news;if(s.items.some(x=>x.id===item.id))return false;s.items.push({id:item.id,at:g.playTime,read:false});return true;}

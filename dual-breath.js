@@ -2,11 +2,11 @@
  'use strict';const {Game,Fate,dist}=api,P=Game.prototype,old=Object.fromEntries(['act','strike','takeHit','enter','setBreath','skillInfo'].map(k=>[k,P[k]]));
  const reset=g=>(g.dualRuntime={serial:0,cast:null,last:null,discount:0,opening:0,seen:new Set(),guard:null});const runtime=g=>g.dualRuntime||reset(g);
  function status(g){const r=runtime(g);return {discount:r.discount,opening:Math.max(0,r.opening-g.playTime)};}
- function valid(g,e,c){return g.laterStory?.dualBreath&&c?.manual&&!g.trial&&e&&!e.trial&&!e.residual&&g.enemies.includes(e)&&!(e.boss&&g.bossLocked());}
- function contact(g,e,c){if(!valid(g,e,c))return;const r=runtime(g),key=c.id+':'+c.family;if(r.seen.has(key))return;r.seen.add(key);if(r.seen.size>128)r.seen.delete(r.seen.values().next().value);
-  if(g.journey.breath==='flow'){if(r.last&&r.last.family!==c.family&&g.playTime-r.last.at<=(g.dualAssist?8:4)){r.discount=6;e.dualSuppressedUntil=g.playTime+6;g.onDualLink?.(e);g.toast('쌍계 호흡 · 다음 유료 무공 내력 -6');}r.last={family:c.family,at:g.playTime};}
-  else if(c.family==='sword'&&c.action==='attack'&&c.focus){r.opening=g.playTime+(g.dualAssist?8:4);g.toast('쌍계 호흡 · 재생의 틈이 드러났습니다.');}
-  else if(c.family!=='sword'&&r.opening>g.playTime){r.opening=0;e.dualSuppressedUntil=g.playTime+6;g.onDualLink?.(e);g.toast('쌍계 호흡 · 재생 6초 정지');}
+ function valid(g,e,c){return (g.laterStory?.dualBreath||g.worldGrowth&&g.laterStory?.deepening?.stage==='trial'&&g.area==='stabilization')&&c?.manual&&!g.trial&&e&&!e.trial&&(!e.residual||e.deepeningExercise)&&g.enemies.includes(e)&&!(e.boss&&g.bossLocked());}
+ function contact(g,e,c){if(!valid(g,e,c))return;if(g.worldGrowth&&!g.laterStory?.dualBreath&&c.family!=='sword'&&!['absorb','counter','evade','pursuit','suppress','weakness'].includes(c.effect))return;const r=runtime(g),key=c.id+':'+c.family;if(r.seen.has(key))return;r.seen.add(key);if(r.seen.size>128)r.seen.delete(r.seen.values().next().value);
+  if(g.journey.breath==='flow'){if(r.last&&r.last.family!==c.family&&g.playTime-r.last.at<=(g.dualAssist?8:4)){r.discount=6;e.dualSuppressedUntil=g.playTime+6;g.onDualLink?.(e);g.toast('연계 강화 · 다음 유료 무공 내력 -6');}r.last={family:c.family,at:g.playTime};}
+  else if(c.family==='sword'&&c.action==='attack'&&c.focus){r.opening=g.playTime+(g.dualAssist?8:4);g.toast('연계 강화 · 재생의 틈이 드러났습니다.');}
+  else if(c.family!=='sword'&&r.opening>g.playTime){r.opening=0;e.dualSuppressedUntil=g.playTime+6;g.onDualLink?.(e);g.toast('연계 강화 · 재생 6초 정지');}
  }
  P.skillInfo=function(action){const info=old.skillInfo.call(this,action);return info&&this.laterStory?.dualBreath&&runtime(this).discount&&info.cost>0?{...info,cost:Math.max(1,info.cost-6)}:info;};
  P.act=function(action,held=false,...args){const r=runtime(this),p=this.player,info=old.skillInfo.call(this,action),paid=['moon','storm','signature1','signature2'].includes(action)&&info?.cost>0,discount=this.laterStory?.dualBreath&&paid?Math.min(r.discount,info.cost-1):0,beforeMp=p.mp;

@@ -1,0 +1,3 @@
+const test=require('node:test'),assert=require('node:assert/strict'),{inherited,talk,opponent}=require('./world-fixtures.cjs'),R=require('../world-reports.js');
+test('first response role requires field achievement and reporting; supplies only once',()=>{const g=inherited();assert.equal(R.role(g).id,'support');const e=opponent(g);e.boss=true;e.hp=0;R.onDefeat(g,e);assert.equal(R.role(g).id,'support');const p=g.potions;g.enter('city');talk(g,'warden');assert.equal(R.role(g).id,'first-response');assert.equal(g.potions,p+2);talk(g,'warden');assert.equal(g.potions,p+2);R.validate(g);});
+test('role supply claims require real report evidence',()=>{const g=inherited();R.state(g).supplies=['rescue'];assert.throws(()=>R.validate(g));});
