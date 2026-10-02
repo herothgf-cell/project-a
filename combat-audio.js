@@ -5,7 +5,7 @@
  const sounds={swing:[220,.10,1],skill:[360,.16,2],move:[510,.08,1],hit:[125,.095,1],heavy:[85,.18,2],telegraph:[680,.24,4],launch:[260,.14,3],hurt:[95,.19,3],block:[420,.13,3],absorb:[185,.22,3],evade:[760,.12,2],counter:[75,.24,2],pursuit:[290,.16,2],suppress:[330,.17,2],kill:[68,.22,2],link:[530,.2,2],attain:[620,.4,2],ui:[820,.055,0]};
  const success=new Set(['evade','counter','pursuit','suppress','kill','link','attain']);
  function create({storage,contextFactory,onUnavailable}={}){
-  let settings={master:1,music:1,combat:1,ui:1,muted:true},ctx=null,unlocked=false,reported=false,pendingUnlock=null,generation=0,serial=0,lastVariant=-1;
+  let settings={master:1,music:1,combat:1,ui:1,muted:false},ctx=null,unlocked=false,reported=false,pendingUnlock=null,generation=0,serial=0,lastVariant=-1;
   const voices=[],seen=new Set(),grouped=new Map(),variants=new Map();
   function normalize(p){const next={...settings};for(const k of ['master','music','combat','ui'])if(typeof p?.[k]==='number'&&Number.isFinite(p[k]))next[k]=Math.max(0,Math.min(1,p[k]));if(typeof p?.muted==='boolean')next.muted=p.muted;return next;}
   try{settings=normalize(JSON.parse(storage?.getItem(KEY)||'null'));}catch(_){}

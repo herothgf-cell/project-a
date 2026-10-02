@@ -11,3 +11,5 @@ test('generated profiles are independent of player level and define readable war
  assert.equal(g.enemies.find(e=>e.boss).maxHp,Director.profiles?.rift.bossHp);
  for(const e of g.enemies){e.wind=1;g.prepareEnemyAttack(e);assert.ok(e.windMax>=.75);assert.ok(e.damage<120);}
 });
+
+test('forest damage is eased slightly without shortening encounters',()=>{assert.equal(Director.profiles.forest.damage,25);assert.equal(Director.profiles.forest.bossHp,5800);assert.equal(Director.profiles.forest.heavyHp,1400);assert.equal(Director.profiles.rift.damage,30);});

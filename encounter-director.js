@@ -2,7 +2,7 @@
  'use strict';const counts={forest:7,rift:7,ruins:9,harbor:9,returnPass:9,returnDock:9,station:9,stabilization:6,woundPass:6,woundDock:6,woundCore:6};const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
  // Final spawn values. Returning to an old area never scales it to the player.
  const profiles=Object.freeze(Object.fromEntries([
-  ['forest',5800,300,1400,240,26],['rift',4800,250,1400,210,30],
+  ['forest',5800,300,1400,240,25],['rift',4800,250,1400,210,30],
   ['ruins',6400,340,1500,280,31],['harbor',6400,310,1600,260,32],
   ['returnPass',7400,380,1800,320,34],['returnDock',7400,370,1900,300,35],
   ['station',8400,420,2100,340,36],['stabilization',9000,440,2200,360,37],

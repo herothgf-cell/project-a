@@ -84,3 +84,5 @@
 }
 @media(max-height:520px){#dialog{padding:10px}#dialog .dialog-heading{margin:4px 0}#dialog #portrait{display:none}#dialog #dialogBody{max-height:48dvh}#dialog #dialogActions{margin-top:6px;padding-top:6px}.app-navigation{margin-bottom:8px;padding-bottom:6px}}
 @media(prefers-reduced-motion:reduce){#dialog *,#game .toast{transition:none;animation:none}}
+
+#dialog.dungeon-dialog #portrait{display:none}
