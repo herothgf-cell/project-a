@@ -7,6 +7,8 @@
   installWorldState(){const g=this;Object.defineProperty(this.journey,'mastery',{configurable:true,enumerable:true,get(){return g.worldGrowth[Growth.worldOf(g)].mastery;},set(v){g.worldGrowth[Growth.worldOf(g)].mastery=v;}});Object.defineProperty(this.journey,'breath',{configurable:true,enumerable:true,get(){return g.worldGrowth[Growth.worldOf(g)].mode;},set(v){g.worldGrowth[Growth.worldOf(g)].mode=v;}});Growth.installInterpretations?.(this);}
   get level(){return this.worldGrowth?this.worldGrowth[Growth.worldOf(this)].level:this._oldLevel||1;}set level(v){if(this.worldGrowth)this.worldGrowth[Growth.worldOf(this)].level=v;else this._oldLevel=v;}
   get xp(){return this.worldGrowth?this.worldGrowth[Growth.worldOf(this)].xp:this._oldXp||0;}set xp(v){if(this.worldGrowth)this.worldGrowth[Growth.worldOf(this)].xp=v;else this._oldXp=v;}
+  senseUnlocked(){return !!(Cycle.state(this).invited||Cycle.state(this).legacyAccess||this.journey.phase>0||this.journey.facts.length||this.journey.known.length);}
+  sense(){return this.senseUnlocked()?super.sense():false;}
   growthWorld(){return Growth.worldOf(this);}
   passiveEffects(){return Passive.effects(this,Growth.worldOf(this));}
   paidSkillCost(action,cost){return this.worldGrowth&&['moon','storm','signature1','signature2'].includes(action)&&cost>0?Math.max(1,cost-this.passiveEffects().discount):cost;}

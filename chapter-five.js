@@ -8,13 +8,13 @@
  P.onInterpretation=function(key,e){const s=S(this);if(this.area==='station'&&s.phase===3&&s.facts.some(f=>f.id==='station-sense')&&this.enemies.some(x=>x.id===e.id)){s.measured=true;finish(this);}};
  P.enter=function(id){const ok=old.enter.call(this,id);if(ok)companion(this);return ok;};
  function objective(g){const s=S(g);if(!s.phase&&g.chapter4?.phase!==4&&g.area!=='archive')return null;const points=g.points();let target,text;
-  if(g.area==='archive'){target=points.find(o=>o.id==='exit');text=active(g)?'해석 장착 완료 · 출구로 돌아가 본편을 이어가거나 다른 흔적을 자유롭게 탐험하세요.':'선택 탐험 · 주변 물건을 기감으로 살펴보세요. 휴식은 회복 기능이며, 원할 때 출구로 돌아갈 수 있습니다.';}
+  if(g.area==='archive'){target=points.find(o=>o.id==='exit');text=active(g)?'해석 장착 완료 · 출구로 돌아가 본편을 이어가거나 다른 흔적을 자유롭게 탐험하세요.':'스킬 진화 · 표시된 물건을 기감으로 살펴보세요. 휴식은 회복 기능이며, 원할 때 출구로 돌아갈 수 있습니다.';}
   else if(g.area==='station'){const e=g.enemies.filter(e=>e.hp>0).sort((a,b)=>Number(a.boss)-Number(b.boss)||dist(a,g.player)-dist(b,g.player))[0];
    if(!s.facts.some(f=>f.id==='station-sense')){target=points.find(o=>o.id==='station-lens');text='관측 기록 가까이에서 기감(B)을 펼치고, 새로 해석한 무공으로 실제 적을 상대하세요.';}
    else if(s.boss&&!s.measured){target=points.find(o=>o.id==='station-reset');text='관측은 끝나지 않았습니다. 잔류 파형을 재현한 뒤 새 무공을 적에게 실제로 사용하세요.';}
    else {target=e?{...e,label:e.name,kind:'enemy'}:points[0];text=s.measured?'몸의 재현은 확인되었습니다. 남은 위협을 끝내고 서린에게 돌아가세요.':'내가 완성한 Q/R 운용을 실제 적에게 사용해 기록과 비교하세요. 내가 가한 기술의 효과만 증명에 기록됩니다.';}}
   else if(AREAS[g.area].safe){let id='portal';if(g.area==='city')id=s.phase===1?'portal':s.phase===3?'stationGate':'warden';else id=s.phase===1?'archiveGate':s.phase===5&&s.promise?'returned-yeonhwa':'portal';target=points.find(o=>o.id===id);text=s.phase===0?'제4장 이후 · 서린의 관측 기록에 남은 차이를 확인하세요.':s.phase===1?'환서정의 필사본에는 퀘스트 목록에 없는 흔적이 있습니다. 연화도 그날의 일을 기억합니다.':s.phase===2?'새 해석을 현실에서 재현할 차례입니다. 서린과 관측소 출입에 대해 이야기하세요.':s.phase===5?'C급 현장 인증을 받았습니다. 관측소를 재공략하거나 연화에게 후일담을 들을 수 있습니다.':'서린이 기다리는 현실의 공명 관측소로 향하세요.';}
-  return target?{title:g.area==='archive'&&!s.phase?'환서정 · 선택 탐험':s.phase===5?'제5장 · 기록에 남긴 나의 호흡':'제5장 · 기록에 없는 귀환자',text,target,chapter:5}:null;
+  return target?{title:g.area==='archive'&&!s.phase?'환서정 · 스킬 진화':s.phase===5?'제5장 · 기록에 남긴 나의 호흡':'제5장 · 기록에 없는 귀환자',text,target,chapter:5}:null;
  }
  P.objective=function(){return objective(this)||old.objective.call(this);};
  P.target=function(){return objective(this)?.target||old.target.call(this);};

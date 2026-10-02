@@ -101,3 +101,8 @@
  #game .world-badge{max-width:124px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
  #game #boss{top:103px;left:144px;right:12px;width:auto}
 }
+
+#game .vitals label.resource-warning{color:#ffd1a0;font-weight:700}
+
+#game .combat-icon{display:block;width:28px;height:28px;margin:auto}#game .actions .attack .combat-icon{width:32px;height:32px}
+#game .journey-tools button[hidden]{display:none}

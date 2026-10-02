@@ -1,9 +1,9 @@
 const {run}=require('./browser-harness.cjs'),assert=require('node:assert/strict'),fs=require('node:fs');
 run(async p=>{
  await p.click('#character');
- assert.deepEqual(await p.locator('.app-navigation button').allTextContents(),['캐릭터','임무','기록','설정']);
- assert.deepEqual(await p.locator('.character-tabs button').allTextContents(),['개요','성장','무공']);
- await p.locator('.character-tabs').getByRole('button',{name:'성장',exact:true}).click();
+ assert.equal(await p.locator('.app-navigation').count(),0);
+ assert.equal(await p.locator('.character-tabs').count(),0);
+ await p.keyboard.press('Escape');await p.click('#growthStatus');
  assert.equal(await p.getByRole('button',{name:'경지 돌파',exact:true}).count(),0);
  assert.equal(await p.locator('.growth-workspace').count(),1);
  const before=await p.evaluate(()=>({area:__game.area,x:__game.player.x,y:__game.player.y,hp:__game.player.hp}));
@@ -21,6 +21,6 @@ run(async p=>{
  await p.evaluate(()=>document.documentElement.style.fontSize='');await p.setViewportSize({width:1280,height:720});
  await p.screenshot({path:'.ssanggye-v11-review/growth-desktop.png'});
  await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'임무',exact:true}).click();assert.match(await p.locator('#dialogBody').innerText(),/현재 행동/);
- await p.locator('.app-navigation').getByRole('button',{name:'설정',exact:true}).click();assert.equal(await p.locator('#dialog').getByRole('button',{name:'소리 설정',exact:true}).count(),0);
+ await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'설정',exact:true}).click();assert.equal(await p.locator('#dialog').getByRole('button',{name:'소리 설정',exact:true}).count(),0);
  console.log('v1.1 navigation, input isolation, responsive and enlarged text verified');
 });

@@ -57,11 +57,12 @@
  };
  function guide(g,path){
   const a=AREAS[g.area],points=g.points?g.points():a.points,s=g.journey;
+  if(g.senseUnlocked&&!g.senseUnlocked())return {stage:'locked',title:'스킬 진화와 함께 기감 해금',text:'4장 귀환 보고 후 연화의 기록을 백련에게 전하세요. 환서정으로 초대받으면 기감으로 진화 단서를 조사할 수 있습니다.',target:null};
   if(g.progress<2)return {stage:'locked',title:'먼저 기본기를 익히세요',text:'청운촌의 백련과 재회하여 월영참을 배우면 기감을 사용할 수 있습니다.',target:null};
   const active=path||g.guidePath||g.fate.path;
   if(g.area!=='archive'&&active===g.fate.path&&s.known.includes(s.selected[active]))return {stage:'equipped',title:'해석 장착 완료 · 본편 이어가기',text:'장착한 해석은 이미 적용 중입니다. '+g.objective().text,target:g.objective().target,path:active};
-  if(g.worldGrowth&&g.area!=='archive'&&!(g.worldState?.cycleOne?.legacyAccess||g.worldState?.cycleOne?.invited)){const next=globalThis.CycleOne?.earlyObjective(g);return {stage:'story',title:'이야기를 따라 기록 찾기',text:next?.currentAction||'연화의 귀환을 돕고 백련에게 기록을 전하면 환서정 탐험이 열립니다.',target:null};}if(g.worldGrowth&&g.area!=='archive')return {stage:'travel',title:'환서정으로 가기 · 선택 탐험',text:(a.world==='현실'?'경계석으로 무림에 건너가세요. ':'')+'청운촌의 무림 탐험지 입구에서 환서정을 선택하세요. 기감으로 살펴보고 가까이에서 조사하면 단서를 확인할 수 있습니다.',target:points.find(o=>o.id===(g.area==='village'?'dungeon-entry':a.safe?'portal':'exit'))||null};
-  if(g.area!=='archive')return {stage:'travel',title:'환서정으로 가기 · 선택 탐험',text:a.world==='현실'?'무림으로 이동한 뒤 청운촌 남동쪽 「환서정」으로 가세요. 기존 무공을 다른 방식으로 쓰는 단서를 찾는 곳입니다.':'청운촌 남동쪽 「환서정」으로 가세요. B 기감 → 가까이 E 조사 → N 수첩 순서로 시작합니다.',target:points.find(o=>o.id===(g.area==='village'?'archiveGate':a.safe?'portal':'exit'))||null};
+  if(g.worldGrowth&&g.area!=='archive'&&!(g.worldState?.cycleOne?.legacyAccess||g.worldState?.cycleOne?.invited)){const next=globalThis.CycleOne?.earlyObjective(g);return {stage:'story',title:'이야기를 따라 기록 찾기',text:next?.currentAction||'연화의 귀환을 돕고 백련에게 기록을 전하면 환서정의 스킬 진화가 열립니다.',target:null};}if(g.worldGrowth&&g.area!=='archive')return {stage:'travel',title:'스킬 진화 · 환서정으로 이동',text:(a.world==='현실'?'경계석으로 무림에 건너가세요. ':'')+'청운촌의 무림 탐험지 입구에서 환서정을 선택하세요. 기감으로 살펴보고 가까이에서 조사하면 단서를 확인할 수 있습니다.',target:points.find(o=>o.id===(g.area==='village'?'dungeon-entry':a.safe?'portal':'exit'))||null};
+  if(g.area!=='archive')return {stage:'travel',title:'스킬 진화 · 환서정으로 이동',text:a.world==='현실'?'무림으로 이동한 뒤 청운촌 남동쪽 「환서정」으로 가세요. 기존 무공을 다른 방식으로 쓰는 단서를 찾는 곳입니다.':'청운촌 남동쪽 「환서정」으로 가세요. B 기감 → 가까이 E 조사 → N 수첩 순서로 시작합니다.',target:points.find(o=>o.id===(g.area==='village'?'archiveGate':a.safe?'portal':'exit'))||null};
   const candidates=points.filter(o=>o.kind==='discovery'&&o.path!=='station');
   const o=candidates.find(o=>o.path===(path||g.guidePath||g.fate.path))||candidates.slice().sort((a,b)=>dist(a,g.player)-dist(b,g.player))[0];
   if(!o)return {stage:'done',title:'주변을 살펴보세요',text:'관찰 수첩에는 실제 발견만 남습니다.',target:null};

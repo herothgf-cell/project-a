@@ -1,7 +1,9 @@
 (function(root,f){const api=f();if(typeof module==='object'&&module.exports)module.exports=api;else root.PersonalNews=api;})(globalThis,function(){
  'use strict';const names={ripple:'파문검',echo:'잔영보',seal:'경계봉인'};
+ function achievementName(id){const parts=id.split(':');if(id==='inherit:first')return '첫 기연의 신체 성장';if(parts[0]==='murim-mastery')return (names[parts[1]]||'무공')+' 숙련 '+parts[2]+'단계 달성';if(parts[0]==='murim-level')return '무림 레벨 '+parts[1]+' 달성';if(parts[0]==='murim-realm')return '첫 경지 돌파';if(parts[0]==='interpret')return '무공 해석의 현실 정착';return '무림 성장의 현실 정착';}
  function realmReady(g){return !g.journey.realm&&Object.values(g.worldGrowth.murim.mastery).reduce((a,b)=>a+b,0)>=8&&g.journey.worlds.length>=2&&g.journey.known.length>0;}
  function catalog(g){const out=[],add=(id,section,subject,title,text)=>out.push({id,section,subject,title,text});
+  if(g.worldState.cycleOne?.invited)add('evolution:unlocked','skills',g.fate.path||'sword','스킬 진화 · 기감 해금','백련의 초대로 첫 스킬 진화와 기감이 열렸습니다. 무림 탐험지 입구에서 환서정으로 이동해 현재 무공의 흔적을 조사하세요. 현재 목표가 발견·조사·실험·장착 순서를 안내합니다.');
   for(const f of g.revision.inherited)add('inherit:'+f,'skills',f,names[f]+' 계승','무림의 호흡을 계승했습니다. 현실로 귀환하면 대응 기술을 따로 장착할 수 있습니다.');
   for(const k of g.journey.known)add('interpret:'+k,'skills',k,'새 무공 해석','무공에서 해석의 효과를 확인하고 직접 장착하세요.');
   if(g.training>0)add('mode:unlocked','growth','mode','심법과 현실 운용 개방','성장에서 유수·집중 심법과 현실 회복·집중 운용을 선택할 수 있습니다.');
@@ -11,7 +13,7 @@
   if(g.worldState.reports?.reported.includes('first-response'))add('role:first-response','status','role','초동 대응자 · 현장 성과 인정','기연 귀환 후 현실 위협을 제압하고 서린에게 보고했습니다. 기지에서 1회 회복약 보급을 받습니다. 공식 헌터 등급은 E급입니다.');
   if(g.worldState.reports?.reported.includes('yeonhwa-rescued'))add('role:rescue','status','role','핵심 수행자 · 구조 성과 보고','직접 확인한 구조 결과를 전했습니다. 기지 보급과 후속 공동 조사로 이어집니다.');
   if(g.laterStory?.six===5)add('role:joint','status','role','공동 대응 제안자','7장 준비에서 대피 통로 또는 정예 차단을 선택하면 현재 전장의 조건이 바뀝니다.');
-  for(const r of g.worldState.achievements?.results||[])add('return:'+r.id,r.unlocked?'skills':'status',r.unlocked||r.id,'귀환 성과 · '+(r.unlocked?names[r.unlocked]+'의 현실 대응':r.id==='inherit:first'?'첫 기연의 신체 성장':r.id),'체력 '+r.before.hp+' → '+r.after.hp+' · 자원 '+r.before.mp+' → '+r.after.mp+' · 공격력 '+r.before.attack+' → '+r.after.attack+(r.unlocked?'\n무공에서 현실 대응을 선택해 장착하세요.':''));
+  for(const r of g.worldState.achievements?.results||[])add('return:'+r.id,r.unlocked?'skills':'status',r.unlocked||r.id,'귀환 성과 · '+(r.unlocked?names[r.unlocked]+'의 현실 대응':achievementName(r.id)),'체력 '+r.before.hp+' → '+r.after.hp+' · 자원 '+r.before.mp+' → '+r.after.mp+' · 공격력 '+r.before.attack+' → '+r.after.attack+(r.unlocked?'\n무공에서 현실 대응을 선택해 장착하세요.':''));
   return out;
  }
  function publish(g,item){if(!catalog(g).some(x=>x.id===item.id)||JSON.stringify(item).length>2048)throw Error('허용되지 않은 소식');const s=g.worldState.news;if(s.items.some(x=>x.id===item.id))return false;s.items.push({id:item.id,at:g.playTime,read:false});return true;}

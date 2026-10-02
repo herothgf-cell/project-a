@@ -9,6 +9,7 @@
   const perfHud=perfEnabled?document.createElement('pre'):null;
   if(perfHud){perfHud.id='perfHud';perfHud.setAttribute('aria-label','성능 진단');perfHud.style.cssText='position:fixed;top:8px;right:8px;z-index:1000;max-width:calc(100vw - 16px);margin:0;padding:8px 10px;background:#101e24e8;color:#f3e5be;border:1px solid #d0bb7b;font:11px/1.4 monospace;white-space:pre-wrap;pointer-events:none;';$('game').append(perfHud);}
   let g=new Game(),active=false,resume=null,hasSave=false,saveWarning=false,lastSave=0,lastFrame=performance.now(),lastHud=0,lastPerfHud=0;
+  let resourceWarningUntil=0,resourceWarningCost=0;
   let bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
   let dialogueUI=null,journeyUI=null,realmUI=null,growthUI=null,introUI=null,contractUI=null,progressionUI=null,characterUI=null,newsUI=null;
   let dungeonUI=null,objectiveUI=null;
@@ -43,7 +44,6 @@
 
     if(currentView)viewMemory.set(currentView,{scroll:$('dialogBody').scrollTop});
     currentView=typeof body==='string'?null:title;
-    if(body?.classList&&!body.classList.contains('intro-scene')&&!body.classList.contains('speaker-scene')&&!body.classList.contains('dungeon-screen')&&!body.classList.contains('growth-workspace')){const nav=node('nav','app-navigation');nav.setAttribute('aria-label','주 메뉴');for(const [label,run]of [['캐릭터',()=>characterUI.open()],['임무',()=>objectiveUI.open()],['기록',()=>openRecords()],['설정',()=>menu()]]){const b=node('button','secondary',label);b.onclick=run;nav.append(b);}body.prepend(nav);}
     if(typeof body==='string'&&dialogueUI){const scenes=DialogueData.lookup(title,body,portrait);if(scenes)return dialogueUI.open({id:title,title,scenes,result,actions});}
     dialog.classList.toggle('intro-dialog',!!body?.classList?.contains('intro-scene'));dialog.classList.toggle('growth-dialog',!!body?.classList?.contains('growth-screen'));
     RealmArt.begin(g);clearInput();dialog.classList.toggle('story-dialog',typeof body==='string'&&portrait!=='system'&&!kicker.includes('일시정지'));dialog.classList.toggle('growth-workspace-dialog',!!body?.classList?.contains('growth-workspace'));dialog.classList.toggle('dungeon-dialog',!!body?.classList?.contains('dungeon-screen'));dialog.classList.toggle('news-dialog',!!body?.classList?.contains('realm-news'));dialog.classList.toggle('help-dialog',!!body?.classList?.contains('realm-help-sheet'));dialog.classList.toggle('legend-offer',kicker.includes('발현')||kicker.includes('각성'));$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
@@ -60,7 +60,7 @@
     ($('dialogActions').querySelector('button:not(:disabled):not(.danger)')||$('closeDialog')).focus({preventScroll:true});
   }
   function legendOffer(event){
-    const path=Fate.PATHS[event.path],body=node('div');body.style.setProperty('--legend-color',path.color);
+    const path=Fate.PATHS[event.path],body=node('div','inheritance-choice');body.style.setProperty('--legend-color',path.color);
     body.append(node('span','legend-symbol',path.glyph),node('p','legend-origin',event.text),node('p','legend-note','이름을 알기 전에 몸이 먼저 기억했다. 이 호흡을 이어가거나, 다른 가능성을 살펴봐도 좋다.'));
     const blocked=!!g.fate.path&&g.fate.path!==event.path&&!AREAS[g.area].safe;
     const actions=[{label:blocked?'거점에서 다른 호흡으로 잇기':'이 호흡을 붙잡는다',disabled:blocked,run:()=>{g.awaken(event.path);processEvents();persist();update();}},{label:'지금은 이 감각만 기억한다',secondary:true}];
@@ -89,7 +89,7 @@
     show('나의 기연 · 기억의 장',body,actions,'hero','내 발걸음에 남은 이야기');
   }
   function fateChoice(){
-    const f=g.fate,body=node('div');body.append(node('p','','직접 증명한 무공을 계승합니다. 기술의 효과를 살펴보고 선택하세요.'));
+    const f=g.fate,body=node('div','inheritance-choice');body.append(node('p','','직접 증명한 무공을 계승합니다. 기술의 효과를 살펴보고 선택하세요.'));
     for(const id of f.proven){const path=Fate.PATHS[id];body.append(node('h3','',path.name),node('p','',path.skills.map((sk,i)=>`${['Q','R','F'][i]} · ${sk[0]}: ${sk[4]}`).join('\n')));}
     if(!f.proven.length)body.append(node('p','','먼저 무명 비경의 흔적을 조사하고, 임시 무공으로 시험을 통과하세요.'));
     show('무공 · 첫 계승',body,[...f.proven.map(id=>({label:Fate.PATHS[id].name+' 수락',run:()=>{g.acceptFate(id);processEvents();persist();update();}})),{label:'더 생각해 보기',secondary:true}],'hero','계승할 무공 선택');
@@ -107,7 +107,7 @@
     else show(event.title,event.text,actions,event.portrait||'system',kicker,event.result);
   }
   function start(load=false){
-    backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
+    resourceWarningUntil=0;backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
     viewMemory.clear();currentView=null;if(!load){g.beginIntro(true);introUI.start();persist();}
     else if(g.introActive)introUI.resume();
     else toast(g.restoreNotice||'저장한 위치와 진행에서 이어갑니다.');
@@ -147,11 +147,8 @@
   function openRecords(){const body=node('section','records-screen');body.append(node('p','','직접 발견한 사실과 귀환 성과를 확인합니다.'));for(const [label,run]of [['내 소식',()=>newsUI.open()],['관찰 수첩',()=>journeyUI.open('facts')],['행적',()=>historyUI.open('history')]]){const b=node('button','secondary',label);b.onclick=run;body.append(b);}show('기록',body,[{label:'돌아가기',secondary:true}]);}
   function menu(){
     if(introUI?.active)return introUI.resume();
-    if(!active)return;const actions=[{label:'계속하기'},{label:'조작 안내',secondary:true,run:help},{label:'지역 지도',secondary:true,run:map},{label:'저장 파일 다운로드',secondary:true,run:()=>exportSave()},{label:'저장 파일 불러오기',secondary:true,run:importSave},{label:renderer.reduced?'화면 효과 켜기':'화면 효과 줄이기',secondary:true,run:()=>{renderer.reduced=!renderer.reduced;menu();}}];
-    actions.push({label:'글자 크기: '+textScale+'%',secondary:true,run:()=>{const sizes=[100,125,150,200];textScale=sizes[(sizes.indexOf(textScale)+1)%sizes.length];document.documentElement.style.fontSize=textScale+'%';try{localStorage.setItem('ssanggye:text-scale',String(textScale));}catch{}menu();}});
-    actions.push({label:'이펙트 품질: '+['낮음','보통','높음'][renderer.quality]+(renderer.autoLow?' (자동 절약)':''),secondary:true,run:()=>{renderer.quality=(renderer.quality+1)%3;renderer.autoLow=false;renderer.slowFrames=0;menu();}});
+    if(!active)return;const actions=[{label:'계속하기'},{label:'조작 안내',secondary:true,run:help},{label:'저장 파일 다운로드',secondary:true,run:()=>exportSave()},{label:'저장 파일 불러오기',secondary:true,run:importSave}];
     if(!AREAS[g.area].safe)actions.push({label:'거점으로 후퇴',secondary:true,run:()=>show('거점으로 돌아갈까요?','무공과 이야기 진행은 유지됩니다.\n다시 입장하면 호위와 아직 완료하지 않은 봉인 공략을 처음부터 시작합니다.',[{label:'취소',secondary:true},{label:'후퇴하기',run:()=>{g.retreat();processEvents();persist();update();}}])});
-    else actions.push({label:'보급',secondary:true,run:shop});
     actions.push({label:'입력 설정',secondary:true,run:controlSettings},{label:'인트로 다시 보기',secondary:true,run:()=>introUI.start(true)},{label:'타이틀로',secondary:true,run:()=>{persist();active=false;progressionUI?.clear();clearInput();$('game').hidden=true;$('title').hidden=false;inspectSave();WorldArt.cover($('cover'));}});
     const body=node('section','settings-screen');body.append(node('p','',`Lv.${g.level} · ${AREAS[g.area].name}`),node('p','','화면, 입력, 저장을 설정합니다.'));const options=node('div','settings-options');for(const action of actions.slice(1)){const b=node('button','secondary',action.label);b.onclick=()=>{if(dialog.open)dialog.close();clearInput();action.run?.();};options.append(b);}body.append(options);show('설정',body,[actions[0]],'hero','일시정지 · v'+VERSION);
   }
@@ -170,7 +167,7 @@
       if(['transfer','victory','defeat','dialog','awakening','trial-complete','legend-ready'].includes(e.type)){story(e);if(e.inheritance)progressionUI?.inherit(e);persist();}
     }
   }
-  function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='cycle-choice')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{const scene=CycleOne.interact(g,result.pointId,choice.id);if(scene)story(scene);persist();update();}})),'system','현장 우선 대응');if(result?.type==='dungeon-select')dungeonUI.open();if(result?.type==='seven-preparation')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{g.chooseSevenPreparation(choice.id);processEvents();persist();update();}})),'warden','공동 대응 준비');if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
+  function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(before.training<1&&g.training>=1)result.result.push('유수심법 · 첫 2포인트 해금. 성장에서 심법을 확인하세요.');if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='cycle-choice')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{const scene=CycleOne.interact(g,result.pointId,choice.id);if(scene)story(scene);persist();update();}})),'system','현장 우선 대응');if(result?.type==='dungeon-select')dungeonUI.open();if(result?.type==='seven-preparation')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{g.chooseSevenPreparation(choice.id);processEvents();persist();update();}})),'warden','공동 대응 준비');if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
   function act(action){
     if(!running())return;const k=g.skillInfo(action);if(!k)return;
     if(!g.act(action)){
@@ -179,9 +176,15 @@
       else if(WorldGrowth.worldOf(g)==='murim'&&action==='signature2'&&Fate.active(g)==='echo'&&!g.combat.echo)toast('Q 잔영각으로 먼저 잔향을 남겨야 합니다.');
       else if(WorldGrowth.worldOf(g)==='murim'&&action==='signature2'&&Fate.active(g)==='echo'&&g.combat.echo&&!g.lineClear(g.player,g.combat.echo))toast('잔향까지의 길이 막혔습니다. 벽을 넘어 귀환할 수 없습니다.');
       else if(g.training<k.need)toast('백련 사부에게 아직 배우지 않은 무공입니다.');
-      else if(g.player.mp<k.cost)toast('내력이 부족합니다. 잠시 호흡을 고르세요.');
+      else if(g.player.mp<k.cost){resourceWarningUntil=performance.now()+1500;resourceWarningCost=k.cost;}
       else if(action==='potion')toast(g.potions<=0?'회복약이 없습니다. 거점에서 구입하세요.':'체력이 충분하거나 재사용 대기 중입니다.');
     }else if(action==='potion')persist();processEvents();update();
+  }
+  function combatIcon(btn,action,path=''){
+    const key=[action,path,WorldGrowth.worldOf(g)].join(':');if(btn.dataset.icon===key)return;btn.dataset.icon=key;
+    const shapes={attack:'M6 24 24 6 M16 6h8v8 M4 18l8 8 M5 25l-2 4',moon:'M5 24C24 25 28 10 25 4C23 16 14 19 5 24Z',storm:'m18 3-12 15h9l-2 11 13-17h-10z',dash:'M3 10h12M1 16h10M4 22h11M17 8l9 8-9 8',guard:'M16 3 5 7v9c0 6 11 13 11 13s11-7 11-13V7z M10 16l4 4 8-9',counter:'M26 10H13l5-5M13 10l5 5 M5 25l16-9 M17 17l4 4',burst:'m16 2 3 9 9-5-5 10 7 5-11 1-3 9-4-9-10 2 7-8-5-8 10 4z',step:'M5 8h9l-4 5h9l-5 5h11M21 14l5 4-5 4',return:'M8 8h12a8 8 0 0 1 0 16h-6M8 8l6-5M8 8l6 5',seal:'M5 5h22v22H5z M16 2v28M2 16h28 M10 10h12v12H10z',bind:'M9 8a6 6 0 0 0 0 12h7M23 12a6 6 0 0 1 0 12h-7M11 16h10',strike:'M5 23 22 6M5 14 14 5M14 27 27 14',punch:'M7 25V14l4-2V7h5v5M16 5h5v8M21 8h5v12l-6 7H7z'};
+    let icon=action;if(action==='signature1')icon=path==='echo'?'step':path==='seal'?'seal':'guard';if(action==='signature2')icon=path==='echo'?'return':path==='seal'?'bind':'counter';if(action==='ultimate')icon=path==='seal'?'seal':'burst';if(WorldGrowth.worldOf(g)==='reality'&&action==='moon')icon='punch';if(WorldGrowth.worldOf(g)==='reality'&&action==='storm')icon='strike';
+    const slot=btn.querySelector('span'),svg=document.createElementNS('http://www.w3.org/2000/svg','svg'),shape=document.createElementNS(svg.namespaceURI,'path');svg.setAttribute('viewBox','0 0 32 32');svg.setAttribute('class','combat-icon');svg.setAttribute('aria-hidden','true');svg.setAttribute('fill','none');svg.setAttribute('stroke','currentColor');svg.setAttribute('stroke-width','2');svg.setAttribute('stroke-linecap','round');svg.setAttribute('stroke-linejoin','round');shape.setAttribute('d',shapes[icon]||shapes.attack);svg.append(shape);slot.replaceChildren(svg);slot.setAttribute('aria-hidden','true');
   }
   function updateNews(){realmUI?.update();}
   function update(){
@@ -193,8 +196,8 @@
     for(const btn of document.querySelectorAll('[data-action]')){const k=btn.querySelector('kbd');if(k)k.textContent=Controls.key(btn.dataset.action);}
     for(const [id,action]of [['inventory','growth'],['interact','interact'],['potion','potion'],['fieldNotes','notes'],['sense','sense'],['helpButton','help']]){const el=$(id);if(el){const k=el.querySelector('kbd');if(k)k.textContent=Controls.key(action);el.setAttribute('aria-label',Controls.labels[action]+' '+Controls.key(action));}}
     const a=AREAS[g.area],s=g.stats(),p=g.player,o=ObjectiveModel.resolve(g);
-    const murim=WorldGrowth.worldOf(g)==='murim';$('growthStatus').textContent='성장';$('growthStatus').title=(g.journey.breath==='flow'?'유수':'집중')+' 운용';
-    $('mpTrack').setAttribute('aria-label',murim?'내력':'자원');$('mpTrack').parentElement.querySelector('label').textContent=murim?'내력':'자원';
+    const murim=WorldGrowth.worldOf(g)==='murim';$('growthStatus').textContent='성장';$('growthStatus').title=g.training<1?'백련 수련 후 심법 해금':(g.journey.breath==='flow'?'유수':'집중')+' 운용';
+    $('mpTrack').setAttribute('aria-label',murim?'내력':'자원');const resourceLabel=$('mpTrack').parentElement.querySelector('label'),resourceLow=performance.now()<resourceWarningUntil&&g.player.mp<resourceWarningCost;resourceLabel.textContent=(murim?'내력':'자원')+(resourceLow?' 부족':'');resourceLabel.classList.toggle('resource-warning',resourceLow);
     $('world').textContent=a.world;$('rank').textContent=murim?Advancement.describe(g,'realm').name:Advancement.describe(g,'hunter').name+'급 헌터';$('place').textContent=a.name;$('sub').textContent=a.sub;$('lv').textContent=g.level;$('gold').textContent=g.gold;
     for(const [id,val,max]of [['hp',p.hp,s.hp],['mp',p.mp,s.mp]]){$(id).style.width=Math.max(0,val/max*100)+'%';$(id+'Text').textContent=`${Math.ceil(val)} / ${max}`;$(id+'Track').setAttribute('aria-valuemin','0');$(id+'Track').setAttribute('aria-valuemax',String(max));$(id+'Track').setAttribute('aria-valuenow',String(Math.ceil(val)));}
     $('quest').textContent=o.title;$('questDesc').textContent=o.text;$('chapterKicker').textContent=o.category||'CHAPTER 0'+o.chapter;$('chapterTitle').textContent=o.category?'현실의 실전':o.chapter===7?'같은 상처의 두 끝':o.chapter===6?'두 하늘의 호흡':o.chapter===5?'기록에 없는 귀환자':o.chapter===4?'끊긴 귀환로':o.chapter===3?'나의 전설':o.chapter===2?'잔월의 서약':'경계를 넘는 자';$('sync').textContent='현실 Lv.'+g.worldGrowth.reality.level+' / 무림 Lv.'+g.worldGrowth.murim.level;
@@ -205,11 +208,12 @@
     if(o.target){$('objectiveTarget').textContent=`${o.target.label} · ${Math.round(dist(p,o.target)/10)}걸음`;$('objectiveHint').textContent=o.text;$('objectiveArrow').style.transform=`rotate(${Math.atan2(o.target.y-p.y,o.target.x-p.x)*180/Math.PI+90}deg)`;}
     const path=g.trial?.path||g.activeFamily();$('game').classList.toggle('has-fate',!!path);$('fateControls').hidden=!path;
     if(path){const theme=Fate.PATHS[path];$('game').style.setProperty('--fate-color',theme.color);$('fateName').textContent=theme.name;$('fateState').textContent=!murim?(g.realityStatus(path)==='settled'?'현실 대응 정착':'대응 장착 · 실전 확인 중'):g.trial?'시험 중 · 임시 공명':path==='ripple'?`축적 파문 ${g.combat.charges}/3`:path==='echo'?(g.combat.echo?`잔향 ${g.combat.echo.life.toFixed(1)}초`:'잔향 대기'):(g.combat.field?`결계 ${g.combat.field.life.toFixed(1)}초`:'결계 대기');$('focusFill').style.width=g.fate.focus+'%';$('focusText').textContent='기세 '+Math.floor(g.fate.focus)+' / 100';$('focusFill').parentElement.setAttribute('aria-valuenow',String(Math.floor(g.fate.focus)));
-      for(const action of Fate.names){const btn=document.querySelector(`[data-action="${action}"]`),sk=g.skillInfo(action);btn.querySelector('span').textContent=sk.glyph;btn.querySelector('small').textContent=sk.name;btn.classList.toggle('locked',sk.locked);btn.classList.toggle('ready',action==='ultimate'&&g.fate.focus>=100&&!sk.locked);btn.setAttribute('aria-label',sk.name+(sk.locked?' 미습득':''));btn.title=sk.description;const cd=btn.querySelector('em');cd.classList.toggle('active',g.player.cool[action]>.05);cd.textContent=Math.ceil(g.player.cool[action]);}
+      for(const action of Fate.names){const btn=document.querySelector(`[data-action="${action}"]`),sk=g.skillInfo(action);combatIcon(btn,action,sk.path||Fate.active(g));btn.querySelector('small').textContent=sk.name;btn.classList.toggle('locked',sk.locked);btn.classList.toggle('ready',action==='ultimate'&&g.fate.focus>=100&&!sk.locked);btn.setAttribute('aria-label',sk.name+(sk.locked?' 미습득':''));btn.title=sk.description;const cd=btn.querySelector('em');cd.classList.toggle('active',g.player.cool[action]>.05);cd.textContent=Math.ceil(g.player.cool[action]);}
     }
     const boss=g.enemies.find(e=>e.boss&&e.hp>0);$('boss').hidden=!(boss&&dist(p,boss)<560);
     if(boss){$('boss').querySelector('span').textContent=boss.name;$('boss').querySelector('u').style.width=boss.hp/boss.maxHp*100+'%';$('boss').querySelector('small').textContent=g.bossLocked()?'호위 / 봉인 해제 후 공격 가능':boss.hp<boss.maxHp/2?'격노 · 더 빠른 공격 예고':'공격 예고를 피하고 빈틈을 노리세요';}
-    for(const action of ['moon','storm','dash']){const btn=document.querySelector(`[data-action="${action}"]`),k=g.skillInfo(action);btn.querySelector('small').textContent=k.name;btn.classList.toggle('locked',g.training<k.need);btn.classList.toggle('no-mana',p.mp<k.cost);btn.setAttribute('aria-label',`${k.name}${g.training<k.need?' 미습득':''}`);const cd=btn.querySelector('em');cd.classList.toggle('active',p.cool[action]>.04);cd.textContent=p.cool[action]>=1?Math.ceil(p.cool[action]):p.cool[action].toFixed(1);}
+    combatIcon(document.querySelector('[data-action=attack]'),'attack');
+    for(const action of ['moon','storm','dash']){const btn=document.querySelector(`[data-action="${action}"]`),k=g.skillInfo(action);combatIcon(btn,action);btn.querySelector('small').textContent=k.name;btn.classList.toggle('locked',g.training<k.need);btn.classList.toggle('no-mana',p.mp<k.cost);btn.setAttribute('aria-label',`${k.name}${g.training<k.need?' 미습득':''}`);const cd=btn.querySelector('em');cd.classList.toggle('active',p.cool[action]>.04);cd.textContent=p.cool[action]>=1?Math.ceil(p.cool[action]):p.cool[action].toFixed(1);}
     document.querySelector('.scene-bottom>span').textContent=matchMedia('(pointer:coarse)').matches?'왼쪽 이동 · 오른쪽 공격 / 회피':'WASD 이동 · J 공격 · Space 회피 · E 대화';
     const closeToTarget=o.target&&near?.id===o.target.id;
     const nextText=closeToTarget?`${Controls.key('interact')} · ${o.target.kind==='npc'?'대화하기':o.target.kind==='portal'?'이동하기':'상호작용'} — ${Controls.format(o.text)}`:Controls.format(o.text);

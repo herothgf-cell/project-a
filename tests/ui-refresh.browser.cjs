@@ -59,10 +59,10 @@ run(async p=>{
  await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='reality');
  await capture('hud',{dialog:false});
  await p.click('#character');await capture('character');
- await p.locator('.character-tabs').getByRole('button',{name:'무공',exact:true}).click();await capture('skills');
+ await p.keyboard.press('Escape');await p.click('#growthStatus');await p.locator('.growth-footer button').filter({hasText:'무공 보기'}).click();await capture('skills');
  await close();await p.click('#menu');await capture('settings');
- await p.locator('.app-navigation').getByRole('button',{name:'기록',exact:true}).click();await capture('records');
- await p.locator('.app-navigation').getByRole('button',{name:'임무',exact:true}).click();await capture('objective');
+ await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'기록',exact:true}).click();await capture('records');
+ await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'임무',exact:true}).click();await capture('objective');
  await close();
  await p.evaluate(()=>{const g=__game;const entry=g.points().find(x=>x.kind==='dungeon-entry');Object.assign(g.player,{x:entry.x,y:entry.y});g.events=[];});
  await p.click('#interact');await p.waitForSelector('.dungeon-screen');await capture('dungeon-list');
