@@ -43,6 +43,7 @@
     if(!safe)para(body,'심법 변경·돌파는 안전한 거점에서 할 수 있습니다.','notebook-muted');
    }
    show('관찰 수첩 · 기록에 없는 호흡',body,[{label:'돌아가기',secondary:true}],'hero','직접 확인한 사실 / 기술 변형 / 성장');
+   if(tab==='styles'&&g.worldGrowth){const visible=new Set(s.known.map(key=>'interpret:'+key)),unread=g.unreadNews('skills').filter(item=>visible.has(item.id));for(const item of unread)g.readNews(item.id);if(unread.length)refresh();}
   }
   function offer(e){const g=game(),v=D.variants[e.key],body=node('div','interpret-offer');body.style.setProperty('--interpret-color',v.color);body.append(node('div','interpret-seal',v.glyph),node('p','',e.text));
    const allowed=g.fate.path===v.path;
