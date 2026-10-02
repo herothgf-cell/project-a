@@ -18,9 +18,10 @@
  }
  function publish(g,item){if(!catalog(g).some(x=>x.id===item.id)||JSON.stringify(item).length>2048)throw Error('허용되지 않은 소식');const s=g.worldState.news;if(s.items.some(x=>x.id===item.id))return false;s.items.push({id:item.id,at:g.playTime,read:false});return true;}
  function refresh(g){for(const item of catalog(g))publish(g,{id:item.id});}
- function list(g){const c=catalog(g);return g.worldState.news.items.map(x=>({...c.find(y=>y.id===x.id),...x})).sort((a,b)=>b.at-a.at||b.id.localeCompare(a.id));}
+ function list(g){const c=catalog(g);return g.worldState.news.items.filter(x=>!x.dismissed).map(x=>({...c.find(y=>y.id===x.id),...x})).sort((a,b)=>b.at-a.at||b.id.localeCompare(a.id));}
  function read(g,id){const item=g.worldState.news.items.find(x=>x.id===id);if(!item)return false;item.read=true;return true;}
+ function dismiss(g,id){const item=g.worldState.news.items.find(x=>x.id===id);if(!item)return false;item.read=true;item.dismissed=true;return true;}
  function unread(g,section){return list(g).filter(x=>!x.read&&(!section||x.section===section));}
- function validate(g){const s=g.worldState.news,c=catalog(g);if(!s||!Array.isArray(s.items)||s.items.length>60||new Set(s.items.map(x=>x.id)).size!==s.items.length||s.items.some(x=>!c.some(y=>y.id===x.id)||typeof x.read!=='boolean'||!Number.isFinite(x.at)||x.at<0||x.at>g.playTime))throw Error('소식 읽음 기록 오류');g.worldState.news={items:s.items.map(x=>({id:x.id,read:x.read,at:x.at}))};}
- return {realmReady,catalog,publish,refresh,list,read,unread,validate};
+ function validate(g){const s=g.worldState.news,c=catalog(g);if(!s||!Array.isArray(s.items)||s.items.length>60||new Set(s.items.map(x=>x.id)).size!==s.items.length||s.items.some(x=>!c.some(y=>y.id===x.id)||typeof x.read!=='boolean'||(x.dismissed!==undefined&&typeof x.dismissed!=='boolean')||(x.dismissed&&!x.read)||!Number.isFinite(x.at)||x.at<0||x.at>g.playTime))throw Error('소식 읽음 기록 오류');g.worldState.news={items:s.items.map(x=>({id:x.id,read:x.read,at:x.at,...(x.dismissed?{dismissed:true}:{})}))};}
+ return {realmReady,catalog,publish,refresh,list,read,dismiss,unread,validate};
 });

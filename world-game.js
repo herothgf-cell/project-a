@@ -23,6 +23,7 @@
   refreshNews(){return News.refresh(this);}
   newsList(){return News.list(this);}
   readNews(id){return News.read(this,id);}
+  dismissNews(id){return News.dismiss(this,id);}
   unreadNews(section){return News.unread(this,section);}
   realmReady(){return News.realmReady(this);}
   restoreWorldEncounter(){Director.populate(this);Cycle.onEnter(this);this.applySevenPreparation?.();this.realityRuntime=null;}

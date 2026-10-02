@@ -420,3 +420,18 @@ body[data-world=murim],#dialog[data-world=murim]{
   #game .fate-buttons{grid-template-columns:repeat(3,60px);gap:6px}
   #game .fate-heading{display:none}
 }
+
+/* Point allocation instructions sit before the tree, not below the scroll fold. */
+#dialog .growth-point-guide{display:flex;align-items:center;gap:16px;padding:12px 16px;margin:0 0 12px;border:1px solid var(--ui-line);border-left:3px solid var(--ui-accent);background:rgba(var(--ui-rgb),.06)}
+#dialog .growth-point-guide>div{flex:1;min-width:0}
+#dialog .growth-point-guide strong{font-size:.9375rem;color:var(--ui-bright)}
+#dialog .growth-point-guide p{font-size:.875rem;line-height:1.6;margin:4px 0;color:var(--ui-text)}
+#dialog .growth-point-guide small{display:block;font-size:.8125rem;color:var(--ui-muted);line-height:1.5}
+#dialog .growth-point-guide .growth-reset{flex:none;white-space:nowrap}
+#dialog .growth-refund-confirm{padding:16px;margin-bottom:12px;border:1px solid var(--ui-accent);background:var(--ui-raised)}
+#dialog .growth-refund-confirm p{font-size:.9375rem}
+#dialog .growth-refund-confirm button{margin:4px 8px 4px 0}
+#dialog .growth-action-hint{flex:0 0 100%;margin:0;font-size:.875rem;line-height:1.5;color:var(--ui-accent);overflow-wrap:anywhere}
+@media(max-width:700px){#dialog .growth-point-guide{align-items:stretch;flex-direction:column;gap:10px;padding:12px}#dialog .growth-point-guide .growth-reset{align-self:flex-start}}
+
+.profile-shortcuts{display:flex;gap:8px;margin-top:16px}.profile-shortcuts>button{flex:1;min-height:48px}.profile-world,.profile-news .world-card{position:relative}.profile-world>.news-dot{position:absolute;right:12px;top:12px}.profile-news .world-card{padding:14px 24px}.profile-news .news-dot{position:absolute;right:12px;top:12px}
