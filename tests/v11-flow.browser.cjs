@@ -10,15 +10,10 @@ run(async p=>{
  await p.locator('#dialogActions').getByRole('button',{name:'입장하기',exact:true}).click();await p.waitForSelector('.dungeon-error');assert.equal(await p.evaluate(()=>__game.area),'city');
  await p.evaluate(()=>{ArtPreview.prepare=window.realPrepare;});
  await p.locator('#dialogActions').getByRole('button',{name:'다시 입장하기',exact:true}).click();await p.waitForFunction(()=>__game.area==='rift');await p.waitForFunction(()=>!document.querySelector('#dialog').open);
- await p.click('#menu');await p.locator('#dialogBody').getByRole('button',{name:'소리 설정',exact:true}).click();await p.locator('#dialogBody').getByRole('button',{name:'소리 끄기',exact:true}).click();await p.locator('#dialogBody').getByRole('button',{name:'소리 켜기',exact:true}).click();
- await p.evaluate(()=>{window.audioStarts=0;const start=OscillatorNode.prototype.start;OscillatorNode.prototype.start=function(...args){window.audioStarts++;return start.apply(this,args);};});
- const before=await p.evaluate(()=>({hp:__game.player.hp,gold:__game.gold,xp:__game.xp}));await p.getByRole('button',{name:'현실 반격 미리듣기',exact:true}).click();assert.deepEqual(await p.evaluate(()=>({hp:__game.player.hp,gold:__game.gold,xp:__game.xp})),before);
- assert.ok(await p.evaluate(()=>window.audioStarts>0),'preview starts an actual browser audio oscillator');
- assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('ssanggye.audio.v1')).muted),false);
- await p.screenshot({path:'.ssanggye-v11-review/audio-settings.png'});
+ await p.click('#menu');assert.equal(await p.locator('#sound').count(),0);assert.equal(await p.getByRole('button',{name:'소리 설정',exact:true}).count(),0);assert.equal(await p.locator('.audio-settings').count(),0);assert.equal(await p.evaluate(()=>typeof CombatAudio),'undefined');
  await p.keyboard.press('Escape');await p.evaluate(()=>{const g=__game;g.enter('city');const point=g.points().find(x=>x.kind==='dungeon-entry');Object.assign(g.player,{x:point.x,y:point.y});g.events=[];});await p.setViewportSize({width:360,height:640});await p.click('#interact');
  await p.locator('.dungeon-row').filter({hasText:'잊힌 지하역'}).click();assert.ok(await p.getByRole('button',{name:'목록으로',exact:true}).isVisible());await p.screenshot({path:'.ssanggye-v11-review/dungeon-mobile.png'});
  assert.ok(await p.locator('#dialog').evaluate(e=>e.scrollWidth<=e.clientWidth+2));
  await p.keyboard.press('Escape');await p.evaluate(()=>{const g=__game;g.enter('village');const point=g.points().find(x=>x.kind==='dungeon-entry');Object.assign(g.player,{x:point.x,y:point.y});g.events=[];});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.click('#interact');await p.waitForSelector('.dungeon-screen');assert.equal(await p.locator('#dialog .app-navigation').count(),0);assert.equal(await p.locator('#portrait').isVisible(),false);await p.keyboard.press('Escape');await p.click('#menu');assert.equal(await p.locator('#dialog .app-navigation').count(),1);
- console.log('real entry select/failure/retry, world boundary, audio preview and mobile detail passed');
+ console.log('real entry select/failure/retry, world boundary, disabled audio and mobile detail passed');
 });

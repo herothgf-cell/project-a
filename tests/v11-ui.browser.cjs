@@ -21,6 +21,6 @@ run(async p=>{
  await p.evaluate(()=>document.documentElement.style.fontSize='');await p.setViewportSize({width:1280,height:720});
  await p.screenshot({path:'.ssanggye-v11-review/growth-desktop.png'});
  await p.locator('.app-navigation').getByRole('button',{name:'임무',exact:true}).click();assert.match(await p.locator('#dialogBody').innerText(),/현재 행동/);
- await p.locator('.app-navigation').getByRole('button',{name:'설정',exact:true}).click();assert.ok(await p.locator('#dialog').getByRole('button',{name:'소리 설정',exact:true}).isVisible());
+ await p.locator('.app-navigation').getByRole('button',{name:'설정',exact:true}).click();assert.equal(await p.locator('#dialog').getByRole('button',{name:'소리 설정',exact:true}).count(),0);
  console.log('v1.1 navigation, input isolation, responsive and enlarged text verified');
 });
