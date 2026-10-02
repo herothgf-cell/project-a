@@ -49,7 +49,7 @@
 .has-news:has(>.news-dot)::after{display:none}
 .personal-news p{white-space:pre-line}.quest-result{border-left:3px solid var(--ui-accent);padding:12px;background:var(--ui-panel)}
 .main-navigation{margin-left:auto;order:2}.main-navigation button{min-height:48px;padding:8px 12px;font-size:14px;background:transparent;border:0;color:var(--ui-text)}
-.header-actions{order:3}.brand{display:none!important}.aside-sub,.aside-footer,footer em,#save{display:none}header .world-chip{max-width:240px}
+.header-actions{order:3}.brand{display:none}.aside-sub,.aside-footer,footer em,#save{display:none}header .world-chip{max-width:240px}
 #game #character{border:1px solid var(--ui-line);border-radius:8px;padding:0;background:var(--ui-panel);cursor:pointer;flex:none;min-width:48px;min-height:48px}
 #character canvas,#character #hudPortrait{display:block;pointer-events:none}
 #personalNews{min-width:48px;min-height:48px;font-size:14px}

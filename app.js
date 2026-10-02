@@ -50,6 +50,7 @@
     $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=Controls.format(body);else $('dialogBody').append(body);
     const isDialogue=!!body?.classList?.contains('speaker-scene')&&portrait!=='system';
     dialog.dataset.popupKind=isDialogue?'dialogue':'general';
+    dialog.dataset.world=body?.dataset?.world||WorldGrowth.worldOf(g);
     dialog.dataset.surface=typeof body==='string'?'message':body?.classList?.contains('speaker-scene')?'story':'workspace';
     $('portrait').hidden=!isDialogue;
     if(isDialogue)WorldArt.portrait($('portrait'),portrait);
@@ -196,7 +197,7 @@
     for(const btn of document.querySelectorAll('[data-action]')){const k=btn.querySelector('kbd');if(k)k.textContent=Controls.key(btn.dataset.action);}
     for(const [id,action]of [['inventory','growth'],['interact','interact'],['potion','potion'],['fieldNotes','notes'],['sense','sense'],['helpButton','help']]){const el=$(id);if(el){const k=el.querySelector('kbd');if(k)k.textContent=Controls.key(action);el.setAttribute('aria-label',Controls.labels[action]+' '+Controls.key(action));}}
     const a=AREAS[g.area],s=g.stats(),p=g.player,o=ObjectiveModel.resolve(g);
-    const murim=WorldGrowth.worldOf(g)==='murim';$('growthStatus').textContent='성장';$('growthStatus').title=g.training<1?'백련 수련 후 심법 해금':(g.journey.breath==='flow'?'유수':'집중')+' 운용';
+    const murim=WorldGrowth.worldOf(g)==='murim';const uiWorld=murim?'murim':'reality';if(document.body.dataset.world!==uiWorld)document.body.dataset.world=uiWorld;$('growthStatus').textContent='성장';$('growthStatus').title=g.training<1?'백련 수련 후 심법 해금':(g.journey.breath==='flow'?'유수':'집중')+' 운용';
     $('mpTrack').setAttribute('aria-label',murim?'내력':'자원');const resourceLabel=$('mpTrack').parentElement.querySelector('label'),resourceLow=performance.now()<resourceWarningUntil&&g.player.mp<resourceWarningCost;resourceLabel.textContent=(murim?'내력':'자원')+(resourceLow?' 부족':'');resourceLabel.classList.toggle('resource-warning',resourceLow);
     $('world').textContent=a.world;$('rank').textContent=murim?Advancement.describe(g,'realm').name:Advancement.describe(g,'hunter').name+'급 헌터';$('place').textContent=a.name;$('sub').textContent=a.sub;$('lv').textContent=g.level;$('gold').textContent=g.gold;
     for(const [id,val,max]of [['hp',p.hp,s.hp],['mp',p.mp,s.mp]]){$(id).style.width=Math.max(0,val/max*100)+'%';$(id+'Text').textContent=`${Math.ceil(val)} / ${max}`;$(id+'Track').setAttribute('aria-valuemin','0');$(id+'Track').setAttribute('aria-valuemax',String(max));$(id+'Track').setAttribute('aria-valuenow',String(Math.ceil(val)));}

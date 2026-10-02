@@ -1,0 +1,422 @@
+/* SSANGGYE · shared fantasy chrome. Layout foundations remain in the three
+   *-refresh stylesheets; all world colours and decorative surfaces live here. */
+:root,body[data-world=reality],#dialog[data-world=reality]{
+  --ui-accent:#8cd8ff;--ui-bright:#d7f2ff;--ui-rgb:79,172,255;
+  --ui-line:#395b76;--ui-bg:#070e18;--ui-panel:#0c1826;
+  --ui-raised:#142a40;--ui-text:#eef4fb;--ui-muted:#a9bbcd;
+  --ui-label:#c1cfdf;--ui-value:#a8e6ff;--ui-radius:2px;--skill-row:0%;--world-position:left;
+}
+body[data-world=murim],#dialog[data-world=murim]{
+  --ui-accent:#e9c582;--ui-bright:#fff0cd;--ui-rgb:219,171,91;
+  --ui-line:#706047;--ui-raised:#30291f;--ui-value:#f4dbab;--skill-row:100%;--world-position:right;
+}
+#game,#dialog{font-family:'Malgun Gothic',system-ui,sans-serif;color:var(--ui-text)}
+#game button,#dialog button,#title button{transition:background-color .15s,border-color .15s,box-shadow .15s;color:var(--ui-text)}
+#game button:focus-visible,#dialog button:focus-visible,#title button:focus-visible{
+  outline:2px solid var(--ui-bright);outline-offset:3px;box-shadow:0 0 18px rgba(var(--ui-rgb),.3);
+}
+#game button:hover:not(:disabled),#dialog button:hover:not(:disabled){border-color:var(--ui-accent);color:var(--ui-bright)}
+#game kbd,#dialog kbd{background:#080e17d9;border:1px solid var(--ui-line);border-radius:2px;color:var(--ui-bright)}
+
+/* Frame: narrow metal edges, an illuminated upper edge and inset corner marks. */
+#game .hud,#game .map-card,#game #objective,#game #boss,#game #interact,#game #potion,#game .journey-tools button{
+  border:1px solid var(--ui-line);border-radius:2px;
+  background:linear-gradient(120deg,rgba(var(--ui-rgb),.08),transparent 55%),linear-gradient(#0b1523f2,#070e18ed);
+  box-shadow:inset 0 1px rgba(var(--ui-rgb),.2),inset 0 0 0 3px #08111b80,0 5px 20px #0005;
+}
+#game{background:#070e16;grid-template-rows:60px minmax(0,1fr) 28px}
+#game>header{
+  padding:0 24px;gap:24px;background:linear-gradient(90deg,#070e18,#101e2b 48%,#070e18);
+  border-bottom:1px solid var(--ui-line);box-shadow:0 2px 14px #0008;position:relative;z-index:5;
+}
+#game .brand{display:flex;gap:12px;align-items:center;min-width:150px}
+#game .brand>span{display:none}
+#game .brand>b{font:700 28px/1.1 'Batang',serif;letter-spacing:.14em;color:#edf5ff;text-shadow:0 0 18px rgba(var(--ui-rgb),.35)}
+#game .brand small{display:block;font:9px/1.5 system-ui;letter-spacing:.23em;margin-top:4px;color:var(--ui-muted)}
+#game .world-chip{display:flex;align-items:center;gap:10px;padding:0 0 0 20px;border-left:1px solid var(--ui-line);border-radius:0;color:var(--ui-accent)}
+#game .world-chip i{background:var(--ui-accent);box-shadow:0 0 10px rgba(var(--ui-rgb),.7)}
+#game .world-chip b{font:600 18px/1.4 'Batang',serif;color:var(--ui-accent);letter-spacing:.12em}
+#game #rank{font-size:12px;color:var(--ui-muted)}
+#game .header-actions{margin-left:auto;gap:10px}
+#game .header-actions button{border-radius:2px;background:transparent;font-size:13px}
+#game .main-navigation{gap:4px}
+#game .main-navigation button,#game #growthStatus{
+  border:1px solid transparent;background:transparent;border-radius:2px;color:var(--ui-label);
+  min-width:58px;min-height:52px;padding:5px 10px;font-size:13px;font-weight:500;
+}
+#game .main-navigation button::before{
+  content:'';display:block;width:22px;height:22px;margin:0 auto 4px;background:currentColor;
+  mask:center/contain no-repeat var(--nav-icon);opacity:.95;
+}
+#game .main-navigation button:nth-child(1){--nav-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.5'%3E%3Ccircle cx='12' cy='7' r='3'/%3E%3Cpath d='M5 21v-4a7 7 0 0114 0v4M8 21v-5m8 5v-5'/%3E%3C/g%3E%3C/svg%3E")}
+#game .main-navigation button:nth-child(2){--nav-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.5'%3E%3Cpath d='M12 2l9 10-9 10L3 12zM12 6v12M8 12l4-4 4 4'/%3E%3C/g%3E%3C/svg%3E")}
+#game .main-navigation button:nth-child(3){--nav-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.5'%3E%3Cpath d='M7 3h12v18H5V5h2zM9 3v5h6V3M9 12h6m-6 4h6'/%3E%3C/g%3E%3C/svg%3E")}
+#game .main-navigation button:nth-child(4){--nav-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.5'%3E%3Cpath d='M12 5C9 3 5 3 2 4v15c4-1 7-1 10 1 3-2 6-2 10-1V4c-3-1-7-1-10 1v15M5 7l4 1m-4 3l4 1m6-4l4-1m-4 5l4-1'/%3E%3C/g%3E%3C/svg%3E")}
+#game .main-navigation button:nth-child(5){--nav-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.5'%3E%3Cpath d='M10 2h4l1 3 3 1 3 4v4l-3 4-3 1-1 3h-4l-1-3-3-1-3-4v-4l3-4 3-1z'/%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/g%3E%3C/svg%3E")}
+#game #growthStatus{color:var(--ui-accent);border-color:var(--ui-line);background:linear-gradient(0deg,rgba(var(--ui-rgb),.14),transparent)}
+
+/* Field HUD. World identity is carried by colour as well as its written label. */
+#game .hud{padding:12px 14px 12px 8px;width:330px;gap:10px;border-left:2px solid var(--ui-accent)}
+#game #character{min-width:58px;min-height:64px;border:1px solid var(--ui-accent);border-radius:50%;background:radial-gradient(ellipse,#243448,#080e17);box-shadow:0 0 0 3px #070d16,0 0 0 4px var(--ui-line);overflow:hidden}
+#game #character #hudPortrait{width:56px;height:64px;border-radius:0;background:transparent}
+#game .level b{font-family:'Batang',serif;color:var(--ui-bright)}
+#game .level small{font:10px/1.5 system-ui;letter-spacing:.1em}
+#game .vitals{gap:7px}
+#game .vitals label{font-size:12px;color:#c1cdda}
+#game .vitals b{font-size:13px;font-weight:500;font-variant-numeric:tabular-nums}
+#game .vitals i{height:10px;background:#020710;border:1px solid #455465;border-radius:0;transform:skewX(-15deg);overflow:hidden}
+#game .vitals u{background:linear-gradient(#f06b6b,#a82239);box-shadow:0 0 7px #f04b5344;border-top:1px solid #ffb5a9}
+#game .vitals .mana u{background:linear-gradient(#67c7ee,#21638f);border-color:#a4e7ff}
+#game .place{top:121px}
+#game .place h2{font:600 19px/1.5 'Batang',serif;letter-spacing:.08em;text-shadow:0 2px 6px #000}
+#game .world-badge{top:152px;color:var(--ui-accent);font:10px/1.5 system-ui;letter-spacing:.16em;text-shadow:0 2px 4px #000}
+#game .journey-tools{top:180px}
+#game .journey-tools button{font-size:13px;min-height:44px;padding:8px 14px}
+#game>aside{top:78px;width:202px}
+#game .map-card{padding:7px}
+#game .map-card>div{font-size:12px;color:var(--ui-bright)}
+#game .map-card button{font-size:12px;min-height:44px;color:var(--ui-accent)}
+#game .map-card canvas{border-radius:0;border:1px solid #43505b;height:120px}
+#game #objective{top:214px;width:260px;max-width:260px;border-left:2px solid var(--ui-accent);padding:14px;box-shadow:inset 0 1px rgba(var(--ui-rgb),.22),0 6px 22px #0005}
+#game #objectiveArrow{color:var(--ui-accent);font-size:24px}
+#game #objectiveTarget{color:var(--ui-bright);font-size:15px;font-weight:600}
+#game #objectiveHint{font-size:12px;line-height:1.7;color:var(--ui-muted)}
+#game .route-label{font:10px/1.8 'Malgun Gothic',sans-serif;letter-spacing:.14em;color:var(--ui-accent)}
+#game #boss{border-color:#795052;background:linear-gradient(#200e17ed,#080e18f2);border-radius:2px}
+#game #boss>i{border-radius:0;background:#100b10;border:1px solid #805458;height:10px}
+#game #boss>span{font:600 15px/1.5 'Batang',serif}
+#game #interact{border-color:var(--ui-accent);border-radius:2px;font-size:14px;min-height:48px}
+#game #interact.near{box-shadow:0 0 18px rgba(var(--ui-rgb),.25),inset 0 0 12px rgba(var(--ui-rgb),.1)}
+#game #potion{font-size:13px;color:#d8e8de}
+#game .toast{border:1px solid var(--ui-line);border-left:2px solid var(--ui-accent);border-radius:2px;background:#08111af5;font-size:14px;box-shadow:0 6px 22px #0007}
+#game>footer{background:#070e17;border-top:1px solid var(--ui-line);font-size:11px;letter-spacing:.04em}
+#game>footer small,#game>footer>b{font-size:11px;color:var(--ui-accent)}
+#game>footer>i{height:4px;background:#1e2a37}#game #xp{background:var(--ui-accent);box-shadow:0 0 8px rgba(var(--ui-rgb),.4)}
+
+/* Skill tiles use the existing SVG icon set, with metal corners and a distinct keycap. */
+#game .actions>button,#game .fate-buttons>button,#game .actions .attack{
+  border:1px solid var(--ui-line);border-radius:2px;
+  background:linear-gradient(135deg,rgba(var(--ui-rgb),.19),transparent 48%),radial-gradient(ellipse at 50% 100%,rgba(var(--ui-rgb),.2),#07111e 80%);
+  box-shadow:inset 0 0 0 3px #07101bab,inset 0 0 15px rgba(var(--ui-rgb),.12),0 4px 12px #0009;
+}
+#game .actions>button::after,#game .fate-buttons>button::after{
+  content:'';position:absolute;inset:3px;pointer-events:none;
+  background:linear-gradient(var(--ui-accent),var(--ui-accent)) left top/9px 1px no-repeat,linear-gradient(var(--ui-accent),var(--ui-accent)) left top/1px 9px no-repeat,linear-gradient(var(--ui-accent),var(--ui-accent)) right bottom/9px 1px no-repeat,linear-gradient(var(--ui-accent),var(--ui-accent)) right bottom/1px 9px no-repeat;
+  opacity:.65;
+}
+#game .actions>button>span,#game .fate-buttons>button>span,#game .actions .attack>span{color:var(--ui-accent);filter:drop-shadow(0 0 5px rgba(var(--ui-rgb),.6))}
+#game .combat-icon{width:28px;height:28px}
+#game .actions small,#game .fate-buttons small{font-size:12px;line-height:1.3;color:#e2eaf4}
+#game .actions kbd,#game .fate-buttons kbd{font:10px/1.5 system-ui;color:var(--ui-bright);letter-spacing:.08em}
+#game .actions .attack{border-color:var(--ui-accent)}
+#game .actions .locked,#game .fate-buttons .locked{filter:grayscale(1);opacity:.65;background:#101820}
+#game .fate-heading{font-size:12px;color:var(--ui-accent)}
+#game .fate-heading small{font-size:11px}
+#game .fate-meter{border-radius:0;border-color:var(--ui-line);background:#060d18}
+#game .fate-meter b{font-size:11px}
+
+/* Shared popup surfaces and controls. Real content remains selectable HTML. */
+#dialog,#dialog.growth-workspace-dialog{
+  padding:24px;border:1px solid var(--ui-line);border-top:2px solid var(--ui-accent);border-radius:2px;
+  background:radial-gradient(ellipse at 0 0,rgba(var(--ui-rgb),.1),transparent 52%),linear-gradient(135deg,#0e1a29,#070d16 72%);
+  box-shadow:0 30px 100px #000b,0 0 0 4px #060c1499,inset 0 0 0 4px #6b8a9f0a;
+}
+#dialog::backdrop{background:#02060bbd;backdrop-filter:blur(5px)}
+#dialog .dialog-heading{padding-bottom:16px;border-bottom:1px solid var(--ui-line);margin-bottom:16px}
+#dialog #dialogTitle{font:600 1.5rem/1.5 'Batang','Malgun Gothic',serif;color:var(--ui-bright);letter-spacing:.07em}
+#dialog #dialogTitle::before{content:'◇';display:inline-block;color:var(--ui-accent);margin-right:12px;text-shadow:0 0 12px rgba(var(--ui-rgb),.7)}
+#dialog #dialogKicker{color:var(--ui-accent);font-size:.75rem;letter-spacing:.12em}
+#dialog #dialogBody{font-size:1rem;line-height:1.8;scrollbar-color:var(--ui-line) #08101a}
+#dialog #dialogActions{border-top:1px solid var(--ui-line);padding-top:16px;margin-top:12px}
+#dialog button:not(.icon-button){border-radius:2px;font-size:.9375rem;min-height:48px}
+#dialog button.secondary,#dialog .settings-options button,#dialog .records-screen>button{
+  background:linear-gradient(#152131,#09121e);border:1px solid var(--ui-line);color:var(--ui-label);
+}
+#dialog button.primary,#dialog .growth-footer button.primary{
+  background:linear-gradient(120deg,rgba(var(--ui-rgb),.27),rgba(var(--ui-rgb),.06)),#0c1724;
+  border:1px solid var(--ui-accent);color:var(--ui-bright);box-shadow:inset 0 0 12px rgba(var(--ui-rgb),.16),0 0 10px rgba(var(--ui-rgb),.1);
+}
+#dialog button.danger{background:linear-gradient(#431924,#240e16);border-color:#b54a57;color:#ffd3ce}
+#dialog button:disabled{opacity:.6;filter:grayscale(.8);box-shadow:none;cursor:not-allowed}
+#dialog #closeDialog{border:1px solid var(--ui-line);border-radius:2px;background:#0a1320;color:var(--ui-muted)}
+#dialog h3{color:var(--ui-bright);font-family:'Batang','Malgun Gothic',serif}
+#dialog .app-navigation,#dialog .character-tabs,#dialog .growth-sections,#dialog .growth-tabs{border-radius:0;background:#07101b;border:1px solid var(--ui-line);gap:0;padding:3px}
+#dialog .app-navigation button{font-size:.875rem;background:transparent}
+#dialog button[aria-pressed=true],#dialog .profile-world[aria-pressed=true],#dialog .world-comparison button[aria-pressed=true],#dialog .growth-tabs button[aria-pressed=true]{
+  border:1px solid var(--ui-accent);background:linear-gradient(0deg,rgba(var(--ui-rgb),.22),rgba(var(--ui-rgb),.03));
+  color:var(--ui-bright);box-shadow:inset 0 -2px var(--ui-accent),inset 0 0 16px rgba(var(--ui-rgb),.08);
+}
+#dialog .development-section,#dialog .world-card,#dialog .tree-detail,#dialog .growth-detail,#dialog .growth-tree-panel,#dialog .growth-values,#dialog .growth-stat-table,#dialog .allocation-card,#dialog .news-item,#dialog .profile-stats{
+  background:linear-gradient(130deg,#101d2bcc,#07101b);border:1px solid var(--ui-line);border-radius:2px;box-shadow:inset 0 1px #ffffff05;
+}
+#dialog .character-screen .stat-grid>div{border-color:var(--ui-line);border-radius:2px;background:#0b1623}
+#dialog .profile-world{border:1px solid var(--ui-line);background:radial-gradient(ellipse at 20% 80%,rgba(var(--ui-rgb),.2),#08131f 75%);border-radius:2px;min-height:170px}
+#dialog .profile-world img{height:160px;width:124px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(var(--ui-rgb),.18))}
+#dialog .profile-world>span{font-family:'Batang',serif;letter-spacing:.15em}
+#dialog .profile-stat+.profile-stat{border-color:var(--ui-line)}
+#dialog .profile-stat-icon,#dialog .profile-level,#dialog .profile-equipped{color:var(--ui-accent)}
+#dialog .profile-stat strong{font-family:'Batang',serif;font-size:1.75rem;color:var(--ui-bright)}
+#dialog .profile-equipped{border-color:var(--ui-line)}
+#dialog .profile-exp progress{accent-color:var(--ui-accent)}
+#dialog .tree-node{border-radius:2px!important;background:#0b1725;border-color:var(--ui-line)}
+#dialog .tree-node[aria-pressed=true]{border-color:var(--ui-accent);background:var(--ui-raised);box-shadow:inset 3px 0 var(--ui-accent)}
+#dialog .news-item.has-news{border-left:3px solid var(--ui-accent);background:linear-gradient(90deg,rgba(var(--ui-rgb),.12),#0b1420)}
+#dialog .growth-workspace{--growth-accent:var(--ui-accent)}
+#dialog .growth-context{font-size:.875rem;color:var(--ui-muted);border-color:var(--ui-line)}
+#dialog .world-tag{border:1px solid var(--ui-line);border-radius:2px;color:var(--ui-accent);background:rgba(var(--ui-rgb),.08);padding:5px 12px}
+#dialog .growth-budget{color:var(--ui-accent);font-size:.9375rem;letter-spacing:.02em}
+#dialog .growth-tree-panel{
+  background:radial-gradient(circle at 50% 46%,transparent 24%,rgba(var(--ui-rgb),.1) 24.3%,transparent 24.8%,transparent 37%,rgba(var(--ui-rgb),.1) 37.3%,transparent 37.8%),radial-gradient(ellipse at center,rgba(var(--ui-rgb),.09),#080f1b 70%);
+}
+#dialog .growth-glyph{border:1px solid var(--ui-accent);background:radial-gradient(ellipse,rgba(var(--ui-rgb),.2),#0a1320 70%);color:var(--ui-accent);box-shadow:0 0 0 4px #091321,0 0 0 5px var(--ui-line),0 0 20px rgba(var(--ui-rgb),.14)}
+#dialog .growth-workspace .passive-node[aria-pressed=true]{border:0;background:transparent;box-shadow:none}
+#dialog .growth-workspace .growth-sections>button[aria-pressed=true],#dialog .growth-workspace .growth-list>button[aria-pressed=true]{background:linear-gradient(0deg,rgba(var(--ui-rgb),.18),transparent);box-shadow:inset 0 -2px var(--ui-accent)}
+#dialog .growth-list{border-radius:2px;border-color:var(--ui-line);background:#0a1522;padding:12px}
+#dialog .growth-values>strong{font-size:1.125rem;word-break:keep-all}
+#dialog .dialog-speaker{color:var(--ui-accent)}
+#dialog .quest-result{border-color:var(--ui-accent);background:rgba(var(--ui-rgb),.08)}
+#dialog .route-detail h3{color:var(--ui-accent);font-family:inherit;font-size:.8125rem;letter-spacing:.08em;border-top:1px solid var(--ui-line);padding-top:14px}
+#dialog .route-detail h3:first-child{border-top:0;padding-top:0}
+#dialog .route-detail p,#dialog .route-detail li{font-size:1rem}
+#dialog .dungeon-row[aria-pressed=true]{background:var(--ui-raised);border-color:var(--ui-accent);box-shadow:inset 3px 0 var(--ui-accent)}
+#dialog .passive-node[aria-pressed=true] .growth-glyph{border-color:var(--ui-bright);color:var(--ui-bright);box-shadow:0 0 0 4px #142030,0 0 0 5px var(--ui-accent),0 0 24px rgba(var(--ui-rgb),.38)}
+#dialog .passive-node[data-status=locked] .growth-glyph{color:#98a8b9;border-color:#65768b;background:#15202b;box-shadow:0 0 0 4px #0b1420}
+#dialog .tree-connections path{stroke:var(--ui-line)}
+#dialog .tree-connections path.learned{stroke:var(--ui-accent);filter:drop-shadow(0 0 4px rgba(var(--ui-rgb),.35))}
+#dialog .growth-condition{border-color:var(--ui-accent);background:rgba(var(--ui-rgb),.08);font-size:.9375rem}
+#dialog .growth-progression .growth-stage{border-radius:2px;background:#0b1420;border-color:var(--ui-line)}
+#dialog .growth-progression .current{background:rgba(var(--ui-rgb),.12);border-color:var(--ui-accent);color:var(--ui-bright)}
+#dialog .growth-confirm{border:1px solid var(--ui-accent);border-radius:2px;background:var(--ui-raised)}
+#dialog .growth-stat-row{border-color:var(--ui-line)}
+#dialog .node-level{font-size:.8125rem;color:var(--ui-muted)}
+#dialog .node-name{font-size:.9375rem}
+
+/* Opening screen shares the silver-blue / gold art direction. */
+#title .title-copy h1{font-family:'Batang',serif;color:#edf5ff;text-shadow:0 0 35px #93c8ff44;font-weight:700}
+#title .title-copy h2{font-family:'Batang',serif;letter-spacing:.2em;color:#d9c49a}
+#title .gold-line{background:linear-gradient(90deg,#65b8f4,#e6c27d,transparent)}
+#title .title-buttons button{border-radius:2px}
+#title .title-buttons .primary{color:#e6f4ff;border:1px solid #7fb9e0;background:linear-gradient(110deg,#153e60,#0b1728);box-shadow:inset 0 0 22px #60b9ff20,0 0 20px #398ad21a}
+#title .title-buttons .secondary{background:#0b1422d9;border:1px solid #6f798b;color:#c9d7e5}
+
+@media(min-width:1024px){
+  #dialog .growth-sections>button{flex:0 1 180px}
+  #dialog .growth-workspace .passive-tree{grid-template-rows:repeat(4,7rem);margin-top:20px}
+  #dialog .growth-workspace .passive-tree[data-deep=false]{grid-template-rows:repeat(3,7rem)}
+  #dialog .growth-workspace .tree-connections{height:28rem}
+  #dialog .growth-workspace .passive-tree[data-deep=false] .tree-connections{height:21rem}
+  #dialog .growth-workspace .passive-node{height:6.75rem}
+  #game .main-navigation{position:fixed;right:20px;bottom:42px;padding:6px 8px;border:1px solid var(--ui-line);background:linear-gradient(#0c1725ed,#070d17ed);box-shadow:0 5px 20px #0006}
+  #game .actions{left:50%;right:auto;bottom:20px;transform:translateX(-50%);width:344px;grid-template-columns:repeat(4,80px);gap:8px}
+  #game .actions>button{width:80px;height:82px;padding:8px 2px}
+  #game .actions .attack{grid-column:auto;width:80px}
+  #game #fateControls{left:50%;right:auto;bottom:118px;transform:translateX(-50%);width:256px}
+  #game .fate-buttons{grid-template-columns:repeat(3,80px)}
+  #game .fate-buttons>button{width:80px;height:72px}
+  #game #interact{bottom:90px}
+  #game #stick{bottom:150px}
+}
+@media(min-width:1024px) and (max-width:1199px){
+  #game .main-navigation{right:12px;padding:4px}
+  #game .main-navigation button{min-width:48px;padding:5px 7px}
+  #game .actions{left:46%;width:312px;grid-template-columns:repeat(4,72px)}
+  #game .actions>button,#game .actions .attack{width:72px}
+  #game #fateControls{left:46%}
+}
+@media(max-width:1023px){
+  #game{grid-template-rows:60px minmax(0,1fr) 28px}
+  #game>header{padding:0 8px;gap:8px;min-height:60px}
+  #game .brand,#game header .world-chip,#game .header-actions{display:none}
+  #game .main-navigation{position:static;flex:1;justify-content:space-around;gap:2px}
+  #game .main-navigation button,#game #growthStatus{min-height:52px;min-width:48px;padding:5px 8px;font-size:12px}
+  #game .main-navigation button::before{width:20px;height:20px;margin-bottom:3px}
+  #game .hud{width:300px;padding:8px;gap:8px}
+  #game .place{top:109px;left:12px}#game .world-badge{top:139px;left:12px}
+  #game .journey-tools{top:165px;left:12px}
+  #game #objective{top:12px;width:260px;max-width:40%;padding:10px}
+  #game #objectiveTarget{font-size:14px}
+  #game .actions>button,#game .fate-buttons>button{height:64px;border-radius:2px}
+  #game .actions .attack{border-radius:2px}
+  #game .actions small,#game .fate-buttons small{font-size:12px;line-height:1.25}
+  #game #fateControls{bottom:152px}
+  #game #interact{bottom:190px;font-size:13px}
+}
+@media(max-width:600px){
+  #game .hud{width:calc(100% - 24px);top:10px}
+  #game .place{top:108px;max-width:124px}#game .place h2{font-size:15px}
+  #game .world-badge{top:134px;letter-spacing:.03em;font-size:9px}
+  #game #objective{top:158px;left:12px;right:12px;width:auto;max-width:none;padding:7px 10px;min-height:48px}
+  #game #objectiveTarget{font-size:14px}
+  #game .journey-tools{top:auto;bottom:244px}
+  #game .journey-tools button{min-height:44px;font-size:13px}
+  #game #boss{top:109px;left:144px;right:12px}
+  #game #boss>span{font-size:12px}
+  #game>footer{padding:0 12px}#game>footer small{font-size:10px}
+  #dialog,#dialog.growth-workspace-dialog{padding:16px 12px;max-height:calc(100dvh - 16px)}
+  #dialog #dialogTitle{font-size:1.125rem;letter-spacing:.03em}
+  #dialog #dialogTitle::before{margin-right:8px}
+  #dialog .dialog-heading{padding-bottom:12px}
+  #dialog[data-popup-kind=general] .dialog-top{right:12px;top:14px}
+  #dialog .profile-world{min-height:148px}#dialog .profile-world img{height:106px;width:86px}
+  #dialog .growth-context{gap:8px}
+}
+@media(max-height:520px) and (min-width:601px){
+  #game{grid-template-rows:52px minmax(0,1fr) 0}
+  #game>header{min-height:52px}#game .main-navigation button,#game #growthStatus{min-height:46px}
+  #game .main-navigation button::before{width:16px;height:16px;margin-bottom:1px}
+  #game .hud{padding:6px;width:290px}
+  #game .place{top:93px}#game .world-badge{top:119px}
+  #game .journey-tools{top:auto;bottom:12px;left:132px}
+  #game #objective{top:8px;width:240px;max-width:30%;padding:8px}
+  #game #interact{bottom:12px;left:250px}
+  #game .actions>button,#game .fate-buttons>button{height:60px}
+  #game #fateControls{bottom:144px}
+}
+@media(prefers-reduced-motion:reduce){#game button,#dialog button,#title button{transition:none}}
+
+/* Illustrated concept pass: artwork sits beneath live labels and controls. */
+#title{background:#050b14 url('assets/ui/world-panorama.webp') center/cover no-repeat}
+#title #cover{opacity:0}
+#title .cover-shade{background:linear-gradient(90deg,#050b14cf,transparent 65%),linear-gradient(0deg,#050b14,transparent 50%)}
+#title .title-copy{top:49%;left:8%}
+#title .title-copy h1{font-size:clamp(84px,9vw,144px);letter-spacing:.14em;text-shadow:0 2px 0 #4c7088,0 0 36px #5b9adc55}
+#title .title-description{color:#d1dae7}
+#title .title-buttons .primary{border-color:#a1dbff;background:linear-gradient(120deg,#1c4c75cc,#091626f2);box-shadow:inset 0 0 0 3px #050d1880,inset 0 0 22px #69bfff35,0 0 14px #4fabef40}
+#game>header{background:linear-gradient(90deg,#060d18 8%,#060d18aa 50%,#060d18 88%),url('assets/ui/world-panorama.webp') center 32%/cover}
+#game .brand>b{font-size:30px;font-style:italic}
+#game .world-chip{padding:7px 20px;border:1px solid var(--ui-line);background:radial-gradient(ellipse,rgba(var(--ui-rgb),.14),transparent);clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%)}
+#game .hud{border-color:var(--ui-accent);box-shadow:inset 0 0 0 3px #030911aa,0 0 0 1px #060b15,0 0 16px rgba(var(--ui-rgb),.14)}
+#game .vitals i{height:12px;box-shadow:0 0 0 2px #06101b,0 0 0 3px #72839160}
+#game .map-card{border-color:var(--ui-line);background:linear-gradient(#070e18ef,#0a1421f5);box-shadow:inset 0 0 0 3px #7999b20d,0 0 18px #0007}
+#game #objective{border:1px solid var(--ui-accent);box-shadow:inset 0 0 0 3px #030a12aa,inset 3px 0 var(--ui-accent),0 0 12px rgba(var(--ui-rgb),.16)}
+#game .route-label{color:var(--ui-accent);letter-spacing:.16em}
+#game #objectiveArrow{display:grid;place-items:center;width:30px;min-width:30px;height:40px;background:rgba(var(--ui-rgb),.12);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);text-shadow:0 0 12px var(--ui-accent)}
+#game .actions>button,#game .fate-buttons>button{overflow:hidden;background:#040a12;box-shadow:0 0 0 2px #030810,inset 0 0 0 2px #66859a70,0 0 18px rgba(var(--ui-rgb),.12)}
+#game [data-action]{--skill-x:0%}
+#game [data-action=storm],#game [data-action=ultimate]{--skill-x:33.333333%}
+#game [data-action=dash]{--skill-x:66.666667%}
+#game [data-action=signature2]{--skill-x:100%}
+#game .actions>button>span,#game .fate-buttons>button>span{
+  position:absolute;display:block;top:2px;left:50%;transform:translateX(-50%);width:68px;height:68px;
+  background:#03070c url('assets/ui/skill-atlas.webp') var(--skill-x) var(--skill-row)/400% 200% no-repeat;
+  filter:none;color:transparent;font-size:0;
+}
+#game .actions>button>span svg,#game .fate-buttons>button>span svg{visibility:hidden}
+#game .actions>button::after,#game .fate-buttons>button::after{z-index:3;inset:2px;opacity:1}
+#game .actions small,#game .fate-buttons small{position:absolute;z-index:4;bottom:5px;left:2px;right:2px;margin:0;font-size:16px;line-height:1.2;font-weight:600;text-shadow:0 1px 3px #000,0 0 6px #000;background:linear-gradient(transparent,#030710db);padding:5px 0 0}
+#game .actions kbd,#game .fate-buttons kbd{position:absolute;z-index:4;top:3px;left:4px;border:0;background:#040b16b0;padding:0 3px;color:#f4e7c9;font-size:11px;text-shadow:0 1px 3px #000}
+#game .actions>button em,#game .fate-buttons>button em{z-index:5;text-shadow:0 1px 3px #000}
+#game .actions .locked>span,#game .fate-buttons .locked>span{filter:grayscale(1);opacity:.35}
+#game .main-navigation{border-top-color:var(--ui-accent);background:linear-gradient(#101d2f,#060c16);box-shadow:0 0 0 2px #050a13,inset 0 0 0 3px #7599b011,0 5px 20px #0007}
+#game .main-navigation button::before{filter:drop-shadow(0 0 5px rgba(var(--ui-rgb),.45))}
+#game #growthStatus{border:1px solid var(--ui-accent);box-shadow:inset 0 0 12px rgba(var(--ui-rgb),.2),0 0 8px rgba(var(--ui-rgb),.15)}
+#game #interact{background:linear-gradient(100deg,rgba(var(--ui-rgb),.16),transparent),#070e18f0}
+
+/* Full-width illustrated heading; controls keep their native focus behavior. */
+#dialog,#dialog.growth-workspace-dialog{border:1px solid var(--ui-accent);background:linear-gradient(125deg,#101b29,#060c16 68%);box-shadow:0 30px 100px #000d,0 0 0 4px #040911c9,inset 0 0 0 3px #7890aa16}
+#dialog .dialog-heading,#dialog[data-popup-kind=general] .dialog-heading{
+  margin:-24px -24px 20px;padding:22px 82px 22px 26px;min-height:106px;
+  border-bottom:1px solid var(--ui-accent);
+  background:linear-gradient(90deg,#050d18e8,#07111c80 65%,#07111cad),url('assets/ui/world-panorama.webp') var(--world-position) 35%/200% auto;
+  box-shadow:inset 0 -4px 0 #01050a88;
+}
+#dialog[data-popup-kind=dialogue] .dialog-heading{margin-top:0}
+#dialog .dialog-top{position:relative;z-index:2}
+#dialog[data-popup-kind=general] .dialog-top{top:24px;right:22px}
+#dialog #dialogTitle{font-size:1.65rem;text-shadow:0 0 18px rgba(var(--ui-rgb),.65),0 2px 5px #000}
+#dialog #dialogTitle::before{font-size:1.7rem;text-shadow:0 0 10px var(--ui-accent)}
+#dialog #closeDialog{background:#07111bd9;border:1px solid var(--ui-accent);box-shadow:inset 0 0 0 3px #80bbd910}
+#dialog button.primary,#dialog .growth-footer button.primary{background:linear-gradient(135deg,rgba(var(--ui-rgb),.36),rgba(var(--ui-rgb),.06)),#0b1727;box-shadow:inset 0 0 0 3px #01081088,inset 0 0 20px rgba(var(--ui-rgb),.28),0 0 12px rgba(var(--ui-rgb),.2)}
+#dialog button[aria-pressed=true]:not(.passive-node){text-shadow:0 0 12px rgba(var(--ui-rgb),.7)}
+#dialog .app-navigation,#dialog .character-tabs,#dialog .growth-sections,#dialog .growth-tabs{background:linear-gradient(#111f31,#070e18);padding:3px;border-color:var(--ui-line);box-shadow:inset 0 0 0 1px #040912}
+#dialog .growth-workspace .growth-sections>button[aria-pressed=true],#dialog .growth-workspace .growth-list>button[aria-pressed=true]{background:linear-gradient(0deg,rgba(var(--ui-rgb),.25),transparent);box-shadow:inset 0 0 12px rgba(var(--ui-rgb),.15),inset 0 -2px var(--ui-accent),0 0 8px rgba(var(--ui-rgb),.12)}
+#dialog .growth-workspace{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px}
+#dialog .growth-workspace>*{grid-column:1/-1}
+#dialog .growth-workspace>.growth-sections{grid-column:1;margin:0 0 12px}
+#dialog .growth-workspace>.growth-budget{grid-column:2;align-self:center;margin:0 0 12px;padding:12px 0;font-size:.875rem}
+#dialog .growth-workspace>details{margin:0 0 12px;font-size:.8125rem;color:var(--ui-muted)}
+#dialog .growth-tree-panel{position:relative;isolation:isolate;overflow:hidden;min-height:440px;background:radial-gradient(ellipse at 50% 50%,rgba(var(--ui-rgb),.14),#07111ee6 70%);border-color:var(--ui-line)}
+#dialog .growth-tree-panel::before{content:'';position:absolute;z-index:-1;left:50%;top:90px;transform:translateX(-50%);width:280px;height:280px;max-width:90%;background:url('assets/ui/skill-atlas.webp') 100% var(--skill-row)/400% 200%;opacity:.26;mix-blend-mode:screen;pointer-events:none}
+#dialog .growth-tree-panel .eyebrow{font-size:.625rem;letter-spacing:.2em;color:var(--ui-accent);margin:4px 0}
+#dialog .growth-tree-panel h3{font-size:1.6rem;letter-spacing:.12em;margin:8px 0}
+#dialog .growth-tree-panel .tree-caption{font-size:.8125rem;color:var(--ui-muted);margin:0}
+#dialog .growth-glyph{font-size:0!important;color:transparent!important;--skill-x:100%;background:#050a12 url('assets/ui/skill-atlas.webp') var(--skill-x) var(--skill-row)/400% 200%;width:54px;height:54px;border:1px solid var(--ui-accent);box-shadow:0 0 0 3px #081221,0 0 0 4px var(--ui-line),0 0 16px rgba(var(--ui-rgb),.3)}
+#dialog [data-node=F1] .growth-glyph,#dialog [data-node=C1] .growth-glyph{--skill-x:0%}
+#dialog [data-node=F2] .growth-glyph,#dialog [data-node=C2] .growth-glyph{--skill-x:33.333333%}
+#dialog [data-node=F3] .growth-glyph,#dialog [data-node=C3] .growth-glyph{--skill-x:66.666667%}
+#dialog .passive-node[aria-pressed=true] .growth-glyph{background-image:url('assets/ui/skill-atlas.webp');box-shadow:0 0 0 3px #081221,0 0 0 5px var(--ui-accent),0 0 25px rgba(var(--ui-rgb),.5)}
+#dialog .passive-node[data-status=locked] .growth-glyph{background:#050a12 url('assets/ui/skill-atlas.webp') var(--skill-x) var(--skill-row)/400% 200%;filter:grayscale(1);opacity:.5}
+#dialog .growth-detail{background:linear-gradient(145deg,#142234,#080f1a 60%);border-top:1px solid var(--ui-accent);box-shadow:inset 0 0 0 3px #678aac08}
+#dialog .growth-detail>.eyebrow{color:var(--ui-accent);font-size:.75rem;letter-spacing:.12em}
+#dialog .growth-detail>h3{font-size:1.6rem;text-shadow:0 0 16px rgba(var(--ui-rgb),.15)}
+#dialog .growth-detail .effect-description{font-size:1rem}
+#dialog .growth-values{background:linear-gradient(100deg,rgba(var(--ui-rgb),.07),#08121e);border-color:var(--ui-line)!important}
+#dialog .growth-list:has(.growth-rank){min-height:300px;background:linear-gradient(#07101b40,#07101bf2 85%),url('assets/ui/world-panorama.webp') var(--world-position) top/auto 100%}
+#dialog .growth-rank{color:var(--ui-bright);text-shadow:0 0 20px rgba(var(--ui-rgb),.6)}
+
+/* Character cards: portrait and environment form one visual, live stats sit below. */
+#dialog:has(.profile-screen){width:min(840px,calc(100vw - 24px))}
+#dialog .profile-world{isolation:isolate;min-height:240px;padding:16px 20px 0;display:flex;flex-direction:row;align-items:flex-end;gap:0;background:#07101b;position:relative}
+#dialog .profile-world::before{content:'';position:absolute;z-index:-1;inset:0;background:linear-gradient(0deg,#070e18 2%,#070e1840 60%),url('assets/ui/world-panorama.webp') left center/auto 130%;opacity:.8}
+#dialog .profile-world[data-world=murim]::before{background-position:0 0,right center}
+#dialog .profile-world[data-world=reality]{--ui-rgb:79,172,255;--ui-accent:#8cd8ff}
+#dialog .profile-world[data-world=murim]{--ui-rgb:219,171,91;--ui-accent:#e9c582}
+#dialog .profile-world img{width:65%;height:216px;object-fit:contain;object-position:bottom;align-self:end;margin-left:-10px;filter:drop-shadow(0 0 18px rgba(var(--ui-rgb),.3))}
+#dialog .profile-world>span.profile-world-copy{display:flex;flex-direction:column;align-self:center;gap:10px;margin-left:-6px;text-align:left;position:relative;z-index:1;font-family:inherit;color:var(--ui-accent)}
+#dialog .profile-world-copy strong{font:600 2rem/1.3 'Batang',serif;letter-spacing:.18em;text-shadow:0 0 16px rgba(var(--ui-rgb),.6),0 2px 5px #000}
+#dialog .profile-world-copy small{font-size:.65rem;letter-spacing:.1em;line-height:1.5;color:#d0d9e5;white-space:nowrap}
+#dialog .profile-world[aria-pressed=true]{background:#07101b;border-color:var(--ui-accent);box-shadow:inset 0 -3px var(--ui-accent),0 0 16px rgba(var(--ui-rgb),.18)}
+#dialog .profile-stat{padding:18px 10px;gap:8px}
+#dialog .profile-stats{background:linear-gradient(115deg,rgba(var(--ui-rgb),.1),#08111d);border-color:var(--ui-line)}
+#dialog .profile-stat strong{font-size:2rem}
+#dialog .profile-equipped{padding:16px;border:1px solid var(--ui-line);background:linear-gradient(90deg,rgba(var(--ui-rgb),.12),transparent)}
+#dialog .tree-glyph{font-size:2rem;text-shadow:0 0 12px rgba(var(--ui-rgb),.6)}
+#dialog .tree-node{background:radial-gradient(at top,rgba(var(--ui-rgb),.1),#0a1422)}
+
+@media(min-width:1024px){
+  #game .actions>button,#game .actions .attack{height:94px}
+  #game #fateControls{bottom:130px}
+  #game .fate-buttons>button{height:88px}
+}
+@media(max-width:1023px){
+  #game .actions>button>span,#game .fate-buttons>button>span{width:54px;height:54px;top:0}
+  #game .actions small,#game .fate-buttons small{font-size:16px;line-height:1.1;bottom:3px}
+  #dialog .growth-workspace{display:block}
+  #dialog .growth-workspace>.growth-budget{padding:0;margin:12px 0}
+}
+@media(max-width:600px){
+  #dialog .dialog-heading,#dialog[data-popup-kind=general] .dialog-heading{margin:-16px -12px 16px;padding:18px 70px 18px 16px;min-height:88px}
+  #dialog[data-popup-kind=dialogue] .dialog-heading{margin-top:0}
+  #dialog #dialogTitle{font-size:1.125rem}
+  #dialog #dialogTitle::before{font-size:1.25rem}
+  #dialog[data-popup-kind=general] .dialog-top{top:18px;right:12px}
+  #dialog .profile-world{min-height:174px;flex-direction:column;align-items:center;justify-content:flex-end;padding:8px 6px}
+  #dialog .profile-world img{width:100%;height:114px;align-self:center;margin:0}
+  #dialog .profile-world>span.profile-world-copy{align-items:center;align-self:center;gap:3px;margin:0}
+  #dialog .profile-world-copy strong{font-size:1.25rem}
+  #dialog .profile-world-copy small{font-size:.65rem;letter-spacing:0}
+  #dialog .profile-world-copy small:first-child{display:none}
+  #dialog .profile-stat{padding:14px 6px}
+  #dialog .profile-stat strong{font-size:1.5rem}
+  #dialog .growth-tree-panel::before{width:230px;height:230px;top:150px}
+}
+@media(max-height:520px){
+  #dialog,#dialog:not(.intro-dialog),#dialog.growth-workspace-dialog{padding:12px 16px}
+  #dialog .dialog-heading,#dialog[data-popup-kind=general] .dialog-heading{min-height:64px;padding-top:12px;padding-bottom:12px;margin:-12px -16px 12px}
+  #dialog[data-popup-kind=dialogue] .dialog-heading{margin-top:0}
+  #dialog[data-popup-kind=general] .dialog-top{top:10px}
+}
+/* Short desktop windows use the same separated control zones as landscape touch. */
+@media(min-width:1024px) and (max-height:520px){
+  #game .brand{display:none}
+  #game .main-navigation{position:static;padding:0;margin-left:auto;border:0;background:transparent;box-shadow:none}
+  #game .main-navigation button,#game #growthStatus{min-width:48px;min-height:46px;padding:3px 8px}
+  #game .actions{left:auto;right:12px;bottom:12px;transform:none;width:192px;grid-template-columns:repeat(3,60px);gap:6px}
+  #game .actions>button,#game .actions .attack,#game .fate-buttons>button{width:60px;height:60px;min-height:56px}
+  #game .actions .attack{grid-column:2/4;width:auto}
+  #game .actions>button>span,#game .fate-buttons>button>span{width:54px;height:54px;top:0}
+  #game .actions kbd,#game .fate-buttons kbd{display:none}
+  #game #fateControls{left:auto;right:12px;bottom:144px;transform:none;width:192px}
+  #game .fate-buttons{grid-template-columns:repeat(3,60px);gap:6px}
+  #game .fate-heading{display:none}
+}

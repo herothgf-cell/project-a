@@ -1,6 +1,6 @@
 const {run}=require('./browser-harness.cjs'),assert=require('node:assert/strict'),fs=require('fs');
 run(async p=>{
- if(fs.existsSync('growth-refresh.css'))await p.addStyleTag({path:'growth-refresh.css'});
+
  await p.evaluate(()=>{__game.training=2;__game.progress=7;__game.enter('village');__game.events=[];});
  await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.click('#growthStatus');
  assert.equal(await p.locator('.tree-connections [data-from]').count(),4);

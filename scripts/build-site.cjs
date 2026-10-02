@@ -9,6 +9,7 @@ function buildSite({root=path.join(__dirname,'..'),out,commit,requireApprovedArt
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
  const files=['index.html',...new Set([...html.matchAll(/(?:src|href)="([^"?]+\.(?:js|css))(?:\?[^"\s]*)?"/g)].map(m=>m[1]))];
  if(files.some(f=>!/^[-a-z0-9]+\.(html|js|css)$/.test(f)))throw Error('Unexpected runtime asset path.');
+ if(files.includes('fantasy-ui.css'))files.push('assets/ui/skill-atlas.webp','assets/ui/world-panorama.webp');
  if(files.includes('intro-ui.js'))files.push(...['signal','stone','return','report','compare'].map(id=>'assets/art/intro/'+id+'.webp'));
  const version=JSON.parse(fs.readFileSync(path.join(root,'package.json'))).version;
  if(require(path.join(root,'world.js')).VERSION!==version)throw Error('Runtime and package versions differ.');
