@@ -1,0 +1,103 @@
+/* UI/UX v1.2: readable field HUD, with independent movement and combat zones. */
+#game{grid-template:64px minmax(0,1fr) 28px / minmax(0,1fr);background:#101823;color:#f4f7fb}
+#game>header{grid-column:1;padding:0 24px;gap:20px;background:#101823;border-bottom:1px solid #40556b;box-shadow:none}
+#game>main{grid-column:1;grid-row:2}
+#game>footer{grid-column:1;padding:0 24px;background:#101823;color:#b8c7d8;font-size:14px}
+#game>footer small{font-size:14px}#game>footer>b{font-size:14px}
+#game .world-chip{border:0;background:none;font-size:16px;color:#e7c477;max-width:none}
+#game .world-chip b{color:#e7c477;font-size:16px}#game #rank{font-size:14px;color:#b8c7d8}
+#game .main-navigation{display:flex;gap:8px;align-items:center}
+#game .main-navigation button,#game #growthStatus{min-height:48px;font-size:16px;padding:8px 14px;color:#f4f7fb;border-radius:8px}
+#game #growthStatus{color:#e7c477;background:#294158;border:1px solid #786849}
+#game .header-actions button{min-width:48px;min-height:48px;color:#b8c7d8}
+#game .hud{top:16px;left:20px;right:auto;min-width:0;width:330px;gap:10px;padding:10px;background:#101823eb;border:1px solid #52677c;border-radius:12px;box-shadow:0 8px 24px #0004}
+#game #character{min-width:52px;min-height:64px;border:1px solid #e7c47780;border-radius:9px;background:#1b2a39}
+#game #character #hudPortrait{width:52px;height:64px;border:0;border-radius:8px}
+#game .level{width:28px;height:auto;border:0;transform:none;background:none;padding:0;flex:none}
+#game .level small{font-size:14px;color:#b8c7d8}#game .level b{font:700 24px/1.2 system-ui;color:#f4f7fb}
+#game .vitals{flex:1;width:auto;min-width:0;gap:10px}
+#game .vitals>div{display:grid;grid-template-columns:auto 1fr;gap:3px 6px}
+#game .vitals label{font-size:14px;color:#b8c7d8}
+#game .vitals b{position:static;text-align:right;font:600 16px/1.3 system-ui;color:#f4f7fb}
+#game .vitals i{grid-column:1/-1;grid-row:2;width:100%;height:8px;margin:0;border:0;border-radius:3px;background:#344456;overflow:hidden}
+#game .vitals u{background:linear-gradient(90deg,#ab4852,#ed8080)}#game .vitals .mana u{background:linear-gradient(90deg,#3884b4,#76d6e8)}
+#game .hud .money{display:none}
+#game .place{top:114px;left:20px;max-width:330px}#game .place h2{margin:0;font:600 18px/1.4 system-ui;color:#f4f7fb}
+#game .world-badge{top:142px;left:20px;font-size:14px;letter-spacing:0;color:#e7c477}
+#game .journey-tools{top:174px;left:20px;right:auto;display:flex;gap:8px;flex-direction:row}
+#game .journey-tools button{min-height:48px;padding:8px 12px;min-width:0;font-size:16px;border:1px solid #52677c;background:#101823e8;border-radius:8px;color:#f4f7fb}
+#game .journey-tools kbd{display:none}#game #fateJournal{display:none}
+#game>aside{display:block;position:absolute;z-index:2;top:80px;right:20px;left:auto;width:220px;padding:0;background:none;border:0;box-shadow:none;pointer-events:none}
+#game>aside>:not(.map-card){display:none}#game .map-card{margin:0;padding:10px;border:1px solid #52677c;border-radius:12px;background:#101823ed;box-shadow:none;pointer-events:auto}
+#game .map-card>div{color:#b8c7d8;font-size:14px}#game .map-card button{min-height:48px;color:#76d6e8;font-size:16px;background:none;border:0}
+#game .map-card canvas{height:125px;width:100%;border:0;border-radius:7px}#game .map-card>small{display:none}
+#game #objective{left:auto;right:20px;top:216px;width:300px;max-width:300px;padding:12px;border:1px solid #52677c;border-radius:10px;background:#101823ef;box-shadow:inset 3px 0 #e7c477;min-height:64px;text-align:left}
+#game #objectiveTarget{font-size:16px;line-height:1.5;color:#e7c477}#game #objectiveHint{font-size:14px;color:#b8c7d8}.route-label{font-size:14px;color:#b8c7d8}
+#game #boss{top:20px;left:50%;transform:translateX(-50%);width:min(330px,28%);max-width:none;background:#101823df;padding:10px;border-radius:8px}
+#game #boss>span{font:600 16px/1.4 system-ui;color:#f4f7fb;letter-spacing:0}#game #boss>small{font-size:14px;color:#b8c7d8}#game #boss>i{height:8px;border:0;box-shadow:none;border-radius:4px}
+#game .actions{left:auto;right:20px;bottom:20px;width:274px;height:auto;display:grid;grid-template-columns:repeat(3,86px);gap:8px;transform:none;align-items:stretch}
+#game .actions>button,#game .fate-buttons>button{position:relative;inset:auto;width:86px;min-width:56px;height:76px;min-height:56px;border:1px solid #59748c;border-radius:12px;padding:5px 2px;background:radial-gradient(at 50% 0,#294b65,#142335 85%);box-shadow:0 5px 14px #0005;opacity:1}
+#game .actions .attack{grid-column:2/4;width:auto;background:linear-gradient(135deg,#695230,#2c2c31);border-color:#e7c477;border-radius:12px}
+#game .actions>button>span,#game .fate-buttons>button>span{font-size:23px;line-height:1;color:#76d6e8;text-shadow:none}
+#game .actions .attack>span{font-size:23px;color:#e7c477}
+#game .actions small,#game .fate-buttons small{display:block;font-size:16px;line-height:1.3;margin:2px 0;color:#f4f7fb;white-space:normal;word-break:keep-all}
+#game .actions kbd,#game .fate-buttons kbd{font-size:14px;padding:0;border:0;color:#b8c7d8}
+#game .actions .locked,#game .fate-buttons .locked{opacity:1;filter:grayscale(1);background:#1b2a39;color:#b8c7d8}
+#game #fateControls{left:auto;right:20px;bottom:188px;top:auto;width:274px;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
+#game .fate-heading{font-size:16px;color:#f4f7fb;text-shadow:0 2px 3px #000}#game .fate-heading small{font-size:14px;color:#b8c7d8}
+#game .fate-meter{height:21px;margin:6px 0;background:#101823eb;border:1px solid #59748c;border-radius:5px}#game .fate-meter b{font:600 14px/19px system-ui;color:#f4f7fb}
+#game .fate-buttons{display:grid;grid-template-columns:repeat(3,86px);gap:8px}
+#game #interact{left:20px;bottom:198px;transform:none;min-height:48px;max-width:260px;padding:10px 14px;font-size:16px;background:#101823ed;color:#f4f7fb;border:1px solid #59748c;border-radius:8px}
+#game .scene-bottom{left:20px;right:auto;bottom:20px}#game #potion{min-height:48px;font-size:16px;background:#101823ed;border:1px solid #59748c;border-radius:8px}
+#game #stick{display:block;left:24px;bottom:82px;width:104px;height:104px;border-color:#7795ad80;background:radial-gradient(#29415860,#101823b0)}
+#game #stick>span{font-size:14px;letter-spacing:0;color:#b8c7d8;bottom:8px}#game #stick>i{left:31px;top:25px;width:42px;height:42px;background:radial-gradient(at 35% 20%,#9eafbd,#40556b);border-color:#b8c7d8}
+#game #toasts{top:35%;max-width:70%}#game .toast{font-size:16px;line-height:1.5;background:#101823f5;color:#f4f7fb;border-color:#52677c}
+@media(max-width:1023px){
+ #game{grid-template-rows:56px minmax(0,1fr) 28px}#game>header{padding:0 8px;gap:4px;flex-wrap:nowrap;min-height:56px}
+ #game .main-navigation{flex:1;gap:0;justify-content:space-around;margin:0}#game .main-navigation button,#game #growthStatus{padding:7px 8px;font-size:16px}
+ #game header .world-chip,#game .header-actions{display:none}#game>aside{display:none}
+ #game .hud{left:12px;top:12px;width:300px;padding:8px;gap:8px}#game .place{left:12px;top:104px;max-width:300px}#game .world-badge{left:12px;top:130px}
+ #game .journey-tools{left:12px;top:158px;gap:6px}#game .journey-tools button{font-size:16px;min-height:48px;padding:8px}
+ #game #objective{top:12px;right:12px;left:auto;width:280px;max-width:40%;padding:8px}
+ #game #boss{top:114px;width:40%;left:auto;right:12px;transform:none}#game #boss>small{display:none}
+ #game .actions{right:12px;bottom:12px;width:192px;grid-template-columns:repeat(3,60px);gap:6px}
+ #game .actions>button,#game .fate-buttons>button{width:60px;height:60px;min-height:56px;padding:3px 1px;border-radius:10px}
+ #game .actions .attack{width:auto}#game .actions kbd,#game .fate-buttons kbd{display:none}
+ #game .actions>button>span,#game .fate-buttons>button>span,#game .actions .attack>span{font-size:22px}
+ #game #fateControls{right:12px;bottom:144px;width:192px}#game .fate-buttons{grid-template-columns:repeat(3,60px);gap:6px}
+ #game .fate-heading{font-size:14px}#game .fate-heading small{display:none}#game .fate-meter{margin:4px 0}
+ #game #interact{left:12px;bottom:184px;max-width:132px;font-size:16px;padding:8px;min-height:48px}
+ #game #stick{left:14px;bottom:74px;width:104px;height:104px}#game .scene-bottom{left:12px;right:auto;bottom:12px}#game #potion{font-size:16px;padding:8px}#game #potion b{margin:0 3px}
+ #game>footer{padding:0 12px;gap:6px}#game>footer>b{margin-left:auto}
+}
+@media(max-width:600px){
+ #game .hud{width:calc(100% - 24px);top:10px}#game .place{top:105px;max-width:calc(100% - 24px)}#game .place h2{font-size:16px}
+ #game .world-badge{top:130px;font-size:14px}
+ #game #objective{top:154px;left:12px;right:12px;width:auto;max-width:none;min-height:48px;padding:6px 10px}
+ #game #objectiveTarget{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;font-size:16px}#game #objective .route-copy{min-width:0}#game #objectiveHint,#game #objective .route-label{display:none}
+ #game #boss{top:210px;left:12px;right:12px;width:auto;padding:6px 10px}#game #boss>span{font-size:16px}
+ #game .journey-tools{left:12px;top:auto;bottom:236px;flex-direction:column;gap:6px}#game .journey-tools button{min-height:48px;font-size:16px;padding:6px 8px}#game #helpButton{display:none}
+ #game #interact{bottom:184px}#game #fateControls{bottom:144px}
+ #game>footer>i{width:46px}#game>footer>b{display:none}
+}
+@media(max-height:520px) and (min-width:601px){
+ #game{grid-template-rows:52px minmax(0,1fr) 0}#game>header{min-height:52px}#game>footer{display:none}
+ #game .hud{top:8px;left:12px;width:290px;padding:6px}#game #character{min-height:56px}#game #character #hudPortrait{height:56px;width:46px}
+ #game .place{top:91px;left:12px}#game .world-badge{top:115px;left:12px}
+ #game .journey-tools{top:auto;bottom:12px;left:132px;flex-direction:column;gap:6px}#game .journey-tools button{min-height:48px;font-size:16px}#game #helpButton{display:none}
+ #game #objective{top:8px;right:12px;width:240px;max-width:30%;min-height:48px}#game #objectiveHint,#game #objective .route-label{display:none}
+ #game #boss{top:12px;left:320px;right:auto;width:210px;padding:6px;transform:none}
+ #game #stick{bottom:12px;left:14px}#game #interact{left:250px;bottom:12px;max-width:170px}#game .scene-bottom{left:250px;bottom:68px}
+ #game #fateControls{bottom:144px}#game .fate-heading{display:none}#game #toasts{top:38%;max-width:45%}
+}
+/* Long learned technique names wrap within their touch targets. */
+@media(max-width:1023px){
+ #game .actions small,#game .fate-buttons small{word-break:break-all;line-height:1.05;margin:2px 0;font-size:16px}
+ #game .actions>button>span,#game .fate-buttons>button>span,#game .actions .attack>span{font-size:18px}
+}
+@media(max-width:600px){#game #boss{left:144px;right:12px;top:210px;width:auto}}
+@media(max-width:600px){
+ #game .place{max-width:124px}#game .place h2{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #game .world-badge{max-width:124px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #game #boss{top:103px;left:144px;right:12px;width:auto}
+}

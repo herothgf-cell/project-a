@@ -25,7 +25,6 @@
     try{const raw=localStorage.getItem(SAVE);hasSave=raw!==null;if(raw!==null){resume=Game.load(raw);if(!devMode&&(JSON.parse(raw).improvementVersion||0)<2){try{const key=SAVE+(JSON.parse(raw).improvementVersion===undefined?'.before-v11':'.before-v12');if(localStorage.getItem(key)===null)localStorage.setItem(key,raw);}catch{saveWarning=true;$('titleError').textContent='이전 기록 백업을 저장하지 못했습니다. 저장 공간을 확인하거나 기록을 내려받으세요.';}}}}
     catch(error){$('titleError').textContent='저장 데이터를 읽을 수 없습니다. 기존 데이터는 유지됩니다. 새 여정은 확인 후 시작합니다.';}
     $('continue').hidden=!resume;$('start').className=resume?'secondary':'primary';
-    if(!$('legacyOptions')){const box=node('div');box.id='legacyOptions';const link=node('a','','v0.11.0 보관판 열기');link.href='legacy/v011/';box.append(link);try{const raw=SaveSlots.read(localStorage,SaveSlots.keys.legacyOriginal);if(raw!==null){box.append(node('p','','이전 기록은 보관됩니다. 개편판은 별도 여정으로 시작합니다.'));const b=node('button','secondary','이전 기록 원문 다운로드');b.onclick=()=>exportSave(raw,'ssanggye-v011-original.json');box.append(b);}}catch{}$('titleError').after(box);}
   }
   function backup(force=false){if(!BACKUP)return;try{const raw=localStorage.getItem(SAVE);if(raw!==null&&(force||!localStorage.getItem(BACKUP)))localStorage.setItem(BACKUP,raw);}catch(error){/* Storage may be unavailable; never block play. */}}
   function persist(){
@@ -49,7 +48,12 @@
     dialog.classList.toggle('intro-dialog',!!body?.classList?.contains('intro-scene'));dialog.classList.toggle('growth-dialog',!!body?.classList?.contains('growth-screen'));
     RealmArt.begin(g);clearInput();dialog.classList.toggle('story-dialog',typeof body==='string'&&portrait!=='system'&&!kicker.includes('일시정지'));dialog.classList.toggle('growth-workspace-dialog',!!body?.classList?.contains('growth-workspace'));dialog.classList.toggle('dungeon-dialog',!!body?.classList?.contains('dungeon-screen'));dialog.classList.toggle('news-dialog',!!body?.classList?.contains('realm-news'));dialog.classList.toggle('help-dialog',!!body?.classList?.contains('realm-help-sheet'));dialog.classList.toggle('legend-offer',kicker.includes('발현')||kicker.includes('각성'));$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
     $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=Controls.format(body);else $('dialogBody').append(body);
-    WorldArt.portrait($('portrait'),portrait);$('dialogActions').replaceChildren();
+    const isDialogue=!!body?.classList?.contains('speaker-scene')&&portrait!=='system';
+    dialog.dataset.popupKind=isDialogue?'dialogue':'general';
+    dialog.dataset.surface=typeof body==='string'?'message':body?.classList?.contains('speaker-scene')?'story':'workspace';
+    $('portrait').hidden=!isDialogue;
+    if(isDialogue)WorldArt.portrait($('portrait'),portrait);
+    $('dialogActions').replaceChildren();
     actions.forEach(a=>{const b=node('button',a.secondary?'secondary':a.danger?'danger':'primary',a.label);b.disabled=!!a.disabled;b.addEventListener('click',()=>{queued=[];if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(a.run)a.run();});$('dialogActions').append(b);});
     $('closeDialog').hidden=!!introUI?.active;
     if(!dialog.open)dialogReturnFocus=document.activeElement;const growthFooter=body?.querySelector?.('.growth-footer');if(growthFooter)$('dialogActions').prepend(growthFooter);if(!dialog.open)dialog.showModal();dialog.scrollTop=0;$('dialogBody').scrollTop=body?.classList?.contains('growth-workspace')?0:viewMemory.get(currentView)?.scroll||0;

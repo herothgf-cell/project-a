@@ -146,3 +146,6 @@
 #dialog .dungeon-error{color:var(--ui-danger)}
 #game #objectiveTarget{color:var(--ui-accent)}
 #game #objectiveHint{color:var(--ui-label)}
+
+#dialog[data-popup-kind=general] #portrait{display:none}
+#dialog[data-popup-kind=general] .dialog-heading{min-height:0}
