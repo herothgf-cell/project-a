@@ -17,7 +17,7 @@
   function initial(){return {counts:{ripple:0,echo:0,seal:0},memories:[],ready:[],awakened:[]};}
   function enter(g){g.legendRuntime={seen:new Set(),evade:null,scarAt:-10};}
   function init(g){g.legend=initial();enter(g);}
-  function eligible(g){return g.progress>=2&&!areas[g.area].safe&&!g.trial&&!g.advancementTrial&&g.area!=='comparison';}
+  function eligible(g){return g.progress>=2&&!areas[g.area].safe&&!g.proofRuntime&&!g.trial&&!g.advancementTrial&&g.area!=='comparison';}
   function remember(g,path,e){
     const r=g.legendRuntime,l=g.legend;if(!eligible(g)||!valid(path)||!e?.id||l.counts[path]>=2)return false;
     const key=[g.area,e.id,e.attacks||0,path].join(':');if(r.seen.has(key))return false;r.seen.add(key);

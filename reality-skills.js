@@ -37,9 +37,9 @@
   feedback(g,'consumed',{family:boost.family,consumer});return boost;
  }
  function onEffect(g,c,e,kind){if(!c.manual||!valid(g,e))return false;const r=runtime(g),key=c.id+':'+e.id+':'+kind;if(r.seen.has(key))return false;r.seen.add(key);if(r.seen.size>256)r.seen.delete(r.seen.values().next().value);
-  const permanent=!e.residual&&!e.trial&&!e.assessment;
+  const permanent=!e.returnProofTarget&&!g.proofRuntime&&!e.residual&&!e.trial&&!e.assessment;
   if(permanent){const count=c.family+':'+e.id;if((r.credits[count]||0)<3&&!e.comparison){r.credits[count]=(r.credits[count]||0)+1;const m=g.worldGrowth.reality.mastery;m[c.family]=Math.min(30,m[c.family]+1);if(!g.journey.worlds.includes('현실'))g.journey.worlds.push('현실');}
-   if(families.includes(c.family)&&['absorb','evade','suppress'].includes(kind)&&status(g,c.family)==='available'){state(g).settled.push(c.family);g.toast('현실 대응 정착 · '+table[c.family][0][0]);g.publishNews?.({id:'response:'+c.family,kind:'skill',subject:c.family});}
+   if(families.includes(c.family)&&['absorb','evade','suppress'].includes(kind)&&status(g,c.family)==='available'){settle(g,c.family);}
   }
   if(['absorb','evade','suppress'].includes(kind)){
    feedback(g,kind,{family:c.family,castId:c.id,targetId:e.id});
@@ -77,6 +77,7 @@
  function step(g){const r=runtime(g);if(r.guard&&r.guard.until<=g.playTime){if(r.guard.c.manual)feedback(g,'waiting-ended',{family:r.guard.c.family});r.guard=null;}if(r.boost&&r.boost.until<=g.playTime)consumeBoost(g,'expiry');if(r.evade){for(const t of r.evade.threats){if(t.done||g.playTime<t.at)continue;t.done=true;if(t.e.hp>0&&g.player.hp>0&&!g.enemyThreatContains(t)){r.boost={family:'echo',until:g.playTime+3,mult:1.6};onEffect(g,r.evade.c,t.e,'evade');}}if(r.evade.threats.every(t=>t.done))r.evade=null;}
   const due=r.pending.filter(h=>h.at<=g.playTime);r.pending=r.pending.filter(h=>h.at>g.playTime);for(const h of due){const list=h.point?g.enemies.filter(e=>e.hp>0&&valid(g,e)&&distance(e,h.point)<=h.radius+e.r&&g.lineClear(h.point,e)):h.target?(h.target.hp>0&&valid(g,h.target)&&g.lineClear(g.player,h.target)?[h.target]:[]):[targets(g,h.range)[0]].filter(Boolean);for(const e of list)hit(g,e,h.mult,h.c,h.c.evolution?'evolution':'hit');}
  }
+ function settle(g,f){if(status(g,f)!=='available')return false;state(g).settled.push(f);g.toast('현실 대응 정착 · '+table[f][0][0]);g.publishNews?.({id:'response:'+f,kind:'skill',subject:f});return true;}
  function validate(g){const s=state(g);if(!Array.isArray(s.settled)||s.settled.length>3||new Set(s.settled).size!==s.settled.length||s.settled.some(f=>!families.includes(f)||status(g,f)==='locked'))throw Error('현실 대응 기록 오류');g.worldState.reality={settled:[...s.settled]};}
- return {table,info,readiness,consumeBoost,act,status,state,runtime,onEffect,absorb,step,validate,evolution,evolutionDescriptions,damageFactor};
+ return {settle,table,info,readiness,consumeBoost,act,status,state,runtime,onEffect,absorb,step,validate,evolution,evolutionDescriptions,damageFactor};
 });

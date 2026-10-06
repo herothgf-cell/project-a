@@ -224,7 +224,7 @@
             if(!this.enemyImpact?.(e)&&Math.hypot(p.x-e.tx,p.y-e.ty)<e.range+p.r*.4&&p.invuln<=0){
               this.takeHit(e);
             }
-            e.cd=e.boss?(e.hp<e.maxHp*.5?1.2:1.7):1.5;
+            e.cd=e.returnProofTarget?(e.role==='heavy'?.8:.5):e.boss?(e.hp<e.maxHp*.5?1.2:1.7):1.5;
             if(!e.trial&&!e.followup&&['combo','volley'].includes(e.pattern)&&this.lineClear(e,p)&&d<(e.pattern==='combo'?130:340)){e.followup=true;e.windMax=e.pattern==='combo'?.65:.8;e.wind=e.windMax;e.tx=p.x;e.ty=p.y;}else e.followup=false;
           }
         }else if(d<(e.role?(e.role==='ranged'?300:e.boss?270:110):e.boss?270:e.kind==='shade'||e.kind==='drone'?240:100)&&e.cd<=0&&this.lineClear(e,p)&&(!this.mayStartAttack||this.mayStartAttack(e))){
@@ -240,7 +240,7 @@
         }
       }
       for(const f of this.fx)f.life-=dt;this.fx=this.fx.filter(f=>f.life>0);
-      if(p.hp<=0){const inTrial=!!this.trial||!!this.advancementTrial;this.gold=Math.max(0,this.gold-(inTrial?0:15));this.enter(AREAS[this.area].world==='무림'?'village':'city');this.emit('defeat',{title:'쓰러져도, 성장은 남는다',text:(inTrial?'시험은 금화 손실 없이 다시 도전할 수 있습니다. ':'거점에서 체력과 내력을 회복했습니다. 금화 최대 15를 잃었지만 ')+ '  무공과 이야기 진행은 유지됩니다.\n\n호위와 봉인은 재입장하면 초기화됩니다. 붉은 공격 예고에서 회피하고, 회복약을 준비하세요.'});}
+      if(p.hp<=0){const inTrial=!!this.trial||!!this.advancementTrial||!!this.proofRuntime;this.gold=Math.max(0,this.gold-(inTrial?0:15));this.enter(AREAS[this.area].world==='무림'?'village':'city');this.emit('defeat',{title:'쓰러져도, 성장은 남는다',text:(inTrial?'시험은 금화 손실 없이 다시 도전할 수 있습니다. ':'거점에서 체력과 내력을 회복했습니다. 금화 최대 15를 잃었지만 ')+ '  무공과 이야기 진행은 유지됩니다.\n\n호위와 봉인은 재입장하면 초기화됩니다. 붉은 공격 예고에서 회피하고, 회복약을 준비하세요.'});}
     }
     retreat(){if(!AREAS[this.area].safe)this.enter(AREAS[this.area].world==='무림'?'village':'city');}
     save(){const d={version:4,fate:this.fate,legend:this.legend};for(const k of ['area','progress','training','level','xp','gold','potions','upgrade','clears','harborClears','playTime'])d[k]=this[k];return JSON.stringify(d);}
