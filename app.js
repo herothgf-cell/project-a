@@ -36,7 +36,7 @@
   function commitGrowth(change){
     const before=g.save();
     try{if(change(g)===false)return false;if(!persist())throw Error('storage');}
-    catch{g=Game.load(before);toast('저장하지 못해 성장 변경을 취소했습니다. 포인트는 유지됩니다.');update();return false;}
+    catch{g=Game.load(before);toast('저장하지 못해 변경을 취소했습니다. 이전 기록은 유지됩니다.');update();return false;}
     processEvents();update();return true;
   }
   function closeDialog(){if(introUI?.active)return introUI.resume();if(dialog.open)dialog.close();if(dialogReturnFocus?.isConnected)dialogReturnFocus.focus({preventScroll:true});clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker,next.result);}}
@@ -103,6 +103,7 @@
     if(event.type==='awakening'){$('game').style.setProperty('--fate-color',Fate.PATHS[event.path].color);}
 
     const actions=['victory','trial-complete'].includes(event.type)?[{label:'거점으로 귀환',run:()=>{g.retreat();processEvents();persist();update();}},{label:'조금 더 둘러보기',secondary:true}]:[{label:event.type==='transfer'?'현실에서 이어가기':event.type==='defeat'?'다시 일어서기':'계속하기'}];
+    if(event.type==='dialog'&&g.area==='city'&&g.nearestPoint()?.id==='warden'&&ReturnProof.describe(g).proofCompleted)actions.unshift({label:ReturnProof.describe(g).reported?'귀환 대응 · 역할 분담':'귀환 대응 결과 보고',run:()=>returnProofUI.report()});
     const kicker=event.type==='awakening'?'나의 전설 · 무공 각성':event.type==='trial-complete'?'기연의 증명':event.type==='victory'?'전투 승리':event.type==='transfer'?'능력 전승':'쌍계 · 이야기';
     if(dialog.open)queued.push({title:event.title,text:event.text,actions,portrait:event.portrait||'system',kicker,result:event.result});
     else show(event.title,event.text,actions,event.portrait||'system',kicker,event.result);
@@ -157,6 +158,7 @@
     for(const e of g.events.splice(0)){
       if(e.type==='world-news')updateNews();
       if(e.type==='proof-return')returnProofUI?.showReturn(e.rows);
+      if(e.type==='proof-result')returnProofUI?.result(e);
       if(e.type==='level-up'){progressionUI?.level(e);persist();}
       if(e.type==='contract-complete'){show(e.title,e.text,[{label:'기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}},{label:'조금 더 둘러보기',secondary:true}]);persist();}
       if(e.type==='interpretation'){journeyUI.offer(e);persist();}
