@@ -65,3 +65,5 @@ CHROMIUM_PATH=/usr/bin/chromium npm run test:browser:resonance
 ```
 
 브라우저 검사는 Playwright와 Chromium이 필요합니다. 다른 설치 경로라면 `CHROMIUM_PATH`를 실제 경로로 바꿉니다.
+
+검증 결과와 구현 판단: [구현·검토 기록](boundary-resonance-implementation-review.md).

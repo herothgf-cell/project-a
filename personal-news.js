@@ -1,5 +1,5 @@
 (function(root,f){const api=f();if(typeof module==='object'&&module.exports)module.exports=api;else root.PersonalNews=api;})(globalThis,function(){
- 'use strict';const names={ripple:'파문검',echo:'잔영보',seal:'경계봉인'};
+ 'use strict';const Resonance=typeof module==='object'&&module.exports?require('./boundary-resonance.js'):globalThis.BoundaryResonance;const names={ripple:'파문검',echo:'잔영보',seal:'경계봉인'};
  function achievementName(id){const parts=id.split(':');if(id==='inherit:first')return '첫 기연의 신체 성장';if(parts[0]==='murim-mastery')return (names[parts[1]]||'무공')+' 숙련 '+parts[2]+'단계 달성';if(parts[0]==='murim-level')return '무림 레벨 '+parts[1]+' 달성';if(parts[0]==='murim-realm')return '첫 경지 돌파';if(parts[0]==='interpret')return '무공 해석의 현실 정착';return '무림 성장의 현실 정착';}
  function realmReady(g){return !g.journey.realm&&Object.values(g.worldGrowth.murim.mastery).reduce((a,b)=>a+b,0)>=8&&g.journey.worlds.length>=2&&g.journey.known.length>0;}
  function catalog(g){const out=[],add=(id,section,subject,title,text)=>out.push({id,section,subject,title,text});
@@ -13,7 +13,7 @@
   if(g.worldState.reports?.reported.includes('first-response'))add('role:first-response','status','role','초동 대응자 · 현장 성과 인정','기연 귀환 후 현실 위협을 제압하고 서린에게 보고했습니다. 기지에서 1회 회복약 보급을 받습니다. 공식 헌터 등급은 E급입니다.');
   if(g.worldState.reports?.reported.includes('yeonhwa-rescued'))add('role:rescue','status','role','핵심 수행자 · 구조 성과 보고','직접 확인한 구조 결과를 전했습니다. 기지 보급과 후속 공동 조사로 이어집니다.');
   if(g.laterStory?.six===5)add('role:joint','status','role','공동 대응 제안자','7장 준비에서 대피 통로 또는 정예 차단을 선택하면 현재 전장의 조건이 바뀝니다.');
-  for(const r of g.worldState.achievements?.results||[])add('return:'+r.id,r.unlocked?'skills':'status',r.unlocked||r.id,'귀환 성과 · '+(r.unlocked?names[r.unlocked]+'의 현실 대응':achievementName(r.id)),'체력 '+r.before.hp+' → '+r.after.hp+' · 자원 '+r.before.mp+' → '+r.after.mp+' · 공격력 '+r.before.attack+' → '+r.after.attack+(r.unlocked?'\n무공에서 현실 대응을 선택해 장착하세요.':''));
+  for(const r of g.worldState.achievements?.results||[]){const grant=r.rewardVersion===3&&g.worldState.resonance?.grants.includes(r.id)?Resonance.catalog(g).find(x=>x.id===r.id):null;add('return:'+r.id,grant?'growth':r.unlocked?'skills':'status',grant?'resonance':r.unlocked||r.id,'귀환 성과 · '+(grant?grant.name:r.unlocked?names[r.unlocked]+'의 현실 대응':achievementName(r.id)),grant?'공명 결정 '+grant.crystal+'개 보관 · 성장 → 경계공명에서 현실 능력치에 배분하세요.':'체력 '+r.before.hp+' → '+r.after.hp+' · 자원 '+r.before.mp+' → '+r.after.mp+' · 공격력 '+r.before.attack+' → '+r.after.attack+(r.unlocked?'\n무공에서 현실 대응을 선택해 장착하세요.':''));}
   return out;
  }
  function publish(g,item){if(!catalog(g).some(x=>x.id===item.id)||JSON.stringify(item).length>2048)throw Error('허용되지 않은 소식');const s=g.worldState.news;if(s.items.some(x=>x.id===item.id))return false;s.items.push({id:item.id,at:g.playTime,read:false});return true;}

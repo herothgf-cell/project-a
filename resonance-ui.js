@@ -1,7 +1,7 @@
 /* The player-facing, transactional surface for one-way growth. */
 (function(root){'use strict';root.ResonanceUI={create({game,show,node,commit,close,refresh,prepare,back,skills}){
  const R=BoundaryResonance,C=ResonanceChallenges;let section='goals',draft=null,ticket=0;
- const button=(label,run,disabled=false)=>{const b=node('button','secondary',label);b.type='button';b.disabled=disabled;b.onclick=run;return b;};
+ const button=(label,run,disabled=false)=>{const b=node('button','secondary',label);b.type='button';b.disabled=disabled;b.dataset.resonanceFocus=label;b.onclick=()=>{const restore=document.activeElement===b;run();if(restore){const target=[...document.querySelectorAll('.resonance-screen button[data-resonance-focus]')].find(x=>x.dataset.resonanceFocus===label&&!x.disabled);target?.focus({preventScroll:true});}};return b;};
  function icon(kind){const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 64 64');s.setAttribute('class','resonance-icon '+kind);s.setAttribute('aria-hidden','true');const p=document.createElementNS(s.namespaceURI,'path');p.setAttribute('d',kind==='crystal'?'M32 3 52 23 44 48 32 61 20 48 12 23Z M32 3V61 M12 23H52 M12 23 32 44 52 23':'M15 7H49V57H15Z M23 17H41 M23 27H41 M24 44 32 34 40 44 M32 34V51');s.append(p);return s;}
  function open(id='goals'){section=id;draft=null;ticket++;render();}
  function change(fn){commit(fn);draft=null;render();}

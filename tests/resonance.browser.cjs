@@ -3,7 +3,7 @@ run(async p=>{
  await p.evaluate(()=>{const g=window.__game;g.training=3;g.progress=12;g.fate.stage=2;g.fate.discovered=['ripple'];g.fate.proven=['ripple'];g.enter('village');g.acceptFate('ripple');g.enter('city');g.events=[];g.save();});
  await p.click('#growthStatus');await p.locator('.resonance-screen').waitFor();
  await p.getByRole('button',{name:'능력치',exact:true}).click();
- await p.getByRole('button',{name:'공격 증가',exact:true}).click();
+ await p.getByRole('button',{name:'공격 증가',exact:true}).focus();await p.keyboard.press('Enter');assert.equal(await p.evaluate(()=>document.activeElement.textContent),'공격 증가');
  await p.getByRole('button',{name:'배분 적용',exact:true}).click();
  assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),1);
  await p.getByRole('button',{name:'현실 스킬',exact:true}).click();
