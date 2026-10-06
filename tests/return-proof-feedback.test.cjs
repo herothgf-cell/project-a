@@ -2,6 +2,9 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const Reality=require('../reality-skills.js');
 const {inherited,opponent}=require('./world-fixtures.cjs');
+test('game creation initializes reality state before any read-only skill query',()=>{
+ const {Game}=require('../world-game.js'),g=new Game();assert.deepEqual(g.worldState.reality,{settled:[]});
+});
 function absorb(g,e){g.player.invuln=0;assert.equal(g.act('signature1'),true);g.takeHit(e);}
 
 test('response readiness distinguishes charge, cooldown and resources without mutating state',()=>{
