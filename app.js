@@ -12,6 +12,8 @@
   let resourceWarningUntil=0,resourceWarningCost=0;
   let bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
   let dialogueUI=null,journeyUI=null,realmUI=null,growthUI=null,introUI=null,contractUI=null,progressionUI=null,characterUI=null,newsUI=null;
+  let proofTelemetry=ReturnProofTelemetry.create();
+  if(devMode){globalThis.ReturnProofDev={enableLogs(enabled){proofTelemetry=ReturnProofTelemetry.create({build:'v0.1_proto_patch',device:innerWidth<700?'mobile':'desktop',profile:'1',feedback:g.responseFeedbackEnabled===false?'A':'B',checkpoint:'developer'},{enabled});},exportLogs:()=>proofTelemetry.export(),feedback(enabled){g.responseFeedbackEnabled=!!enabled;}};}
   let dungeonUI=null,objectiveUI=null,returnProofUI=null;
   const viewMemory=new Map();let currentView=null,dialogReturnFocus=null;let textScale=100;try{textScale=Number(localStorage.getItem('ssanggye:text-scale'))||100;}catch{}if(![100,125,150,200].includes(textScale))textScale=100;document.documentElement.style.fontSize=textScale+'%';
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
@@ -156,6 +158,7 @@
   }
   function processEvents(){
     for(const e of g.events.splice(0)){
+      proofTelemetry.record(e.type,e);
       if(e.type==='world-news')updateNews();
       if(e.type==='proof-return')returnProofUI?.showReturn(e.rows);
       if(e.type==='proof-result')returnProofUI?.result(e);
@@ -173,7 +176,7 @@
   }
   function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(before.training<1&&g.training>=1)result.result.push('유수심법 · 첫 2포인트 해금. 성장에서 심법을 확인하세요.');if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='cycle-choice')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{const scene=CycleOne.interact(g,result.pointId,choice.id);if(scene)story(scene);persist();update();}})),'system','현장 우선 대응');if(result?.type==='dungeon-select')dungeonUI.open();if(result?.type==='seven-preparation')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{g.chooseSevenPreparation(choice.id);processEvents();persist();update();}})),'warden','공동 대응 준비');if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
   function act(action){
-    if(!running())return;const k=g.skillInfo(action);if(!k)return;
+    if(!running())return;proofTelemetry.record('act',{action,at:g.playTime,manual:true});const k=g.skillInfo(action);if(!k)return;
     if(!g.act(action)){
       if(k.locked)toast(WorldGrowth.worldOf(g)==='reality'?'무공 화면에서 현실 대응을 장착하세요. 미계승 상태에서는 타격과 회피로 진행할 수 있습니다.':'전장에서 나타난 감각은 무공에 기록됩니다.');
       else if(action==='ultimate'&&g.fate.focus<100)toast('적에게 타격하거나 기연 행동에 성공해 기세 100을 모으세요.');

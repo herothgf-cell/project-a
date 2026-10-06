@@ -8,7 +8,7 @@ function createServer({artReview=false}={}){
  for(const name of ['save-slots','world-growth','world-achievements','reality-skills','world-reports','personal-news','save-v10','world-game'])allowed.add(name+'.js');
  for(const file of ['character-ui.js','development-ui.js','news-ui.js','world-growth.css','ui-refresh.css','hud-refresh.css','growth-refresh.css','fantasy-ui.css','return-proof.css'])allowed.add(file);
  for(const file of ['assets/ui/skill-atlas.webp','assets/ui/world-panorama.webp'])allowed.add(file);
- allowed.add('encounter-director.js');for(const file of ['passive-growth.js','advancement.js','cycle-one.js','growth-screen.js','overseer-art.js','return-proof.js','return-proof-ui.js'])allowed.add(file);
+ allowed.add('encounter-director.js');for(const file of ['passive-growth.js','advancement.js','cycle-one.js','growth-screen.js','overseer-art.js','return-proof.js','return-proof-ui.js','return-proof-telemetry.js'])allowed.add(file);
  for(const file of ['dungeon-entry.js','dungeon-ui.js','combat-audio.js','combat-events.js','audio-ui.js'])allowed.add(file);
  for(const file of ['controls.js','revision.js','progression.js','martial-tree.js','contract-ui.js','progression-ui.js','progression.css','intro-ui.js','growth-ui.js','revision.css',...['signal','stone','return','report','compare'].map(id=>'assets/art/intro/'+id+'.webp')])allowed.add(file);
   for(const name of ['chapter-seven.js','dual-breath.js','later-story-data.js','chapter-six.js','growth-model.js','dialogue-data.js','dialogue-ui.js','quest-data.js','economy.js','save-v9.js','objective-model.js','objective-ui.js','feedback-two.css'])allowed.add(name);
@@ -26,8 +26,8 @@ function createServer({artReview=false}={}){
   let url,params;try{const parsed=new URL(req.url,'http://localhost');url=decodeURIComponent(parsed.pathname);params=parsed.searchParams;}catch{res.writeHead(400);return res.end('Bad request');}
   const dev=artReview&&params.get('dev')==='1'&&['127.0.0.1','::1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress);
   if(dev&&url==='/__dev/start'){
-   const stage=params.get('stage');if(!['new','five','six'].includes(stage)){res.writeHead(400);return res.end('Unknown start');}
-   try{const {Game}=require('./world-game.js'),{five,six}=require('./tests/helpers/world-journey.cjs');const g=stage==='new'?new Game():stage==='five'?five():six(five(),'ripple');const raw=g.save();Game.load(raw);res.writeHead(200,{'Content-Type':types['.json']});return res.end(req.method==='HEAD'?undefined:raw);}catch{res.writeHead(500);return res.end('Unable to prepare start');}
+   const stage=params.get('stage');if(!['new','two','five','six'].includes(stage)){res.writeHead(400);return res.end('Unknown start');}
+   try{const {Game}=require('./world-game.js'),{two,five,six}=require('./tests/helpers/world-journey.cjs');const g=stage==='new'?new Game():stage==='two'?two():stage==='five'?five():six(five(),'ripple');const raw=g.save();Game.load(raw);res.writeHead(200,{'Content-Type':types['.json']});return res.end(req.method==='HEAD'?undefined:raw);}catch{res.writeHead(500);return res.end('Unable to prepare start');}
   }
   if(dev&&url==='/__dev/starts.js'){res.writeHead(200,{'Content-Type':types['.js']});return res.end(req.method==='HEAD'?undefined:fs.readFileSync(path.join(__dirname,'tests/dev-starts-ui.js')));}
   if(url==='/favicon.ico'){res.writeHead(204);return res.end();}

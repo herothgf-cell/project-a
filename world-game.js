@@ -34,6 +34,7 @@
   prepareEnemyAttack(e){if(e.trial)this.onProofPractice({kind:"observed",target:e});if(Proof.prepareEnemy(this,e))return;if(e.cycleBoss){e.wind=e.windMax=e.cyclePhase===3?.9:1.2;e.pattern=e.attacks%2?'shot':'heavy';e.range=e.pattern==='shot'?24:120;e.telegraph={x:e.x,y:e.y,tx:e.tx,ty:e.ty,width:24};return;}return Director.prepare(this,e);}
   enemyImpact(e){if(e.returnProofTarget){e.proofRecoveryUntil=this.playTime+(e.role==='heavy'?.8:.5);if(e.pattern!=='shot'){if(this.enemyThreatContains(e)&&this.lineClear(e,this.player))this.takeHit(e);return true;}}return Director.impact(this,e);}
   enemyThreatContains(e){return Director.contains(this.player,e);}
+  objective(){const p=Proof.objective(this);return p?{...p,title:p.purpose,text:p.currentAction}:super.objective();}
   laterObjective(){const proof=Proof.objective(this);if(proof)return proof;const trial=Advance.progress(this);if(trial)return {chapter:0,purpose:'성장 실전 · '+trial.phase+'/'+trial.phases,currentAction:trial.text,condition:'실제 대응·제압·지점 확보',rewards:[],status:'assessment'};const cycle=Cycle.objective(this);if(cycle)return cycle;const o=super.laterObjective();if(!o)return o;return {...o,currentAction:o.currentAction.replace('자유 탐험과 실전 의뢰','자유 탐험과 무공 운용'),rewards:o.rewards.map(text=>text.replace('경험치 120','현실 경험치 60 · 무림 경험치 60').replace('경험치 180','현실 경험치 90 · 무림 경험치 90'))};}
   startContract(){return false;}
   claimContract(){return false;}
