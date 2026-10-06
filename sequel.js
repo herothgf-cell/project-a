@@ -83,7 +83,7 @@
     if(o.id==='returned-yeonhwa')return dialogue('연화 · 다시 문을 연 가게',`다리가 끊겼을 때는 다시 가게에 돌아올 수 없을 줄 알았어요.\n${s.route==='detour'?'당신이 우회로를 함께 놓아 줬던 일':`그날 직접 보았던 「${label[s.route]}」`}, 잊지 않을게요.\n\n이제 다음 손님이 올 시간이네요. 당신이 남긴 길 덕분에요.`,'yeonhwa');
     if(o.id==='stranded-yeonhwa')return dialogue('연화 · 귀환을 기다리는 사람','교각은 부서진 게 아니라 같은 충격을 반복해서 받고 있어요.\n그 울림을 다른 곳으로 돌리거나, 돌아오는 흔적을 잇거나, 틈을 붙잡을 수 있다면…\n위쪽 협로의 권양기로 우회 다리를 놓는 길도 있어요.','yeonhwa');
     if(o.id==='winch'){if(s.rescued)return {type:'toast',text:'연화는 이미 청운촌으로 돌아갔습니다.'};if(this.guardsAlive())return dialogue('낡은 권양기','추격자들이 밧줄을 움켜쥐고 있습니다. 호위들을 먼저 물리치면 손으로도 우회로를 놓을 수 있습니다.');resolve(this,'detour');return {type:'toast',text:'권양기가 움직였다. 끊긴 귀환로에 우회 다리가 놓였다.'};}
-    if(o.id==='bridge-trace')return dialogue('울리는 교각','울림이 모이는 동안 지금 배운 무공으로 대응할 수 있습니다.\n파문을 받아내기 / 잔향을 남겼다가 돌아오기 / 결계로 틈 억제하기.\n\n정해진 답은 없습니다. 위쪽 협로와 수동 권양기도 남아 있습니다.');
+    if(o.id==='bridge-trace')return dialogue('울리는 교각','울림이 모이는 동안 지금 배운 무공으로 대응할 수 있습니다.\n파문을 받아내기 / Q 잔영각으로 울림 밖에 발자국 남기기 / 결계로 틈 억제하기.\n\n정해진 답은 없습니다. 위쪽 협로와 수동 권양기도 남아 있습니다.');
     if(o.id==='witness-hunter'||o.id==='world-anchor')return dialogue('도겸 · 당신이 남긴 흔적',{ripple:'빛나는 교각 흔적 가까이에서는 충격이 흩어집니다. 당신이 무림에서 되돌린 힘이 여기서도 사람을 지켜요.',echo:'검을 휘두르면 뒤늦게 같은 검격이 겹쳐요. 당신이 돌아온 그 발걸음이 이곳에서도 함께 움직입니다.',seal:'빛나는 결계 안으로 적을 유인해 보세요. 공격의 예고가 흩어집니다. 그 틈이 여기에 이어졌군요.',detour:'함께 만든 우회로에는 비밀 기술이 없지만, 돌아올 수 있는 길이 생겼어요. 이번에도 힘을 합쳐 보죠.'}[s.route]||'아직 이곳에 남은 공명이 없습니다.','hunter');
     return old.interact.call(this);
   };
@@ -102,6 +102,7 @@
   proto.act=function(action,...args){
     const echo=this.combat?.echo?{...this.combat.echo}:null,before={x:this.player.x,y:this.player.y},pulse=runtime(this).pulse;
     const result=old.act.call(this,action,...args);
+    if(result&&action==='signature1'&&Fate.active(this)==='echo'&&this.worldState?.growthArc&&!this.worldState.growthArc.legacy&&this.area==='returnPass'&&pulse.wind>0&&dist(before,pulse)<pulse.range){runtime(this).qRescue={x:before.x,y:before.y};}
     if(result&&action==='signature2'&&Fate.active(this)==='echo'&&echo&&dist(before,echo)>60&&dist(this.player,echo)<2&&dist(before,this.player)>60&&pulse.wind>0&&(dist(before,pulse)<230||dist(echo,pulse)<205))resolve(this,'echo');
     return result;
   };
@@ -110,6 +111,7 @@
     const s=state(this),r=runtime(this);r.aid=Math.max(0,r.aid-elapsed);
     if(this.area==='returnPass'&&s.phase===1&&!s.rescued){
       const q=r.pulse;
+      if(r.qRescue&&this.player.dash<=0){if(q.wind>0&&dist(this.player,q)>=q.range&&dist(this.player,r.qRescue)>60)resolve(this,'echo');if(!q.wind||s.rescued)r.qRescue=null;}
       if(q.wind>0){
         if(this.combat?.field&&dist(this.combat.field,q)<this.combat.field.radius&&Fate.active(this)==='seal'){this.combat.field.life=Math.max(1,this.combat.field.life);resolve(this,'seal');}
         else{q.wind=Math.max(0,q.wind-elapsed);if(!q.wind){this.effect('impact',q.x,q.y,{range:q.range,life:.4,max:.4});if(dist(this.player,q)<q.range)this.takeHit({storyPulse:true,id:'return-pulse',name:'교각의 울림',x:q.x,y:q.y,r:10,hp:999999,damage:18,attacks:1});q.cd=3.6;}}

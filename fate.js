@@ -23,11 +23,12 @@
       blocks:[{x:110,y:150,w:175,h:240,kind:'ruin'},{x:350,y:480,w:135,h:140,kind:'container'},{x:640,y:220,w:160,h:195,kind:'ruin'},{x:985,y:830,w:190,h:100,kind:'ruin'},{x:1310,y:550,w:140,h:180,kind:'ruin'}],
       roads:[[[150,970],[390,850],[780,780],[920,550],[1280,230]]]};
   }
+  function firstProof(path){return path==='echo'?'붉은 공격 예고 안에서 Q 잔영각으로 빠져나온 뒤 기본 검격으로 시험 잔상을 제압하세요.':path==='seal'?'적의 공격 예고에 Q 쇄경진으로 대응한 뒤 기본 검격으로 제압하세요.':PATHS.ripple.proof;}
   function initial(){return {stage:0,path:null,discovered:[],proven:[],feats:{ripple:0,echo:0,seal:0},focus:0};}
   function reset(g){g.combat={parry:0,charges:0,echo:null,field:null,pending:[]};g.trial=null;g.hitStop=0;g.fate.focus=0;for(const a of names)g.player.cool[a]=0;}
   function init(g){g.fate=initial();reset(g);}
   function active(g){return g.trial?.path||g.fate.path;}
-  function info(g,a){if(!names.includes(a))return null;const p=active(g),i=names.indexOf(a),s=p?PATHS[p].skills[i]:['미완성 기연','?',0,0,'비경에서 자신의 기연을 발견하세요.'];return {name:s[0],glyph:s[1],cost:s[2],cool:s[3],description:s[4],need:0,key:['Q','R','F'][i],locked:!p||(a==='ultimate'&&(!g.fate.path||!!g.trial)),path:p};}
+  function info(g,a){if(!names.includes(a))return null;const p=active(g),i=names.indexOf(a),s=p?PATHS[p].skills[i]:['미완성 기연','?',0,0,'비경에서 자신의 기연을 발견하세요.'];return {name:s[0],glyph:s[1],cost:s[2],cool:s[3],description:s[4],need:0,key:['Q','R','F'][i],locked:!p||(g.worldState?.growthArc&&!g.worldState.growthArc.legacy&&a==='signature2'&&!g.worldState.growthArc.learnedR&&!g.growthArcRuntime?.lessonR)||(g.worldState?.growthArc&&!g.worldState.growthArc.legacy&&a==='ultimate'&&!g.worldState.growthArc.learnedF)||(a==='ultimate'&&(!g.fate.path||!!g.trial)),path:p};}
   function entry(g){reset(g);}
   function note(g,path){if(g.advancementTrial){g.fate.focus=Math.min(100,g.fate.focus+20);return;}g.fate.feats[path]=Math.min(999999,g.fate.feats[path]+1);g.fate.focus=Math.min(100,g.fate.focus+20);if(g.trial?.path===path&&!g.trial.feat){g.trial.feat=true;g.toast('기연의 호흡을 증명했습니다! 이제 시험 잔상을 제압하세요.');}}
   function strike(g,e,amount,source='signature',cast=null){return g.strike(e,Math.round(g.stats().attack*amount),source,cast);}
@@ -38,7 +39,7 @@
     if(g.area!=='sanctum'||g.fate.stage<2||!valid(path)||!g.fate.discovered.includes(path))return false;
     reset(g);g.fx=[];g.enemies=[];g.trial={path,feat:false};const p=g.player;Object.assign(p,{x:720,y:800,face:-Math.PI/2,hp:g.stats().hp,mp:g.stats().mp,invuln:1,dash:0});
     const hp=Math.max(175,g.stats().attack*5);g.enemies.push({id:'trial-'+path,name:'시험 잔상 · '+PATHS[path].name,kind:path==='ripple'?'chief':path==='echo'?'masked':'guardian',x:760,y:710,r:23,hp,maxHp:hp,boss:false,damage:12,speed:70,cd:.9,wind:0,windMax:1.3,tx:760,ty:710,range:95,flash:0,attacks:0,pattern:'strike',rewarded:false,trial:true});
-    g.emit('dialog',{title:PATHS[path].name+' · 빌린 호흡',text:PATHS[path].proof+'\n\n시험 중 무공은 임시로 빌린 힘입니다. 실패해도 다시 도전할 수 있습니다. Q / R 버튼을 확인하세요.',portrait:'hero'});return true;
+    g.emit('dialog',{title:PATHS[path].name+' · 빌린 호흡',text:g.growthArcRuntime?.lessonR?'Q의 준비 효과를 만든 뒤 R 후속 기술을 시험 잔상에 적중시키세요. 실제 연결을 성공하면 R을 체득합니다.':(g.worldState?.growthArc&&!g.worldState.growthArc.legacy?firstProof(path):PATHS[path].proof)+'\n\n시험 중 무공은 임시로 빌린 힘입니다. 실패해도 다시 도전할 수 있습니다. Q 버튼으로 첫 원리를 체험하세요.',portrait:'hero'});return true;
   }
   function accept(g,path){
     if(g.area!=='village'||g.fate.stage<2||!valid(path)||!g.fate.proven.includes(path)||g.trial)return false;
@@ -68,7 +69,7 @@
       if(f.stage<2)return {type:'toast',text:'먼저 백련 사부에게 무명 비경에 대해 물어보세요.'};
       if(g.trial)return {type:'toast',text:'현재 시험을 마치거나, 출구에서 거점으로 돌아간 뒤 다시 조사하세요.'};
       if(!f.discovered.includes(o.path))f.discovered.push(o.path);
-      return {type:'fate-trial',path:o.path,title:PATHS[o.path].relic,text:PATHS[o.path].reason+'\n\n'+PATHS[o.path].proof};
+      return {type:'fate-trial',path:o.path,title:PATHS[o.path].relic,text:PATHS[o.path].reason+'\n\n'+(g.worldState?.growthArc&&!g.worldState.growthArc.legacy?firstProof(o.path):PATHS[o.path].proof)};
     }
     return null;
   }
@@ -76,12 +77,12 @@
     const f=g.fate,a=areas[g.area];if(g.progress<12)return null;
     let target,title='이름 없는 전설',text='';
     if(g.area==='sanctum'){
-      if(g.trial){const e=g.enemies.find(e=>e.hp>0);target=e?{...e,label:e.name,kind:'enemy'}:a.points[0];title=PATHS[g.trial.path].name+' · 증명의 시간';text=g.trial.feat?'호흡을 증명했습니다. 시험 잔상을 제압하세요.':PATHS[g.trial.path].proof;}
+      if(g.trial){const e=g.enemies.find(e=>e.hp>0);target=e?{...e,label:e.name,kind:'enemy'}:a.points[0];title=PATHS[g.trial.path].name+' · 증명의 시간';text=g.trial.feat?'호흡을 증명했습니다. 시험 잔상을 제압하세요.':g.worldState?.growthArc&&!g.worldState.growthArc.legacy?firstProof(g.trial.path):PATHS[g.trial.path].proof;}
       else if(f.proven.length){target=a.points[0];title='네가 완성한 호흡';text='백련에게 돌아가 증명한 계열을 수락하세요. 다른 흔적도 자유롭게 조사할 수 있습니다.';}
       else {target=a.points.find(o=>o.kind==='relic'&&!f.discovered.includes(o.path))||a.points.find(o=>o.kind==='relic');text='세 흔적 중 마음이 가는 것을 조사하세요. 힘을 시험해도 아직 계열은 확정되지 않습니다.';}
     }else if(g.area==='heart'){
       if(f.stage>=5){target=a.points[0];text='포식자를 막았습니다. 헌터 기지의 서린에게 돌아가 보고하세요.';}
-      else {const e=g.enemies.find(e=>e.hp>0&&!e.boss);const seal=a.points.find(o=>o.kind==='seal'&&!g.activated.includes(o.id));const b=g.enemies.find(e=>e.hp>0&&e.boss);target=e?{...e,label:e.name,kind:'enemy'}:seal|| (b?{...b,label:b.name,kind:'enemy'}:a.points[0]);text=e?'네가 완성한 무공으로 호위들을 제압하세요.':seal?'균열 매듭에 접근해 E / 대화·이동으로 해제하세요.':'보호막이 사라졌습니다. 기세를 모아 F / 오의를 사용해 보세요.';}
+      else {const e=g.enemies.find(e=>e.hp>0&&!e.boss);const seal=a.points.find(o=>o.kind==='seal'&&!g.activated.includes(o.id));const b=g.enemies.find(e=>e.hp>0&&e.boss);target=e?{...e,label:e.name,kind:'enemy'}:seal|| (b?{...b,label:b.name,kind:'enemy'}:a.points[0]);text=e?'네가 완성한 무공으로 호위들을 제압하세요.':seal?'균열 매듭에 접근해 E / 대화·이동으로 해제하세요.':'보호막이 사라졌습니다. 공격 예고에 Q로 대응하고 기본 검격과 K/L로 마무리하세요.';}
     }else if(a.safe){
       const ids=g.area==='city'?{0:'warden',1:'portal',2:'portal',3:'warden',4:'heart',5:'warden',6:'portal'}:{0:'portal',1:'master',2:f.proven.length?'master':'sanctum',3:'portal',4:'portal',5:'portal',6:'master'};
       target=a.points.find(o=>o.id===ids[f.stage]);text=f.stage===0?'서린과 대화해 제3장을 시작하세요.':f.stage===2?(f.proven.length?'증명한 기연을 백련에게서 수락하세요.':'무명 비경에서 흔적을 조사하고 임시 무공을 시험하세요.'):f.stage===6?'제3장 완료. 백련에게 재수련하거나 비경에서 다른 가능성을 탐구하세요.':`금빛 방향 표식을 따라 ${target?.label||'다음 목표'}에게 향하세요.`;
@@ -110,7 +111,7 @@
       if(action==='signature1'){c.parry=.7;emit(g,'fate-guard',p.x,p.y,{life:.7,max:.7});}
       else {const mult=2.2+c.charges*.9;c.charges=0;const nearest=targets(g,p,230).sort((a,b)=>dist(a,p)-dist(b,p))[0];if(nearest)p.face=Math.atan2(nearest.y-p.y,nearest.x-p.x);for(const e of targets(g,p,230))if(Math.cos(Math.atan2(e.y-p.y,e.x-p.x)-p.face)>-.05)strike(g,e,mult);emit(g,'fate-wave',p.x,p.y,{angle:p.face,range:230});}
     }else if(path==='echo'){
-      if(action==='signature1'){c.echo={x:p.x,y:p.y,life:5,face:p.face};p.dash=.17;p.invuln=.35;p.dx=Math.cos(p.face);p.dy=Math.sin(p.face);emit(g,'fate-trail',p.x,p.y,{angle:p.face});}
+      if(action==='signature1'){if(g.worldState?.growthArc&&!g.worldState.growthArc.legacy&&g.trial)c.evadeProof=targets(g,p,220).filter(e=>e.wind>0&&(g.enemyThreatContains?g.enemyThreatContains(e):dist(p,{x:e.tx,y:e.ty})<e.range+p.r*.4)).map(e=>({e,tx:e.tx,ty:e.ty,range:e.range}));c.echo={x:p.x,y:p.y,life:5,face:p.face};p.dash=.17;p.invuln=.35;p.dx=Math.cos(p.face);p.dy=Math.sin(p.face);emit(g,'fate-trail',p.x,p.y,{angle:p.face});}
       else {const old={x:p.x,y:p.y},echo=c.echo;c.echo=null;p.dash=0;p.x=echo.x;p.y=echo.y;p.invuln=.25;const hits=areaHit(g,old,145,1.4)+areaHit(g,p,165,1.6);if(hits)note(g,'echo');emit(g,'fate-link',p.x,p.y,{tx:old.x,ty:old.y});}
     }else {
       if(action==='signature1'){c.field={x:p.x,y:p.y,radius:165,life:4};for(const e of targets(g,p,165))if(e.wind>0){e.wind=0;e.cd=1;note(g,'seal');}emit(g,'fate-seal',p.x,p.y,{range:165,life:.9,max:.9});}
@@ -120,6 +121,7 @@
   }
   function tick(g,dt){
     const c=g.combat;c.parry=Math.max(0,c.parry-dt);
+    if(c.evadeProof&&g.player.dash<=0){if(c.evadeProof.some(t=>dist(g.player,{x:t.tx,y:t.ty})>=t.range+g.player.r*.4))note(g,'echo');c.evadeProof=null;}
     if(c.echo){c.echo.life-=dt;if(c.echo.life<=0)c.echo=null;}
     if(c.field){c.field.life-=dt;if(c.field.life<=0)c.field=null;}
     const ready=[];for(const hit of c.pending){hit.delay-=dt;if(hit.delay<=0)ready.push(hit);}c.pending=c.pending.filter(h=>h.delay>0);

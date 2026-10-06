@@ -26,7 +26,7 @@
   g.onRealityEffect?.({castId:c.id,family:c.family,kind,target:e,manual:true,action:c.action,evolution:c.evolution||null});return true;
  }
  function hit(g,e,mult,c,kind='hit'){const n=g.strike(e,Math.round(g.stats().attack*mult),(c.action==='ultimate'?'reality-ultimate:':'reality:')+c.family);if(n>0)onEffect(g,c,e,kind);return n;}
- function act(g,a,held=false){const k=info(g,a);if(!k)return null;const p=g.player,r=runtime(g);if(g.introActive||k.locked||p.hp<=0||p.cool[a]>0||p.mp<k.cost||a==='ultimate'&&g.fate.focus<100)return false;
+ function act(g,a,held=false){const k=g.skillInfo?.(a)||info(g,a);if(!k||!actions.includes(a))return null;const p=g.player,r=runtime(g);if(g.introActive||k.locked||p.hp<=0||p.cool[a]>0||p.mp<k.cost||a==='ultimate'&&g.fate.focus<100)return false;
   const key=evolution(g,k.path),c={id:++r.serial,family:k.path,manual:!held,action:a},v=targets(g,k.range),from={x:p.x,y:p.y};p.mp-=k.cost;if(k.cost>0&&g.dualRuntime)g.dualRuntime.discount=0;g.experimentRuntime.lastAction=g.playTime;p.cool[a]=k.cool;p.swing=.3;if(a==='ultimate')g.fate.focus=0;
   if(a==='moon')hitTarget(v[0],k.mult);
   else if(a==='storm'){hitTarget(v[0],k.mult);r.pending.push({at:g.playTime+.15,c,range:k.range,mult:k.mult});}

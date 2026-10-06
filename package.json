@@ -1,6 +1,6 @@
 {
   "name": "dualworld-project-a",
-  "version": "0.12.3",
+  "version": "0.12.4",
   "private": true,
   "description": "쌍계 — 두 세계의 호흡. World-specific art, anchored motion, unified interface and accessible discovery guidance.",
   "scripts": {
@@ -16,9 +16,10 @@
     "test:browser:later": "node tests/later-story.browser.cjs",
     "test:browser:dialogue": "node tests/dialogue.browser.cjs",
     "test:browser:navigation": "node tests/navigation.browser.cjs",
-    "check:world": "node --check save-slots.js && node --check world-growth.js && node --check world-achievements.js && node --check reality-skills.js && node --check world-reports.js && node --check personal-news.js && node --check save-v10.js && node --check world-game.js && node --check encounter-director.js && node --check character-ui.js && node --check development-ui.js && node --check news-ui.js && node --check dungeon-entry.js && node --check dungeon-ui.js && node --check combat-audio.js && node --check combat-events.js && node --check audio-ui.js && node --check passive-growth.js && node --check advancement.js && node --check cycle-one.js && node --check growth-screen.js && node --check overseer-art.js",
+    "check:world": "node --check save-slots.js && node --check world-growth.js && node --check world-achievements.js && node --check reality-skills.js && node --check world-reports.js && node --check personal-news.js && node --check save-v10.js && node --check growth-arc.js && node --check world-game.js && node --check encounter-director.js && node --check character-ui.js && node --check development-ui.js && node --check news-ui.js && node --check dungeon-entry.js && node --check dungeon-ui.js && node --check combat-audio.js && node --check combat-events.js && node --check audio-ui.js && node --check passive-growth.js && node --check advancement.js && node --check cycle-one.js && node --check growth-screen.js && node --check overseer-art.js",
     "test:browser:v11": "node tests/v11-ui.browser.cjs && node tests/v11-flow.browser.cjs",
-    "test:browser:v12": "node tests/v12-ui.browser.cjs && node tests/v12-overseer-art.browser.cjs"
+    "test:browser:v12": "node tests/v12-ui.browser.cjs && node tests/v12-overseer-art.browser.cjs",
+    "test:browser:growth": "node tests/growth-arc.browser.cjs"
   },
   "engines": {
     "node": ">=20"

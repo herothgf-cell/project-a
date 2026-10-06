@@ -1,0 +1,13 @@
+'use strict';
+const {run}=require('./browser-harness.cjs'),assert=require('node:assert/strict');
+run(async p=>{
+ async function closeStory(){for(let i=0;i<15&&await p.locator('#dialog').evaluate(e=>e.open);i++){const skip=p.getByRole('button',{name:'대화 건너뛰기',exact:true});if(await skip.isVisible())await skip.click();else {const next=p.getByRole('button',{name:'계속하기',exact:true});if(await next.isVisible())await next.click();else await p.keyboard.press('Escape');}}}
+ await p.evaluate(()=>{const g=__game;g.progress=12;g.training=3;g.enter('city');g.events=[];const o=g.points().find(p=>p.id==='warden');Object.assign(g.player,{x:o.x,y:o.y});});
+ await p.click('#interact');assert.equal(await p.evaluate(()=>__game.worldState.growthArc.phase),'defense');assert.match(await p.locator('#dialog').innerText(),/통로/);await closeStory();
+ await p.evaluate(()=>{const o=__game.points().find(p=>p.kind==='dungeon-entry');Object.assign(__game.player,{x:o.x,y:o.y});});await p.click('#interact');await p.waitForSelector('.dungeon-screen');const row=p.locator('.dungeon-row').filter({hasText:'균열 재조사 · 귀환 통로 방어'});assert.match(await row.innerText(),/현재 임무/);await row.click();await p.getByRole('button',{name:'입장하기',exact:true}).click();await p.waitForFunction(()=>__game.area==='rift');await closeStory();
+ const before=await p.evaluate(()=>({gold:__game.gold,xp:__game.xp}));await p.evaluate(()=>{for(let i=0;i<300&&__game.area==='rift';i++){__game.hitStop=0;__game.step(.05);}});await p.waitForFunction(()=>__game.area==='city');assert.equal(await p.evaluate(()=>__game.worldState.growthArc.phase),'failed');assert.deepEqual(await p.evaluate(()=>({gold:__game.gold,xp:__game.xp})),before);await closeStory();
+ await p.evaluate(()=>{const g=__game;g.fate.stage=2;g.worldState.growthArc.phase='reported';g.fate.discovered=['seal'];g.fate.proven=['seal'];g.enter('village');g.acceptFate('seal');g.enter('city');});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='reality');await closeStory();
+ assert.equal(await p.evaluate(()=>__game.worldGrowth.reality.equipped),'seal');assert.equal(await p.locator('[data-action=signature1]').evaluate(e=>e.classList.contains('locked')),false);for(const a of ['signature2','ultimate'])assert.equal(await p.locator(`[data-action=${a}]`).evaluate(e=>e.classList.contains('locked')),true);
+ const restored=await p.evaluate(()=>{const h=WorldGame.Game.load(__game.save());return {family:h.worldGrowth.reality.equipped,r:h.skillInfo('signature2').locked,f:h.skillInfo('ultimate').locked};});assert.deepEqual(restored,{family:'seal',r:true,f:true});
+ await p.screenshot({path:'/tmp/growth-arc-q-only.png'});console.log('growth arc: actual dialogue, dungeon entry, retreat, auto-adapted Q, R/F HUD locks and reload passed');
+});

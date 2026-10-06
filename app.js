@@ -63,8 +63,8 @@
   function legendOffer(event){
     const path=Fate.PATHS[event.path],body=node('div','inheritance-choice');body.style.setProperty('--legend-color',path.color);
     body.append(node('span','legend-symbol',path.glyph),node('p','legend-origin',event.text),node('p','legend-note','이름을 알기 전에 몸이 먼저 기억했다. 이 호흡을 이어가거나, 다른 가능성을 살펴봐도 좋다.'));
-    const blocked=!!g.fate.path&&g.fate.path!==event.path&&!AREAS[g.area].safe;
-    const actions=[{label:blocked?'거점에서 다른 호흡으로 잇기':'이 호흡을 붙잡는다',disabled:blocked,run:()=>{g.awaken(event.path);processEvents();persist();update();}},{label:'지금은 이 감각만 기억한다',secondary:true}];
+    const early=globalThis.GrowthArc?.active(g)&&g.fate.stage<2;const blocked=early||!!g.fate.path&&g.fate.path!==event.path&&!AREAS[g.area].safe;
+    const actions=[{label:early?'통로 경험을 백련에게 전한 뒤 체득':blocked?'거점에서 다른 호흡으로 잇기':'이 호흡을 붙잡는다',disabled:blocked,run:()=>{g.awaken(event.path);processEvents();persist();update();}},{label:'지금은 이 감각만 기억한다',secondary:true}];
     if(dialog.open)queued.push({title:event.title,text:body,actions,portrait:'hero',kicker:'현장 발현 · 아직 이름 붙이지 않은 힘'});
     else show(event.title,body,actions,'hero','현장 발현 · 아직 이름 붙이지 않은 힘');
   }
@@ -91,11 +91,11 @@
   }
   function fateChoice(){
     const f=g.fate,body=node('div','inheritance-choice');body.append(node('p','','직접 증명한 무공을 계승합니다. 기술의 효과를 살펴보고 선택하세요.'));
-    for(const id of f.proven){const path=Fate.PATHS[id];body.append(node('h3','',path.name),node('p','',path.skills.map((sk,i)=>`${['Q','R','F'][i]} · ${sk[0]}: ${sk[4]}`).join('\n')));}
+    for(const id of f.proven){const path=Fate.PATHS[id];body.append(node('h3','',path.name),node('p','',path.skills.map((sk,i)=>`${['Q','R','F'][i]} · ${sk[0]}${globalThis.GrowthArc?.active(g)?[' · 첫 체득',' · 4장 구조 이후 별도 실습',' · 7장 위기의 실전'][i]:''}: ${sk[4]}`).join('\n')));}
     if(!f.proven.length)body.append(node('p','','먼저 무명 비경의 흔적을 조사하고, 임시 무공으로 시험을 통과하세요.'));
     show('무공 · 첫 계승',body,[...f.proven.map(id=>({label:Fate.PATHS[id].name+' 수락',run:()=>{g.acceptFate(id);processEvents();persist();update();}})),{label:'더 생각해 보기',secondary:true}],'hero','계승할 무공 선택');
   }
-  function trialPrompt(event){show(event.title,event.text,[{label:'공명 시험 시작',run:()=>{g.beginTrial(event.path);processEvents();persist();update();}},{label:'지금은 관찰만',secondary:true}],'hero','선택형 기억 연습 · 현장 발현과 별개');}
+  function trialPrompt(event){show(event.title,event.text,[{label:'공명 시험 시작',run:()=>{g.beginTrial(event.path);processEvents();persist();update();}},{label:'지금은 관찰만',secondary:true}],'hero',globalThis.GrowthArc?.active(g)?'첫 기연 · Q 원리 체험':'선택형 기억 연습 · 현장 발현과 별개');}
   function story(event){
     if(event.type==='legend-ready'){legendOffer(event);return;}
     if(event.type==='fate-trial'){trialPrompt(event);return;}
