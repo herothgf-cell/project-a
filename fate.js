@@ -36,7 +36,7 @@
   function emit(g,kind,x,y,extra={}){g.effect(kind,x,y,{path:active(g),life:.65,max:.65,...extra});}
   function begin(g,path){
     if(g.area!=='sanctum'||g.fate.stage<2||!valid(path)||!g.fate.discovered.includes(path))return false;
-    reset(g);g.fx=[];g.enemies=[];g.trial={path,feat:false};const p=g.player;Object.assign(p,{x:720,y:800,face:-Math.PI/2,hp:g.stats().hp,mp:g.stats().mp,invuln:1,dash:0});
+    reset(g);g.fx=[];g.enemies=[];g.trial={path,feat:false};g.onProofPractice?.({kind:'start'});const p=g.player;Object.assign(p,{x:720,y:800,face:-Math.PI/2,hp:g.stats().hp,mp:g.stats().mp,invuln:1,dash:0});
     const hp=Math.max(175,g.stats().attack*5);g.enemies.push({id:'trial-'+path,name:'시험 잔상 · '+PATHS[path].name,kind:path==='ripple'?'chief':path==='echo'?'masked':'guardian',x:760,y:710,r:23,hp,maxHp:hp,boss:false,damage:12,speed:70,cd:.9,wind:0,windMax:1.3,tx:760,ty:710,range:95,flash:0,attacks:0,pattern:'strike',rewarded:false,trial:true});
     g.emit('dialog',{title:PATHS[path].name+' · 빌린 호흡',text:PATHS[path].proof+'\n\n시험 중 무공은 임시로 빌린 힘입니다. 실패해도 다시 도전할 수 있습니다. Q / R 버튼을 확인하세요.',portrait:'hero'});return true;
   }
@@ -90,7 +90,7 @@
   }
   function incoming(g,e,damage){
     const c=g.combat,p=g.player,path=active(g);
-    if(path==='ripple'&&c.parry>0){const perfect=c.parry>.42;c.parry=0;c.charges=Math.min(3,c.charges+(perfect?2:1));note(g,'ripple');emit(g,'fate-parry',p.x,p.y,{perfect});g.effect('text',p.x,p.y-80,{text:perfect?'정파 · 받아내기':'파문 · 반격',color:PATHS.ripple.color,life:1,max:1});strike(g,e,perfect?1.8:1.25);e.stun=.5;g.hitStop=.045;g.emit('sound',{name:'parry'});return 0;}
+    if(path==='ripple'&&c.parry>0){const perfect=c.parry>.42;c.parry=0;c.charges=Math.min(3,c.charges+(perfect?2:1));g.onProofPractice?.({kind:'absorbed',target:e});note(g,'ripple');emit(g,'fate-parry',p.x,p.y,{perfect});g.effect('text',p.x,p.y-80,{text:perfect?'정파 · 받아내기':'파문 · 반격',color:PATHS.ripple.color,life:1,max:1});strike(g,e,perfect?1.8:1.25);e.stun=.5;g.hitStop=.045;g.emit('sound',{name:'parry'});return 0;}
     if(c.field&&dist(p,c.field)<c.field.radius){if(path==='seal')note(g,'seal');return Math.round(damage*.45);}
     return damage;
   }
@@ -108,7 +108,7 @@
     g.emit('sound',{name:path});
     if(path==='ripple'){
       if(action==='signature1'){c.parry=.7;emit(g,'fate-guard',p.x,p.y,{life:.7,max:.7});}
-      else {const mult=2.2+c.charges*.9;c.charges=0;const nearest=targets(g,p,230).sort((a,b)=>dist(a,p)-dist(b,p))[0];if(nearest)p.face=Math.atan2(nearest.y-p.y,nearest.x-p.x);for(const e of targets(g,p,230))if(Math.cos(Math.atan2(e.y-p.y,e.x-p.x)-p.face)>-.05)strike(g,e,mult);emit(g,'fate-wave',p.x,p.y,{angle:p.face,range:230});}
+      else {const charged=c.charges>0,mult=2.2+c.charges*.9;c.charges=0;const nearest=targets(g,p,230).sort((a,b)=>dist(a,p)-dist(b,p))[0];if(nearest)p.face=Math.atan2(nearest.y-p.y,nearest.x-p.x);for(const e of targets(g,p,230))if(Math.cos(Math.atan2(e.y-p.y,e.x-p.x)-p.face)>-.05){const dealt=strike(g,e,mult);if(charged&&dealt>0)g.onProofPractice?.({kind:'followup',target:e});}emit(g,'fate-wave',p.x,p.y,{angle:p.face,range:230});}
     }else if(path==='echo'){
       if(action==='signature1'){c.echo={x:p.x,y:p.y,life:5,face:p.face};p.dash=.17;p.invuln=.35;p.dx=Math.cos(p.face);p.dy=Math.sin(p.face);emit(g,'fate-trail',p.x,p.y,{angle:p.face});}
       else {const old={x:p.x,y:p.y},echo=c.echo;c.echo=null;p.dash=0;p.x=echo.x;p.y=echo.y;p.invuln=.25;const hits=areaHit(g,old,145,1.4)+areaHit(g,p,165,1.6);if(hits)note(g,'echo');emit(g,'fate-link',p.x,p.y,{tx:old.x,ty:old.y});}
@@ -119,7 +119,7 @@
     return true;
   }
   function tick(g,dt){
-    const c=g.combat;c.parry=Math.max(0,c.parry-dt);
+    const c=g.combat;if(c.parry>0&&c.parry<=dt)g.onProofPractice?.({kind:'miss'});c.parry=Math.max(0,c.parry-dt);
     if(c.echo){c.echo.life-=dt;if(c.echo.life<=0)c.echo=null;}
     if(c.field){c.field.life-=dt;if(c.field.life<=0)c.field=null;}
     const ready=[];for(const hit of c.pending){hit.delay-=dt;if(hit.delay<=0)ready.push(hit);}c.pending=c.pending.filter(h=>h.delay>0);

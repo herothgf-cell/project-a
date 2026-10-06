@@ -156,6 +156,7 @@
   function processEvents(){
     for(const e of g.events.splice(0)){
       if(e.type==='world-news')updateNews();
+      if(e.type==='proof-return')returnProofUI?.showReturn(e.rows);
       if(e.type==='level-up'){progressionUI?.level(e);persist();}
       if(e.type==='contract-complete'){show(e.title,e.text,[{label:'기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}},{label:'조금 더 둘러보기',secondary:true}]);persist();}
       if(e.type==='interpretation'){journeyUI.offer(e);persist();}

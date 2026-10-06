@@ -5,3 +5,5 @@
 @media(max-width:700px){#responseOpportunity{bottom:auto;top:29%;width:max-content;font-size:.72rem}}
 @media(max-height:450px){#responseOpportunity{bottom:auto;top:14%;max-width:45%;font-size:.65rem}}
 @media(prefers-reduced-motion:reduce){#responseOpportunity,#game button.response-charged{animation:none;transition:none}}
+
+#responseOpportunity button{pointer-events:auto;margin-left:.5rem;min-height:36px;}
