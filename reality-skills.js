@@ -18,11 +18,17 @@
  const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
  const valid=(g,e)=>e&&g.enemies.includes(e)&&!e.trial&&!g.trial&&!(e.boss&&g.bossLocked());
  function targets(g,range){return g.enemies.filter(e=>e.hp>0&&valid(g,e)&&distance(e,g.player)<=range+e.r&&Math.cos(Math.atan2(e.y-g.player.y,e.x-g.player.x)-g.player.face)>.25&&g.lineClear(g.player,e)).sort((a,b)=>distance(a,g.player)-distance(b,g.player));}
+ function actionTargets(g,action,k){
+  const boost=g.realityRuntime?.boost,p=g.player;
+  const piercing=action==='signature2'&&k.path==='ripple'&&boost?.family==='ripple'&&boost.until>g.playTime&&evolution(g,k.path)==='ripple-return';
+  const list=piercing?targets(g,300).filter(e=>Math.abs((e.x-p.x)*Math.sin(p.face)-(e.y-p.y)*Math.cos(p.face))<=45+e.r):targets(g,k.range);
+  return k.path==='seal'?list.slice(0,1):list;
+ }
  function readiness(g,action='signature2'){
   const k=info(g,action),r=g.realityRuntime||{},family=g.worldGrowth.reality.equipped;
   const cooldown=Math.max(0,g.player.cool[action]||0),cost=k?.cost||0;
   const boostRemaining=r.boost?.family===family?Math.max(0,r.boost.until-g.playTime):0;
-  const list=k?targets(g,k.range):[],hasTarget=action==='signature1'&&family==='ripple'||list.length>0;
+  const list=k?actionTargets(g,action,k):[],hasTarget=action==='signature1'&&family==='ripple'||list.length>0;
   const charged=boostRemaining>0||family==='seal'&&list.some(e=>e.realitySuppressionProven&&e.realitySuppressedUntil>g.playTime);
   const reason=!k||k.locked?'locked':g.introActive?'intro':g.player.hp<=0?'defeated':cooldown>0?'cooldown':g.player.mp<cost?'resource':action==='ultimate'&&g.fate.focus<100?'focus':'';
   return {canUse:!reason,reason:reason||(!hasTarget?'no-target':''),charged,boostRemaining,hasTarget,cooldown,cost,family,guardRemaining:Math.max(0,(r.guard?.until||0)-g.playTime)};
@@ -49,12 +55,12 @@
  }
  function hit(g,e,mult,c,kind='hit'){const n=g.strike(e,Math.round(g.stats().attack*mult),(c.action==='ultimate'?'reality-ultimate:':'reality:')+c.family);if(n>0)onEffect(g,c,e,kind);return n;}
  function act(g,a,held=false){const k=info(g,a);if(!k)return null;const p=g.player,r=runtime(g);if(g.introActive||k.locked||p.hp<=0||p.cool[a]>0||p.mp<k.cost||a==='ultimate'&&g.fate.focus<100)return false;
-  const key=evolution(g,k.path),c={id:++r.serial,family:k.path,manual:!held,action:a},v=targets(g,k.range),from={x:p.x,y:p.y};p.mp-=k.cost;if(k.cost>0&&g.dualRuntime)g.dualRuntime.discount=0;g.experimentRuntime.lastAction=g.playTime;p.cool[a]=k.cool;p.swing=.3;if(a==='ultimate')g.fate.focus=0;
+  const key=evolution(g,k.path),c={id:++r.serial,family:k.path,manual:!held,action:a},v=actionTargets(g,a,k),from={x:p.x,y:p.y};p.mp-=k.cost;if(k.cost>0&&g.dualRuntime)g.dualRuntime.discount=0;g.experimentRuntime.lastAction=g.playTime;p.cool[a]=k.cool;p.swing=.3;if(a==='ultimate')g.fate.focus=0;
   if(a==='moon')hitTarget(v[0],k.mult);
   else if(a==='storm'){hitTarget(v[0],k.mult);r.pending.push({at:g.playTime+.15,c,range:k.range,mult:k.mult});}
   else if(k.path==='ripple'){
    if(a==='signature1')r.guard={until:g.playTime+.7,c};
-   else {const charged=consumeBoost(g,a)?.family==='ripple';const piercing=a==='signature2'&&charged&&key==='ripple-return',list=piercing?targets(g,300).filter(e=>Math.abs((e.x-p.x)*Math.sin(p.face)-(e.y-p.y)*Math.cos(p.face))<=45+e.r):v;for(const e of list){hit(g,e,a==='ultimate'?4:charged?3:2,piercing?{...c,evolution:key}:c,charged?'counter':'hit');if(a==='ultimate')e.stun=.8;}}
+   else {const charged=consumeBoost(g,a)?.family==='ripple';const piercing=a==='signature2'&&charged&&key==='ripple-return',list=v;for(const e of list){hit(g,e,a==='ultimate'?4:charged?3:2,piercing?{...c,evolution:key}:c,charged?'counter':'hit');if(a==='ultimate')e.stun=.8;}}
   }else if(k.path==='echo'){
    if(a==='signature1'||a==='ultimate'){
     const threats=g.enemies.filter(e=>e.hp>0&&valid(g,e)&&e.wind>0&&g.enemyThreatContains(e)&&g.lineClear(e,p)).map(e=>({e,at:g.playTime+e.wind,tx:e.tx,ty:e.ty,range:e.range,pattern:e.pattern,telegraph:e.telegraph&&{...e.telegraph}}));

@@ -25,7 +25,11 @@
    if(!status){status=document.createElement('div');status.id='responseOpportunity';status.setAttribute('aria-label','현실 대응과 후속 기회');document.getElementById('canvas').parentElement.append(status);}
    const visible=g.worldGrowth&&g.growthWorld()==='reality'&&g.worldGrowth.reality.equipped&&g.responseFeedbackEnabled!==false;
    const view=visible?combatView(g,globalThis.Controls.key):{text:'',charged:false,ready:false};
-   const practice=globalThis.ReturnProof.practiceView(g);status.hidden=!(view.text||practice);status.textContent=practice?'선택 연습 · '+practice.next+' ('+globalThis.Controls.key('signature1')+' 받아내기 / '+globalThis.Controls.key('signature2')+' 후속기)':view.text;if(practice?.helpAvailable){const help=document.createElement('button');help.type='button';help.textContent='도움말 보기';help.onclick=()=>show('선택 연습 도움말','적의 예고가 끝나기 직전 받아내기를 누르세요. 성공하면 축적 표시가 생깁니다. 후속기는 가까운 적을 향해 사용합니다. 연습을 생략해도 기존 계승 조건은 같습니다.',[{label:'직접 다시 시도'}]);status.append(help);}status.dataset.ready=String(view.ready);
+   const practice=globalThis.ReturnProof.practiceView(g);
+   let message=status.querySelector('.response-message');if(!message){message=document.createElement('span');message.className='response-message';status.append(message);}
+   status.hidden=!(view.text||practice);message.textContent=practice?'선택 연습 · '+practice.next+' ('+globalThis.Controls.key('signature1')+' 받아내기 / '+globalThis.Controls.key('signature2')+' 후속기)':view.text;
+   let help=status.querySelector('button');if(practice?.helpAvailable&&!help){help=document.createElement('button');help.type='button';help.textContent='도움말 보기';help.onclick=()=>show('선택 연습 도움말','적의 예고가 끝나기 직전 받아내기를 누르세요. 성공하면 축적 표시가 생깁니다. 후속기는 가까운 적을 향해 사용합니다. 연습을 생략해도 기존 계승 조건은 같습니다.',[{label:'직접 다시 시도'}]);status.append(help);}if(help)help.hidden=!practice?.helpAvailable;
+   status.dataset.ready=String(view.ready);
    if(button){button.classList.toggle('response-charged',view.charged);button.dataset.responseReady=String(view.ready);if(view.text)button.setAttribute('aria-label',g.skillInfo('signature2').name+' · '+view.text);}
   }
   return {updateCombat,showReturn,report,choices,result};
