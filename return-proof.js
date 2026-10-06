@@ -26,5 +26,19 @@
  function prepareEnemy(g,e){if(!e.returnProofTarget)return false;e.wind=e.windMax=e.role==='heavy'?1.2:e.role==='ranged'?1:.85;e.pattern=e.role==='ranged'?'shot':e.role==='heavy'?'heavy':'strike';e.range=e.role==='ranged'?24:e.role==='heavy'?95:62;e.telegraph={x:e.x,y:e.y,tx:e.tx,ty:e.ty,width:24};return true;}
  function mayStartAttack(g,e){return !g.enemies.some(x=>x!==e&&x.hp>0&&x.wind>0);}
  function safeZone(g){return g.proofRuntime?.choice==='secure-route'?{x:700,y:700,radius:100,damageFactor:.75}:null;}
- return {profile,initial,state,describe,install,entry,requestEntry,begin,progress,objective,points,step,finish,interact,onEffect,prepareEnemy,mayStartAttack,safeZone,clone,snapshot,restore};
+
+ function validate(g){
+  const raw=g.worldState.returnProof;if(raw===undefined){g.worldState.returnProof=initial();return;}
+  const fail=()=>{throw Error('귀환 검증 기록 오류');},keys=Object.keys(initial());
+  if(!raw||Array.isArray(raw)||Object.keys(raw).length!==keys.length||Object.keys(raw).some(k=>!keys.includes(k))||raw.version!==1)fail();
+  for(const k of ['baselineCompleted','proofCompleted','reported','applicationCompleted'])if(typeof raw[k]!=='boolean')fail();
+  if(raw.baselineCompleted&&(g.progress<12||g.fate.stage<1)||raw.proofCompleted&&!raw.baselineCompleted)fail();
+  if(raw.verifiedFamily!==null){const f=raw.verifiedFamily,e=raw.evidence;if(!families.includes(f)||!raw.baselineCompleted||!g.revision.inherited.includes(f)||!g.worldState.achievements.settled.includes('inherit:'+f)||!e||Array.isArray(e)||Object.keys(e).length!==6||e.family!==f||e.profileVersion!==1||e.kind!==effects[f]||typeof e.encounterId!=='string'||!/^proof-[a-z0-9-]{1,64}$/.test(e.encounterId)||!Number.isInteger(e.castId)||e.castId<1||e.castId>1000000||!profile.enemies.some(p=>e.targetId==='return-proof-'+p.role))fail();}else if(raw.evidence!==null)fail();
+  if(raw.reported&&(!raw.proofCompleted||!raw.verifiedFamily||!g.worldState.reports?.reported.includes('first-response'))||raw.roleChoice!==null&&(!['cut-support','secure-route'].includes(raw.roleChoice)||!raw.reported)||raw.applicationCompleted&&(!raw.reported||!raw.roleChoice))fail();
+  g.worldState.returnProof=clone(raw);
+ }
+ function session(g){const r=g.proofRuntime;return r?{version:1,mode:r.mode,profileVersion:r.profileVersion,choice:r.choice}:null;}
+ function withSaveSnapshot(g,serialize){const r=g.proofRuntime;if(!r)return serialize();const live=Object.fromEntries(fields.map(k=>[k,g[k]])),focus=g.fate.focus;try{restore(g,r.snapshot);return serialize();}finally{for(const k of fields)g[k]=live[k];g.fate.focus=focus;}}
+ function restoreSession(g,d){if(d===undefined)return;if(!d||Array.isArray(d)||Object.keys(d).length!==4||d.version!==1||d.profileVersion!==1||!modes.includes(d.mode)||d.choice!==(d.mode==='application'?describe(g).roleChoice:null)||!available(g,d.mode)||!near(g)||!begin(g,d.mode))throw Error('귀환 임무 재개 기록 오류');g.restoreNotice='귀환 대응 임무를 시작 지점부터 다시 진행합니다. 확정한 증거는 유지됩니다.';}
+ return {validate,session,withSaveSnapshot,restoreSession,profile,initial,state,describe,install,entry,requestEntry,begin,progress,objective,points,step,finish,interact,onEffect,prepareEnemy,mayStartAttack,safeZone,clone,snapshot,restore};
 });

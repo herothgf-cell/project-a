@@ -1,5 +1,5 @@
 /* Current save boundary. Raw storage is never mutated while validating/migrating. */
-(function(root,f){const n=typeof module==='object'&&module.exports,api=f(n?require('./world-growth.js'):root.WorldGrowth,n?require('./dungeon-entry.js'):root.DungeonEntry);if(n)module.exports=api;else root.SaveV10=api;})(globalThis,function(Growth,Dungeon){
+(function(root,f){const n=typeof module==='object'&&module.exports,api=f(n?require('./world-growth.js'):root.WorldGrowth,n?require('./dungeon-entry.js'):root.DungeonEntry,n?require('./return-proof.js'):root.ReturnProof);if(n)module.exports=api;else root.SaveV10=api;})(globalThis,function(Growth,Dungeon,Proof){
  'use strict';const clone=x=>JSON.parse(JSON.stringify(x));
  function snapshot(g){
   // Trial rosters replace sanctum's normal roster, even just after trial completion.
@@ -7,7 +7,7 @@
   if(g.trial||g.enemies.some(e=>e.trial))return null;
   return {version:1,area:g.area,player:{x:g.player.x,y:g.player.y,hp:g.player.hp,mp:g.player.mp},enemies:g.enemies.filter(e=>!e.residual&&!(g.area==='overseerHall'&&g.worldState.cycleOne?.bossClear)).map(e=>({id:e.id,hp:e.hp,maxHp:e.maxHp,x:e.x,y:e.y,rewarded:!!e.rewarded})),activated:[...g.activated],linked:!!g.laterRuntime?.linked,suppressRemaining:Math.max(0,Math.min(6,(g.laterRuntime?.suppress||0)-g.playTime)),cycle:g.area==='overseerHall'?{charges:g.cycleRuntime?.charges??3,chargeExposed:g.cycleRuntime?.chargeExposed||0,pulse:g.cycleRuntime?.pulse||0,suppressed:g.cycleRuntime?.suppressed||0,phase:g.cycleRuntime?.phase||1}:null,exercise:g.enemies.some(e=>e.deepeningExercise&&e.hp>0)};
  }
- function save(g,baseSave){const d=JSON.parse(baseSave.call(g));d.version=10;d.improvementVersion=2;d.worldGrowth=clone(g.worldGrowth);d.questRewards=[...g.questRewards];d.journey.mastery=clone(g.worldGrowth.murim.mastery);d.journey.breath=g.worldGrowth.murim.mode;d.fate.path=g.worldGrowth.murim.equipped||g.fate.path;d.worldState=clone(g.worldState);d.encounter=snapshot(g);return JSON.stringify(d);}
+ function save(g,baseSave){const d=JSON.parse(baseSave.call(g));d.version=10;d.improvementVersion=2;d.worldGrowth=clone(g.worldGrowth);d.questRewards=[...g.questRewards];d.journey.mastery=clone(g.worldGrowth.murim.mastery);d.journey.breath=g.worldGrowth.murim.mode;d.fate.path=g.worldGrowth.murim.equipped||g.fate.path;d.worldState=clone(g.worldState);d.encounter=snapshot(g);const proof=Proof.session(g);if(proof)d.returnProofSession=proof;return JSON.stringify(d);}
  function restore(g,d){
   const snap=d.encounter;if(snap!=null){if(snap.version!==1||snap.area!==d.area||!Array.isArray(snap.enemies)||snap.enemies.length>100||typeof snap.linked!=='boolean')throw Error('전장 기록 오류');const p=snap.player;if(!p||!['x','y','hp','mp'].every(k=>Number.isFinite(p[k]))||p.hp<0||p.mp<0||p.hp>10000||p.mp>10000)throw Error('전장 위치·체력 기록 오류');const seen=new Set();for(const e of snap.enemies){if(!e||typeof e.id!=='string'||seen.has(e.id)||!['hp','maxHp','x','y'].every(k=>Number.isFinite(e[k]))||e.hp<0||e.hp>e.maxHp||e.maxHp<=0||e.maxHp>100000||typeof e.rewarded!=='boolean')throw Error('적 기록 오류');seen.add(e.id);}
    if(snap.cycle!=null){const c=snap.cycle;if(d.area!=='overseerHall'||!Number.isInteger(c.charges)||c.charges<0||c.charges>3||!Number.isInteger(c.phase)||c.phase<1||c.phase>3||!['chargeExposed','pulse','suppressed'].every(k=>Number.isFinite(c[k])&&c[k]>=0&&c[k]<=6))throw Error('감독관 전투 기록 오류');}
@@ -41,7 +41,7 @@
   const projection=clone(d);projection.version=9;if(d.improvementVersion===2&&d.worldState.advancement?.realm>0){if(![0,1].includes(d.journey?.realm))throw Error('경지 값 오류');projection.journey.realm=0;}if(['transportRoad','supplyRidge','overseerApproach','overseerHall','transportDock','evacuationDock'].includes(projection.area))projection.area=Growth.worldOf(d)==='murim'?'village':'city';projection.level=worlds[Growth.worldOf(d)].level;projection.xp=worlds[Growth.worldOf(d)].xp;const g=baseLoad(JSON.stringify(projection));Object.setPrototypeOf(g,Game.prototype);delete g.level;delete g.xp;g.worldGrowth=worlds;g.questRewards=[...d.questRewards];g.worldState=clone(d.worldState);g.installWorldState();if(d.improvementVersion===2&&d.worldState.advancement?.realm>0)g.journey.realm=d.journey.realm;
   for(const w of Object.values(worlds))if(w.equipped&&!g.revision.inherited.includes(w.equipped))throw Error('미계승 계열 장착 오류');g.validateWorldState?.();if(!d.worldState.cycleOne&&(d.improvementVersion||0)<2&&d.progress>=2)g.worldState.cycleOne.legacyAccess=true;
   if(g.laterStory?.dualBreath&&!g.laterStory.deepening)g.laterStory.deepening={stage:'legacy',observed:false,clue:false,interpreted:false,legacy:true};
-  g.player.hp=g.stats().hp;g.player.mp=g.stats().mp;restore(g,d);g.events=[];return g;
+  g.player.hp=g.stats().hp;g.player.mp=g.stats().mp;restore(g,d);Proof.restoreSession(g,d.returnProofSession);g.events=[];return g;
  }
  return {save,load,snapshot};
 });
