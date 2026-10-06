@@ -39,6 +39,7 @@
   startContract(){return false;}
   claimContract(){return false;}
   cancelContract(){return false;}
+  nearestPoint(){if(this.proofRuntime&&Proof.inRecovery(this))return Proof.points(this).find(p=>p.id==='proof-recover');return super.nearestPoint();}
   points(){if(this.proofRuntime)return Proof.points(this);return Dungeon.points(this,[...super.points().filter(p=>p.id!=='contract-board'),...Cycle.points(this)]);}
   potionHint(){if(this.worldState.potionHintSeen||this.potions<=0||this.player.hp>this.stats().hp*.4)return '';this.worldState.potionHintSeen=true;return '회복약을 직접 사용하면 최대 체력의 55%를 회복합니다. 보유 '+this.potions+'개 · 자동 사용되지 않습니다.';}
   regenerateEnemy(e,amount){if(e.realitySuppressedUntil>this.playTime){if(e.hp<e.maxHp&&e.realitySuppressionCast){e.realitySuppressionProven=true;Reality.onEffect(this,e.realitySuppressionCast,e,'suppress');}return;}e.hp=Math.min(e.maxHp,e.hp+amount);}

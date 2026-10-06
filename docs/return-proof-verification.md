@@ -1,0 +1,46 @@
+# 귀환 대응 프로토타입 검증
+
+브랜치 `v0.1_proto_patch`, 기준 `6039e71`, 설계 승인 2026-10-06. [원문](superpowers/specs/2026-10-06-return-proof-source.md)·[설계](superpowers/specs/2026-10-06-return-proof-design.md)·[계획](superpowers/plans/2026-10-06-return-proof.md).
+
+## 구현
+
+현실 던전 입구의 선택 체험으로 첫 전투 → 기존 계승 → 귀환·장착 → 같은 전투의 실제 대응 → 직접 보고 → 역할 선택 → 적용 전투가 연결된다. 본편 진입 조건은 그대로다. E1/E4 적 프로필은 동일하며 강타 예고 1.2초·후딜 0.8초, 파문 흡수 0.7초·강화 4초·후속기 쿨 5초다. 임무 보상은 0이며 입장 전 자원이 복구된다.
+
+저장 버전 10·improvementVersion 2를 유지한다. 새 영구 묶음은 `worldState.returnProof.version=1`. 중간 저장은 본편 스냅샷과 검증된 증거를 보존하고 `returnProofSession`으로 재시작한다. 기세·쿨다운은 `encounter.returnProofResources`에 별도로 검증해 보존한다. Set/Map 런타임은 직렬화 투영 후 원래 참조로 되돌린다.
+
+## 기능 근거
+
+| 항목 | 자동 근거 |
+| --- | --- |
+| F01~04 | `return-proof.test.cjs`, `return-proof-acceptance.test.cjs`: 2장 보고 전 잠금, 고정 프로필, 실제 기본 공격·회피 완료, 과성장 제압 |
+| F05~10 / CB02~05 | `return-proof-feedback.test.cjs`: 실제 효과, 읽기 전용 readiness, 만료·기본 공격 소비·쿨·자원·타격 정지 |
+| F11 | `return-proof-ui.test.cjs`: 준비 실패·닫기·게임 교체·중복 확정; 기존 입구 브라우저 회귀 |
+| F12 | `return-proof.browser.cjs`: 실제 DOM/키 입력, 360×640·844×390·200% 선택 화면; 기존 키보드·반응형 UI 검사 |
+| F13 / CB01,06~08 | `return-proof-integration.test.cjs`, `return-proof.test.cjs`: 벽/사격 선분/범위, 독립 예고, 후딜, 정지 시계; 원·선·사각 표시 |
+| F14~18 | `return-proof-reports.test.cjs`: 미증명 승리, 직접 보고, 기존 역할·보급 99·중복 방지 |
+| F19~20 | 같은 보고 테스트와 신규 브라우저: 미리보기 무변화, 선택 고정, 사격 제거/실제 피해 25% 감소, 적용 완료 |
+| F21~24 | `return-proof-save.test.cjs`, acceptance: 자원 복구, 세션 재시작, 구저장, 부분 증거, 손상 거부, 예외 후 참조 보존 |
+| F25~27 | practice/integration/acceptance 및 기존 fate·world-full-journey·v12 전체: 계승 유지, 3계열×2심법, 6~10장 회귀 |
+| F28 | telemetry/save 및 기존 v12 저장 실패 브라우저: 로그 opt-in/상한/무개인정보·예외 격리, 저장 실패 복구 |
+
+## 실행 기록
+
+실행 환경: Linux 클라우드, Node v24.19.0, Playwright 1.57.0, `/usr/bin/chromium`. 현재 작업 트리에서 각 작업의 실패 테스트 후 구현을 검증했다. 신규 흐름의 브라우저는 E1부터 E6까지 UI 확인·직접 보고·선택 확정으로 연결한다. 적 처치 일부는 테스트 fixture를 사용하며 사람 난도 검증으로 간주하지 않는다. 별도 acceptance는 기연 없는 정상 2장 캐릭터의 실제 `act('attack')`·`act('dash')` 및 `step`으로 제압했다.
+
+- Task 1: 전체 681 통과. 조회 부작용 제거 후 초기화 회귀를 발견해 게임 생성 단계로 옮겼다.
+- Task 2: 전체 691 통과.
+- Task 3: 전체 696 통과.
+- Task 4: 전체 699 통과.
+- Task 5: 전체 702 통과.
+- Task 6: 전체 708 통과. 브라우저의 전멸 후 목표 조회 오류를 모델 회귀로 재현해 수정했다.
+- 최종 통합 검사·검토 결과는 아래에 추가한다.
+
+브라우저 스크린샷: `/workspace/.project-a-setup/return-proof/choice-360.png`, `choice-844.png`. 빌드는 외부 디렉터리에 생성하며 배포하지 않는다. 기존 미승인 아트의 공개 출시 상태와 이번 프로토타입 기능 통과는 구분한다.
+
+## 판단 기록과 남은 검증
+
+- 기존 저장기가 초기화하던 입장 전 기세·쿨을 보존하기 위해 encounter 하위 자원 투영을 추가했다. 잘못되면 추가 마이그레이션 면이 생기므로 범위·형식 손상 테스트를 둔다.
+- 표시된 회수 사각형의 모서리까지 확보·상호작용을 허용했다. 원형 거리보다 영역이 조금 넓지만 전후 임무는 동일하다.
+- 사람 8명, H1~H5, 재미, 실제 신규 플레이의 20~30분 도달은 **미실행**이다. [사람 테스트 양식](return-proof-playtest.md)을 사용한다. P6 확장은 하지 않았다.
+
+최종 통합(검토 전): `check`, `check:revision`, `check:world` 통과, **718/718 테스트 통과**. 신규 E1~E6 흐름과 별도 브라우저 안전성 검사(실제 DOM 준비 취소/게임 교체/중복/준비 실패, 보고 저장 quota 실패 후 보급·원본 보존) 통과. 기존 v12 UI/art, dev-starts, dialog-keyboard, navigation-followup, fantasy-ui 브라우저 통과.
