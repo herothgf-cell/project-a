@@ -3,10 +3,12 @@
 현재 `v0.2_proto_patch`는 main v0.12.4 기준에 기획 자료만 추가한 브랜치입니다. 새 아이템과 UI는 아직 실행 게임에 나오지 않습니다.
 
 - [기획 초안](../../superpowers/specs/2026-10-06-cross-world-items-design.md)
-- [아이템 아이콘 콘셉트](item-icons.svg)
-- [성장·보유 재화 화면 콘셉트](ui-concept.svg)
+- [비판 검토와 수정 권고](critical-review.md)
+- [아이템 아이콘 이미지](item-icons.png) · [SVG 원본](item-icons.svg)
+- [능력치·보유 재화 이미지 — 초기안](ui-concept.png) · [SVG 원본](ui-concept.svg)
+- [스킬 트리 이미지 — 수정 제안](skill-tree-concept.png) · [SVG 원본](skill-tree-concept.svg)
 
-SVG는 브라우저에서 열어 볼 수 있는 정적 시안입니다. 버튼은 동작하지 않습니다. 설명용 잔액과 수치를 실제 게임 상태로 해석하지 마세요.
+PNG는 바로 볼 수 있는 화면 이미지이고, SVG는 확대 가능한 원본입니다. 모두 정적 시안입니다. 능력치 화면의 레벨 증가 수치는 초기안이며 비판 검토에서 철회를 권고했습니다. 스킬 트리는 사용자 검토용 수정 제안으로 아직 확정되지 않았습니다. 버튼은 동작하지 않습니다. 설명용 잔액과 수치를 실제 게임 상태로 해석하지 마세요.
 
 ## 현재 브랜치에서 게임 실행
 
