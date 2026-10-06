@@ -26,6 +26,10 @@
     try{const raw=localStorage.getItem(SAVE);hasSave=raw!==null;if(raw!==null){resume=Game.load(raw);if(!devMode&&(JSON.parse(raw).improvementVersion||0)<2){try{const key=SAVE+(JSON.parse(raw).improvementVersion===undefined?'.before-v11':'.before-v12');if(localStorage.getItem(key)===null)localStorage.setItem(key,raw);}catch{saveWarning=true;$('titleError').textContent='이전 기록 백업을 저장하지 못했습니다. 저장 공간을 확인하거나 기록을 내려받으세요.';}}}}
     catch(error){$('titleError').textContent='저장 데이터를 읽을 수 없습니다. 기존 데이터는 유지됩니다. 새 여정은 확인 후 시작합니다.';}
     $('continue').hidden=!resume;$('start').className=resume?'secondary':'primary';
+    $('importPrevious')?.remove();try{if(localStorage.getItem(SaveSlots.keys.previous)!==null){const b=node('button','secondary','이전 v0.12 기록 가져오기');b.id='importPrevious';b.onclick=importPrevious;$('continue').after(b);}}catch{}
+  }
+  function importPrevious(){
+    try{const raw=localStorage.getItem(SaveSlots.keys.previous),loaded=Game.load(raw);show('이전 기록을 v0.2로 가져올까요?','이전 v0.12 원본은 유지됩니다. 현재 v0.2 기록이 있다면 교체됩니다. 이미 적용된 능력치와 심법 효과는 보존됩니다.',[{label:'취소',secondary:true},{label:'v0.2로 복사',run:()=>{try{backup(true);localStorage.setItem(SAVE,loaded.save());inspectSave();toast('가져오기 완료 · 이어하기를 눌러 주세요.');}catch{$('titleError').textContent='가져오기 저장 실패 · 기존 기록을 유지했습니다. 저장 공간을 확인하세요.';}}}]);}catch{$('titleError').textContent='가져오기 실패 · 지원하지 않거나 손상된 기록입니다. 원본은 유지됩니다. v0.1 귀환 검증 저장은 직접 이전을 지원하지 않습니다.';}
   }
   function backup(force=false){if(!BACKUP)return;try{const raw=localStorage.getItem(SAVE);if(raw!==null&&(force||!localStorage.getItem(BACKUP)))localStorage.setItem(BACKUP,raw);}catch(error){/* Storage may be unavailable; never block play. */}}
   function persist(){
@@ -140,7 +144,7 @@
     show('저장 파일 불러오기','파일 선택 중에는 게임이 멈춥니다. 선택을 취소했다면 돌아가기를 누르세요.',[{label:'돌아가기'}],'system','저장 데이터');
     const input=node('input');input.type='file';input.accept='.json,application/json';input.addEventListener('change',async()=>{
       const file=input.files?.[0];if(!file)return;if(file.size>500000){show('불러오지 못했습니다','저장 파일 크기가 너무 큽니다. 현재 진행은 유지됩니다.');return;}
-      try{const loaded=Game.load(await file.text());show('이 여정을 불러올까요?',`Lv.${loaded.level} · ${QUESTS[loaded.progress][0]}\n현재 진행이 선택한 저장으로 교체됩니다.`,[{label:'취소',secondary:true},{label:'불러오기',run:()=>{backup(true);g=loaded;renderer.area=null;persist();update();toast('저장한 거점에서 이어갑니다.');}}]);}
+      try{const loaded=Game.load(await file.text());show('이 여정을 불러올까요?',`Lv.${loaded.level} · ${QUESTS[loaded.progress][0]}\n현재 진행이 선택한 저장으로 교체됩니다.`,[{label:'취소',secondary:true},{label:'불러오기',run:()=>{try{backup(true);localStorage.setItem(SAVE,loaded.save());g=loaded;renderer.area=null;processEvents();update();toast('저장한 위치에서 이어갑니다.');}catch{show('불러오기 저장 실패','현재 진행과 이전 저장을 유지했습니다. 저장 공간을 확인하세요.');}}}]);}
       catch(error){show('불러오지 못했습니다','손상되었거나 지원하지 않는 저장 파일입니다. 현재 진행은 변경되지 않았습니다.');}
     });input.click();
   }
@@ -154,7 +158,10 @@
     const body=node('section','settings-screen');body.append(node('p','',`Lv.${g.level} · ${AREAS[g.area].name}`),node('p','','화면, 입력, 저장을 설정합니다.'));const options=node('div','settings-options');for(const action of actions.slice(1)){const b=node('button','secondary',action.label);b.onclick=()=>{if(dialog.open)dialog.close();clearInput();action.run?.();};options.append(b);}body.append(options);show('설정',body,[actions[0]],'hero','일시정지 · v'+VERSION);
   }
   function processEvents(){
+    const rs=BoundaryResonance.state(g);if(g.area==='city'&&rs&&rs.notified<rs.grants.length){const old=rs.notified;rs.notified=rs.grants.length;if(persist())toast('무림의 성취가 공명으로 남았습니다 · 성장 → 경계공명에서 확인하세요.');else rs.notified=old;}
     for(const e of g.events.splice(0)){
+      if(e.type==='resonance-proof'){if(persist())show(e.title,e.text,[{label:'현실 기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}}]);}
+      if(e.type==='resonance-complete'){if(!persist()){g=Game.load(e.before);ResonanceChallenges.runtime(g).rewardBlocked=true;toast('저장 실패 · 기록 지점에서 E로 다시 시도하세요.');continue;}show(e.title,e.text,[{label:'청운촌으로 귀환',run:()=>{g.enter('village');processEvents();persist();update();}},{label:'기록 확인',run:()=>growthUI.open()}]);}
       if(e.type==='world-news')updateNews();
       if(e.type==='level-up'){progressionUI?.level(e);persist();}
       if(e.type==='contract-complete'){show(e.title,e.text,[{label:'기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}},{label:'조금 더 둘러보기',secondary:true}]);persist();}
@@ -281,7 +288,7 @@
   const historyUI=GrowthUI.create({game:()=>g,show,node,grid,close:closeDialog,refresh:refreshGrowth,notes:journeyUI,shop,route:tab=>tab==='status'?characterUI.open():growthUI.open('skills')});
   characterUI=CharacterUI.create({game:()=>g,show,node,grid,refresh:refreshGrowth,openSection:section=>growthUI.open(section)});
   newsUI=NewsUI.create({game:()=>g,show,node,refresh:refreshGrowth,openDestination:item=>item.section==='status'?characterUI.open('reality'):growthUI.open(item.section,item.subject)});
-  growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI});
+  growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI,prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
   const character=node('button'),hudPortrait=$('hudPortrait');character.id='character';character.type='button';character.setAttribute('aria-label','캐릭터 상태');hudPortrait.replaceWith(character);character.append(hudPortrait);character.onclick=()=>characterUI.open();
   const newsButton=node('button','icon-button','소식');newsButton.id='personalNews';newsButton.onclick=()=>newsUI.open();document.querySelector('.header-actions').prepend(newsButton);
   progressionUI=ProgressionUI.create({node});

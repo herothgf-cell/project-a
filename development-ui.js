@@ -1,8 +1,9 @@
-(function(root){'use strict';root.DevelopmentUI={create({game,show,node,refresh,commit,notes,close,character,news,history}){
+(function(root){'use strict';root.DevelopmentUI={create({game,show,node,refresh,commit,notes,close,character,news,history,prepare}){
  const names={ripple:'파문검',echo:'잔영보',seal:'경계봉인'};
  function button(parent,label,fn,disabled=false){const b=node('button','secondary',label);b.disabled=disabled;b.onclick=fn;parent.append(b);return b;}
- const growth=GrowthScreen.create({game,show,node,refresh,commit,close,character,skills:()=>open('skills')});
- function open(section='growth',subject=null){if(section==='growth')return growth.open(subject);const g=game();if(g.introActive)return;g.refreshNews();const world=WorldGrowth.worldOf(g),murim=world==='murim',w=g.worldGrowth[world],safe=DualWorld.AREAS[g.area].safe,body=node('section','growth-screen development-screen'),nav=node('nav','growth-tabs');
+ const growth=GrowthScreen.create({game,show,node,refresh,commit,close,character,skills:()=>open('skills'),resonance:()=>resonance.open()});
+ const resonance=ResonanceUI.create({game,show,node,commit,close,refresh,prepare,back:()=>growth.open('murim'),skills:()=>open('skills')});
+ function open(section='growth',subject=null){if(section==='growth')return subject?growth.open(subject):resonance.open();const g=game();if(g.introActive)return;g.refreshNews();const world=WorldGrowth.worldOf(g),murim=world==='murim',w=g.worldGrowth[world],safe=DualWorld.AREAS[g.area].safe,body=node('section','growth-screen development-screen'),nav=node('nav','growth-tabs');
   body.dataset.section=section;nav.classList.add('character-tabs');const tabs=[];button(nav,'개요',()=>character.open()).setAttribute('aria-pressed','false');for(const [id,label]of [['growth','성장'],['skills','무공']]){const b=button(nav,label,()=>open(id));b.setAttribute('aria-pressed',String(section===id));tabs.push({id,label,b});}body.append(nav);
   function updateBadges(){for(const {id,label,b}of tabs){const count=g.unreadNews(id).length;b.querySelector('.news-dot')?.remove();b.classList.toggle('has-news',count>0);b.setAttribute('aria-label',label+(count?' · 새 소식 '+count+'개':''));if(count){const dot=node('span','news-dot');dot.setAttribute('aria-hidden','true');b.append(dot);}}}
   updateBadges();

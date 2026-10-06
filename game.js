@@ -35,7 +35,7 @@
         });
       }
       Fate.entry(this);Legend.enter(this);this.emit('area',{text:a.name});
-      if(old.world==='무림'&&a.world==='현실'&&this.training>0)this.emit('transfer',{title:'무공이 현실에 남았다',text:`공격력 ${this.stats().attack} · 전승 무공 ${Math.min(2,this.training)}개\n${this.training>=3?'경계 공명 · 받는 피해 15% 감소\n':''}\n다른 하늘 아래에서도, 몸은 같은 호흡을 기억한다.`});
+      if(old.world==='무림'&&a.world==='현실'&&this.training>0)this.emit('transfer',{title:'무공이 현실에 남았다',text:`공격력 ${this.stats().attack} · 전승 무공 ${Math.min(2,this.training)}개\n${this.training>=3?'무림 성취는 성장 → 경계공명에서 현실의 힘으로 배분합니다.\n':''}\n다른 하늘 아래에서도, 몸은 같은 호흡을 기억한다.`});
       return true;
     }
     blocked(x,y,r=16){
@@ -101,7 +101,7 @@
         if(s===1){this.progress=2;this.training=1;return dialog('백련 · 첫 번째 호흡','다른 하늘에서 온 제자로구나.\n검을 휘두르는 것은 팔이 아니라 호흡이다.\n\n월영참 습득 · K / 月\n동남쪽 흑풍 죽림에서 호위를 쓰러뜨리고 두목을 제압하거라.','master');}
         if(s===3){this.progress=4;this.training=2;this.gold+=80;return dialog('백련 · 경계를 베는 검','두려워도 한 발을 내딛었구나.\n이제 청명검과 천뢰격을 가져가거라.\n몸에 새긴 것은, 어느 세계에서도 사라지지 않는다.\n\n천뢰격 습득 · L / 雷 · 금화 +80\n경계석으로 현실에 돌아가 서린에게 보고하자.','master');}
         if(s===7){this.progress=8;return dialog('백련 · 잔월의 흔적','월영문의 인장이다. 닫힌 문을 누군가 다시 열었군.\n\n동북쪽 월영 폐사로 가거라.\n파수꾼을 물리친 뒤 세 인장을 깨우면 수문장의 보호막이 사라진다.\n\n돌아오면 두 세계의 호흡을 하나로 잇는 법을 알려주마.','master');}
-        if(s===9){this.progress=10;this.training=3;this.gold+=120;return dialog('백련 · 경계 공명','저쪽의 파도와 이쪽의 달은 같은 상처를 비추고 있다.\n두 세계를 오간 네 호흡만이 그 틈을 메울 수 있지.\n\n경계 공명 완성 · 공격력 +6 · 받는 피해 15% 감소\n금화 +120 · 현실의 서린에게 돌아가자.','master');}
+        if(s===9){this.progress=10;this.training=3;this.gold+=120;return dialog('백련 · 경계 공명','저쪽의 파도와 이쪽의 달은 같은 상처를 비추고 있다.\n두 세계를 오간 네 호흡만이 그 틈을 메울 수 있지.\n\n경계 공명 완성 · 무림 공격력 +6 · 무림 받는 피해 15% 감소\n무림의 성취가 공명 결정과 각인으로 남는다. 현실 기지의 성장 화면에서 배분하자.\n금화 +120 · 현실의 서린에게 돌아가자.','master');}
         return dialog('백련 · 사부','붉은 원은 적이 노리는 자리다.\n회피로 벗어난 뒤, 비어 있는 틈을 베어라.\n\n무공과 장비의 성장은 현실에도 그대로 남는다.','master');
       }
       if(o.id==='portal'){
@@ -240,7 +240,7 @@
         }
       }
       for(const f of this.fx)f.life-=dt;this.fx=this.fx.filter(f=>f.life>0);
-      if(p.hp<=0){const inTrial=!!this.trial||!!this.advancementTrial;this.gold=Math.max(0,this.gold-(inTrial?0:15));this.enter(AREAS[this.area].world==='무림'?'village':'city');this.emit('defeat',{title:'쓰러져도, 성장은 남는다',text:(inTrial?'시험은 금화 손실 없이 다시 도전할 수 있습니다. ':'거점에서 체력과 내력을 회복했습니다. 금화 최대 15를 잃었지만 ')+ '  무공과 이야기 진행은 유지됩니다.\n\n호위와 봉인은 재입장하면 초기화됩니다. 붉은 공격 예고에서 회피하고, 회복약을 준비하세요.'});}
+      if(p.hp<=0){const inTrial=!!this.trial||!!this.advancementTrial||!!this.worldState?.resonanceChallenges?.active;this.gold=Math.max(0,this.gold-(inTrial?0:15));this.enter(AREAS[this.area].world==='무림'?'village':'city');this.emit('defeat',{title:'쓰러져도, 성장은 남는다',text:(inTrial?'시험은 금화 손실 없이 다시 도전할 수 있습니다. ':'거점에서 체력과 내력을 회복했습니다. 금화 최대 15를 잃었지만 ')+ '  무공과 이야기 진행은 유지됩니다.\n\n호위와 봉인은 재입장하면 초기화됩니다. 붉은 공격 예고에서 회피하고, 회복약을 준비하세요.'});}
     }
     retreat(){if(!AREAS[this.area].safe)this.enter(AREAS[this.area].world==='무림'?'village':'city');}
     save(){const d={version:4,fate:this.fate,legend:this.legend};for(const k of ['area','progress','training','level','xp','gold','potions','upgrade','clears','harborClears','playTime'])d[k]=this[k];return JSON.stringify(d);}

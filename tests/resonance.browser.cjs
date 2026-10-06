@@ -1,0 +1,36 @@
+const assert=require('node:assert/strict'),{run}=require('./browser-harness.cjs');
+run(async p=>{
+ await p.evaluate(()=>{const g=window.__game;g.training=3;g.progress=12;g.fate.stage=2;g.fate.discovered=['ripple'];g.fate.proven=['ripple'];g.enter('village');g.acceptFate('ripple');g.enter('city');g.events=[];g.save();});
+ await p.click('#growthStatus');await p.locator('.resonance-screen').waitFor();
+ await p.getByRole('button',{name:'능력치',exact:true}).click();
+ await p.getByRole('button',{name:'공격 증가',exact:true}).click();
+ await p.getByRole('button',{name:'배분 적용',exact:true}).click();
+ assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),1);
+ await p.getByRole('button',{name:'현실 스킬',exact:true}).click();
+ await p.getByRole('button',{name:'안정 흡수 · 각인 1 사용',exact:true}).click();
+ assert.equal(await p.evaluate(()=>BoundaryResonance.effects(__game,'ripple').guardWindow),.9);
+ await p.getByRole('button',{name:'능력치',exact:true}).click();
+ await p.evaluate(()=>{const old=WorldGame.Game.load;WorldGame.Game.load=function(...args){return window.__game=old.apply(this,args);};window.__setItem=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw Error('quota');};});
+ await p.getByRole('button',{name:'공격 증가',exact:true}).click();await p.getByRole('button',{name:'배분 적용',exact:true}).click();
+ assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),1);
+ await p.evaluate(()=>{Storage.prototype.setItem=window.__setItem;});
+ await p.setViewportSize({width:360,height:800});await p.evaluate(()=>document.documentElement.style.fontSize='200%');
+ assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await p.getByRole('button',{name:'성장 목표',exact:true}).click();await p.getByRole('button',{name:'버티는 힘 목표 선택',exact:true}).click();
+ assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).goal),'survival');
+ await p.screenshot({path:'/tmp/resonance-mobile.png'});
+ await p.setViewportSize({width:1280,height:900});await p.evaluate(()=>document.documentElement.style.fontSize='100%');
+ await p.getByRole('button',{name:'능력치',exact:true}).click();await p.getByRole('button',{name:'능력치 전액 환불',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),0);
+ await p.getByRole('button',{name:'현실 스킬',exact:true}).click();await p.getByRole('button',{name:'스킬 각인 전액 환불',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).learned.length),0);
+ await p.keyboard.press('Escape');await p.evaluate(()=>{__game.enter('village');__game.events=[];});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.click('#growthStatus');
+ await p.getByRole('button',{name:'입장 · 흑풍 죽림 · 버티는 힘',exact:true}).click();await p.waitForFunction(()=>__game.area==='resonanceForest');
+ await p.evaluate(()=>{window.__setItem=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw Error('quota');};});
+ await p.evaluate(()=>{for(const e of __game.enemies)__game.strike(e,99999);Object.assign(__game.player,{x:800,y:780});for(let i=0;i<45;i++){__game.hitStop=0;__game.step(.05);}});
+ await p.waitForFunction(()=>ResonanceChallenges.runtime(__game).rewardBlocked);assert.equal(await p.evaluate(()=>ResonanceChallenges.state(__game).completed.length),0);await p.evaluate(()=>Storage.prototype.setItem=window.__setItem);await p.click('#interact');
+ await p.getByRole('button',{name:'청운촌으로 귀환',exact:true}).click();await p.waitForFunction(()=>__game.area==='village');
+ assert.deepEqual(await p.evaluate(()=>ResonanceChallenges.state(__game).completed),['forest:survival']);
+ await p.reload();await p.waitForFunction(()=>ArtPreview.ready);await p.click('#continue');await p.waitForFunction(()=>window.__game?.area==='village');
+ assert.deepEqual(await p.evaluate(()=>ResonanceChallenges.state(__game).completed),['forest:survival']);
+ await p.click('#growthStatus');await p.getByRole('button',{name:'보관함·기록',exact:true}).click();await p.screenshot({path:'/tmp/resonance-desktop.png'});
+
+}).then(()=>console.log('resonance browser passed')).catch(e=>{console.error(e);process.exitCode=1;});
