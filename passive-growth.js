@@ -44,7 +44,7 @@
   const clean={version:1,ledger:{...raw.ledger},levels:{...raw.levels},adapted:raw.adapted===null?null:{levels:{...raw.adapted.levels}}};
   g.worldState.passive=clean;return sync(g);
  }
- function active(g,world){const s=sync(g);return world==='reality'?{...(s.adapted?.levels||empty()),F4:g.laterStory?.dualBreath?1:0,C5:g.laterStory?.dualBreath?1:0}:s.levels;}
+ function active(g,world){const s=sync(g);if(world==='reality'&&g.worldState.resonance)return {...empty(),...g.worldState.resonance.common,F0:g.training>=1?1:0,C0:g.training>=2||g.worldGrowth?.reality?.mode==='focus'||g.worldGrowth?.murim?.mode==='focus'?1:0,F4:g.laterStory?.dualBreath?1:0,C5:g.laterStory?.dualBreath?1:0};return world==='reality'?{...(s.adapted?.levels||empty()),F4:g.laterStory?.dualBreath?1:0,C5:g.laterStory?.dualBreath?1:0}:s.levels;}
  function bonus(g,world=worldOf(g)){const l=active(g,world),focus=g.worldGrowth?.[world]?.mode==='focus';return {hp:6*(focus?l.C4:l.F5),mp:4*(focus?l.C1:l.F1)};}
  function effects(g,world=worldOf(g)){
   const l=active(g,world),focus=g.worldGrowth?.[world]?.mode==='focus',baseFlow=world==='reality'||l.F0,baseFocus=world==='reality'||l.C0;
@@ -55,7 +55,7 @@
  function reason(g,n,s){if(n.free)return n.id==='F4'||n.id==='C5'?'6장 원리 체득 후 개방':n.id==='F0'?'첫 운기 체득 필요':'집중 원리 체험 필요';if(s.levels[n.id]>=n.max)return '최대 단계';if(n.prerequisite&&!s.levels[n.prerequisite])return nodes.find(x=>x.id===n.prerequisite).name+' 1단계 필요';if(downstream.includes(n.id)&&!(g.journey?.realm>=1))return '이류 도달 필요';if(total(s)-spent(s.levels)<1)return '포인트 부족';if(!safe(g))return '무림 안전 거점에서 변경 가능';return '';}
  function upgrade(g,id){const s=sync(g),n=nodes.find(n=>n.id===id);if(!n||n.free||reason(g,n,s))return false;preserve(g,()=>s.levels[id]++);return true;}
  function reset(g){const s=sync(g);if(!safe(g))return false;preserve(g,()=>{for(const n of nodes)if(!n.free)s.levels[n.id]=0;});return true;}
- function settle(g){const s=sync(g);preserve(g,()=>{s.adapted={levels:{...s.levels}};});return s.adapted;}
+ function settle(g){const s=sync(g);if(g.worldState.resonance)return null;preserve(g,()=>{s.adapted={levels:{...s.levels}};});return s.adapted;}
  function value(id,l){switch(id){case 'F0':return l?'추가 회복 +3/초':'미체득';case 'F1':case 'C1':return '최대 자원 +'+4*l;case 'F2':return '추가 회복 '+(3+.5*l).toFixed(1)+'/초';case 'F3':return '일반 유료 기술 비용 −'+l;case 'F4':return l?'연계 후 비용 −6 · 재생 6초 억제':'미체득';case 'F5':case 'C4':return '최대 체력 +'+6*l;case 'C0':return l?'1.4초 준비 · 1.2배 · 자원 6':'미체득';case 'C2':return '준비 일격 '+(1.2+.05*l).toFixed(2)+'배';case 'C3':return '준비 일격 자원 '+(6-l);case 'C5':return l?'준비 일격 후 기연 · 재생 6초 억제':'미체득';}}
  function describe(g,world=worldOf(g)){const s=sync(g);return {world,mode:g.worldGrowth?.[world]?.mode||'flow',adapted:!!s.adapted,total:total(s),spent:spent(s.levels),available:total(s)-spent(s.levels),nodes:nodes.map(n=>{const level=s.levels[n.id],why=reason(g,n,s);return {...n,level,cost:n.free||level===n.max?0:1,status:level===n.max?'complete':why?'locked':'available',current:value(n.id,level),next:value(n.id,Math.min(n.max,level+1)),reason:level===n.max?'':why,prerequisites:[n.prerequisite,...(downstream.includes(n.id)?['이류']:[])].filter(Boolean),appliedLevel:active(g,world)[n.id],appliedCurrent:value(n.id,active(g,world)[n.id])};})};}
  return {state,sync,validate,bonus,effects,upgrade,reset,settle,describe,nodes,empty,value,rewards,earned,spent};

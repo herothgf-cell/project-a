@@ -1,4 +1,5 @@
 (function(root,f){const api=f();if(typeof module==='object'&&module.exports)module.exports=api;else root.RealitySkills=api;})(globalThis,function(){
+ const Resonance=typeof module==='object'&&module.exports?require('./boundary-resonance.js'):globalThis.BoundaryResonance;
  'use strict';
  const families=['ripple','echo','seal'],actions=['moon','storm','signature1','signature2','ultimate'];
  const table={
@@ -14,7 +15,7 @@
  function damageFactor(g,e){const r=runtime(g);if(r.protection?.until>g.playTime){if(e)onEffect(g,{...r.protection.c,evolution:'ripple-guard'},e,'protection');return .7;}return 1;}
  function status(g,f){return !g.worldState.achievements?.settled.includes('inherit:'+f)?'locked':state(g).settled.includes(f)?'settled':'available';}
  function baseInfo(g,a){if(!actions.includes(a))return null;const common=['moon','storm'].includes(a),family=common?'sword':g.worldGrowth.reality.equipped,row=common?table.sword[a==='moon'?0:1]:table[family]?.[actions.indexOf(a)-2];if(!row)return {name:'현실 대응 미장착',glyph:'?',cost:0,cool:0,need:0,locked:true,description:'기연을 계승하고 귀환한 뒤 무공에서 현실 대응을 장착하세요.'};return {name:row[0],glyph:common?'검':family==='ripple'?'흡':family==='echo'?'속':'억',cost:g.laterStory?.dualBreath&&g.dualRuntime?.discount&&row[1]>0?Math.max(1,row[1]-6-(g.passiveEffects?.().discount||0)):row[1]>0?Math.max(1,row[1]-(g.passiveEffects?.().discount||0)):0,cool:row[2],range:row[3],mult:row[4],description:row[5],need:0,path:family,locked:common?g.training<(a==='moon'?1:2):status(g,family)==='locked'};}
- function info(g,a){const k=baseInfo(g,a);if(!k||k.path==='sword')return k;const key=evolution(g,k.path);return key?{...k,evolution:key,description:k.description+' '+evolutionDescriptions[key]}:k;}
+ function info(g,a){let k=baseInfo(g,a);if(!k||k.path==='sword')return k;const x=Resonance.effects(g,k.path),discount=a==='signature1'?x.discountQ:a==='signature2'?x.discountR:0;k={...k,cost:k.cost>0?Math.max(1,k.cost-discount):0};if(a==='signature1'){if(k.path==='ripple')k.description=x.guardWindow+'초 안의 공격 한 번을 흡수합니다. 다음 수동 타격 강화.';if(k.path==='echo')k.cool=x.echoCool;if(k.path==='seal')k.description='공격 예고를 끊고 재생을 '+x.suppress+'초 억제합니다.';}const key=evolution(g,k.path);return key?{...k,evolution:key,description:k.description+' '+evolutionDescriptions[key]}:k;}
  const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
  const valid=(g,e)=>e&&g.enemies.includes(e)&&!e.trial&&!g.trial&&!(e.boss&&g.bossLocked());
  function targets(g,range){return g.enemies.filter(e=>e.hp>0&&valid(g,e)&&distance(e,g.player)<=range+e.r&&Math.cos(Math.atan2(e.y-g.player.y,e.x-g.player.x)-g.player.face)>.25&&g.lineClear(g.player,e)).sort((a,b)=>distance(a,g.player)-distance(b,g.player));}
@@ -31,7 +32,7 @@
   if(a==='moon')hitTarget(v[0],k.mult);
   else if(a==='storm'){hitTarget(v[0],k.mult);r.pending.push({at:g.playTime+.15,c,range:k.range,mult:k.mult});}
   else if(k.path==='ripple'){
-   if(a==='signature1')r.guard={until:g.playTime+.7,c};
+   if(a==='signature1')r.guard={until:g.playTime+Resonance.effects(g,'ripple').guardWindow,c};
    else {const charged=r.boost?.family==='ripple'&&r.boost.until>g.playTime;r.boost=null;const piercing=a==='signature2'&&charged&&key==='ripple-return',list=piercing?targets(g,300).filter(e=>Math.abs((e.x-p.x)*Math.sin(p.face)-(e.y-p.y)*Math.cos(p.face))<=45+e.r):v;for(const e of list){hit(g,e,a==='ultimate'?4:charged?3:2,piercing?{...c,evolution:key}:c,charged?'counter':'hit');if(a==='ultimate')e.stun=.8;}}
   }else if(k.path==='echo'){
    if(a==='signature1'||a==='ultimate'){
@@ -40,7 +41,7 @@
     if(a==='signature1')r.evade={c,threats};else for(const e of g.enemies){const dx=p.x-from.x,dy=p.y-from.y,t=Math.max(0,Math.min(1,((e.x-from.x)*dx+(e.y-from.y)*dy)/(dx*dx+dy*dy||1)));if(e.hp>0&&valid(g,e)&&distance(e,{x:from.x+dx*t,y:from.y+dy*t})<=90+e.r&&g.lineClear(p,e))hit(g,e,3.5,c);}
    }else {const charged=r.boost?.family==='echo'&&r.boost.until>g.playTime;r.boost=null;const returning=charged&&key==='echo-return';for(const e of v)hit(g,e,charged?2.8:2,returning?{...c,evolution:key}:c,charged?'pursuit':'hit');if(returning&&v[0]){p.invuln=Math.max(p.invuln,.35);for(const e of g.enemies)if(e.hp>0&&!v.includes(e)&&valid(g,e)&&distance(e,v[0])<=110+e.r&&g.lineClear(v[0],e))hit(g,e,1.2,{...c,evolution:key},'pursuit');}if(key==='echo-replay')r.pending.push({at:g.playTime+.45,c:{...c,evolution:key},point:{x:v[0]?.x??p.x+Math.cos(p.face)*100,y:v[0]?.y??p.y+Math.sin(p.face)*100},radius:100,mult:1.2});}
   }else if(k.path==='seal'){
-   const e=v[0];if(e){if(a==='signature1'||a==='ultimate'){const effective=e.wind>0,holding=a==='signature1'&&key==='seal-hold',sc=holding?{...c,evolution:key}:c;e.wind=0;e.cd=Math.max(e.cd,1);e.realitySuppressedUntil=g.playTime+(a==='ultimate'||holding?6:4);e.realitySuppressionCast=sc;e.realitySuppressionProven=effective;if(effective)onEffect(g,sc,e,'suppress');if(a==='ultimate'){hit(g,e,4,c);e.stun=1;}}else {const proven=e.realitySuppressedUntil>g.playTime&&e.realitySuppressionProven,guiding=proven&&key==='seal-guide',hc=guiding?{...c,evolution:key}:c;hit(g,e,e.realitySuppressedUntil>g.playTime?3:2,hc,proven?'weakness':'hit');if(guiding&&e.hp>0){if(!e.boss)g.move(e,Math.cos(p.face)*70,Math.sin(p.face)*70);r.pending.push({at:g.playTime+.2,c:hc,target:e,mult:1});}}}
+   const e=v[0];if(e){if(a==='signature1'||a==='ultimate'){const effective=e.wind>0,holding=a==='signature1'&&key==='seal-hold',sc=holding?{...c,evolution:key}:c;e.wind=0;e.cd=Math.max(e.cd,1);e.realitySuppressedUntil=g.playTime+(a==='ultimate'?6:holding?Math.max(6,Resonance.effects(g,'seal').suppress):Resonance.effects(g,'seal').suppress);e.realitySuppressionCast=sc;e.realitySuppressionProven=effective;if(effective)onEffect(g,sc,e,'suppress');if(a==='ultimate'){hit(g,e,4,c);e.stun=1;}}else {const proven=e.realitySuppressedUntil>g.playTime&&e.realitySuppressionProven,guiding=proven&&key==='seal-guide',hc=guiding?{...c,evolution:key}:c;hit(g,e,e.realitySuppressedUntil>g.playTime?3:2,hc,proven?'weakness':'hit');if(guiding&&e.hp>0){if(!e.boss)g.move(e,Math.cos(p.face)*70,Math.sin(p.face)*70);r.pending.push({at:g.playTime+.2,c:hc,target:e,mult:1});}}}
   }
   const motion=p.motion||(p.motion={}),action=a==='ultimate'?'ultimate-'+k.path:a==='signature1'||a==='signature2'?k.path:a;
   Object.assign(motion,{action,at:g.playTime,angle:p.face,duration:.3,combo:g.combo});motion.instance=Object.freeze({actionId:'reality-'+c.id,action,input:a,startedAt:g.playTime,contactAt:g.playTime,angle:p.face,duration:.3,combo:g.combo});
