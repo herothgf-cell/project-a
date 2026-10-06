@@ -12,16 +12,38 @@
  const evolutionDescriptions={'ripple-return':'역파 · 충격을 보관한 반격이 전방 300 범위의 일직선 적을 관통합니다.','ripple-guard':'잔파 · 실제 흡수 뒤 4초 동안 본인 피해가 30% 줄어듭니다.','echo-return':'회향 · 가속 성공 뒤 추격 타격이 대상 주변으로 퍼집니다. 과거 위치로 돌아가지 않습니다.','echo-replay':'먹향 · 추격 타격 위치에 0.45초 뒤 검격이 한 번 더 남습니다.','seal-hold':'정박 · 적 하나의 재생 억제가 6초로 늘어납니다.','seal-guide':'유전 · 유효 억제 뒤 약점 타격이 일반 적을 앞으로 밀고 후속 검기를 남깁니다. 보스는 밀리지 않습니다.'};
  function evolution(g,family=g.worldGrowth.reality.equipped){const key=g.worldGrowth.reality.interpretations?.[family];return Object.hasOwn(evolutionDescriptions,key)&&g.journey.known.includes(key)&&g.journey.sync[key]>=1?key:null;}
  function damageFactor(g,e){const r=runtime(g);if(r.protection?.until>g.playTime){if(e)onEffect(g,{...r.protection.c,evolution:'ripple-guard'},e,'protection');return .7;}return 1;}
- function status(g,f){return !g.worldState.achievements?.settled.includes('inherit:'+f)?'locked':state(g).settled.includes(f)?'settled':'available';}
+ function status(g,f){return !g.worldState.achievements?.settled.includes('inherit:'+f)?'locked':(g.worldState.reality?.settled||[]).includes(f)?'settled':'available';}
  function baseInfo(g,a){if(!actions.includes(a))return null;const common=['moon','storm'].includes(a),family=common?'sword':g.worldGrowth.reality.equipped,row=common?table.sword[a==='moon'?0:1]:table[family]?.[actions.indexOf(a)-2];if(!row)return {name:'현실 대응 미장착',glyph:'?',cost:0,cool:0,need:0,locked:true,description:'기연을 계승하고 귀환한 뒤 무공에서 현실 대응을 장착하세요.'};return {name:row[0],glyph:common?'검':family==='ripple'?'흡':family==='echo'?'속':'억',cost:g.laterStory?.dualBreath&&g.dualRuntime?.discount&&row[1]>0?Math.max(1,row[1]-6-(g.passiveEffects?.().discount||0)):row[1]>0?Math.max(1,row[1]-(g.passiveEffects?.().discount||0)):0,cool:row[2],range:row[3],mult:row[4],description:row[5],need:0,path:family,locked:common?g.training<(a==='moon'?1:2):status(g,family)==='locked'};}
  function info(g,a){const k=baseInfo(g,a);if(!k||k.path==='sword')return k;const key=evolution(g,k.path);return key?{...k,evolution:key,description:k.description+' '+evolutionDescriptions[key]}:k;}
  const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
  const valid=(g,e)=>e&&g.enemies.includes(e)&&!e.trial&&!g.trial&&!(e.boss&&g.bossLocked());
  function targets(g,range){return g.enemies.filter(e=>e.hp>0&&valid(g,e)&&distance(e,g.player)<=range+e.r&&Math.cos(Math.atan2(e.y-g.player.y,e.x-g.player.x)-g.player.face)>.25&&g.lineClear(g.player,e)).sort((a,b)=>distance(a,g.player)-distance(b,g.player));}
+ function readiness(g,action='signature2'){
+  const k=info(g,action),r=g.realityRuntime||{},family=g.worldGrowth.reality.equipped;
+  const cooldown=Math.max(0,g.player.cool[action]||0),cost=k?.cost||0;
+  const boostRemaining=r.boost?.family===family?Math.max(0,r.boost.until-g.playTime):0;
+  const list=k?targets(g,k.range):[],hasTarget=action==='signature1'&&family==='ripple'||list.length>0;
+  const charged=boostRemaining>0||family==='seal'&&list.some(e=>e.realitySuppressionProven&&e.realitySuppressedUntil>g.playTime);
+  const reason=!k||k.locked?'locked':g.introActive?'intro':g.player.hp<=0?'defeated':cooldown>0?'cooldown':g.player.mp<cost?'resource':action==='ultimate'&&g.fate.focus<100?'focus':'';
+  return {canUse:!reason,reason:reason||(!hasTarget?'no-target':''),charged,boostRemaining,hasTarget,cooldown,cost,family,guardRemaining:Math.max(0,(r.guard?.until||0)-g.playTime)};
+ }
+ function feedback(g,kind,extra={}){
+  const event={kind,at:g.playTime,until:g.playTime+1.5,...extra};runtime(g).lastResponse=event;
+  g.emit?.('response-feedback',event);
+ }
+ function consumeBoost(g,consumer){
+  const r=runtime(g),boost=r.boost;if(!boost)return null;r.boost=null;
+  if(boost.until<=g.playTime){feedback(g,'expired',{family:boost.family});return null;}
+  feedback(g,'consumed',{family:boost.family,consumer});return boost;
+ }
  function onEffect(g,c,e,kind){if(!c.manual||!valid(g,e))return false;const r=runtime(g),key=c.id+':'+e.id+':'+kind;if(r.seen.has(key))return false;r.seen.add(key);if(r.seen.size>256)r.seen.delete(r.seen.values().next().value);
   const permanent=!e.residual&&!e.trial&&!e.assessment;
   if(permanent){const count=c.family+':'+e.id;if((r.credits[count]||0)<3&&!e.comparison){r.credits[count]=(r.credits[count]||0)+1;const m=g.worldGrowth.reality.mastery;m[c.family]=Math.min(30,m[c.family]+1);if(!g.journey.worlds.includes('현실'))g.journey.worlds.push('현실');}
    if(families.includes(c.family)&&['absorb','evade','suppress'].includes(kind)&&status(g,c.family)==='available'){state(g).settled.push(c.family);g.toast('현실 대응 정착 · '+table[c.family][0][0]);g.publishNews?.({id:'response:'+c.family,kind:'skill',subject:c.family});}
+  }
+  if(['absorb','evade','suppress'].includes(kind)){
+   feedback(g,kind,{family:c.family,castId:c.id,targetId:e.id});
+   if(g.responseFeedbackEnabled!==false&&!g.responseReduced)g.hitStop=Math.max(g.hitStop||0,.06);
   }
   g.onRealityEffect?.({castId:c.id,family:c.family,kind,target:e,manual:true,action:c.action,evolution:c.evolution||null});return true;
  }
@@ -32,13 +54,13 @@
   else if(a==='storm'){hitTarget(v[0],k.mult);r.pending.push({at:g.playTime+.15,c,range:k.range,mult:k.mult});}
   else if(k.path==='ripple'){
    if(a==='signature1')r.guard={until:g.playTime+.7,c};
-   else {const charged=r.boost?.family==='ripple'&&r.boost.until>g.playTime;r.boost=null;const piercing=a==='signature2'&&charged&&key==='ripple-return',list=piercing?targets(g,300).filter(e=>Math.abs((e.x-p.x)*Math.sin(p.face)-(e.y-p.y)*Math.cos(p.face))<=45+e.r):v;for(const e of list){hit(g,e,a==='ultimate'?4:charged?3:2,piercing?{...c,evolution:key}:c,charged?'counter':'hit');if(a==='ultimate')e.stun=.8;}}
+   else {const charged=consumeBoost(g,a)?.family==='ripple';const piercing=a==='signature2'&&charged&&key==='ripple-return',list=piercing?targets(g,300).filter(e=>Math.abs((e.x-p.x)*Math.sin(p.face)-(e.y-p.y)*Math.cos(p.face))<=45+e.r):v;for(const e of list){hit(g,e,a==='ultimate'?4:charged?3:2,piercing?{...c,evolution:key}:c,charged?'counter':'hit');if(a==='ultimate')e.stun=.8;}}
   }else if(k.path==='echo'){
    if(a==='signature1'||a==='ultimate'){
     const threats=g.enemies.filter(e=>e.hp>0&&valid(g,e)&&e.wind>0&&g.enemyThreatContains(e)&&g.lineClear(e,p)).map(e=>({e,at:g.playTime+e.wind,tx:e.tx,ty:e.ty,range:e.range,pattern:e.pattern,telegraph:e.telegraph&&{...e.telegraph}}));
     g.move(p,Math.cos(p.face)*k.range,Math.sin(p.face)*k.range);p.invuln=Math.max(p.invuln,.35);
     if(a==='signature1')r.evade={c,threats};else for(const e of g.enemies){const dx=p.x-from.x,dy=p.y-from.y,t=Math.max(0,Math.min(1,((e.x-from.x)*dx+(e.y-from.y)*dy)/(dx*dx+dy*dy||1)));if(e.hp>0&&valid(g,e)&&distance(e,{x:from.x+dx*t,y:from.y+dy*t})<=90+e.r&&g.lineClear(p,e))hit(g,e,3.5,c);}
-   }else {const charged=r.boost?.family==='echo'&&r.boost.until>g.playTime;r.boost=null;const returning=charged&&key==='echo-return';for(const e of v)hit(g,e,charged?2.8:2,returning?{...c,evolution:key}:c,charged?'pursuit':'hit');if(returning&&v[0]){p.invuln=Math.max(p.invuln,.35);for(const e of g.enemies)if(e.hp>0&&!v.includes(e)&&valid(g,e)&&distance(e,v[0])<=110+e.r&&g.lineClear(v[0],e))hit(g,e,1.2,{...c,evolution:key},'pursuit');}if(key==='echo-replay')r.pending.push({at:g.playTime+.45,c:{...c,evolution:key},point:{x:v[0]?.x??p.x+Math.cos(p.face)*100,y:v[0]?.y??p.y+Math.sin(p.face)*100},radius:100,mult:1.2});}
+   }else {const charged=consumeBoost(g,a)?.family==='echo';const returning=charged&&key==='echo-return';for(const e of v)hit(g,e,charged?2.8:2,returning?{...c,evolution:key}:c,charged?'pursuit':'hit');if(returning&&v[0]){p.invuln=Math.max(p.invuln,.35);for(const e of g.enemies)if(e.hp>0&&!v.includes(e)&&valid(g,e)&&distance(e,v[0])<=110+e.r&&g.lineClear(v[0],e))hit(g,e,1.2,{...c,evolution:key},'pursuit');}if(key==='echo-replay')r.pending.push({at:g.playTime+.45,c:{...c,evolution:key},point:{x:v[0]?.x??p.x+Math.cos(p.face)*100,y:v[0]?.y??p.y+Math.sin(p.face)*100},radius:100,mult:1.2});}
   }else if(k.path==='seal'){
    const e=v[0];if(e){if(a==='signature1'||a==='ultimate'){const effective=e.wind>0,holding=a==='signature1'&&key==='seal-hold',sc=holding?{...c,evolution:key}:c;e.wind=0;e.cd=Math.max(e.cd,1);e.realitySuppressedUntil=g.playTime+(a==='ultimate'||holding?6:4);e.realitySuppressionCast=sc;e.realitySuppressionProven=effective;if(effective)onEffect(g,sc,e,'suppress');if(a==='ultimate'){hit(g,e,4,c);e.stun=1;}}else {const proven=e.realitySuppressedUntil>g.playTime&&e.realitySuppressionProven,guiding=proven&&key==='seal-guide',hc=guiding?{...c,evolution:key}:c;hit(g,e,e.realitySuppressedUntil>g.playTime?3:2,hc,proven?'weakness':'hit');if(guiding&&e.hp>0){if(!e.boss)g.move(e,Math.cos(p.face)*70,Math.sin(p.face)*70);r.pending.push({at:g.playTime+.2,c:hc,target:e,mult:1});}}}
   }
@@ -52,9 +74,9 @@
   function hitTarget(e,m){if(e)hit(g,e,m,c);}
  }
  function absorb(g,e){const r=runtime(g);if(g.player.invuln>0||!r.guard||r.guard.until<=g.playTime||!valid(g,e))return false;const c=r.guard.c;r.guard=null;r.boost={family:'ripple',until:g.playTime+4,mult:1.8};if(evolution(g,'ripple')==='ripple-guard')r.protection={until:g.playTime+4,c};onEffect(g,c,e,'absorb');g.effect('fate-parry',g.player.x,g.player.y,{path:'ripple',life:.6,max:.6});return true;}
- function step(g){const r=runtime(g);if(r.evade){for(const t of r.evade.threats){if(t.done||g.playTime<t.at)continue;t.done=true;if(t.e.hp>0&&g.player.hp>0&&!g.enemyThreatContains(t)){r.boost={family:'echo',until:g.playTime+3,mult:1.6};onEffect(g,r.evade.c,t.e,'evade');}}if(r.evade.threats.every(t=>t.done))r.evade=null;}
+ function step(g){const r=runtime(g);if(r.guard&&r.guard.until<=g.playTime){if(r.guard.c.manual)feedback(g,'waiting-ended',{family:r.guard.c.family});r.guard=null;}if(r.boost&&r.boost.until<=g.playTime)consumeBoost(g,'expiry');if(r.evade){for(const t of r.evade.threats){if(t.done||g.playTime<t.at)continue;t.done=true;if(t.e.hp>0&&g.player.hp>0&&!g.enemyThreatContains(t)){r.boost={family:'echo',until:g.playTime+3,mult:1.6};onEffect(g,r.evade.c,t.e,'evade');}}if(r.evade.threats.every(t=>t.done))r.evade=null;}
   const due=r.pending.filter(h=>h.at<=g.playTime);r.pending=r.pending.filter(h=>h.at>g.playTime);for(const h of due){const list=h.point?g.enemies.filter(e=>e.hp>0&&valid(g,e)&&distance(e,h.point)<=h.radius+e.r&&g.lineClear(h.point,e)):h.target?(h.target.hp>0&&valid(g,h.target)&&g.lineClear(g.player,h.target)?[h.target]:[]):[targets(g,h.range)[0]].filter(Boolean);for(const e of list)hit(g,e,h.mult,h.c,h.c.evolution?'evolution':'hit');}
  }
  function validate(g){const s=state(g);if(!Array.isArray(s.settled)||s.settled.length>3||new Set(s.settled).size!==s.settled.length||s.settled.some(f=>!families.includes(f)||status(g,f)==='locked'))throw Error('현실 대응 기록 오류');g.worldState.reality={settled:[...s.settled]};}
- return {table,info,act,status,state,runtime,onEffect,absorb,step,validate,evolution,evolutionDescriptions,damageFactor};
+ return {table,info,readiness,consumeBoost,act,status,state,runtime,onEffect,absorb,step,validate,evolution,evolutionDescriptions,damageFactor};
 });

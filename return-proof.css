@@ -1,0 +1,7 @@
+#responseOpportunity{position:absolute;z-index:8;left:50%;bottom:112px;transform:translateX(-50%);max-width:calc(100% - 28px);padding:7px 12px;border:1px solid #ceb987;border-radius:6px;background:#0b1926ed;color:#f7e7c7;font-size:.78rem;line-height:1.45;text-align:center;pointer-events:none;overflow-wrap:anywhere}
+#responseOpportunity[data-ready=true]{border-width:2px;color:#d7ffee}
+#game button.response-charged{outline:2px dashed #e7cd85;outline-offset:2px}
+#game button.response-charged[data-response-ready=true]{outline-style:solid}
+@media(max-width:700px){#responseOpportunity{bottom:auto;top:29%;width:max-content;font-size:.72rem}}
+@media(max-height:450px){#responseOpportunity{bottom:auto;top:14%;max-width:45%;font-size:.65rem}}
+@media(prefers-reduced-motion:reduce){#responseOpportunity,#game button.response-charged{animation:none;transition:none}}

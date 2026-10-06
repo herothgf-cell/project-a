@@ -12,7 +12,7 @@
   let resourceWarningUntil=0,resourceWarningCost=0;
   let bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
   let dialogueUI=null,journeyUI=null,realmUI=null,growthUI=null,introUI=null,contractUI=null,progressionUI=null,characterUI=null,newsUI=null;
-  let dungeonUI=null,objectiveUI=null;
+  let dungeonUI=null,objectiveUI=null,returnProofUI=null;
   const viewMemory=new Map();let currentView=null,dialogReturnFocus=null;let textScale=100;try{textScale=Number(localStorage.getItem('ssanggye:text-scale'))||100;}catch{}if(![100,125,150,200].includes(textScale))textScale=100;document.documentElement.style.fontSize=textScale+'%';
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
   const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=Controls.format(text);return e;};
@@ -211,6 +211,7 @@
     if(path){const theme=Fate.PATHS[path];$('game').style.setProperty('--fate-color',theme.color);$('fateName').textContent=theme.name;$('fateState').textContent=!murim?(g.realityStatus(path)==='settled'?'현실 대응 정착':'대응 장착 · 실전 확인 중'):g.trial?'시험 중 · 임시 공명':path==='ripple'?`축적 파문 ${g.combat.charges}/3`:path==='echo'?(g.combat.echo?`잔향 ${g.combat.echo.life.toFixed(1)}초`:'잔향 대기'):(g.combat.field?`결계 ${g.combat.field.life.toFixed(1)}초`:'결계 대기');$('focusFill').style.width=g.fate.focus+'%';$('focusText').textContent='기세 '+Math.floor(g.fate.focus)+' / 100';$('focusFill').parentElement.setAttribute('aria-valuenow',String(Math.floor(g.fate.focus)));
       for(const action of Fate.names){const btn=document.querySelector(`[data-action="${action}"]`),sk=g.skillInfo(action);combatIcon(btn,action,sk.path||Fate.active(g));btn.querySelector('small').textContent=sk.name;btn.classList.toggle('locked',sk.locked);btn.classList.toggle('ready',action==='ultimate'&&g.fate.focus>=100&&!sk.locked);btn.setAttribute('aria-label',sk.name+(sk.locked?' 미습득':''));btn.title=sk.description;const cd=btn.querySelector('em');cd.classList.toggle('active',g.player.cool[action]>.05);cd.textContent=Math.ceil(g.player.cool[action]);}
     }
+    returnProofUI?.updateCombat();
     const boss=g.enemies.find(e=>e.boss&&e.hp>0);$('boss').hidden=!(boss&&dist(p,boss)<560);
     if(boss){$('boss').querySelector('span').textContent=boss.name;$('boss').querySelector('u').style.width=boss.hp/boss.maxHp*100+'%';$('boss').querySelector('small').textContent=g.bossLocked()?'호위 / 봉인 해제 후 공격 가능':boss.hp<boss.maxHp/2?'격노 · 더 빠른 공격 예고':'공격 예고를 피하고 빈틈을 노리세요';}
     combatIcon(document.querySelector('[data-action=attack]'),'attack');
@@ -267,12 +268,13 @@
     const elapsed=now-lastFrame,dt=Math.min(elapsed/1000,.05);lastFrame=now;
     try{
       if(perf&&running()&&elapsed>0&&elapsed<1000){perf.record(elapsed);if(now-lastPerfHud>500){const quality=renderer.reduced||renderer.autoLow?0:renderer.quality;perfHud.textContent=`PERF · local only\navg ${perf.averageMs.toFixed(1)} ms · recent ${perf.recentMs.toFixed(1)} ms (120 frames)\nslow >35 ms ${perf.slowTotal} · pressure ${renderer.slowFrames}\nautoLow ${renderer.autoLow?'ON':'OFF'} · quality ${quality} (base ${renderer.quality})\nviewport ${innerWidth}×${innerHeight} · canvas ${Math.round(renderer.w)}×${Math.round(renderer.h)} · DPR ${renderer.dpr}`;lastPerfHud=now;}}
-      if(running()){const pressed=a=>[...keys].some(k=>Controls.action(k)===a),x=joy.x+(pressed('right')?1:0)-(pressed('left')?1:0),y=joy.y+(pressed('down')?1:0)-(pressed('up')?1:0);g.step(dt,{x,y,attack:pressed('attack')||held.size>0});processEvents();if(now-lastSave>4000)persist();}
+      if(running()){g.responseReduced=renderer.reduced||renderer.autoLow;const pressed=a=>[...keys].some(k=>Controls.action(k)===a),x=joy.x+(pressed('right')?1:0)-(pressed('left')?1:0),y=joy.y+(pressed('down')?1:0)-(pressed('up')?1:0);g.step(dt,{x,y,attack:pressed('attack')||held.size>0});processEvents();if(now-lastSave>4000)persist();}
       if(active){renderer.draw(g,dt);if(now-lastHud>70){update();lastHud=now;}}
     }catch(error){if(!errorReported){errorReported=true;console.error(error);show('게임 실행 중 오류가 발생했습니다','저장된 진행은 그대로 보관됩니다. 새로고침 후에도 반복되면 이 내용을 알려 주세요.\n\n'+error.message);}}
     requestAnimationFrame(frame);
   }
   $('growthStatus').onclick=()=>inventory();
+  returnProofUI=ReturnProofUI.create({game:()=>g,node,show,close:closeDialog,commit:commitGrowth,refresh:()=>update(),skills:()=>growthUI.open('skills')});
   dialogueUI=DialogueUI.create({show,node});
   journeyUI=JourneyUI.create({game:()=>g,show,node,grid,refresh:()=>{processEvents();persist();update();},act,running,active:()=>active,growth:()=>growthUI.open()});
   realmUI=RealmUI.create({game:()=>g,show,node,refresh:()=>{processEvents();persist();update();},active:()=>active,clearInput,notes:journeyUI});
