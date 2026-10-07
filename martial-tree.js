@@ -1,7 +1,7 @@
 (function(root){'use strict';
  const actions=['signature1','signature2','ultimate'];
  const variantAction=key=>['ripple-guard','seal-hold'].includes(key)?0:1;
- function create({g,node,close,refresh,notes,subject=null,onDetail=()=>{}}){
+ function create({g,node,close,refresh,commit,notes,subject=null,onDetail=()=>{}}){
   const rootEl=node('section','martial-tree'),map=node('div','tree-map'),detail=node('section','tree-detail');detail.setAttribute('aria-live','polite');let selected=JourneyData.variants[subject]&&g.journey.known.includes(subject)?'variant:'+subject:g.revision.inherited.includes(subject)?'family:'+subject:'common:attack';
   const b=(label,fn,disabled=false)=>{const e=node('button','secondary',label);e.type='button';e.disabled=disabled;e.onclick=fn;return e;};
   const owned=path=>g.revision.inherited.includes(path),ready=path=>g.legend.ready.includes(path)||g.fate.proven.includes(path);
@@ -18,7 +18,7 @@
    if(kind==='common'){const k=g.skillInfo(id),need={attack:0,moon:1,storm:2}[id];detail.append(node('h3','',k.name),node('p','',k.description||'전방의 적에게 기본 검격을 가합니다.'),node('p','',`{key:${id}} · 내력 ${k.cost} · 재사용 ${k.cool}초`),node('p','',g.training>=need?'현재 사용 가능':'백련과 본편 수련을 통해 습득합니다.'));showMastery('sword');}
    else if(kind==='family'){
     const v=DualWorld.Fate.PATHS[path],have=owned(path),can=ready(path);detail.append(node('h3','',have?v.name:'미확인 기연'),node('p','',have?'계승 완료 · 이 가지의 기술을 사용할 때 해당 계열 숙련이 성장합니다.':can?'직접 확인한 힘을 자신의 무공으로 계승할 수 있습니다.':'전투와 탐험에서 평소와 다른 반응을 관찰하세요. 아직 이름과 획득 방법은 밝혀지지 않았습니다.'));
-    if(have||can){showMastery(path);if(!have||g.fate.path!==path){const field=g.legend.ready.includes(path),allowed=!g.trial&&(field?(!g.fate.path||g.fate.path===path||DualWorld.AREAS[g.area].safe):g.area==='village'&&g.fate.stage>=2);detail.append(b(have?'이 계열로 재수련':'계승 수락',()=>{close();field?g.awaken(path):g.acceptFate(path);refresh();},!allowed));if(!allowed)detail.append(node('p','','시험을 마친 뒤 '+(field?'안전 거점':'청운촌')+'에서 선택하세요.'));}else detail.append(node('p','node-state','현재 운용 계열'));}
+    if(have||can){showMastery(path);if(!have||g.fate.path!==path){const field=g.legend.ready.includes(path),allowed=!g.trial&&(field?(!g.fate.path||g.fate.path===path||DualWorld.AREAS[g.area].safe):g.area==='village'&&g.fate.stage>=2);detail.append(b(have?'이 계열로 재수련':'계승 수락',()=>{close();if(commit)commit(current=>field?current.awaken(path):current.acceptFate(path));else {field?g.awaken(path):g.acceptFate(path);refresh();}},!allowed));if(!allowed)detail.append(node('p','','시험을 마친 뒤 '+(field?'안전 거점':'청운촌')+'에서 선택하세요.'));}else detail.append(node('p','node-state','현재 운용 계열'));}
    }else if(kind==='skill'){
     if(!owned(path)){detail.append(node('h3','','계승 후 공개'),node('p','','기연을 정식 계승하면 기술과 오의의 이름·효과가 열립니다.'));}
     else {const k=DualWorld.Fate.PATHS[path].skills[Number(index)];detail.append(node('h3','',k[0]),node('p','',k[4]),node('p','',`{key:${actions[index]}} · ${Number(index)===2?'기세 100':`내력 ${k[2]}`} · 재사용 ${k[3]}초`),node('p','',g.fate.path===path?'현재 계열에서 사용 가능':'거점에서 이 계열로 재수련하면 사용할 수 있습니다.'));showMastery(path);}

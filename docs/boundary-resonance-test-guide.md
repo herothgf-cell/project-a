@@ -1,20 +1,20 @@
 # v0.2 경계공명 테스트 안내
 
-작업 브랜치: `v0.2_proto_patch`. 공개 Pages는 main의 배포가 성공한 뒤 갱신됩니다. 공개판에서는 **성장 → 경계공명**으로 진입하고, 아래 개발 시작점은 로컬 테스트에서만 제공합니다.
+배포 브랜치: `main` · 게임 버전: `v0.12.5` · 경계공명 규칙: v0.2. 공개 Pages는 main의 배포가 성공한 뒤 갱신됩니다. 공개판에서는 **성장 → 경계공명**으로 진입하고, 아래 개발 시작점은 로컬 테스트에서만 제공합니다.
 
 ## 실행
 
 Node.js 20 이상이 필요합니다. `npm`이 없더라도 `node --version`이 정상이라면 서버를 직접 실행할 수 있습니다. `node`도 없다면 Node.js LTS를 설치하고 터미널을 다시 여세요.
 
 ```bash
-git switch v0.2_proto_patch
+git switch main
 ART_REVIEW=1 node server.cjs
 ```
 
 PowerShell:
 
 ```powershell
-git switch v0.2_proto_patch
+git switch main
 $env:ART_REVIEW='1'
 node server.cjs
 ```
@@ -26,7 +26,7 @@ node server.cjs
 ## 첫 확인 순서
 
 1. **성장 → 경계공명**에서 결정·각인 보유량을 확인합니다. 첫 계승은 결정 8·각인 1이며 이미 달성한 기본기·레벨 성취도 함께 표시될 수 있습니다.
-2. **능력치**에서 공격 4·체력 4를 배분하고 적용합니다. 적용 전후 공격 +4·체력 +24를 확인합니다. 남는 결정은 보관됩니다.
+2. **능력치 → 첫 정착 추천 배분**으로 공격 4·체력 4를 미리 보고 **배분 적용**을 누릅니다. 추천 버튼만으로는 결정이 소비되지 않습니다. 적용 전후 공격 +4·체력 +24를 확인합니다. 남는 결정은 보관됩니다.
 3. **현실 스킬**에서 파문의 **안정 흡수**를 해금합니다. Q 흡수 판정이 0.7 → 0.9초로 바뀝니다. R/F는 이야기에서 체득하기 전까지 잠겨 있습니다.
 4. **보관함·기록 → 현실 비교 전투**에서 Q로 공격 예고에 대응하고 적 2종을 제압합니다. 결과의 실제 시간·피해·타격·기술 사용·Q 성공/시도·자원 부족을 확인합니다. 최근 2개 결과가 남습니다.
 5. 현실 기지에서 스탯/각인을 무료 환불하고 다른 배분을 시험합니다. 체력·기력의 현재 비율이 유지되므로 환불로 회복을 반복할 수 없습니다.
@@ -64,6 +64,6 @@ npm run check:world
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser:resonance
 ```
 
-브라우저 검사는 Playwright와 Chromium이 필요합니다. 다른 설치 경로라면 `CHROMIUM_PATH`를 실제 경로로 바꿉니다.
+브라우저 검사는 Playwright와 Chromium이 필요합니다. 화면 증거는 `browser-results/`에 저장하며 Windows에서도 같은 검사를 실행할 수 있습니다. 다른 설치 경로라면 `CHROMIUM_PATH`를 실제 경로로 바꿉니다.
 
 검증 결과와 구현 판단: [구현·검토 기록](boundary-resonance-implementation-review.md).

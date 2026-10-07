@@ -1,0 +1,20 @@
+const assert=require('node:assert/strict'),{run}=require('./browser-harness.cjs');
+run(async p=>{
+ await p.evaluate(()=>{const g=__game;g.training=3;g.progress=12;g.fate.stage=2;g.worldState.growthArc.phase='reported';g.fate.discovered=['ripple'];g.fate.proven=['ripple'];g.enter('village');g.events=[];const master=g.points().find(x=>x.id==='master');Object.assign(g.player,{x:master.x,y:master.y});const load=WorldGame.Game.load;WorldGame.Game.load=function(...args){return window.__game=load.apply(this,args);};});
+ await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');
+ await p.click('#interact');await p.getByRole('button',{name:'파문검 수락',exact:true}).waitFor();
+ const before=await p.evaluate(()=>({raw:localStorage.getItem('dualworld.save.v02'),seal:BoundaryResonance.balance(__game).seal}));
+ await p.evaluate(()=>{window.originalSetItem=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw Error('quota');};});
+ await p.getByRole('button',{name:'파문검 수락',exact:true}).click();
+ assert.deepEqual(await p.evaluate(()=>({crystal:BoundaryResonance.balance(__game).crystal,inherited:__game.revision.inherited})),{crystal:0,inherited:[]});
+ assert.equal(await p.evaluate(()=>BoundaryResonance.balance(__game).seal),before.seal);
+ assert.equal(await p.evaluate(()=>localStorage.getItem('dualworld.save.v02')),before.raw);
+ assert.equal(await p.locator('#dialog').evaluate(d=>d.open&&d.innerText.includes('계승 완료')),false);
+ await p.evaluate(()=>Storage.prototype.setItem=window.originalSetItem);
+ await p.click('#interact');await p.getByRole('button',{name:'파문검 수락',exact:true}).click();
+ assert.deepEqual(await p.evaluate(()=>({crystal:BoundaryResonance.balance(__game).crystal,inherited:__game.revision.inherited})),{crystal:8,inherited:['ripple']});
+ assert.equal(await p.evaluate(()=>BoundaryResonance.balance(__game).seal),before.seal+1);
+ await p.reload();await p.waitForFunction(()=>ArtPreview.ready);await p.click('#continue');
+ await p.waitForFunction(()=>window.__game?.revision.inherited.includes('ripple'));
+ assert.equal(await p.evaluate(()=>BoundaryResonance.balance(__game).crystal),8);
+}).then(()=>console.log('inheritance quota rollback, single retry reward and reload passed')).catch(e=>{console.error(e);process.exitCode=1;});

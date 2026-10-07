@@ -1,8 +1,14 @@
-const assert=require('node:assert/strict'),{run}=require('./browser-harness.cjs');
+const assert=require('node:assert/strict'),{run}=require('./browser-harness.cjs'),path=require('node:path'),fs=require('node:fs');
+const evidence=path.join(__dirname,'..','browser-results');fs.mkdirSync(evidence,{recursive:true});
 run(async p=>{
  await p.evaluate(()=>{const g=window.__game;g.training=3;g.progress=12;g.fate.stage=2;g.fate.discovered=['ripple'];g.fate.proven=['ripple'];g.enter('village');g.acceptFate('ripple');g.enter('city');g.events=[];g.save();});
  await p.click('#growthStatus');await p.locator('.resonance-screen').waitFor();
  await p.getByRole('button',{name:'능력치',exact:true}).click();
+ await p.getByRole('button',{name:'첫 정착 추천 배분',exact:true}).click();
+ assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),0,'preview must not spend crystals');
+ await p.getByRole('button',{name:'배분 적용',exact:true}).click();
+ assert.deepEqual(await p.evaluate(()=>BoundaryResonance.bonus(__game)),{attack:4,hp:24,mp:0});
+ await p.getByRole('button',{name:'능력치 전액 환불',exact:true}).click();
  await p.getByRole('button',{name:'공격 증가',exact:true}).focus();await p.keyboard.press('Enter');assert.equal(await p.evaluate(()=>document.activeElement.textContent),'공격 증가');
  await p.getByRole('button',{name:'배분 적용',exact:true}).click();
  assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),1);
@@ -18,7 +24,7 @@ run(async p=>{
  assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await p.getByRole('button',{name:'성장 목표',exact:true}).click();await p.getByRole('button',{name:'버티는 힘 목표 선택',exact:true}).click();
  assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).goal),'survival');
- await p.screenshot({path:'/tmp/resonance-mobile.png'});
+ await p.screenshot({path:path.join(evidence,'resonance-mobile.png')});
  await p.setViewportSize({width:1280,height:900});await p.evaluate(()=>document.documentElement.style.fontSize='100%');
  await p.getByRole('button',{name:'능력치',exact:true}).click();await p.getByRole('button',{name:'능력치 전액 환불',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),0);
  await p.getByRole('button',{name:'현실 스킬',exact:true}).click();await p.getByRole('button',{name:'스킬 각인 전액 환불',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).learned.length),0);
@@ -31,6 +37,6 @@ run(async p=>{
  assert.deepEqual(await p.evaluate(()=>ResonanceChallenges.state(__game).completed),['forest:survival']);
  await p.reload();await p.waitForFunction(()=>ArtPreview.ready);await p.click('#continue');await p.waitForFunction(()=>window.__game?.area==='village');
  assert.deepEqual(await p.evaluate(()=>ResonanceChallenges.state(__game).completed),['forest:survival']);
- await p.click('#growthStatus');await p.getByRole('button',{name:'보관함·기록',exact:true}).click();await p.screenshot({path:'/tmp/resonance-desktop.png'});
+ await p.click('#growthStatus');await p.getByRole('button',{name:'보관함·기록',exact:true}).click();await p.screenshot({path:path.join(evidence,'resonance-desktop.png')});
 
 }).then(()=>console.log('resonance browser passed')).catch(e=>{console.error(e);process.exitCode=1;});

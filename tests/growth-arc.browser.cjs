@@ -1,5 +1,6 @@
 'use strict';
-const {run}=require('./browser-harness.cjs'),assert=require('node:assert/strict');
+const {run}=require('./browser-harness.cjs'),assert=require('node:assert/strict'),path=require('node:path'),fs=require('node:fs');
+const evidence=path.join(__dirname,'..','browser-results');fs.mkdirSync(evidence,{recursive:true});
 run(async p=>{
  async function closeStory(){for(let i=0;i<15&&await p.locator('#dialog').evaluate(e=>e.open);i++){const skip=p.getByRole('button',{name:'대화 건너뛰기',exact:true});if(await skip.isVisible())await skip.click();else {const next=p.getByRole('button',{name:'계속하기',exact:true});if(await next.isVisible())await next.click();else await p.keyboard.press('Escape');}}}
  await p.evaluate(()=>{const g=__game;g.progress=12;g.training=3;g.enter('city');g.events=[];const o=g.points().find(p=>p.id==='warden');Object.assign(g.player,{x:o.x,y:o.y});});
@@ -9,5 +10,5 @@ run(async p=>{
  await p.evaluate(()=>{const g=__game;g.fate.stage=2;g.worldState.growthArc.phase='reported';g.fate.discovered=['seal'];g.fate.proven=['seal'];g.enter('village');g.acceptFate('seal');g.enter('city');});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='reality');await closeStory();
  await p.waitForFunction(()=>__game.worldGrowth.reality.equipped==='seal'&&WorldGame.Game===__game.constructor&&document.querySelector('[data-action=signature1]')?.classList.contains('locked')===false&&['signature2','ultimate'].every(a=>document.querySelector('[data-action='+a+']')?.classList.contains('locked')===true));assert.equal(await p.evaluate(()=>__game.worldGrowth.reality.equipped),'seal');assert.equal(await p.locator('[data-action=signature1]').evaluate(e=>e.classList.contains('locked')),false);for(const a of ['signature2','ultimate'])assert.equal(await p.locator(`[data-action=${a}]`).evaluate(e=>e.classList.contains('locked')),true);
  const restored=await p.evaluate(()=>{const h=WorldGame.Game.load(__game.save());return {family:h.worldGrowth.reality.equipped,r:h.skillInfo('signature2').locked,f:h.skillInfo('ultimate').locked};});assert.deepEqual(restored,{family:'seal',r:true,f:true});
- await p.screenshot({path:'/tmp/growth-arc-q-only.png'});console.log('growth arc: actual dialogue, dungeon entry, retreat, auto-adapted Q, R/F HUD locks and reload passed');
+ await p.screenshot({path:path.join(evidence,'growth-arc-q-only.png')});console.log('growth arc: actual dialogue, dungeon entry, retreat, auto-adapted Q, R/F HUD locks and reload passed');
 });
