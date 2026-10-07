@@ -1,0 +1,44 @@
+const assert=require('node:assert/strict'),{run}=require('./browser-harness.cjs');
+const {inherited}=require('./world-fixtures.cjs'),R=require('../boundary-resonance.js'),fs=require('node:fs');
+const sample=inherited();R.reset(sample,'stats');const save=sample.save();
+run(async p=>{
+ await p.evaluate(raw=>{Object.assign(__game,WorldGame.Game.load(raw));__game.events=[];__game.save();},save);
+ await p.waitForFunction(()=>document.querySelector('#characterMenu small').textContent.includes('8'));
+ assert.deepEqual(await p.locator('.main-navigation strong').allTextContents(),['캐릭터','무공/스킬','경지 돌파','헌터 승급']);
+ await p.click('#realmMenu');assert.match(await p.locator('.advancement-screen').innerText(),/이야기 잠금/);
+ assert.equal(await p.locator('.advancement-screen .allocation-card').count(),0);
+ await p.locator('[data-purpose="character"]').click();await p.getByRole('button',{name:'첫 정착 추천',exact:true}).click();
+ await p.locator('[data-purpose="skills"]').click();assert.match(await p.locator('.character-screen').innerText(),/배분 초안이 남아/);
+ await p.getByRole('button',{name:'계속 편집',exact:true}).click();
+ await p.keyboard.press('Escape');assert.equal(await p.locator('#dialog').evaluate(d=>d.open),true);
+ await p.getByRole('button',{name:'초안 버리기',exact:true}).click();assert.equal(await p.locator('#dialog').evaluate(d=>d.open),false);
+ await p.click('#characterMenu');await p.getByRole('button',{name:'첫 정착 추천',exact:true}).click();
+ await p.locator('[data-purpose="hunter"]').click();await p.getByRole('button',{name:'배분 확정 후 이동',exact:true}).click();
+ assert.equal(await p.evaluate(()=>BoundaryResonance.balance(__game).crystal),0);assert.match(await p.locator('.advancement-screen').innerText(),/이야기 잠금/);
+ await p.keyboard.press('Escape');await p.evaluate(()=>{__game.fate.stage=6;__game.refreshNews();__game.save();});
+ await p.waitForFunction(()=>!document.querySelector('#hunterMenu small').textContent.includes('잠김'));
+ await p.click('#hunterMenu');assert.match(await p.locator('.advancement-screen').innerText(),/도전 조건 충족/);
+ await p.locator('[data-purpose="realm"]').click();assert.match(await p.locator('.advancement-screen').innerText(),/준비 중/);
+ await p.keyboard.press('Escape');await p.click('#missionsMenu');await p.getByRole('button',{name:'공명 도전',exact:true}).click();
+ assert.equal(await p.getByRole('button',{name:'능력치',exact:true}).count(),0);assert.equal(await p.getByRole('button',{name:'현실 스킬',exact:true}).count(),0);
+ await p.keyboard.press('Escape');
+ // Deferred navigation must build its destination after a successful draft commit.
+ await p.evaluate(()=>{__game.enter('village');__game.events=[];__game.journey.realm=1;Object.assign(Advancement.state(__game),{realm:1,history:['realm:1:legacy']});__game.save();});
+ await p.click('#characterMenu');await p.getByRole('button',{name:'공격 증가',exact:true}).click();
+ await p.locator('[data-purpose="realm"]').click();await p.getByRole('button',{name:'배분 확정 후 이동',exact:true}).click();
+ assert.equal(await p.evaluate(()=>Advancement.describe(__game,'realm').points.available),1);
+ assert.match(await p.locator('.advancement-screen').innerText(),/남은 1포인트/);
+ await p.keyboard.press('Escape');
+ fs.mkdirSync('browser-results/purpose-growth',{recursive:true});
+ for(const width of [1280,360]){await p.setViewportSize({width,height:900});await p.evaluate(()=>document.documentElement.style.fontSize='100%');
+  assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  for(const id of ['characterMenu','growthStatus','realmMenu','hunterMenu','missionsMenu','recordsMenu','menu'])assert.equal(await p.locator('#'+id).isVisible(),true,id+' visible');
+  if(await p.locator('.growth-receipt').count())assert.equal(await p.evaluate(()=>{const r=document.querySelector('#toasts').getBoundingClientRect(),nav=document.querySelector('.main-navigation').getBoundingClientRect(),actions=document.querySelector('.actions').getBoundingClientRect();return r.top>=nav.bottom&&r.bottom<=actions.top;}),true,'receipts leave menus and combat controls reachable');
+  await p.screenshot({path:'browser-results/purpose-growth/header-'+width+'.png'});
+  await p.click('#characterMenu');await p.screenshot({path:'browser-results/purpose-growth/character-'+width+'.png'});await p.keyboard.press('Escape');
+ }
+ await p.evaluate(()=>document.documentElement.style.fontSize='200%');assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ await p.click('#growthStatus');assert.equal(await p.locator('.skills-screen').isVisible(),true);
+ assert.equal(await p.locator('.skills-screen').evaluate(el=>getComputedStyle(el).color),'rgb(238, 244, 251)','skill text uses the readable dark-panel theme');
+ await p.screenshot({path:'browser-results/purpose-growth/skills-mobile-200.png'});
+}).then(()=>console.log('purpose growth integration browser passed')).catch(e=>{console.error(e);process.exitCode=1;});

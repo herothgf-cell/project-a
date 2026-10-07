@@ -1,0 +1,47 @@
+/* Four canonical growth destinations stay at the top in both worlds. */
+#game{grid-template-rows:auto minmax(0,1fr) 28px}
+#game>header{height:auto;min-height:0;display:flex;flex-wrap:wrap;gap:10px 20px;padding:10px 20px}
+#game .main-navigation{position:static;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));flex-basis:100%;width:100%;margin:0;padding:0;gap:8px;border:0;box-shadow:none;background:transparent}
+#game .main-navigation button,#game #growthStatus{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;padding:10px 14px;min-height:44px;min-width:0;border:1px solid var(--ui-line);background:var(--ui-panel);font:inherit;line-height:1.4}
+#game .main-navigation button::before{display:none}
+#game .main-navigation button strong{font-size:.86rem}#game .main-navigation button small{font-size:.72rem;color:var(--ui-muted)}
+#game .purpose-utilities{display:flex;gap:6px}#game .purpose-utilities button{min-height:44px;padding:6px 10px;font-size:.8rem}
+#game .header-actions{display:flex;flex-wrap:wrap;gap:6px;order:0}
+#game #growthStatus{position:static;width:auto;max-width:none;margin:0;align-self:stretch}
+#game .main-navigation{order:1}
+#dialog .purpose-screen{max-width:940px;margin:auto;color:var(--ui-text)}
+#dialog .purpose-screen>h3{font-size:1.3rem;margin:4px 0 16px}
+#dialog .purpose-eyebrow{color:var(--ui-muted);font-size:.8rem}
+#dialog .purpose-lock,#dialog .purpose-reward{padding:20px;margin:14px 0;border:1px solid var(--ui-line);background:var(--ui-panel)}
+#dialog .purpose-lock h4{font-size:1.05rem;margin:10px 0}
+#dialog .purpose-notice{padding:12px 16px;border-left:3px solid var(--ui-accent);background:var(--ui-raised);line-height:1.6}
+#dialog .purpose-next{font-size:1.35rem;margin:20px 0}
+#dialog .purpose-state{display:inline-block;background:var(--ui-raised);padding:5px 10px;color:var(--ui-accent)}
+#dialog .advancement-stages{padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+#dialog .advancement-stages li{padding:7px 12px;border-bottom:2px solid var(--ui-line);color:var(--ui-muted)}
+#dialog .advancement-stages .current{border-color:var(--ui-accent);color:var(--ui-bright)}
+#dialog .purpose-requirements{list-style:none;padding:0}
+#dialog .purpose-requirements li{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:12px 0;border-bottom:1px solid var(--ui-line)}
+#dialog .purpose-requirements li.met{color:#b9dbc1}
+#dialog .purpose-screen button{min-height:44px;white-space:normal;margin:6px 4px 6px 0}
+#toasts .growth-receipt{pointer-events:auto;width:min(480px,calc(100vw - 24px));max-width:100%;max-height:42dvh;overflow:auto;overscroll-behavior:contain;padding:14px 16px;background:#102231;border:1px solid var(--ui-accent);color:var(--ui-text);font-size:.83rem;box-shadow:0 6px 24px #0008}
+#toasts .growth-receipt strong,#toasts .growth-receipt small{display:block}#toasts .growth-receipt p{margin:5px 0;color:var(--ui-accent)}
+#toasts .growth-receipt button{min-height:44px;font-size:.8rem;padding:6px 10px;margin:8px 4px 0 0}
+#game #toasts:has(.growth-receipt){position:absolute;top:8px;bottom:auto;left:50%;right:auto;transform:translateX(-50%);width:min(480px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-height:44dvh;overflow:auto;z-index:50;pointer-events:none}
+#dialog .purpose-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0 0 16px}
+#dialog .purpose-nav button{min-height:44px;white-space:normal;padding:7px;font-size:.8rem}
+@media(max-width:700px){
+ #game>header{padding:7px 10px;gap:7px 10px}#game .brand{min-width:0}#game .brand>b{font-size:20px}#game .brand small{display:none}
+ #game .world-chip{padding-left:8px;gap:5px}#game .world-chip b{font-size:14px}#game #rank{font-size:11px}
+ #game .header-actions{display:flex;margin-left:auto}#game .header-actions #save{display:none}
+ #game .main-navigation{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}#game .main-navigation button,#game #growthStatus{padding:7px 9px;min-height:46px}
+ #game .main-navigation button strong{font-size:.78rem}#game .main-navigation button small{font-size:.68rem}
+ #game .purpose-utilities{gap:1px}#game .purpose-utilities button{padding:4px 6px;font-size:.73rem}
+ #game .header-actions #fullscreen{display:none}#game .header-actions #personalNews{padding:4px 6px}
+ #dialog .purpose-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #dialog .purpose-lock,#dialog .purpose-reward{padding:14px}
+}
+@media(max-width:520px) and (max-height:700px){
+ #game .journey-tools{top:auto;bottom:180px;left:auto;right:12px;max-width:140px;flex-direction:row;flex-wrap:wrap;justify-content:flex-end}
+ #game #interact{bottom:180px}
+}

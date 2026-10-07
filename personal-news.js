@@ -6,14 +6,17 @@
   if(g.worldState.cycleOne?.invited)add('evolution:unlocked','skills',g.fate.path||'sword','스킬 진화 · 기감 해금','백련의 초대로 첫 스킬 진화와 기감이 열렸습니다. 무림 탐험지 입구에서 환서정으로 이동해 현재 무공의 흔적을 조사하세요. 현재 목표가 발견·조사·실험·장착 순서를 안내합니다.');
   for(const f of g.revision.inherited)add('inherit:'+f,'skills',f,names[f]+' 계승','무림의 호흡을 계승했습니다. 현실로 귀환하면 대응 기술을 따로 장착할 수 있습니다.');
   for(const k of g.journey.known)add('interpret:'+k,'skills',k,'새 무공 해석','무공에서 해석의 효과를 확인하고 직접 장착하세요.');
-  if(g.training>0)add('mode:unlocked','growth','mode','심법과 현실 운용 개방','성장에서 유수·집중 심법과 현실 회복·집중 운용을 선택할 수 있습니다.');
-  if(realmReady(g)||g.journey.realm)add('realm:ready','growth','realm','첫 경지 돌파 가능','무림 거점의 성장 화면에서 조건을 확인하고 직접 돌파하세요.');
-  if(g.laterStory?.dualBreath)add('mode:dual','growth','mode','심법 심화 달성','서로 다른 계열의 실제 효과를 연결해 적의 재생을 끊습니다.');
+  if(g.training>0)add('mode:unlocked','skills','mode','심법과 현실 운용 개방','무공/스킬의 공통 운용에서 유수·집중 심법을 확인하고 강화하세요.');
+  if(realmReady(g)||g.journey.realm)add('realm:ready','growth','realm','경지 시련 조건 확인','최상단 경지 돌파에서 이야기·숙련 조건을 확인하세요.');
+  if(g.v12ChapterCompleted?.(3)||g.worldState.advancement?.realm) add('menu:realm','growth','realm','경지 돌파 메뉴 해금','이야기 결과를 보고했습니다. 최상단 경지 돌파에서 남은 시련 조건을 확인하세요.');
+  if(g.v12ChapterCompleted?.(3)||g.worldState.advancement?.hunter) add('menu:hunter','growth','hunter','헌터 승급 메뉴 해금','최상단 헌터 승급에서 공식 평가 조건을 확인하세요. 평가 통과 후 서린에게 보고하면 승급이 확정됩니다.');
+  if(g.laterStory?.dualBreath)add('mode:dual','skills','mode','심법 심화 달성','서로 다른 계열의 실제 효과를 연결해 적의 재생을 끊습니다.');
+  for(const row of Resonance.catalog(g).filter(x=>g.worldState.resonance?.grants.includes(x.id)))for(const kind of ['crystal','seal'])if(row[kind]>0)add('resonance:'+kind+':'+row.id,kind==='crystal'?'status':'skills',kind,(kind==='crystal'?'공명 결정':'무공 각인')+' +'+row[kind]+' · '+row.name,kind==='crystal'?'획득 완료 · 캐릭터에서 현실 스탯에 배분하세요. 무림에서 얻은 결정은 현실 귀환 후 사용합니다.':'획득 완료 · 무공/스킬에서 현실 기술을 강화하세요. 각인은 자동 소비되지 않습니다.');
   for(const f of g.worldState.reality?.settled||[])add('response:'+f,'skills',f,'현실 대응 정착','무림의 원리를 현실의 몸으로 실제 사용했습니다.');
   if(g.worldState.reports?.reported.includes('first-response'))add('role:first-response','status','role','초동 대응자 · 현장 성과 인정','기연 귀환 후 현실 위협을 제압하고 서린에게 보고했습니다. 기지에서 1회 회복약 보급을 받습니다. 공식 헌터 등급은 E급입니다.');
   if(g.worldState.reports?.reported.includes('yeonhwa-rescued'))add('role:rescue','status','role','핵심 수행자 · 구조 성과 보고','직접 확인한 구조 결과를 전했습니다. 기지 보급과 후속 공동 조사로 이어집니다.');
   if(g.laterStory?.six===5)add('role:joint','status','role','공동 대응 제안자','7장 준비에서 대피 통로 또는 정예 차단을 선택하면 현재 전장의 조건이 바뀝니다.');
-  for(const r of g.worldState.achievements?.results||[]){const grant=r.rewardVersion===3&&g.worldState.resonance?.grants.includes(r.id)?Resonance.catalog(g).find(x=>x.id===r.id):null;add('return:'+r.id,grant?'growth':r.unlocked?'skills':'status',grant?'resonance':r.unlocked||r.id,'귀환 성과 · '+(grant?grant.name:r.unlocked?names[r.unlocked]+'의 현실 대응':achievementName(r.id)),grant?'공명 결정 '+grant.crystal+'개 보관 · 성장 → 경계공명에서 현실 능력치에 배분하세요.':'체력 '+r.before.hp+' → '+r.after.hp+' · 자원 '+r.before.mp+' → '+r.after.mp+' · 공격력 '+r.before.attack+' → '+r.after.attack+(r.unlocked?'\n무공에서 현실 대응을 선택해 장착하세요.':''));}
+  for(const r of g.worldState.achievements?.results||[]){const grant=r.rewardVersion===3&&g.worldState.resonance?.grants.includes(r.id)?Resonance.catalog(g).find(x=>x.id===r.id):null;add('return:'+r.id,grant?'growth':r.unlocked?'skills':'status',grant?'resonance':r.unlocked||r.id,'귀환 성과 · '+(grant?grant.name:r.unlocked?names[r.unlocked]+'의 현실 대응':achievementName(r.id)),grant?'공명 결정 '+grant.crystal+'개 보관 · 캐릭터에서 현실 능력치에 배분하세요.':'체력 '+r.before.hp+' → '+r.after.hp+' · 자원 '+r.before.mp+' → '+r.after.mp+' · 공격력 '+r.before.attack+' → '+r.after.attack+(r.unlocked?'\n무공에서 현실 대응을 선택해 장착하세요.':''));}
   return out;
  }
  function publish(g,item){if(!catalog(g).some(x=>x.id===item.id)||JSON.stringify(item).length>2048)throw Error('허용되지 않은 소식');const s=g.worldState.news;if(s.items.some(x=>x.id===item.id))return false;s.items.push({id:item.id,at:g.playTime,read:false});return true;}
@@ -22,6 +25,6 @@
  function read(g,id){const item=g.worldState.news.items.find(x=>x.id===id);if(!item)return false;item.read=true;return true;}
  function dismiss(g,id){const item=g.worldState.news.items.find(x=>x.id===id);if(!item)return false;item.read=true;item.dismissed=true;return true;}
  function unread(g,section){return list(g).filter(x=>!x.read&&(!section||x.section===section));}
- function validate(g){const s=g.worldState.news,c=catalog(g);if(!s||!Array.isArray(s.items)||s.items.length>60||new Set(s.items.map(x=>x.id)).size!==s.items.length||s.items.some(x=>!c.some(y=>y.id===x.id)||typeof x.read!=='boolean'||(x.dismissed!==undefined&&typeof x.dismissed!=='boolean')||(x.dismissed&&!x.read)||!Number.isFinite(x.at)||x.at<0||x.at>g.playTime))throw Error('소식 읽음 기록 오류');g.worldState.news={items:s.items.map(x=>({id:x.id,read:x.read,at:x.at,...(x.dismissed?{dismissed:true}:{})}))};}
+ function validate(g){const s=g.worldState.news,c=catalog(g);if(!s||!Array.isArray(s.items)||s.items.length>128||new Set(s.items.map(x=>x.id)).size!==s.items.length||s.items.some(x=>!c.some(y=>y.id===x.id)||typeof x.read!=='boolean'||(x.dismissed!==undefined&&typeof x.dismissed!=='boolean')||(x.dismissed&&!x.read)||!Number.isFinite(x.at)||x.at<0||x.at>g.playTime))throw Error('소식 읽음 기록 오류');g.worldState.news={items:s.items.map(x=>({id:x.id,read:x.read,at:x.at,...(x.dismissed?{dismissed:true}:{})}))};}
  return {realmReady,catalog,publish,refresh,list,read,dismiss,unread,validate};
 });

@@ -1,22 +1,14 @@
-(function(root){'use strict';root.DevelopmentUI={create({game,show,node,refresh,commit,notes,close,character,news,history,prepare}){
- const names={ripple:'파문검',echo:'잔영보',seal:'경계봉인'};
- function button(parent,label,fn,disabled=false){const b=node('button','secondary',label);b.disabled=disabled;b.onclick=fn;parent.append(b);return b;}
- const growth=GrowthScreen.create({game,show,node,refresh,commit,close,character,skills:()=>open('skills'),resonance:()=>resonance.open()});
- const resonance=ResonanceUI.create({game,show,node,commit,close,refresh,prepare,back:()=>growth.open('murim'),skills:()=>open('skills')});
- function open(section='growth',subject=null){if(section==='growth')return subject&&subject!=='resonance'?growth.open(subject):resonance.open();const g=game();if(g.introActive)return;g.refreshNews();const world=WorldGrowth.worldOf(g),murim=world==='murim',w=g.worldGrowth[world],safe=DualWorld.AREAS[g.area].safe,body=node('section','growth-screen development-screen'),nav=node('nav','growth-tabs');
-  body.dataset.section=section;nav.classList.add('character-tabs');const tabs=[];button(nav,'개요',()=>character.open()).setAttribute('aria-pressed','false');for(const [id,label]of [['growth','성장'],['skills','무공']]){const b=button(nav,label,()=>open(id));b.setAttribute('aria-pressed',String(section===id));tabs.push({id,label,b});}body.append(nav);
-  function updateBadges(){for(const {id,label,b}of tabs){const count=g.unreadNews(id).length;b.querySelector('.news-dot')?.remove();b.classList.toggle('has-news',count>0);b.setAttribute('aria-label',label+(count?' · 새 소식 '+count+'개':''));if(count){const dot=node('span','news-dot');dot.setAttribute('aria-hidden','true');b.append(dot);}}}
-  updateBadges();
-  function readDetail(id){let changed=false;for(const item of g.unreadNews(section))if(item.subject===id){g.readNews(item.id);changed=true;}if(changed){refresh();updateBadges();}}
-  {
-   body.append(node('h3','',murim?'무림 무공 · 계승과 해석':'현실 대응 · 별도 장착'),node('p','',murim?'배운 동작과 직접 발견한 해석을 운용합니다.':'무림의 원리가 현실의 몸에 맞는 다른 기술이 됩니다. 장착 후 실제 효과에 성공하면 정착됩니다.'));
-   if(murim){body.append(MartialTree.create({g,node,close,refresh,commit,notes,subject,onDetail:readDetail}));}
-   else {if(!g.revision.inherited.length)body.append(node('p','','아직 계승한 기연이 없습니다. 기본 타격과 회피로 현장을 살펴보세요.'));for(const family of [...g.revision.inherited].sort((a,b)=>Number(b===w.equipped)-Number(a===w.equipped))){const card=node('article','world-card'),status=g.realityStatus(family);card.dataset.subject=family;card.append(node('h3','',names[family]+' → '+RealitySkills.table[family][0][0]),node('p','',status==='locked'?'무림에서 현실로 귀환하면 열립니다.':status==='settled'?'실전 대응 정착 완료':'장착 가능 · 실제 대응 성공으로 정착'));for(const [i,row]of RealitySkills.table[family].entries())card.append(node('p','',Controls.key(['signature1','signature2','ultimate'][i])+' · '+row[0]+' — '+row[5]));button(card,w.equipped===family?'현재 장착 중':'현실 대응 장착',()=>{g.equipReality(family);g.readNews('inherit:'+family);g.readNews('return:inherit:'+family);refresh();open('skills',family);},!safe||status==='locked'||w.equipped===family);for(const key of g.journey.known.filter(key=>key.startsWith(family+'-'))){const v=JourneyData.variants[key],equipped=g.journey.selected[family]===key;card.append(node('h4','',v.name+' · 현실 진화'),node('p','',RealitySkills.evolutionDescriptions[key]),node('p','',g.journey.sync[key]>=1?'정상 귀환으로 적응 가능':'정상 귀환 후 개방'));button(card,equipped?'진화 적용 중':'진화 장착',()=>{commit(g=>g.chooseInterpretation(key));open('skills',key);},!safe||w.equipped!==family||equipped||g.journey.sync[key]<1);}if(g.journey.selected[family])button(card,'기본 대응으로 복귀',()=>{commit(g=>g.clearInterpretation());open('skills',family);},!safe||w.equipped!==family);body.append(card);readDetail(family);}button(body,'대응 비교 전투 · 처치 보상 없음',()=>{close();g.beginComparison();refresh();},g.area!=='city'||!w.equipped);}
-   if(!murim&&JourneyData.variants[subject]&&g.journey.known.includes(subject)){const detail=node('article','world-card');detail.dataset.interpretation=subject;detail.append(node('h3','',JourneyData.variants[subject].name),node('p','',RealitySkills.evolutionDescriptions[subject]),node('p','','현실 적용 · 장착은 위 진화 장착 버튼으로 확정합니다.'));body.append(detail);readDetail(subject);}
-   body.append(node('h3','','현재 세계 숙련'));for(const [family,value]of Object.entries(w.mastery)){if(family!=='sword'&&!g.revision.inherited.includes(family))continue;const percent=[5,10,20,30].filter(n=>value>=n).length*3;body.append(node('p','',(names[family]||'공통 검술')+' '+value+'/30 · 피해 +'+percent+'%'));}button(body,'발견한 해석 확인',()=>notes.open('styles'));
-  }
-  let group=null;for(const child of [...body.children]){if(child===nav)continue;if(child.tagName==='H3'){group=node('section','development-section');body.insertBefore(group,child);}if(group)group.append(child);}
-  show(section==='growth'?'성장 · 지금 할 수 있는 행동':'무공 · 세계별 운용',body,[{label:'돌아가기',secondary:true}],'hero',murim?'무림 성장':'현실 성장');
+(function(root){'use strict';root.DevelopmentUI={create({game,show,node,refresh,commit,notes,close,character,prepare,objective=()=>{}}){
+ const skills=SkillsScreen.create({game,show,node,refresh,commit,close,notes});
+ const advancement=GrowthScreen.create({game,show,node,refresh,commit,close,character,skills:world=>skills.open(world),prepare,objective});
+ const challenges=ResonanceUI.create({game,show,node,commit,close,refresh,prepare,back:objective,skills:()=>skills.open('reality')});
+ function open(section='skills',subject=null){if(game().introActive)return;
+  if(section==='realm'||section==='hunter')return advancement.open(section);
+  if(section==='challenges'||section==='records')return challenges.open(section==='records'?'records':'goals');
+  if(section==='stats'||subject==='crystal'||section==='status')return character.open('reality','crystal');
+  if(section==='growth'&&['realm','hunter'].includes(subject))return advancement.open(subject);
+  if(section==='growth'&&subject==='resonance')return character.open('reality','crystal');
+  return skills.open(subject==='murim'||subject==='reality'?subject:WorldGrowth.worldOf(game()),subject);
  }
  return {open};
 }};})(globalThis);

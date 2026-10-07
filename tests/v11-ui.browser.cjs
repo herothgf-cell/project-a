@@ -4,8 +4,8 @@ run(async p=>{
  assert.equal(await p.locator('.app-navigation').count(),0);
  assert.equal(await p.locator('.character-tabs').count(),0);
  await p.keyboard.press('Escape');await p.click('#growthStatus');
- assert.equal(await p.getByRole('button',{name:'경지 돌파',exact:true}).count(),0);
- assert.equal(await p.locator('.resonance-screen').count(),1);
+ assert.equal(await p.locator('#realmMenu').count(),1);assert.equal(await p.locator('#hunterMenu').count(),1);
+ assert.equal(await p.locator('.skills-screen').count(),1);
  const before=await p.evaluate(()=>({area:__game.area,x:__game.player.x,y:__game.player.y,hp:__game.player.hp}));
  await p.keyboard.down('ArrowRight');await p.waitForTimeout(150);await p.keyboard.up('ArrowRight');
  assert.deepEqual(await p.evaluate(()=>({area:__game.area,x:__game.player.x,y:__game.player.y,hp:__game.player.hp})),before);
@@ -20,7 +20,7 @@ run(async p=>{
  fs.mkdirSync('.ssanggye-v11-review',{recursive:true});await p.screenshot({path:'.ssanggye-v11-review/growth-mobile-200.png'});
  await p.evaluate(()=>document.documentElement.style.fontSize='');await p.setViewportSize({width:1280,height:720});
  await p.screenshot({path:'.ssanggye-v11-review/growth-desktop.png'});
- await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'임무',exact:true}).click();assert.match(await p.locator('#dialogBody').innerText(),/현재 행동/);
- await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'설정',exact:true}).click();assert.equal(await p.locator('#dialog').getByRole('button',{name:'소리 설정',exact:true}).count(),0);
+ await p.keyboard.press('Escape');await p.locator('#missionsMenu').click();assert.match(await p.locator('#dialogBody').innerText(),/현재 행동/);
+ await p.keyboard.press('Escape');await p.locator('#menu').click();assert.equal(await p.locator('#dialog').getByRole('button',{name:'소리 설정',exact:true}).count(),0);
  console.log('v1.1 navigation, input isolation, responsive and enlarged text verified');
 });

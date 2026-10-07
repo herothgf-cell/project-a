@@ -1,0 +1,39 @@
+.character-growth{--character-accent:#8fcaff;display:grid;gap:12px;max-width:760px;margin:auto;min-width:0;color:var(--text,#eef3f8);font-size:1rem;line-height:1.5}
+.character-growth[data-world="murim"]{--character-accent:#e8c57e}
+.character-growth *{box-sizing:border-box;min-width:0;overflow-wrap:anywhere}
+.character-growth h3,.character-growth p{margin:0}
+.character-growth button{min-height:44px;white-space:normal;line-height:1.4;max-width:100%;padding:8px 12px;font:inherit;cursor:pointer}
+.character-growth button:disabled{cursor:default;opacity:.6}
+.character-growth button:focus-visible{outline:3px solid var(--character-accent);outline-offset:3px}
+.character-worlds,.character-resources{display:flex;flex-wrap:wrap;gap:8px}
+.character-worlds button,.character-resources button{flex:1 1 125px}
+.character-growth button[aria-pressed="true"]{border-color:var(--character-accent);box-shadow:inset 0 -3px var(--character-accent)}
+.character-identity{display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.character-location,.character-unit,.character-growth small{color:var(--muted,#aebccc)}
+.character-growth .profile-exp{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.character-growth progress{width:100px;flex:1 1 60px;max-width:100%}
+.character-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.character-stats article,.character-resource,.character-provenance,.character-confirmation{background:#102132;border:1px solid #40566e;border-radius:10px;padding:12px}
+.character-stats article{display:flex;flex-direction:column;gap:4px}
+.character-stats strong{font-size:1.5em;color:var(--character-accent);font-variant-numeric:tabular-nums}
+.character-stats small{font-size:.78em}
+.character-resource{display:grid;gap:8px}
+.character-resource>strong{font-size:1.2em;color:var(--character-accent)}
+.character-new{color:#f5d38a;font-weight:700}
+.character-notice,.character-status{padding:10px 12px;border-left:3px solid var(--character-accent);background:#16293c}
+.character-allocation{display:grid;gap:8px}
+.character-allocation-row{display:grid;grid-template-columns:minmax(0,1fr) 44px 30px 44px;gap:7px;align-items:center;padding:12px 0;border-bottom:1px solid #40566e}
+.character-stat-copy{display:flex;flex-direction:column;gap:4px}
+.character-stat-copy span{font-variant-numeric:tabular-nums}
+.character-draft-count{text-align:center;font-variant-numeric:tabular-nums}
+.character-confirm{display:grid;gap:8px;padding:12px;background:#152b41;border-radius:10px}
+.character-confirmation{display:grid;gap:10px;border-color:var(--character-accent)}
+.character-receipts{display:grid;gap:8px;border-top:1px solid #40566e;padding-top:8px}
+/* Override the older profile and story spacing inside this compact stat workspace. */
+#dialog .character-growth{gap:8px}
+#dialog #dialogBody .character-growth p,#dialog .character-growth h3{margin:0;line-height:1.5}
+#dialog .character-growth .character-identity{min-height:0;height:auto;margin:0;padding:0;border:0;background:transparent;box-shadow:none}
+#dialog .character-growth .profile-exp{margin:0}
+#dialog .character-growth .profile-equipped{padding:0;border:0;background:transparent;font-size:.85rem}
+#dialog .character-growth button{padding:8px 12px;min-height:44px}
+@media(max-width:480px){.character-stats{grid-template-columns:1fr}.character-stats article{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}.character-stats small{grid-column:1/-1}.character-allocation-row{grid-template-columns:44px minmax(0,1fr) 44px}.character-stat-copy{grid-column:1/-1}.character-growth{gap:10px}.character-worlds button,.character-resources button{flex-basis:110px}}

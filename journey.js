@@ -29,7 +29,7 @@
   return true;
  };
  P.chooseInterpretation=function(key){const s=S(this),v=D.variants[key];if(!v||!s.known.includes(key)||Fate.active(this)!==v.path||this.trial||(!AREAS[this.area].safe&&this.area!=='archive'))return false;s.selected[v.path]=key;R(this).pending=[];R(this).charge=0;R(this).guard=null;this.toast(v.name+' · 내 호흡으로 이어갑니다.');if(s.phase===1)s.phase=2;return true;};
- P.clearInterpretation=function(){if(!AREAS[this.area].safe||this.trial)return false;const p=Fate.active(this);if(p)S(this).selected[p]=null;reset(this);return true;};
+ P.clearInterpretation=function(){if((!AREAS[this.area].safe&&this.area!=='archive')||this.trial)return false;const p=Fate.active(this);if(p)S(this).selected[p]=null;reset(this);return true;};
  P.interact=function(){const o=this.nearestPoint(),s=S(this),r=R(this);if(!o)return old.interact.call(this);
   if(o.id==='archiveGate'){this.enter('archive');return {type:'travel'};}
   if(o.id==='stationGate'){if(s.phase<3)return dialog('응답하지 않는 관측소','서린과 현장 재현에 대해 이야기하자.');this.enter('station');return {type:'travel'};}

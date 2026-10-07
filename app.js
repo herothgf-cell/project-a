@@ -21,6 +21,22 @@
   window.addEventListener('art-controls-ready',()=>{clearInput();lastFrame=performance.now();});
   function clearInput(){keys.clear();held.clear();joy={x:0,y:0};joyId=null;$('stick').querySelector('i').style.transform='';}
   function toast(text){const e=node('div','toast',text);$('toasts').append(e);while($('toasts').children.length>3)$('toasts').firstChild.remove();setTimeout(()=>e.remove(),3000);}
+  function notifyGrowthReceipts(){
+    const rs=BoundaryResonance.state(g);if(!active||g.introActive||dialog.open||!rs||rs.notified>=rs.grants.length)return;
+    const old=rs.notified,ids=new Set(rs.grants.slice(old)),rows=BoundaryResonance.catalog(g).filter(x=>ids.has(x.id));
+    const amounts={crystal:rows.reduce((n,r)=>n+r.crystal,0),seal:rows.reduce((n,r)=>n+r.seal,0)};
+    rs.notified=rs.grants.length;if(!persist()){rs.notified=old;return;}
+    const receipt=node('section','growth-receipt');receipt.setAttribute('role','status');receipt.setAttribute('aria-label','성장 아이템 획득');
+    receipt.append(node('strong','',rows.map(r=>r.name).join(' · ')),node('p','',[amounts.crystal?'공명 결정 +'+amounts.crystal:'',amounts.seal?'무공 각인 +'+amounts.seal:''].filter(Boolean).join(' · ')),node('small','',WorldGrowth.worldOf(g)==='murim'?'획득 완료 · 현실 귀환 후 사용':'획득 완료 · 캐릭터에서 스탯 배분 / 무공·스킬에서 강화'));
+    const safe=AREAS[g.area].safe&&!g.trial;if(safe)for(const [label,run]of [['스탯 배분',()=>characterUI.open('reality','crystal')],['스킬 강화',()=>growthUI.open('skills','reality')]]){const b=node('button','secondary',label);b.onclick=()=>{receipt.remove();run();};receipt.append(b);}
+    const dismiss=node('button','secondary','알림 닫기');dismiss.onclick=()=>receipt.remove();receipt.append(dismiss);$('toasts').append(receipt);setTimeout(()=>receipt.remove(),8000);
+  }
+  function updatePurposeMenus(){
+    const balance=BoundaryResonance.balance(g),counts={characterMenu:g.unreadNews('status').filter(x=>x.subject==='crystal').length,growthStatus:g.unreadNews('skills').length};
+    for(const [id,label,status]of [['characterMenu','캐릭터','결정 '+balance.crystal],['growthStatus','무공/스킬','각인 '+balance.seal],...['realm','hunter'].map(kind=>{const m=Advancement.describe(g,kind),id=kind+'Menu';counts[id]=g.unreadNews('growth').filter(x=>x.subject===kind).length;return [id,kind==='realm'?'경지 돌파':'헌터 승급',!m.menuUnlocked?'잠김':m.status==='passed'?(kind==='realm'?'확정 대기':'보고 대기'):m.status==='complete'?'달성':m.unlocked?'도전 가능':'준비 중'];})]){
+      const b=$(id);if(!b)continue;const text=status+(counts[id]?' · NEW':'');if(b.querySelector('small')?.textContent!==text)b.querySelector('small').textContent=text;b.setAttribute('aria-label',label+' · '+text);b.classList.toggle('has-news',counts[id]>0);
+    }
+  }
   function inspectSave(){
     resume=null;hasSave=false;$('titleError').textContent='';
     try{const raw=localStorage.getItem(SAVE);hasSave=raw!==null;if(raw!==null){resume=Game.load(raw);if(!devMode&&(JSON.parse(raw).improvementVersion||0)<2){try{const key=SAVE+(JSON.parse(raw).improvementVersion===undefined?'.before-v11':'.before-v12');if(localStorage.getItem(key)===null)localStorage.setItem(key,raw);}catch{saveWarning=true;$('titleError').textContent='이전 기록 백업을 저장하지 못했습니다. 저장 공간을 확인하거나 기록을 내려받으세요.';}}}}
@@ -43,15 +59,19 @@
     catch{g=Game.load(before);toast('저장하지 못해 성장 변경을 취소했습니다. 포인트는 유지됩니다.');update();return false;}
     processEvents();update();return true;
   }
-  function closeDialog(){if(introUI?.active)return introUI.resume();if(dialog.open)dialog.close();if(dialogReturnFocus?.isConnected)dialogReturnFocus.focus({preventScroll:true});clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker,next.result);}}
-  function show(title,body,actions=[{label:'계속하기'}],portrait='system',kicker='쌍계 · 이야기',result=null){
+  function closeDialog(force=false){if(force!==true&&characterUI?.requestLeave)return characterUI.requestLeave(()=>closeDialog(true));if(introUI?.active)return introUI.resume();if(dialog.open)dialog.close();if(dialogReturnFocus?.isConnected)dialogReturnFocus.focus({preventScroll:true});clearInput();lastFrame=performance.now();if(queued.length){const next=queued.shift();show(next.title,next.text,next.actions,next.portrait,next.kicker,next.result);}}
+  function show(title,body,actions=[{label:'계속하기'}],portrait='system',kicker='쌍계 · 이야기',result=null,unguarded=false){
+    if(!unguarded&&characterUI?.requestLeave&&!body?.classList?.contains('character-screen'))return characterUI.requestLeave(()=>show(title,body,actions,portrait,kicker,result,true));
 
     if(currentView)viewMemory.set(currentView,{scroll:$('dialogBody').scrollTop});
     currentView=typeof body==='string'?null:title;
     if(typeof body==='string'&&dialogueUI){const scenes=DialogueData.lookup(title,body,portrait);if(scenes)return dialogueUI.open({id:title,title,scenes,result,actions});}
     dialog.classList.toggle('intro-dialog',!!body?.classList?.contains('intro-scene'));dialog.classList.toggle('growth-dialog',!!body?.classList?.contains('growth-screen'));
     RealmArt.begin(g);clearInput();dialog.classList.toggle('story-dialog',typeof body==='string'&&portrait!=='system'&&!kicker.includes('일시정지'));dialog.classList.toggle('growth-workspace-dialog',!!body?.classList?.contains('growth-workspace'));dialog.classList.toggle('dungeon-dialog',!!body?.classList?.contains('dungeon-screen'));dialog.classList.toggle('news-dialog',!!body?.classList?.contains('realm-news'));dialog.classList.toggle('help-dialog',!!body?.classList?.contains('realm-help-sheet'));dialog.classList.toggle('legend-offer',kicker.includes('발현')||kicker.includes('각성'));$('dialogTitle').textContent=title;$('dialogKicker').textContent=kicker;
-    $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=Controls.format(body);else $('dialogBody').append(body);
+    $('dialogBody').replaceChildren();if(typeof body==='string')$('dialogBody').textContent=Controls.format(body);else {
+      if(body?.matches?.('.character-screen,.skills-screen,.advancement-screen')){const nav=node('nav','purpose-nav');nav.setAttribute('aria-label','성장 메뉴');for(const [id,label,run]of [['character','캐릭터',()=>characterUI.open()],['skills','무공/스킬',()=>growthUI.open('skills')],['realm','경지 돌파',()=>growthUI.open('realm')],['hunter','헌터 승급',()=>growthUI.open('hunter')]]){const b=node('button','secondary',label);b.dataset.purpose=id;b.type='button';b.setAttribute('aria-current',body.classList.contains('character-screen')&&id==='character'||body.classList.contains('skills-screen')&&id==='skills'||body.dataset.section===id?'page':'false');b.onclick=()=>characterUI.requestLeave(run);nav.append(b);}$('dialogBody').append(nav);}
+      $('dialogBody').append(body);
+    }
     const isDialogue=!!body?.classList?.contains('speaker-scene')&&portrait!=='system';
     dialog.dataset.popupKind=isDialogue?'dialogue':'general';
     dialog.dataset.world=body?.dataset?.world||WorldGrowth.worldOf(g);
@@ -59,7 +79,7 @@
     $('portrait').hidden=!isDialogue;
     if(isDialogue)WorldArt.portrait($('portrait'),portrait);
     $('dialogActions').replaceChildren();
-    actions.forEach(a=>{const b=node('button',a.secondary?'secondary':a.danger?'danger':'primary',a.label);b.disabled=!!a.disabled;b.addEventListener('click',()=>{queued=[];if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(a.run)a.run();});$('dialogActions').append(b);});
+    actions.forEach(a=>{const b=node('button',a.secondary?'secondary':a.danger?'danger':'primary',a.label);b.disabled=!!a.disabled;b.addEventListener('click',()=>{const run=()=>{queued=[];if(dialog.open)dialog.close();clearInput();lastFrame=performance.now();if(a.run)a.run();};if(characterUI?.requestLeave)characterUI.requestLeave(run);else run();});$('dialogActions').append(b);});
     $('closeDialog').hidden=!!introUI?.active;
     if(!dialog.open)dialogReturnFocus=document.activeElement;const growthFooter=body?.querySelector?.('.growth-footer');if(growthFooter)$('dialogActions').prepend(growthFooter);if(!dialog.open)dialog.showModal();dialog.scrollTop=0;$('dialogBody').scrollTop=body?.classList?.contains('growth-workspace')?0:viewMemory.get(currentView)?.scroll||0;
     ($('dialogActions').querySelector('button:not(:disabled):not(.danger)')||$('closeDialog')).focus({preventScroll:true});
@@ -158,7 +178,6 @@
     const body=node('section','settings-screen');body.append(node('p','',`Lv.${g.level} · ${AREAS[g.area].name}`),node('p','','화면, 입력, 저장을 설정합니다.'));const options=node('div','settings-options');for(const action of actions.slice(1)){const b=node('button','secondary',action.label);b.onclick=()=>{if(dialog.open)dialog.close();clearInput();action.run?.();};options.append(b);}body.append(options);show('설정',body,[actions[0]],'hero','일시정지 · v'+VERSION);
   }
   function processEvents(){
-    const rs=BoundaryResonance.state(g);if(g.area==='city'&&rs&&rs.notified<rs.grants.length){const old=rs.notified;rs.notified=rs.grants.length;if(persist())toast('무림의 성취가 공명으로 남았습니다 · 성장 → 경계공명에서 확인하세요.');else rs.notified=old;}
     for(const e of g.events.splice(0)){
       if(e.type==='resonance-proof'){if(persist())show(e.title,e.text,[{label:'현실 기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}}]);}
       if(e.type==='resonance-complete'){if(!persist()){g=Game.load(e.before);ResonanceChallenges.runtime(g).rewardBlocked=true;toast('저장 실패 · 기록 지점에서 E로 다시 시도하세요.');continue;}show(e.title,e.text,[{label:'청운촌으로 귀환',run:()=>{g.enter('village');processEvents();persist();update();}},{label:'기록 확인',run:()=>growthUI.open()}]);}
@@ -174,6 +193,7 @@
       if(e.type==='ultimate'){$('ultimateBanner').querySelector('small').textContent='나만의 오의';clearTimeout(bannerTimer);$('areaBanner').classList.remove('show');$('ultimateBanner').querySelector('strong').textContent=e.title;$('ultimateBanner').style.setProperty('--fate-color',Fate.PATHS[e.path].color);$('ultimateBanner').classList.add('show');clearTimeout(ultimateTimer);ultimateTimer=setTimeout(()=>$('ultimateBanner').classList.remove('show'),1100);}
       if(['transfer','victory','defeat','dialog','awakening','trial-complete','legend-ready'].includes(e.type)){story(e);if(e.inheritance)progressionUI?.inherit(e);persist();}
     }
+    notifyGrowthReceipts();
   }
   function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(before.training<1&&g.training>=1)result.result.push('유수심법 · 첫 2포인트 해금. 성장에서 심법을 확인하세요.');if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='cycle-choice')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{const scene=CycleOne.interact(g,result.pointId,choice.id);if(scene)story(scene);persist();update();}})),'system','현장 우선 대응');if(result?.type==='dungeon-select')dungeonUI.open();if(result?.type==='seven-preparation')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{g.chooseSevenPreparation(choice.id);processEvents();persist();update();}})),'warden','공동 대응 준비');if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
   function act(action){
@@ -204,7 +224,7 @@
     for(const btn of document.querySelectorAll('[data-action]')){const k=btn.querySelector('kbd');if(k)k.textContent=Controls.key(btn.dataset.action);}
     for(const [id,action]of [['inventory','growth'],['interact','interact'],['potion','potion'],['fieldNotes','notes'],['sense','sense'],['helpButton','help']]){const el=$(id);if(el){const k=el.querySelector('kbd');if(k)k.textContent=Controls.key(action);el.setAttribute('aria-label',Controls.labels[action]+' '+Controls.key(action));}}
     const a=AREAS[g.area],s=g.stats(),p=g.player,o=ObjectiveModel.resolve(g);
-    const murim=WorldGrowth.worldOf(g)==='murim';const uiWorld=murim?'murim':'reality';if(document.body.dataset.world!==uiWorld)document.body.dataset.world=uiWorld;$('growthStatus').textContent='성장';$('growthStatus').title=g.training<1?'백련 수련 후 심법 해금':(g.journey.breath==='flow'?'유수':'집중')+' 운용';
+    const murim=WorldGrowth.worldOf(g)==='murim';const uiWorld=murim?'murim':'reality';if(document.body.dataset.world!==uiWorld)document.body.dataset.world=uiWorld;updatePurposeMenus();
     $('mpTrack').setAttribute('aria-label',murim?'내력':'자원');const resourceLabel=$('mpTrack').parentElement.querySelector('label'),resourceLow=performance.now()<resourceWarningUntil&&g.player.mp<resourceWarningCost;resourceLabel.textContent=(murim?'내력':'자원')+(resourceLow?' 부족':'');resourceLabel.classList.toggle('resource-warning',resourceLow);
     $('world').textContent=a.world;$('rank').textContent=murim?Advancement.describe(g,'realm').name:Advancement.describe(g,'hunter').name+'급 헌터';$('place').textContent=a.name;$('sub').textContent=a.sub;$('lv').textContent=g.level;$('gold').textContent=g.gold;
     for(const [id,val,max]of [['hp',p.hp,s.hp],['mp',p.mp,s.mp]]){$(id).style.width=Math.max(0,val/max*100)+'%';$(id+'Text').textContent=`${Math.ceil(val)} / ${max}`;$(id+'Track').setAttribute('aria-valuemin','0');$(id+'Track').setAttribute('aria-valuemax',String(max));$(id+'Track').setAttribute('aria-valuenow',String(Math.ceil(val)));}
@@ -235,7 +255,7 @@
   $('start').addEventListener('click',newGame);$('continue').addEventListener('click',()=>start(true));$('menu').addEventListener('click',menu);$('inventory').addEventListener('click',inventory);$('journal').addEventListener('click',journal);$('mapBtn').addEventListener('click',map);$('interact').addEventListener('click',interact);$('potion').addEventListener('click',()=>act('potion'));$('closeDialog').addEventListener('click',closeDialog);
   // Clear synchronously at every close/cancel path. Native close is queued and
   // must not erase a fresh movement key pressed after the dialog disappeared.
-  dialog.addEventListener('cancel',e=>{queued=[];clearInput();if(introUI?.active){e.preventDefault();introUI.resume();}});
+  dialog.addEventListener('cancel',e=>{e.preventDefault();queued=[];clearInput();closeDialog();});
   $('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('game').requestFullscreen();}catch(error){toast('이 브라우저에서는 전체 화면을 지원하지 않습니다.');}});
   function controlSettings(){
     const body=node('section','control-settings');
@@ -281,20 +301,21 @@
   }
   $('growthStatus').onclick=()=>inventory();
   dialogueUI=DialogueUI.create({show,node});
-  journeyUI=JourneyUI.create({game:()=>g,show,node,grid,refresh:()=>{processEvents();persist();update();},act,running,active:()=>active,growth:()=>growthUI.open()});
+  journeyUI=JourneyUI.create({game:()=>g,show,node,grid,refresh:()=>{processEvents();persist();update();},act,running,active:()=>active,growth:()=>growthUI.open(),skills:subject=>growthUI.open('skills',subject)});
   realmUI=RealmUI.create({game:()=>g,show,node,refresh:()=>{processEvents();persist();update();},active:()=>active,clearInput,notes:journeyUI});
   introUI=IntroUI.create({game:()=>g,setGame:value=>{g=value;renderer.area=null;progressionUI?.clear();clearInput();},show,node,refresh:()=>{processEvents();persist();update();}});
   const refreshGrowth=()=>{processEvents();persist();update();};
   const historyUI=GrowthUI.create({game:()=>g,show,node,grid,close:closeDialog,refresh:refreshGrowth,notes:journeyUI,shop,route:tab=>tab==='status'?characterUI.open():growthUI.open('skills')});
-  characterUI=CharacterUI.create({game:()=>g,show,node,grid,refresh:refreshGrowth,openSection:section=>growthUI.open(section)});
-  newsUI=NewsUI.create({game:()=>g,show,node,refresh:refreshGrowth,openDestination:item=>item.section==='status'?characterUI.open('reality'):growthUI.open(item.section,item.subject)});
-  growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI,prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
+  characterUI=CharacterUI.create({game:()=>g,show,node,grid,commit:commitGrowth,refresh:refreshGrowth,openSection:section=>growthUI.open(section)});
+  newsUI=NewsUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,openDestination:item=>item.section==='status'?characterUI.open('reality'):growthUI.open(item.section,item.subject)});
+  growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI,objective:()=>objectiveUI.open(),prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
   const character=node('button'),hudPortrait=$('hudPortrait');character.id='character';character.type='button';character.setAttribute('aria-label','캐릭터 상태');hudPortrait.replaceWith(character);character.append(hudPortrait);character.onclick=()=>characterUI.open();
   const newsButton=node('button','icon-button','소식');newsButton.id='personalNews';newsButton.onclick=()=>newsUI.open();document.querySelector('.header-actions').prepend(newsButton);
   progressionUI=ProgressionUI.create({node});
   // Repeatable contracts remain in the isolated archive only.
-  objectiveUI=ObjectiveUI.create({game:()=>g,node,show,openMap:map,refresh:()=>{clearInput();update();}});
+  objectiveUI=ObjectiveUI.create({game:()=>g,node,show,openMap:map,challenges:()=>growthUI.open('challenges'),refresh:()=>{clearInput();update();}});
   dungeonUI=DungeonUI.create({game:()=>g,node,show,refresh:refreshGrowth,close:closeDialog,isOpen:()=>dialog.open,prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
-  const mainNav=node('nav','main-navigation');mainNav.setAttribute('aria-label','주 메뉴');for(const [label,run]of [['캐릭터',()=>characterUI.open()],['성장',()=>growthUI.open('growth')],['임무',()=>objectiveUI.open()],['기록',openRecords],['설정',menu]]){const b=label==='성장'?$('growthStatus'):node('button','secondary',label);b.onclick=run;mainNav.append(b);}document.querySelector('header').append(mainNav);
+  const mainNav=node('nav','main-navigation');mainNav.setAttribute('aria-label','주 메뉴');for(const [id,label,run]of [['characterMenu','캐릭터',()=>characterUI.open()],['growthStatus','무공/스킬',()=>growthUI.open('skills')],['realmMenu','경지 돌파',()=>growthUI.open('realm')],['hunterMenu','헌터 승급',()=>growthUI.open('hunter')]]){const b=$(id)||node('button','secondary');b.id=id;b.type='button';b.replaceChildren(node('strong','',label),node('small','purpose-menu-status'));b.onclick=()=>characterUI.requestLeave(run);mainNav.append(b);}document.querySelector('header').append(mainNav);
+  const utilities=node('nav','purpose-utilities');utilities.setAttribute('aria-label','보조 메뉴');for(const [id,label,run]of [['missionsMenu','임무',()=>objectiveUI.open()],['recordsMenu','기록',openRecords]]){const b=node('button','secondary',label);b.id=id;b.type='button';b.onclick=run;utilities.append(b);}document.querySelector('.header-actions').prepend(utilities);
   inspectSave();WorldArt.cover($('cover'));WorldArt.portrait($('hudPortrait'),'hero');update();requestAnimationFrame(frame);
 })();

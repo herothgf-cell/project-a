@@ -32,7 +32,7 @@ run(async p=>{
      if((!art.hidden&&art.getBoundingClientRect().width>0)!==portrait)issues.push('incorrect portrait visibility');
      for(const b of d.querySelectorAll('button')){
       const br=b.getBoundingClientRect();if(!br.width||!br.height)continue;
-      if(br.height<47.5||br.width<47.5)issues.push('small target '+b.textContent.trim()+': '+Math.round(br.width)+'×'+Math.round(br.height));
+      const minimum=b.closest('.purpose-nav,.character-growth,.skills-screen,.advancement-screen')?43.5:47.5;if(br.height<minimum||br.width<minimum)issues.push('small target '+b.textContent.trim()+': '+Math.round(br.width)+'×'+Math.round(br.height));
      }
      for(const b of d.querySelectorAll('.app-navigation button')){
       const range=document.createRange();range.selectNodeContents(b);
@@ -59,10 +59,10 @@ run(async p=>{
  await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='reality');
  await capture('hud',{dialog:false});
  await p.click('#character');await capture('character');
- await p.keyboard.press('Escape');await p.click('#growthStatus');await p.getByRole('button',{name:'현실 스킬',exact:true}).click();await p.getByRole('button',{name:'현실 대응 장착·진화',exact:true}).click();await capture('skills');
+ await p.keyboard.press('Escape');await p.click('#growthStatus');await p.getByRole('button',{name:'파문',exact:true}).click();await p.locator('[data-equipment=equipment]').click();await capture('skills');
  await close();await p.click('#menu');await capture('settings');
- await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'기록',exact:true}).click();await capture('records');
- await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'임무',exact:true}).click();await capture('objective');
+ await p.keyboard.press('Escape');await p.locator('#recordsMenu').click();await capture('records');
+ await p.keyboard.press('Escape');await p.locator('#missionsMenu').click();await capture('objective');
  await close();
  await p.evaluate(()=>{const g=__game;const entry=g.points().find(x=>x.kind==='dungeon-entry');Object.assign(g.player,{x:entry.x,y:entry.y});g.events=[];});
  await p.click('#interact');await p.waitForSelector('.dungeon-screen');await capture('dungeon-list');

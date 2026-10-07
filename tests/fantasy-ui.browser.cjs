@@ -14,19 +14,19 @@ run(async p=>{
   const slots=await p.locator('.actions>button').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().top));
   assert.ok(Math.max(...slots)-Math.min(...slots)<2,'desktop combat slots share a row');
   await p.screenshot({path:'.ui-design-review/field-murim.png'});
-  await p.click('#growthStatus');await p.getByRole('button',{name:'무림 심법·경지·헌터',exact:true}).click();
-  await p.waitForSelector('.growth-workspace');
+  await p.click('#growthStatus');
+  await p.waitForSelector('.skills-screen');
   const before=await p.evaluate(()=>__game.save());
   assert.equal(await p.locator('#dialog').getAttribute('data-world'),'murim');
   await p.screenshot({path:'.ui-design-review/growth-murim.png'});
-  await p.getByRole('button',{name:'현실 정보 보기',exact:true}).click();
+  await p.getByRole('button',{name:'현실 보기',exact:true}).click();
   assert.equal(await p.locator('#dialog').getAttribute('data-world'),'reality');
   assert.notEqual(await p.locator('#dialog').evaluate(e=>getComputedStyle(e).getPropertyValue('--ui-accent').trim()),fieldAccent);
   assert.equal(await p.evaluate(()=>__game.save()),before,'viewing the other world does not change game state');
   await p.screenshot({path:'.ui-design-review/growth-reality.png'});
   await p.keyboard.press('Escape');
   await p.click('#character');
-  await p.locator('.profile-world img').evaluateAll(es=>Promise.all(es.map(e=>e.decode())));
+  assert.equal(await p.locator('.character-stats article').count(),3);
   await p.screenshot({path:'.ui-design-review/character.png'});
   await p.keyboard.press('Escape');
   for(const [width,height]of [[360,640],[390,844],[844,390],[1024,390],[1280,900]]){
@@ -41,7 +41,7 @@ run(async p=>{
     const controls=await p.locator('.actions>button,#potion,#interact').evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>{const r=e.getBoundingClientRect();return {name:e.textContent,x:r.x,y:r.y,right:r.right,bottom:r.bottom};}));
     for(let i=0;i<controls.length;i++)for(let j=i+1;j<controls.length;j++){const a=controls[i],b=controls[j];assert.ok(a.right<=b.x||b.right<=a.x||a.bottom<=b.y||b.bottom<=a.y,'controls must not overlap: '+a.name+' / '+b.name);}
     await p.screenshot({path:'.ui-design-review/field-'+width+'.png'});
-    await p.click('#growthStatus');await p.getByRole('button',{name:'무림 심법·경지·헌터',exact:true}).click();
+    await p.click('#growthStatus');
     assert.ok(await p.locator('#dialog').evaluate(e=>e.scrollWidth<=e.clientWidth+2));
     await p.screenshot({path:'.ui-design-review/growth-'+width+'.png'});
     await p.keyboard.press('Escape');
