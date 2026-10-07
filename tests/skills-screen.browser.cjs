@@ -9,9 +9,12 @@ run(async p=>{
   document.querySelector('#dialog')?.close();g.paused=true;g.step=()=>{};
   const host=document.createElement('div');host.id='skills-test-host';document.body.append(host);
   host.style.cssText='position:fixed;inset:0;overflow:auto;background:#14202c;z-index:9999;color:white';
-  window.__skillCloses=0;window.__skills=SkillsScreen.create({game:()=>__game,node:(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;},show:(_,body)=>host.replaceChildren(body),refresh:()=>{},close:()=>{window.__skillCloses++;},notes:{open:()=>{}},commit:fn=>{
+  window.__skillCloses=0;window.__skillEvents=[];window.__skills=SkillsScreen.create({game:()=>__game,node:(tag,cls='',text='')=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e;},show:(_,body)=>host.replaceChildren(body),refresh:()=>{},close:()=>{window.__skillCloses++;},notes:{open:()=>{}},commit:fn=>{
    if(window.__failSkillsSave)return false;
-   return fn(__game)!==false;
+   const result=fn(__game)!==false;
+   // The component harness owns its modal and event delivery; prevent the live app
+   // from consuming its story events and opening a second, unrelated modal.
+   window.__skillEvents.push(...__game.events.splice(0));return result;
   }});__skills.open('reality','ripple');
  });
  const before=await p.evaluate(()=>__game.worldGrowth.reality.equipped);
@@ -58,6 +61,7 @@ run(async p=>{
  await p.evaluate(()=>{__game.enter('village');__game.events=[];__skills.open('murim','F1');});
  await p.evaluate(()=>{__game.fate.discovered.push('echo');__game.fate.proven.push('echo');__skills.open('murim','discovery');});await p.locator('[data-discovery="echo"]').click();await p.getByRole('button',{name:'계승 수락',exact:true}).click();
  assert.ok(await p.evaluate(()=>__game.revision.inherited.includes('echo')));assert.equal(await p.evaluate(()=>window.__skillCloses),1,'acceptance yields workspace to its story event');
+ assert.equal(await p.evaluate(()=>__skillEvents.some(e=>e.type==='awakening'&&e.path==='echo')),true,'acceptance still emits its real story event');
  await p.evaluate(()=>__skills.open('murim','F1'));
  await p.locator('[data-upgrade="F1"]').click();assert.equal(await p.evaluate(()=>PassiveGrowth.state(__game).levels.F1),1);
  await p.evaluate(()=>{__game.enter('city');__game.events=[];__game.journey.known.push('seal-hold');__game.journey.sync['seal-hold']=1;__game.refreshNews();__skills.open('reality','seal-hold');});
