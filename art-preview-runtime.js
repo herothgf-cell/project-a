@@ -1,10 +1,10 @@
 /* Candidate presentation. Public only through the explicit prototype build. */
 (async function(){
  'use strict';
- const diagnostics=new Map();let redrawQueued=false;
+ const diagnostics=new Map(),loadedPaths=new Set();let redrawQueued=false;
  const retry=document.createElement('button');retry.id='artRetry';retry.textContent='아트 로딩 실패 · 다시 불러오기';retry.hidden=true;
  retry.style.cssText='position:fixed;top:48px;left:50%;transform:translateX(-50%);z-index:220;padding:8px;background:#152432;color:#ffe1a3;border:1px solid #d6bc7d';document.body.append(retry);
- const images=ProductionArt.createResidentImages({onError(){retry.hidden=false;},onLoad(){if(redrawQueued)return;redrawQueued=true;requestAnimationFrame(()=>{redrawQueued=false;dispatchEvent(new Event('wuxia-assets-ready'));});}});
+ const images=ProductionArt.createResidentImages({onError(){retry.hidden=false;},onLoad(path){loadedPaths.add(path);if(redrawQueued)return;redrawQueued=true;requestAnimationFrame(()=>{redrawQueued=false;const paths=[...loadedPaths];loadedPaths.clear();dispatchEvent(new CustomEvent('wuxia-assets-ready',{detail:{paths}}));});}});
  retry.onclick=()=>{images.retryFailures();retry.hidden=true;dispatchEvent(new Event('wuxia-assets-ready'));};
  const effectDiagnostics=new Map(),state=globalThis.ArtPreview={ready:false,diagnostics,effectDiagnostics,residency:images,error:null};
  try{
@@ -133,21 +133,22 @@
   ClassicArt.terrain=function(area){
    const id=Object.entries(DualWorld.AREAS).find(([,a])=>a===area)?.[0];
    const world=area.world==='현실'?'reality':'murim',v=catalog.resolve({world,entityId:'environment.ground',action:'cell-0',facing:'none'},{preview:true});
+   const assetPaths=sourceCatalog.manifest.assets.filter(a=>a.world===world&&['environment.ground','environment.dressing'].includes(a.entityId)).map(a=>a.atlas.path);
    const terrain=document.createElement('canvas');terrain.width=area.w;terrain.height=area.h;const c=terrain.getContext('2d');
-   if(v.status==='BLOCKED_ART'){c.fillStyle=world==='reality'?'#344550':'#536149';c.fillRect(0,0,area.w,area.h);return {terrain,decorations:[]};}
+   if(v.status==='BLOCKED_ART'){c.fillStyle=world==='reality'?'#344550':'#536149';c.fillRect(0,0,area.w,area.h);return {terrain,decorations:[],assetPaths,pending:true};}
    const tile=document.createElement('canvas');tile.width=tile.height=512;const tc=tile.getContext('2d');
    ArtRuntime.drawTerrainRepeat(tc,images.get(v.atlas.path),v.frame.rect,256);c.fillStyle=c.createPattern(tile,'repeat');c.fillRect(0,0,area.w,area.h);
-   const road=catalog.resolve({world,entityId:'environment.ground',action:'cell-1',facing:'none'},{preview:true});if(road.status==='BLOCKED_ART')return {terrain,decorations:[]};tc.clearRect(0,0,512,512);ArtRuntime.drawTerrainRepeat(tc,images.get(road.atlas.path),road.frame.rect,256);
+   const road=catalog.resolve({world,entityId:'environment.ground',action:'cell-1',facing:'none'},{preview:true});if(road.status==='BLOCKED_ART')return {terrain,decorations:[],assetPaths,pending:true};tc.clearRect(0,0,512,512);ArtRuntime.drawTerrainRepeat(tc,images.get(road.atlas.path),road.frame.rect,256);
    c.strokeStyle=c.createPattern(tile,'repeat');c.lineWidth=id==='city'?132:112;c.lineCap='round';c.lineJoin='round';
    for(const points of area.roads){c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.stroke();}
-   let dressingCount=0;
+   let dressingCount=0,pending=false;
    for(const d of ArtRuntime.groundDetails(area,world)){
     const detail=catalog.resolve({world,entityId:'environment.dressing',action:'cell-'+d.cell,facing:'none'},{preview:true});
-    if(detail.status==='BLOCKED_ART')continue;
+    if(detail.status==='BLOCKED_ART'){pending=true;continue;}
      c.save();c.translate(d.x,d.y);c.rotate(d.rotation||0);c.drawImage(images.get(detail.atlas.path),...detail.frame.rect,-d.size/2,-d.size/2,d.size,d.size);c.restore();dressingCount++;
    }
    diagnostics.set(world+'.ground-dressing',{count:dressingCount,status:dressingCount?'candidate':'BLOCKED_ART'});
-   return {terrain,decorations:ArtRuntime.foregroundDetails(area,world).map(o=>({...o,kind:'production-foreground'}))};
+   return {terrain,assetPaths,pending,decorations:ArtRuntime.foregroundDetails(area,world).map(o=>({...o,kind:'production-foreground'}))};
   };
   WorldArt.pointLabelHeight=o=>game&&['city','village'].includes(game.area)&&o.kind==='portal'?280:null;
   WorldArt.portal=function(c,o,t,theme,locked){

@@ -8,7 +8,7 @@ await page.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{
 await page.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await page.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);
 assert.equal(await page.evaluate(()=>ArtPreview.error),null);assert.ok(requests.length<50,`startup eagerly requested ${requests.length} atlases`);
 assert.ok(await page.evaluate(()=>ArtPreview.residency.bytes<=128*1024*1024));assert.deepEqual(errors,[]);
-await page.click('#start');await page.locator('#dialogActions button').first().click();await page.waitForFunction(()=>window.__game);
+await page.click('#start');await page.getByRole('button',{name:'인트로 건너뛰기',exact:true}).click();await page.waitForFunction(()=>window.__game);
 const samples=[];
 for(const [area,world]of [['city','reality'],['village','murim'],['city','reality']]){
  await page.evaluate(area=>{__game.progress=8;__game.enter(area);__game.events=[];},area);

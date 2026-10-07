@@ -250,7 +250,7 @@
     $('rank').textContent=Advancement.describe(g,'hunter').name+'급 헌터';
     $('inventory').querySelector('span').textContent='성장';
   }
-  window.addEventListener('wuxia-assets-ready',()=>{renderer.cache={};WorldArt.portrait($('hudPortrait'),'hero');if(!$('title').hidden)WorldArt.cover($('cover'));});
+  window.addEventListener('wuxia-assets-ready',()=>{WorldArt.portrait($('hudPortrait'),'hero');if(!$('title').hidden)WorldArt.cover($('cover'));});
   $('fateJournal').addEventListener('click',fateJournal);
   $('start').addEventListener('click',newGame);$('continue').addEventListener('click',()=>start(true));$('menu').addEventListener('click',menu);$('inventory').addEventListener('click',inventory);$('journal').addEventListener('click',journal);$('mapBtn').addEventListener('click',map);$('interact').addEventListener('click',interact);$('potion').addEventListener('click',()=>act('potion'));$('closeDialog').addEventListener('click',closeDialog);
   // Clear synchronously at every close/cancel path. Native close is queued and

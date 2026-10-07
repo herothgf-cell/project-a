@@ -14,10 +14,15 @@
     get recentMs(){return this.recent.length?this.recentSum/this.recent.length:0;}
   }
   class WorldRenderer{
-    constructor(canvas,mini){this.canvas=canvas;this.c=canvas.getContext('2d');this.mini=mini;this.cache={};this.camera={x:0,y:0};this.area=null;this.quality=matchMedia('(pointer:coarse)').matches?1:2;this.autoLow=false;this.slowFrames=0;root.addEventListener('wuxia-assets-ready',()=>{this.cache={};});this.reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;this.resize();}
+    constructor(canvas,mini){this.canvas=canvas;this.c=canvas.getContext('2d');this.mini=mini;this.cache={};this.dirtyScenery=new Set();this.camera={x:0,y:0};this.area=null;this.quality=matchMedia('(pointer:coarse)').matches?1:2;this.autoLow=false;this.slowFrames=0;root.addEventListener('wuxia-assets-ready',e=>this.invalidateScenery(e.detail?.paths));this.reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;this.resize();}
+    invalidateScenery(paths){
+      if(!paths){this.cache={};this.dirtyScenery.clear();return;}
+      for(const [id,scene]of Object.entries(this.cache))if(scene.assetPaths?.some(path=>paths.includes(path)))this.dirtyScenery.add(id);
+    }
     resize(){const r=this.canvas.getBoundingClientRect();this.w=Math.max(1,r.width);this.h=Math.max(1,r.height);this.dpr=Math.min(devicePixelRatio||1,2);this.canvas.width=Math.round(this.w*this.dpr);this.canvas.height=Math.round(this.h*this.dpr);this.zoom=this.w<600?1:1.1;}
     scenery(id){
-      if(this.cache[id])return this.cache[id];if(root.ClassicArt){this.cache[id]=ClassicArt.terrain(AREAS[id]);return this.cache[id];}const a=AREAS[id],p=palettes[id],can=document.createElement('canvas');can.width=a.w;can.height=a.h;const c=can.getContext('2d'),rng=random(id.charCodeAt(0)*289+17),outdoor=['village','forest','ruins','sanctum'].includes(id);
+      const previous=this.cache[id];if(previous&&!this.dirtyScenery.has(id))return previous;this.dirtyScenery.delete(id);
+      if(root.ClassicArt){const scene=ClassicArt.terrain(AREAS[id]);this.cache[id]=scene.pending&&previous&&!previous.pending?previous:scene;return this.cache[id];}const a=AREAS[id],p=palettes[id],can=document.createElement('canvas');can.width=a.w;can.height=a.h;const c=can.getContext('2d'),rng=random(id.charCodeAt(0)*289+17),outdoor=['village','forest','ruins','sanctum'].includes(id);
       const grad=c.createLinearGradient(0,0,a.w,a.h);grad.addColorStop(0,p[1]);grad.addColorStop(.65,p[0]);grad.addColorStop(1,p[1]);c.fillStyle=grad;c.fillRect(0,0,a.w,a.h);
       for(let i=0;i<2000;i++){c.fillStyle=i%2?'#d9e4bb06':'#122f320a';c.fillRect(rng()*a.w,rng()*a.h,5+rng()*25,1+rng()*8);}
       c.lineCap='round';c.lineJoin='round';for(const road of a.roads){line(c,road,outdoor?'#c5c09929':'#c4d2bd16',154);line(c,road,outdoor?'#919677':'#566c76',132);line(c,road,outdoor?'#a4a384':'#536873',112);}
