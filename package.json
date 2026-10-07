@@ -1,6 +1,6 @@
 {
   "name": "dualworld-project-a",
-  "version": "0.12.7",
+  "version": "0.12.8",
   "private": true,
   "description": "쌍계 — 두 세계의 호흡. World-specific art, anchored motion, unified interface and accessible discovery guidance.",
   "scripts": {

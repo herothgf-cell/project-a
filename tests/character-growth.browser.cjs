@@ -57,7 +57,7 @@ const {chromium}=require('playwright');
   assert.equal(await p.getByRole('button',{name:'최대 생명 증가',exact:true}).isDisabled(),false);
   // Latest means grant order, not catalog order; opening character does not read receipts.
   await p.evaluate(()=>{resetCharacter();g.worldGrowth.murim.level=5;g.worldState.resonance.grants=['murim-level:5','inherit:first'];g.journey.known=[];g.journey.worlds=[];g.worldState.news={items:[]};g.worldState.reports={reported:['first-response']};g.playTime=10;PersonalNews.refresh(g);g.newsList=()=>PersonalNews.list(g);g.unreadNews=s=>PersonalNews.unread(g,s);g.readNews=id=>PersonalNews.read(g,id);ui.open('reality');});
-  assert.match(await p.locator('.character-resource').innerText(),/최근 획득 \+8 · 첫 기연 영구 계승/);
+  assert.match(await p.locator('.character-resource-extra').innerText(),/최근 획득 \+8 · 첫 기연 영구 계승/);
   assert.equal(await p.evaluate(()=>g.unreadNews('status').filter(n=>n.subject==='crystal').length),2);
   await p.evaluate(()=>failSave=true);await p.getByRole('button',{name:'획득 내역',exact:true}).click();
   assert.equal(await p.evaluate(()=>g.unreadNews('status').filter(n=>n.subject==='crystal').length),2);
@@ -86,6 +86,17 @@ const {chromium}=require('playwright');
  await require('./browser-harness.cjs').run(async p=>{
   await p.evaluate(()=>{__game.revision.inherited=['ripple'];BoundaryResonance.sync(__game);__game.events=[];});
   await p.click('#characterMenu');
+  assert.equal(await p.locator('.character-stats').count(),0,'current values have one home in the allocation rows');
+  for(const [width,height] of [[1280,800],[360,800],[360,640]]){
+   await p.setViewportSize({width,height});
+   assert.equal(await p.evaluate(()=>{const view=document.querySelector('#dialogBody').getBoundingClientRect();return [...document.querySelectorAll('.character-allocation-row')].every(e=>{const r=e.getBoundingClientRect();return r.top>=view.top&&r.bottom<=view.bottom;});}),true,'all stat rows and controls are visible on initial open at '+width+'x'+height);
+   assert.equal(await p.evaluate(()=>{const r=document.querySelector('#dialogActions .character-confirm').getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight;}),true,'balance and confirmation stay visible at '+width+'x'+height);
+  }
+  const attack=p.locator('[data-stat="attack"]');const initial=await attack.locator('.character-current').innerText();
+  await p.getByRole('button',{name:'공격 증가',exact:true}).click();
+  assert.equal(await attack.locator('.character-current').innerText(),initial,'draft leaves the current value stable');
+  assert.match(await attack.locator('.character-after').innerText(),/\+1/,'the same row previews the increase');
+  await p.getByRole('button',{name:'공격 감소',exact:true}).click();
   assert.equal(await p.evaluate(()=>document.querySelector('.character-resource>strong').getBoundingClientRect().bottom<=document.querySelector('#dialogBody').getBoundingClientRect().bottom),true,'initial desktop viewport shows available growth balance');
   await p.setViewportSize({width:360,height:800});
   await p.getByRole('button',{name:'공격 증가',exact:true}).click();

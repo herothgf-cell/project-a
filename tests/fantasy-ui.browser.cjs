@@ -26,7 +26,7 @@ run(async p=>{
   await p.screenshot({path:'.ui-design-review/growth-reality.png'});
   await p.keyboard.press('Escape');
   await p.click('#character');
-  assert.equal(await p.locator('.character-stats article').count(),3);
+  assert.equal(await p.locator('.character-allocation-row .character-stepper').count(),3);
   await p.screenshot({path:'.ui-design-review/character.png'});
   await p.keyboard.press('Escape');
   for(const [width,height]of [[360,640],[390,844],[844,390],[1024,390],[1280,900]]){

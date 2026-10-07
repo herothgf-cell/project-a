@@ -38,44 +38,57 @@
  function render(){
   const c=context(),{g,r,old,available,total,used,cap,safe,remaining}=c,s=W.stats(g,world),w=g.worldGrowth[world],actual=W.worldOf(g);
   draft||={...old};body=node('section','character-screen profile-screen character-growth');body.dataset.world=world;
+  const more=node('section','character-more'),toolbar=node('div','character-toolbar');
   const nav=node('nav','character-worlds');nav.setAttribute('aria-label','세계별 캐릭터');
-  for(const [id,label]of [['reality','현실'],['murim','무림']]){const b=button(label+' 캐릭터',()=>open(id),{key:'world-'+id});b.setAttribute('aria-pressed',String(id===world));nav.append(b);}body.append(nav);
-  const identity=node('header','character-identity');identity.append(node('h3','','윤서'),node('span','','Lv. '+w.level),node('span','',world==='reality'?A.describe(g,'hunter').name+'급 헌터':A.describe(g,'realm').name));body.append(identity,node('p','character-location','조회: '+(world==='reality'?'현실':'무림')+' · 현재 위치: '+(root.WorldGame?.AREAS?.[g.area]?.name||root.DualWorld?.AREAS?.[g.area]?.name||({city:'현실 기지',village:'청운촌'}[g.area])||g.area)+(actual!==world?' · 다른 세계 조회 중':'')));
-  const exp=node('div','profile-exp'),bar=node('progress');bar.max=s.next;bar.value=w.xp;bar.setAttribute('aria-label','경험치');exp.append(node('span','','EXP'),bar,node('span','',w.xp+' / '+s.next));body.append(exp);
-  const stats=node('div','character-stats');for(const [key,label]of [['attack','공격력'],['hp','최대 생명'],['mp','최대 기력']]){const card=node('article');card.append(node('span','',label),node('strong','',fmt(s[key])));if(key!=='attack')card.append(node('small','',actual===world?'현재 '+fmt(g.player[key])+' / '+fmt(s[key]):'현재 수치는 '+(actual==='reality'?'현실':'무림')+'에서 확인'));stats.append(card);}body.append(stats);
-  const equipped=w.equipped;body.append(node('p','profile-equipped','장착 무공 · '+(equipped?(world==='reality'?root.RealitySkills?.table?.[equipped]?.[0]?.[0]:root.DualWorld?.Fate?.PATHS?.[equipped]?.name)||R.familyNames[equipped]||'기본 무공':'기본 무공')));
-  const details=button(provenance?'스탯 출처 접기':'스탯 출처 보기',()=>{provenance=!provenance;render();});details.setAttribute('aria-expanded',String(provenance));body.append(details);
+  for(const [id,label]of [['reality','현실'],['murim','무림']]){const b=button(label,()=>open(id),{key:'world-'+id});b.setAttribute('aria-label',label+' 캐릭터');b.setAttribute('aria-pressed',String(id===world));nav.append(b);}
+  const identity=node('header','character-identity');identity.append(node('h3','','윤서'),node('span','','Lv. '+w.level),node('span','',world==='reality'?A.describe(g,'hunter').name+'급 헌터':A.describe(g,'realm').name));toolbar.append(identity,nav);body.append(toolbar);more.append(node('p','character-location','조회: '+(world==='reality'?'현실':'무림')+' · 현재 위치: '+(root.WorldGame?.AREAS?.[g.area]?.name||root.DualWorld?.AREAS?.[g.area]?.name||({city:'현실 기지',village:'청운촌'}[g.area])||g.area)+(actual!==world?' · 다른 세계 조회 중':'')));
+  const exp=node('div','profile-exp'),bar=node('progress');bar.max=s.next;bar.value=w.xp;bar.setAttribute('aria-label','경험치');exp.append(node('span','','EXP'),bar,node('span','',w.xp+' / '+s.next));more.append(exp);
+  const equipped=w.equipped;more.append(node('p','profile-equipped','장착 무공 · '+(equipped?(world==='reality'?root.RealitySkills?.table?.[equipped]?.[0]?.[0]:root.DualWorld?.Fate?.PATHS?.[equipped]?.name)||R.familyNames[equipped]||'기본 무공':'기본 무공')));
+  const details=button(provenance?'스탯 출처 접기':'스탯 출처 보기',()=>{provenance=!provenance;render();});details.setAttribute('aria-expanded',String(provenance));more.append(details);
   if(provenance){const advanced=A.bonus(g,world),passive=PassiveGrowth.bonus(g,world),legacy=world==='reality'?(g.achievementBonuses?.()||{attack:0,hp:0,mp:0}):{attack:0,hp:0,mp:0},res=world==='reality'?r.bonus:{attack:0,hp:0,mp:0},table=node('div','character-provenance');
-   for(const [label,v]of [['기본 / 레벨 / 기본 수련',{attack:s.attack-advanced.attack-(passive.attack||0)-legacy.attack-res.attack,hp:s.hp-advanced.hp-passive.hp-legacy.hp-res.hp,mp:s.mp-advanced.mp-passive.mp-legacy.mp-res.mp}],['기존 성취',legacy],['공명 결정',res],['심법',passive],['경지 / 훈련',advanced]])table.append(node('p','',label+' · 공격 '+fmt(v.attack||0)+' / 생명 '+fmt(v.hp||0)+' / 기력 '+fmt(v.mp||0)));body.append(table);
+   for(const [label,v]of [['기본 / 레벨 / 기본 수련',{attack:s.attack-advanced.attack-(passive.attack||0)-legacy.attack-res.attack,hp:s.hp-advanced.hp-passive.hp-legacy.hp-res.hp,mp:s.mp-advanced.mp-passive.mp-legacy.mp-res.mp}],['기존 성취',legacy],['공명 결정',res],['심법',passive],['경지 / 훈련',advanced]])table.append(node('p','',label+' · 공격 '+fmt(v.attack||0)+' / 생명 '+fmt(v.hp||0)+' / 기력 '+fmt(v.mp||0)));more.append(table);
   }
-  const resources=node('nav','character-resources');resources.setAttribute('aria-label','배분 자원');for(const id of world==='murim'?['realm']:['crystal','hunter']){const b=button(names[id],()=>requestLeave(()=>reset(world,id)),{key:'source-'+id});b.setAttribute('aria-pressed',String(source===id));resources.append(b);}body.append(resources);
-  const wallet=node('section','character-resource');wallet.append(node('h3','',names[source]),node('strong','','보유 '+available+'개'),node('p','',(source==='realm'?'무림':'현실')+' 스탯용 · '+(source==='crystal'?'◇ 결정':'◎ 포인트')));
+  const resources=node('nav','character-resources');resources.setAttribute('aria-label','배분 자원');for(const id of world==='murim'?['realm']:['crystal','hunter']){const b=button(id==='hunter'?'헌터 훈련':names[id],()=>requestLeave(()=>reset(world,id)),{key:'source-'+id});b.setAttribute('aria-label',names[id]);b.setAttribute('aria-pressed',String(source===id));resources.append(b);}
+  const wallet=node('section','character-resource'),receipts=node('section','character-resource-extra');const resourceTitle=node('h3','',names[source]);resourceTitle.hidden=world!=='murim';if(world!=='murim')wallet.append(resources);wallet.append(resourceTitle,node('strong','','보유 '+available+'개'));
   if(source==='crystal'){
    const grants=R.state(g)?.grants||[],sources=r.sources.filter(x=>x.crystal>0).sort((a,b)=>grants.indexOf(a.id)-grants.indexOf(b.id)),latest=sources.at(-1),news=g.unreadNews?.('status')?.some(n=>n.subject==='crystal');
-   if(news)wallet.append(node('span','character-new','NEW · 새 획득 내역'));
-   wallet.append(node('p','',latest?'최근 획득 +'+latest.crystal+' · '+latest.name:'아직 공명 결정을 획득하지 않았습니다.'));
-   const hb=button(history?'획득 내역 접기':'획득 내역',historyToggle);hb.setAttribute('aria-expanded',String(history));wallet.append(hb);
-   if(history){const list=node('div','character-receipts');for(const x of sources)list.append(node('p','',x.name+' · 결정 +'+x.crystal));if(!sources.length)list.append(node('p','','획득 내역이 없습니다.'));wallet.append(list);}
-   if(available===0){const state=R.state(g),next=R.catalog(g).find(x=>x.crystal>0&&!state?.grants.includes(x.id)&&!state?.legacy.includes(x.id));wallet.append(node('p','character-next-source',next?'다음 미수령 획득처: '+next.name+' · 결정 +'+next.crystal:'현재 모든 공명 결정 출처를 수령했습니다.'));}
-  }else{wallet.append(node('p','','확정한 '+(source==='realm'?'경지':'헌터 등급')+' 보상 · 총 '+c.a.points.total+'개 / 투자 '+used+'개'));if(!available)wallet.append(node('p','character-next-source',c.a.nextName?'다음 포인트: '+c.a.nextName+(source==='realm'?' 경지 돌파 확정':'급 평가 후 서린 보고')+' · +2':'모든 단계 보상을 받았습니다.'));}body.append(wallet);
-  if(!safe)body.append(node('p','character-notice',source==='crystal'?'공명 결정은 보관 중입니다. 현실 기지에서 배분할 수 있습니다. 미리보기만 가능합니다.':(source==='realm'?'청운촌':'현실 기지')+'의 안전한 상태에서 확정할 수 있습니다. 미리보기만 가능합니다.'));
-  if(cap){body.append(node('p','character-limits','공격 '+(draft.attack+cap.legacyAttack)+'/'+cap.attack+' · 총 투자 '+(total+cap.occupied)+'/'+cap.total),node('small','',cap.next));if(cap.occupied)body.append(node('p','character-notice','이전 고정 성취는 상한에 포함되며 환불되지 않습니다. 공격 +'+r.legacy.attack+' · 생명 +'+r.legacy.hp+' · 기력 +'+r.legacy.mp));}
-  if(source==='crystal'&&!used&&!cap.occupied)body.append(button('첫 정착 추천',()=>{draft={attack:4,hp:4,mp:0};message='추천 초안 · 공격 +4 / 최대 생명 +24';render();},{disabled:available<8}));
-  const editor=node('div','character-allocation');for(const [key,label,unit]of rows()){
+   if(news)receipts.append(node('span','character-new','NEW · 새 획득 내역'));
+   receipts.append(node('p','',latest?'최근 획득 +'+latest.crystal+' · '+latest.name:'아직 공명 결정을 획득하지 않았습니다.'));
+   const hb=button(history?'획득 내역 접기':'획득 내역',historyToggle);hb.setAttribute('aria-expanded',String(history));receipts.append(hb);
+   if(history){const list=node('div','character-receipts');for(const x of sources)list.append(node('p','',x.name+' · 결정 +'+x.crystal));if(!sources.length)list.append(node('p','','획득 내역이 없습니다.'));receipts.append(list);}
+   if(available===0){const state=R.state(g),next=R.catalog(g).find(x=>x.crystal>0&&!state?.grants.includes(x.id)&&!state?.legacy.includes(x.id));receipts.append(node('p','character-next-source',next?'다음 미수령 획득처: '+next.name+' · 결정 +'+next.crystal:'현재 모든 공명 결정 출처를 수령했습니다.'));}
+  }else{receipts.append(node('p','','확정한 '+(source==='realm'?'경지':'헌터 등급')+' 보상 · 총 '+c.a.points.total+'개 / 투자 '+used+'개'));if(!available)receipts.append(node('p','character-next-source',c.a.nextName?'다음 포인트: '+c.a.nextName+(source==='realm'?' 경지 돌파 확정':'급 평가 후 서린 보고')+' · +2':'모든 단계 보상을 받았습니다.'));}body.append(wallet);more.prepend(receipts);
+  if(!safe)more.append(node('p','character-notice',source==='crystal'?'공명 결정은 보관 중입니다. 현실 기지에서 배분할 수 있습니다. 미리보기만 가능합니다.':(source==='realm'?'청운촌':'현실 기지')+'의 안전한 상태에서 확정할 수 있습니다. 미리보기만 가능합니다.'));
+  if(cap){more.append(node('p','character-limits','공격 '+(draft.attack+cap.legacyAttack)+'/'+cap.attack+' · 총 투자 '+(total+cap.occupied)+'/'+cap.total),node('small','',cap.next));if(cap.occupied)more.append(node('p','character-notice','이전 고정 성취는 상한에 포함되며 환불되지 않습니다. 공격 +'+r.legacy.attack+' · 생명 +'+r.legacy.hp+' · 기력 +'+r.legacy.mp));}
+
+  const editor=node('div','character-allocation');editor.setAttribute('aria-label','현재 스탯과 배분 미리보기');
+  const editable=rows(),allRows=[...editable];if(source==='hunter')allRows.splice(2,0,['mp','최대 기력',0]);
+  for(const [key,label,unit]of allRows){
    const row=node('div','character-allocation-row');row.dataset.stat=key;
-   const current=key==='speed'?A.bonus(g,world).speed*100:s[key],after=current+(draft[key]-old[key])*unit,suffix=key==='speed'?'%':'';
-   const copy=node('div','character-stat-copy');copy.append(node('strong','',label),node('span','',fmt(current)+suffix+' → 적용 후 '+fmt(after)+suffix),node('small','','이번 변경 '+(draft[key]-old[key]>=0?'+':'')+(draft[key]-old[key])+'개 · 총 투자 '+draft[key]+'개'));
-   const minus=button('−',()=>{draft[key]--;message='';render();},{disabled:draft[key]<=0,key:key+'-minus'});minus.setAttribute('aria-label',label+' 감소');
-   const plus=button('+',()=>{draft[key]++;message='';render();},{disabled:remaining<=0||!!cap&&(total+cap.occupied>=cap.total||key==='attack'&&draft.attack+cap.legacyAttack>=cap.attack)||!cap&&draft[key]>=10,key:key+'-plus'});plus.setAttribute('aria-label',label+' 증가');
-   row.append(copy,minus,node('span','character-draft-count',String(draft[key])),plus);editor.append(row);
-  }body.append(editor,node('p','character-unit',source==='crystal'?'결정 1개 = 공격 +1 / 최대 생명 +6 / 최대 기력 +3':source==='realm'?'포인트 1개 = 공격 +1.5 / 최대 생명 +8 / 최대 기력 +5':'포인트 1개 = 공격 +1.5 / 최대 생명 +8 / 이동 속도 +1%'));
-  const footer=node('div','character-confirm');footer.append(node('p','','이번 소비 '+Math.max(0,total-used)+'개'+(total<used?' · 환불 '+(used-total)+'개':'')+' · 적용 후 잔량 '+remaining+'개'));
+   const canEdit=editable.some(([k])=>k===key),change=canEdit?draft[key]-old[key]:0,current=key==='speed'?A.bonus(g,world).speed*100:s[key],after=current+change*unit,suffix=key==='speed'?'%':'';
+   const copy=node('div','character-stat-copy'),title=node('strong','',key==='attack'?'공격력':key==='speed'?'이동 속도 보너스':label),values=node('div','character-stat-values');
+   const now=node('span','character-current',fmt(current)+suffix);now.setAttribute('aria-label','현재 '+fmt(current)+suffix);
+   const preview=node('span','character-after',change?fmt(after)+suffix+' ('+(change>0?'+':'')+fmt(change*unit)+suffix+')':'변경 없음');preview.setAttribute('aria-label',change?'배분 후 '+fmt(after)+suffix:'배분 변경 없음');row.dataset.changed=String(change!==0);
+   values.append(now,node('span','character-value-arrow','→'),preview);copy.append(title,values);
+   if((key==='hp'||key==='mp')&&(actual!==world||g.player[key]<s[key]))title.append(node('small','character-vital',actual===world?'잔여 '+fmt(g.player[key]):'다른 세계 조회 중'));
+   row.append(copy);
+   if(canEdit){const controls=node('div','character-stepper');
+    const minus=button('−',()=>{draft[key]--;message='';render();},{disabled:draft[key]<=0,key:key+'-minus'});minus.setAttribute('aria-label',label+' 감소');
+    const plus=button('+',()=>{draft[key]++;message='';render();},{disabled:remaining<=0||!!cap&&(total+cap.occupied>=cap.total||key==='attack'&&draft.attack+cap.legacyAttack>=cap.attack)||!cap&&draft[key]>=10,key:key+'-plus'});plus.setAttribute('aria-label',label+' 증가');
+    const count=node('span','character-draft-count',String(draft[key]));count.setAttribute('aria-label','투자 '+draft[key]+'개');controls.append(minus,count,plus);row.append(controls);
+   }else row.append(node('small','character-readonly','공명 결정으로 배분'));
+   editor.append(row);
+  }body.append(node('p','character-table-caption','현재 → 배분 후 · −/+로 투자 조절'),editor);
+  more.append(node('p','character-unit',source==='crystal'?'결정 1개 = 공격 +1 / 최대 생명 +6 / 최대 기력 +3':source==='realm'?'포인트 1개 = 공격 +1.5 / 최대 생명 +8 / 최대 기력 +5':'포인트 1개 = 공격 +1.5 / 최대 생명 +8 / 이동 속도 +1%'));
+  const footer=node('div','character-confirm growth-footer');footer.append(node('p','','이번 소비 '+Math.max(0,total-used)+'개'+(total<used?' · 환불 '+(used-total)+'개':'')+' · 적용 후 잔량 '+remaining+'개'));
   const label=!safe?(source==='realm'?'청운촌에서 확정':'현실 기지에서 확정'):!dirty()?'배분할 스탯을 선택하세요':(source==='crystal'?'결정 ':'포인트 ')+Math.max(0,total-used)+'개로 배분 확정';footer.append(button(label,apply,{disabled:!safe||!dirty(),primary:true,key:'apply'}));body.append(footer);
+  if(source==='crystal'&&!used&&!cap.occupied)more.prepend(button('첫 정착 추천',()=>{draft={attack:4,hp:4,mp:0};message='추천 초안 · 공격 +4 / 최대 생명 +24';render();},{disabled:available<8}));
+  body.append(more);
   if(message){const status=node('p','character-status',message);status.setAttribute('role','status');body.append(status);}
   body.append(button(names[source]+' 투자 환불',()=>{refund=true;pendingLeave=null;render();body.querySelector('[data-character-focus="refund-cancel"]')?.focus({preventScroll:true});},{disabled:!used||!safe,key:'refund'}));
   if(refund){const panel=node('section','character-confirmation');panel.setAttribute('role','group');panel.setAttribute('aria-label','투자 환불 확인');panel.append(node('h3','','선택한 자원 투자 환불'),node('p','',(source==='crystal'?'결정 ':'포인트 ')+used+'개를 돌려받습니다. '+rows().filter(([k])=>old[k]>0).map(([k,label,unit])=>label+' −'+fmt(old[k]*unit)+(k==='speed'?'%':'')).join(' · ')),node('p','','현재 생명·기력 비율을 유지합니다. 이전 고정 성취는 보존됩니다.'),button('환불 취소',()=>{refund=false;render();},{key:'refund-cancel'}),button((source==='crystal'?'결정 ':'포인트 ')+used+'개 환불 확정',()=>{let ok=false;try{ok=commit(g=>source==='crystal'?R.reset(g,'stats'):A.allocate(g,source,Object.fromEntries(Object.keys(old).map(k=>[k,0]))))===true;}catch{}if(ok){draft={...allocation()};refund=false;message='저장됨 · 투자를 환불했습니다.';refresh();}else message='환불을 저장하지 못했습니다. 기존 투자와 초안을 유지합니다.';render();},{primary:true,key:'refund-confirm'}));body.append(panel);}
   if(pendingLeave){const run=pendingLeave,panel=node('section','character-confirmation');panel.setAttribute('role','group');panel.setAttribute('aria-label','저장하지 않은 배분 초안');panel.append(node('h3','','배분 초안이 남아 있습니다'),node('p','','이동하기 전에 초안을 어떻게 할지 선택하세요.'),button('배분 확정 후 이동',()=>{if(apply()){pendingLeave=null;run();}},{disabled:!safe,primary:true,key:'leave-apply'}),button('초안 버리기',()=>{draft={...allocation()};pendingLeave=null;run();},{key:'leave-discard'}),button('계속 편집',()=>{pendingLeave=null;render();},{key:'keep-editing'}));body.append(panel);}
-  show('캐릭터',body,[{label:'닫기',secondary:true}],'system','스탯 확인 · 능력치 배분');
+  show('캐릭터',body,[],'system','스탯 확인 · 능력치 배분');
   if(pendingLeave||refund)body.querySelector('[data-character-focus="'+(pendingLeave?'keep-editing':'refund-cancel')+'"]')?.focus();
  }
  return {open,requestLeave};

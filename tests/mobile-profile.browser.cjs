@@ -6,7 +6,7 @@ run(async p=>{
  const before=await p.evaluate(()=>JSON.stringify({area:__game.area,growth:__game.worldGrowth}));
  for(const [width,height,scale]of [[1280,900,100],[360,640,100],[390,844,200]]){
   await p.setViewportSize({width,height});await p.evaluate(s=>document.documentElement.style.fontSize=s+'%',scale);
-  for(const name of ['무림 캐릭터','현실 캐릭터']){await p.getByRole('button',{name,exact:true}).click();assert.equal(await p.locator('.character-stats article').count(),3);assert.equal(await p.locator('.app-navigation,.character-tabs').count(),0);assert.ok(await p.locator('#dialog').evaluate(e=>e.scrollWidth<=e.clientWidth+2));assert.match(await p.locator('.character-location').innerText(),/조회:.*현재 위치:/);}
+  for(const name of ['무림 캐릭터','현실 캐릭터']){await p.getByRole('button',{name,exact:true}).click();assert.equal(await p.locator('.character-allocation-row .character-stepper').count(),3);assert.equal(await p.locator('.app-navigation,.character-tabs').count(),0);assert.ok(await p.locator('#dialog').evaluate(e=>e.scrollWidth<=e.clientWidth+2));assert.match(await p.locator('.character-location').innerText(),/조회:.*현재 위치:/);}
   assert.doesNotMatch(await p.locator('#dialogBody').innerText(),/성장 출처|기본 체력|현장 자격|현실 비교|현재 전투 세계|맡은 역할/);
   await p.screenshot({path:'.ssanggye-v12-review/profile-'+width+'-'+scale+'.png'});
  }
