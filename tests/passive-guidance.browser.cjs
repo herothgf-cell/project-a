@@ -5,12 +5,12 @@ run(async p=>{
  await p.click('#personalNews');await p.locator('.news-item').filter({hasText:'심법과 현실 운용 개방'}).click();await p.locator('.skills-screen').waitFor();
  assert.equal(await p.locator('#dialogTitle').innerText(),'무공/스킬');
  assert.equal(await p.evaluate(()=>__game.newsList().some(x=>x.id==='mode:unlocked')),false);
- await p.getByRole('button',{name:'무림 보기',exact:true}).click();await p.locator('[data-passive=F1]').click();
+ await p.getByRole('button',{name:'무림 보기',exact:true}).click();await p.getByRole('button',{name:'심법 (패시브)',exact:true}).click();await p.locator('[data-passive=F1]').click();
  assert.match(await p.locator('.skills-notice').innerText(),/청운촌/);assert.ok(await p.locator('[data-upgrade=F1]').isDisabled());
  await p.keyboard.press('Escape');await p.reload();await p.waitForFunction(()=>ArtPreview.ready);await p.click('#continue');await p.click('#personalNews');
  assert.equal(await p.locator('.news-item').filter({hasText:'심법과 현실 운용 개방'}).count(),0);
  await p.keyboard.press('Escape');await p.evaluate(()=>{__game.enter('village');__game.events=[];});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');
- await p.click('#growthStatus');await p.locator('[data-passive=F1]').click();assert.equal(await p.locator('[data-passive=F1]').getAttribute('aria-pressed'),'true');
+ await p.click('#growthStatus');await p.getByRole('button',{name:'심법 (패시브)',exact:true}).click();await p.locator('[data-passive=F1]').click();assert.equal(await p.locator('[data-passive=F1]').getAttribute('aria-pressed'),'true');
  assert.match(await p.locator('.skills-detail').innerText(),/정기 축적/);assert.match(await p.locator('.skills-detail').innerText(),/최대 자원 \+4/);
  await p.locator('[data-upgrade=F1]').click();assert.equal(await p.evaluate(()=>PassiveGrowth.describe(__game).spent),1);
  await p.getByRole('button',{name:'스킬 초기화',exact:true}).click();assert.equal(await p.evaluate(()=>PassiveGrowth.describe(__game).spent),1);

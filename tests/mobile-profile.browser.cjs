@@ -13,6 +13,6 @@ run(async p=>{
  assert.equal(await p.evaluate(()=>JSON.stringify({area:__game.area,growth:__game.worldGrowth})),before);
  await p.keyboard.press('Escape');await p.evaluate(()=>document.documentElement.style.fontSize='100%');await p.setViewportSize({width:1280,height:900});
  await p.locator('#menu').click();assert.doesNotMatch(await p.locator('#dialog').innerText(),/지역 지도|화면 효과|글자 크기|이펙트 품질|보급/);assert.equal(await p.locator('.app-navigation').count(),0);await p.keyboard.press('Escape');
- await p.evaluate(()=>{const s=CycleOne.state(__game);s.returnReceipt=s.recordDelivered=s.invited=true;});await p.waitForSelector('#sense',{state:'visible'});assert.equal(await p.evaluate(()=>__game.sense()),true);
- console.log('Portrait profiles, compact stats, no duplicate navigation/settings, story-gated sense, viewport and 200% checks passed');
+ await p.evaluate(()=>{const s=CycleOne.state(__game);s.returnReceipt=s.recordDelivered=s.invited=true;});assert.equal(await p.locator('#sense').isVisible(),false);assert.equal(await p.evaluate(()=>__game.sense()),true);
+ console.log('Portrait profiles, compact stats, no duplicate navigation/settings, hidden observation controls, viewport and 200% checks passed');
 });

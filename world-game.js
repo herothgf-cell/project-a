@@ -4,7 +4,7 @@
  api.AREAS.comparison={...api.AREAS.rift,name:'현실 대응 비교 현장',sub:'선택 체험 · 처치 보상 없음',positions:[[470,700],[710,700]],points:[{id:'exit',x:150,y:970,label:'헌터 기지로 귀환',kind:'exit'}]};
  class Game extends Base{
   constructor(){super();this.worldGrowth=Growth.initial();this.questRewards=[];this.worldState={news:{items:[]},growthArc:Arc.initial(),resonance:Resonance.initial(),resonanceChallenges:Challenges.initial(),resonanceProof:Proof.initial()};this.installWorldState();}
-  installWorldState(){const g=this;Object.defineProperty(this.journey,'mastery',{configurable:true,enumerable:true,get(){return g.worldGrowth[Growth.worldOf(g)].mastery;},set(v){g.worldGrowth[Growth.worldOf(g)].mastery=v;}});Object.defineProperty(this.journey,'breath',{configurable:true,enumerable:true,get(){return g.worldGrowth[Growth.worldOf(g)].mode;},set(v){g.worldGrowth[Growth.worldOf(g)].mode=v;}});Growth.installInterpretations?.(this);}
+  installWorldState(){const g=this;this.journey.directProgression=true;Object.defineProperty(this.journey,'mastery',{configurable:true,enumerable:true,get(){return g.worldGrowth[Growth.worldOf(g)].mastery;},set(v){g.worldGrowth[Growth.worldOf(g)].mastery=v;}});Object.defineProperty(this.journey,'breath',{configurable:true,enumerable:true,get(){return g.worldGrowth[Growth.worldOf(g)].mode;},set(v){g.worldGrowth[Growth.worldOf(g)].mode=v;}});Growth.installInterpretations?.(this);}
   get level(){return this.worldGrowth?this.worldGrowth[Growth.worldOf(this)].level:this._oldLevel||1;}set level(v){if(this.worldGrowth)this.worldGrowth[Growth.worldOf(this)].level=v;else this._oldLevel=v;}
   get xp(){return this.worldGrowth?this.worldGrowth[Growth.worldOf(this)].xp:this._oldXp||0;}set xp(v){if(this.worldGrowth)this.worldGrowth[Growth.worldOf(this)].xp=v;else this._oldXp=v;}
   senseUnlocked(){return !!(Cycle.state(this).invited||Cycle.state(this).legacyAccess||this.journey.phase>0||this.journey.facts.length||this.journey.known.length);}
@@ -27,6 +27,7 @@
   dismissNews(id){return News.dismiss(this,id);}
   unreadNews(section){return News.unread(this,section);}
   realmReady(){return News.realmReady(this);}
+  restoreArchivedVisit(){return super.enter('archive');}
   restoreWorldEncounter(){Director.populate(this);Arc.balance(this);Arc.onEnter(this);Cycle.onEnter(this);Challenges.onEnter(this);this.applySevenPreparation?.();this.realityRuntime=null;}
   allowEnemyStep(e){return !(this.area==='overseerHall'&&!Cycle.state(this).confronted)&&Director.allow(this,e); }
   mayStartAttack(e){return Director.mayStartAttack(this,e);}
@@ -39,12 +40,12 @@
   startContract(){return false;}
   claimContract(){return false;}
   cancelContract(){return false;}
-  points(){return Dungeon.points(this,[...super.points().filter(p=>p.id!=='contract-board'),...Cycle.points(this)]);}
+  points(){return Dungeon.points(this,[...super.points().filter(p=>p.id!=='contract-board'&&(this.area!=='archive'||['exit','rest'].includes(p.kind))&&(this.area!=='station'||p.id!=='station-lens')),...Cycle.points(this)]);}
   potionHint(){if(this.worldState.potionHintSeen||this.potions<=0||this.player.hp>this.stats().hp*.4)return '';this.worldState.potionHintSeen=true;return '회복약을 직접 사용하면 최대 체력의 55%를 회복합니다. 보유 '+this.potions+'개 · 자동 사용되지 않습니다.';}
   regenerateEnemy(e,amount){if(e.realitySuppressedUntil>this.playTime){if(e.hp<e.maxHp&&e.realitySuppressionCast){e.realitySuppressionProven=true;Reality.onEffect(this,e.realitySuppressionCast,e,'suppress');}return;}e.hp=Math.min(e.maxHp,e.hp+amount);}
   onDualLink(e){super.onDualLink(e);Advance.onEffect(this,'link',e);Cycle.onDualLink(this);}
   trainingSpeed(){return Advance.bonus(this,Growth.worldOf(this)).speed;}
-  onRealityEffect(e){if(e.action!=='signature1'||{ripple:'absorb',echo:'evade',seal:'suppress'}[e.family]===e.kind)this.recordIndividualSkill(e,e.target,'reality');Proof.effect(this,e);Arc.onEffect(this,e);Advance.onEffect(this,e.kind,e.target);if(this.advancementTrial)return;const {family,kind,target}=e,key=e.evolution;if(key&&this.journey.known.includes(key)){this.journey.sync[key]=2;this.onInterpretation(key,target);}Dual.contact(this,target,{id:'reality-'+e.castId,family,action:e.action,manual:e.manual,effect:kind});}
+  onRealityEffect(e){this.onStationResponse?.(e);if(e.action!=='signature1'||{ripple:'absorb',echo:'evade',seal:'suppress'}[e.family]===e.kind)this.recordIndividualSkill(e,e.target,'reality');Proof.effect(this,e);Arc.onEffect(this,e);Advance.onEffect(this,e.kind,e.target);if(this.advancementTrial)return;const {family,kind,target}=e,key=e.evolution;if(key&&this.journey.known.includes(key)){this.journey.sync[key]=2;this.onInterpretation(key,target);}Dual.contact(this,target,{id:'reality-'+e.castId,family,action:e.action,manual:e.manual,effect:kind});}
   recordIndividualSkill(c,e,world=Growth.worldOf(this)){
    if(!c?.manual||!e||!this.enemies.includes(e)||e.trial||e.assessment||e.comparison||e.residual||e.resonanceTrial||e.demonstration||e.boss&&this.bossLocked())return false;
    const key=world+':'+c.family+':'+c.action,credits=e.skillMasteryCredits||{};if((credits[key]||0)>=3)return false;

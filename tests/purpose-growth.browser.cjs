@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),{run}=require('./browser-harness.cjs');
 const {inherited}=require('./world-fixtures.cjs'),R=require('../boundary-resonance.js'),fs=require('node:fs');
-const sample=inherited();R.reset(sample,'stats');const save=sample.save();
+const sample=inherited('ripple',{allocate:false});const save=sample.save();
 run(async p=>{
  await p.evaluate(raw=>{Object.assign(__game,WorldGame.Game.load(raw));__game.events=[];__game.save();},save);
  await p.waitForFunction(()=>document.querySelector('#characterMenu small').textContent.includes('8'));
@@ -32,7 +32,7 @@ run(async p=>{
  fs.mkdirSync('browser-results/purpose-growth',{recursive:true});
  for(const width of [1280,360]){await p.setViewportSize({width,height:900});await p.evaluate(()=>document.documentElement.style.fontSize='100%');
   assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
-  for(const id of ['characterMenu','growthStatus','realmMenu','hunterMenu','missionsMenu','recordsMenu','menu'])assert.equal(await p.locator('#'+id).isVisible(),true,id+' visible');
+  for(const id of ['characterMenu','growthStatus','realmMenu','hunterMenu','missionsMenu','menu'])assert.equal(await p.locator('#'+id).isVisible(),true,id+' visible');
   if(await p.locator('.growth-receipt').count())assert.equal(await p.evaluate(()=>{const r=document.querySelector('#toasts').getBoundingClientRect(),nav=document.querySelector('.main-navigation').getBoundingClientRect(),actions=document.querySelector('.actions').getBoundingClientRect();return r.top>=nav.bottom&&r.bottom<=actions.top;}),true,'receipts leave menus and combat controls reachable');
   await p.screenshot({path:'browser-results/purpose-growth/header-'+width+'.png'});
   await p.click('#characterMenu');await p.screenshot({path:'browser-results/purpose-growth/character-'+width+'.png'});await p.keyboard.press('Escape');

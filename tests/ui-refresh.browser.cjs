@@ -61,7 +61,7 @@ run(async p=>{
  await p.click('#character');await capture('character');
  await p.keyboard.press('Escape');await p.click('#growthStatus');await p.getByRole('button',{name:'파문',exact:true}).click();await p.locator('[data-equipment=equipment]').click();await capture('skills');
  await close();await p.click('#menu');await capture('settings');
- await p.keyboard.press('Escape');await p.locator('#recordsMenu').click();await capture('records');
+ await p.keyboard.press('Escape');await p.locator('#personalNews').click();await capture('news');
  await p.keyboard.press('Escape');await p.locator('#missionsMenu').click();await capture('objective');
  await close();
  await p.evaluate(()=>{const g=__game;const entry=g.points().find(x=>x.kind==='dungeon-entry');Object.assign(g.player,{x:entry.x,y:entry.y});g.events=[];});

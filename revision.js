@@ -25,12 +25,12 @@
   const s=state(this);if(inIntro(this)){const o=this.nearestPoint();if(!o)return {type:'toast',text:'백련의 표식 가까이에서 E를 누르세요.'};s.aid++;if(s.aid===2){s.intro=4;return {type:'intro-next'};}return {type:'toast',text:'출혈을 눌렀습니다. 백련을 처마 아래로 부축하세요.'};}
   const progress=this.progress,training=this.training,chapter=this.journey.phase,fate=this.fate.stage,four=this.chapter4.phase,id=this.nearestPoint()?.id,result=old.interact.call(this);
   if(this.training>training)record(this,'training-'+this.training,['','백련과 재회하여 월영참을 배웠다.','죽림의 길을 확보하고 천뢰격을 배웠다.','두 세계의 흔적으로 경계 공명을 완성했다.'][this.training]);
-  if(this.journey.phase===5&&chapter!==5)record(this,'certification','새 해석을 현실에서 재현하여 C급 현장 인증을 받았다.');
+  if(this.journey.phase===5&&chapter!==5)record(this,'certification',this.worldGrowth?'공명 관측소의 위협에 무공으로 대응하여 C급 현장 인증을 받았다.':'새 해석을 현실에서 재현하여 C급 현장 인증을 받았다.');
   if(result?.type==='dialog'&&this.nearestPoint()?.id==='master'&&progress===1&&s.origin==='new')result.text='백련: 돌아왔구나. 네가 감아 둔 천 덕에 제자들이 나를 찾았다.\n윤서: 얼굴은 좀 나아지셨네요. 윤서입니다. 저쪽에서는 헌터 일을 해요.\n백련: 그 길을 계속 오갈 생각이라면, 몸을 지킬 호흡부터 익혀라.\n\n월영참 습득 · K\n회복하는 동안 마을 길을 지킬 수 있도록 흑풍 죽림을 살펴보자.';
   if(result?.type==='dialog'){
    if(dialogue[id+'-'+progress])result.text=dialogue[id+'-'+progress];
    if(id==='warden'&&progress===12){
-    if(four===4){result.text=chapter===0?'서린: 네가 한 일을 의심하는 건 아니야. 그런데 영상과 보고가 맞지 않는 이유는 알아야 해.\n그쪽에 남은 기록도 찾아보자. 연화가 적어 둔 글과 환서정의 물건이 도움이 될 거야.':chapter===4?'서린: 관측값도 이제 따라왔네. C급 현장 인증을 발급할게.\n네 개인 등급과는 별개로, 관측소 조사에 참여할 자격이 생긴 거야.\n연화에게도 소식을 전해 줘.':this.journey.phase===3?'서린: 공명 관측소에서 장치 가까이 기감(B)을 펼친 뒤, 적에게 새 해석의 실제 효과를 보여 줘. 도겸이 주변을 살필 거야.':chapter===5?'서린: 돌아왔네. 물이랑 보급을 준비해 뒀어. 관측소 재공략 자격은 그대로야.':'서린: 환서정에서 발견한 해석을 장착하고 돌아와. 확인한 사실은 수첩에서 볼 수 있어.';}
+    if(four===4){if(!this.worldGrowth)result.text=chapter===0?'서린: 네가 한 일을 의심하는 건 아니야. 그런데 영상과 보고가 맞지 않는 이유는 알아야 해.\n그쪽에 남은 기록도 찾아보자. 연화가 적어 둔 글과 환서정의 물건이 도움이 될 거야.':chapter===4?'서린: 관측값도 이제 따라왔네. C급 현장 인증을 발급할게.\n네 개인 등급과는 별개로, 관측소 조사에 참여할 자격이 생긴 거야.\n연화에게도 소식을 전해 줘.':this.journey.phase===3?'서린: 공명 관측소에서 장치 가까이 기감(B)을 펼친 뒤, 적에게 새 해석의 실제 효과를 보여 줘. 도겸이 주변을 살필 거야.':chapter===5?'서린: 돌아왔네. 물이랑 보급을 준비해 뒀어. 관측소 재공략 자격은 그대로야.':'서린: 환서정에서 발견한 해석을 장착하고 돌아와. 확인한 사실은 수첩에서 볼 수 있어.';}
     else if(fate>=6)result.text=four===0?'서린: 네가 관찰한 청운 귀환로의 천흔과 현실 부두 신호가 같은 박자로 흔들려.\n고립된 사람이 돌아올 길부터 찾아보자. 무공을 쓰거나 위쪽 협로의 권양기를 쓸 수 있어.':four===3?'서린: 연화 씨가 돌아갔다는 소식 들었어. 여기 부두에도 같은 흔적이 남았더라.\n다음에 가면 잘 지내는지 보고 와.':'서린: 청운 귀환로와 현실 부두의 울림을 맞춰 보고 있어. 지금 목표를 확인해 줘.';
     else if(fate===0)result.text='서린: 현장 영상에 네가 없는 위치에서도 검격이 남았어. 같은 파형이 반복돼.\n백련에게 이 흔적을 보여 주고 네가 발견한 힘을 확인해 보자.';
    }

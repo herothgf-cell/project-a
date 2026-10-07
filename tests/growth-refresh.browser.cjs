@@ -1,11 +1,11 @@
 const {run}=require('./browser-harness.cjs'),assert=require('node:assert/strict'),fs=require('fs');
 run(async p=>{
  fs.mkdirSync('.ssanggye-v12-review',{recursive:true});
- await p.evaluate(()=>{__game.training=2;__game.progress=7;__game.enter('village');__game.events=[];});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.click('#growthStatus');
- assert.equal(await p.locator('[data-passive]').count(),await p.evaluate(()=>PassiveGrowth.nodes.length));
+ await p.evaluate(()=>{__game.training=2;__game.progress=7;__game.enter('village');__game.events=[];});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.click('#growthStatus');await p.getByRole('button',{name:'심법 (패시브)',exact:true}).click();
+ assert.equal(await p.locator('[data-passive]').count(),await p.evaluate(()=>PassiveGrowth.nodes.filter(n=>n.tree==='flow').length));
  const snapshot=()=>p.evaluate(()=>JSON.stringify({stats:__game.stats(),passive:__game.worldState.passive}));const before=await snapshot();
  await p.locator('[data-passive=F2]').click();assert.equal(await snapshot(),before);
- await p.getByRole('button',{name:'집중심법 운용',exact:true}).click();assert.equal(await p.evaluate(()=>__game.worldGrowth.murim.mode),'focus');
+ await p.getByRole('button',{name:'집중심법 운용',exact:true}).click();assert.equal(await p.evaluate(()=>__game.worldGrowth.murim.mode),'focus');await p.getByRole('button',{name:'집중심법',exact:true}).click();
  for(const [w,h]of [[1280,900],[360,640],[390,844],[844,390],[640,450]]){await p.setViewportSize({width:w,height:h});if(w<=700&&await p.locator('.skills-back').isVisible())await p.locator('.skills-back').click();await p.locator('[data-passive=C2]').scrollIntoViewIfNeeded();await p.screenshot({path:'.ssanggye-v12-review/refresh-tree-'+w+'.png'});await p.locator('[data-passive=C2]').click();assert.ok(await p.locator('#dialog').evaluate(e=>e.scrollWidth<=e.clientWidth+2));await p.screenshot({path:'.ssanggye-v12-review/refresh-detail-'+w+'.png'});if(w<=700)await p.locator('.skills-back').click();}
  await p.setViewportSize({width:390,height:844});await p.evaluate(()=>document.documentElement.style.fontSize='200%');await p.locator('[data-passive=C2]').click();assert.ok(await p.locator('#dialog').evaluate(e=>e.scrollWidth<=e.clientWidth+2));await p.screenshot({path:'.ssanggye-v12-review/refresh-200.png'});await p.evaluate(()=>document.documentElement.style.fontSize='');await p.setViewportSize({width:1280,height:900});await p.keyboard.press('Escape');
  await p.evaluate(()=>{__game.v12ChapterCompleted=()=>true;__game.journey.realm=1;Advancement.state(__game).realm=1;});await p.click('#realmMenu');assert.equal(await p.locator('.character-allocation').count(),0);await p.getByRole('button',{name:/캐릭터에서 경지 특화 배분/}).click();

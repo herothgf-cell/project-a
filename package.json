@@ -1,6 +1,6 @@
 {
   "name": "dualworld-project-a",
-  "version": "0.12.8",
+  "version": "0.12.9",
   "private": true,
   "description": "쌍계 — 두 세계의 호흡. World-specific art, anchored motion, unified interface and accessible discovery guidance.",
   "scripts": {
@@ -21,7 +21,7 @@
     "test:browser:v12": "node tests/v12-ui.browser.cjs && node tests/v12-overseer-art.browser.cjs",
     "test:browser:growth": "node tests/growth-arc.browser.cjs",
     "test:browser:resonance": "node tests/resonance.browser.cjs && node tests/resonance-import.browser.cjs && node tests/resonance-inheritance.browser.cjs",
-    "test:browser:purpose": "node tests/character-growth.browser.cjs && node tests/skills-screen.browser.cjs && node tests/purpose-growth.browser.cjs"
+    "test:browser:purpose": "node tests/character-growth.browser.cjs && node tests/skills-screen.browser.cjs && node tests/skills-tree.browser.cjs && node tests/simplified-growth.browser.cjs && node tests/purpose-growth.browser.cjs"
   },
   "engines": {
     "node": ">=20"

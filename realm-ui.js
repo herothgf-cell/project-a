@@ -6,13 +6,14 @@
   const {game,show,node,refresh,active,clearInput,notes}=env;
   let signature='',newsViews=[],lastWorld='',lastGame=null;
   const button=(label,fn,cls='secondary')=>{const b=node('button',cls,label);b.type='button';b.addEventListener('click',fn);return b;};
-  const help=button('도움말',()=>openHelp(),'realm-help');help.id='helpButton';help.setAttribute('aria-label','기감과 무공 해석 도움말 H');help.append(node('kbd','','H'));$('journeyTools').append(help);
+  const help=button('도움말',()=>openHelp(),'realm-help');help.id='helpButton';help.setAttribute('aria-label','게임 도움말 H');help.append(node('kbd','','H'));$('journeyTools').append(help);
   const worldBadge=node('span','world-badge');worldBadge.id='realmBadge';$('playArea').append(worldBadge);
   const guideToggle=button('길잡이 끄기',()=>{game().guideActive=false;refresh();},'guide-dismiss');
   const guideHint=node('div','guide-card');guideHint.id='guideCard';guideHint.hidden=true;guideHint.append(node('strong','','선택 탐험 길잡이'),node('p','',''),button('현재 단계 자세히',()=>openHelp()),guideToggle);$('playArea').append(guideHint);
   $('rumorPanel').hidden=true;
   function openNews(){}
-  function openHelp(){if(!active())return;const g=game(),u=P.guide(g),body=node('section','realm-help-sheet');
+  function openHelp(){if(!active())return;const g=game(),body=node('section','realm-help-sheet');
+   if(g.worldGrowth){const o=ObjectiveModel.resolve(g);body.append(node('h3','','지금 할 일'),node('p','',o.currentAction));for(const [title,copy]of [['임무','상단 임무에서 목표, 다음 행동, 이동 경로와 보고 대상을 확인하세요.'],['캐릭터','스탯 수치와 배분 후 결과를 확인하고 확정하세요. 확정한 스탯은 환불할 수 없습니다.'],['무공/스킬','일반 스킬과 심법(패시브)을 나눠 봅니다. 트리에서 기술을 선택하면 효과, 레벨과 강화 조건을 확인할 수 있습니다.'],['전투','붉은 공격 예고를 피하거나 배운 무공으로 대응하세요. 회복약은 직접 사용합니다.']]){const row=node('article','help-step');row.append(node('b','',title),node('p','',copy));body.append(row);}show('게임 도움말',body,[{label:'닫기',secondary:true}],'hero','임무 · 성장 · 전투');return;}const u=P.guide(g);
    body.append(node('p','help-purpose','환서정은 기존 무공의 사용법을 바꾸는 단서를 찾는 선택 탐험입니다. 진행하지 않아도 기존 이야기와 무공은 유지됩니다.'));
    for(const [title,copy]of [['기감 · B / 화면 기감','내 주변의 숨겨진 반응을 찾습니다. 전체 지도 정답을 표시하지는 않습니다.'],['조사 · E / 화면 대화·이동','드러난 물건 가까이에 서서 내용을 살펴봅니다.'],['관찰 수첩 · N / 수첩','확인한 사실, 발견한 무공 해석, 성장 방법을 읽습니다.'],['무공 해석 · 기존 기술의 변형','세 계열에 두 가지씩 있습니다. 발견만으로 직업이 바뀌지 않으며 수락·보류·원래 운용 복귀가 가능합니다.']]){const row=node('article','help-step');row.append(node('b','',title),node('p','',copy));body.append(row);}
    const next=node('section','guide-next');next.append(node('small','','지금 할 일'),node('h3','',u.title),node('p','',u.text));body.append(next);
@@ -23,11 +24,11 @@
   function update(){const g=game(),a=DualWorld.AREAS[g.area];if(g!==lastGame){lastGame=g;signature='';}
    const world=P.worldStyle(a);$('game').dataset.realm=world.architecture;worldBadge.textContent=world.world==='현실'?'현실 / HUNTER DISTRICT':'무림 / MARTIAL REALM';
    const mapLabel=$('mapWorld');if(mapLabel)mapLabel.textContent='['+a.world+'] '+a.name.split(' · ')[0];
-   help.classList.toggle('help-recommended',g.progress>=2&&!g.journey?.facts?.length);
-   guideHint.hidden=!g.guideActive;const u=P.guide(g);if(g.guideActive){guideHint.querySelector('p').textContent=u.title;guideHint.querySelector('strong').textContent='선택 탐험 · '+(u.path?DualWorld.Fate.PATHS[u.path].name:'기감 안내');}
+   help.classList.toggle('help-recommended',!g.worldGrowth&&g.progress>=2&&!g.journey?.facts?.length);
+   guideHint.hidden=!!g.worldGrowth||!g.guideActive;const u=P.guide(g);if(g.guideActive){guideHint.querySelector('p').textContent=u.title;guideHint.querySelector('strong').textContent='선택 탐험 · '+(u.path?DualWorld.Fate.PATHS[u.path].name:'기감 안내');}
    if(a.world!==lastWorld){lastWorld=a.world;$('hudPortrait').setAttribute('aria-label',a.world+'의 윤서');}
   }
-  return {update,openHelp,openNews,notebookHint,guide:()=>game().guideActive?P.guide(game()):null};
+  return {update,openHelp,openNews,notebookHint,guide:()=>!game().worldGrowth&&game().guideActive?P.guide(game()):null};
  }
  root.RealmUI={create};
 })(globalThis);

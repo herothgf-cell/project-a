@@ -5,9 +5,8 @@ run(async p=>{
  await p.click('#characterMenu');await p.locator('.character-growth').waitFor();
  await p.getByRole('button',{name:'첫 정착 추천',exact:true}).click();
  assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),0,'preview must not spend crystals');
- await p.getByRole('button',{name:'결정 8개로 배분 확정',exact:true}).click();
- assert.deepEqual(await p.evaluate(()=>BoundaryResonance.bonus(__game)),{attack:4,hp:24,mp:0});
- await p.getByRole('button',{name:'공명 결정 투자 환불',exact:true}).click();await p.getByRole('button',{name:'결정 8개 환불 확정',exact:true}).click();
+ for(let i=0;i<4;i++){await p.getByRole('button',{name:'공격 감소',exact:true}).click();await p.getByRole('button',{name:'최대 생명 감소',exact:true}).click();}
+ assert.equal(await p.getByRole('button',{name:/투자 환불/}).count(),0);
  await p.getByRole('button',{name:'공격 증가',exact:true}).focus();await p.keyboard.press('Enter');assert.equal(await p.evaluate(()=>document.activeElement.getAttribute('aria-label')),'공격 증가');
  await p.getByRole('button',{name:'결정 1개로 배분 확정',exact:true}).click();
  assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),1);
@@ -24,7 +23,7 @@ run(async p=>{
  assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).goal),'survival');
  await p.screenshot({path:path.join(evidence,'resonance-mobile.png')});
  await p.setViewportSize({width:1280,height:900});await p.evaluate(()=>document.documentElement.style.fontSize='100%');
- await p.keyboard.press('Escape');await p.click('#characterMenu');await p.getByRole('button',{name:'공명 결정 투자 환불',exact:true}).click();await p.getByRole('button',{name:'결정 1개 환불 확정',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),0);
+ await p.keyboard.press('Escape');await p.click('#characterMenu');assert.equal(await p.getByRole('button',{name:/투자 환불/}).count(),0);assert.equal(await p.evaluate(()=>BoundaryResonance.reset(__game,'stats')),false);assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),1);
  await p.keyboard.press('Escape');await p.click('#growthStatus');await p.getByRole('button',{name:'스킬 초기화',exact:true}).click();await p.getByRole('button',{name:'초기화 확정',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).learned.length),0);
  await p.keyboard.press('Escape');await p.evaluate(()=>{__game.enter('village');__game.events=[];});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.click('#missionsMenu');await p.getByRole('button',{name:'공명 도전',exact:true}).click();
  await p.getByRole('button',{name:'입장 · 흑풍 죽림 · 버티는 힘',exact:true}).click();await p.waitForFunction(()=>__game.area==='resonanceForest');

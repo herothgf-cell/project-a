@@ -9,14 +9,14 @@ run(async p=>{
  assert.ok(await p.evaluate(()=>__game.unreadNews('status').filter(n=>n.subject==='crystal').length>0),'viewing balance does not acknowledge receipts');await p.getByRole('button',{name:'획득 내역',exact:true}).click();assert.equal(await p.evaluate(()=>__game.unreadNews('status').filter(n=>n.subject==='crystal').length),0,'reading receipt history acknowledges only crystals');
  assert.equal(await p.locator('.character-new').count(),0);
  assert.equal(await p.evaluate(()=>__game.unreadNews('skills').length),skills,'unrelated skill news stays unread');
- await p.keyboard.press('Escape');await p.locator('#characterMenu').click();await p.keyboard.press('Escape');await p.click('#growthStatus');await p.getByRole('button',{name:'발견한 해석과 관찰 기록',exact:true}).click();
- assert.equal(await p.evaluate(()=>__game.newsList().find(x=>x.id==='interpret:ripple-return').read),true,'notebook details share the read state');
+ await p.keyboard.press('Escape');await p.locator('#characterMenu').click();await p.keyboard.press('Escape');await p.click('#growthStatus');assert.equal(await p.getByRole('button',{name:'발견한 해석과 관찰 기록',exact:true}).count(),0);
+ assert.equal(await p.evaluate(()=>__game.newsList().some(x=>x.id.startsWith('interpret:'))),false,'removed content never produces a visible dot');
  assert.equal(await p.evaluate(()=>__game.newsList().find(x=>x.id==='inherit:ripple').read),false);
  assert.equal(await p.evaluate(()=>JSON.stringify([__game.worldGrowth,__game.journey.selected,__game.gold])),before);
  await p.keyboard.press('Escape');await p.reload();await p.waitForFunction(()=>ArtPreview.ready);await p.click('#continue');
  for(let i=0;i<2;i++){await p.evaluate(()=>__game.refreshNews());await p.click('#character');await p.getByRole('button',{name:/현실 캐릭터/}).click();await p.getByRole('button',{name:'획득 내역',exact:true}).click();await p.keyboard.press('Escape');assert.equal(await p.evaluate(()=>__game.unreadNews('status').filter(n=>n.subject==='crystal').length),0);}
- assert.equal(await p.evaluate(()=>__game.newsList().find(x=>x.id==='interpret:ripple-return').read),true);
+ assert.equal(await p.evaluate(()=>__game.newsList().some(x=>x.id.startsWith('interpret:'))),false);
  await p.evaluate(()=>{const g=__game;g.grantExperience({world:'murim',amount:10000});g.enter('city');g.events=[];g.refreshNews();});
  assert.ok(await p.evaluate(()=>__game.unreadNews('growth').some(x=>x.id==='return:murim-level:10')),'genuinely new return result still notifies');
- console.log('status and notebook reads clear matching dots, survive reload, preserve other news and allow new notifications');
+ console.log('receipt reads survive reload, preserve unrelated news and hide retired content');
 });

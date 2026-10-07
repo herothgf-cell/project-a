@@ -41,7 +41,7 @@
    blocks:[{x:100,y:180,w:190,h:235,kind:'building'},{x:450,y:320,w:140,h:125,kind:'ruin'},{x:720,y:140,w:160,h:210,kind:'container'},{x:1130,y:810,w:215,h:110,kind:'container'}],
    roads:[[[110,975],[390,840],[600,720],[815,670],[1030,520],[1280,215]],[[755,510],[600,720]]]};
  }
- function initial(){return {seed:1+Math.floor(Math.random()*2147483646),phase:0,items:[],facts:[],known:[],selected:{ripple:null,echo:null,seal:null},sync:{},mastery:{sword:0,ripple:0,echo:0,seal:0},worlds:[],breath:'flow',realm:0,materials:0,lens:false,companion:false,measured:false,boss:false,promise:false,rank:'미평가'};}
+ function initial(){return {seed:1+Math.floor(Math.random()*2147483646),phase:0,directProgression:false,items:[],facts:[],known:[],selected:{ripple:null,echo:null,seal:null},sync:{},mastery:{sword:0,ripple:0,echo:0,seal:0},worlds:[],breath:'flow',realm:0,materials:0,lens:false,companion:false,measured:false,boss:false,promise:false,rank:'미평가'};}
  function rumors(s){const labels=['북문 석판','처마 아래의 필사본','행상이 남긴 탁본'];return [
   {speaker:'청람',text:`내 여정에서는 ${labels[s.seed%3]}에 기운이 남았어. 다른 흔적도 같은 서고 안에서 찾았지.`},
   {speaker:'돌샘',text:'석판은 평소엔 잠잠했어. 검으로 울림을 돌려보냈더니, 그때서야 글이 나타났지.'},

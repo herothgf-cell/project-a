@@ -9,8 +9,8 @@
  const R=g=>g.experimentRuntime||reset(g);
  const dialog=(title,text,portrait='hero')=>({type:'dialog',title,text,portrait});
  const active=g=>!g.trial&&S(g).selected[Fate.active(g)];
- const record=(g,id)=>{const s=S(g);if(!Object.hasOwn(D.facts,id)||s.facts.some(f=>f.id===id))return false;s.facts.push({id,area:g.area,at:g.playTime});g.toast(D.facts[id]);return true;};
- function learn(g,key){const s=S(g),v=D.variants[key];if(!v||s.known.includes(key)||!s.items.includes(v.path)||!s.facts.some(f=>f.id==='sense-'+v.path))return false;
+ const record=(g,id)=>{if(g.worldGrowth)return false;const s=S(g);if(!Object.hasOwn(D.facts,id)||s.facts.some(f=>f.id===id))return false;s.facts.push({id,area:g.area,at:g.playTime});g.toast(D.facts[id]);return true;};
+ function learn(g,key){if(g.worldGrowth)return false;const s=S(g),v=D.variants[key];if(!v||s.known.includes(key)||!s.items.includes(v.path)||!s.facts.some(f=>f.id==='sense-'+v.path))return false;
   record(g,'proof-'+key);s.known.push(key);s.sync[key]=0;const p=g.player;g.effect('interpret-'+key,p.x,p.y,{path:v.path,color:v.color,range:180,life:1.3,max:1.3});g.emit('sound',{name:v.path});g.hitStop=.045;
   g.emit('interpretation',{key,title:'이름보다 먼저 움직인 힘',text:D.facts['proof-'+key]+'\n\n'+v.name+'\n'+v.description,portrait:'hero'});return true;
  }
@@ -25,7 +25,7 @@
   if(R(this).pulse?.wind>0)R(this).pulse.read=true;return true;
  };
  P.enter=function(id){S(this);const from=this.area,ok=old.enter.call(this,id);if(!ok)return false;reset(this);this.player.cool.sense=0;
-  if(AREAS[from]?.world==='무림'&&AREAS[id].world==='현실'){const s=S(this),key=active(this);if(key&&s.sync[key]===0){s.sync[key]=1;this.emit('dialog',{title:'계단 아래에서 한 번 더 울린 발소리',text:'몸에 남긴 새 호흡이 현실에서도 잠깐 움직였다.\n기존 무공은 그대로 쓸 수 있다. 새 해석을 실제 적과 마주한 순간 다시 재현해 보자.',portrait:'hero'});}}
+  if(!this.worldGrowth&&AREAS[from]?.world==='무림'&&AREAS[id].world==='현실'){const s=S(this),key=active(this);if(key&&s.sync[key]===0){s.sync[key]=1;this.emit('dialog',{title:'계단 아래에서 한 번 더 울린 발소리',text:'몸에 남긴 새 호흡이 현실에서도 잠깐 움직였다.\n기존 무공은 그대로 쓸 수 있다. 새 해석을 실제 적과 마주한 순간 다시 재현해 보자.',portrait:'hero'});}}
   return true;
  };
  P.chooseInterpretation=function(key){const s=S(this),v=D.variants[key];if(!v||!s.known.includes(key)||Fate.active(this)!==v.path||this.trial||(!AREAS[this.area].safe&&this.area!=='archive'))return false;s.selected[v.path]=key;R(this).pending=[];R(this).charge=0;R(this).guard=null;this.toast(v.name+' · 내 호흡으로 이어갑니다.');if(s.phase===1)s.phase=2;return true;};
@@ -60,6 +60,7 @@
   }
  };
  function validate(raw){const s=D.initial();if(!raw||Array.isArray(raw)||!Number.isInteger(raw.seed)||raw.seed<1||raw.seed>2147483647)throw Error('여정의 씨앗이 손상되었습니다.');
+  if(raw.directProgression!==undefined&&typeof raw.directProgression!=='boolean')throw Error('직접 진행 상태 오류');
   for(const [k,max]of Object.entries({phase:5,realm:1,materials:9999}))if(!Number.isInteger(raw[k])||raw[k]<0||raw[k]>max)throw Error('잘못된 여정 수치: '+k);
   for(const k of ['lens','companion','measured','boss','promise'])if(typeof raw[k]!=='boolean')throw Error('잘못된 여정 상태');
   if(!['flow','focus'].includes(raw.breath)||!['미평가','현장 재평가 중','C급 현장 인증'].includes(raw.rank))throw Error('성장 상태가 올바르지 않습니다.');
@@ -74,10 +75,10 @@
   if(!raw.selected||!raw.mastery||!raw.sync||Object.keys(raw.sync).some(k=>!raw.known.includes(k)))throw Error('해석 상태가 올바르지 않습니다.');
   for(const p of D.paths)if(raw.selected[p]!==null&&(!raw.known.includes(raw.selected[p])||D.variants[raw.selected[p]]?.path!==p))throw Error('미해석 무공은 장착할 수 없습니다.');
   for(const p of ['sword',...D.paths])if(!Number.isInteger(raw.mastery[p])||raw.mastery[p]<0||raw.mastery[p]>30)throw Error('무공 숙련이 손상되었습니다.');
-  if(raw.phase>=2&&!raw.known.length||raw.phase>=4&&!raw.boss||raw.phase===5&&raw.rank!=='C급 현장 인증'||raw.phase<5&&raw.rank==='C급 현장 인증')throw Error('현실 재평가 기록이 일치하지 않습니다.');
+  if(!raw.directProgression&&raw.phase>=2&&!raw.known.length||raw.phase>=4&&!raw.boss||raw.phase===5&&raw.rank!=='C급 현장 인증'||raw.phase<5&&raw.rank==='C급 현장 인증')throw Error('현실 재평가 기록이 일치하지 않습니다.');
   if(raw.realm&&(Object.values(raw.mastery).reduce((a,b)=>a+b,0)<8||raw.worlds.length<2||!raw.known.length))throw Error('경지의 근거가 없습니다.');
-  if(raw.phase>=4&&(!raw.measured||!has('station-sense'))||raw.measured&&!Object.values(raw.sync).includes(2)||raw.promise&&!has('yeonhwa-letter'))throw Error('실전 재현 기록이 없습니다.');
-  for(const k of Object.keys(s))s[k]=JSON.parse(JSON.stringify(raw[k]));return s;
+  if(raw.phase>=4&&(!raw.measured||!raw.directProgression&&!has('station-sense'))||!raw.directProgression&&raw.measured&&!Object.values(raw.sync).includes(2)||raw.promise&&!has('yeonhwa-letter'))throw Error('실전 재현 기록이 없습니다.');
+  for(const k of Object.keys(s))s[k]=k==='directProgression'?raw[k]===true:JSON.parse(JSON.stringify(raw[k]));return s;
  }
  P.save=function(){const d=JSON.parse(old.save.call(this));d.version=6;d.journey=S(this);return JSON.stringify(d);};
  Game.load=function(text){const d=JSON.parse(text);if(!d||typeof d!=='object')throw Error('손상된 저장입니다.');const s=d.version===6?validate(d.journey):D.initial();if(d.version===6){if(s.phase>0&&d.chapter4?.phase!==4)throw Error('이전 이야기를 완료하지 않았습니다.');d.version=5;}
