@@ -5,7 +5,7 @@ run(async p=>{
  assert.equal(await p.locator('.character-tabs').count(),0);
  await p.keyboard.press('Escape');await p.click('#growthStatus');
  assert.equal(await p.getByRole('button',{name:'경지 돌파',exact:true}).count(),0);
- assert.equal(await p.locator('.growth-workspace').count(),1);
+ assert.equal(await p.locator('.resonance-screen').count(),1);
  const before=await p.evaluate(()=>({area:__game.area,x:__game.player.x,y:__game.player.y,hp:__game.player.hp}));
  await p.keyboard.down('ArrowRight');await p.waitForTimeout(150);await p.keyboard.up('ArrowRight');
  assert.deepEqual(await p.evaluate(()=>({area:__game.area,x:__game.player.x,y:__game.player.y,hp:__game.player.hp})),before);

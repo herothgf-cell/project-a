@@ -59,7 +59,7 @@ run(async p=>{
  await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='reality');
  await capture('hud',{dialog:false});
  await p.click('#character');await capture('character');
- await p.keyboard.press('Escape');await p.click('#growthStatus');await p.locator('.growth-footer button').filter({hasText:'무공'}).click();await capture('skills');
+ await p.keyboard.press('Escape');await p.click('#growthStatus');await p.getByRole('button',{name:'현실 스킬',exact:true}).click();await p.getByRole('button',{name:'현실 대응 장착·진화',exact:true}).click();await capture('skills');
  await close();await p.click('#menu');await capture('settings');
  await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'기록',exact:true}).click();await capture('records');
  await p.keyboard.press('Escape');await p.locator('.main-navigation').getByRole('button',{name:'임무',exact:true}).click();await capture('objective');

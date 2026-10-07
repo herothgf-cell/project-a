@@ -3,7 +3,7 @@ run(async p=>{
  fs.mkdirSync('.ui-design-review/passive-guidance',{recursive:true});
  await p.evaluate(()=>{__game.training=2;__game.progress=7;__game.enter('city');__game.events=[];__game.refreshNews();__game.readNews('mode:unlocked');});
  await p.click('#personalNews');
- await p.locator('.news-item').filter({hasText:'심법과 현실 운용 개방'}).click();
+ await p.locator('.news-item').filter({hasText:'심법과 현실 운용 개방'}).click();await p.locator('.resonance-screen').waitFor();await p.getByRole('button',{name:'무림 심법·경지·헌터',exact:true}).click();
  await p.waitForSelector('.growth-workspace');
  assert.equal(await p.locator('#dialogTitle').innerText(),'성장 · 심법');
  assert.equal(await p.evaluate(()=>__game.newsList().some(x=>x.id==='mode:unlocked')),false);
@@ -14,7 +14,7 @@ run(async p=>{
  await p.keyboard.press('Escape');await p.reload();await p.waitForFunction(()=>ArtPreview.ready);await p.click('#continue');
  await p.click('#personalNews');assert.equal(await p.locator('.news-item').filter({hasText:'심법과 현실 운용 개방'}).count(),0);
  await p.keyboard.press('Escape');await p.evaluate(()=>{__game.enter('village');__game.events=[];});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');
- await p.click('#growthStatus');assert.equal(await p.locator('[data-node=F1]').getAttribute('aria-pressed'),'true');
+ await p.click('#growthStatus');await p.getByRole('button',{name:'무림 심법·경지·헌터',exact:true}).click();assert.equal(await p.locator('[data-node=F1]').getAttribute('aria-pressed'),'true');
  assert.match(await p.locator('.growth-action-hint').innerText(),/정기 축적.*최대 자원 \+0.*최대 자원 \+4/);
  await p.getByRole('button',{name:'1포인트 배분',exact:true}).click();
  assert.equal(await p.evaluate(()=>PassiveGrowth.describe(__game).spent),1);

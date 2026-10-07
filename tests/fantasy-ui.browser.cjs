@@ -14,7 +14,7 @@ run(async p=>{
   const slots=await p.locator('.actions>button').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().top));
   assert.ok(Math.max(...slots)-Math.min(...slots)<2,'desktop combat slots share a row');
   await p.screenshot({path:'.ui-design-review/field-murim.png'});
-  await p.click('#growthStatus');
+  await p.click('#growthStatus');await p.getByRole('button',{name:'무림 심법·경지·헌터',exact:true}).click();
   await p.waitForSelector('.growth-workspace');
   const before=await p.evaluate(()=>__game.save());
   assert.equal(await p.locator('#dialog').getAttribute('data-world'),'murim');
@@ -41,7 +41,7 @@ run(async p=>{
     const controls=await p.locator('.actions>button,#potion,#interact').evaluateAll(es=>es.filter(e=>e.getClientRects().length).map(e=>{const r=e.getBoundingClientRect();return {name:e.textContent,x:r.x,y:r.y,right:r.right,bottom:r.bottom};}));
     for(let i=0;i<controls.length;i++)for(let j=i+1;j<controls.length;j++){const a=controls[i],b=controls[j];assert.ok(a.right<=b.x||b.right<=a.x||a.bottom<=b.y||b.bottom<=a.y,'controls must not overlap: '+a.name+' / '+b.name);}
     await p.screenshot({path:'.ui-design-review/field-'+width+'.png'});
-    await p.click('#growthStatus');
+    await p.click('#growthStatus');await p.getByRole('button',{name:'무림 심법·경지·헌터',exact:true}).click();
     assert.ok(await p.locator('#dialog').evaluate(e=>e.scrollWidth<=e.clientWidth+2));
     await p.screenshot({path:'.ui-design-review/growth-'+width+'.png'});
     await p.keyboard.press('Escape');
