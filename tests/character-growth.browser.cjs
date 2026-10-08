@@ -6,7 +6,7 @@ const {chromium}=require('playwright');
  try{
   const p=await browser.newPage({viewport:{width:360,height:800}}),errors=[];p.on('pageerror',e=>errors.push(String(e)));p.setDefaultTimeout(3000);
   await p.setContent('<main id="screen"></main>');
-  for(const file of ['passive-growth.js','advancement.js','boundary-resonance.js','world-growth.js','personal-news.js','character-ui.js'])await p.addScriptTag({path:path.join(__dirname,'..',file)});
+  for(const file of ['murim-growth.js','passive-growth.js','advancement.js','boundary-resonance.js','world-growth.js','personal-news.js','character-ui.js'])await p.addScriptTag({path:path.join(__dirname,'..',file)});
   if(fs.existsSync(path.join(__dirname,'../character-growth.css')))await p.addStyleTag({path:path.join(__dirname,'../character-growth.css')});
   await p.evaluate(()=>{
    window.resetCharacter=()=>{

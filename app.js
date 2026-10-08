@@ -310,7 +310,7 @@
   characterUI=CharacterUI.create({game:()=>g,show,node,grid,commit:commitGrowth,refresh:refreshGrowth,openSection:section=>growthUI.open(section)});
   newsUI=NewsUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,openDestination:item=>item.section==='status'?characterUI.open('reality'):growthUI.open(item.section,item.subject)});
   growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI,objective:()=>objectiveUI.open(),prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
-  murimUI=MurimJourneyUI.create({game:()=>g,show,node,commit:commitGrowth,refresh:refreshGrowth,close:closeDialog,prepare:async()=>globalThis.ArtPreview?.prepare?ArtPreview.prepare('murim'):true});globalThis.murimJourneyUI=murimUI;
+  murimUI=MurimJourneyUI.create({game:()=>g,show,node,commit:commitGrowth,refresh:refreshGrowth,close:closeDialog,isOpen:()=>dialog.open,prepare:async()=>globalThis.ArtPreview?.prepare?ArtPreview.prepare('murim'):true});globalThis.murimJourneyUI=murimUI;
   const character=node('button'),hudPortrait=$('hudPortrait');character.id='character';character.type='button';character.setAttribute('aria-label','캐릭터 상태');hudPortrait.replaceWith(character);character.append(hudPortrait);character.onclick=()=>characterUI.open();
   const newsButton=node('button','icon-button','소식');newsButton.id='personalNews';newsButton.onclick=()=>newsUI.open();document.querySelector('.header-actions').prepend(newsButton);
   progressionUI=ProgressionUI.create({node});

@@ -1,5 +1,6 @@
 const assert=require('node:assert/strict'),{run}=require('./browser-harness.cjs');
 run(async p=>{
+ assert.match(await p.locator('#dialogTitle').innerText(),/낯선 하늘/);for(let n=0;n<8&&!(await p.getByRole('button',{name:'추적자를 돌파하기',exact:true}).count());n++)await p.getByRole('button',{name:'계속하기',exact:true}).click();await p.getByRole('button',{name:'추적자를 돌파하기',exact:true}).click();
  await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');
  async function dismiss(){if(await p.locator('#dialog').evaluate(e=>e.open))await p.keyboard.press('Escape');}
  async function interact(id){await dismiss();await p.evaluate(id=>{const g=__game,o=g.points().find(x=>x.id===id);if(!o)throw Error(id);g.player.dash=0;Object.assign(g.player,{x:o.x,y:o.y});},id);await p.click('#interact');}
@@ -11,4 +12,4 @@ run(async p=>{
  for(let i=1;i<=3;i++){await enter('murimReturn'+i);await fight();await interact('journey-exit');await dismiss();if(i===1){await enter('murimChance');await fight();await interact('journey-exit');await dismiss();}}
  await interact('journey-return');await dismiss();await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='reality');assert.equal(await p.evaluate(()=>__game.area),'city');assert.equal(await p.evaluate(()=>__game.worldState.murimJourney.rare),true);assert.equal(await p.evaluate(()=>__game.worldState.murimJourney.cleared.length),15);await p.reload();await p.waitForFunction(()=>ArtPreview.ready);await p.click('#continue');assert.equal(await p.evaluate(()=>__game.worldState.murimJourney.stage),'complete');await p.screenshot({path:'browser-results/murim-journey/first-return.png'});
  console.log('Murim browser complete: 10 road stages, three mentors, declined disciple, optional rare, boss and first return/reload');
-},{classic:false});
+},{classic:false,skipIntro:false});

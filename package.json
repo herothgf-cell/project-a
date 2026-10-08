@@ -23,7 +23,7 @@
     "test:browser:resonance": "node tests/resonance.browser.cjs && node tests/resonance-import.browser.cjs && node tests/resonance-inheritance.browser.cjs",
     "test:browser:purpose": "node tests/character-growth.browser.cjs && node tests/skills-screen.browser.cjs && node tests/skills-tree.browser.cjs && node tests/simplified-growth.browser.cjs && node tests/purpose-growth.browser.cjs",
     "test:browser:plan-b": "node tests/plan-b.browser.cjs",
-    "test:browser:murim": "node tests/murim-journey.browser.cjs && node tests/murim-return.browser.cjs"
+    "test:browser:murim": "node tests/murim-journey.browser.cjs && node tests/murim-return.browser.cjs && node tests/murim-entry-cancel.browser.cjs"
   },
   "engines": {
     "node": ">=20"
