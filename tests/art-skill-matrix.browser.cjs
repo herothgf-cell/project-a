@@ -17,7 +17,7 @@ for(const [family,mode]of [['ripple','return'],['ripple','guard'],['echo','retur
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined});
   const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:reduced?'reduce':'no-preference'});page.on('pageerror',e=>errors.push(String(e)));
   await page.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;const step=v.Game.prototype.step;v.Game.prototype.step=function(...args){window.__game=this;return step.apply(this,args);};}});});
-  await page.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await page.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await page.evaluate(()=>ArtPreview.error),null);
+  await page.goto('http://127.0.0.1:'+server.address().port+'/art-play.html?campaign=classic');await page.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await page.evaluate(()=>ArtPreview.error),null);
   await page.click('#start');await page.locator('#dialogActions button').first().click();await page.waitForFunction(()=>window.__game);
   await page.evaluate(()=>{const draw=RealmArt.effect;window.__drawn=[];RealmArt.effect=function(c,f,...args){const result=draw(c,f,...args);window.__drawn.push({kind:f.kind,phase:f.presentationPhase||null,quality:args[0],drawn:result===true});return result;};});
   for(const fixture of fixtures){

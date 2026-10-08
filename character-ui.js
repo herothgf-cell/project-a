@@ -18,7 +18,7 @@
   return {g,r,a,old,available,total,used,cap,safe,remaining:available+used-total};
  }
  function reset(nextWorld,nextSource){world=nextWorld;source=nextSource;draft={...allocation()};pendingLeave=null;history=false;message='';render();}
- function open(nextWorld=W.worldOf(game()),nextSource){nextWorld=nextWorld==='murim'?'murim':'reality';nextSource=nextWorld==='murim'?'realm':nextSource==='hunter'?'hunter':'crystal';return requestLeave(()=>reset(nextWorld,nextSource));}
+ function open(nextWorld=W.worldOf(game()),nextSource){if(root.MurimJourney?.active(game()))return root.murimJourneyUI.stats();nextWorld=nextWorld==='murim'?'murim':'reality';nextSource=nextWorld==='murim'?'realm':nextSource==='hunter'?'hunter':'crystal';return requestLeave(()=>reset(nextWorld,nextSource));}
  function requestLeave(run){if(!connected()||!dirty()){pendingLeave=null;run();return true;}pendingLeave=run;render();body.querySelector('[data-character-focus="keep-editing"]')?.focus({preventScroll:true});return false;}
  function apply(){
   const c=context();if(!dirty()||!c.safe)return false;

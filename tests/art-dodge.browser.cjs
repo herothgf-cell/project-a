@@ -8,7 +8,7 @@ const {createServer}=require('../server.cjs');
  try{
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH});const p=await browser.newPage({viewport:{width:1440,height:900}});p.on('pageerror',e=>errors.push(String(e)));
   await p.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;const step=v.Game.prototype.step;v.Game.prototype.step=function(...args){window.__game=this;return step.apply(this,args);};}});});
-  const url='http://127.0.0.1:'+server.address().port;await p.goto(url+'/art-play.html');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
+  const url='http://127.0.0.1:'+server.address().port;await p.goto(url+'/art-play.html?campaign=classic');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
   await p.click('#start');await p.locator('#dialogActions button').first().click();await p.waitForFunction(()=>window.__game);
   for(const world of ['reality','murim'])for(const [direction,facing] of facings.entries()){
    await p.evaluate(({world,direction})=>{const g=__game;g.progress=8;g.training=1;g.enter(world==='reality'?'city':'village');g.events=[];Object.assign(g.player,{x:700,y:650,face:direction*Math.PI/4});g.player.cool.dash=0;g.hitStop=0;},{world,direction});

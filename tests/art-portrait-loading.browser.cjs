@@ -9,7 +9,7 @@ const {createServer}=require('../server.cjs');
   await page.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;const step=v.Game.prototype.step;v.Game.prototype.step=function(...args){window.__game=this;return step.apply(this,args);};}});});
   const hold=new Promise(r=>release=r);
   await page.route('**/reality/npc/seorin-candidate-v1.png',async route=>{await hold;await route.continue();});
-  await page.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');
+  await page.goto('http://127.0.0.1:'+server.address().port+'/art-play.html?campaign=classic');
   await page.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await page.evaluate(()=>ArtPreview.error),null);
   await page.click('#start');await page.locator('#dialogActions button').first().click();
   await page.waitForFunction(()=>window.__game);

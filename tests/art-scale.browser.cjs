@@ -3,7 +3,7 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
 const {createServer}=require('../server.cjs');
 (async()=>{const server=createServer({artReview:true});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
  try{browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined});const p=await browser.newPage({viewport:{width:1280,height:760}});
- await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await p.waitForFunction(()=>ArtPreview.ready);
+ await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html?campaign=classic');await p.waitForFunction(()=>ArtPreview.ready);
  for(const world of ['reality','murim']){
   await p.evaluate(async world=>{document.body.innerHTML='<canvas id="comparison" width="1280" height="760"></canvas>';const c=document.querySelector('canvas').getContext('2d');c.fillStyle='#24333d';c.fillRect(0,0,1280,760);
    const a=(await(await fetch('assets/art/'+world+'/hero/yunseo/candidate.json')).json()).assets[0],dirs=['s','se','e','ne','n','nw','w','sw'];

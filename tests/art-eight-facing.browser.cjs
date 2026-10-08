@@ -12,7 +12,7 @@ const {createServer}=require('../server.cjs');
   const p=await browser.newPage({viewport:{width:1440,height:900}});p.on('pageerror',e=>errors.push(String(e)));
   await p.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;const step=v.Game.prototype.step;v.Game.prototype.step=function(...args){window.__game=this;return step.apply(this,args);};}});});
   const url='http://127.0.0.1:'+server.address().port;
-  await p.goto(url+'/art-play.html');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
+  await p.goto(url+'/art-play.html?campaign=classic');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
   await p.click('#start');await p.locator('#dialogActions button').first().click();await p.waitForFunction(()=>window.__game);
   for(const [facing,angle]of [['s',Math.PI/2],['se',Math.PI/4],['e',0],['ne',-Math.PI/4],['n',-Math.PI/2],['nw',-3*Math.PI/4],['w',Math.PI],['sw',3*Math.PI/4]]){
    const expected=await p.evaluate(([angle,world,combo])=>{const g=__game;g.progress=8;g.training=1;g.enter(world==='murim'?'forest':'rift');g.events=[];g.enemies=g.enemies.filter(e=>!e.boss).slice(0,1);Object.assign(g.player,{x:850,y:700,face:angle});Object.assign(g.enemies[0],{x:850+Math.cos(angle)*35,y:700+Math.sin(angle)*35,hp:1000,maxHp:1000,cd:999});g.player.cool.attack=0;g.combo=combo-1;g.lastAttack=g.playTime;g.hitStop=0;return Math.round(g.stats().attack*(combo===3?1.7:combo===2?1.1:1));},[angle,world,combo]);

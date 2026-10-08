@@ -8,7 +8,7 @@ const {createServer}=require('../server.cjs');
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined});const p=await browser.newPage({viewport:{width:1440,height:900}}),errors=[];
   p.on('pageerror',e=>errors.push(String(e)));
   await p.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;const step=v.Game.prototype.step;v.Game.prototype.step=function(...args){window.__game=this;if(!window.__pause)return step.apply(this,args);};}});});
-  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
+  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html?campaign=classic');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
   await p.click('#start');await p.locator('#dialogActions button').first().click();await p.waitForFunction(()=>window.__game);
   await p.evaluate(()=>{__pause=true;const o=DualWorld.AREAS.city.points.find(o=>o.id==='portal');__game.player.x=o.x;__game.player.y=o.y+25;});
   const state=()=>p.evaluate(()=>ArtRuntime.portalState(__game,DualWorld.AREAS[__game.area].points.find(o=>o.id==='portal')));

@@ -7,7 +7,7 @@ const {createServer}=require('../server.cjs');
  try{
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined});const p=await browser.newPage({viewport:{width:1440,height:1000}});p.on('pageerror',e=>errors.push(String(e)));
   await p.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;const step=v.Game.prototype.step;v.Game.prototype.step=function(...args){window.__game=this;return step.apply(this,args);};}});});
-  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
+  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html?campaign=classic');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
   await p.click('#start');await p.locator('#dialogActions button').first().click();await p.waitForFunction(()=>window.__game);
   for(const [area,world,npc]of [['city','reality','npc.seorin'],['village','murim','npc.baekryun']]){
    await p.evaluate(area=>{__game.progress=5;__game.enter(area);__game.events=[];},area);await p.waitForFunction(k=>ArtPreview.diagnostics.get(k)?.status==='candidate',world+'.'+npc);

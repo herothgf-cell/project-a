@@ -12,7 +12,7 @@
   let resourceWarningUntil=0,resourceWarningCost=0;
   let bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
   let dialogueUI=null,journeyUI=null,realmUI=null,growthUI=null,introUI=null,contractUI=null,progressionUI=null,characterUI=null,newsUI=null;
-  let dungeonUI=null,objectiveUI=null;
+  let dungeonUI=null,objectiveUI=null,murimUI=null;
   const viewMemory=new Map();let currentView=null,dialogReturnFocus=null;let textScale=100;try{textScale=Number(localStorage.getItem('ssanggye:text-scale'))||100;}catch{}if(![100,125,150,200].includes(textScale))textScale=100;document.documentElement.style.fontSize=textScale+'%';
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
   const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=Controls.format(text);return e;};
@@ -22,7 +22,7 @@
   function clearInput(){keys.clear();held.clear();joy={x:0,y:0};joyId=null;$('stick').querySelector('i').style.transform='';}
   function toast(text){const e=node('div','toast',text);$('toasts').append(e);while($('toasts').children.length>3)$('toasts').firstChild.remove();setTimeout(()=>e.remove(),3000);}
   function notifyGrowthReceipts(){
-    const rs=BoundaryResonance.state(g);if(!active||g.introActive||dialog.open||!rs||rs.notified>=rs.grants.length)return;
+    const rs=BoundaryResonance.state(g);if(MurimJourney.active(g))return;if(!active||g.introActive||dialog.open||!rs||rs.notified>=rs.grants.length)return;
     const old=rs.notified,ids=new Set(rs.grants.slice(old)),rows=BoundaryResonance.catalog(g).filter(x=>ids.has(x.id));
     const amounts={crystal:rows.reduce((n,r)=>n+r.crystal,0),seal:rows.reduce((n,r)=>n+r.seal,0)};
     rs.notified=rs.grants.length;if(!persist()){rs.notified=old;return;}
@@ -32,6 +32,7 @@
     const dismiss=node('button','secondary','알림 닫기');dismiss.onclick=()=>receipt.remove();receipt.append(dismiss);$('toasts').append(receipt);setTimeout(()=>receipt.remove(),8000);
   }
   function updatePurposeMenus(){
+    if(MurimJourney.active(g)){const b=MurimGrowth.balance(g);for(const [id,label,text]of [['characterMenu','무림 스탯','단련석 '+b.stone],['growthStatus','무림 스킬','수련첩 '+b.scroll]]){const el=$(id);if(el){el.querySelector('small').textContent=text;el.setAttribute('aria-label',label+' · '+text);el.classList.remove('has-news');}}return;}
     const balance=BoundaryResonance.balance(g),counts={characterMenu:g.unreadNews('status').filter(x=>x.subject==='crystal').length,growthStatus:g.unreadNews('skills').length};
     for(const [id,label,status]of [['characterMenu','캐릭터','결정 '+balance.crystal],['growthStatus','무공/스킬','각인 '+balance.seal],...['realm','hunter'].map(kind=>{const m=Advancement.describe(g,kind),id=kind+'Menu';counts[id]=g.unreadNews('growth').filter(x=>x.subject===kind).length;return [id,kind==='realm'?'경지 돌파':'헌터 승급',!m.menuUnlocked?'잠김':m.status==='passed'?(kind==='realm'?'확정 대기':'보고 대기'):m.status==='complete'?'달성':m.unlocked?'도전 가능':'준비 중'];})]){
       const b=$(id);if(!b)continue;const text=status+(counts[id]?' · NEW':'');if(b.querySelector('small')?.textContent!==text)b.querySelector('small').textContent=text;b.setAttribute('aria-label',label+' · '+text);b.classList.toggle('has-news',counts[id]>0);
@@ -132,9 +133,9 @@
     else show(event.title,event.text,actions,event.portrait||'system',kicker,event.result);
   }
   function start(load=false){
-    resourceWarningUntil=0;backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
-    viewMemory.clear();currentView=null;if(!load){g.beginIntro(true);introUI.start();persist();}
-    else if(g.introActive)introUI.resume();
+    resourceWarningUntil=0;backup();g=load&&resume?resume:new Game();if(!load&&new URLSearchParams(location.search).get('campaign')!=='classic')g.startMurimJourney();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
+    viewMemory.clear();currentView=null;if(!load){if(MurimJourney.active(g))murimUI.intro();else {g.beginIntro(true);introUI.start();}persist();}
+    else if(MurimJourney.state(g)?.stage==='intro')murimUI.intro();else if(g.introActive)introUI.resume();
     else toast(g.restoreNotice||'저장한 위치와 진행에서 이어갑니다.');
   }
   function newGame(){if(hasSave)show('새로운 여정을 시작할까요?','현재 진행을 새 저장으로 교체합니다. 이전 저장은 브라우저의 백업 항목에도 보관합니다.\n\n기존 여정은 이어하기로 계속할 수 있습니다.',[{label:'취소',secondary:true},{label:'새로 시작',danger:true,run:()=>{backup(true);start(false);}}],'system','저장 데이터 확인');else start(false);}
@@ -153,8 +154,8 @@
     if(!AREAS[g.area].safe)return;const body=node('div'),balance=g.economy?.refundBalance||0;body.append(grid([['소지 금화',g.gold],['회복약',g.potions],['정산 잔액',balance]]));body.append(node('p','','회복약: 최대 체력의 55% 회복\n거점에서는 무료로 체력과 내력을 회복합니다. 공격력은 수련과 성장으로 높입니다.\n이전 버전의 남은 환급금은 금화 한도가 생기면 수령할 수 있습니다.'));
     show('여정을 위한 준비',body,[{label:'회복약 · 25 금화',disabled:g.gold<25||g.potions>=99,run:()=>{g.buy('potion');processEvents();persist();shop();}},{label:'정산 잔액 수령',disabled:!balance||g.gold>=999999,run:()=>{g.claimSettlement();processEvents();persist();shop();}},{label:'돌아가기',secondary:true}],'shop','보급');
   }
-  function map(){const body=node('div'),canvas=node('canvas','map-full');canvas.width=460;canvas.height=340;renderer.drawMini(g,canvas,true);body.append(canvas,node('p','dialog-note','◆ 현재 위치 · 붉은 점: 적 · 금빛 점: 인물과 출입구\n화면의 방향 표식과 현재 목표를 함께 확인하세요.'));show(AREAS[g.area].name,body,[{label:'돌아가기'}],'system','지역 지도');}
-  function journal(){
+  function map(){if(MurimJourney.active(g))return murimUI.route();const body=node('div'),canvas=node('canvas','map-full');canvas.width=460;canvas.height=340;renderer.drawMini(g,canvas,true);body.append(canvas,node('p','dialog-note','◆ 현재 위치 · 붉은 점: 적 · 금빛 점: 인물과 출입구\n화면의 방향 표식과 현재 목표를 함께 확인하세요.'));show(AREAS[g.area].name,body,[{label:'돌아가기'}],'system','지역 지도');}
+  function journal(){if(MurimJourney.active(g))return murimUI.route();
     if(characterUI)return characterUI.open();
     const body=node('div');body.append(node('p','','현실의 균열에서 발견한 경계석.\n무림에서 몸에 새긴 호흡은 현실에서도 사라지지 않는다.\n\n제1장: 두 세계의 검\n무공을 익히고 현실의 균열을 공략한다.\n\n제2장: 잔월의 서약\n폐사의 세 인장을 깨우고, 현실 항만의 검은 파도를 잠재운다.'));
     body.append(grid([['현재 이야기',g.progress>=7?'제2장':'제1장'],['전승 무공',Math.min(g.training,2)+'개'],['경계 공명',g.training>=3?'완성':'미완성'],['현실 / 무림 공격력',`${g.stats().attack} / ${g.stats().attack}`]]));show('두 세계의 공명',body,[{label:'돌아가기'}]);
@@ -173,7 +174,7 @@
     if(introUI?.active)return introUI.resume();
     if(!active)return;const actions=[{label:'계속하기'},{label:'조작 안내',secondary:true,run:help},{label:'저장 파일 다운로드',secondary:true,run:()=>exportSave()},{label:'저장 파일 불러오기',secondary:true,run:importSave}];
     if(!AREAS[g.area].safe)actions.push({label:'거점으로 후퇴',secondary:true,run:()=>show('거점으로 돌아갈까요?','무공과 이야기 진행은 유지됩니다.\n다시 입장하면 호위와 아직 완료하지 않은 봉인 공략을 처음부터 시작합니다.',[{label:'취소',secondary:true},{label:'후퇴하기',run:()=>{g.retreat();processEvents();persist();update();}}])});
-    actions.push({label:'입력 설정',secondary:true,run:controlSettings},{label:'인트로 다시 보기',secondary:true,run:()=>introUI.start(true)},{label:'타이틀로',secondary:true,run:()=>{persist();active=false;progressionUI?.clear();clearInput();$('game').hidden=true;$('title').hidden=false;inspectSave();WorldArt.cover($('cover'));}});
+    actions.push({label:'입력 설정',secondary:true,run:controlSettings},{label:'인트로 다시 보기',secondary:true,run:()=>MurimJourney.active(g)?show('돌아갈 길을 찾아서','부상한 백련에게 삼재검법을 배우고, 화산에서 치료를 받은 뒤 천흔으로 돌아가는 여정입니다.'):introUI.start(true)},{label:'타이틀로',secondary:true,run:()=>{persist();active=false;progressionUI?.clear();clearInput();$('game').hidden=true;$('title').hidden=false;inspectSave();WorldArt.cover($('cover'));}});
     const body=node('section','settings-screen');body.append(node('p','',`Lv.${g.level} · ${AREAS[g.area].name}`),node('p','','화면, 입력, 저장을 설정합니다.'));const options=node('div','settings-options');for(const action of actions.slice(1)){const b=node('button','secondary',action.label);b.onclick=()=>{if(dialog.open)dialog.close();clearInput();action.run?.();};options.append(b);}body.append(options);show('설정',body,[actions[0]],'hero','일시정지 · v'+VERSION);
   }
   function processEvents(){
@@ -194,9 +195,9 @@
     }
     notifyGrowthReceipts();
   }
-  function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(before.training<1&&g.training>=1)result.result.push('유수심법 · 첫 2포인트 해금. 성장에서 심법을 확인하세요.');if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='cycle-choice')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{const scene=CycleOne.interact(g,result.pointId,choice.id);if(scene)story(scene);persist();update();}})),'system','현장 우선 대응');if(result?.type==='dungeon-select')dungeonUI.open();if(result?.type==='seven-preparation')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{g.chooseSevenPreparation(choice.id);processEvents();persist();update();}})),'warden','공동 대응 준비');if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
+  function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(MurimJourney.active(g)){if(result?.type==='journey-route')murimUI.route();if(result?.type==='journey-growth')murimUI.stats();if(result?.type==='journey-intro')murimUI.intro();if(result?.type==='journey-choice')murimUI.choice(result);if(result?.type==='journey-complete')murimUI.complete();if(result?.type==='dialog')story(result);if(result?.type==='toast')toast(result.text);processEvents();persist();update();return;}if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(before.training<1&&g.training>=1)result.result.push('유수심법 · 첫 2포인트 해금. 성장에서 심법을 확인하세요.');if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='cycle-choice')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{const scene=CycleOne.interact(g,result.pointId,choice.id);if(scene)story(scene);persist();update();}})),'system','현장 우선 대응');if(result?.type==='dungeon-select')dungeonUI.open();if(result?.type==='seven-preparation')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{g.chooseSevenPreparation(choice.id);processEvents();persist();update();}})),'warden','공동 대응 준비');if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
   function act(action){
-    if(!running())return;const k=g.skillInfo(action);if(!k)return;
+    if(!running())return;const k=g.skillInfo(action);if(!k)return;if(MurimJourney.active(g)&&k.locked){toast('무림 스킬 트리에서 체득 조건을 확인하세요.');return;}
     if(!g.act(action)){
       if(k.locked)toast(WorldGrowth.worldOf(g)==='reality'?'무공 화면에서 현실 대응을 장착하세요. 미계승 상태에서는 타격과 회피로 진행할 수 있습니다.':'전장에서 나타난 감각은 무공에 기록됩니다.');
       else if(action==='ultimate'&&g.fate.focus<100)toast('적에게 타격하거나 기연 행동에 성공해 기세 100을 모으세요.');
@@ -215,7 +216,7 @@
   }
   function updateNews(){realmUI?.update();}
   function update(){
-    updateNews();journeyUI?.update();progressionUI?.update();
+    document.body.dataset.journey=MurimJourney.active(g)?'early':'classic';updateNews();journeyUI?.update();progressionUI?.update();
     for(const [id,section]of [['inventory','growth'],['personalNews',null],['fateJournal','skills'],['character','status']]){const e=$(id);if(e&&g.unreadNews){const n=g.unreadNews(section).length;e.classList.toggle('has-news',n>0);e.setAttribute('aria-label',({inventory:'성장',personalNews:'내 소식',fateJournal:'무공',character:'캐릭터 상태'})[id]+(n?' · 새 소식 '+n+'개':''));}}
     if(active&&!dialog.open&&!g.introActive){const hint=g.potionHint();if(hint){toast(hint);$('potion').classList.add('potion-guidance');persist();}}
     $('potion').title='회복약 '+g.potions+'개 · 최대 체력의 55% ('+Math.ceil(g.stats().hp*.55)+') 회복'+(g.potions<=0?' · 보유 약 없음':g.player.hp>=g.stats().hp?' · 체력이 가득 찼습니다.':'');
@@ -240,13 +241,13 @@
     const boss=g.enemies.find(e=>e.boss&&e.hp>0);$('boss').hidden=!(boss&&dist(p,boss)<560);
     if(boss){$('boss').querySelector('span').textContent=boss.name;$('boss').querySelector('u').style.width=boss.hp/boss.maxHp*100+'%';$('boss').querySelector('small').textContent=g.bossLocked()?'호위 / 봉인 해제 후 공격 가능':boss.hp<boss.maxHp/2?'격노 · 더 빠른 공격 예고':'공격 예고를 피하고 빈틈을 노리세요';}
     combatIcon(document.querySelector('[data-action=attack]'),'attack');
-    for(const action of ['moon','storm','dash']){const btn=document.querySelector(`[data-action="${action}"]`),k=g.skillInfo(action);combatIcon(btn,action);btn.querySelector('small').textContent=k.name;btn.classList.toggle('locked',g.training<k.need);btn.classList.toggle('no-mana',p.mp<k.cost);btn.setAttribute('aria-label',`${k.name}${g.training<k.need?' 미습득':''}`);const cd=btn.querySelector('em');cd.classList.toggle('active',p.cool[action]>.04);cd.textContent=p.cool[action]>=1?Math.ceil(p.cool[action]):p.cool[action].toFixed(1);}
+    for(const action of ['moon','storm','dash']){const btn=document.querySelector(`[data-action="${action}"]`),k=g.skillInfo(action);combatIcon(btn,action);btn.querySelector('small').textContent=k.name;btn.classList.toggle('locked',g.training<k.need||!!k.locked);btn.classList.toggle('no-mana',p.mp<k.cost);btn.setAttribute('aria-label',`${k.name}${g.training<k.need?' 미습득':''}`);const cd=btn.querySelector('em');cd.classList.toggle('active',p.cool[action]>.04);cd.textContent=p.cool[action]>=1?Math.ceil(p.cool[action]):p.cool[action].toFixed(1);}
     document.querySelector('.scene-bottom>span').textContent=matchMedia('(pointer:coarse)').matches?'왼쪽 이동 · 오른쪽 공격 / 회피':'WASD 이동 · J 공격 · Space 회피 · E 대화';
     const closeToTarget=o.target&&near?.id===o.target.id;
     const nextText=closeToTarget?`${Controls.key('interact')} · ${o.target.kind==='npc'?'대화하기':o.target.kind==='portal'?'이동하기':'상호작용'} — ${Controls.format(o.text)}`:Controls.format(o.text);
     $('questDesc').textContent=Controls.format(o.text);$('objectiveHint').textContent=nextText;
     document.querySelector('.scene-bottom>span').textContent=Controls.format(document.querySelector('.scene-bottom>span').textContent);
-    $('rank').textContent=Advancement.describe(g,'hunter').name+'급 헌터';
+    $('rank').textContent=MurimJourney.active(g)?(MurimJourney.state(g).stage==='complete'?'첫 귀환 완료':'무림 여정'):Advancement.describe(g,'hunter').name+'급 헌터';
     $('inventory').querySelector('span').textContent='성장';
   }
   window.addEventListener('wuxia-assets-ready',()=>{WorldArt.portrait($('hudPortrait'),'hero');if(!$('title').hidden)WorldArt.cover($('cover'));});
@@ -309,6 +310,7 @@
   characterUI=CharacterUI.create({game:()=>g,show,node,grid,commit:commitGrowth,refresh:refreshGrowth,openSection:section=>growthUI.open(section)});
   newsUI=NewsUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,openDestination:item=>item.section==='status'?characterUI.open('reality'):growthUI.open(item.section,item.subject)});
   growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI,objective:()=>objectiveUI.open(),prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
+  murimUI=MurimJourneyUI.create({game:()=>g,show,node,commit:commitGrowth,refresh:refreshGrowth,close:closeDialog,prepare:async()=>globalThis.ArtPreview?.prepare?ArtPreview.prepare('murim'):true});globalThis.murimJourneyUI=murimUI;
   const character=node('button'),hudPortrait=$('hudPortrait');character.id='character';character.type='button';character.setAttribute('aria-label','캐릭터 상태');hudPortrait.replaceWith(character);character.append(hudPortrait);character.onclick=()=>characterUI.open();
   const newsButton=node('button','icon-button','소식');newsButton.id='personalNews';newsButton.onclick=()=>newsUI.open();document.querySelector('.header-actions').prepend(newsButton);
   progressionUI=ProgressionUI.create({node});

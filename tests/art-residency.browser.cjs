@@ -5,7 +5,7 @@ const {createServer}=require('../server.cjs');
 try{browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined});const page=await browser.newPage();const requests=[],errors=[];
 page.on('request',r=>{if(/assets\/art\/.*\.png/.test(r.url()))requests.push(r.url());});page.on('pageerror',e=>errors.push(String(e)));
 await page.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;const step=v.Game.prototype.step;v.Game.prototype.step=function(...args){window.__game=this;return step.apply(this,args);};}});});
-await page.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await page.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);
+await page.goto('http://127.0.0.1:'+server.address().port+'/art-play.html?campaign=classic');await page.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);
 assert.equal(await page.evaluate(()=>ArtPreview.error),null);assert.ok(requests.length<50,`startup eagerly requested ${requests.length} atlases`);
 assert.ok(await page.evaluate(()=>ArtPreview.residency.bytes<=128*1024*1024));assert.deepEqual(errors,[]);
 await page.click('#start');await page.getByRole('button',{name:'인트로 건너뛰기',exact:true}).click();await page.waitForFunction(()=>window.__game);

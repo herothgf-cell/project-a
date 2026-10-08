@@ -10,7 +10,7 @@ const {createServer}=require('../server.cjs');
  try{
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROMIUM_PATH||undefined});const p=await browser.newPage({viewport:{width:1440,height:900}});p.on('pageerror',e=>errors.push(String(e)));
   await p.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;const step=v.Game.prototype.step;v.Game.prototype.step=function(...args){window.__game=this;if(!window.__pause)return step.apply(this,args);};window.__simulationStep=step;}});});
-  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
+  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html?campaign=classic');await p.waitForFunction(()=>ArtPreview.ready||ArtPreview.error);assert.equal(await p.evaluate(()=>ArtPreview.error),null);
   await p.click('#start');await p.locator('#dialogActions button').first().click();await p.waitForFunction(()=>window.__game);
   await p.evaluate(({area,kind,sign,signY})=>{window.__pause=true;window.__advance=dt=>{__pause=false;__game.step(dt);__pause=true;};const g=__game;g.progress=5;g.training=1;g.enter(area);g.events=[];g.enemies=g.enemies.filter(e=>e.kind===kind).slice(0,1);const e=g.enemies[0];Object.assign(e,{x:850,y:700,cd:99,wind:0});Object.assign(g.player,{x:850+100*sign,y:700+100*signY,invuln:99});__advance(.05);},{area,kind,sign,signY});
   // Bosses correctly refuse to act until the existing area seals are cleared.

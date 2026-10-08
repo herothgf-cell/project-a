@@ -9,7 +9,7 @@ const {createServer}=require('../server.cjs');
   await p.route('**/attack1-e-candidate-v2.png',async route=>{await new Promise(r=>setTimeout(r,1500));await route.continue();});
   await p.route('**/murim/environment/*.png',async route=>{await new Promise(r=>setTimeout(r,800));await route.continue();});
   await p.route('**/scene-candidate.json',async route=>{await new Promise(r=>setTimeout(r,1600));await route.continue();});
-  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html',{waitUntil:'domcontentloaded'});
+  await p.goto('http://127.0.0.1:'+server.address().port+'/art-play.html?campaign=classic',{waitUntil:'domcontentloaded'});
   assert.equal(await p.locator('#cover').evaluate(el=>getComputedStyle(el).visibility),'hidden','bootstrap must not expose old canvas');
   await p.waitForFunction(()=>ArtPreview.ready);await p.click('#start');await p.locator('#dialogActions button').first().click();await p.waitForFunction(()=>window.__game);
   await p.waitForFunction(()=>ArtPreview.diagnostics.get('reality.hero')?.status==='candidate');

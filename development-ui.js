@@ -2,7 +2,7 @@
  const skills=SkillsScreen.create({game,show,node,refresh,commit,close,notes});
  const advancement=GrowthScreen.create({game,show,node,refresh,commit,close,character,skills:world=>skills.open(world),prepare,objective});
  const challenges=ResonanceUI.create({game,show,node,commit,close,refresh,prepare,back:objective,skills:()=>skills.open('reality')});
- function open(section='skills',subject=null){if(game().introActive)return;
+ function open(section='skills',subject=null){if(root.MurimJourney?.active(game()))return ['stats','status'].includes(section)?root.murimJourneyUI.stats():root.murimJourneyUI.skills();if(game().introActive)return;
   if(section==='realm'||section==='hunter')return advancement.open(section);
   if(section==='challenges'||section==='records')return challenges.open(section==='records'?'records':'goals');
   if(section==='stats'||subject==='crystal'||section==='status')return character.open('reality','crystal');

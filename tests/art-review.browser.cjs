@@ -65,7 +65,7 @@ async function main(){
   report.actionProbe=actionProbe;report.checks.push('real keyboard attack body/effect share action id and contact clock');
   const review=await browser.newPage({viewport:{width:1440,height:900}});review.on('pageerror',e=>errors.push(String(e)));
   await review.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get(){return api;},set(v){api=v;for(const k of ['save','step']){const original=api.Game.prototype[k];api.Game.prototype[k]=function(...args){window.__game=this;return original.apply(this,args);};}}});});
-  await review.goto(url+'/art-play.html');await review.waitForFunction(()=>window.ArtPreview?.ready||window.ArtPreview?.error);assert.equal(await review.evaluate(()=>ArtPreview.error),null);
+  await review.goto(url+'/art-play.html?campaign=classic');await review.waitForFunction(()=>window.ArtPreview?.ready||window.ArtPreview?.error);assert.equal(await review.evaluate(()=>ArtPreview.error),null);
   await review.click('#start');await review.locator('#dialogActions button').first().click();
   await review.waitForFunction(()=>ArtPreview.diagnostics.get('reality.hero')?.id==='reality.hero.yunseo');
   await review.waitForFunction(()=>document.getElementById('hudPortrait').dataset.productionPortrait==='reality.hero.yunseo');
