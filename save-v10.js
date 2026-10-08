@@ -4,7 +4,7 @@
  function snapshot(g){
   // Trial rosters replace sanctum's normal roster, even just after trial completion.
   // Their permanent proof is already serialized by Fate; temporary attempts restart.
-  if(g.trial||g.enemies.some(e=>e.trial))return null;
+  if(g.trial||g.enemies.some(e=>e.trial||e.demonstration))return null;
   return {version:1,area:g.area,player:{x:g.player.x,y:g.player.y,hp:g.player.hp,mp:g.player.mp},enemies:g.enemies.filter(e=>!e.residual&&!(g.area==='overseerHall'&&g.worldState.cycleOne?.bossClear)).map(e=>({id:e.id,hp:e.hp,maxHp:e.maxHp,x:e.x,y:e.y,rewarded:!!e.rewarded})),activated:[...g.activated],linked:!!g.laterRuntime?.linked,suppressRemaining:Math.max(0,Math.min(6,(g.laterRuntime?.suppress||0)-g.playTime)),cycle:g.area==='overseerHall'?{charges:g.cycleRuntime?.charges??3,chargeExposed:g.cycleRuntime?.chargeExposed||0,pulse:g.cycleRuntime?.pulse||0,suppressed:g.cycleRuntime?.suppressed||0,phase:g.cycleRuntime?.phase||1}:null,exercise:g.enemies.some(e=>e.deepeningExercise&&e.hp>0)};
  }
  function save(g,baseSave){const d=JSON.parse(baseSave.call(g));d.version=10;d.improvementVersion=2;d.resonanceVersion=1;d.worldGrowth=clone(g.worldGrowth);d.questRewards=[...g.questRewards];d.journey.mastery=clone(g.worldGrowth.murim.mastery);d.journey.breath=g.worldGrowth.murim.mode;d.fate.path=g.worldGrowth.murim.equipped||g.fate.path;d.worldState=clone(g.worldState);d.encounter=snapshot(g);return JSON.stringify(d);}

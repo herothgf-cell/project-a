@@ -49,7 +49,7 @@
  function reason(g,id){return condition(g,id)||(!safe(g)?'현실 안전 거점에서 변경 가능':balance(g).seal<1?'무공 각인 부족':'');}
  function upgrade(g,id){if(reason(g,id))return false;const s=state(g),n=common.find(x=>x.id===id);preserve(g,()=>{if(n)s.common[id]++;else{s.learned.push(id);const k=skillNodes.find(x=>x.id===id);if(k.branch)s.selected[k.family]=id;}});return true;}
  function select(g,family,id){const s=state(g);if(!s||!safe(g)||!families.includes(family)||!skillNodes.some(n=>n.id===id&&n.family===family&&n.branch)||!s.learned.includes(id)||s.selected[family]===id)return false;s.selected[family]=id;return true;}
- function reset(g,kind){const s=state(g);if(!s||!safe(g)||kind!=='skills')return false;if(!s.learned.length&&!Object.values(s.common).some(Boolean))return false;preserve(g,()=>{s.common=initial().common;s.learned=[];s.selected=initial().selected;});return true;}
+ function reset(g,kind){return false;}
  function setGoal(g,goal){const s=state(g);if(!s||goal!==null&&!Object.hasOwn(goals,goal))return false;s.goal=goal;return true;}
  function effects(g,family){const s=state(g),branch=s?.selected?.[family],window=branch===family+'-window';return {discountQ:branch===family+'-economy'?2:0,discountR:s?.learned.includes(family+'-follow')?2:0,guardWindow:family==='ripple'&&window?.9:.7,echoCool:family==='echo'&&window?3.5:4,suppress:family==='seal'&&window?5:4};}
  function migrate(g){if(state(g))return validate(g);const s=initial();g.worldState.resonance=s;const valid=new Set(catalog(g).filter(x=>x.crystal&&x.eligible).map(x=>x.id));s.legacy=(g.worldState.achievements?.settled||[]).filter(id=>valid.has(id));for(const n of common)s.common[n.id]=g.worldState.passive?.adapted?.levels?.[n.id]||0;sync(g);s.notified=s.grants.length;return validate(g);}

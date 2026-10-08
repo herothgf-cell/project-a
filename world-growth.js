@@ -2,6 +2,7 @@
  'use strict';const families=['ripple','echo','seal'],skillActions=['signature1','signature2','ultimate'],skillMax=30,skillCasts=new WeakMap(),mastery=()=>({sword:0,ripple:0,echo:0,seal:0}),entry=()=>({level:1,xp:0,mastery:mastery(),skillMastery:{},equipped:null,mode:'flow'}),initial=()=>({reality:entry(),murim:entry()});
  function normalizeSkillMastery(raw){const out={};if(!raw||typeof raw!=='object'||Array.isArray(raw))return out;for(const family of families){const row=raw[family];if(!row||typeof row!=='object'||Array.isArray(row))continue;for(const action of skillActions){const n=row[action];if(Number.isInteger(n)&&n>=0)(out[family]||={})[action]=Math.min(skillMax,n);}}return out;}
  function skillMastery(g,world,family,action){const n=['reality','murim'].includes(world)&&families.includes(family)&&skillActions.includes(action)?g.worldGrowth?.[world]?.skillMastery?.[family]?.[action]:undefined,tracked=Number.isInteger(n)&&n>=0;return {value:tracked?Math.min(skillMax,n):0,max:skillMax,tracked};}
+ function skillAttainment(g,w,f,a){const m=skillMastery(g,w,f,a),stars=1+[4,8,12,15,19,23,27,30].filter(n=>m.value>=n).length;return {...m,stars,bonus:(stars-1)*.01,proposal:true};}
  function recordSkillMastery(g,world,family,action,token){
   if(!g.worldGrowth?.[world]||!['reality','murim'].includes(world)||world!==worldOf(g)||!families.includes(family)||!skillActions.includes(action)||token==null||g.trial||g.advancementTrial||g.worldState?.resonanceChallenges?.active||['comparison','realmAssessment','hunterAssessment','resonanceForest','resonanceRuins','resonancePass'].includes(g.area))return false;
   const current=skillMastery(g,world,family,action);if(current.value>=skillMax)return false;
@@ -23,5 +24,5 @@
  function settleInterpretations(g){for(const key of g.journey.known)if(interpretationKeys.includes(key)&&g.journey.sync[key]===0)g.journey.sync[key]=1;}
  function validateInterpretations(g){for(const world of ['murim','reality']){const map=interpretationMap(g.worldGrowth[world].interpretations);for(const key of Object.values(map))if(key!==null&&!canEquipInterpretation(g,key,world))throw Error('보유하지 않은 세계 진화');g.worldGrowth[world].interpretations=map;}}
  function validateWithInterpretations(raw){const out=validate(raw);for(const world of ['murim','reality']){out[world].skillMastery=normalizeSkillMastery(raw[world].skillMastery);if(raw[world].interpretations!==undefined)out[world].interpretations=interpretationMap(raw[world].interpretations);}return out;}
- return {families,initial,worldOf,stats,grantExperience,skillMastery,recordSkillMastery,validate:validateWithInterpretations,installInterpretations,canEquipInterpretation,settleInterpretations,validateInterpretations};
+ return {families,initial,worldOf,stats,grantExperience,skillMastery,skillAttainment,recordSkillMastery,validate:validateWithInterpretations,installInterpretations,canEquipInterpretation,settleInterpretations,validateInterpretations};
 });

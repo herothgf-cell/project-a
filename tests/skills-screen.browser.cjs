@@ -52,9 +52,9 @@ run(async p=>{
  assert.doesNotMatch(await p.locator('[data-skill="signature1"]').innerText(),/Lv\.3/);
  await p.locator('[data-select="ripple-window"]').click();
  assert.equal(await p.evaluate(()=>BoundaryResonance.effects(__game,'ripple').discountQ),0);
- await p.locator('[data-skill="signature2"]').click();assert.match(await p.locator('.skills-detail').innerText(),/4장 구조 완료 후 백련/);
+ await p.locator('[data-skill="signature2"]').click();assert.match(await p.locator('.skills-detail').innerText(),/핵심 기술 실전 증명 후 백련/);
  assert.equal(await p.locator('[data-upgrade="ripple-follow"]').isDisabled(),true);
- await p.locator('[data-skill="ultimate"]').click();assert.match(await p.locator('.skills-detail').innerText(),/7장 위기 실전/);assert.equal(await p.locator('.skills-detail [data-upgrade]').count(),0);
+ await p.locator('[data-skill="ultimate"]').click();assert.match(await p.locator('.skills-detail').innerText(),/후속 연계의 실전 증명/);assert.equal(await p.locator('.skills-detail [data-upgrade]').count(),0);
  await p.evaluate(()=>{__game.worldState.growthArc.learnedR=true;__game.worldState.growthArc.learnedF=true;__game.chapter4.phase=4;BoundaryResonance.sync(__game);__game.worldGrowth.reality.skillMastery={ripple:{signature1:4,signature2:2}};__skills.open('reality','ripple');});
  await p.locator('[data-skill="signature1"]').click();assert.match(await p.locator('.skills-mastery').innerText(),/4\/30/);
  await p.locator('[data-skill="signature2"]').click();assert.match(await p.locator('.skills-mastery').innerText(),/2\/30/);await p.locator('[data-upgrade="ripple-follow"]').click();assert.equal(await p.evaluate(()=>BoundaryResonance.effects(__game,'ripple').discountR),2);
@@ -70,9 +70,8 @@ run(async p=>{
  await p.locator('[data-upgrade="C1"]').click();assert.equal(await p.evaluate(()=>BoundaryResonance.balance(__game).seal),balance);assert.match(await p.locator('.skills-screen [role="status"]').innerText(),/저장하지 못/);
  await p.evaluate(()=>window.__failSkillsSave=false);await p.locator('[data-upgrade="C1"]').focus();await p.keyboard.press('Enter');
  assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).common.C1),1);assert.equal(await p.evaluate(()=>document.activeElement.dataset.upgrade),'C1');
- await p.getByRole('button',{name:'스킬 초기화',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).common.C1),1);
- await p.getByRole('button',{name:'취소',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).common.C1),1);
- await p.getByRole('button',{name:'스킬 초기화',exact:true}).click();await p.getByRole('button',{name:'초기화 확정',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).common.C1),0);assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).learned.length),0);assert.equal(await p.evaluate(()=>WorldGrowth.skillMastery(__game,'reality','ripple','signature1').value),4);
+ await p.getByRole('button',{name:'스킬 초기화',exact:true}).count().then(n=>assert.equal(n,0));
+ const permanent=await p.evaluate(()=>JSON.stringify(BoundaryResonance.state(__game)));assert.equal(await p.evaluate(()=>BoundaryResonance.reset(__game,'skills')),false);assert.equal(await p.evaluate(()=>JSON.stringify(BoundaryResonance.state(__game))),permanent);
  await p.getByRole('button',{name:'무림 보기',exact:true}).click();assert.match(await p.locator('.skills-screen').innerText(),/청운촌/);await p.getByRole('button',{name:'심법 (패시브)',exact:true}).click();await p.locator('[data-passive="F1"]').click();assert.equal(await p.locator('[data-upgrade="F1"]').isDisabled(),true);
  await p.evaluate(()=>{__game.enter('village');__game.events=[];__skills.open('murim','F1');});
  await p.evaluate(()=>{__game.fate.discovered.push('echo');__game.fate.proven.push('echo');__skills.open('murim','discovery');});await p.locator('[data-discovery="echo"]').click();await p.getByRole('button',{name:'계승 수락',exact:true}).click();

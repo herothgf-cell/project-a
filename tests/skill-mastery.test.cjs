@@ -46,10 +46,10 @@ test('held casts and trial, comparison, assessment, residual and challenge targe
  for(const world of ['reality','murim']){const {g}=fight('ripple',world);g.act('signature2',true);assert.equal(read(g,'ripple','signature2',world).value,0);}
  const {g}=fight();g.area='comparison';g.act('signature2');assert.equal(read(g,'ripple','signature2').value,0);
 });
-test('individual records never add damage on top of preserved family mastery',()=>{
+test('individual attainment adds its proposal damage while preserving family mastery',()=>{
  const {g,e}=fight();g.worldGrowth.reality.mastery.ripple=30;assert.equal(typeof Growth.recordSkillMastery,'function');
  for(let i=0;i<35;i++)Growth.recordSkillMastery(g,'reality','ripple','signature2',{});
- assert.equal(read(g,'ripple','signature2').value,30);const hp=e.hp;g.act('signature2');assert.equal(hp-e.hp,45);assert.equal(g.worldGrowth.reality.mastery.ripple,30);
+ assert.equal(read(g,'ripple','signature2').value,30);const hp=e.hp;g.act('signature2');assert.equal(hp-e.hp,48);assert.equal(g.worldGrowth.reality.mastery.ripple,30);
 });
 test('one target gives bounded action credit while other actions retain their own history',()=>{
  for(const world of ['reality','murim']){const {g,e}=fight('ripple',world);e.hp=e.maxHp=10000;

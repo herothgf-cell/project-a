@@ -28,7 +28,7 @@
   function reset(g){g.combat={parry:0,charges:0,echo:null,field:null,pending:[]};g.trial=null;g.hitStop=0;g.fate.focus=0;for(const a of names)g.player.cool[a]=0;}
   function init(g){g.fate=initial();reset(g);}
   function active(g){return g.trial?.path||g.fate.path;}
-  function info(g,a){if(!names.includes(a))return null;const p=active(g),i=names.indexOf(a),s=p?PATHS[p].skills[i]:['미완성 기연','?',0,0,'비경에서 자신의 기연을 발견하세요.'];return {name:s[0],glyph:s[1],cost:s[2],cool:s[3],description:s[4],need:0,key:['Q','R','F'][i],locked:!p||(g.worldState?.growthArc&&!g.worldState.growthArc.legacy&&a==='signature2'&&!g.worldState.growthArc.learnedR&&!g.growthArcRuntime?.lessonR)||(g.worldState?.growthArc&&!g.worldState.growthArc.legacy&&a==='ultimate'&&!g.worldState.growthArc.learnedF)||(a==='ultimate'&&(!g.fate.path||!!g.trial)),path:p};}
+  function info(g,a){if(!names.includes(a))return null;const p=active(g),i=names.indexOf(a),s=p?PATHS[p].skills[i]:['미완성 기연','?',0,0,'비경에서 자신의 기연을 발견하세요.'];return {name:s[0],glyph:s[1],cost:s[2],cool:s[3],description:s[4],need:0,key:['Q','R','F'][i],locked:!p||(g.worldState?.growthArc&&!g.worldState.growthArc.legacy&&a==='signature2'&&!g.worldState.growthArc.learnedR&&!g.growthArcRuntime?.lessonR)||(g.worldState?.growthArc&&!g.worldState.growthArc.legacy&&a==='ultimate'&&!g.worldState.growthArc.learnedF&&!g.growthArcRuntime?.lessonF)||(a==='ultimate'&&(!g.fate.path||!!g.trial&&!g.growthArcRuntime?.lessonF)),path:p};}
   function entry(g){reset(g);}
   function note(g,path){if(g.worldState?.resonanceChallenges?.active){g.onResonanceFate?.(path);g.fate.focus=Math.min(100,g.fate.focus+20);return;}if(g.advancementTrial){g.fate.focus=Math.min(100,g.fate.focus+20);return;}g.fate.feats[path]=Math.min(999999,g.fate.feats[path]+1);g.fate.focus=Math.min(100,g.fate.focus+20);if(g.trial?.path===path&&!g.trial.feat){g.trial.feat=true;g.toast('기연의 호흡을 증명했습니다! 이제 시험 잔상을 제압하세요.');}}
   function strike(g,e,amount,source='signature',cast=null){return g.strike(e,Math.round(g.stats().attack*amount),source,cast);}
@@ -57,8 +57,8 @@
     if(o.id==='warden'){
       if(f.stage===0){f.stage=1;return {type:'dialog',title:'제3장 · 이름 없는 전설',text:'제2장 완료. 그런데 네가 없는 자리에서 검의 흔적이 나타났어.\n다른 헌터는 아무것도 보지 못했는데 너는 그 흔적을 읽었지.\n\n이번에는 누군가의 기술을 따라 배우는 일이 아닐지도 몰라.\n백련 사부에게 이 흔적을 보여줘.',portrait:'warden'};}
       if(f.stage===3){f.stage=4;return {type:'dialog',title:'서린 · '+PATHS[f.path].title,text:'그 호흡은 기록된 어떤 무공과도 조금 달라.\n네가 겪은 사건이 검에 남은 것 같아.\n\n기지 동쪽 「경계의 심장」이 열렸어.\n호위와 두 매듭을 끊고 포식자를 막아 줘. 네 방식대로.',portrait:'warden'};}
-      if(f.stage===5){f.stage=6;g.gold=Math.min(999999,g.gold+160);return {type:'awakening',title:'제3장 완료 · '+PATHS[f.path].title,text:PATHS[f.path].ending+'\n\n별호 획득 · '+PATHS[f.path].title+'\n금화 +160\n\n백련에게 돌아가 다른 증명된 계열로 재수련하거나, 비경에서 남은 흔적을 탐구할 수 있습니다.',path:f.path,portrait:'warden'};}
-      if(f.stage>=6)return {type:'dialog',title:'서린 · 돌아온 전설',text:PATHS[f.path].ending+'\n\n기연 도감에서 네가 증명한 이야기를 돌아볼 수 있어.',portrait:'warden'};
+      if(f.stage===5){f.stage=6;g.gold=Math.min(999999,g.gold+160);return {type:'awakening',title:'제3장 완료 · '+PATHS[f.path].title,text:(PATHS[f.path]?.ending||'일반 수련으로 귀환로를 지켰다.')+'\n\n별호 획득 · '+PATHS[f.path].title+'\n금화 +160\n\n백련에게 돌아가 다른 증명된 계열로 재수련하거나, 비경에서 남은 흔적을 탐구할 수 있습니다.',path:f.path,portrait:'warden'};}
+      if(f.stage>=6)return {type:'dialog',title:'서린 · 돌아온 전설',text:(PATHS[f.path]?.ending||'일반 수련으로 귀환로를 지켰다.')+'\n\n기연 도감에서 네가 증명한 이야기를 돌아볼 수 있어.',portrait:'warden'};
     }
     if(o.id==='master'){
       if(f.stage===1&&f.path){f.stage=3;return {type:'dialog',title:'백련 · 나는 그 힘을 준 적이 없다',text:g.witness()+'네 검은 이미 답을 찾았다. 비경의 기억은 연습일 뿐, 허가증이 아니다.\n현실로 돌아가 네 호흡이 그곳에서도 이어지는지 보아라.',portrait:'master'};}
@@ -134,9 +134,9 @@
   }
   function validate(raw,progress,early=false){
     if(!raw||Array.isArray(raw)||!Number.isInteger(raw.stage)||raw.stage<0||raw.stage>6||raw.path!==null&&!valid(raw.path))throw Error('기연 저장이 손상되었습니다.');
-    const clean=initial();clean.stage=raw.stage;clean.path=raw.path;
+    if(raw.ordinaryRoute!==undefined&&typeof raw.ordinaryRoute!=='boolean')throw Error('일반 진행 기록 오류');const clean=initial();if(raw.ordinaryRoute)clean.ordinaryRoute=true;clean.stage=raw.stage;clean.path=raw.path;
     for(const key of ['discovered','proven']){if(!Array.isArray(raw[key])||raw[key].length>3||raw[key].some(p=>!valid(p))||new Set(raw[key]).size!==raw[key].length)throw Error('기연 증거가 손상되었습니다.');clean[key]=raw[key].slice();}
-    if(clean.proven.some(p=>!clean.discovered.includes(p))||clean.stage>=3&&(!clean.path||!clean.proven.includes(clean.path))||clean.stage<3&&clean.path&&!early||progress<12&&clean.stage>0)throw Error('기연 진행이 일치하지 않습니다.');
+    if(clean.proven.some(p=>!clean.discovered.includes(p))||clean.path&&!clean.proven.includes(clean.path)||clean.stage>=3&&!clean.ordinaryRoute&&(!clean.path||!clean.proven.includes(clean.path))||clean.stage<3&&clean.path&&!early||progress<12&&clean.stage>0)throw Error('기연 진행이 일치하지 않습니다.');
     if(!raw.feats||typeof raw.feats!=='object')throw Error('기연 행적이 없습니다.');for(const key of Object.keys(PATHS)){const v=raw.feats[key];if(!Number.isInteger(v)||v<0||v>999999)throw Error('기연 행적 값이 잘못되었습니다.');clean.feats[key]=v;}
     if(!Number.isFinite(raw.focus)||raw.focus<0||raw.focus>100)throw Error('잘못된 기세입니다.');clean.focus=0;return clean;
   }
