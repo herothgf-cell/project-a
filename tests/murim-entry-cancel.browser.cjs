@@ -1,10 +1,8 @@
-const assert=require('node:assert/strict'),{run}=require('./browser-harness.cjs');
+const assert=require('node:assert/strict'),{run}=require('./browser-harness.cjs'),H=require('./helpers/murim-browser.cjs');
 (async()=>{for(const reject of [false,true])await run(async p=>{
- await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.evaluate(()=>{const g=__game;g.player.x+=40;g.step(.05);g.act('dash');for(const e of g.enemies){Object.assign(g.player,{x:e.x-30,y:e.y});for(let i=0;e.hp>0&&i<100;i++){g.player.cool.attack=0;g.act('attack');}}g.player.dash=0;g.events=[];const p=g.points().find(p=>p.id==='journey-exit');Object.assign(g.player,{x:p.x,y:p.y});g.interact();const q=g.points().find(p=>p.id==='journey-route');Object.assign(g.player,{x:q.x,y:q.y});});
- await p.click('#interact');await p.locator('[data-journey-destination="murimRoad1"]').click();await p.evaluate(()=>{ArtPreview.prepare=()=>new Promise((resolve,reject)=>{window.__resolveEntry=resolve;window.__rejectEntry=reject;});});await p.getByRole('button',{name:'입장하기',exact:true}).click();await p.click('#closeDialog');
+ await H.fight(p);await H.exit(p);await p.evaluate(()=>{ArtPreview.prepare=()=>new Promise((resolve,reject)=>{window.__resolveEntry=resolve;window.__rejectEntry=reject;});});await p.getByRole('button',{name:'다음 지역으로',exact:true}).click();await p.click('#closeDialog');
  if(reject){await p.click('#characterMenu');await p.getByRole('button',{name:'공격 증가',exact:true}).click();await p.evaluate(()=>__rejectEntry(Error('offline')));}else await p.evaluate(()=>__resolveEntry(true));
- await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
- assert.equal(await p.evaluate(()=>__game.area),'village','canceled request cannot travel');assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem(SaveSlots.keys.current)).area),'village','canceled request cannot save a different area');
- if(reject){assert.equal(await p.locator('#dialogTitle').innerText(),'무림 스탯');assert.equal(await p.getByRole('button',{name:'단련석 1개로 확정',exact:true}).isEnabled(),true,'canceled failure leaves the active draft intact');}else assert.equal(await p.locator('#dialog').evaluate(e=>e.open),false);
- console.log('Murim entry cancel',reject?'rejection keeps new stats draft':'completion cannot travel','passed');
+ await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));assert.equal(await p.evaluate(()=>__game.area),'village');assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem(SaveSlots.keys.current)).area),'village');
+ if(reject){assert.equal(await p.locator('#dialogTitle').innerText(),'무림 스탯');assert.equal(await p.getByRole('button',{name:'단련석 1개로 확정',exact:true}).isEnabled(),true);}else assert.equal(await p.locator('#dialog').evaluate(e=>e.open),false);
+ console.log('Murim entry cancellation protects current state',reject);
 },{classic:false});})().catch(e=>{console.error(e);process.exitCode=1;});

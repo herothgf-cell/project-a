@@ -16,7 +16,9 @@
    if(snap.exercise!==undefined&&typeof snap.exercise!=='boolean'||snap.exercise&&(d.area!=='stabilization'||g.laterStory?.six!==3||snap.linked||snap.enemies.some(e=>e.hp>0)||!g.laterStory.dualBreath&&g.laterStory.deepening?.stage!=='trial'))throw Error('잔류 수련 기록 오류');
    if(snap.activated!==undefined&&(!Array.isArray(snap.activated)||snap.activated.length>20||new Set(snap.activated).size!==snap.activated.length||snap.activated.some(id=>typeof id!=='string')))throw Error('봉인 기록 오류');
   }
-  if(g.area!==d.area&&!(d.area==='archive'?g.restoreArchivedVisit():g.enter(d.area))){g.restoreNotice='이전 위치의 진입 조건을 확인할 수 없어 같은 세계의 안전 지점에서 이어갑니다.';return;}
+  let entered=true;g.murimRestoringArea=d.area;
+  try{if(g.area!==d.area)entered=d.area==='archive'?g.restoreArchivedVisit():g.enter(d.area);}finally{delete g.murimRestoringArea;}
+  if(!entered){g.restoreNotice='이전 위치의 진입 조건을 확인할 수 없어 같은 세계의 안전 지점에서 이어갑니다.';return;}
   g.restoreWorldEncounter();
   if(!snap)return;
   // Completed halls contain no active roster. Older saves retained the defeated overseer.

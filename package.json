@@ -1,6 +1,6 @@
 {
   "name": "dualworld-project-a",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "private": true,
   "description": "쌍계 — 두 세계의 호흡. World-specific art, anchored motion, unified interface and accessible discovery guidance.",
   "scripts": {
@@ -16,14 +16,14 @@
     "test:browser:later": "node tests/later-story.browser.cjs",
     "test:browser:dialogue": "node tests/dialogue.browser.cjs",
     "test:browser:navigation": "node tests/navigation.browser.cjs",
-    "check:world": "node --check save-slots.js && node --check world-growth.js && node --check world-achievements.js && node --check reality-skills.js && node --check world-reports.js && node --check personal-news.js && node --check save-v10.js && node --check growth-arc.js && node --check world-game.js && node --check encounter-director.js && node --check character-ui.js && node --check development-ui.js && node --check news-ui.js && node --check dungeon-entry.js && node --check dungeon-ui.js && node --check combat-audio.js && node --check combat-events.js && node --check audio-ui.js && node --check passive-growth.js && node --check advancement.js && node --check cycle-one.js && node --check growth-screen.js && node --check overseer-art.js && node --check boundary-resonance.js && node --check resonance-challenges.js && node --check resonance-proof.js && node --check resonance-ui.js && node --check skills-screen.js && node --check ordinary-growth.js && node --check plan-b-story.js && node --check murim-growth.js && node --check murim-journey.js && node --check murim-journey-ui.js",
+    "check:world": "node --check save-slots.js && node --check world-growth.js && node --check world-achievements.js && node --check reality-skills.js && node --check world-reports.js && node --check personal-news.js && node --check save-v10.js && node --check growth-arc.js && node --check world-game.js && node --check encounter-director.js && node --check character-ui.js && node --check development-ui.js && node --check news-ui.js && node --check dungeon-entry.js && node --check dungeon-ui.js && node --check combat-audio.js && node --check combat-events.js && node --check audio-ui.js && node --check passive-growth.js && node --check advancement.js && node --check cycle-one.js && node --check growth-screen.js && node --check overseer-art.js && node --check boundary-resonance.js && node --check resonance-challenges.js && node --check resonance-proof.js && node --check resonance-ui.js && node --check skills-screen.js && node --check ordinary-growth.js && node --check plan-b-story.js && node --check murim-scenes.js && node --check murim-loadout.js && node --check murim-notices.js && node --check murim-growth.js && node --check murim-journey.js && node --check murim-journey-ui.js",
     "test:browser:v11": "node tests/v11-ui.browser.cjs && node tests/v11-flow.browser.cjs",
     "test:browser:v12": "node tests/v12-ui.browser.cjs && node tests/v12-overseer-art.browser.cjs",
     "test:browser:growth": "node tests/growth-arc.browser.cjs",
     "test:browser:resonance": "node tests/resonance.browser.cjs && node tests/resonance-import.browser.cjs && node tests/resonance-inheritance.browser.cjs",
     "test:browser:purpose": "node tests/character-growth.browser.cjs && node tests/skills-screen.browser.cjs && node tests/skills-tree.browser.cjs && node tests/simplified-growth.browser.cjs && node tests/purpose-growth.browser.cjs",
     "test:browser:plan-b": "node tests/plan-b.browser.cjs",
-    "test:browser:murim": "node tests/murim-journey.browser.cjs && node tests/murim-return.browser.cjs && node tests/murim-entry-cancel.browser.cjs"
+    "test:browser:murim": "node tests/murim-journey.browser.cjs && node tests/murim-return.browser.cjs && node tests/murim-entry-cancel.browser.cjs && node tests/murim-scenes.browser.cjs"
   },
   "engines": {
     "node": ">=20"

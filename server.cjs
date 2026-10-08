@@ -5,7 +5,7 @@ const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=
 function createServer({artReview=false}={}){
  const archived=require('./scripts/legacy-assets.cjs').payloads(__dirname);
  const Art=require('./art-loader.js'),allowed=new Set([...assets,'art-loader.js','assets/art/manifest.json']);
- for(const name of ['murim-growth','murim-journey','ordinary-growth','plan-b-story','save-slots','world-growth','world-achievements','reality-skills','world-reports','personal-news','save-v10','world-game'])allowed.add(name+'.js');
+ for(const name of ['murim-scenes','murim-loadout','murim-notices','murim-growth','murim-journey','ordinary-growth','plan-b-story','save-slots','world-growth','world-achievements','reality-skills','world-reports','personal-news','save-v10','world-game'])allowed.add(name+'.js');
  for(const file of ['murim-journey-ui.js','murim-journey.css','character-ui.js','character-growth.css','skills-screen.js','skills-screen.css','purpose-growth.css','development-ui.js','news-ui.js','world-growth.css','ui-refresh.css','hud-refresh.css','growth-refresh.css','fantasy-ui.css'])allowed.add(file);
  for(const file of ['assets/ui/skill-atlas.webp','assets/ui/world-panorama.webp'])allowed.add(file);
  allowed.add('resonance-proof.js');allowed.add('resonance-ui.js');allowed.add('resonance.css');allowed.add('boundary-resonance.js');allowed.add('resonance-challenges.js');allowed.add('encounter-director.js');allowed.add('growth-arc.js');for(const file of ['passive-growth.js','advancement.js','cycle-one.js','growth-screen.js','overseer-art.js'])allowed.add(file);
