@@ -13,10 +13,8 @@ run(async p=>{
  await p.click('#growthStatus');await p.getByRole('button',{name:'심법 (패시브)',exact:true}).click();await p.locator('[data-passive=F1]').click();assert.equal(await p.locator('[data-passive=F1]').getAttribute('aria-pressed'),'true');
  assert.match(await p.locator('.skills-detail').innerText(),/정기 축적/);assert.match(await p.locator('.skills-detail').innerText(),/최대 자원 \+4/);
  await p.locator('[data-upgrade=F1]').click();assert.equal(await p.evaluate(()=>PassiveGrowth.describe(__game).spent),1);
- await p.getByRole('button',{name:'스킬 초기화',exact:true}).click();assert.equal(await p.evaluate(()=>PassiveGrowth.describe(__game).spent),1);
- await p.getByRole('button',{name:'취소',exact:true}).click();assert.equal(await p.evaluate(()=>PassiveGrowth.describe(__game).spent),1);
- await p.getByRole('button',{name:'스킬 초기화',exact:true}).click();await p.getByRole('button',{name:'초기화 확정',exact:true}).click();
- assert.equal(await p.evaluate(()=>PassiveGrowth.describe(__game).spent),0);assert.equal(await p.evaluate(()=>PassiveGrowth.state(__game).levels.F0),1);
+ assert.equal(await p.getByRole('button',{name:'스킬 초기화',exact:true}).count(),0);
+ const invested=await p.evaluate(()=>JSON.stringify(PassiveGrowth.state(__game)));assert.equal(await p.evaluate(()=>PassiveGrowth.reset(__game)),false);assert.equal(await p.evaluate(()=>JSON.stringify(PassiveGrowth.state(__game))),invested);
  for(const [width,height]of [[1280,900],[390,844],[844,390]]){await p.setViewportSize({width,height});assert.ok(await p.locator('#dialog').evaluate(e=>e.scrollWidth<=e.clientWidth+2));await p.screenshot({path:'.ui-design-review/passive-guidance/'+width+'.png'});}
- console.log('Passive news routes persistently; skill workspace preserves point guidance, allocation and refund confirmation');
+ console.log('Passive news routes persistently; skill workspace preserves point guidance, permanent investment');
 });

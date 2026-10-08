@@ -8,7 +8,7 @@
   ['ruins','village','ruins',g=>g.progress>=8,g=>g.progress===9,g=>g.progress>=10,'백련에게 본편의 조사 결과를 전하세요.'],
   ['harbor','city','harbor',g=>g.progress>=11,g=>g.progress===12&&!(g.fate?.stage),g=>g.fate?.stage>0,'서린에게 본편의 진입 허가를 받으세요.'],
   ['sanctum','village','sanctum',g=>g.progress>=12&&g.fate?.stage>=2,()=>false,g=>!!g.fate?.path,'서린과 백련에게 다음 이야기의 단서를 확인하세요.'],
-  ['heart','city','heart',g=>g.progress>=12&&g.fate?.stage>=4,g=>g.fate?.stage===5,g=>g.fate?.stage>=6,'자신의 호흡을 계승한 뒤 서린에게 보고하세요.'],
+  ['heart','city','heart',g=>g.progress>=12&&g.fate?.stage>=4,g=>g.fate?.stage===5,g=>g.fate?.stage>=6,'화산 일반 재수련 또는 기연 체득 뒤 서린에게 준비를 보고하세요.'],
   ['returnPass','village','passGate',g=>g.chapter4?.phase>=1,()=>false,g=>g.chapter4?.phase>=2,'서린에게 후속 구조 신호를 확인하세요.'],
   ['returnDock','city','dockGate',g=>g.chapter4?.phase>=2,g=>g.chapter4?.phase===3,g=>g.chapter4?.phase>=4,'무림의 구조 현장에서 돌아올 길을 여세요.'],
   ['archive','village','archiveGate',g=>g.progress>=2&&Cycle.archiveAccess(g),()=>false,()=>false,'4장 보고 후 연화의 귀환을 확인하고 기록을 백련에게 전해 초대를 수락하세요.'],

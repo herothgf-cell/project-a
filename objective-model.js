@@ -12,7 +12,7 @@
   if(g.worldGrowth&&(phase>=1&&phase<=4||g.area==='archive')){
    o.kind='story';o.chapter=5;o.purpose='공명 관측소 현장 확보';
    if(phase===1||phase===2){o.status='briefing';o.condition='서린에게 현장 임무 받기';o.currentAction='현실 기지의 서린과 대화해 공명 관측소 임무를 받으세요.';navigate('city','warden');}
-   else if(phase===3){o.status='combat';o.condition='적에게 실제 Q 대응 또는 R 명중 + 우두머리 제압';o.currentAction=s.measured?'대응 성공 · 남은 위협과 우두머리를 제압하세요.':'적의 공격 예고에 Q로 대응하거나 R을 적에게 명중시키고, 우두머리를 제압하세요.';if(g.area!=='station')navigate('station',null);}
+   else if(phase===3){o.status='combat';o.condition='일반 검격·회피 또는 기연 대응 + 우두머리 제압';o.currentAction=s.measured?'대응 성공 · 남은 위협과 우두머리를 제압하세요.':'일반 검격·회피 또는 배운 기연으로 위협을 제압하고 기록을 확보하세요.';if(g.area!=='station')navigate('station',null);}
    else if(phase===4){o.status='report';o.condition='서린에게 확보 결과 보고';o.currentAction='현실 기지의 서린에게 현장 확보를 보고하세요.';navigate('city','warden');}
    else{o.status='return-story';o.currentAction='청운촌으로 돌아가 현재 임무를 이어가세요.';o.target=points(g,g.area).find(p=>p.id==='exit');}
    return finish(o,g);

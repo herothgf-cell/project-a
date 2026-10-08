@@ -24,7 +24,7 @@ run(async p=>{
  await p.screenshot({path:path.join(evidence,'resonance-mobile.png')});
  await p.setViewportSize({width:1280,height:900});await p.evaluate(()=>document.documentElement.style.fontSize='100%');
  await p.keyboard.press('Escape');await p.click('#characterMenu');assert.equal(await p.getByRole('button',{name:/투자 환불/}).count(),0);assert.equal(await p.evaluate(()=>BoundaryResonance.reset(__game,'stats')),false);assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).allocation.attack),1);
- await p.keyboard.press('Escape');await p.click('#growthStatus');await p.getByRole('button',{name:'스킬 초기화',exact:true}).click();await p.getByRole('button',{name:'초기화 확정',exact:true}).click();assert.equal(await p.evaluate(()=>BoundaryResonance.state(__game).learned.length),0);
+ await p.keyboard.press('Escape');await p.click('#growthStatus');assert.equal(await p.getByRole('button',{name:'스킬 초기화',exact:true}).count(),0);const investment=await p.evaluate(()=>JSON.stringify(BoundaryResonance.state(__game)));assert.equal(await p.evaluate(()=>BoundaryResonance.reset(__game,'skills')),false);assert.equal(await p.evaluate(()=>JSON.stringify(BoundaryResonance.state(__game))),investment);
  await p.keyboard.press('Escape');await p.evaluate(()=>{__game.enter('village');__game.events=[];});await p.waitForFunction(()=>ArtPreview.ready&&ArtPreview.world==='murim');await p.click('#missionsMenu');await p.getByRole('button',{name:'공명 도전',exact:true}).click();
  await p.getByRole('button',{name:'입장 · 흑풍 죽림 · 버티는 힘',exact:true}).click();await p.waitForFunction(()=>__game.area==='resonanceForest');
  await p.evaluate(()=>{window.__setItem=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw Error('quota');};});
