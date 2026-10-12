@@ -6,7 +6,7 @@
  const active=g=>!!g.worldState?.murimJourney;
  const initial=()=>({version:1,slots:{moon:null,storm:null}});
  const state=g=>g.worldState?.murimLoadout;
- function learned(g,id){return active(g)&&(id==='samjae-arc'?g.worldState.murimGrowth?.levels.arc>0:id==='plum-first'?g.worldState.murimJourney.disciple==='accept':!!Growth.form(g,id)?.learned);}
+ function learned(g,id){return active(g)&&(id==='samjae-arc'?g.worldState.murimGrowth?.levels.arc>0:id==='plum-first'?(g.worldState.murimJourney.disciple==='accept'||!!g.worldState.dualProgression?.lateAccepted):!!Growth.form(g,id)?.learned);}
  function skill(g,id){const t=techniques.find(t=>t.id===id);if(!t||!learned(g,id))return null;return {...g.murimTechniqueInfo(t.action),...t,techniqueId:id,cooldownKey:t.action};}
  function resolve(g,input){if(!active(g))return input;if(['attack','dash','potion'].includes(input))return input;if(!slots.includes(input))return null;const id=state(g)?.slots[input];return learned(g,id)?techniques.find(t=>t.id===id).action:null;}
  function describe(g){return {editable:Growth.safe(g),learned:techniques.filter(t=>learned(g,t.id)).map(t=>skill(g,t.id)),slots:slots.map(id=>{const skillId=state(g)?.slots[id]??null;return {id,skillId,skill:skill(g,skillId)};})};}
