@@ -1,0 +1,877 @@
+{
+  "snapshot_commit": "f5a5a3b",
+  "date_kst": "2026-10-12",
+  "policy": "Markdown: archive notice and relocated links only; other formats byte-identical. Historical prose retained.",
+  "files": [
+    {
+      "original": "CODEX_ART_HANDOFF.md",
+      "archive": "docs/archive/2026-10-12-이전문서/프로젝트안내/CODEX_ART_HANDOFF.md",
+      "original_sha256": "e118cbbc25ff4e112dc9413e1adc41942c74eeb2f7ed356e96e8a9079a01fb64",
+      "archive_sha256": "219ae3eb642898c6ee656cea312ea529239c7c41d84a09548e7f06086a74ccb8"
+    },
+    {
+      "original": "README.md",
+      "archive": "docs/archive/2026-10-12-이전문서/프로젝트안내/README.md",
+      "original_sha256": "d7b788f473d6d4609f7d0317150c627744e9bad968a9e8ad6033323b3137ecc0",
+      "archive_sha256": "ac8c2dbd775450ca6eb79217ecd44175d34a21507267139257333d82658b8f89"
+    },
+    {
+      "original": "docs/SSANGGYE_IMPROVEMENT_SPEC_v1.1.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/SSANGGYE_IMPROVEMENT_SPEC_v1.1.md",
+      "original_sha256": "fed292ed2d396742c4b1c0018477573f2fae2814188b34c2e4fa1287f776d36a",
+      "archive_sha256": "8fcea23b7b7dfaee756a3c9a96ca87b85550a0f5056125f12f45387964cbe6b7"
+    },
+    {
+      "original": "docs/art-provenance-v05.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/art-provenance-v05.md",
+      "original_sha256": "e7705410091a560073713db31df5877b57e5cf1dea82a34eed7a0b6f3cf90acd",
+      "archive_sha256": "b407cd9a0d1ce179e0bccef69dcb5ca08c9488f017e29d1b61af3967c977da75"
+    },
+    {
+      "original": "docs/art-provenance-v06.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/art-provenance-v06.md",
+      "original_sha256": "439b37b69b0fe9aae4e43059419cbb1f5cd9685f1d07d5cc3b31ad751fc2aeec",
+      "archive_sha256": "273a3651bad22840ceb5bad0590c724e6094581c74196303af78225b7229858e"
+    },
+    {
+      "original": "docs/audio-provenance.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/audio-provenance.md",
+      "original_sha256": "45d0ff8f164438687d415468e867b6c6bbb58baa5ac9f6f9f811736da7e0eb15",
+      "archive_sha256": "c50c23ef6a7f26c62f89abf968a445c95c6df35be33ba7478cd4dfd091bf9a99"
+    },
+    {
+      "original": "docs/boundary-resonance-implementation-review.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/boundary-resonance-implementation-review.md",
+      "original_sha256": "f35d90336cd6140b6dd84ce38e3ea9907d8d4976ef08a3705a3afe1aba6a57d7",
+      "archive_sha256": "3377e767ca0505ac2ebb5db2653b8c4ce7b1e1effdf49cd319819f4d0d34b6df"
+    },
+    {
+      "original": "docs/boundary-resonance-test-guide.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/boundary-resonance-test-guide.md",
+      "original_sha256": "89a4e70e19ef23b1ac9b9a58f736cba90b214762d0b3173555189970fb21f80c",
+      "archive_sha256": "16f0ba93d4ba773d04991d24f9580d0cfe13223d2048d0881b8f412aca2a2d70"
+    },
+    {
+      "original": "docs/codex-art-handoff/00_READ_FIRST.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/00_READ_FIRST.md",
+      "original_sha256": "83d1d6ac33a10e7c89528ca050213bc9f91e804050542bb4eb991cbf2b7dc652",
+      "archive_sha256": "a79847768dacc400fa3c3ff6e07b01e3ded15040ca34af0826d4ec650d406f74"
+    },
+    {
+      "original": "docs/codex-art-handoff/01_CURRENT_STATE_AND_GAPS.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/01_CURRENT_STATE_AND_GAPS.md",
+      "original_sha256": "ae64a01b569518c18519bd561d11d849f6d6b2f6d04e2a955d15dfa3f0dc93ca",
+      "archive_sha256": "72aac65c188616be055df2f94c10f81c081645e7cf8c53052596b614bebd06ac"
+    },
+    {
+      "original": "docs/codex-art-handoff/02_ART_DIRECTION.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/02_ART_DIRECTION.md",
+      "original_sha256": "cb08e895f03317b639f0db747107b193ea75777b504918631570ea699f4611d0",
+      "archive_sha256": "556c06961d07cb1d0639bc990dbec834e12289b2caaaa386612600aa4db9e3d0"
+    },
+    {
+      "original": "docs/codex-art-handoff/03_PRODUCTION_ASSET_MATRIX.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/03_PRODUCTION_ASSET_MATRIX.md",
+      "original_sha256": "0b37c98db61061a795f94fd936ff4fe59627510a8e5e28ac0d556b32799ed20d",
+      "archive_sha256": "3a0d1824538315081092d10a93d7a616a832e8faad321d2e9397c790e17f4002"
+    },
+    {
+      "original": "docs/codex-art-handoff/04_SKILL_VFX_IMPLEMENTATION.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/04_SKILL_VFX_IMPLEMENTATION.md",
+      "original_sha256": "10c4a8e9343298b38e7098299208bf51d9ef101b8bfb9be8be2d72c5f5debddb",
+      "archive_sha256": "d0107093abf22c25b3d55a5a619b66263f9d9099c29dcdc3d388e9564e6d798d"
+    },
+    {
+      "original": "docs/codex-art-handoff/05_RUNTIME_INTEGRATION.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/05_RUNTIME_INTEGRATION.md",
+      "original_sha256": "56539fed3e384f50f2a615267ad12c6b92128aad414590ac21b2180a2c3e5a06",
+      "archive_sha256": "b0622933ad5c004ce4e26bc947122dc7ba8c9f9b3652ffc17f81a10f127c6428"
+    },
+    {
+      "original": "docs/codex-art-handoff/06_CODEX_WORK_ORDER.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/06_CODEX_WORK_ORDER.md",
+      "original_sha256": "2b617b4aa91b7350f2089171578a638b3cc959dc24cf311229e131bdbf80425d",
+      "archive_sha256": "9ba4f38ea2ac6633a84473f9ed54f5b42e5385bb7db6301bea0ec6ad0b88a16c"
+    },
+    {
+      "original": "docs/codex-art-handoff/07_DONE_CRITERIA.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/07_DONE_CRITERIA.md",
+      "original_sha256": "6b7be10c4a4ed7e35969e0854ac9ab15fbc02a050a05220a58b89467968a5ffe",
+      "archive_sha256": "58620a3cfa52cb01f531dccff0f0b6d692f217915d3c871f8cea037953fe61bd"
+    },
+    {
+      "original": "docs/codex-art-handoff/08_PRODUCTION_PROGRESS.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/08_PRODUCTION_PROGRESS.md",
+      "original_sha256": "cdf61583015ffd921924570b50e12b075cd30ae17d20734e23fb45c4a06972e9",
+      "archive_sha256": "bcfd07145bad85f5578c61a4122597d07374483b54086eaa2bc1bd15dd45159c"
+    },
+    {
+      "original": "docs/codex-art-handoff/09_GENERATION_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/09_GENERATION_PROMPTS.json",
+      "original_sha256": "b95288241932bb91eff47cad35a59fd44f9c5f99b1893cfeac94029423f4be72",
+      "archive_sha256": "b95288241932bb91eff47cad35a59fd44f9c5f99b1893cfeac94029423f4be72"
+    },
+    {
+      "original": "docs/codex-art-handoff/10_MOTION_GENERATION_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/10_MOTION_GENERATION_PROMPTS.json",
+      "original_sha256": "02837ce120de7ae6057210b85adbe5f38a918848135e96a82cfac95d3a422e4c",
+      "archive_sha256": "02837ce120de7ae6057210b85adbe5f38a918848135e96a82cfac95d3a422e4c"
+    },
+    {
+      "original": "docs/codex-art-handoff/11_WALK_GENERATION_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/11_WALK_GENERATION_PROMPTS.json",
+      "original_sha256": "ca666bc19a333d338e93452578722853ad8b042aa6532b2a0712aa4b93311283",
+      "archive_sha256": "ca666bc19a333d338e93452578722853ad8b042aa6532b2a0712aa4b93311283"
+    },
+    {
+      "original": "docs/codex-art-handoff/12_HERO_MULTIDIRECTION_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/12_HERO_MULTIDIRECTION_PROMPTS.json",
+      "original_sha256": "646a01d1f4d835e7b7f8eafea47e1070e9278cc67bb928684210decdfc12fb79",
+      "archive_sha256": "646a01d1f4d835e7b7f8eafea47e1070e9278cc67bb928684210decdfc12fb79"
+    },
+    {
+      "original": "docs/codex-art-handoff/13_SCENE_VFX_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/13_SCENE_VFX_PROMPTS.json",
+      "original_sha256": "b5c9d3a1d6c71ba50f27bdc947a5822e4317c6e7731d59cd4981fcfabb8df144",
+      "archive_sha256": "b5c9d3a1d6c71ba50f27bdc947a5822e4317c6e7731d59cd4981fcfabb8df144"
+    },
+    {
+      "original": "docs/codex-art-handoff/14_SCENE_INTEGRATION_STATUS.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/14_SCENE_INTEGRATION_STATUS.md",
+      "original_sha256": "b5eeb50ad3daed1d2aeffba25bc90113d8a3bfdf7849f94f768e41f0c15ea347",
+      "archive_sha256": "3fffc4b9a694fb20f53820844e996d2dfb21a9195a2da1bee2476b517e2f7b3f"
+    },
+    {
+      "original": "docs/codex-art-handoff/15_ENEMY_PORTAL_REVISIONS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/15_ENEMY_PORTAL_REVISIONS.json",
+      "original_sha256": "29b2b9de861d4b5195fb7c5e5ac6e88324d7c34ff0b8e6408834d34dfb1b0de2",
+      "archive_sha256": "29b2b9de861d4b5195fb7c5e5ac6e88324d7c34ff0b8e6408834d34dfb1b0de2"
+    },
+    {
+      "original": "docs/codex-art-handoff/16_P0_POLISH_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/16_P0_POLISH_PROMPTS.json",
+      "original_sha256": "f4231f8741fb6d41e0a94f40809a3a23fae9e9165289ab9350adcc8b7ad842ce",
+      "archive_sha256": "f4231f8741fb6d41e0a94f40809a3a23fae9e9165289ab9350adcc8b7ad842ce"
+    },
+    {
+      "original": "docs/codex-art-handoff/17_P0_POLISH_STATUS.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/17_P0_POLISH_STATUS.md",
+      "original_sha256": "fe2b96f9fa3f755e499e994366892a5ca3724858bd9769782ef80c5adb6da058",
+      "archive_sha256": "fc2ec70ad87fbcff5cbf01d4f8b55ddd65e03434ec6f072c156fbf716df96d9d"
+    },
+    {
+      "original": "docs/codex-art-handoff/18_DIRECTIONAL_ATTACK_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/18_DIRECTIONAL_ATTACK_PROMPTS.json",
+      "original_sha256": "ff7aef3b5869b8a645fb908dda05017760652da57a4062277c3b26b9e9809168",
+      "archive_sha256": "ff7aef3b5869b8a645fb908dda05017760652da57a4062277c3b26b9e9809168"
+    },
+    {
+      "original": "docs/codex-art-handoff/19_USER_APPROVAL.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/19_USER_APPROVAL.md",
+      "original_sha256": "7cf2a3cadab5192dc2c0a2bea5badc7821f285d87ad87780100d437dddcd232e",
+      "archive_sha256": "fb0ad1c340afb64f80b4e9060a5a6e9f28a16c3ea437fe680cd75a6de3dcbcec"
+    },
+    {
+      "original": "docs/codex-art-handoff/20_REALITY_ATTACK_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/20_REALITY_ATTACK_PROMPTS.json",
+      "original_sha256": "73d07e757747b47e290ac4f22abb74a068f0ec39f2e431bc01d82c3d4d16cea3",
+      "archive_sha256": "73d07e757747b47e290ac4f22abb74a068f0ec39f2e431bc01d82c3d4d16cea3"
+    },
+    {
+      "original": "docs/codex-art-handoff/21_VFX_BOUNDARY_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/21_VFX_BOUNDARY_PROMPTS.json",
+      "original_sha256": "dd8753a399fafd69620645a1d26e92bf85051a1038bc776b4492dc61e1602c93",
+      "archive_sha256": "dd8753a399fafd69620645a1d26e92bf85051a1038bc776b4492dc61e1602c93"
+    },
+    {
+      "original": "docs/codex-art-handoff/22_APPROVED_CONTINUATION_STATUS.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/22_APPROVED_CONTINUATION_STATUS.md",
+      "original_sha256": "39252b63a9b5a521ef3f4162d6e85dabec47d71dde2756f2161c3a6b180d46c4",
+      "archive_sha256": "877fa9ca5f0515d815f3ea6584ced87bc75edf01be76b1054d8cb7e5e79bca64"
+    },
+    {
+      "original": "docs/codex-art-handoff/23_CONTINUATION_VERIFICATION.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/23_CONTINUATION_VERIFICATION.md",
+      "original_sha256": "2e67326f4c4159aa4680a8599198212fd37cd466b1fd56b3d08e8c8764c4ffb8",
+      "archive_sha256": "982052ddbf4a3866263a4c8741abc00e8de02ad31c3c154d9939da3328d54cf5"
+    },
+    {
+      "original": "docs/codex-art-handoff/24_EAST_DODGE_PROVENANCE.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/24_EAST_DODGE_PROVENANCE.json",
+      "original_sha256": "e6ee608926d6fbbf4e759f4b7ff45ce107370991ed52a09c3b11fc47cc52eb53",
+      "archive_sha256": "e6ee608926d6fbbf4e759f4b7ff45ce107370991ed52a09c3b11fc47cc52eb53"
+    },
+    {
+      "original": "docs/codex-art-handoff/25_REMAINING_DODGE_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/25_REMAINING_DODGE_PROMPTS.json",
+      "original_sha256": "27205d765a792f0616cb044da317034ad93c50220d278bd647072b0d430c9775",
+      "archive_sha256": "27205d765a792f0616cb044da317034ad93c50220d278bd647072b0d430c9775"
+    },
+    {
+      "original": "docs/codex-art-handoff/26_REMAINING_DODGE_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/26_REMAINING_DODGE_OUTPUTS.json",
+      "original_sha256": "e05160e2a04f59839b6c8d9b923e02dc5a01890faa9338fd7b096fd77f3f0ece",
+      "archive_sha256": "e05160e2a04f59839b6c8d9b923e02dc5a01890faa9338fd7b096fd77f3f0ece"
+    },
+    {
+      "original": "docs/codex-art-handoff/27_MURIM_DODGE_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/27_MURIM_DODGE_OUTPUTS.json",
+      "original_sha256": "ae995d01b56ff15908b0876e78aa80d2b53df7c9f978257b846058a440ac25ba",
+      "archive_sha256": "ae995d01b56ff15908b0876e78aa80d2b53df7c9f978257b846058a440ac25ba"
+    },
+    {
+      "original": "docs/codex-art-handoff/28_REMAINING_ACTION_PROMPTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/28_REMAINING_ACTION_PROMPTS.json",
+      "original_sha256": "f1b6b672f124d9023d5f1b8f03aefbc317318ec544c543e4ccaf160a9f7cf6c1",
+      "archive_sha256": "f1b6b672f124d9023d5f1b8f03aefbc317318ec544c543e4ccaf160a9f7cf6c1"
+    },
+    {
+      "original": "docs/codex-art-handoff/29_REMAINING_ACTION_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/29_REMAINING_ACTION_OUTPUTS.json",
+      "original_sha256": "be7877c9f17e1763bd3b9b734cef283d32831224febd87cc8b315b6a0e18553b",
+      "archive_sha256": "be7877c9f17e1763bd3b9b734cef283d32831224febd87cc8b315b6a0e18553b"
+    },
+    {
+      "original": "docs/codex-art-handoff/30_MURIM_ATTACK2_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/30_MURIM_ATTACK2_OUTPUTS.json",
+      "original_sha256": "69fe903537338ff3a3c4ad685696dac73db17edc6ffeabe50f2cc586ec4775e9",
+      "archive_sha256": "69fe903537338ff3a3c4ad685696dac73db17edc6ffeabe50f2cc586ec4775e9"
+    },
+    {
+      "original": "docs/codex-art-handoff/31_REALITY_ATTACK3_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/31_REALITY_ATTACK3_OUTPUTS.json",
+      "original_sha256": "e7d6cebc1661b5fbdbdfe896bce64d914c355533e3a645c3bf7360c9aba8715e",
+      "archive_sha256": "e7d6cebc1661b5fbdbdfe896bce64d914c355533e3a645c3bf7360c9aba8715e"
+    },
+    {
+      "original": "docs/codex-art-handoff/32_MURIM_ATTACK3_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/32_MURIM_ATTACK3_OUTPUTS.json",
+      "original_sha256": "c6f95e58cdb8deb63ef72f57160f67e7b61fd1fde9ebd39bbfdbeda2d907d001",
+      "archive_sha256": "c6f95e58cdb8deb63ef72f57160f67e7b61fd1fde9ebd39bbfdbeda2d907d001"
+    },
+    {
+      "original": "docs/codex-art-handoff/33_REALITY_CAST_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/33_REALITY_CAST_OUTPUTS.json",
+      "original_sha256": "68f2561939cc3450b84e7e1b69dd14120a581a1ea248f065d72ddf3258712075",
+      "archive_sha256": "68f2561939cc3450b84e7e1b69dd14120a581a1ea248f065d72ddf3258712075"
+    },
+    {
+      "original": "docs/codex-art-handoff/34_MURIM_CAST_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/34_MURIM_CAST_OUTPUTS.json",
+      "original_sha256": "46ab972c5eaf421436d07594f2bfc2957b99934d9da8df3ccbd31a482434897b",
+      "archive_sha256": "46ab972c5eaf421436d07594f2bfc2957b99934d9da8df3ccbd31a482434897b"
+    },
+    {
+      "original": "docs/codex-art-handoff/35_REALITY_HIT_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/35_REALITY_HIT_OUTPUTS.json",
+      "original_sha256": "285810f5597dddaeb446630e692a9bd104fbeaf44964d6939a7ecfdb16ddb7de",
+      "archive_sha256": "285810f5597dddaeb446630e692a9bd104fbeaf44964d6939a7ecfdb16ddb7de"
+    },
+    {
+      "original": "docs/codex-art-handoff/36_MURIM_HIT_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/36_MURIM_HIT_OUTPUTS.json",
+      "original_sha256": "c1d4ab25e57c8730f83f414216c5b4b5d90be21bab8bcd0449f1ad4aad061f23",
+      "archive_sha256": "c1d4ab25e57c8730f83f414216c5b4b5d90be21bab8bcd0449f1ad4aad061f23"
+    },
+    {
+      "original": "docs/codex-art-handoff/37_GRIP_CORRECTIONS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/37_GRIP_CORRECTIONS.json",
+      "original_sha256": "8ea26d980cf1b764695b9a8a8d4f51b78133ba30a56d99679da25b7ad9ec1e4e",
+      "archive_sha256": "8ea26d980cf1b764695b9a8a8d4f51b78133ba30a56d99679da25b7ad9ec1e4e"
+    },
+    {
+      "original": "docs/codex-art-handoff/38_EQUIPMENT_CORRECTION.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/38_EQUIPMENT_CORRECTION.json",
+      "original_sha256": "dcec7f22ec7a2241aa4f896d77158c9f694c9034ac7de4606f956e8c18a5e7e1",
+      "archive_sha256": "dcec7f22ec7a2241aa4f896d77158c9f694c9034ac7de4606f956e8c18a5e7e1"
+    },
+    {
+      "original": "docs/codex-art-handoff/39_GROUND_DRESSING.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/39_GROUND_DRESSING.json",
+      "original_sha256": "24583a3121710d9525dfaaefb0e494fc73a075283e3748ad39cbbefa4eaa323b",
+      "archive_sha256": "24583a3121710d9525dfaaefb0e494fc73a075283e3748ad39cbbefa4eaa323b"
+    },
+    {
+      "original": "docs/codex-art-handoff/40_BANDIT_ATTACK_CORRECTION.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/40_BANDIT_ATTACK_CORRECTION.json",
+      "original_sha256": "4d27378d898b5391dfb042b0da70c1eee7dbb1c311ce2ccba2193435d0762ce1",
+      "archive_sha256": "4d27378d898b5391dfb042b0da70c1eee7dbb1c311ce2ccba2193435d0762ce1"
+    },
+    {
+      "original": "docs/codex-art-handoff/41_BANDIT_NW_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/41_BANDIT_NW_OUTPUTS.json",
+      "original_sha256": "9747cf8f30f76e03ca114d20a7a10f74fa5dd98b8620bef1f6f01e71017fd09b",
+      "archive_sha256": "9747cf8f30f76e03ca114d20a7a10f74fa5dd98b8620bef1f6f01e71017fd09b"
+    },
+    {
+      "original": "docs/codex-art-handoff/42_HERO_FINISHER_CORRECTIONS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/42_HERO_FINISHER_CORRECTIONS.json",
+      "original_sha256": "f1956c06dbdfa6a4e9f48b0cc7a9f53504fd677ef0534c5bbe25bb19c01a7766",
+      "archive_sha256": "f1956c06dbdfa6a4e9f48b0cc7a9f53504fd677ef0534c5bbe25bb19c01a7766"
+    },
+    {
+      "original": "docs/codex-art-handoff/43_P0_FOREGROUND_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/43_P0_FOREGROUND_OUTPUTS.json",
+      "original_sha256": "9d1528819c7ccd006ab16ced0ba822600945d1919ab43f31c5fdf7f78b0faaef",
+      "archive_sha256": "9d1528819c7ccd006ab16ced0ba822600945d1919ab43f31c5fdf7f78b0faaef"
+    },
+    {
+      "original": "docs/codex-art-handoff/44_REALITY_DODGE_BLADE_CORRECTION.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/44_REALITY_DODGE_BLADE_CORRECTION.json",
+      "original_sha256": "3e95426113cff87203b0e775bf669f214427c8035fbc5742f2804f6e650045f0",
+      "archive_sha256": "3e95426113cff87203b0e775bf669f214427c8035fbc5742f2804f6e650045f0"
+    },
+    {
+      "original": "docs/codex-art-handoff/45_ENEMY_CONTINUATION_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/45_ENEMY_CONTINUATION_OUTPUTS.json",
+      "original_sha256": "2363a0e2b943009e2244dbeec2837d4081097695581a09afb2fe49bb97a9451c",
+      "archive_sha256": "2363a0e2b943009e2244dbeec2837d4081097695581a09afb2fe49bb97a9451c"
+    },
+    {
+      "original": "docs/codex-art-handoff/46_ENEMY_SE_PACKING_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/46_ENEMY_SE_PACKING_OUTPUTS.json",
+      "original_sha256": "0f843842086367c745bc9902c301486846aff3d846fcd6197d3070ce663e35dd",
+      "archive_sha256": "0f843842086367c745bc9902c301486846aff3d846fcd6197d3070ce663e35dd"
+    },
+    {
+      "original": "docs/codex-art-handoff/47_SHADE_NW_MOTION_OUTPUTS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/47_SHADE_NW_MOTION_OUTPUTS.json",
+      "original_sha256": "475377597507fcd5b6185a8a298ddc245c6d558af4ebe4f105a8e45a8fe8e625",
+      "archive_sha256": "475377597507fcd5b6185a8a298ddc245c6d558af4ebe4f105a8e45a8fe8e625"
+    },
+    {
+      "original": "docs/codex-art-handoff/48_CAST_EDGE_HAND_CORRECTIONS.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/48_CAST_EDGE_HAND_CORRECTIONS.json",
+      "original_sha256": "079226f6224fc75231afaef1c70c5a1f892a93736614c4edb5035fd035c7ad9c",
+      "archive_sha256": "079226f6224fc75231afaef1c70c5a1f892a93736614c4edb5035fd035c7ad9c"
+    },
+    {
+      "original": "docs/codex-art-handoff/49_DODGE_SCALE_REVIEW.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/49_DODGE_SCALE_REVIEW.json",
+      "original_sha256": "0d31802f1680c3c0c862a77cfa011f47d6320c73747fb0ff38cb3d2000dfb2ee",
+      "archive_sha256": "0d31802f1680c3c0c862a77cfa011f47d6320c73747fb0ff38cb3d2000dfb2ee"
+    },
+    {
+      "original": "docs/codex-art-handoff/50_PROTOTYPE_RELEASE.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/50_PROTOTYPE_RELEASE.md",
+      "original_sha256": "4ff6b8d942a3b03e2819080bbefbef20084093d1b0b2af7ab1e6a954b32d021f",
+      "archive_sha256": "332a0ee17b7e61a695ecb3d3196d5ad03aedac27bceafc75559ec4eff6f02b34"
+    },
+    {
+      "original": "docs/codex-art-handoff/51_ADDITIONAL_ENEMY_PROVENANCE.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/51_ADDITIONAL_ENEMY_PROVENANCE.json",
+      "original_sha256": "d07c5ec072c2912725980c421bc3039533b3e271a9d64bfc289772d7cf4665ae",
+      "archive_sha256": "d07c5ec072c2912725980c421bc3039533b3e271a9d64bfc289772d7cf4665ae"
+    },
+    {
+      "original": "docs/codex-art-handoff/52_SIMPLIFIED_PROTOTYPE.md",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/52_SIMPLIFIED_PROTOTYPE.md",
+      "original_sha256": "55f87921a0dad40ad70b97b220139f37b329754d5a3898465498cc9bd41ea3c6",
+      "archive_sha256": "7dd8491492fa4f4e893a74198299d0b45c2bf66219fc6b0c959ffd0ff968a63f"
+    },
+    {
+      "original": "docs/codex-art-handoff/53_SIMPLIFIED_ART_PROVENANCE.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/53_SIMPLIFIED_ART_PROVENANCE.json",
+      "original_sha256": "45cb425adc62fd204bb704133d6d8548053997e4409950b742b5ef4ddfd6347e",
+      "archive_sha256": "45cb425adc62fd204bb704133d6d8548053997e4409950b742b5ef4ddfd6347e"
+    },
+    {
+      "original": "docs/codex-art-handoff/54_ATTACK_SCALE_AND_CADENCE.json",
+      "archive": "docs/archive/2026-10-12-이전문서/아트제작/54_ATTACK_SCALE_AND_CADENCE.json",
+      "original_sha256": "dac8f4a5cfa70915592256640be04a8cfdeb0cd5aee1d15238d6e22bb332b81e",
+      "archive_sha256": "dac8f4a5cfa70915592256640be04a8cfdeb0cd5aee1d15238d6e22bb332b81e"
+    },
+    {
+      "original": "docs/design/boundary-resonance/README.md",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/boundary-resonance/README.md",
+      "original_sha256": "b447a99001204a91dff72876ae74b41ff0a6f58f9fb66a7055de764a25aa28b0",
+      "archive_sha256": "5a9bbf76a9f400ec10b0a7cbaec8e5ae108d49c7f75578990a69e59799420fc3"
+    },
+    {
+      "original": "docs/design/boundary-resonance/ui-concept.png",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/boundary-resonance/ui-concept.png",
+      "original_sha256": "563988439956368ddc15aa84e2f504beeaf01ddd5fdb25ccf9971e3d272593fb",
+      "archive_sha256": "563988439956368ddc15aa84e2f504beeaf01ddd5fdb25ccf9971e3d272593fb"
+    },
+    {
+      "original": "docs/design/cross-world-items/README.md",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/cross-world-items/README.md",
+      "original_sha256": "dee0d1e07b17872aa98197ce47372fddab0588e1d5dc3eff40e55a577e9ef5d3",
+      "archive_sha256": "36321a30c539dbbe56eed873c272680968e79fa64d6b0cba42cb9b9eac53cb54"
+    },
+    {
+      "original": "docs/design/cross-world-items/critical-review.md",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/cross-world-items/critical-review.md",
+      "original_sha256": "87e077f2a494f64fd98b7cb36ebc08f3ed9993d965ba13ce3e1b41e90f7fc4c1",
+      "archive_sha256": "457c70f942df8d226a55390bcd6e00036ca1d0d57a0d1ac2856ea9058a9a0c92"
+    },
+    {
+      "original": "docs/design/cross-world-items/item-icons.png",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/cross-world-items/item-icons.png",
+      "original_sha256": "0bbdfb32eba9b2a16d53a03e7ec9e694870b86860434b8d8fc8c90c2d6bca71e",
+      "archive_sha256": "0bbdfb32eba9b2a16d53a03e7ec9e694870b86860434b8d8fc8c90c2d6bca71e"
+    },
+    {
+      "original": "docs/design/cross-world-items/item-icons.svg",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/cross-world-items/item-icons.svg",
+      "original_sha256": "5a5f995aa9bf4c52c0bd31e816ca3c3f6e676337c4f8b2a3b503514a9feacae9",
+      "archive_sha256": "5a5f995aa9bf4c52c0bd31e816ca3c3f6e676337c4f8b2a3b503514a9feacae9"
+    },
+    {
+      "original": "docs/design/cross-world-items/skill-tree-concept.png",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/cross-world-items/skill-tree-concept.png",
+      "original_sha256": "d6203cb90b911c10a423fe63b05dd7377f9c03635a7e922a2fbbda60cbf332ef",
+      "archive_sha256": "d6203cb90b911c10a423fe63b05dd7377f9c03635a7e922a2fbbda60cbf332ef"
+    },
+    {
+      "original": "docs/design/cross-world-items/skill-tree-concept.svg",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/cross-world-items/skill-tree-concept.svg",
+      "original_sha256": "5acf2a0b02760272702d46efb6884593aeb47a8d47d0d8d473d00c328752644b",
+      "archive_sha256": "5acf2a0b02760272702d46efb6884593aeb47a8d47d0d8d473d00c328752644b"
+    },
+    {
+      "original": "docs/design/cross-world-items/ui-concept.png",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/cross-world-items/ui-concept.png",
+      "original_sha256": "50508d48c162c5d06db25a3561c47daa7fd7043aa9df38ff656539070fa88bdf",
+      "archive_sha256": "50508d48c162c5d06db25a3561c47daa7fd7043aa9df38ff656539070fa88bdf"
+    },
+    {
+      "original": "docs/design/cross-world-items/ui-concept.svg",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/cross-world-items/ui-concept.svg",
+      "original_sha256": "72b89b08524859734539db6089225f57aad115820aaa0e85f59fba73959e2def",
+      "archive_sha256": "72b89b08524859734539db6089225f57aad115820aaa0e85f59fba73959e2def"
+    },
+    {
+      "original": "docs/design/murim-journey/skills-desktop.png",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/murim-journey/skills-desktop.png",
+      "original_sha256": "0cf5cf047edcd8ac72929af3670115208b01dc035f64ecb92c17d9fa240eb447",
+      "archive_sha256": "0cf5cf047edcd8ac72929af3670115208b01dc035f64ecb92c17d9fa240eb447"
+    },
+    {
+      "original": "docs/design/murim-journey/skills-mobile.png",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/murim-journey/skills-mobile.png",
+      "original_sha256": "b3429fc59a28084d66a616182fb7d88619bbb6f1dd9bde16200049087be2c554",
+      "archive_sha256": "b3429fc59a28084d66a616182fb7d88619bbb6f1dd9bde16200049087be2c554"
+    },
+    {
+      "original": "docs/design/murim-journey/stats-mobile.png",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/murim-journey/stats-mobile.png",
+      "original_sha256": "cca0037df7f5e31d8ac9a83b2b0a4b2fb51bfce185ace936e1fdb1c2954134ff",
+      "archive_sha256": "cca0037df7f5e31d8ac9a83b2b0a4b2fb51bfce185ace936e1fdb1c2954134ff"
+    },
+    {
+      "original": "docs/design/murim-scenes/departure-desktop.png",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/murim-scenes/departure-desktop.png",
+      "original_sha256": "b2bafdac8cf05eb892a362544c2927b732aad5efe0c515626fa0d2e0d0db5547",
+      "archive_sha256": "b2bafdac8cf05eb892a362544c2927b732aad5efe0c515626fa0d2e0d0db5547"
+    },
+    {
+      "original": "docs/design/murim-scenes/loadout-mobile.png",
+      "archive": "docs/archive/2026-10-12-이전문서/시안/murim-scenes/loadout-mobile.png",
+      "original_sha256": "3eeadac4c9be1d84029249f179bb7f9f01c6480031d985bc39923b167437f7ec",
+      "archive_sha256": "3eeadac4c9be1d84029249f179bb7f9f01c6480031d985bc39923b167437f7ec"
+    },
+    {
+      "original": "docs/feedback-two-play-guide.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/feedback-two-play-guide.md",
+      "original_sha256": "6d422f0fc343f3215d22974bdc0ace681f83d190d8a0f248597778b55c0fd098",
+      "archive_sha256": "535081c196753bf2906d5f6c63e5a4ca92c5838818262a737f7e88e7fe948189"
+    },
+    {
+      "original": "docs/growth-arc-test-guide.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/growth-arc-test-guide.md",
+      "original_sha256": "ea7e4b4cdc294be24da4b4a20eb3fffe24aa32b235c9c928c48d6bce9f712bf6",
+      "archive_sha256": "f279584c56e58660fe584286297a9373514dd30df69d6e08c2284eeb0a8c393e"
+    },
+    {
+      "original": "docs/planning/00_중앙기획서_문서지도.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/00_중앙기획서_문서지도.md",
+      "original_sha256": "ad169947fcf8760cd1e976ee8c5e5b58896b1e61886cb8385baf596a594bffde",
+      "archive_sha256": "d65aa3f35181cf830b60bb685901dc4d8e7dced4f4e27f8b584f32491fe949ae"
+    },
+    {
+      "original": "docs/planning/01_컨셉과_게임구조.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/01_컨셉과_게임구조.md",
+      "original_sha256": "a97fed36ba762d37214f7687b2fdc13e4a3aecfaa0d97ec7c057e9107ed4c5dc",
+      "archive_sha256": "c1cb8c4c080ed5e43ebe54e1dfba03fa9a26ae0cba60a8d63c3f6daa9776764c"
+    },
+    {
+      "original": "docs/planning/02_기연과_희소보상.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/02_기연과_희소보상.md",
+      "original_sha256": "99724f8bc2c7b02db82e244293258409c83efab9e4f7486b3060d58ee3229259",
+      "archive_sha256": "b59e4a3c2276b29ede7437aeeeb653446e12f1c7e850759dfa9f275001596f9a"
+    },
+    {
+      "original": "docs/planning/03_현실세계_헌터와_퓨전판타지.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/03_현실세계_헌터와_퓨전판타지.md",
+      "original_sha256": "f3c6cf9030e4c7c3abcaddca2f7420b6b0a85a6cf6d92f9f974c094c04bee136",
+      "archive_sha256": "8cc9af024bc541fc9f9503a82b6137ba8935a0dd82e2d03418ec7e6fd1d0112c"
+    },
+    {
+      "original": "docs/planning/04_무림세계_문파와_경지.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/04_무림세계_문파와_경지.md",
+      "original_sha256": "0953d3751e6457c9d53383f2d726fc5f8ec61005c47653b1c1ea0bdf17982d1d",
+      "archive_sha256": "597b8a426052d7556149f76a9045564bc1d8bb6bc73b1f21a7d59af341605ae9"
+    },
+    {
+      "original": "docs/planning/05_무공스킬_트리와_성취도.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/05_무공스킬_트리와_성취도.md",
+      "original_sha256": "d049e9666dd84d59e9854fe7831b08087c1cef2e1ba51e4816be6b1fa180b957",
+      "archive_sha256": "fb3f63da24ed879930cf328b4555facdcfce95d712cb142583612aaa987b88dc"
+    },
+    {
+      "original": "docs/planning/06_스탯_에너지_양세계연계.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/06_스탯_에너지_양세계연계.md",
+      "original_sha256": "e77074510cad426f3497b7c0ddac77a52db6e0b784bdf0e9014a0c08d30d5b9a",
+      "archive_sha256": "22cf0675e37eb4a837ff70a2be8672d6e198c109bf8a5b4033a18d562c0e602f"
+    },
+    {
+      "original": "docs/planning/07_스토리_인트로부터_10장.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/07_스토리_인트로부터_10장.md",
+      "original_sha256": "4fcc5c8863db934153767403e30ac2e81a5ce9cce097ca912aebe7bb7bb794f9",
+      "archive_sha256": "727f4fffdcf06e6e53aea305f5d249e6f592d45a146430b482a1168838d1b27a"
+    },
+    {
+      "original": "docs/planning/08_UIUX_아트_정보전달.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/08_UIUX_아트_정보전달.md",
+      "original_sha256": "55db2734731c989f4deb8b0c6cb601b9215319d364fbc38567ec63019b95ae05",
+      "archive_sha256": "d364b335fda11ed6f86910f912766cc99b998ab47ab1c62161688eccb2e86f8f"
+    },
+    {
+      "original": "docs/planning/09_운영_독점권_멀티플레이.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/09_운영_독점권_멀티플레이.md",
+      "original_sha256": "6baf6e131e3f65f9906d8c41cb7943d38b0917267924d4f3b5b47d2168165e96",
+      "archive_sha256": "8f7456d176faf2f2aa8770ee0dcd1fa105eb7410a81615853dad7d8183dc9f07"
+    },
+    {
+      "original": "docs/planning/10_구현대조_개편로드맵_검증.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/10_구현대조_개편로드맵_검증.md",
+      "original_sha256": "1ad6dbe6bd69ed092053d5a0513b5d68e3d389ed52d1c1f950ffeba70fc687ab",
+      "archive_sha256": "86283252e7c0a74adb41ace4fa44fb299d13eb2a089c896a39741d0a1c8fa533"
+    },
+    {
+      "original": "docs/planning/11_결정대장_확답이필요한질문.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/11_결정대장_확답이필요한질문.md",
+      "original_sha256": "51977c094261794c1f094f9fb469dbbbab102821cd00a75e1ee88a04d260021c",
+      "archive_sha256": "19f669ed58dea8f00a62c219f667d9cc218887918b11533a963425970f5352e8"
+    },
+    {
+      "original": "docs/planning/12_요구사항추적_72카드_출처.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/12_요구사항추적_72카드_출처.md",
+      "original_sha256": "8c065a848f4aa4c89377dbf6a6e4e615154aadf6817b650c33ccfa91dcbbfa25",
+      "archive_sha256": "9dabfd6d308250a1814af8053747941e4d0aaca0be7be0d8a989d5afa9c65fca"
+    },
+    {
+      "original": "docs/planning/13_기연배치와_보상후보.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/13_기연배치와_보상후보.md",
+      "original_sha256": "c0e6515d2471b9efb0275f4c100624b2a96715a2d044ca986519e446dfc73aa0",
+      "archive_sha256": "c715c5830ed5fd6e6b4aef9fd422c7e2bd1a604f9843e73b284faf0885b82279"
+    },
+    {
+      "original": "docs/planning/14_문파무공_레퍼런스_검토.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/14_문파무공_레퍼런스_검토.md",
+      "original_sha256": "2820fff5c155e1072070d9e6eed04b060bf5007c53efdc30d9ae6e6b6f6ddf62",
+      "archive_sha256": "d383c3e035cebf39e389cd8f15f160c58d2088bc8c9fdbcd602d0d488d1abb0c"
+    },
+    {
+      "original": "docs/planning/15_NPC_등장인물_관계와_장별행동.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/15_NPC_등장인물_관계와_장별행동.md",
+      "original_sha256": "a0a4dbfe3fc0425f3e9dd07b1ca4745410da0c0cd325d7a6612d80f7b8ac04d5",
+      "archive_sha256": "08e693dc9a2becf52fdda6d9d46e2bec83d06e33afd3e40ec33247a5c91a8ef5"
+    },
+    {
+      "original": "docs/planning/16_B안_구현범위와_플레이테스트.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/16_B안_구현범위와_플레이테스트.md",
+      "original_sha256": "a052636da6e912ce6c0dd80957b8d87465222845081c537f9b2fff8e5471ce19",
+      "archive_sha256": "d350226bcbae8feed8395c7076d3fb20636a819e7560a410f84a3f89f702c294"
+    },
+    {
+      "original": "docs/planning/17_무림_1~2장_집중개편.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/17_무림_1~2장_집중개편.md",
+      "original_sha256": "f07271aa3e74c9c7b3ff9585e76eca62894f6e55be7969320821ed77149e1a04",
+      "archive_sha256": "e1adb244e860592f8f2465e1b1d43067480f61d6ba0d701eff8d1d1811b277e6"
+    },
+    {
+      "original": "docs/planning/18_무림_장면연결과_기술편성.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/18_무림_장면연결과_기술편성.md",
+      "original_sha256": "36f9c59cf06fe53de2c20d7f3225fdddf7b74053842eaafc18d96c0b3e48c209",
+      "archive_sha256": "387a326bc37479574e8ac8c2eaf180e416f7bb1c8f49d02ed27b5bc154280508"
+    },
+    {
+      "original": "docs/planning/CHANGELOG.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/CHANGELOG.md",
+      "original_sha256": "8f72721bcf0129e688750f2591e05da46789241f6f77785312cc0c28bcb415a2",
+      "archive_sha256": "6858e2b54f0edd1a536872aa74c1d0673af7dac8695c88a0fc90a3f687a68726"
+    },
+    {
+      "original": "docs/planning/README.md",
+      "archive": "docs/archive/2026-10-12-이전문서/기획/README.md",
+      "original_sha256": "bcb7aed3dbeca7c3604aa68b4b1d9a8646708378294aeb3bcd5df7b8ba986aa9",
+      "archive_sha256": "9eef11c148b9eea77dd3b3556651d9b73ee0fdf292390605b5448e18ee9e3906"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-09-25-v03.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-09-25-v03.md",
+      "original_sha256": "354165c94f17ab2995baff7375c777ece48b31d76d27986861d6ae57a7413f04",
+      "archive_sha256": "0db3c600fddc5fb01813f2211d2990de9d51a370bb53a45258097399728fe895"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-09-25-v04-plan.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-09-25-v04-plan.md",
+      "original_sha256": "d4080ea399ee2fb54a13b14eb1294a9394617fe37656b7405a92deaaf03f6be1",
+      "archive_sha256": "ab83d083a9dca9682f9640e1a19bf06e9dfcf3826c4009b034e1ce77577ce6b5"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-09-28-v05-plan.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-09-28-v05-plan.md",
+      "original_sha256": "b4efc032437e3a081e9f019319843902bf1290aff500a641cbb57eee4c115452",
+      "archive_sha256": "d7a9ab3640f7708e700b05f635cdda09a771877f2f65bf8df20905b3e03adda3"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-09-29-codex-art-production.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-09-29-codex-art-production.md",
+      "original_sha256": "ef4e6f95a474dd485352bacaef8196cab4f3d748c820a4673e2c4defc43b05de",
+      "archive_sha256": "4e188ab4387c63ae64dd846b2f1de4caf18cd17c16a0fcb36dd008506e057f0a"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-09-29-v07-plan.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-09-29-v07-plan.md",
+      "original_sha256": "3cdc796c5ecc1e346c5599f71045bb7e9165ba9d325a4506c6d7980da49367d6",
+      "archive_sha256": "bffdc1dc6199ba7a1c25cfb19597f392fa6c0c8bcb1f8d86609765e8110bc534"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-09-29-v08-plan.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-09-29-v08-plan.md",
+      "original_sha256": "74b47643d1c49013ea71256d5360766d81d65b3dfd7f7cebef2ee09411e39604",
+      "archive_sha256": "615bf419961e3d7f13ac101f1a2a16784cfc0d16aad0ea22d5afa41a1a8c3aa8"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-09-30-v09-revision.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-09-30-v09-revision.md",
+      "original_sha256": "e70ce6d7ab6bc9bc6aeb2bde8046fee311074fb23d44e391864a4121b6e94e78",
+      "archive_sha256": "d00d41cc4fb1117ba5b9691df9099dbec3500ee397ad7cc759d7efee674706f0"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-01-feedback-two-and-chapters.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-01-feedback-two-and-chapters.md",
+      "original_sha256": "c4506e5d3df67f8942195524119ca5a65f4c171ecee4aee746acfb1f70c4c38a",
+      "archive_sha256": "d8c0392477197e6b4d57f2203de2f985217105d07bd09317c5cc9fd2f0f97264"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-01-growth-discovery.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-01-growth-discovery.md",
+      "original_sha256": "04fac7de612706b9c0ba7ede5516e384cedab1501353cbab88d2531ff125a04b",
+      "archive_sha256": "f89eefda64c2b5400496e42a60822ee67e7d929929868aec3f079e93b335b285"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-01-world-growth-combat.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-01-world-growth-combat.md",
+      "original_sha256": "0f667b26b3d3b86cf48efe92ea0da8bbefd536f7dbb96ac2f7a0592421d44fa3",
+      "archive_sha256": "e11fc3c2b15a971fddac3d97c687816e3de1a9246ba8db586327d93f00a9a1b8"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-02-ssanggye-v11.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-02-ssanggye-v11.md",
+      "original_sha256": "dcfb363eb78de21895e0afb94024cf7554d83038a3ad8ccd8e137ad9e69822fc",
+      "archive_sha256": "16b31405a6a8528eb591fc30143b54e1fd084be9d3248bb34c6e116d2ff378e5"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-02-ssanggye-v12.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-02-ssanggye-v12.md",
+      "original_sha256": "5231ad99625c0a2cd84867d7edfec2cfb8e8302245701dacf0ab5c82e6d8580e",
+      "archive_sha256": "809eb7831559a9c7d3161db1898a6605632d8549cc676cc85d18afae95a833d2"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-06-boundary-resonance.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-06-boundary-resonance.md",
+      "original_sha256": "e17ea20924889457b500154a0e341ea9fe13ead45f10e8ad8ff8c734d33e4368",
+      "archive_sha256": "d0a7f8a5b428e403a7c5041b6d13ba4695c245535d105db7c3da727ddee2414a"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-06-growth-arc.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-06-growth-arc.md",
+      "original_sha256": "d1cc74be95a31ea4a0d2e1ee260967da67c0fc64fb0d1e132b530e14d970f683",
+      "archive_sha256": "2a73971e5bddffb698b2007638c5f886b7a88df6017a81dee1515909c15dd7f5"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-07-purpose-focused-growth.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-07-purpose-focused-growth.md",
+      "original_sha256": "c5387054e331d0db3279920350abccf879ddbfda52f7091816f77130fc910969",
+      "archive_sha256": "a1bba9477f46d631419ee7dc9192a84e334ee36ae96cafcd718409761347f538"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-08-murim-journey.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-08-murim-journey.md",
+      "original_sha256": "6b7b4f6f5e642e2c2e6a0da3a1cef8e79baca8b05bd5865e2ae201cad41b5c03",
+      "archive_sha256": "3678790d0f43ad948ea7b00432c4bd01a7397e5ffaec74d905341622a5eb835b"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-08-murim-scenes-loadout.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-08-murim-scenes-loadout.md",
+      "original_sha256": "9b4ec4b0f687118a640dde105ea960b9cc00a48884cc11dd1ec49eaa37738aa3",
+      "archive_sha256": "e23a6887c17b4059e2714ff66c144efe677802a8f98c05cadf4d4489611346bf"
+    },
+    {
+      "original": "docs/superpowers/plans/2026-10-08-plan-b.md",
+      "archive": "docs/archive/2026-10-12-이전문서/작업계획/2026-10-08-plan-b.md",
+      "original_sha256": "90d2f2016975fa7b884af68e457d06de52e2cc37db31b48f3fcc93405c21a45b",
+      "archive_sha256": "2346160528a12360b72c09e7a3d85f21896f86a2aaea149a7410d19ca6373ed4"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-09-25-v03-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-09-25-v03-design.md",
+      "original_sha256": "c9b6501cab3d1700d1023c2bce7476b186263d7585e21341418aad79acb871d8",
+      "archive_sha256": "63f12ea8c61af31b2922cbdc8f906ae8425d1fe784bf590301f82e4337ec33a8"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-09-25-v04-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-09-25-v04-design.md",
+      "original_sha256": "d52e30e03cec9db5a19a3e22b80f2e0622d841e78227ca5eb369d5bc32b717b5",
+      "archive_sha256": "42e0535ac8800e99547948eac2d6aa8fcede1fb68eb39cd3c838fda7ca04ed36"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-09-28-v05-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-09-28-v05-design.md",
+      "original_sha256": "3eae3c8307bad16efb77398a533c0b6413e0dda29ebbb57fee8ed3484606642b",
+      "archive_sha256": "0dff49590d8f7c02413578dd92b01f89362559898342c034bc9ed07206a3ef85"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-09-29-v07-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-09-29-v07-design.md",
+      "original_sha256": "6c695a8f9ab89b857ad0f93df3816364ee6dd2b098397ecd38602e8fb73b5c7b",
+      "archive_sha256": "27f31491e7ee22886b957f3ea948c8d928500d550e882ce6d81ff60d10d6ad21"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-09-29-v08-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-09-29-v08-design.md",
+      "original_sha256": "2a1747edfb98143fb3115d5626b12e5ce774eac243bf4c712362b6c6c968868d",
+      "archive_sha256": "2c3494c276d01c2a80a479d41939c926f608b940af18cf0c64d98fb6f4e14793"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-01-chapters-six-seven-story.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-01-chapters-six-seven-story.md",
+      "original_sha256": "f0a0c31e8f2e961ec605df2901c852422cf276875c6b4b6f311d99a4fb1e5459",
+      "archive_sha256": "ed0648f8a73ec9572b3fee4f23b3e55fa2a7c68bc27eaa2751d41757fb8c520a"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-01-feedback-two-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-01-feedback-two-design.md",
+      "original_sha256": "7b2ceeffe1cf1cfe5131df3ecc97f6b8c3fd214041d3c197989ef282cb31506c",
+      "archive_sha256": "f598ec7814980c4949d88b8cfa52ac3a297fda045a07b155e3b1efab288cb12b"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-01-growth-discovery-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-01-growth-discovery-design.md",
+      "original_sha256": "4e92fc56b61b187a7cc9417f5a4d25e15e0c214536de3f2ff3f5278260b827b8",
+      "archive_sha256": "fd6c58f74e50ab080430b639816f8293bfdac9115af375676ecd7f2551118213"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-01-world-growth-combat-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-01-world-growth-combat-design.md",
+      "original_sha256": "bde2dc80eb585098f7f7878259bf69b574ce74cd3dc51d268fedd32268b5bee2",
+      "archive_sha256": "b15ff1c7a282114cc8c2065c33744a076205df03e72aaafdbf0408f2bdd31b23"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-02-ssanggye-v11-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-02-ssanggye-v11-design.md",
+      "original_sha256": "84dbcabe8bf263d4ccdfcfc80ad962ae9c9d12bb6490cee334025fb13a3ad82e",
+      "archive_sha256": "3ab78922836c050db1805620283d6090b565f1582cf798532e0b170898d326ce"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-06-boundary-resonance-redesign.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-06-boundary-resonance-redesign.md",
+      "original_sha256": "bafc4fdff5484bee325869978f2be73dcb8809a10b47a3ef3d1a6a84cbb6e234",
+      "archive_sha256": "27e5610cdbe2b68fe69dee1cb5c2889a30b38cd8b6cc49d3e3d8696fda157753"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-06-cross-world-items-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-06-cross-world-items-design.md",
+      "original_sha256": "a90928d64b5a5ee69f2aef5e755afc8cbcaeb45136549cc20364b27c332b767e",
+      "archive_sha256": "17c78e65fddca459c1550bc20db7a173c92cbd05a351687210745453696d49de"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-07-purpose-focused-growth-ui-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-07-purpose-focused-growth-ui-design.md",
+      "original_sha256": "dc54b82c68a774590dcbf2f41968efd123fcea5d8fe5644fff9c90864c9c8c2f",
+      "archive_sha256": "fb71b7e9827026182304e3f008e5a0ecad516854157b5497973a253a12b48340"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-08-murim-journey-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-08-murim-journey-design.md",
+      "original_sha256": "9f780a78a18a1855864663fb403a7c08b36fd45c38d2b414d26fa7504413a6e7",
+      "archive_sha256": "8d7855cb48add901beaf7b7a487f46bd60f9ae2f541339fdb2eb3dd1630905e2"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-08-murim-scenes-loadout-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-08-murim-scenes-loadout-design.md",
+      "original_sha256": "ebb67ec23e1114e1e2948748302c4253a6fc7b710bf2c3935b68568cec616877",
+      "archive_sha256": "c98b4850139e8b273c14ed2c812e6e597990bf11030f476605be515ab43f34bc"
+    },
+    {
+      "original": "docs/superpowers/specs/2026-10-08-plan-b-design.md",
+      "archive": "docs/archive/2026-10-12-이전문서/설계/2026-10-08-plan-b-design.md",
+      "original_sha256": "55e21e3c9933d447256cfc697be37b5b06b3607d8c9a0148611bbfcc5767657a",
+      "archive_sha256": "68c30683b637a55d8449c57923be30c4ddf8fea9fb409218e7803107d70f6302"
+    },
+    {
+      "original": "docs/v11-balance-review.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/v11-balance-review.md",
+      "original_sha256": "8d0b077aa497b10633c78e65b89c1684260cf9ea6a27b9d5f5d9808a3af757fc",
+      "archive_sha256": "a35fc2afd8878b8d53edbea14f2dd4ac1af7c2dcbc325827f9172024e7911da6"
+    },
+    {
+      "original": "docs/v11-improvement-review.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/v11-improvement-review.md",
+      "original_sha256": "206f0113338de1956f4168d706c695dc80d15315308e9df7b6b57ee724fdcea5",
+      "archive_sha256": "9ff140253f5abdbbd6cb2435f1340991aae42b4a70a046ab11cd5da7d8b0b767"
+    },
+    {
+      "original": "docs/verification-v03.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/verification-v03.md",
+      "original_sha256": "0205a4de3490b231eb9153420b921fd1317a536d1a9a88fed8a09918ea7e96b1",
+      "archive_sha256": "47e00a82ce4408c85d4637c85a0e6c0bba313b34141e4c6d9d740441bfcddb38"
+    },
+    {
+      "original": "docs/verification-v04.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/verification-v04.md",
+      "original_sha256": "65fee53c68517ed48a9ebc685a85cb61bfa7fb006b2dfa581fa1c6ae1665e454",
+      "archive_sha256": "d03b9c6ae98bba4e2754bb2278626016743b22f3b2cf69b112ca22f05948dcd0"
+    },
+    {
+      "original": "docs/verification-v05.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/verification-v05.md",
+      "original_sha256": "a88a1428ca8b9595668796bfddfd326676b34ab4f86d691cf19a25bc009d6ced",
+      "archive_sha256": "fb43fcafba5c5449b7b94221b5c741ad31f0d9daa0513f6510709fec1255267f"
+    },
+    {
+      "original": "docs/verification-v06.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/verification-v06.md",
+      "original_sha256": "6547934480c40b1c4552c31f4c850174c1fae5dbba54b9cfd4120216bd4a85ff",
+      "archive_sha256": "aa443a75ac26f641df51301f9c6d01c0c54bfce0c238caf7a5dbf1ae11a1cfce"
+    },
+    {
+      "original": "docs/verification-v07.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/verification-v07.md",
+      "original_sha256": "bae253579e56df7dee6fb5ae379de544af4494d023a3d25c51c7f5a5707e1ce5",
+      "archive_sha256": "4ce31c485dd63d0494ca7e991d825f8914acd95f32a270c4191b88462695d0fb"
+    },
+    {
+      "original": "docs/verification-v08.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/verification-v08.md",
+      "original_sha256": "63777255913c4e1be27fb6ce2ec72b79a57da89516f0d50ca17d9cb71383ccaa",
+      "archive_sha256": "e7d92e8275401e6157a80eebc100cac458801afe8849d83b5cfabddb65864197"
+    },
+    {
+      "original": "docs/world-growth-balance-review.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/world-growth-balance-review.md",
+      "original_sha256": "f3d7897f1bf0fbda8de00125fcfc74ae774cb5fb08cf56adcc8ed0371fd459ee",
+      "archive_sha256": "0fc267e5ceb64bbc3656eaa4e103c7815b0ce9ef5ea5a80c470e43a8592f9cdd"
+    },
+    {
+      "original": "docs/world-growth-release-review.md",
+      "archive": "docs/archive/2026-10-12-이전문서/검토기록/world-growth-release-review.md",
+      "original_sha256": "2517f2ae1752fe202e3b7e55b0d0d5ff1b14167885366a449a7f8e6caa0e6408",
+      "archive_sha256": "80716e3ca646db14580766257efc0e8deeb9da8145dffca37be336abc1404eb1"
+    }
+  ]
+}
