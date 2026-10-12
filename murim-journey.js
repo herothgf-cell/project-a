@@ -3,7 +3,7 @@
  'use strict';
  const roadNames=['추적자의 죽림','갈림길 초소','무너진 잔도','물안개 계곡','버려진 역참','산사의 돌계단','매복의 협곡','운무 숲길','화산 외곽 관문','화산 산문'];
  const events=[
-  '백련을 쫓던 자들이 길을 막았다. 정체를 단정할 증거는 아직 없다.','부러진 수레 옆에서 남궁의 여행자를 만났다. 칼끝의 거리를 읽는 법을 나눌 수 있다.','백련을 부축할 넓은 길을 확보했다. 천흔 쪽으로 되돌아가기에는 아직 위험하다.','무당의 여행자가 기운을 아끼는 호흡을 제안했다. 야영지에서 이야기를 들을 수 있다.','역참에서 추적자들의 보급 흔적을 발견했다. 백련은 마교 활동과 천흔의 관계를 조사 중이었다고 밝힌다.','아미의 여행자가 부상자를 지키는 발걸음을 보여 준다. 야영지에서 배울 수 있다.','협곡의 매복을 돌파했다. 백련은 힘을 보태려다 부상이 깊어져 다시 검을 거둔다.','구름 너머 화산의 능선이 보인다. 돌아가기 위해 먼저 살아남을 힘을 기른다.','관문을 점거한 무리를 물리치고 화산에 구조 신호를 보냈다.','산문까지 길을 열었다. 이제 화산에서 백련의 치료를 받을 수 있다.'
+  '백련을 쫓던 자들이 길을 막았다. 정체를 단정할 증거는 아직 없다.','부러진 수레가 큰길을 막았다. 백련을 부축하고 잔도 쪽으로 우회한다.','백련을 부축할 넓은 길을 확보했다. 천흔 쪽으로 되돌아가기에는 아직 위험하다.','무당의 여행자가 화산으로 가는 길을 알려 주었다. 무공 전수 없이 역참으로 향한다.','역참에서 추적자들의 보급 흔적을 발견했다. 백련은 마교 활동과 천흔의 관계를 조사 중이었다고 밝힌다.','돌계단 끝에서 협곡의 매복을 발견했다. 백련과 함께 앞길을 살핀다.','협곡의 매복을 돌파했다. 백련은 힘을 보태려다 부상이 깊어져 다시 검을 거둔다.','구름 너머 화산의 능선이 보인다. 돌아가기 위해 먼저 살아남을 힘을 기른다.','관문을 점거한 무리를 물리치고 화산에 구조 신호를 보냈다.','산문까지 길을 열었다. 이제 화산에서 백련의 치료를 받을 수 있다.'
  ];
  const roads=roadNames.map((name,i)=>({id:'murimRoad'+(i+1),name:(i+1)+'. '+name,index:i,chapter:1,story:events[i]}));
  const returns=[{id:'murimReturn1',name:'귀환길 1 · 천흔 옛길',index:10,chapter:2,story:'백련과 함께 천흔의 위치를 다시 확인했다. 갈라진 기운의 흔적에서 선택 수련 기회가 열린다.'},{id:'murimReturn2',name:'귀환길 2 · 검은 진영',index:11,chapter:2,story:'적대 무리의 진영을 무너뜨렸다. 천흔을 지키는 우두머리만 남았다.'},{id:'murimReturn3',name:'귀환길 3 · 천흔 수문장',index:12,chapter:2,story:'천흔을 막던 우두머리를 제압했다. 돌아갈 길이 열렸다.'}];
@@ -25,12 +25,12 @@
  function scene(g){const s=state(g),p=s?.sceneState,d=p&&Scenes.get(p.id);return d?{...d,page:p.page,current:d.pages[p.page]}:null;}
  function queue(g,id){const s=state(g);if(!id||s.sceneState||s.completedScenes.includes(id))return false;s.sceneState={id,page:0};return true;}
  function advanceScene(g,skip=false){
-  const s=state(g),d=scene(g);if(!d||d.choice||g.area!=='village')return false;
+  const s=state(g),d=scene(g);if(!d||d.choice||!Growth.safe(g))return false;
   if(!skip&&s.sceneState.page<d.pages.length-1){s.sceneState.page++;return true;}
   s.completedScenes.push(d.id);s.sceneState=null;
   const i=introIds.indexOf(d.id);if(i>=0){s.scene=Math.min(3,i+1);if(i<3)queue(g,introIds[i+1]);else s.stage='tutorial';}
   if(d.id==='murim-treatment'){s.stage='choice';queue(g,'murim-disciple');}
-  for(const [type,id]of Object.entries(mentorAt))if(d.id===sceneFor(id)&&!s.mentors.includes(type))s.mentors.push(type);
+  // Travel encounters convey directions only. Existing mentor history remains intact.
   if(d.id==='murim-first-return'){s.stage='complete';g.enter('city');}
   return true;
  }
@@ -44,8 +44,8 @@
   if(s.cleared.includes(id)&&!s.completedScenes?.includes(sceneFor(id)))return !s.sceneState||s.sceneState.id===sceneFor(id);
   if(s.sceneState)return false;if(id==='murimChance')return chanceAvailable(g);return next(g)?.id===id;
  }
- function prepare(g,id){const s=state(g);if(!s||g.area!=='village'||g.player.hp<=0||s.sceneState)return false;if(id!=='murimChance'&&next(g)?.id!==id||id==='murimChance'&&!chanceAvailable(g))return false;const before=s.chanceChoice;if(id==='murimChance')s.chanceChoice='enter';const ok=g.enter(id);if(!ok)s.chanceChoice=before;return !!ok;}
- function skipChance(g){if(g.area!=='village'||!chanceAvailable(g))return false;state(g).chanceChoice='skip';return true;}
+ function prepare(g,id){const s=state(g);if(!s||!Growth.safe(g)||s.sceneState)return false;if(area(g.area)&&s.cleared.includes(g.area)&&!s.completedScenes.includes(sceneFor(g.area)))return false;if(id!=='murimChance'&&next(g)?.id!==id||id==='murimChance'&&!chanceAvailable(g))return false;const before=s.chanceChoice;if(id==='murimChance')s.chanceChoice='enter';const ok=g.enter(id);if(!ok)s.chanceChoice=before;return !!ok;}
+ function skipChance(g){if(!Growth.safe(g)||!chanceAvailable(g))return false;state(g).chanceChoice='skip';return true;}
  function spawnTutorial(g){
   const t=state(g).tutorial;if(!t.waves)return;const prefix='tutorial-'+t.wave+'-';if(g.enemies.length===[2,2,3][t.wave]&&g.enemies.every(e=>e.id.startsWith(prefix)))return;
   const base=g.enemies[0]||{r:19,kind:'bandit',range:64,windMax:1,pattern:'strike'};
@@ -64,11 +64,11 @@
  function step(g){if(!active(g)||g.area!=='murimTutorial')return;const s=state(g),p=g.murimEntry;if(p&&Math.hypot(g.player.x-p.x,g.player.y-p.y)>24)s.tutorial.move=true;}
  function contact(g,e,c){if(active(g)&&g.area==='murimTutorial'&&e.journeyEnemy&&c?.manual&&c.action==='attack')state(g).tutorial.attack=true;}
  function action(g,a,ok,held){if(!active(g)||!ok)return;const s=state(g),l=Growth.state(g).levels;if(a==='dash'){g.player.cool.dash=Math.max(.6,1.2-l.step*.1);g.player.invuln+=l.distance*.03;if(!held&&g.area==='murimTutorial')s.tutorial.dash=true;}}
- function points(g){const s=state(g);if(!s)return null;if(area(g.area))return [point('journey-exit',110,945,s.cleared.includes(g.area)||g.area==='murimTutorial'&&tutorialReady(g)?'확보 완료 · 다음 장면':'안전한 곳으로 철수','exit')];return [];}
- function choose(g,choice){const s=state(g);if(!s||s.stage!=='choice'||g.area!=='village'||!['accept','decline'].includes(choice)||s.sceneState?.id!=='murim-disciple')return false;s.disciple=choice;s.stage='return';s.completedScenes.push('murim-disciple');s.sceneState=null;queue(g,'murim-disciple-'+choice);g.training=2;g.progress=4;return true;}
+ function points(g){const s=state(g);if(!s)return null;if(area(g.area)){const done=s.cleared.includes(g.area)||g.area==='murimTutorial'&&tutorialReady(g);return [point('journey-exit',done?1190:110,done?300:945,done?'앞길로 · 다음 지역':'안전한 곳으로 철수','exit')];}return [];}
+ function choose(g,choice){const s=state(g);if(!s||s.stage!=='choice'||!Growth.safe(g)||!['accept','decline'].includes(choice)||s.sceneState?.id!=='murim-disciple')return false;s.disciple=choice;s.stage='return';s.completedScenes.push('murim-disciple');s.sceneState=null;queue(g,'murim-disciple-'+choice);g.training=2;g.progress=4;return true;}
  function interact(g,id){
   const s=state(g);if(!s)return null;
-  if(id==='journey-exit'&&area(g.area)){const from=g.area;if(from==='murimTutorial'&&tutorialReady(g))finishTutorial(g);g.enter('village');if(s.cleared.includes(from))queue(g,sceneFor(from));return {type:scene(g)?'journey-scene':'journey-route'};}
+  if(id==='journey-exit'&&area(g.area)){const from=g.area;if(from==='murimTutorial'&&tutorialReady(g))finishTutorial(g);if(s.cleared.includes(from)){if(queue(g,sceneFor(from))){g.player.hp=g.stats().hp;g.player.mp=g.stats().mp;}}else g.enter('village');return {type:scene(g)?'journey-scene':'journey-route'};}
   if(id==='journey-next')return {type:scene(g)?'journey-scene':s.stage==='choice'?'journey-choice':s.stage==='complete'?'journey-complete':'journey-route'};
   return {type:'toast',text:'메뉴에서 다음 장면과 목적지를 확인하세요.'};
  }
@@ -102,7 +102,7 @@
   for(const id of [...s.completedScenes,...(p?[p.id]:[])]){const source=locations.find(d=>sceneFor(d.id)===id);if(source&&!s.cleared.includes(source.id))throw Error('무림 장면 선행 누락');if(id.startsWith('murim-disciple')&&!s.cleared.includes('murimRoad10')||id.startsWith('murim-disciple-')&&id!=='murim-disciple-'+s.disciple)throw Error('무림 장면 선택 순서 오류');}
   if(p&&introIds.includes(p.id)&&s.stage!=='intro'||p?.id==='murim-disciple'&&s.stage!=='choice'||s.stage==='choice'&&p?.id!=='murim-disciple'||p?.id==='murim-treatment'&&s.stage!=='treatment'||s.stage==='intro'&&!introIds.includes(p?.id))throw Error('무림 장면 단계 오류');
   if(p){const expected=introIds.includes(p.id)?'intro':p.id==='murim-treatment'?'treatment':p.id==='murim-disciple'?'choice':p.id==='murim-departure'||p.id.startsWith('murim-road-')?'road':'return';if(s.stage!==expected)throw Error('무림 장면 단계 오류');}
-  Growth.validate(g);Notices.validate(g);
+  Growth.validatePlum(g);Growth.validate(g);Notices.validate(g);
  }
  return {state,active,area,areas,start,intro,scene,advanceScene,canEnter,prepare,skipChance,chanceAvailable,populate,onEnter,reward,step,contact,action,points,choose,interact,objective,next,validate,roads,returns,locations,tutorialReady,practice};
 });

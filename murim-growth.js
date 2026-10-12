@@ -4,21 +4,38 @@
  const nodes=[
   {id:'edge',tree:'sword',name:'검로 다듬기',glyph:'劍',max:3,parent:null,mentor:null,description:'단계마다 삼재 검격 피해 +5%.'},
   {id:'arc',tree:'sword',name:'삼재 · 횡검',glyph:'斬',max:1,parent:'edge',mentor:null,description:'전방을 넓게 베는 횡검을 체득합니다. 기력 18, 재사용 2.8초.'},
-  {id:'precision',tree:'sword',name:'남궁의 거리 읽기',glyph:'勢',max:3,parent:'arc',mentor:'sword',description:'횡검 피해가 단계마다 8% 증가합니다.'},
+  {id:'precision',tree:'sword',name:'검끝의 거리 읽기',glyph:'勢',max:3,parent:'arc',mentor:null,description:'횡검 피해가 단계마다 8% 증가합니다.'},
   {id:'step',tree:'movement',name:'가벼운 발',glyph:'步',max:3,parent:null,mentor:null,description:'회피 재사용 시간이 단계마다 0.1초 감소합니다.'},
   {id:'guard',tree:'movement',name:'안정된 중심',glyph:'守',max:3,parent:'step',mentor:null,description:'최대 생명이 단계마다 8 증가합니다.'},
-  {id:'distance',tree:'movement',name:'아미의 거리 조절',glyph:'風',max:3,parent:'guard',mentor:'movement',description:'회피 무적 시간이 단계마다 0.03초 증가합니다.'},
+  {id:'distance',tree:'movement',name:'발걸음의 거리 조절',glyph:'風',max:3,parent:'guard',mentor:null,description:'회피 무적 시간이 단계마다 0.03초 증가합니다.'},
   {id:'breath',tree:'inner',name:'고른 호흡',glyph:'息',max:3,parent:null,mentor:null,description:'최대 기력이 단계마다 6 증가합니다.'},
   {id:'reserve',tree:'inner',name:'기력 아끼기',glyph:'氣',max:3,parent:'breath',mentor:null,description:'횡검·매화노방 기력 소모가 단계마다 1 감소합니다.'},
-  {id:'recovery',tree:'inner',name:'무당의 운기',glyph:'靜',max:3,parent:'reserve',mentor:'inner',description:'초당 기력 회복이 단계마다 0.3 증가합니다.'}
+  {id:'recovery',tree:'inner',name:'삼재 운기',glyph:'靜',max:3,parent:'reserve',mentor:null,description:'초당 기력 회복이 단계마다 0.3 증가합니다.'}
  ];
  const active=g=>!!g.worldState?.murimJourney;
- const initial=()=>({version:1,grants:['start'],allocation:{attack:0,hp:0,mp:0},levels:Object.fromEntries(nodes.map(n=>[n.id,0]))});
+ const initial=()=>({version:1,grants:['start'],allocation:{attack:0,hp:0,mp:0},levels:Object.fromEntries(nodes.map(n=>[n.id,0])),plum:{learned:[],records:{'plum-second':0,'plum-third':0}}});
  const state=g=>g.worldState.murimGrowth;
+ // Costs, combat effects and practice thresholds below are playtest proposals.
+ const forms=[
+  {id:'plum-first',name:'매화노방',number:1,parent:null,cost:0,description:'주변 검세로 위협을 제압합니다. 백련의 정식 제자 수락으로 체득합니다.'},
+  {id:'plum-second',name:'매화접무',number:2,parent:'plum-first',cost:2,mp:16,cool:3.6,range:180,mult:2.6,description:'주변 180 거리의 적을 베고 0.25초간 회피합니다. 기력 16 · 재사용 3.6초 (검증안).'},
+  {id:'plum-third',name:'매화토염',number:3,parent:'plum-second',cost:2,mp:24,cool:5,range:300,mult:4.4,description:'전방 300 거리의 좁은 검로에 강한 일격을 보냅니다. 기력 24 · 재사용 5초 (검증안).'}
+ ];
+ function plum(g){if(state(g).plum===undefined)state(g).plum={learned:[],records:{'plum-second':0,'plum-third':0}};return state(g).plum;}
+ function form(g,id){const f=forms.find(x=>x.id===id);if(!f)return null;const accepted=g.worldState.murimJourney.disciple==='accept',value=id==='plum-first'?g.ordinarySkill('murim','storm').value:plum(g).records[id],learned=accepted&&(id==='plum-first'||plum(g).learned.includes(id)),stage=id==='plum-first'?Math.min(2,Math.floor(value/8)):Math.min(2,Math.floor(value/4));return {...f,learned,value,stage,label:learned?['입문','활용','숙련'][stage]:'미체득'};}
+ function formReason(g,id){const f=form(g,id);if(!f)return '아직 전수되지 않은 초식';if(g.worldState.murimJourney.disciple!=='accept')return '백련의 정식 제자 수락 필요';if(f.learned)return '이미 체득한 초식';if(f.parent){const p=form(g,f.parent);if(!p.learned)return p.name+' 체득 필요';if(p.value<1)return p.name+' 실전 명중 1회 필요';}if(!safe(g))return '현재 전장의 위협을 먼저 제압하세요';if(balance(g).scroll<f.cost)return '수련첩 부족';return '';}
+ function learnForm(g,id){if(formReason(g,id))return false;plum(g).learned.push(id);return true;}
+ function formInfo(g,id){const f=form(g,id);return f&&{name:f.name+' · 제'+f.number+'초식',glyph:'梅',description:f.description+' · '+f.label,cost:Math.max(1,f.mp-state(g).levels.reserve),cool:f.cool,need:0,locked:!f.learned,cooldownKey:id,techniqueId:id,hidden:!f.learned};}
+ function castForm(g,id,held=false){const f=form(g,id),k=formInfo(g,id),p=g.player;if(!f||f.number===1||!f.learned||!g.area.startsWith('murim')||p.hp<=0||(p.cool[id]||0)>0||p.mp<k.cost||g.worldState.murimJourney.sceneState)return false;
+  p.mp-=k.cost;p.cool[id]=k.cool;p.swing=.24;if(id==='plum-second')p.invuln=Math.max(p.invuln,.25);
+  const cast={manual:!held,action:id};g.effect(id==='plum-second'?'storm':'slash',p.x,p.y,{angle:p.face,range:f.range,skill:id==='plum-second'?'storm':'moon',life:.4,max:.4});g.emit('sound',{name:'skill'});
+  for(const e of [...g.enemies]){if(e.hp<=0||Math.hypot(e.x-p.x,e.y-p.y)>f.range+e.r||!g.lineClear(p,e)||e.boss&&g.bossLocked())continue;if(id==='plum-third'&&Math.cos(Math.atan2(e.y-p.y,e.x-p.x)-p.face)<.8)continue;const before=e.hp;g.strike(e,Math.round(g.stats().attack*f.mult*(1+f.stage*.02)),id,cast);if(!held&&e.hp<before&&!e.trial&&!e.demonstration&&!e.assessment){const credits=e.plumCredits||(e.plumCredits={});if((credits[id]||0)<3){credits[id]=(credits[id]||0)+1;plum(g).records[id]=Math.min(32,plum(g).records[id]+1);}}}return true;
+ }
+ function validatePlum(g){const p=plum(g);if(!p||!Array.isArray(p.learned)||p.learned.length>2||new Set(p.learned).size!==p.learned.length||p.learned.some(id=>!['plum-second','plum-third'].includes(id))||!p.records||Object.keys(p.records).length!==2||['plum-second','plum-third'].some(id=>!Number.isInteger(p.records[id])||p.records[id]<0||p.records[id]>32||p.records[id]>0&&!p.learned.includes(id))||p.learned.length&&g.worldState.murimJourney.disciple!=='accept'||p.learned.includes('plum-second')&&!(g.worldState.ordinaryGrowth.records.murim.storm>=1)||p.learned.includes('plum-third')&&(!p.learned.includes('plum-second')||p.records['plum-second']<1))throw Error('매화 초식 기록 오류');}
  const value=id=>id==='start'?{stone:3,scroll:2}:id==='murimChance'?{stone:4,scroll:2}:/^murimRoad(?:[1-9]|10)$/.test(id)?{stone:2,scroll:1}:/^murimReturn[1-3]$/.test(id)?{stone:3,scroll:1}:null;
- function balance(g){const s=state(g),total=s.grants.reduce((a,id)=>{const v=value(id);a.stone+=v.stone;a.scroll+=v.scroll;return a;},{stone:0,scroll:0});return {...total,stone:total.stone-Object.values(s.allocation).reduce((a,n)=>a+n,0),scroll:total.scroll-Object.values(s.levels).reduce((a,n)=>a+n,0),total};}
+ function balance(g){const s=state(g),total=s.grants.reduce((a,id)=>{const v=value(id);a.stone+=v.stone;a.scroll+=v.scroll;return a;},{stone:0,scroll:0});return {...total,stone:total.stone-Object.values(s.allocation).reduce((a,n)=>a+n,0),scroll:total.scroll-Object.values(s.levels).reduce((a,n)=>a+n,0)-(s.plum?.learned.length||0)*2,total};}
  function grant(g,id){if(!value(id)||state(g).grants.includes(id))return false;state(g).grants.push(id);return true;}
- function safe(g){return active(g)&&g.area==='village'&&g.player.hp>0&&!g.enemies.some(e=>e.hp>0);}
+ function safe(g){return active(g)&&(g.area==='village'||g.area.startsWith('murim'))&&g.player.hp>0&&!g.enemies.some(e=>e.hp>0);}
  function reason(g,id){const n=nodes.find(n=>n.id===id),s=state(g);if(!n||!s)return '없는 기술';if(s.levels[id]>=n.max)return '최대 투자';if(n.parent&&!s.levels[n.parent])return nodes.find(x=>x.id===n.parent).name+' 1단계 필요';if(n.mentor&&!g.worldState.murimJourney.mentors.includes(n.mentor))return ({sword:'남궁',movement:'아미',inner:'무당'})[n.mentor]+'의 여행자와 대화 필요';if(balance(g).scroll<1)return '수련첩 부족';if(!safe(g))return '안전한 야영지에서 투자';return '';}
  function preserve(g,fn){const before=g.stats(),hp=g.player.hp/before.hp,mp=g.player.mp/before.mp;fn();const after=g.stats();g.player.hp=hp*after.hp;g.player.mp=mp*after.mp;return true;}
  function upgrade(g,id){if(reason(g,id))return false;return preserve(g,()=>state(g).levels[id]++);}
@@ -28,5 +45,5 @@
  function cost(g,a,n){return active(g)&&g.area!=='city'&&['moon','storm'].includes(a)?Math.max(1,n-state(g).levels.reserve):n;}
  function info(g,a,k){if(!active(g)||!k)return k;const s=state(g),j=g.worldState.murimJourney;const names={attack:'삼재검법 · 삼재검격',moon:'삼재검법 · 횡검',storm:'매화노방 · 제1초식'};if(['signature1','signature2','ultimate'].includes(a))return {...k,locked:true,description:'이번 1~2장에서는 삼재검법과 선택 무공을 사용합니다.'};const locked=a==='moon'&&!s.levels.arc||a==='storm'&&j.disciple!=='accept';return {...k,name:names[a]||k.name,locked:!!locked,cool:a==='dash'?Math.max(.6,1.2-s.levels.step*.1):k.cool,description:a==='storm'?'제자 제안 수락 시 체득 · 주변 검세로 위협 제압 (효과 검증안)':a==='moon'?'검술 트리에서 체득 · 전방을 넓게 베는 삼재검법':a==='attack'?'백련이 급히 전한 삼재검법의 기초 검격':k.description};}
  function validate(g){if(!active(g))return;const s=state(g),j=g.worldState.murimJourney;if(!s||s.version!==1||!Array.isArray(s.grants)||s.grants.length>16||new Set(s.grants).size!==s.grants.length||!s.grants.includes('start')||s.grants.some(id=>!value(id)||id!=='start'&&!j.cleared.includes(id)))throw Error('무림 성장 보상 기록 오류');for(const id of j.cleared)if(value(id)&&!s.grants.includes(id))throw Error('무림 성장 보상 누락');if(Object.keys(s.allocation||{}).length!==3||['hp','mp','attack'].some(k=>!Number.isInteger(s.allocation[k])||s.allocation[k]<0||s.allocation[k]>100))throw Error('무림 스탯 투자 오류');if(Object.keys(s.levels||{}).length!==nodes.length||nodes.some(n=>!Number.isInteger(s.levels[n.id])||s.levels[n.id]<0||s.levels[n.id]>n.max||s.levels[n.id]>0&&(n.parent&&!s.levels[n.parent]||n.mentor&&!j.mentors.includes(n.mentor))))throw Error('무림 스킬 선행 오류');const b=balance(g);if(b.stone<0||b.scroll<0)throw Error('무림 성장 재료 초과');}
- return {active,initial,state,nodes,value,balance,grant,safe,reason,upgrade,allocate,bonus,damage,cost,info,validate};
+ return {active,initial,state,nodes,value,balance,grant,safe,reason,upgrade,allocate,bonus,damage,cost,info,validate,forms,plum,form,formReason,learnForm,formInfo,castForm,validatePlum};
 });

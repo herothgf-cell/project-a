@@ -2,11 +2,11 @@
 (function(root,f){const n=typeof module==='object'&&module.exports,api=f(n?require('./murim-growth.js'):root.MurimGrowth);if(n)module.exports=api;else root.MurimLoadout=api;})(globalThis,function(Growth){
  'use strict';
  const slots=['moon','storm'];
- const techniques=[{id:'samjae-arc',action:'moon',name:'삼재검법 · 횡검',glyph:'斬'},{id:'plum-first',action:'storm',name:'매화노방 · 제1초식',glyph:'梅'}];
+ const techniques=[{id:'samjae-arc',action:'moon',name:'삼재검법 · 횡검',glyph:'斬'},{id:'plum-first',action:'storm',name:'매화노방 · 제1초식',glyph:'梅'},...Growth.forms.filter(f=>f.number>1).map(f=>({id:f.id,action:f.id,name:f.name+' · 제'+f.number+'초식',glyph:'梅'}))];
  const active=g=>!!g.worldState?.murimJourney;
  const initial=()=>({version:1,slots:{moon:null,storm:null}});
  const state=g=>g.worldState?.murimLoadout;
- function learned(g,id){return active(g)&&(id==='samjae-arc'?g.worldState.murimGrowth?.levels.arc>0:id==='plum-first'?g.worldState.murimJourney.disciple==='accept':false);}
+ function learned(g,id){return active(g)&&(id==='samjae-arc'?g.worldState.murimGrowth?.levels.arc>0:id==='plum-first'?g.worldState.murimJourney.disciple==='accept':!!Growth.form(g,id)?.learned);}
  function skill(g,id){const t=techniques.find(t=>t.id===id);if(!t||!learned(g,id))return null;return {...g.murimTechniqueInfo(t.action),...t,techniqueId:id,cooldownKey:t.action};}
  function resolve(g,input){if(!active(g))return input;if(['attack','dash','potion'].includes(input))return input;if(!slots.includes(input))return null;const id=state(g)?.slots[input];return learned(g,id)?techniques.find(t=>t.id===id).action:null;}
  function describe(g){return {editable:Growth.safe(g),learned:techniques.filter(t=>learned(g,t.id)).map(t=>skill(g,t.id)),slots:slots.map(id=>{const skillId=state(g)?.slots[id]??null;return {id,skillId,skill:skill(g,skillId)};})};}
