@@ -12,7 +12,7 @@
   let resourceWarningUntil=0,resourceWarningCost=0;
   let bannerTimer=null,queued=[],errorReported=false,ultimateTimer=null;
   let dialogueUI=null,journeyUI=null,realmUI=null,growthUI=null,introUI=null,contractUI=null,progressionUI=null,characterUI=null,newsUI=null;
-  let dungeonUI=null,objectiveUI=null;
+  let dungeonUI=null,objectiveUI=null,trainingUI=null;
   const viewMemory=new Map();let currentView=null,dialogReturnFocus=null;let textScale=100;try{textScale=Number(localStorage.getItem('ssanggye:text-scale'))||100;}catch{}if(![100,125,150,200].includes(textScale))textScale=100;document.documentElement.style.fontSize=textScale+'%';
   const keys=new Set(),held=new Set();let joy={x:0,y:0},joyId=null;
   const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=Controls.format(text);return e;};
@@ -160,6 +160,7 @@
   function processEvents(){
     const rs=BoundaryResonance.state(g);if(g.area==='city'&&rs&&rs.notified<rs.grants.length){const old=rs.notified;rs.notified=rs.grants.length;if(persist())toast('무림의 성취가 공명으로 남았습니다 · 성장 → 경계공명에서 확인하세요.');else rs.notified=old;}
     for(const e of g.events.splice(0)){
+      if(e.type==='martial-training'){trainingUI?.open(e.family||'sword',e.section||'learn');persist();continue;}
       if(e.type==='resonance-proof'){if(persist())show(e.title,e.text,[{label:'현실 기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}}]);}
       if(e.type==='resonance-complete'){if(!persist()){g=Game.load(e.before);ResonanceChallenges.runtime(g).rewardBlocked=true;toast('저장 실패 · 기록 지점에서 E로 다시 시도하세요.');continue;}show(e.title,e.text,[{label:'청운촌으로 귀환',run:()=>{g.enter('village');processEvents();persist();update();}},{label:'기록 확인',run:()=>growthUI.open()}]);}
       if(e.type==='world-news')updateNews();
@@ -175,7 +176,7 @@
       if(['transfer','victory','defeat','dialog','awakening','trial-complete','legend-ready'].includes(e.type)){story(e);if(e.inheritance)progressionUI?.inherit(e);persist();}
     }
   }
-  function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(before.training<1&&g.training>=1)result.result.push('유수심법 · 첫 2포인트 해금. 성장에서 심법을 확인하세요.');if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='cycle-choice')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{const scene=CycleOne.interact(g,result.pointId,choice.id);if(scene)story(scene);persist();update();}})),'system','현장 우선 대응');if(result?.type==='dungeon-select')dungeonUI.open();if(result?.type==='seven-preparation')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{g.chooseSevenPreparation(choice.id);processEvents();persist();update();}})),'warden','공동 대응 준비');if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
+  function interact(){if(!running())return;const before={gold:g.gold,training:g.training};const result=g.interact();if(result?.type==='martial-training')trainingUI.open(result.family||'sword',result.section||'learn');if(result?.type==='dialog'){result.result=[];if(g.gold>before.gold)result.result.push('금화 +'+(g.gold-before.gold));if(before.training<1&&g.training>=1)result.result.push('유수심법 · 첫 2포인트 해금. 성장에서 심법을 확인하세요.');if(g.training>before.training)result.result.push(['','월영참 습득','천뢰격 습득','경계 공명 완성'][g.training]);if(result.result.length)result.result.push('다음 행동 · '+ObjectiveModel.resolve(g).currentAction);}if(result?.type==='cycle-choice')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{const scene=CycleOne.interact(g,result.pointId,choice.id);if(scene)story(scene);persist();update();}})),'system','현장 우선 대응');if(result?.type==='dungeon-select')dungeonUI.open();if(result?.type==='seven-preparation')show(result.title,result.text,result.choices.map(choice=>({label:choice.label,run:()=>{g.chooseSevenPreparation(choice.id);processEvents();persist();update();}})),'warden','공동 대응 준비');if(result?.type==='intro-next')introUI.resume();if(result&&['dialog','fate-trial','fate-choice','awakening'].includes(result.type))story(result);if(result?.type==='contract-board')contractUI.open();if(result?.type==='shop')shop();if(result?.type==='toast')toast(result.text);processEvents();persist();update();}
   function act(action){
     if(!running())return;const k=g.skillInfo(action);if(!k)return;
     if(!g.act(action)){
@@ -288,13 +289,14 @@
   const historyUI=GrowthUI.create({game:()=>g,show,node,grid,close:closeDialog,refresh:refreshGrowth,notes:journeyUI,shop,route:tab=>tab==='status'?characterUI.open():growthUI.open('skills')});
   characterUI=CharacterUI.create({game:()=>g,show,node,grid,refresh:refreshGrowth,openSection:section=>growthUI.open(section)});
   newsUI=NewsUI.create({game:()=>g,show,node,refresh:refreshGrowth,openDestination:item=>item.section==='status'?characterUI.open('reality'):growthUI.open(item.section,item.subject)});
-  growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI,prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
+  growthUI=DevelopmentUI.create({game:()=>g,show,node,refresh:refreshGrowth,commit:commitGrowth,notes:journeyUI,close:closeDialog,character:characterUI,news:()=>newsUI,history:historyUI,training:()=>trainingUI.open(),prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
+  trainingUI=MartialTrainingUI.create({game:()=>g,show,node,commit:commitGrowth,refresh:refreshGrowth,close:closeDialog,legacy:()=>growthUI.open('skills')});
   const character=node('button'),hudPortrait=$('hudPortrait');character.id='character';character.type='button';character.setAttribute('aria-label','캐릭터 상태');hudPortrait.replaceWith(character);character.append(hudPortrait);character.onclick=()=>characterUI.open();
   const newsButton=node('button','icon-button','소식');newsButton.id='personalNews';newsButton.onclick=()=>newsUI.open();document.querySelector('.header-actions').prepend(newsButton);
   progressionUI=ProgressionUI.create({node});
   // Repeatable contracts remain in the isolated archive only.
   objectiveUI=ObjectiveUI.create({game:()=>g,node,show,openMap:map,refresh:()=>{clearInput();update();}});
   dungeonUI=DungeonUI.create({game:()=>g,node,show,refresh:refreshGrowth,close:closeDialog,isOpen:()=>dialog.open,prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
-  const mainNav=node('nav','main-navigation');mainNav.setAttribute('aria-label','주 메뉴');for(const [label,run]of [['캐릭터',()=>characterUI.open()],['성장',()=>growthUI.open('growth')],['임무',()=>objectiveUI.open()],['기록',openRecords],['설정',menu]]){const b=label==='성장'?$('growthStatus'):node('button','secondary',label);b.onclick=run;mainNav.append(b);}document.querySelector('header').append(mainNav);
+  const mainNav=node('nav','main-navigation');mainNav.setAttribute('aria-label','주 메뉴');for(const [label,run]of [['캐릭터',()=>characterUI.open()],['성장',()=>growthUI.open('growth')],['임무',()=>objectiveUI.open()],['기록',openRecords],['설정',menu],['무공 수련',()=>trainingUI.open()]]){const b=label==='성장'?$('growthStatus'):node('button','secondary',label);b.onclick=run;if(label==='무공 수련')b.classList.add('training-nav');mainNav.append(b);}document.querySelector('header').append(mainNav);
   inspectSave();WorldArt.cover($('cover'));WorldArt.portrait($('hudPortrait'),'hero');update();requestAnimationFrame(frame);
 })();

@@ -8,6 +8,7 @@ function createServer({artReview=false}={}){
  for(const name of ['save-slots','world-growth','world-achievements','reality-skills','world-reports','personal-news','save-v10','world-game'])allowed.add(name+'.js');
  for(const file of ['character-ui.js','development-ui.js','news-ui.js','world-growth.css','ui-refresh.css','hud-refresh.css','growth-refresh.css','fantasy-ui.css'])allowed.add(file);
  for(const file of ['assets/ui/skill-atlas.webp','assets/ui/world-panorama.webp'])allowed.add(file);
+ for(const file of ['martial-training.js','martial-training-combat.js','martial-training-ui.js','martial-training.css'])allowed.add(file);
  allowed.add('resonance-proof.js');allowed.add('resonance-ui.js');allowed.add('resonance.css');allowed.add('boundary-resonance.js');allowed.add('resonance-challenges.js');allowed.add('encounter-director.js');allowed.add('growth-arc.js');for(const file of ['passive-growth.js','advancement.js','cycle-one.js','growth-screen.js','overseer-art.js'])allowed.add(file);
  for(const file of ['dungeon-entry.js','dungeon-ui.js','combat-audio.js','combat-events.js','audio-ui.js'])allowed.add(file);
  for(const file of ['controls.js','revision.js','progression.js','martial-tree.js','contract-ui.js','progression-ui.js','progression.css','intro-ui.js','growth-ui.js','revision.css',...['signal','stone','return','report','compare'].map(id=>'assets/art/intro/'+id+'.webp')])allowed.add(file);
@@ -25,6 +26,14 @@ function createServer({artReview=false}={}){
   if(!['GET','HEAD'].includes(req.method)){res.writeHead(405,{Allow:'GET, HEAD'});return res.end('Method not allowed');}
   let url,params;try{const parsed=new URL(req.url,'http://localhost');url=decodeURIComponent(parsed.pathname);params=parsed.searchParams;}catch{res.writeHead(400);return res.end('Bad request');}
   const dev=artReview&&params.get('dev')==='1'&&['127.0.0.1','::1','::ffff:127.0.0.1'].includes(req.socket.remoteAddress);
+  if(dev&&url==='/__dev/skillform'){
+   const content=require('./scripts/skillform-html.cjs').skillformHtml(__dirname);res.writeHead(200,{'Content-Type':types['.html']});return res.end(req.method==='HEAD'?undefined:content);
+  }
+  if(dev&&url.startsWith('/__dev/skillform/')){
+   const name=url.slice('/__dev/skillform/'.length);
+   if(!['model.js','trial.js','ui.js','style.css'].includes(name)){res.writeHead(404);return res.end('Not found');}
+   res.writeHead(200,{'Content-Type':types[path.extname(name)]});return res.end(req.method==='HEAD'?undefined:fs.readFileSync(path.join(__dirname,'experiments/skillform',name)));
+  }
   if(dev&&url==='/__dev/start'){
    const stage=params.get('stage');if(!['new','five','six','before','inherited','challenge'].includes(stage)){res.writeHead(400);return res.end('Unknown start');}
    try{const {Game}=require('./world-game.js'),{five,six,resonanceStart}=require('./tests/helpers/world-journey.cjs');const g=stage==='new'?new Game():stage==='five'?five():stage==='six'?six(five(),'ripple'):resonanceStart(stage);const raw=g.save();Game.load(raw);res.writeHead(200,{'Content-Type':types['.json']});return res.end(req.method==='HEAD'?undefined:raw);}catch{res.writeHead(500);return res.end('Unable to prepare start');}

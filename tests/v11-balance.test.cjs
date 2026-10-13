@@ -2,7 +2,7 @@ const test=require('node:test'),assert=require('node:assert/strict');
 const {Game}=require('../world-game.js'),{inherited}=require('./world-fixtures.cjs');
 const families=['ripple','echo','seal'],modes=['flow','focus'],policies=['hold','dodge','response'];
 function measure({family='ripple',mode='flow',policy='hold',grown=true,world='reality',ready=true,manualFocus=false}={}){
- const g=grown?inherited(family):new Game();g.progress=12;g.training=3;g.enter(world==='murim'?'village':'city');g.setBreath(mode);
+ const g=grown?inherited(family):new Game();g.progress=12;g.training=3;require('../martial-training.js').setAssisted(g,false);g.enter(world==='murim'?'village':'city');g.setBreath(mode);
  assert.equal(g.worldGrowth[world].mode,mode);const level=g.level,stats={...g.stats()};assert.equal(g.enter(world==='murim'?'forest':'rift'),true);const e=g.enemies.find(e=>e.role==='heavy');g.enemies=[e];if(ready)e.cd=0;
  const enemy={hp:e.hp,damage:e.damage,role:e.role,speed:e.speed};Object.assign(g.player,{x:e.x-65,y:e.y,face:0,invuln:0});
  let damage=0,hits=0,casts=0,steps=0,potions=0,focusHits=0,focusCycle=-1,focusWaiting=false;const effects={},at=g.playTime,original=g.takeHit;g.takeHit=function(...args){const hp=this.player.hp,result=original.apply(this,args);if(this.player.hp<hp){damage+=hp-this.player.hp;hits++;}return result;};const effect=g.onRealityEffect;g.onRealityEffect=function(ev){effects[ev.kind]=(effects[ev.kind]||0)+1;return effect.call(this,ev);};

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>쌍계 · 무공 조합 수련장</title>
+<link rel="stylesheet" href="/__dev/skillform/style.css?dev=1">
+<!-- GAME_RULES -->
+<script defer src="/__dev/skillform/model.js?dev=1"></script><script defer src="/__dev/skillform/trial.js?dev=1"></script><script defer src="/__dev/skillform/ui.js?dev=1"></script>
+</head><body>
+<header><div><p class="eyebrow">쌍계 / 두 세계의 호흡</p><h1>나의 무공을 빚다</h1><p>월영참에서 시작해, 익힌 원리를 다른 하늘에 남기세요.</p></div><div class="header-actions"><span id="saveStatus" role="status">실험 기록 준비 중</span><button id="saveRetry">다시 저장</button><button id="reset">실험 초기화</button></div></header>
+<div id="error" role="alert" hidden></div>
+<main>
+<ol class="journey" aria-label="수련 순서"><li id="step1">01 <strong>월영참 만들기</strong></li><li id="step2">02 <strong>새 원리 배우기</strong></li><li id="step3">03 <strong>초식 연결하기</strong></li><li id="step4">04 <strong>현실에 남기기</strong></li></ol>
+<section class="intro"><span class="seal">形<br>氣 運 意</span><div><h2 id="nextTitle">백련 · 첫 번째 호흡</h2><p id="nextText">베기, 기본 운기, 즉시 전개, 전방 범위. 네 요소를 하나씩 골라 월영참을 구성하세요.</p><small>쉬운 수련 전투 · 체력 180 · 적 피해 6 · 예고 1.6초 · 실패 손실 없음</small></div></section>
+<div class="workbench">
+<section class="panel"><h2>배움의 흔적</h2><p>원리를 배우고 직접 구성해야 초식이 됩니다.</p><div id="families" class="families"></div><p id="clue" class="clue"></p><button id="learn" class="primary">원리 배우기</button><p class="muted">첫 월영참 이후 모든 배움 경로를 시험할 수 있습니다. 한 번에 한 계열만 운용합니다.</p></section>
+<section class="panel"><div class="title-row"><h2 id="builderTitle">월영참 · 초식 구성</h2><span id="basicState" class="badge">미구성</span></div><p id="recipeHint"></p><div id="axes" class="axes"></div><p id="compatibility" role="status"></p><div class="buttons"><button id="compose" class="primary">초식 구성 저장</button><button id="baseTrial">기본 초식 시험</button></div><p class="muted">각 축 하나 · 핵심 기능 하나. 만든 초식의 기능을 실제로 증명하면 연계 재료가 됩니다.</p></section>
+</div>
+<section class="panel link-panel"><div><p class="eyebrow">두 호흡을 하나로</p><h2 id="linkTitle">초식 연결하기</h2><p id="linkDescription">월영참을 체득한 뒤 새 계열의 초식을 연결하세요.</p></div><div class="link-controls"><label>실험 숙련<select id="rank"><option value="1">1성 · 기본형</option><option value="3">3성 · 조정 체험</option><option value="5">5성 · 확장 체험</option></select></label><label id="valueLabel">조정값 <input id="linkValue" type="range"><output id="valueText"></output></label><p id="linkCost"></p><div class="buttons"><button id="link">연계 초안 저장</button><button id="linkTrial">무림 연계 시험</button></div><div class="buttons"><button id="apply">현실에 적용</button><button id="realityTrial" class="blue">현실 연계 시험</button><button id="realityBase">현실 기본형 비교</button></div><p id="realityState" role="status"></p></div></section>
+<section class="panel trial-panel"><div class="title-row"><div><p class="eyebrow" id="worldLabel">무명 비경 / 시험 준비</p><h2 id="trialTitle">조합한 무공을 펼쳐보세요</h2></div><div class="buttons"><button id="retry" disabled>같은 시험 재시도</button><button id="leave" disabled>거점으로 돌아가기</button></div></div>
+<p id="combatHint" role="status">초식 구성 후 시험 버튼을 누르세요. 전투 중 편집은 잠깁니다.</p><div class="arena"><canvas id="arena" width="960" height="540" tabindex="0" aria-label="수련 전장. 방향키 또는 WASD 이동, Q 준비 기술, K 월영참, J 기본 공격, Space 회피"></canvas><div class="meters"><span id="hp">체력 —</span><span id="mp">내력 —</span><span id="ready">준비 없음</span></div></div>
+<div class="combat-controls"><div class="dpad"><button data-move="0,-1" aria-label="위로 이동">↑</button><button data-move="-1,0" aria-label="왼쪽 이동">←</button><button data-move="0,1" aria-label="아래로 이동">↓</button><button data-move="1,0" aria-label="오른쪽 이동">→</button></div><div class="buttons"><button data-action="signature1">Q · 준비 기술</button><button data-action="moon" class="primary">K · 검격</button><button data-action="attack">J · 기본 공격</button><button data-action="dash">Space · 회피</button></div></div>
+<p class="muted">이동: 방향키/WASD · 마우스로 전장 조준 · 모바일: 방향·기술 버튼 · 예고 원이 찰 때 Q · Esc 일시 정지</p><div id="result" role="status"></div></section>
+<section class="panel"><h2>수련 기록</h2><p>같은 조건에서 기본형과 연계를 비교하세요. 시험마다 체력과 내력이 복구됩니다.</p><div id="history"></div></section>
+</main><footer>개발용 조합 실험 · 본편 저장·난이도·보상은 바뀌지 않습니다. 전투 중 재접속하면 거점부터 이어집니다.</footer>
+<dialog id="resetDialog"><h2>실험 기록을 초기화할까요?</h2><p>월영참부터 다시 시작합니다. 본편 기록은 그대로 유지됩니다.</p><div class="buttons"><button id="cancelReset">취소</button><button id="confirmReset">실험만 초기화</button></div></dialog>
+<noscript>JavaScript를 허용하면 수련장을 사용할 수 있습니다.</noscript></body></html>

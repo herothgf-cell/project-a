@@ -10,6 +10,7 @@ test('explicit prototype build packages candidate play without promoting product
   assert.match(html,/data-art-loading/);
   for(const [,url]of html.matchAll(/(?:src|href)="([^"\s]+\.(?:js|css)[^"\s]*)"/g))assert.ok(url.endsWith('?build='+'c'.repeat(40)),url);
   const manifest=JSON.parse(fs.readFileSync(path.join(out,'asset-manifest.json')));
+  assert.ok(Object.keys(manifest.assets).every(file=>!file.includes('skillform')&&!file.startsWith('experiments/')),'development experiment must not ship');
   for(const file of ['art-runtime.js','art-preview-runtime.js','art-review.html','assets/art/scene-candidate.json'])assert.ok(manifest.assets[file],file);
   const scene=JSON.parse(fs.readFileSync(path.join(out,'assets/art/scene-candidate.json')));
   assert.ok(scene.assets.every(a=>a.status==='candidate'));
@@ -24,6 +25,7 @@ test('site build contains every versioned runtime asset and records exactly thei
   const run=cp.spawnSync(process.execPath,['scripts/build-site.cjs',output,'a25872353ee7949086b74b5a3faffd3bc1a0afad'],{cwd:path.join(__dirname,'..'),encoding:'utf8'});
   assert.equal(run.status,0,run.stderr);
   const manifest=JSON.parse(fs.readFileSync(path.join(output,'asset-manifest.json'))),info=JSON.parse(fs.readFileSync(path.join(output,'build-info.json')));
+  assert.ok(Object.keys(manifest.assets).every(file=>!file.includes('skillform')&&!file.startsWith('experiments/')),'development experiment must not ship');
   assert.equal(info.version,require('../package.json').version);assert.equal(manifest.commit,info.commit);
   assert.ok(Object.hasOwn(manifest.assets,'chapter-five.js'));assert.ok(Object.hasOwn(manifest.assets,'journey.css'));assert.ok(!Object.hasOwn(manifest.assets,'server.cjs'));
   for(const file of ['objective-model.js','objective-ui.js','feedback-two.css','economy.js','save-v9.js','dialogue-data.js','dialogue-ui.js','quest-data.js','growth-model.js','dual-breath.js','later-story-data.js','chapter-six.js','chapter-seven.js'])assert.ok(Object.hasOwn(manifest.assets,file),file);
