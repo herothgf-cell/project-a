@@ -116,7 +116,7 @@
     resourceWarningUntil=0;backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
     viewMemory.clear();currentView=null;if(!load){if(devMode&&globalThis.DevTrainingRoute?.enabled()){try{localStorage.removeItem(DevTrainingRoute.key()+'.proofs');}catch{toast('이전 시험 기록을 지우지 못했습니다.');}}g.beginIntro(true);introUI.start();persist();}
     else if(g.introActive)introUI.resume();
-    else if(devMode&&globalThis.DevTrainingRoute?.enabled()){const next=DevTrainingRoute.next(g,MartialTraining,DevTrainingRoute.completed());trainingUI.open(next?.family||'sword',next?.kind==='learn'?'learn':'create');}else toast(g.restoreNotice||'저장한 위치와 진행에서 이어갑니다.');
+    else if(devMode&&globalThis.DevTrainingRoute?.enabled()){const next=DevTrainingRoute.next(g,MartialTraining,DevTrainingRoute.completed());trainingUI.open(next?.family||'sword',['create','reality'].includes(next?.kind)?'create':'learn');}else toast(g.restoreNotice||'저장한 위치와 진행에서 이어갑니다.');
   }
   function newGame(){if(hasSave)show('새로운 여정을 시작할까요?','현재 진행을 새 저장으로 교체합니다. 이전 저장은 브라우저의 백업 항목에도 보관합니다.\n\n기존 여정은 이어하기로 계속할 수 있습니다.',[{label:'취소',secondary:true},{label:'새로 시작',danger:true,run:()=>{backup(true);start(false);}}],'system','저장 데이터 확인');else start(false);}
   function grid(items){const e=node('div','stat-grid');for(const [label,value]of items){const b=node('div','',label);b.append(node('b','',String(value)));e.append(b);}return e;}
@@ -162,6 +162,7 @@
     const rs=BoundaryResonance.state(g);if(g.area==='city'&&rs&&rs.notified<rs.grants.length){const old=rs.notified;rs.notified=rs.grants.length;if(persist())toast('무림의 성취가 공명으로 남았습니다 · 성장 → 경계공명에서 확인하세요.');else rs.notified=old;}
     for(const e of g.events.splice(0)){
       if(e.type==='martial-link-proven'){if(devMode&&globalThis.DevTrainingRoute?.enabled()){try{DevTrainingRoute.record(g,e);}catch{toast('시험 완료 기록을 저장하지 못했습니다. 저장 공간을 확인하고 다시 실습하세요.');}}persist();continue;}
+      if(e.type==='martial-acquisition-progress'){persist();continue;}
       if(e.type==='martial-practice-complete'||e.type==='awakening'&&e.practice){persist();continue;}
       if(e.type==='martial-training'){trainingUI?.open(e.family||'sword',e.section||'learn');persist();continue;}
       if(e.type==='resonance-proof'){if(persist())show(e.title,e.text,[{label:'현실 기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}}]);}
@@ -200,7 +201,7 @@
   }
   function updateNews(){realmUI?.update();}
   function update(){
-    const practice=g.martialRuntime?.practice,practiceControls=$('trainingPracticeControls');if(practiceControls){practiceControls.hidden=!active||!practice;if(practice)practiceControls.querySelector('span').textContent=practice.completed?'수련 성공 · 계속 연습할 수 있습니다':'수련 중 · 직접 종료할 때까지 진행';}
+    const practice=g.martialRuntime?.practice,acquisition=MartialAcquisition.describe(g).session,practiceControls=$('trainingPracticeControls');if(practiceControls){practiceControls.hidden=!active||!(practice||acquisition);if(acquisition)practiceControls.querySelector('span').textContent=acquisition.objective;else if(practice)practiceControls.querySelector('span').textContent=practice.completed?'수련 성공 · 계속 연습할 수 있습니다':'수련 중 · 직접 종료할 때까지 진행';}
     updateNews();journeyUI?.update();progressionUI?.update();
     for(const [id,section]of [['inventory','growth'],['personalNews',null],['fateJournal','skills'],['character','status']]){const e=$(id);if(e&&g.unreadNews){const n=g.unreadNews(section).length;e.classList.toggle('has-news',n>0);e.setAttribute('aria-label',({inventory:'성장',personalNews:'내 소식',fateJournal:'무공',character:'캐릭터 상태'})[id]+(n?' · 새 소식 '+n+'개':''));}}
     if(active&&!dialog.open&&!g.introActive){const hint=g.potionHint();if(hint){toast(hint);$('potion').classList.add('potion-guidance');persist();}}
@@ -302,6 +303,6 @@
   objectiveUI=ObjectiveUI.create({game:()=>g,node,show,openMap:map,refresh:()=>{clearInput();update();}});
   dungeonUI=DungeonUI.create({game:()=>g,node,show,refresh:refreshGrowth,close:closeDialog,isOpen:()=>dialog.open,prepare:async id=>globalThis.ArtPreview?.prepare?ArtPreview.prepare(AREAS[id].world==='현실'?'reality':'murim'):true});
   const mainNav=node('nav','main-navigation');mainNav.setAttribute('aria-label','주 메뉴');for(const [label,run]of [['캐릭터',()=>characterUI.open()],['성장',()=>growthUI.open('growth')],['임무',()=>objectiveUI.open()],['기록',openRecords],['설정',menu],['무공 수련',()=>trainingUI.open()]]){const b=label==='성장'?$('growthStatus'):node('button','secondary',label);b.onclick=run;if(label==='무공 수련')b.classList.add('training-nav');mainNav.append(b);}document.querySelector('header').append(mainNav);
-  const practiceControls=node('div','training-practice-controls');practiceControls.id='trainingPracticeControls';practiceControls.hidden=true;practiceControls.append(node('span'));const endPractice=node('button','secondary','수련 종료');endPractice.type='button';endPractice.onclick=()=>{let result;const ok=commitGrowth(g=>{result=MartialTraining.finishPractice(g);return true;});if(ok&&result)trainingUI.open(result.family,result.section);};practiceControls.append(endPractice);$('playArea').append(practiceControls);
+  const practiceControls=node('div','training-practice-controls');practiceControls.id='trainingPracticeControls';practiceControls.hidden=true;practiceControls.append(node('span'));const endPractice=node('button','secondary','수련 종료');endPractice.type='button';endPractice.onclick=()=>{let result;const ok=commitGrowth(g=>{result=MartialAcquisition.describe(g).session?MartialAcquisition.stop(g):MartialTraining.finishPractice(g);return true;});if(ok&&result)trainingUI.open(result.family,result.section);};practiceControls.append(endPractice);$('playArea').append(practiceControls);
   inspectSave();WorldArt.cover($('cover'));WorldArt.portrait($('hudPortrait'),'hero');update();requestAnimationFrame(frame);
 })();

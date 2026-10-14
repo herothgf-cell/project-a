@@ -1,6 +1,6 @@
 /* In-game training menu. All mutations use the game's transactional save boundary. */
 (function(root){'use strict';root.MartialTrainingUI={create({game,show,node,commit,refresh,close,legacy}){
- const T=root.MartialTraining,axes=['form','qi','flow','intent'],axisNames=['형','기','운','의'],axisHelp=['몸의 움직임','힘의 성질','펼치는 방식','힘이 닿는 곳'];
+ const T=root.MartialTraining,A=root.MartialAcquisition,axes=['form','qi','flow','intent'],axisNames=['형','기','운','의'],axisHelp=['몸의 움직임','힘의 성질','펼치는 방식','힘이 닿는 곳'];
  let tab='learn',family='sword',draft={},notice='',step=0;
  const el=(tag,cls,text)=>node(tag,cls,text);
  function button(label,run,disabled=false,cls='secondary'){const b=el('button',cls,label);b.type='button';b.disabled=disabled;b.onclick=run;return b;}
@@ -18,24 +18,16 @@
    const next=route.next(g,T,route.completed()),panel=el('div','training-teacher training-dev-route');
    panel.append(el('strong','','개발용 무공 순차 테스트'));
    if(next){
-    const name=next.kind==='learn'?T.catalog[next.family].name:T.links[next.family].name;
-    const target=name+(next.kind==='learn'?' 습득':next.kind==='create'?' 창안 증명':' 현실 연계');
+    const name=['create','reality'].includes(next.kind)?T.links[next.family].name:T.catalog[next.family].name;
+    const target=name+({discover:' 형·기 발견',flow:' 운 체득',quest:' 의 획득',learn:' 습득',create:' 창안 증명',reality:' 현실 연계'}[next.kind]);
     panel.append(el('p','',(next.index+1)+' / '+next.total+' · '+target),el('small','','중간 스토리 생략 · 실제 구성·적중·대응으로 완료 · 일반 저장과 분리'));
     panel.append(button(target+' 시험으로 이동',()=>{
      let result;const ok=commit(g=>{result=route.move(g,T,route.completed());return true;});
      if(!ok){notice='시작점 이동을 저장하지 못했습니다.';render();return;}
      if(result.leave){close();refresh();}else open(result.family,result.section);
     },false,'primary'));
-   }else panel.append(el('p','','11 / 11 완료 · 다섯 무공 습득과 세 창안의 무림·현실 증명을 마쳤습니다.'));
+   }else panel.append(el('p','',route.steps.length+' / '+route.steps.length+' 완료 · 다섯 무공 습득과 세 창안의 무림·현실 증명을 마쳤습니다.'));
    body.append(panel);
-  }
-  const learning=tab==='learn'&&m.basics.find(b=>b.id===family);
-  if(learning?.discovered&&!learning.learned&&!learning.drafted){
-   const decoded=learning.known.every(Boolean),guide=el('div','training-teacher training-guidance');
-   guide.append(el('strong','',decoded?'다음 · 네 요소를 선택해 구성하세요':'형·기 해독 완료 · 운·의는 청운촌에서 해독'));
-   guide.append(el('p','',decoded?'공개된 조합법을 보고 형·기·운·의를 선택한 뒤 구성 확인을 누르세요. 구성 후 실습에 성공하면 무공을 습득합니다.':m.safe?'아래 지도 받기 버튼으로 남은 두 조합법을 공개하세요. 추가 재료나 비용은 없습니다.':'비경의 흔적에서는 형과 기만 알 수 있습니다. 청운촌으로 돌아가 구성하기를 누른 뒤, 단서 해독 · 지도 받기로 운과 의를 공개하세요.'));
-   if(!decoded&&m.safe)guide.append(button('단서 해독 · 지도 받기',()=>change(g=>T.learn(g,family)),false,'primary'));
-   body.append(guide);
   }
   const layout=el('div','training-layout'),list=el('nav','training-list'),detail=el('article','training-detail');list.setAttribute('aria-label',tab==='learn'?'무공 목록':'창안 무공 목록');
   if(tab==='learn'){
@@ -43,20 +35,36 @@
    for(const b of m.basics){const entry=button('',()=>select(b.id),false,'secondary training-entry');entry.dataset.trainingFamily=b.id;entry.setAttribute('aria-pressed',String(family===b.id));entry.append(el('strong','',b.name),el('small','',b.learned?'습득 · '+b.rank+'성':b.drafted?'구성 완료 · 실습 대기':b.discovered?b.grade+' · '+b.known.filter(Boolean).length+'/4 해독':'미발견 · 획득 경로'));list.append(entry);}
    const b=m.basics.find(x=>x.id===family)||m.basics[0];family=b.id;
    const meta=el('div','training-meta');meta.append(el('span','training-grade',b.grade),el('span','',b.learned?'습득 완료 · '+b.rank+'성 / 5성':'조합법 '+b.known.filter(Boolean).length+'/4 해독'));detail.append(meta,el('h3','',b.name),el('p','training-description',b.description));
+   if(b.discovered){
+    detail.append(el('p','training-ownership','보유 요소 '+b.owned.filter(Boolean).length+'/4 · '+(b.craftable?'필요한 요소를 모두 배웠습니다':'부족한 요소의 획득 경로를 확인하세요')));
+    const acquisition=A.describe(g).families.find(x=>x.id===family);
+    if(acquisition){
+     const cards=el('div','training-acquisition');
+     const relic=el('section','training-source');relic.append(el('strong','','형·기 · 비경 조사'),el('p','','무명 비경의 해당 흔적을 조사해 획득합니다.'),el('small','',b.owned[0]&&b.owned[1]?'획득 완료':'미획득'));cards.append(relic);
+     const flow=el('section','training-source');flow.append(el('strong','','운 · 전투 숙련'),el('p','',acquisition.flow.requirement),el('small','',acquisition.flow.owned?'획득 완료':acquisition.flow.count+' / '+acquisition.flow.total));if(!acquisition.flow.owned)flow.append(button('운 체득 실습',()=>change(g=>A.startFlow(g,family),{leave:true}),!m.safe));cards.append(flow);
+     const quest=el('section','training-source'),q=acquisition.quest;quest.append(el('strong','','의 · '+q.title),el('p','',q.description),el('small','','목표 달성 후 청운촌에서 보고하면 의를 얻습니다.'));
+     if(q.stage==='ready')quest.append(button('퀘스트 보고 · 의 획득',()=>change(g=>A.reportQuest(g,family)),g.area!=='village','primary'));
+     else if(q.stage==='complete')quest.append(el('small','','보고 완료 · 의 획득'));
+     else quest.append(button(q.stage==='active'?'의 획득 퀘스트 다시 시작':'의 획득 퀘스트 시작',()=>change(g=>A.startQuest(g,family),{leave:true}),!m.safe||q.stage==='locked'));
+     cards.append(quest);detail.append(cards);
+    }
+    if(!b.known.every(Boolean)){const hints=el('div','training-clue');hints.append(el('p','','조합법은 정답의 힌트입니다. 지도 받아도 요소는 지급되지 않습니다. 배운 요소로 직접 추론할 수도 있습니다.'),button('단서 해독 · 지도 받기',()=>change(g=>T.learn(g,family)),!m.safe));detail.append(hints);}
+    const inventory=el('details','training-inventory');inventory.append(el('summary','','내가 배운 요소와 획득 경로'));for(const [i,a]of axes.entries()){inventory.append(el('strong','',axisNames[i]));for(const o of b.options[a]||[])inventory.append(el('p','',o.label+' · '+(o.source||o.learnedFrom||'배운 요소')));}detail.append(inventory);
+   }
    if(['sword','thunder'].includes(family)&&!b.learned){const teacher=el('div','training-teacher');teacher.append(el('strong','','백련'),el('p','',family==='thunder'?'뇌기를 내려치기에 담아 주변으로 펼쳐라. 구성한 천뢰격을 목인에 직접 적중시키거라.':'형으로 검을 세우고, 기로 힘을 채운다. 운으로 펼치고, 의로 닿을 곳을 정하거라.'));detail.append(teacher,el('p','training-flow','① 네 요소 구성 → ② '+(family==='thunder'?'L 천뢰격':'K 월영참')+' 적중 → ③ '+b.name+' 습득'));}
    if(!b.discovered){detail.append(el('div','training-clue',b.source||b.reason||'무명 비경의 흔적을 조사해 조합법과 요소를 찾으세요.'));}
    else{
     const slots=el('div','training-axes');for(const [i,a]of axes.entries()){
      const label=el('label','training-axis');label.append(el('b','',axisNames[i]),el('small','',axisHelp[i]));
      const options=b.options[a]||[],known=b.known[i],recipe=b.recipe[i];
-     if(known&&recipe){label.append(el('span','training-answer',options.find(o=>o.id===recipe)?.label||T.labels?.[recipe]||recipe));}
+     if(known&&recipe){label.append(el('span','training-answer','조합법 힌트 · '+(options.find(o=>o.id===recipe)?.label||T.labels?.[recipe]||recipe)));}
      else label.append(el('span','training-answer','미해독'));
-     const select=el('select');select.dataset.trainingAxis=a;select.setAttribute('aria-label',axisNames[i]+' 요소 선택');select.append(new Option('요소 선택',''));for(const o of options)select.append(new Option(o.label,o.id));select.value=draft[a]||'';select.disabled=!m.safe||!b.known.every(Boolean)||(!b.learned&&['sword','thunder'].includes(family)&&i>step);
-     select.onchange=()=>{draft[a]=select.value;if(select.value)step=Math.max(step,i+1);for(const [j,k]of axes.entries()){const next=body.querySelector('[data-training-axis="'+k+'"]');if(next)next.disabled=!m.safe||!b.known.every(Boolean)||(!b.learned&&['sword','thunder'].includes(family)&&j>step);}const compose=body.querySelector('[data-training-compose]');compose.disabled=!m.safe||!b.known.every(Boolean)||!axes.every(k=>draft[k]);};
-     label.append(select,el('small','',known?'조합법 해독됨':'청운촌에서 지도 후 공개'));slots.append(label);
+     const select=el('select');select.dataset.trainingAxis=a;select.setAttribute('aria-label',axisNames[i]+' 요소 선택');select.append(new Option('내가 배운 요소 선택',''));for(const o of options)select.append(new Option(o.label,o.id));select.value=draft[a]||'';select.disabled=!m.safe||!options.length;
+     select.onchange=()=>{draft[a]=select.value;const compose=body.querySelector('[data-training-compose]');compose.disabled=!m.safe||!axes.every(k=>draft[k]);};
+     label.append(select,el('small','',b.owned[i]?'필요 요소 보유':(b.missing.find(x=>x.axis===a)?.source||'필요 요소 미획득')));slots.append(label);
     }detail.append(slots);
     const clue=el('div','training-clue');clue.append(el('strong','','배움의 단서'),el('p','',b.clue||'백련에게 배운 네 요소의 원리를 떠올리세요.'),el('small','',b.source||''));detail.append(clue);
-    const row=el('div','training-actions'),compose=button('구성 확인',()=>change(g=>T.compose(g,family,axes.map(a=>draft[a]))),!m.safe||!b.known.every(Boolean)||!axes.every(a=>draft[a]),'primary');compose.dataset.trainingCompose='';row.append(compose);
+    const row=el('div','training-actions'),compose=button('구성 확인',()=>change(g=>T.compose(g,family,axes.map(a=>draft[a]))),!m.safe||!axes.every(a=>draft[a]),'primary');compose.dataset.trainingCompose='';row.append(compose);
     if(b.drafted||b.learned)row.append(button(['sword','thunder'].includes(family)?'목인 수련 시작':'기본 무공 실습',()=>change(g=>T.startPractice(g,family),{leave:true}),!m.safe,'primary'));
     if(b.learned&&!['sword','thunder'].includes(family))row.append(button('기본 무공 장착',()=>change(g=>T.equip(g,family)),!m.safe));detail.append(row);
     detail.append(el('p','training-caption',b.learned?'습득한 무공과 원본 조합법은 유지됩니다.':b.drafted?'구성 완료 · 실제 기능을 펼치면 무공을 습득합니다.':'각 축 하나 · 보유 요소만 사용 · 실패 시 재료 소멸 없음'));

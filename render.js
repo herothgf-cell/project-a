@@ -63,7 +63,7 @@
         else if(['mechanism','story-clue'].includes(o.kind)&&root.WuxiaArt)WuxiaArt.mechanism(c,o,t);
         else if(o.kind==='relic')FateArt.relic(c,o,t,g.fate.proven.includes(o.path));
         else if(o.kind==='scar')ClassicArt.scar(c,o,t,g);
-        else if(o.kind==='seal')seal(c,o,t,g.activated.includes(o.id),g.area==='harbor');
+        else if(o.kind==='seal')seal(c,o,t,o.completed||g.activated.includes(o.id),g.area==='harbor');
         else if(o.kind==='rest'){if(!root.WorldArt.rest?.(c,o,t,a.theme)){ellipse(c,o.x,o.y+2,36,13,'#102e324a');box(c,o.x-28,o.y-13,56,12,'#acac87',2);line(c,[[o.x-20,o.y],[o.x-20,o.y+9]],'#556e59',4);line(c,[[o.x+20,o.y],[o.x+20,o.y+9]],'#556e59',4);}}
         else human(c,{...o,face:Math.atan2(p.y-o.y,p.x-o.x)},t,o.role||(o.id==='warden'?'warden':o.id==='master'?'master':'shop'));
         

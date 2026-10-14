@@ -1,4 +1,5 @@
 'use strict';
+const acquisition=require('./helpers/martial-acquisition-browser.cjs');
 const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),assert=require('node:assert/strict');
 (async()=>{
  const server=createServer({artReview:true});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
@@ -21,7 +22,15 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
    if(['ripple','echo','seal'].includes(f)){
     await page.keyboard.press('g');await page.locator('.training-screen').waitFor();
     await page.getByRole('button',{name:'청운촌으로 돌아가 구성하기',exact:true}).click();
+    assert.match(await page.locator('.training-ownership').innerText(),/2\/4/);
     await page.getByRole('button',{name:'단서 해독 · 지도 받기',exact:true}).click();
+    assert.match(await page.locator('.training-ownership').innerText(),/2\/4/);
+    assert.equal(await page.locator('[data-training-axis=flow] option[value="'+recipe[2]+'"]').count(),0);
+    await move();await acquisition.flow(page,f);
+    await move();await acquisition.quest(page,f);
+    await move();assert.match(await page.locator('.training-ownership').innerText(),/4\/4/);
+    for(const width of [390,360]){await page.setViewportSize({width,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);}
+    await page.setViewportSize({width:1280,height:900});
    }
    if(f==='thunder')assert.match(await page.locator('[data-action="storm"]').getAttribute('aria-label'),/미습득/);
    await compose(recipe);
@@ -38,15 +47,15 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
    await page.waitForFunction(({kind,f})=>kind==='create'?MartialTraining.state(__game).linkProof.includes(f):DevTrainingRoute.completed().includes(f),{kind,f});
    assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);await page.getByRole('button',{name:'수련 종료',exact:true}).click();await page.locator('.training-screen').waitFor();
   }
-  assert.match(await page.locator('.training-dev-route').innerText(),/11 \/ 11 완료/);
+  assert.match(await page.locator('.training-dev-route').innerText(),/20 \/ 20 완료/);
   for(const width of [390,360]){await page.setViewportSize({width,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);}
   await page.reload();await page.waitForFunction(()=>globalThis.ArtPreview?.ready);await page.locator('#continue').click();
-  assert.match(await page.locator('.training-dev-route').innerText(),/11 \/ 11 완료/);
+  assert.match(await page.locator('.training-dev-route').innerText(),/20 \/ 20 완료/);
   assert.deepEqual(await page.evaluate(()=>[localStorage.getItem(SaveSlots.keys.current),localStorage.getItem(SaveSlots.keys.test)]),['public-sentinel','dev-sentinel']);
   await page.keyboard.press('Escape');await page.getByRole('button',{name:'무공 순차 테스트',exact:true}).click();
   await page.waitForFunction(()=>globalThis.ArtPreview?.ready);await page.locator('#continue').click();
-  assert.match(await page.locator('.training-dev-route').innerText(),/1 \/ 11 · 월영참/);
+  assert.match(await page.locator('.training-dev-route').innerText(),/1 \/ 20 · 월영참/);
   assert.deepEqual(await page.evaluate(()=>DevTrainingRoute.completed()),[]);assert.deepEqual(errors,[]);
-  console.log('dev route: all 11 stages via actual UI/combat, reload, reset, isolated saves and mobile layout passed');
+  console.log('dev route: all 20 stages via actual UI/combat, reload, reset, isolated saves and mobile layout passed');
  }finally{await browser?.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

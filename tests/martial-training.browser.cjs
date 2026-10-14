@@ -1,4 +1,5 @@
 'use strict';
+const acquisition=require('./helpers/martial-acquisition-browser.cjs');
 const {run}=require('./browser-harness.cjs'),assert=require('node:assert/strict');
 run(async page=>{
  const finishPractice=async()=>{await page.waitForFunction(()=>__game.martialRuntime?.practice?.completed);assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);const time=await page.evaluate(()=>__game.playTime);await page.waitForFunction(t=>__game.playTime>t+.4,time);await page.getByRole('button',{name:'수련 종료',exact:true}).click();await page.locator('.training-screen').waitFor();};
@@ -20,6 +21,10 @@ run(async page=>{
  await page.locator('.training-screen').waitFor();
  assert.match(await page.locator('.training-meta').innerText(),/습득 완료/);
  await page.keyboard.press('Escape');
+ await page.evaluate(()=>{const g=__game;g.progress=3;const p=g.points().find(p=>p.id==='master');Object.assign(g.player,{x:p.x,y:p.y+25});});
+ await page.keyboard.press('g');await page.locator('.training-screen').waitFor();
+ for(const [i,axis]of ['form','qi','flow','intent'].entries())await page.locator('[data-training-axis="'+axis+'"]').selectOption(['cleave','thunder','explode','surround'][i]);
+ await page.getByRole('button',{name:'구성 확인',exact:true}).click();await page.getByRole('button',{name:'목인 수련 시작',exact:true}).click();await page.keyboard.press('w');await finishPractice();await page.keyboard.press('Escape');
  for(const [family,recipe]of [['ripple',['guard','rebound','store','self']],['echo',['step','echo','burst','origin']],['seal',['field','bind','hold','point']]]){
   // Skip unrelated chapter travel, but investigate, compose and prove through actual UI/combat.
   await page.evaluate(f=>{const g=__game;g.progress=12;g.training=3;g.fate.stage=Math.max(2,g.fate.stage);g.enter('sanctum');g.events=[];const p=g.points().find(p=>p.path===f&&p.kind==='relic');Object.assign(g.player,{x:p.x,y:p.y});},family);
@@ -27,13 +32,13 @@ run(async page=>{
   await page.locator('#interact').click();
   await page.locator('.training-screen').waitFor();
   assert.equal(await page.locator('.training-answer').filter({hasText:'미해독'}).count(),2);
-  assert.match(await page.locator('.training-guidance').innerText(),/청운촌으로 돌아가 구성하기/);
   await page.getByRole('button',{name:'청운촌으로 돌아가 구성하기',exact:true}).click();
-  assert.match(await page.locator('.training-guidance').innerText(),/추가 재료나 비용은 없습니다/);
-  assert.equal(await page.locator('[data-training-axis=flow]').isDisabled(),true);
-  await page.getByRole('button',{name:'단서 해독 · 지도 받기',exact:true}).click();
-  assert.equal(await page.locator('.training-answer').filter({hasText:'미해독'}).count(),0);
   assert.equal(await page.locator('[data-training-axis=flow]').isEnabled(),true);
+  assert.equal(await page.locator('[data-training-axis=flow] option[value="'+recipe[2]+'"]').count(),0);
+  await page.getByRole('button',{name:'단서 해독 · 지도 받기',exact:true}).click();
+  assert.match(await page.locator('.training-ownership').innerText(),/2\/4/);
+  await page.getByRole('button',{name:'운 체득 실습',exact:true}).click();await acquisition.flow(page,family);
+  await page.getByRole('button',{name:'의 획득 퀘스트 시작',exact:true}).click();await acquisition.quest(page,family);
   for(const [i,axis]of ['form','qi','flow','intent'].entries())await page.locator('[data-training-axis="'+axis+'"]').selectOption(recipe[i]);
   await page.getByRole('button',{name:'구성 확인',exact:true}).click();
   await page.getByRole('button',{name:'기본 무공 실습',exact:true}).click();
@@ -69,7 +74,7 @@ run(async page=>{
   require('node:fs').mkdirSync('.skillform-review/integration',{recursive:true});
   await page.screenshot({path:'.skillform-review/integration/training-'+width+'.png'});
  }
- assert.deepEqual(await page.evaluate(()=>MartialTraining.state(WorldGame.Game.load(__game.save())).learned),['sword','ripple','echo','seal']);
+ assert.deepEqual(await page.evaluate(()=>MartialTraining.state(WorldGame.Game.load(__game.save())).learned),['sword','thunder','ripple','echo','seal']);
  await page.keyboard.press('Escape');
  await page.setViewportSize({width:1280,height:900});
  for(const f of ['ripple','echo','seal']){
@@ -96,5 +101,5 @@ run(async page=>{
  assert.match(await page.getByRole('alert').innerText(),/저장하지 못했습니다/);
  assert.ok(await page.getByRole('button',{name:'수련 지원 끄기',exact:true}).isVisible(),'failed storage restores previous support setting');
  await page.evaluate(()=>{Storage.prototype.setItem=window.__originalStorageSet;});
- console.log('actual game: four acquired arts, three creations proved in both worlds, persistence and mobile UI passed');
+ console.log('actual game: five acquired arts, three creations proved in both worlds, persistence and mobile UI passed');
 });
