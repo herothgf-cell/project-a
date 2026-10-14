@@ -33,7 +33,7 @@ test('site build contains every versioned runtime asset and records exactly thei
   for(const [file,sha]of Object.entries(manifest.assets)){const bytes=fs.readFileSync(path.join(output,file));assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),sha,file);}
   assert.equal(fs.existsSync(path.join(output,'tests')),false);assert.equal(fs.existsSync(path.join(output,'docs')),false);
   for(const file of ['world-game.js','world-growth.js','save-v10.js','reality-skills.js','encounter-director.js','personal-news.js','character-ui.js','development-ui.js','news-ui.js','world-growth.css','legacy/v011/index.html','legacy/v011/app.js'])assert.ok(manifest.assets[file],file);
-  for(const file of ['tests/dev-starts-ui.js','tests/helpers/world-journey.cjs','__dev/starts.js','Library','ProjectSettings'])assert.equal(fs.existsSync(path.join(output,file)),false,file);
+  for(const file of ['tests/dev-starts-ui.js','tests/dev-training-route.js','__dev/training-route.js','tests/helpers/world-journey.cjs','__dev/starts.js','Library','ProjectSettings'])assert.equal(fs.existsSync(path.join(output,file)),false,file);
  } finally {fs.rmSync(output,{recursive:true,force:true});}
 });
 

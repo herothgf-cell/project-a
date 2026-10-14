@@ -2,7 +2,7 @@
 (function(){
   'use strict';
   const {Game,AREAS,QUESTS,SKILLS,VERSION,dist,Fate,Legend}=globalThis.WorldGame||DualWorld;
-  const $=id=>document.getElementById(id),devMode=globalThis.SSANGGYE_DEV===true&&['localhost','127.0.0.1','[::1]'].includes(location.hostname),SAVE=devMode?SaveSlots.keys.test:SaveSlots.keys.current,BACKUP=devMode?null:SaveSlots.keys.backup;
+  const $=id=>document.getElementById(id),devMode=globalThis.SSANGGYE_DEV===true&&['localhost','127.0.0.1','[::1]'].includes(location.hostname),SAVE=devMode?SaveSlots.keys.test+(new URLSearchParams(location.search).get('training')==='1'?'.training-route':''):SaveSlots.keys.current,BACKUP=devMode?null:SaveSlots.keys.backup;
   const dialog=$('dialog'),renderer=new WorldRenderer($('canvas'),$('mini'));
   const perfEnabled=new URLSearchParams(location.search).get('perf')==='1';
   const perf=perfEnabled?new PerfMeter():null;
@@ -19,6 +19,7 @@
   const artReady=()=>{if(!globalThis.ArtPreview)return !document.documentElement.hasAttribute('data-art-loading');return globalThis.ArtPreview.ensureWorld?.(AREAS[g.area].world==='현실'?'reality':'murim')===true;};
   const running=()=>active&&!dialog.open&&!document.hidden&&artReady();
   window.addEventListener('art-controls-ready',()=>{clearInput();lastFrame=performance.now();});
+  if(devMode)window.addEventListener('ssanggye-dev-start-ready',()=>{active=false;clearInput();});
   function clearInput(){keys.clear();held.clear();joy={x:0,y:0};joyId=null;$('stick').querySelector('i').style.transform='';}
   function toast(text){const e=node('div','toast',text);$('toasts').append(e);while($('toasts').children.length>3)$('toasts').firstChild.remove();setTimeout(()=>e.remove(),3000);}
   function inspectSave(){
@@ -113,9 +114,9 @@
   }
   function start(load=false){
     resourceWarningUntil=0;backup();g=load&&resume?resume:new Game();active=true;queued=[];clearInput();$('title').hidden=true;$('game').hidden=false;renderer.area=null;renderer.resize();renderer.draw(g,0);lastFrame=performance.now();persist();update();
-    viewMemory.clear();currentView=null;if(!load){g.beginIntro(true);introUI.start();persist();}
+    viewMemory.clear();currentView=null;if(!load){if(devMode&&globalThis.DevTrainingRoute?.enabled()){try{localStorage.removeItem(DevTrainingRoute.key()+'.proofs');}catch{toast('이전 시험 기록을 지우지 못했습니다.');}}g.beginIntro(true);introUI.start();persist();}
     else if(g.introActive)introUI.resume();
-    else toast(g.restoreNotice||'저장한 위치와 진행에서 이어갑니다.');
+    else if(devMode&&globalThis.DevTrainingRoute?.enabled()){const next=DevTrainingRoute.next(g,MartialTraining,DevTrainingRoute.completed());trainingUI.open(next?.family||'sword',next?.kind==='learn'?'learn':'create');}else toast(g.restoreNotice||'저장한 위치와 진행에서 이어갑니다.');
   }
   function newGame(){if(hasSave)show('새로운 여정을 시작할까요?','현재 진행을 새 저장으로 교체합니다. 이전 저장은 브라우저의 백업 항목에도 보관합니다.\n\n기존 여정은 이어하기로 계속할 수 있습니다.',[{label:'취소',secondary:true},{label:'새로 시작',danger:true,run:()=>{backup(true);start(false);}}],'system','저장 데이터 확인');else start(false);}
   function grid(items){const e=node('div','stat-grid');for(const [label,value]of items){const b=node('div','',label);b.append(node('b','',String(value)));e.append(b);}return e;}
@@ -160,6 +161,7 @@
   function processEvents(){
     const rs=BoundaryResonance.state(g);if(g.area==='city'&&rs&&rs.notified<rs.grants.length){const old=rs.notified;rs.notified=rs.grants.length;if(persist())toast('무림의 성취가 공명으로 남았습니다 · 성장 → 경계공명에서 확인하세요.');else rs.notified=old;}
     for(const e of g.events.splice(0)){
+      if(e.type==='martial-link-proven'){if(devMode&&globalThis.DevTrainingRoute?.enabled()){try{DevTrainingRoute.record(g,e);}catch{toast('시험 완료 기록을 저장하지 못했습니다. 저장 공간을 확인하고 다시 실습하세요.');}persist();trainingUI.open(e.family,'create');}continue;}
       if(e.type==='martial-training'){trainingUI?.open(e.family||'sword',e.section||'learn');persist();continue;}
       if(e.type==='resonance-proof'){if(persist())show(e.title,e.text,[{label:'현실 기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}}]);}
       if(e.type==='resonance-complete'){if(!persist()){g=Game.load(e.before);ResonanceChallenges.runtime(g).rewardBlocked=true;toast('저장 실패 · 기록 지점에서 E로 다시 시도하세요.');continue;}show(e.title,e.text,[{label:'청운촌으로 귀환',run:()=>{g.enter('village');processEvents();persist();update();}},{label:'기록 확인',run:()=>growthUI.open()}]);}
@@ -222,7 +224,7 @@
     const boss=g.enemies.find(e=>e.boss&&e.hp>0);$('boss').hidden=!(boss&&dist(p,boss)<560);
     if(boss){$('boss').querySelector('span').textContent=boss.name;$('boss').querySelector('u').style.width=boss.hp/boss.maxHp*100+'%';$('boss').querySelector('small').textContent=g.bossLocked()?'호위 / 봉인 해제 후 공격 가능':boss.hp<boss.maxHp/2?'격노 · 더 빠른 공격 예고':'공격 예고를 피하고 빈틈을 노리세요';}
     combatIcon(document.querySelector('[data-action=attack]'),'attack');
-    for(const action of ['moon','storm','dash']){const btn=document.querySelector(`[data-action="${action}"]`),k=g.skillInfo(action);combatIcon(btn,action);btn.querySelector('small').textContent=k.name;btn.classList.toggle('locked',g.training<k.need);btn.classList.toggle('no-mana',p.mp<k.cost);btn.setAttribute('aria-label',`${k.name}${g.training<k.need?' 미습득':''}`);const cd=btn.querySelector('em');cd.classList.toggle('active',p.cool[action]>.04);cd.textContent=p.cool[action]>=1?Math.ceil(p.cool[action]):p.cool[action].toFixed(1);}
+    for(const action of ['moon','storm','dash']){const btn=document.querySelector(`[data-action="${action}"]`),k=g.skillInfo(action);combatIcon(btn,action);btn.querySelector('small').textContent=k.name;btn.classList.toggle('locked',k.locked??g.training<k.need);btn.classList.toggle('no-mana',p.mp<k.cost);btn.setAttribute('aria-label',`${k.name}${(k.locked??g.training<k.need)?' 미습득':''}`);const cd=btn.querySelector('em');cd.classList.toggle('active',p.cool[action]>.04);cd.textContent=p.cool[action]>=1?Math.ceil(p.cool[action]):p.cool[action].toFixed(1);}
     document.querySelector('.scene-bottom>span').textContent=matchMedia('(pointer:coarse)').matches?'왼쪽 이동 · 오른쪽 공격 / 회피':'WASD 이동 · J 공격 · Space 회피 · E 대화';
     const closeToTarget=o.target&&near?.id===o.target.id;
     const nextText=closeToTarget?`${Controls.key('interact')} · ${o.target.kind==='npc'?'대화하기':o.target.kind==='portal'?'이동하기':'상호작용'} — ${Controls.format(o.text)}`:Controls.format(o.text);
