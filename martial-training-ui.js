@@ -29,6 +29,14 @@
    }else panel.append(el('p','','11 / 11 완료 · 다섯 무공 습득과 세 창안의 무림·현실 증명을 마쳤습니다.'));
    body.append(panel);
   }
+  const learning=tab==='learn'&&m.basics.find(b=>b.id===family);
+  if(learning?.discovered&&!learning.learned&&!learning.drafted){
+   const decoded=learning.known.every(Boolean),guide=el('div','training-teacher training-guidance');
+   guide.append(el('strong','',decoded?'다음 · 네 요소를 선택해 구성하세요':'형·기 해독 완료 · 운·의는 청운촌에서 해독'));
+   guide.append(el('p','',decoded?'공개된 조합법을 보고 형·기·운·의를 선택한 뒤 구성 확인을 누르세요. 구성 후 실습에 성공하면 무공을 습득합니다.':m.safe?'아래 지도 받기 버튼으로 남은 두 조합법을 공개하세요. 추가 재료나 비용은 없습니다.':'비경의 흔적에서는 형과 기만 알 수 있습니다. 청운촌으로 돌아가 구성하기를 누른 뒤, 단서 해독 · 지도 받기로 운과 의를 공개하세요.'));
+   if(!decoded&&m.safe)guide.append(button('단서 해독 · 지도 받기',()=>change(g=>T.learn(g,family)),false,'primary'));
+   body.append(guide);
+  }
   const layout=el('div','training-layout'),list=el('nav','training-list'),detail=el('article','training-detail');list.setAttribute('aria-label',tab==='learn'?'무공 목록':'창안 무공 목록');
   if(tab==='learn'){
    list.append(el('p','training-caption','기초 · 상승 · 절학 순으로 조합법의 비밀이 깊어집니다. 절학은 추후 발견할 수 있습니다.'));
@@ -43,13 +51,12 @@
      const options=b.options[a]||[],known=b.known[i],recipe=b.recipe[i];
      if(known&&recipe){label.append(el('span','training-answer',options.find(o=>o.id===recipe)?.label||T.labels?.[recipe]||recipe));}
      else label.append(el('span','training-answer','미해독'));
-     const select=el('select');select.dataset.trainingAxis=a;select.setAttribute('aria-label',axisNames[i]+' 요소 선택');select.append(new Option('요소 선택',''));for(const o of options)select.append(new Option(o.label,o.id));select.value=draft[a]||'';select.disabled=!m.safe||(!b.learned&&['sword','thunder'].includes(family)&&i>step);
-     select.onchange=()=>{draft[a]=select.value;if(select.value)step=Math.max(step,i+1);for(const [j,k]of axes.entries()){const next=body.querySelector('[data-training-axis="'+k+'"]');if(next)next.disabled=!m.safe||(!b.learned&&['sword','thunder'].includes(family)&&j>step);}const compose=body.querySelector('[data-training-compose]');compose.disabled=!m.safe||!axes.every(k=>draft[k]);};
-     label.append(select,el('small','',known?'조합법 해독됨':'단서로 추론 · 정답 비공개'));slots.append(label);
+     const select=el('select');select.dataset.trainingAxis=a;select.setAttribute('aria-label',axisNames[i]+' 요소 선택');select.append(new Option('요소 선택',''));for(const o of options)select.append(new Option(o.label,o.id));select.value=draft[a]||'';select.disabled=!m.safe||!b.known.every(Boolean)||(!b.learned&&['sword','thunder'].includes(family)&&i>step);
+     select.onchange=()=>{draft[a]=select.value;if(select.value)step=Math.max(step,i+1);for(const [j,k]of axes.entries()){const next=body.querySelector('[data-training-axis="'+k+'"]');if(next)next.disabled=!m.safe||!b.known.every(Boolean)||(!b.learned&&['sword','thunder'].includes(family)&&j>step);}const compose=body.querySelector('[data-training-compose]');compose.disabled=!m.safe||!b.known.every(Boolean)||!axes.every(k=>draft[k]);};
+     label.append(select,el('small','',known?'조합법 해독됨':'청운촌에서 지도 후 공개'));slots.append(label);
     }detail.append(slots);
     const clue=el('div','training-clue');clue.append(el('strong','','배움의 단서'),el('p','',b.clue||'백련에게 배운 네 요소의 원리를 떠올리세요.'),el('small','',b.source||''));detail.append(clue);
-    if(!b.known.every(Boolean))detail.append(button('단서 해독 · 지도 받기',()=>change(g=>T.learn(g,family)),!m.safe));
-    const row=el('div','training-actions'),compose=button('구성 확인',()=>change(g=>T.compose(g,family,axes.map(a=>draft[a]))),!m.safe||!axes.every(a=>draft[a]),'primary');compose.dataset.trainingCompose='';row.append(compose);
+    const row=el('div','training-actions'),compose=button('구성 확인',()=>change(g=>T.compose(g,family,axes.map(a=>draft[a]))),!m.safe||!b.known.every(Boolean)||!axes.every(a=>draft[a]),'primary');compose.dataset.trainingCompose='';row.append(compose);
     if(b.drafted||b.learned)row.append(button(['sword','thunder'].includes(family)?'목인 수련 시작':'기본 무공 실습',()=>change(g=>T.startPractice(g,family),{leave:true}),!m.safe,'primary'));
     if(b.learned&&!['sword','thunder'].includes(family))row.append(button('기본 무공 장착',()=>change(g=>T.equip(g,family)),!m.safe));detail.append(row);
     detail.append(el('p','training-caption',b.learned?'습득한 무공과 원본 조합법은 유지됩니다.':b.drafted?'구성 완료 · 실제 기능을 펼치면 무공을 습득합니다.':'각 축 하나 · 보유 요소만 사용 · 실패 시 재료 소멸 없음'));

@@ -25,8 +25,13 @@ run(async page=>{
   await page.locator('#interact').click();
   await page.locator('.training-screen').waitFor();
   assert.equal(await page.locator('.training-answer').filter({hasText:'미해독'}).count(),2);
+  assert.match(await page.locator('.training-guidance').innerText(),/청운촌으로 돌아가 구성하기/);
   await page.getByRole('button',{name:'청운촌으로 돌아가 구성하기',exact:true}).click();
+  assert.match(await page.locator('.training-guidance').innerText(),/추가 재료나 비용은 없습니다/);
+  assert.equal(await page.locator('[data-training-axis=flow]').isDisabled(),true);
   await page.getByRole('button',{name:'단서 해독 · 지도 받기',exact:true}).click();
+  assert.equal(await page.locator('.training-answer').filter({hasText:'미해독'}).count(),0);
+  assert.equal(await page.locator('[data-training-axis=flow]').isEnabled(),true);
   for(const [i,axis]of ['form','qi','flow','intent'].entries())await page.locator('[data-training-axis="'+axis+'"]').selectOption(recipe[i]);
   await page.getByRole('button',{name:'구성 확인',exact:true}).click();
   await page.getByRole('button',{name:'기본 무공 실습',exact:true}).click();
