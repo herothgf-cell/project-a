@@ -55,7 +55,7 @@
   }
   if(notice){const status=el('p','training-error',notice);status.setAttribute('role','alert');detail.append(status);}
   layout.append(list,detail);body.append(layout);
-  const footer=el('div','training-footer');footer.append(el('span','','수련 지원 · '+(m.assisted?'피해 감소 · 빠른 회복':'기본 난이도')),button(m.assisted?'수련 지원 끄기':'수련 지원 켜기',()=>change(g=>T.setAssisted(g,!m.assisted)),!m.safe),button('기존 무공 운용',legacy));body.append(footer);
+  const footer=el('div','training-footer');footer.append(el('span','','수련 지원 · '+(m.assisted?'일반 전투 피해량 ×4 · 받는 피해 감소 · 빠른 회복':'기본 난이도')),button(m.assisted?'수련 지원 끄기':'수련 지원 켜기',()=>change(g=>T.setAssisted(g,!m.assisted)),!m.safe),button('기존 무공 운용',legacy));body.append(footer);
   show('무공 수련',body,[{label:'전장으로 돌아가기',secondary:true}],'system','무공 습득 · 무공 창안');
  }
  return {open};
