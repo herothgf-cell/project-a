@@ -5,7 +5,7 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
  const server=createServer({artReview:true});await new Promise(r=>server.listen(0,'127.0.0.1',r));let browser;
  try{
   browser=await chromium.launch({headless:true,channel:process.env.CHROMIUM_PATH?undefined:'chrome',executablePath:process.env.CHROMIUM_PATH});
-  const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];page.on('pageerror',e=>errors.push(String(e)));page.setDefaultTimeout(12000);
+  const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error('pageerror',e);});page.setDefaultTimeout(12000);
   await page.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get:()=>api,set(v){api=v;for(const k of ['step','save']){const old=v.Game.prototype[k];v.Game.prototype[k]=function(...args){window.__game=this;return old.apply(this,args);};}}});});
   const base='http://127.0.0.1:'+server.address().port;
   await page.goto(base+'/art-play.html?dev=1');await page.waitForFunction(()=>globalThis.ArtPreview?.ready);
@@ -47,15 +47,43 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
    await page.waitForFunction(({kind,f})=>kind==='create'?MartialTraining.state(__game).linkProof.includes(f):DevTrainingRoute.completed().includes(f),{kind,f});
    assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);await page.getByRole('button',{name:'수련 종료',exact:true}).click();await page.locator('.training-screen').waitFor();
   }
-  assert.match(await page.locator('.training-dev-route').innerText(),/20 \/ 20 완료/);
+  // New forms must be acquired and composed by the player, not awarded by route movement.
+  for(const f of ['flash','crescent','gathering','sidestep']){
+   await move();
+   assert.equal(await page.evaluate(f=>MartialPrototypes.state(__game).discovered.includes(f),f),false);
+   if(f==='sidestep'){await page.keyboard.press('g');await page.keyboard.press('Escape');await page.locator('.training-nav').click();}
+   else await page.getByRole('button',{name:'백련에게 원형 배우기',exact:true}).click();
+   await move();
+   const recipe=await page.evaluate(f=>MartialPrototypes.catalog[f].recipe,f);
+   for(const id of recipe)await page.locator('[data-prototype-element="'+id+'"]').click();
+   await page.getByRole('button',{name:'구성 확인',exact:true}).click();await page.locator('.training-completion').waitFor();
+   assert.equal(await page.evaluate(()=>__game.martialRuntime?.practice||null),null);
+   await page.getByRole('button',{name:'무공 목록으로',exact:true}).click();
+   await move();await page.keyboard.press('q');
+   if(f==='gathering'){await page.waitForFunction(()=>__game.prototypeRuntime?.charge&&__game.playTime-__game.prototypeRuntime.charge.at>=.65);await page.keyboard.press('q');}
+   await page.waitForFunction(f=>MartialPrototypes.state(__game).proven.includes(f),f);
+   assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);
+   await page.getByRole('button',{name:'수련 종료',exact:true}).click();
+  }
+  for(const f of ['chargedCrescent','sideFlash'])for(const kind of ['create','reality']){
+   await move();
+   assert.equal(await page.evaluate(f=>MartialPrototypes.state(__game).realityProof.includes(f),f),false);
+   await page.getByRole('button',{name:kind==='create'?'무공 창안하기':'현실에 적용',exact:true}).click();
+   if(kind==='create'){await page.locator('.training-completion').waitFor();await page.getByRole('button',{name:'무공 목록으로',exact:true}).click();}
+   await page.getByRole('button',{name:kind==='create'?'무림 연계 실습':'현실 연계 실습',exact:true}).click();await page.keyboard.press('q');
+   if(f==='chargedCrescent'){await page.waitForFunction(()=>__game.prototypeRuntime?.charge&&__game.playTime-__game.prototypeRuntime.charge.at>=.9);await page.keyboard.press('q');}
+   await page.waitForFunction(({f,kind})=>MartialPrototypes.state(__game)[kind==='create'?'linkProof':'realityProof'].includes(f),{f,kind});
+   assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);await page.getByRole('button',{name:'수련 종료',exact:true}).click();
+  }
+  assert.match(await page.locator('.training-dev-route').innerText(),/36 \/ 36 완료/);
   for(const width of [390,360]){await page.setViewportSize({width,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);}
   await page.reload();await page.waitForFunction(()=>globalThis.ArtPreview?.ready);await page.locator('#continue').click();
-  assert.match(await page.locator('.training-dev-route').innerText(),/20 \/ 20 완료/);
+  assert.match(await page.locator('.training-dev-route').innerText(),/36 \/ 36 완료/);
   assert.deepEqual(await page.evaluate(()=>[localStorage.getItem(SaveSlots.keys.current),localStorage.getItem(SaveSlots.keys.test)]),['public-sentinel','dev-sentinel']);
   await page.keyboard.press('Escape');await page.getByRole('button',{name:'무공 순차 테스트',exact:true}).click();
   await page.waitForFunction(()=>globalThis.ArtPreview?.ready);await page.locator('#continue').click();
-  assert.match(await page.locator('.training-dev-route').innerText(),/1 \/ 20 · 월영참/);
+  assert.match(await page.locator('.training-dev-route').innerText(),/1 \/ 36 · 월영참/);
   assert.deepEqual(await page.evaluate(()=>DevTrainingRoute.completed()),[]);assert.deepEqual(errors,[]);
-  console.log('dev route: all 20 stages via actual UI/combat, reload, reset, isolated saves and mobile layout passed');
+  console.log('dev route: all 36 stages via actual UI/combat, reload, reset, isolated saves and mobile layout passed');
  }finally{await browser?.close();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

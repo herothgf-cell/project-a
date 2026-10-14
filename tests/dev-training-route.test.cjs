@@ -13,5 +13,5 @@ test('developer progression moves to the next unproved step without awarding the
 });
 test('development route never treats applying a creation as its reality proof',()=>{
  const g=R.create(Game,T),s=T.state(g);s.learned=['sword','thunder','ripple','echo','seal'];s.discovered=[...s.learned];for(const f of s.learned)for(const [i,a]of ['form','qi','flow','intent'].entries())if(!s.elements[a].includes(T.catalog[f].recipe[i]))s.elements[a].push(T.catalog[f].recipe[i]);s.linkProof=['ripple','echo','seal'];s.reality='ripple';
- assert.equal(R.next(g,T).kind,'reality');assert.equal(R.next(g,T).family,'ripple');assert.equal(R.next(g,T,['ripple']).family,'echo');assert.equal(R.next(g,T,['ripple','echo','seal']),null);
+ assert.equal(R.next(g,T).kind,'reality');assert.equal(R.next(g,T).family,'ripple');assert.equal(R.next(g,T,['ripple']).family,'echo');assert.equal(R.next(g,T,['ripple','echo','seal']).family,'flash');assert.equal(R.next(g,T,['ripple','echo','seal']).kind,'acquire');
 });

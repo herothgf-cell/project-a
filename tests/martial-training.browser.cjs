@@ -53,7 +53,7 @@ run(async page=>{
  await page.evaluate(()=>{__game.enter('village');__game.events=[];});
  await page.locator('.training-nav').click();
  await page.getByRole('button',{name:'무공 창안',exact:true}).click();
- assert.equal(await page.locator('[data-training-link]').count(),3);
+ assert.equal(await page.locator('[data-training-link]').count(),5);
  for(const f of ['ripple','echo','seal']){
   await page.locator('[data-training-link="'+f+'"]').click();
   await page.getByRole('button',{name:'무공 창안하기',exact:true}).click();await page.locator('.training-completion').waitFor();await page.getByRole('button',{name:'무공 목록으로',exact:true}).click();
