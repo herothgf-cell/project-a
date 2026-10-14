@@ -23,7 +23,7 @@
     "test:browser:resonance": "node tests/resonance.browser.cjs && node tests/resonance-import.browser.cjs",
     "test:browser:skillform": "node tests/skillform.browser.cjs",
     "start:skillform": "node scripts/start-skillform.cjs",
-    "test:browser:training": "node tests/martial-training.browser.cjs",
+    "test:browser:training": "node tests/martial-training.browser.cjs && node tests/martial-completion.browser.cjs",
     "test:browser:training-route": "node tests/dev-training-route.browser.cjs"
   },
   "engines": {

@@ -1,6 +1,39 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const W=require('../world-game.js'),T=require('../martial-training.js');
 const fresh=()=>{const g=new W.Game();g.introActive=false;g.area='village';g.progress=1;return g;};
+for(const f of ['sword','thunder','ripple','echo','seal'])test(f+' composition immediately learns once and persists without practice',()=>{
+ const g=f==='sword'?fresh():f==='thunder'?thunderLesson():J.five('ripple','before');g.enter('village');
+ if(['sword','thunder'].includes(f)){if(f==='thunder')talk(g,'master');else T.introduce(g,f);}
+ else {T.discover(g,f);const s=T.state(g);s.elements.flow.push(T.catalog[f].recipe[2]);s.flowProgress[f]=3;s.elements.intent.push(T.catalog[f].recipe[3]);s.quests[f]='complete';}
+ const gold=g.gold,xp=g.xp;assert(T.compose(g,f,T.catalog[f].recipe));assert(T.state(g).learned.includes(f));
+ assert.equal(g.gold,gold);assert.equal(g.xp,xp);
+ if(f==='sword'){assert.equal(g.training,1);assert.equal(g.progress,2);}
+ else if(f==='thunder')assert.equal(g.training,2);
+ else {assert(g.fate.proven.includes(f));assert.equal(g.fate.path,f);assert.equal(g.worldGrowth.murim.equipped,f);assert(g.revision.inherited.includes(f));assert(g.events.some(e=>e.type==='awakening'&&e.composition));}
+ const before=JSON.stringify({training:g.training,progress:g.progress,gold:g.gold,xp:g.xp,fate:g.fate,growth:g.worldGrowth,revision:g.revision});g.events=[];
+ assert(T.compose(g,f,T.catalog[f].recipe));assert.equal(JSON.stringify({training:g.training,progress:g.progress,gold:g.gold,xp:g.xp,fate:g.fate,growth:g.worldGrowth,revision:g.revision}),before);assert(!g.events.some(e=>e.type==='awakening'));
+ assert(T.state(W.Game.load(g.save())).learned.includes(f));
+ T.startPractice(g,f);assert(!g.martialRuntime.practice.completed);if(['sword','thunder'].includes(f))T.compose(g,f,T.catalog[f].recipe);assert(!g.martialRuntime.practice.completed);
+});
+test('full element inventory shows ownership and sources without revealing recipes',()=>{
+ const g=fresh();T.discover(g,'echo');const d=T.describe(g);
+ for(const a of ['form','qi','flow','intent']){assert.equal(d.elements[a].length,5);for(const e of d.elements[a]){assert(e.id&&e.label&&e.source);assert.equal(e.owned,T.owns(g,a,e.id));assert(!('learnedFrom' in e));}}
+ assert.deepEqual(d.basics.find(b=>b.id==='echo').recipe,['step','echo',null,null]);assert.deepEqual(d.basics.find(b=>b.id==='seal').recipe,[null,null,null,null]);
+ assert(d.basics[0].options.form.every(e=>T.owns(g,'form',e.id)));
+});
+test('old drafted saves can recompose to learn while undiscovered arts stay unlearned',()=>{
+ const g=fresh();T.introduce(g);const s=T.state(g);s.drafted.push('sword');const h=W.Game.load(g.save());
+ assert(!T.state(h).learned.includes('sword'));assert(!h.skillInfo('moon').locked);
+ assert(T.compose(h,'sword',['slash','breath','instant','front']));assert.deepEqual(T.state(h).learned,['sword']);
+ assert.throws(()=>T.compose(h,'echo',['step','echo','burst','origin']));assert.deepEqual(T.state(h).learned,['sword']);
+});
+test('composition permits creation immediately but reality application still needs link proof',()=>{
+ const g=J.five('ripple','before');g.enter('village');T.discover(g,'echo');const s=T.state(g);
+ s.elements.flow.push('burst');s.flowProgress.echo=3;s.elements.intent.push('origin');s.quests.echo='complete';
+ T.compose(g,'echo',['step','echo','burst','origin']);assert(T.create(g,'echo'));assert(!s.linkProof.includes('echo'));
+ T.startPractice(g,'echo',{linked:true});assert(g.act('signature1'));assert(!g.martialRuntime.practice.completed);
+ g.enter('city');assert.throws(()=>T.apply(g,'echo'),/실제 효과/);assert.equal(s.reality,null);
+});
 test('practice success persists learning without opening a modal or ending the field session',()=>{
  const g=fresh();T.introduce(g);T.compose(g,'sword',T.catalog.sword.recipe);T.startPractice(g,'sword');g.events=[];
  g.act('moon');assert(T.state(g).learned.includes('sword'));assert.equal(g.martialRuntime.practice?.completed,true);
@@ -8,9 +41,9 @@ test('practice success persists learning without opening a modal or ending the f
  assert(T.state(W.Game.load(g.save())).learned.includes('sword'));
  assert.deepEqual(T.finishPractice(g),{family:'sword',section:'learn'});assert.equal(g.martialRuntime,null);assert(!g.enemies.some(e=>e.martialTarget));
 });
-test('leaving an unproved practice does not award learning',()=>{
+test('leaving optional practice preserves composition learning',()=>{
  const g=fresh();T.introduce(g);T.compose(g,'sword',T.catalog.sword.recipe);T.startPractice(g,'sword');T.finishPractice(g);
- assert(!T.state(g).learned.includes('sword'));assert.equal(g.area,'village');
+ assert(T.state(g).learned.includes('sword'));assert.equal(g.area,'village');
 });
 test('practice targets recover after defeat so manual practice can continue without rewards',()=>{
  const g=fresh();T.introduce(g);T.compose(g,'sword',T.catalog.sword.recipe);T.startPractice(g,'sword');g.act('moon');
@@ -37,16 +70,16 @@ test('assisted damage keeps training and proof targets durable and cannot bypass
   T.setAssisted(g,true);g.strike(e,10);assert.equal(hp-e.hp,normal,flag);delete e[flag];
  }
 });
-test('first master requires composition and actual wooden target hit',()=>{const g=fresh();g.nearestPoint=()=>({id:'master'});assert.equal(g.interact().type,'martial-training');assert.equal(g.training,0);assert.throws(()=>T.startPractice(g,'sword'));T.compose(g,'sword',T.catalog.sword.recipe);T.startPractice(g,'sword');assert.equal(g.act('moon'),true);assert.equal(g.training,1);assert.equal(g.progress,2);assert(T.describe(g).basics[0].learned);assert.equal(g.gold,40);});
+test('first master composition learns sword before optional wooden target practice',()=>{const g=fresh();g.nearestPoint=()=>({id:'master'});assert.equal(g.interact().type,'martial-training');assert.equal(g.training,0);assert.throws(()=>T.startPractice(g,'sword'));T.compose(g,'sword',T.catalog.sword.recipe);T.startPractice(g,'sword');assert.equal(g.act('moon'),true);assert.equal(g.training,1);assert.equal(g.progress,2);assert(T.describe(g).basics[0].learned);assert.equal(g.gold,40);});
 test('unowned recipes and old awakening routes cannot grant Q',()=>{const g=fresh();assert.throws(()=>T.compose(g,'ripple',T.catalog.ripple.recipe));g.legend.ready=['ripple'];assert.equal(g.awaken('ripple'),false);assert.equal(g.acceptFate('ripple'),false);});
 test('persistent learned history migrates, transient readiness never saves',()=>{const g=new W.Game();g.training=1;delete g.worldState.martialTraining;T.state(g);assert(T.describe(g).basics[0].learned);g.martialRuntime={ready:{family:'ripple'},pending:[]};const saved=JSON.parse(g.save());assert(saved.worldState.martialTraining.learned.includes('sword'));assert(!saved.martialRuntime);});
 
 const J=require('./helpers/world-journey.cjs'),{talk}=require('./world-fixtures.cjs');
 function thunderLesson(){const g=fresh();talk(g,'master');T.compose(g,'sword',['slash','breath','instant','front']);T.startPractice(g,'sword');g.act('moon');g.enter('forest');J.clear(g);g.enter('village');return g;}
 test('forest report teaches thunder composition without granting permanent learning or Fate',()=>{const g=thunderLesson(),gold=g.gold;assert.equal(g.progress,3);const scene=talk(g,'master');assert.equal(scene.type,'martial-training');assert.equal(scene.family,'thunder');assert.equal(g.progress,4);assert.equal(g.gold,gold+80);assert.equal(g.skillInfo('storm').locked,true);assert.equal(g.act('storm'),false);const row=T.describe(g).basics.find(b=>b.id==='thunder');assert.equal(row.type,'basic');assert.equal(row.action,'storm');assert.deepEqual(row.recipe,['cleave','thunder','explode','surround']);assert.equal(row.learned,false);assert.deepEqual(g.fate.proven,[]);talk(g,'master');assert.equal(g.gold,gold+80);});
-test('thunder requires composition and an actual village practice hit, surviving reload once',()=>{let g=thunderLesson();talk(g,'master');assert.throws(()=>T.startPractice(g,'thunder'));T.compose(g,'thunder',['cleave','thunder','explode','surround']);T.startPractice(g,'thunder');assert.equal(g.area,'village');assert.equal(g.enemies.length,1);const e=g.enemies[0],gold=g.gold;e.x=g.player.x+400;assert(g.act('storm'));assert(!T.state(g).learned.includes('thunder'));e.x=g.player.x+85;g.player.cool.storm=0;g.player.mp=g.stats().mp;assert(g.act('storm'));assert(T.state(g).learned.includes('thunder'));assert.equal(g.gold,gold);assert.equal(g.fate.path,null);assert.deepEqual(g.fate.proven,[]);assert.equal(g.worldGrowth.murim.equipped,null);assert.throws(()=>T.discover(g,'thunder'));assert.throws(()=>T.create(g,'thunder'));assert.throws(()=>T.startPractice(g,'thunder',{world:'reality'}));assert(T.equip(g,'thunder'));assert.equal(g.fate.path,null);g=W.Game.load(g.save());assert(T.state(g).learned.includes('thunder'));talk(g,'master');assert.equal(g.gold,gold);assert.equal(g.progress,4);});
+test('thunder composition learns immediately while optional practice requires an actual village hit',()=>{let g=thunderLesson();talk(g,'master');assert.throws(()=>T.startPractice(g,'thunder'));T.compose(g,'thunder',['cleave','thunder','explode','surround']);T.startPractice(g,'thunder');assert.equal(g.area,'village');assert.equal(g.enemies.length,1);const e=g.enemies[0],gold=g.gold;e.x=g.player.x+400;assert(g.act('storm'));assert(T.state(g).learned.includes('thunder'));assert(!g.martialRuntime.practice.completed);e.x=g.player.x+85;g.player.cool.storm=0;g.player.mp=g.stats().mp;assert(g.act('storm'));assert(T.state(g).learned.includes('thunder'));assert.equal(g.gold,gold);assert.equal(g.fate.path,null);assert.deepEqual(g.fate.proven,[]);assert.equal(g.worldGrowth.murim.equipped,null);assert.throws(()=>T.discover(g,'thunder'));assert.throws(()=>T.create(g,'thunder'));assert.throws(()=>T.startPractice(g,'thunder',{world:'reality'}));assert(T.equip(g,'thunder'));assert.equal(g.fate.path,null);g=W.Game.load(g.save());assert(T.state(g).learned.includes('thunder'));talk(g,'master');assert.equal(g.gold,gold);assert.equal(g.progress,4);});
 test('new training milestones do not learn thunder while v1 and missing old records migrate once',()=>{const g=thunderLesson();talk(g,'master');assert(!T.state(g).learned.includes('thunder'));const saved=JSON.parse(g.save());assert(!T.state(W.Game.load(JSON.stringify(saved))).learned.includes('thunder'));for(const legacy of ['v1','missing']){const raw=structuredClone(saved);if(legacy==='v1')raw.worldState.martialTraining={...T.initial(),version:1,introduced:true,discovered:['sword'],decoded:['sword'],drafted:['sword'],learned:['sword']};else delete raw.worldState.martialTraining;const h=W.Game.load(JSON.stringify(raw));assert(T.state(h).learned.includes('thunder'));assert(!h.skillInfo('storm').locked);assert.equal(T.state(h).version,3);assert(!h.fate.proven.includes('thunder'));}g.training=3;assert(!T.state(g).learned.includes('thunder'));});
-function learned(f){const g=J.five('ripple','inherited');g.enter('sanctum');talk(g,'relic-'+f);require('./helpers/martial-acquisition.cjs').acquire(g,f);T.learn(g,f);T.compose(g,f,T.catalog[f].recipe);T.startPractice(g,f);respond(g,f);assert(T.state(g).learned.includes(f));g.enter('village');return g;}
+function learned(f){const g=J.five('ripple','inherited');g.enter('sanctum');talk(g,'relic-'+f);require('./helpers/martial-acquisition.cjs').acquire(g,f);T.learn(g,f);T.compose(g,f,T.catalog[f].recipe);T.startPractice(g,f);assert(!g.martialRuntime.practice.completed);respond(g,f);assert(g.martialRuntime.practice.completed);assert(T.state(g).learned.includes(f));g.enter('village');return g;}
 function respond(g,f){const e=g.enemies[0];Object.assign(e,{wind:.2,tx:g.player.x,ty:g.player.y,range:90});g.player.invuln=0;assert(g.act('signature1'));if(f==='ripple')g.takeHit(e);if(f==='echo')for(let i=0;i<7;i++){g.hitStop=0;g.step(.05);}return e;}
 test('actual link contacts announce their world every time including a saved reality replay',()=>{const g=learned('ripple');T.create(g,'ripple');T.startPractice(g,'ripple',{linked:true});respond(g,'ripple');g.events=[];assert(g.act('moon'));assert.deepEqual(g.events.filter(e=>e.type==='martial-link-proven'),[{type:'martial-link-proven',family:'ripple',world:'murim'}]);g.enter('city');T.apply(g,'ripple');const h=W.Game.load(g.save());T.startPractice(h,'ripple',{linked:true,world:'reality'});h.events=[];assert(h.act('moon'));assert(!h.events.some(e=>e.type==='martial-link-proven'));h.player.cool.moon=0;h.player.mp=h.stats().mp;respond(h,'ripple');assert(h.act('moon'));assert.deepEqual(h.events.filter(e=>e.type==='martial-link-proven'),[{type:'martial-link-proven',family:'ripple',world:'reality'}]);});
 for(const f of ['ripple','echo','seal'])test(f+' exploration composition, real basic and creation effect persist and replay in reality',()=>{const g=learned(f);T.create(g,f);T.startPractice(g,f,{linked:true});respond(g,f);assert(g.martialRuntime.ready);const mp=g.player.mp;assert(g.act('moon'));assert.equal(mp-g.player.mp,18+T.links[f].cost);if(f==='echo')for(let i=0;i<20;i++){g.hitStop=0;g.step(.05);}assert(T.state(g).linkProof.includes(f));assert.equal(g.martialRuntime.ready,null);g.enter('city');T.apply(g,f);const h=W.Game.load(g.save());assert.equal(T.state(h).reality,f);assert.equal(h.martialRuntime,null);T.startPractice(h,f,{linked:true,world:'reality'});respond(h,f);assert(h.act('moon'));if(f==='echo')for(let i=0;i<20;i++){h.hitStop=0;h.step(.05);}assert(T.state(h).linkProof.includes(f));});

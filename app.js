@@ -163,7 +163,7 @@
     for(const e of g.events.splice(0)){
       if(e.type==='martial-link-proven'){if(devMode&&globalThis.DevTrainingRoute?.enabled()){try{DevTrainingRoute.record(g,e);}catch{toast('시험 완료 기록을 저장하지 못했습니다. 저장 공간을 확인하고 다시 실습하세요.');}}persist();continue;}
       if(e.type==='martial-acquisition-progress'){persist();continue;}
-      if(e.type==='martial-practice-complete'||e.type==='awakening'&&e.practice){persist();continue;}
+      if(e.type==='martial-practice-complete'||e.type==='awakening'&&(e.practice||e.composition)){persist();continue;}
       if(e.type==='martial-training'){trainingUI?.open(e.family||'sword',e.section||'learn');persist();continue;}
       if(e.type==='resonance-proof'){if(persist())show(e.title,e.text,[{label:'현실 기지로 귀환',run:()=>{g.enter('city');processEvents();persist();update();}}]);}
       if(e.type==='resonance-complete'){if(!persist()){g=Game.load(e.before);ResonanceChallenges.runtime(g).rewardBlocked=true;toast('저장 실패 · 기록 지점에서 E로 다시 시도하세요.');continue;}show(e.title,e.text,[{label:'청운촌으로 귀환',run:()=>{g.enter('village');processEvents();persist();update();}},{label:'기록 확인',run:()=>growthUI.open()}]);}

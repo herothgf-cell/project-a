@@ -14,7 +14,7 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
   await page.waitForURL('**/art-play.html?dev=1&training=1');await page.waitForFunction(()=>globalThis.ArtPreview?.ready);
   await page.locator('#continue').click();await page.locator('.training-screen').waitFor();
   const recipes={sword:['slash','breath','instant','front'],thunder:['cleave','thunder','explode','surround'],ripple:['guard','rebound','store','self'],echo:['step','echo','burst','origin'],seal:['field','bind','hold','point']};
-  const compose=async recipe=>{for(const [i,axis]of ['form','qi','flow','intent'].entries())await page.locator('[data-training-axis="'+axis+'"]').selectOption(recipe[i]);await page.getByRole('button',{name:'구성 확인',exact:true}).click();};
+  const compose=async recipe=>{for(const [i,axis]of ['form','qi','flow','intent'].entries())await page.locator('[data-element-card="'+recipe[i]+'"]').click();await page.getByRole('button',{name:'구성 확인',exact:true}).click();await page.locator('.training-completion').waitFor();await page.getByRole('button',{name:'무공 목록으로',exact:true}).click();};
   const move=async()=>{await page.locator('.training-dev-route button').click();await page.waitForFunction(()=>ArtPreview.ensureWorld(WorldGrowth.worldOf(__game))===true);};
   const respond=async f=>{if(f==='echo')await page.evaluate(()=>{__game.player.face=-Math.PI/2;});await page.waitForFunction(()=>__game.enemies.some(e=>e.wind>.2&&e.wind<.8));await page.keyboard.press('e');};
   for(const [f,recipe]of Object.entries(recipes)){
@@ -25,7 +25,7 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
     assert.match(await page.locator('.training-ownership').innerText(),/2\/4/);
     await page.getByRole('button',{name:'단서 해독 · 지도 받기',exact:true}).click();
     assert.match(await page.locator('.training-ownership').innerText(),/2\/4/);
-    assert.equal(await page.locator('[data-training-axis=flow] option[value="'+recipe[2]+'"]').count(),0);
+    assert.equal(await page.locator('[data-element-card="'+recipe[2]+'"]').isDisabled(),true);
     await move();await acquisition.flow(page,f);
     await move();await acquisition.quest(page,f);
     await move();assert.match(await page.locator('.training-ownership').innerText(),/4\/4/);
@@ -34,14 +34,14 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
    }
    if(f==='thunder')assert.match(await page.locator('[data-action="storm"]').getAttribute('aria-label'),/미습득/);
    await compose(recipe);
-   await page.getByRole('button',{name:['sword','thunder'].includes(f)?'목인 수련 시작':'기본 무공 실습',exact:true}).click();
-   if(f==='sword'||f==='thunder')await page.keyboard.press(f==='sword'?'q':'w');else await respond(f);
-   await page.waitForFunction(f=>MartialTraining.state(__game).learned.includes(f),f);assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);await page.getByRole('button',{name:'수련 종료',exact:true}).click();await page.locator('.training-screen').waitFor();
+   assert.equal(await page.evaluate(f=>MartialTraining.state(__game).learned.includes(f),f),true);
+   assert.equal(await page.evaluate(()=>__game.martialRuntime?.practice||null),null);
   }
   for(const kind of ['create','reality'])for(const f of ['ripple','echo','seal']){
    assert.equal(await page.evaluate(()=>DevTrainingRoute.next(__game,MartialTraining,DevTrainingRoute.completed()).family),f);
    await move();
-   await page.getByRole('button',{name:kind==='create'?'창안 초안 저장':'현실에 적용',exact:true}).click();
+   await page.getByRole('button',{name:kind==='create'?'무공 창안하기':'현실에 적용',exact:true}).click();
+   if(kind==='create'){await page.locator('.training-completion').waitFor();await page.getByRole('button',{name:'무공 목록으로',exact:true}).click();}
    await page.getByRole('button',{name:kind==='create'?'무림 연계 실습':'현실 연계 실습',exact:true}).click();
    await respond(f);await page.waitForFunction(()=>!!__game.martialRuntime?.ready);await page.keyboard.press('q');
    await page.waitForFunction(({kind,f})=>kind==='create'?MartialTraining.state(__game).linkProof.includes(f):DevTrainingRoute.completed().includes(f),{kind,f});
