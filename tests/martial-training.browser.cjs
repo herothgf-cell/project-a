@@ -1,6 +1,7 @@
 'use strict';
 const {run}=require('./browser-harness.cjs'),assert=require('node:assert/strict');
 run(async page=>{
+ const finishPractice=async()=>{await page.waitForFunction(()=>__game.martialRuntime?.practice?.completed);assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);const time=await page.evaluate(()=>__game.playTime);await page.waitForFunction(t=>__game.playTime>t+.4,time);await page.getByRole('button',{name:'수련 종료',exact:true}).click();await page.locator('.training-screen').waitFor();};
  await page.evaluate(()=>{const g=__game;g.enter('village');const p=g.points().find(x=>x.id==='master');g.player.x=p.x;g.player.y=p.y+30;g.events=[];});
  await page.waitForFunction(()=>ArtPreview.ensureWorld('murim')===true);
  await page.locator('#interact').click();
@@ -15,6 +16,7 @@ run(async page=>{
  assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);
  await page.keyboard.press('q');
  await page.waitForFunction(()=>__game.training===1);
+ await finishPractice();
  await page.locator('.training-screen').waitFor();
  assert.match(await page.locator('.training-meta').innerText(),/습득 완료/);
  await page.keyboard.press('Escape');
@@ -39,6 +41,7 @@ run(async page=>{
   await page.waitForFunction(()=>__game.enemies.some(e=>e.wind>.2&&e.wind<.8));
   await page.keyboard.press('e');
   await page.waitForFunction(f=>MartialTraining.state(__game).learned.includes(f),family);
+  await finishPractice();
   await page.locator('.training-screen').waitFor();
   await page.keyboard.press('Escape');
  }
@@ -57,9 +60,7 @@ run(async page=>{
   await page.waitForFunction(()=>!!__game.martialRuntime?.ready);
   await page.keyboard.press('q');
   await page.waitForFunction(f=>MartialTraining.state(__game).linkProof.includes(f),f);
-  await page.evaluate(()=>{__game.enter('village');__game.events=[];});
-  await page.locator('.training-nav').click();
-  await page.getByRole('button',{name:'무공 창안',exact:true}).click();
+  await finishPractice();
  }
  for(const width of [1280,390,360]){
   await page.setViewportSize({width,height:900});
@@ -84,8 +85,9 @@ run(async page=>{
   await page.keyboard.press('e');
   await page.waitForFunction(()=>!!__game.martialRuntime?.ready);
   await page.keyboard.press('q');
-  await page.waitForFunction(()=>!__game.martialRuntime?.practice);
-  assert.equal(await page.evaluate(()=>__game.martialRuntime?.ready),null);
+  await finishPractice();
+  assert.equal(await page.evaluate(()=>__game.martialRuntime),null);
+  await page.keyboard.press('Escape');
  }
  await page.evaluate(()=>{__game.enter('village');__game.events=[];});
  await page.locator('.training-nav').click();

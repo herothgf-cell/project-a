@@ -27,7 +27,7 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
    await compose(recipe);
    await page.getByRole('button',{name:['sword','thunder'].includes(f)?'목인 수련 시작':'기본 무공 실습',exact:true}).click();
    if(f==='sword'||f==='thunder')await page.keyboard.press(f==='sword'?'q':'w');else await respond(f);
-   await page.waitForFunction(f=>MartialTraining.state(__game).learned.includes(f),f);await page.locator('.training-screen').waitFor();
+   await page.waitForFunction(f=>MartialTraining.state(__game).learned.includes(f),f);assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);await page.getByRole('button',{name:'수련 종료',exact:true}).click();await page.locator('.training-screen').waitFor();
   }
   for(const kind of ['create','reality'])for(const f of ['ripple','echo','seal']){
    assert.equal(await page.evaluate(()=>DevTrainingRoute.next(__game,MartialTraining,DevTrainingRoute.completed()).family),f);
@@ -36,7 +36,7 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
    await page.getByRole('button',{name:kind==='create'?'무림 연계 실습':'현실 연계 실습',exact:true}).click();
    await respond(f);await page.waitForFunction(()=>!!__game.martialRuntime?.ready);await page.keyboard.press('q');
    await page.waitForFunction(({kind,f})=>kind==='create'?MartialTraining.state(__game).linkProof.includes(f):DevTrainingRoute.completed().includes(f),{kind,f});
-   await page.locator('.training-screen').waitFor();
+   assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);await page.getByRole('button',{name:'수련 종료',exact:true}).click();await page.locator('.training-screen').waitFor();
   }
   assert.match(await page.locator('.training-dev-route').innerText(),/11 \/ 11 완료/);
   for(const width of [390,360]){await page.setViewportSize({width,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);}
