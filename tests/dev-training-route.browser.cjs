@@ -7,17 +7,19 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
   browser=await chromium.launch({headless:true,channel:process.env.CHROMIUM_PATH?undefined:'chrome',executablePath:process.env.CHROMIUM_PATH});
   const page=await browser.newPage({viewport:{width:1280,height:900}}),errors=[];page.on('pageerror',e=>{errors.push(String(e));console.error('pageerror',e);});page.setDefaultTimeout(12000);
   await page.addInitScript(()=>{let api;Object.defineProperty(window,'DualWorld',{configurable:true,get:()=>api,set(v){api=v;for(const k of ['step','save']){const old=v.Game.prototype[k];v.Game.prototype[k]=function(...args){window.__game=this;return old.apply(this,args);};}}});});
+  const exclusive=process.env.EXCLUSIVE_STORY_TEST==='1';
+  if(exclusive)await page.addInitScript(()=>{let api;Object.defineProperty(window,'ExclusiveGame',{configurable:true,get:()=>api,set(v){api=v;const old=v.Game.prototype.save;v.Game.prototype.save=function(...args){window.__game=this;return old.apply(this,args);};}});});
   const base='http://127.0.0.1:'+server.address().port;
   await page.goto(base+'/art-play.html?dev=1');await page.waitForFunction(()=>globalThis.ArtPreview?.ready);
   await page.evaluate(()=>{localStorage.setItem(SaveSlots.keys.current,'public-sentinel');localStorage.setItem(SaveSlots.keys.test,'dev-sentinel');});
-  await page.getByRole('button',{name:'무공 순차 테스트',exact:true}).click();
-  await page.waitForURL('**/art-play.html?dev=1&training=1');await page.waitForFunction(()=>globalThis.ArtPreview?.ready);
+  await page.getByRole('button',{name:exclusive?'새 이야기 · 무공 순차':'무공 순차 테스트',exact:true}).click();
+  await page.waitForURL('**/art-play.html?dev=1&training=1'+(exclusive?'&story=1':''));await page.waitForFunction(()=>globalThis.ArtPreview?.ready);
   await page.locator('#continue').click();await page.locator('.training-screen').waitFor();
   const recipes={sword:['slash','breath','instant','front'],thunder:['cleave','thunder','explode','surround'],ripple:['guard','rebound','store','self'],echo:['step','echo','burst','origin'],seal:['field','bind','hold','point']};
   const compose=async recipe=>{for(const [i,axis]of ['form','qi','flow','intent'].entries())await page.locator('[data-element-card="'+recipe[i]+'"]').click();await page.getByRole('button',{name:'구성 확인',exact:true}).click();await page.locator('.training-completion').waitFor();await page.getByRole('button',{name:'무공 목록으로',exact:true}).click();};
   const move=async()=>{await page.locator('.training-dev-route button').click();await page.waitForFunction(()=>ArtPreview.ensureWorld(WorldGrowth.worldOf(__game))===true);};
   const respond=async f=>{if(f==='echo')await page.evaluate(()=>{__game.player.face=-Math.PI/2;});await page.waitForFunction(()=>__game.enemies.some(e=>e.wind>.2&&e.wind<.8));await page.keyboard.press('e');};
-  for(const [f,recipe]of Object.entries(recipes)){
+  for(const [f,recipe]of Object.entries(recipes)){console.log('route acquired art:',f);
    await move();
    if(['ripple','echo','seal'].includes(f)){
     await page.keyboard.press('g');await page.locator('.training-screen').waitFor();
@@ -75,12 +77,12 @@ const {chromium}=require('playwright'),{createServer}=require('../server.cjs'),a
    await page.waitForFunction(({f,kind})=>MartialPrototypes.state(__game)[kind==='create'?'linkProof':'realityProof'].includes(f),{f,kind});
    assert.equal(await page.locator('#dialog').evaluate(e=>e.open),false);await page.getByRole('button',{name:'수련 종료',exact:true}).click();
   }
-  assert.match(await page.locator('.training-dev-route').innerText(),/36 \/ 36 완료/);
+  console.log('route all 36 actions done');assert.match(await page.locator('.training-dev-route').innerText(),/36 \/ 36 완료/);
   for(const width of [390,360]){await page.setViewportSize({width,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);}
   await page.reload();await page.waitForFunction(()=>globalThis.ArtPreview?.ready);await page.locator('#continue').click();
   assert.match(await page.locator('.training-dev-route').innerText(),/36 \/ 36 완료/);
   assert.deepEqual(await page.evaluate(()=>[localStorage.getItem(SaveSlots.keys.current),localStorage.getItem(SaveSlots.keys.test)]),['public-sentinel','dev-sentinel']);
-  await page.keyboard.press('Escape');await page.getByRole('button',{name:'무공 순차 테스트',exact:true}).click();
+  await page.keyboard.press('Escape');await page.getByRole('button',{name:exclusive?'새 이야기 · 무공 순차':'무공 순차 테스트',exact:true}).click();
   await page.waitForFunction(()=>globalThis.ArtPreview?.ready);await page.locator('#continue').click();
   assert.match(await page.locator('.training-dev-route').innerText(),/1 \/ 36 · 월영참/);
   assert.deepEqual(await page.evaluate(()=>DevTrainingRoute.completed()),[]);assert.deepEqual(errors,[]);

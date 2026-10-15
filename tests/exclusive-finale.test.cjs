@@ -1,0 +1,5 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');const E=require('../exclusive-game.js');
+function finale(){const g=new E.Game();for(const e of E.Story.events){if(e.id==='reality-support')break;g.storyComplete(e.id,e.kind);}g.area='riftFinal';g.enter('riftFinal');return g;}
+test('finale needs survival duration and three distinct actual threat responses',()=>{const g=finale();for(let i=0;i<250;i++)g.step(.05,{});assert.equal(g.storyObjective().id,'reality-support');assert.equal(g.storyEncounter().responses,0);for(const e of g.enemies){e.wind=1;e.attacks++;g.strike(e,1);g.playTime+=.5;}g.step(.05,{});assert.equal(g.storyObjective().id,'reality-account');});
+test('repeated hits on same windup are not extra responses',()=>{const g=finale(),e=g.enemies[0];e.wind=1;e.attacks=1;for(let i=0;i<3;i++)g.strike(e,1);assert.equal(g.storyEncounter().responses,1);});
+test('killing initial threats cannot softlock the support objective',()=>{const g=finale();for(const e of g.enemies)g.strike(e,9999);g.step(.05,{});assert.equal(g.storyObjective().id,'reality-support');assert(g.enemies.some(e=>e.hp>0));assert.equal(g.storyEncounter().responses,0);});

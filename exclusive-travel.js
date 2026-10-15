@@ -13,8 +13,8 @@
   if(!Number.isFinite(dt)||dt<0)throw Error('호흡 시간 오류');
   if(input.paused||input.cancel||input.x||input.y||input.attack||g.area!==r.area||g.player.x!==r.x||g.player.y!==r.y||g.player.hp<r.hp||!canCross(g.worldState.exclusiveTravel,g).ok){cancel(g);return false;}
   r.seconds+=dt;if(r.seconds+1e-9<BREATHS)return false;
-  cancel(g);const to=r.area==='home'?'shrine':'home';
-  if(g.enter(to)===false)return false;
+  const to=r.area==='home'?'shrine':'home';
+  if(g.enter(to)===false){cancel(g);return false;}cancel(g);
   g.worldState.exclusiveTravel.arrivedAt=g.worldState.exclusiveTravel.minutes;
   g.onStoryCrossing?.(to);return true;
  }

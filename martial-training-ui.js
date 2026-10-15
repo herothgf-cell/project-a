@@ -65,7 +65,7 @@
      const relic=el('section','training-source');relic.append(el('strong','','형·기 · 비경 조사'),el('p','','무명 비경의 해당 흔적을 조사해 획득합니다.'),el('small','',b.owned[0]&&b.owned[1]?'획득 완료':'미획득'));cards.append(relic);
      const flow=el('section','training-source');flow.append(el('strong','','운 · 전투 숙련'),el('p','',acquisition.flow.requirement),el('small','',acquisition.flow.owned?'획득 완료':acquisition.flow.count+' / '+acquisition.flow.total));if(!acquisition.flow.owned)flow.append(button('운 체득 실습',()=>change(g=>A.startFlow(g,family),{leave:true}),!m.safe));cards.append(flow);
      const quest=el('section','training-source'),q=acquisition.quest;quest.append(el('strong','','의 · '+q.title),el('p','',q.description),el('small','','목표 달성 후 청운촌에서 보고하면 의를 얻습니다.'));
-     if(q.stage==='ready')quest.append(button('퀘스트 보고 · 의 획득',()=>change(g=>A.reportQuest(g,family)),g.area!=='village','primary'));
+     if(q.stage==='ready')quest.append(button('퀘스트 보고 · 의 획득',()=>change(g=>A.reportQuest(g,family)),!['village','yeoul'].includes(g.area),'primary'));
      else if(q.stage==='complete')quest.append(el('small','','보고 완료 · 의 획득'));
      else quest.append(button(q.stage==='active'?'의 획득 퀘스트 다시 시작':'의 획득 퀘스트 시작',()=>change(g=>A.startQuest(g,family),{leave:true}),!m.safe||q.stage==='locked'));
      cards.append(quest);detail.append(cards);

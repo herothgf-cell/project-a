@@ -13,7 +13,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,6 +33,8 @@ jobs:
           python -m playwright install --with-deps chromium
           npm install --no-save --package-lock=false playwright@1.57.0
       - name: HTTP browser and real storage regression tests
+        env:
+          SSANGGYE_STORY_COMPAT: '1'
         run: |
           node server.cjs > /tmp/ssanggye-server.log 2>&1 &
           SERVER_PID=$!
@@ -97,6 +99,13 @@ jobs:
           name: browser-test-evidence
           path: browser-results/
           if-no-files-found: ignore
+      - name: Exclusive story and martial journey
+        run: |
+          export CHROMIUM_PATH="$(python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
+          node tests/exclusive-intro.browser.cjs
+          node tests/exclusive-quest-ui.browser.cjs
+          node tests/exclusive-crossing.browser.cjs
+          EXCLUSIVE_STORY_TEST=1 node tests/dev-training-route.browser.cjs
       - name: Prepare browser assets only
         run: node scripts/build-site.cjs site "$GITHUB_SHA" --include-prototype
       - uses: actions/upload-pages-artifact@v3

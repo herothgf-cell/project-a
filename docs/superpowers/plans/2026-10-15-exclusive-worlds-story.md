@@ -1,5 +1,16 @@
 # 단독 왕래 스토리 교체 Implementation Plan
 
+## 구현 결과 · 2026-10-15
+
+6개 작업의 구현을 새 이야기 모듈과 기존 브라우저 어댑터에 연결했다. 검증 항목은 파일을 작업별로 모두 분리하는 대신 `exclusive-*.test.cjs`, 전체 여정 헬퍼, 새 이야기 브라우저 테스트로 통합했다. 11장 전체 여정은 사건마다 저장·재개하며 실제 창안 효과와 현실 재현을 검사한다. 새 이야기 클래스의 36단계 브라우저 테스트는 모든 기존·추가 무공의 획득부터 현실 적용, 모바일, 재개·초기화까지 통과했다.
+
+- 전체 Node 테스트: 834개 통과.
+- 새 이야기 화면·여울장 의뢰 보고·왕래 저장 실패 복구: 브라우저 테스트 통과.
+- 기존 무공 습득 연출·추가 원형 무공 UI: 브라우저 회귀 테스트 통과.
+- 문법 검사 및 변경 공백 검사 통과.
+- 옛 이야기 브라우저 회귀는 로컬 호환 설정에서 실행하고 공개 기본 진입점은 새 이야기로 사용한다.
+- 원고는 수정하지 않았으며 대사는 플레이용으로 축약해 구성했다. 공개 푸시·배포는 수행하지 않는다.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 기존 무공 기능을 유지한 새 게임에서 「쌍계 홀로 건너는 사람」 11장을 끝까지 플레이한다.

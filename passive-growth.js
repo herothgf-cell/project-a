@@ -10,7 +10,7 @@
  const ids=nodes.map(n=>n.id),downstream=['F3','F5','C3','C4'];
  const empty=()=>Object.fromEntries(ids.map(id=>[id,0]));
  const worldOf=g=>g.growthWorld?.()||(['village','forest','ruins','sanctum','returnPass','archive','woundPass','woundCore','transportRoad','supplyRidge','overseerHall','realmAssessment'].includes(g.area)?'murim':'reality');
- const earned=g=>({training:g.training>=1,realm:g.journey?.realm>=1,chapter4:g.chapter4?.phase===4,chapter5:g.journey?.phase===5,six:g.laterStory?.six===5,seven:g.laterStory?.seven===5});
+ const earned=g=>g.worldState?.exclusiveStory?Object.fromEntries(Object.entries({training:'basic-composition',realm:'creation-proof',chapter4:'first-reproduction',chapter5:'north-survey',six:'murim-rescue',seven:'reality-support'}).map(([key,id])=>[key,g.worldState.exclusiveStory.completed.includes(id)])):({training:g.training>=1,realm:g.journey?.realm>=1,chapter4:g.chapter4?.phase===4,chapter5:g.journey?.phase===5,six:g.laterStory?.six===5,seven:g.laterStory?.seven===5});
  const total=s=>Object.values(s.ledger).reduce((a,b)=>a+b,0);
  const spent=levels=>nodes.reduce((a,n)=>a+(n.free?0:levels[n.id]),0);
  function sync(g){

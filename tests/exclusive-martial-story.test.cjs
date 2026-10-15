@@ -1,0 +1,2 @@
+const {test}=require('node:test'),assert=require('node:assert/strict');const {journey}=require('./helpers/exclusive-journey.cjs');
+test('eleven chapters play through acquisition, actual creation and reality proof, with reload after every event',()=>{const {g,visited}=journey();assert.equal(g.storyObjective(),null);assert.equal(g.worldState.exclusiveStory.chapter,11);assert(visited.includes('first-reproduction'));assert(g.worldState.martialPrototypes.realityProof.includes('chargedCrescent'));});

@@ -1,0 +1,3 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');const {Game}=require('../exclusive-game.js');
+test('new save round trip; transient breaths restart and old saves rejected',()=>{const g=new Game(),raw=g.save(),h=Game.load(raw);assert.deepEqual(h.worldState.exclusiveStory,g.worldState.exclusiveStory);assert.equal(h.area,g.area);assert.equal(h.travelRuntime,null);assert.throws(()=>Game.load(new (require('../world-game.js').Game)().save()));});
+test('corrupt new story and resources rejected',()=>{const g=new Game(),d=JSON.parse(g.save());d.worldState.exclusiveStory.completed=['two-notebooks'];assert.throws(()=>Game.load(JSON.stringify(d)));const e=JSON.parse(g.save());e.player.hp=-3;assert.throws(()=>Game.load(JSON.stringify(e)));});

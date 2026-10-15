@@ -6,14 +6,14 @@
  const newBasics=['flash','crescent','gathering','sidestep'],newLinks=['chargedCrescent','sideFlash'];
  const steps=[...['sword','thunder'].map(family=>({kind:'learn',family})),...responses.flatMap(family=>['discover','flow','quest','learn'].map(kind=>({kind,family}))),...responses.map(family=>({kind:'create',family})),...responses.map(family=>({kind:'reality',family})),...newBasics.flatMap(family=>['acquire','learn','prove'].map(kind=>({kind,family,prototype:true}))),...newLinks.flatMap(family=>['create','reality'].map(kind=>({kind,family,prototype:true})))];
  const enabled=()=>root.SSANGGYE_DEV===true&&new URLSearchParams(root.location.search).get('training')==='1';
- const key=()=>root.SaveSlots.keys.test+'.training-route';
+ const key=()=>root.SaveSlots.keys.test+(new URLSearchParams(root.location.search).get('story')==='1'?'.exclusive-v1':'')+'.training-route';
  function completed(){try{const value=JSON.parse(root.localStorage.getItem(key()+'.proofs')||'[]');return Array.isArray(value)?value.filter(f=>responses.includes(f)):[];}catch{return [];}}
  function next(g,T,done=[]){const s=T.state(g);for(const [index,step]of steps.entries()){
   let complete;if(step.prototype){const p=prototypes().state(g);const key={acquire:'discovered',learn:'learned',prove:'proven',create:'linkProof',reality:'realityProof'}[step.kind];complete=p[key].includes(step.family);}
   else complete=step.kind==='discover'?s.discovered.includes(step.family):step.kind==='flow'?T.owns(g,'flow',T.catalog[step.family].recipe[2]):step.kind==='quest'?T.owns(g,'intent',T.catalog[step.family].recipe[3]):step.kind==='learn'?s.learned.includes(step.family):step.kind==='create'?s.linkProof.includes(step.family):done.includes(step.family);
   if(!complete)return {...step,index,total:steps.length};}return null;}
- function create(Game,T){const g=new Game();g.beginIntro(true);g.finishIntro();g.enter('village');T.introduce(g);g.events=[];return g;}
- function move(g,T,done=[]){const step=next(g,T,done);if(!step)return null;const {family,kind}=step;
+ function create(Game,T){const g=new Game();if(g.skipStoryIntro){g.skipStoryIntro();g.events=[];return g;}g.beginIntro(true);g.finishIntro();g.enter('village');T.introduce(g);g.events=[];return g;}
+ function move(g,T,done=[]){const step=next(g,T,done);if(!step)return null;const {family,kind}=step;if(g.worldState?.exclusiveStory){const to=kind==='reality'?'city':'yeoul';if(g.growthWorld()!==(kind==='reality'?'reality':'murim')){g.area=to;g.enter(to);}if(kind==='learn'&&family==='thunder')T.introduce(g,'thunder');}
   if(step.prototype){
    const P=prototypes();
    if(kind==='acquire'&&family==='sidestep'){

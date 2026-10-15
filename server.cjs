@@ -3,6 +3,7 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
 const assets=new Set(['journey-data.js','journey.js','cultivation.js','chapter-five.js','journey-art.js','journey-ui.js','journey.css','sequel.js','wuxia-direction.js','wuxia-data.js','wuxia-art.js','wuxia.css','index.html','presentation.js','realm-art.js','realm-ui.js','realm.css','world.js','fate.js','legend.js','game.js','art.js','fate-art.js','classic-art.js','portrait-data.js','classic.css','render.js','app.js','style.css']);
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.webp':'image/webp','.ogg':'audio/ogg','.wav':'audio/wav'};
 function createServer({artReview=false}={}){
+ for(const name of ['exclusive-story-data','exclusive-story','exclusive-travel','exclusive-areas','exclusive-game','exclusive-story-ui'])assets.add(name+'.js');
  const archived=require('./scripts/legacy-assets.cjs').payloads(__dirname);
  const Art=require('./art-loader.js'),allowed=new Set([...assets,'art-loader.js','assets/art/manifest.json']);
  for(const name of ['save-slots','world-growth','world-achievements','reality-skills','world-reports','personal-news','save-v10','world-game'])allowed.add(name+'.js');
@@ -35,8 +36,8 @@ function createServer({artReview=false}={}){
    res.writeHead(200,{'Content-Type':types[path.extname(name)]});return res.end(req.method==='HEAD'?undefined:fs.readFileSync(path.join(__dirname,'experiments/skillform',name)));
   }
   if(dev&&url==='/__dev/start'){
-   const stage=params.get('stage');if(!['new','training','five','six','before','inherited','challenge'].includes(stage)){res.writeHead(400);return res.end('Unknown start');}
-   try{const {Game}=require('./world-game.js'),{five,six,resonanceStart}=require('./tests/helpers/world-journey.cjs');const g=stage==='training'?require('./tests/dev-training-route.js').create(Game,require('./martial-training.js')):stage==='new'?new Game():stage==='five'?five():stage==='six'?six(five(),'ripple'):resonanceStart(stage);const raw=g.save();Game.load(raw);res.writeHead(200,{'Content-Type':types['.json']});return res.end(req.method==='HEAD'?undefined:raw);}catch{res.writeHead(500);return res.end('Unable to prepare start');}
+   const stage=params.get('stage');if(!['story','story-training','new','training','five','six','before','inherited','challenge'].includes(stage)){res.writeHead(400);return res.end('Unknown start');}
+   try{const {Game}=require(stage.startsWith('story')?'./exclusive-game.js':'./world-game.js'),{five,six,resonanceStart}=require('./tests/helpers/world-journey.cjs');const g=['training','story-training'].includes(stage)?require('./tests/dev-training-route.js').create(Game,require('./martial-training.js')):['new','story'].includes(stage)?new Game():stage==='five'?five():stage==='six'?six(five(),'ripple'):resonanceStart(stage);const raw=g.save();Game.load(raw);res.writeHead(200,{'Content-Type':types['.json']});return res.end(req.method==='HEAD'?undefined:raw);}catch{res.writeHead(500);return res.end('Unable to prepare start');}
   }
   if(dev&&url==='/__dev/training-route.js'){res.writeHead(200,{'Content-Type':types['.js']});return res.end(req.method==='HEAD'?undefined:fs.readFileSync(path.join(__dirname,'tests/dev-training-route.js')));}
   if(dev&&url==='/__dev/starts.js'){res.writeHead(200,{'Content-Type':types['.js']});return res.end(req.method==='HEAD'?undefined:fs.readFileSync(path.join(__dirname,'tests/dev-starts-ui.js')));}
@@ -45,6 +46,7 @@ function createServer({artReview=false}={}){
   fs.readFile(path.join(__dirname,file==='art-play.html'?'index.html':file),(error,content)=>{
    if(error){res.writeHead(500);return res.end('Unable to read game asset');}
    if(file==='art-play.html')content=Buffer.from(require('./scripts/prototype-html.cjs').prototypeHtml(content.toString('utf8')));
+   if(process.env.SSANGGYE_STORY_COMPAT==='1'&&['art-play.html','index.html'].includes(file))content=Buffer.from(content.toString('utf8').replace('<head>','<head><script>globalThis.SSANGGYE_LEGACY_TEST=true;</script>'));
    if(dev&&['art-play.html','index.html'].includes(file))content=Buffer.from(content.toString('utf8').replace('<head>','<head><script>globalThis.SSANGGYE_DEV=true;</script><script defer src="/__dev/training-route.js?dev=1"></script>').replace('</body>','<script src="/__dev/starts.js?dev=1"></script></body>'));
    res.writeHead(200,{'Content-Type':types[path.extname(file)]});res.end(req.method==='HEAD'?undefined:content);
   });
