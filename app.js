@@ -223,6 +223,7 @@
     const near=g.nearestPoint();$('interact').classList.toggle('near',!!near);$('interact').querySelector('span').textContent=near?near.kind==='npc'?'대화 · '+near.label:near.kind==='shop'?'보급':near.kind==='rest'?'휴식하기':near.label:'대화 / 이동';
     $('objectiveArrow').hidden=!o.target;if(!o.target){$('objectiveTarget').textContent=o.title;$('objectiveHint').textContent=Controls.format(o.text);}
     if(o.target){$('objectiveTarget').textContent=`${o.target.label} · ${Math.round(dist(p,o.target)/10)}걸음`;$('objectiveHint').textContent=o.text;$('objectiveArrow').style.transform=`rotate(${Math.atan2(o.target.y-p.y,o.target.x-p.x)*180/Math.PI+90}deg)`;}
+    if(storyMode){const detail=g.objective();$('objective').classList.add('exclusive-guidance');$('objective').querySelector('.route-label').textContent='현재 의뢰 · '+detail.title;$('objectiveTarget').textContent=detail.action;$('objectiveHint').textContent=Controls.format((detail.destinationLabel?'장소 · '+detail.destinationLabel+'\n':'')+detail.text);}
     const path=g.trial?.path||g.activeFamily();$('game').classList.toggle('has-fate',!!path);$('fateControls').hidden=!path;
     if(path){const theme=Fate.PATHS[path];$('game').style.setProperty('--fate-color',theme.color);$('fateName').textContent=theme.name;$('fateState').textContent=!murim?(g.realityStatus(path)==='settled'?'현실 대응 정착':'대응 장착 · 실전 확인 중'):g.trial?'시험 중 · 임시 공명':path==='ripple'?`축적 파문 ${g.combat.charges}/3`:path==='echo'?(g.combat.echo?`잔향 ${g.combat.echo.life.toFixed(1)}초`:'잔향 대기'):(g.combat.field?`결계 ${g.combat.field.life.toFixed(1)}초`:'결계 대기');$('focusFill').style.width=g.fate.focus+'%';$('focusText').textContent='기세 '+Math.floor(g.fate.focus)+' / 100';$('focusFill').parentElement.setAttribute('aria-valuenow',String(Math.floor(g.fate.focus)));
       for(const action of Fate.names){const btn=document.querySelector(`[data-action="${action}"]`),sk=g.skillInfo(action);combatIcon(btn,action,sk.path||Fate.active(g));btn.querySelector('small').textContent=sk.name;btn.classList.toggle('locked',sk.locked);btn.classList.toggle('ready',action==='ultimate'&&g.fate.focus>=100&&!sk.locked);btn.setAttribute('aria-label',sk.name+(sk.locked?' 미습득':''));btn.title=sk.description;const cd=btn.querySelector('em');cd.classList.toggle('active',g.player.cool[action]>.05);cd.textContent=Math.ceil(g.player.cool[action]);}
@@ -234,7 +235,7 @@
     document.querySelector('.scene-bottom>span').textContent=matchMedia('(pointer:coarse)').matches?'왼쪽 이동 · 오른쪽 공격 / 회피':'WASD 이동 · J 공격 · Space 회피 · E 대화';
     const closeToTarget=o.target&&near?.id===o.target.id;
     const nextText=closeToTarget?`${Controls.key('interact')} · ${o.target.kind==='npc'?'대화하기':o.target.kind==='portal'?'이동하기':'상호작용'} — ${Controls.format(o.text)}`:Controls.format(o.text);
-    $('questDesc').textContent=Controls.format(o.text);$('objectiveHint').textContent=nextText;
+    $('questDesc').textContent=Controls.format(o.text);if(!storyMode)$('objectiveHint').textContent=nextText;
     document.querySelector('.scene-bottom>span').textContent=Controls.format(document.querySelector('.scene-bottom>span').textContent);
     $('rank').textContent=Advancement.describe(g,'hunter').name+'급 헌터';
     $('inventory').querySelector('span').textContent='성장';

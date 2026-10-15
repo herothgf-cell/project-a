@@ -11,4 +11,7 @@
 .exclusive-record{padding:12px 0;border-bottom:1px solid #ffffff25}
 .exclusive-record summary{cursor:pointer;color:#e8ca8e}
 .exclusive-record p{white-space:pre-line}
+#game #objective.exclusive-guidance #objectiveHint{white-space:pre-line;display:block;max-height:none;-webkit-line-clamp:unset;overflow:visible}
+#game #objective.exclusive-guidance .route-label{display:block;white-space:normal;line-height:1.5}
+.exclusive-steps{padding-left:24px;color:#b8c2c6}.exclusive-steps .is-current{color:#ffe0a0;font-weight:700}
 @media(max-width:480px){.exclusive-line{max-width:100%;padding:10px 12px}.exclusive-conversation{gap:10px}}

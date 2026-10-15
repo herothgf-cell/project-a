@@ -4,7 +4,8 @@
   function open(){const g=game(),e=g.storyObjective(),body=node('section','exclusive-journal'),[destination]=F.destination(g),phase=F.phase(g);
    body.append(node('p','exclusive-place','현재 위치 · '+root.ExclusiveGame.AREAS[g.area].name));
    body.append(node('p','exclusive-journal-stage',({offer:'의뢰인 만나기',field:'현장 수행',report:'복귀하여 보고',scene:'인물과 이야기하기',done:'여정 완료'})[phase]));
-   body.append(node('h3','',e?.title||'두 권의 수첩'),node('p','',g.objective().text));
+   const guide=g.objective();body.append(node('h3','',e?.title||'두 권의 수첩'),node('h4','',guide.action),node('p','',guide.text));
+   const steps=node('ol','exclusive-steps');for(const [i,label]of guide.steps.entries()){const item=node('li',i===guide.stepIndex?'is-current':'',(i<guide.stepIndex?'완료 · ':i===guide.stepIndex?'지금 · ':'다음 · ')+label);if(i===guide.stepIndex)item.setAttribute('aria-current','step');steps.append(item);}body.append(steps);
    const route=F.route(g.area,destination);body.append(node('p','dialog-note',route.length?'가는 길 · '+[g.area,...route].map(id=>root.ExclusiveGame.AREAS[id].name).join(' → '):'현재 장소에서 금빛 목표 표식을 따라가세요.'));
    if(e?.kind==='support'&&phase==='field'){const r=g.storyEncounter();body.append(node('p','','엄호 · 남은 '+r.remaining.toFixed(1)+'초 · 실제 대응 '+r.responses+'/3'));}
    body.append(node('p','dialog-note','NPC와 출입구 가까이에서 G 또는 상호작용 버튼을 누르세요. 수첩에서는 사건을 진행하거나 장소를 이동하지 않습니다.'));

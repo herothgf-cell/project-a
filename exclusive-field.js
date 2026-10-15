@@ -115,6 +115,20 @@
   const ambient={master:'발을 둘 자리를 먼저 보게. 칼은 그 다음일세. 필요한 수련이 있으면 말하게.', 'npc-minjae':'장비는 여기서 볼게. 어디가 불편한지는 숨기지 말고 알려 줘.', 'npc-jiwoo':'현장에 갈 때는 맡은 구간과 돌아올 길부터 확인해.', 'npc-jeongsun':'날이 무뎌지면 들러. 오래 쓰려면 손질도 해야지.', 'npc-soyeon':'사당에서 내려오는 길은 송림 고개예요. 여울장의 새벽객점에 가면 밥과 잘 곳을 구할 수 있어요.', 'npc-damhee':'밥은 따뜻할 때 먹어요. 빚 이야기는 그 뒤에 해도 돼요.', 'npc-seoha':'길은 지도만 보고는 다 알 수 없어요. 직접 걸으며 달라진 곳을 기록해야죠.'};
   return {type:'exclusive-dialogue',phase:'ambient',speaker:p.label.split(' · ')[0],pointId:p.id,title:p.label,lines:[[p.label.split(' · ')[0],ambient[p.id]||'낯선 흔적을 수첩에 남겼다. 지금 해야 할 일부터 마치자.']]};
  }
+ function guidance(g,areas){
+  const e=g.storyObjective(),ph=phase(g),[area,id]=destination(g),target=g.target();
+  const name=pair=>(residents[pair[0]]||[]).find(p=>p.id===pair[1])?.label.split(' · ')[0]||'백련';
+  if(!e)return {action:'다음 탐험 준비하기',text:'무공 수련에서 배운 무공을 확인하세요.',steps:[],stepIndex:0};
+  const job=jobs[e.id],person=job?name(ph==='report'?job[1]:job[0]):name([area,id]);
+  const tasks={learn:['월영참 구성하기','화면의 무공 수련 버튼 → 무공 습득 → 월영참 → 배운 요소 선택 → 구성 확인'],create:['새 무공 창안하기','화면의 무공 수련 버튼 → 무공 창안 → 조합 선택 → 필요한 무공 확인 후 창안'],proof:['창안 무공의 실제 효과 확인하기','무공 수련 → 무공 창안 → 만든 무공의 실습을 시작하고 실제 효과를 확인하세요. 실습 종료는 직접 누르세요.'],reproduce:['창안 무공을 현실에서 재현하기','무공 수련 → 무공 창안 → 검증한 무공을 현실에 적용하고 실습에서 실제 효과를 확인하세요.'],combat:['현장 위협 처치하기','방향키 / 스틱으로 적에게 접근 → {key:attack} / 공격 버튼으로 남은 적을 처치하세요.'],support:['동료 엄호하기','12초 동안 생존하며 서로 다른 위협에 세 번 대응하세요. 공격·회피로 동료를 지켜 주세요.']};
+  const task=tasks[e.kind]||[e.title,'대화를 끝까지 읽고 진행 버튼을 선택하세요.'];
+  let action,text,steps,stepIndex;
+  if(job){steps=[name(job[0])+'에게 의뢰 받기',task[0],name(job[1])+'에게 보고하기'];stepIndex=ph==='offer'?0:ph==='report'?2:1;
+   action=steps[stepIndex];text=ph==='offer'?person+' 가까이에서 {key:interact} / 상호작용 → 맡겠습니다':ph==='report'?person+' 가까이에서 {key:interact} / 상호작용 → 결과를 전한다':task[1];
+  }else{action=e.kind==='cross'?'왕래 표식으로 건너가기':id?.includes('table')||id?.includes('mark')||id==='array-map'?'현장의 흔적 조사하기':person+'와 이야기하기';text=e.kind==='cross'?'왕래 표식 가까이에서 {key:interact} / 상호작용 → 잠시 멈춰 전환 완료':(target?.label||person)+' 가까이에서 {key:interact} / 상호작용 → 대화의 진행 버튼 선택';steps=[action];stepIndex=0;}
+  const travel=g.area!==area?(target?.label||areas[area].name)+' 가까이로 이동 → {key:interact} / 상호작용. 도착 후: ':'';
+  return {action,text:travel+text,steps,stepIndex,destinationLabel:areas[area].name};
+ }
  function validate(g){const s=state(g),ids=Object.keys(jobs);if(s.version!==1)throw Error('현장 의뢰 버전 오류');for(const key of ['accepted','ready','cleared'])if(!Array.isArray(s[key])||new Set(s[key]).size!==s[key].length||s[key].some(id=>!ids.includes(id)))throw Error('현장 의뢰 기록 오류');if(s.ready.some(id=>!s.accepted.includes(id))||s.cleared.some(id=>!s.ready.includes(id)))throw Error('현장 의뢰 선행 오류');return s;}
- return {residents,edges,locations,jobs,scenes,missionLines,reportLines,initial,state,phase,destination,route,near,dialogue,validate};
+ return {residents,edges,locations,jobs,scenes,missionLines,reportLines,guidance,initial,state,phase,destination,route,near,dialogue,validate};
 });
