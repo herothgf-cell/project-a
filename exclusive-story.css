@@ -1,0 +1,14 @@
+.exclusive-conversation{max-width:720px;margin:auto;display:grid;gap:14px;padding:8px 2px 18px}
+.exclusive-place{color:#b8c2c6;font-size:.85rem;letter-spacing:.06em;margin:0 0 8px}
+.exclusive-line{max-width:94%;padding:13px 18px;background:#14262dd9;border-left:3px solid #c5aa72;border-radius:3px 12px 12px 3px;line-height:1.75}
+.exclusive-line strong{display:block;color:#e8ca8e;font-size:.9rem;margin-bottom:4px}
+.exclusive-line p{margin:0;white-space:pre-line}
+.exclusive-line.is-hero{justify-self:end;background:#20323e;border-left-color:#89b4ce}
+.exclusive-line.is-hero strong{color:#b7d7ef}
+.exclusive-line.is-narration{background:none;border:0;color:#bfc3bc;font-style:italic;padding:8px 18px}
+.exclusive-journal{max-width:720px;margin:auto;line-height:1.8}
+.exclusive-journal-stage{color:#e8ca8e;font-size:.9rem}
+.exclusive-record{padding:12px 0;border-bottom:1px solid #ffffff25}
+.exclusive-record summary{cursor:pointer;color:#e8ca8e}
+.exclusive-record p{white-space:pre-line}
+@media(max-width:480px){.exclusive-line{max-width:100%;padding:10px 12px}.exclusive-conversation{gap:10px}}

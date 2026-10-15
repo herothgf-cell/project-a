@@ -3,7 +3,8 @@ const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
 const assets=new Set(['journey-data.js','journey.js','cultivation.js','chapter-five.js','journey-art.js','journey-ui.js','journey.css','sequel.js','wuxia-direction.js','wuxia-data.js','wuxia-art.js','wuxia.css','index.html','presentation.js','realm-art.js','realm-ui.js','realm.css','world.js','fate.js','legend.js','game.js','art.js','fate-art.js','classic-art.js','portrait-data.js','classic.css','render.js','app.js','style.css']);
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.json':'application/json; charset=utf-8','.png':'image/png','.webp':'image/webp','.ogg':'audio/ogg','.wav':'audio/wav'};
 function createServer({artReview=false}={}){
- for(const name of ['exclusive-story-data','exclusive-story','exclusive-travel','exclusive-areas','exclusive-game','exclusive-story-ui'])assets.add(name+'.js');
+ for(const name of ['exclusive-field','exclusive-story-data','exclusive-story','exclusive-travel','exclusive-areas','exclusive-game','exclusive-story-ui'])assets.add(name+'.js');
+ assets.add('exclusive-story.css');
  const archived=require('./scripts/legacy-assets.cjs').payloads(__dirname);
  const Art=require('./art-loader.js'),allowed=new Set([...assets,'art-loader.js','assets/art/manifest.json']);
  for(const name of ['save-slots','world-growth','world-achievements','reality-skills','world-reports','personal-news','save-v10','world-game'])allowed.add(name+'.js');
